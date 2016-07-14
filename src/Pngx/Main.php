@@ -13,24 +13,17 @@ if ( class_exists( 'Pngx__Main' ) ) {
 }
 
 class Pngx__Main {
-	//const EVENTSERROROPT      = '_tribe_events_errors';
-	//const OPTIONNAME          = 'tribe_events_calendar_options';
-	//const OPTIONNAMENETWORK   = 'tribe_events_calendar_network_options';
+
 
 	const VERSION           = '2.3';
-
-//	const FEED_URL          = 'https://theeventscalendar.com/feed/';
 
 	//protected $plugin_context;
 	//protected $plugin_context_class;
 	//protected $doing_ajax = false;
 
-	//public static $tribe_url = 'http://tri.be/';
-	//public static $tec_url = 'http://theeventscalendar.com/';
-
-	//public $plugin_dir;
-	//public $plugin_path;
-	//public $plugin_url;
+	public $plugin_dir;
+	public $plugin_path;
+	public $plugin_url;
 
 	/**
 	 * constructor
@@ -263,6 +256,30 @@ class Pngx__Main {
 		}
 
 		return $this->doing_ajax;*/
+	}
+
+	/**
+	 * Merge the Defaults with new values
+	 *
+	 * @param $defaults
+	 * @param $updates
+	 *
+	 * @return array
+	 */
+	public static function merge_defaults( $defaults, $updates ) {
+
+		$updates = (array) $updates;
+		$out     = array();
+		foreach ( $defaults as $name => $default ) {
+			if ( array_key_exists( $name, $updates ) ) {
+				$out[ $name ] = $updates[ $name ];
+			} else {
+				$out[ $name ] = $default;
+			}
+		}
+
+		return $out;
+
 	}
 
 	/**

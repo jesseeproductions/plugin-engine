@@ -1,6 +1,6 @@
 <?php
 /**
- * Main Plugin Engine class.
+ * Register Custom Post Types with WordPress
  */
 
 // Don't load directly
@@ -8,16 +8,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die( '-1' );
 }
 
-if ( class_exists( 'Pngx__Main' ) ) {
-	return;
-}
 
-
+/**
+ * Class Pngx__Register_Post_Type
+ * Register Custom Post Types in WordPress and Modify Messaging
+ */
 class Pngx__Register_Post_Type {
 
 	protected $post_type = '';
 	protected $title_msg = '';
 
+	/**
+	 * Construct to Modify Messaging for Post Type
+	 *
+	 * @param $cpt is a string for the registered post type
+	 * @param $title_msg is string for title placeholder
+	 */
 	public function __construct( $cpt, $title_msg ) {
 		if ( ! $cpt ) {
 			return;
@@ -30,6 +36,13 @@ class Pngx__Register_Post_Type {
 		add_filter( 'enter_title_here', array( $this, 'title_placeholders' ) );
 	}
 
+	/**
+	 * Modifies update messages for a custom post type
+	 *
+	 * @param $messages
+	 *
+	 * @return mixed
+	 */
 	public function post_update_messages( $messages ) {
 		global $post, $post_ID;
 
@@ -79,27 +92,39 @@ class Pngx__Register_Post_Type {
 		return $placeholder;
 	}
 
-	public static function generate_post_type_labels( $name, $plural_name, $lc_name, $lc_plural_name, $text_domain ) {
+
+	/**
+	 * Generate Labels for Custom Post Type
+	 *
+	 * @param $singular_name
+	 * @param $plural_name
+	 * @param $lc_singular_name
+	 * @param $lc_plural_name
+	 * @param $text_domain
+	 *
+	 * @return array
+	 */
+	public static function generate_post_type_labels( $singular_name, $plural_name, $lc_singular_name, $lc_plural_name, $text_domain ) {
 
 		$labels = array(
 			'name'                  => sprintf( esc_html__( '%s', $text_domain ), $plural_name ),
-			'singular_name'         => sprintf( esc_html__( '%s', $text_domain ), $name ),
+			'singular_name'         => sprintf( esc_html__( '%s', $text_domain ), $singular_name ),
 			'menu_name'             => sprintf( esc_html__( '%s', $text_domain ), $plural_name ),
 			'name_admin_bar'        => sprintf( esc_html__( '%s', $text_domain ), $plural_name ),
-			'add_new'               => sprintf( esc_html__( 'Add New', $text_domain ), $name ),
-			'add_new_item'          => sprintf( esc_html__( 'Add New %s', $text_domain ), $name ),
-			'edit_item'             => sprintf( esc_html__( 'Edit %s', $text_domain ), $name ),
-			'new_item'              => sprintf( esc_html__( 'New %s', $text_domain ), $name ),
-			'view_item'             => sprintf( esc_html__( 'View %s', $text_domain ), $name ),
+			'add_new'               => sprintf( esc_html__( 'Add New', $text_domain ), $singular_name ),
+			'add_new_item'          => sprintf( esc_html__( 'Add New %s', $text_domain ), $singular_name ),
+			'edit_item'             => sprintf( esc_html__( 'Edit %s', $text_domain ), $singular_name ),
+			'new_item'              => sprintf( esc_html__( 'New %s', $text_domain ), $singular_name ),
+			'view_item'             => sprintf( esc_html__( 'View %s', $text_domain ), $singular_name ),
 			'search_items'          => sprintf( esc_html__( 'Search %s', $text_domain ), $plural_name ),
 			'not_found'             => sprintf( esc_html__( 'No %s found', $text_domain ), $lc_plural_name ),
 			'not_found_in_trash'    => sprintf( esc_html__( 'No %s found in Trash', $text_domain ), $lc_plural_name ),
-			'parent_item_colon'     => sprintf( esc_html__( 'Parent %s', $text_domain ), $name ),
+			'parent_item_colon'     => sprintf( esc_html__( 'Parent %s', $text_domain ), $singular_name ),
 			'all_items'             => sprintf( esc_html__( 'All %s', $text_domain ), $plural_name ),
-			'update_item'           => sprintf( esc_html__( 'Update %s', $text_domain ), $name ),
-			'archives'              => sprintf( esc_html__( '%s Archives', $text_domain ), $name ),
-			'insert_into_item'      => sprintf( esc_html__( 'Insert into %s', $text_domain ), $lc_name ),
-			'uploaded_to_this_item' => sprintf( esc_html__( 'Uploaded to this %s', $text_domain ), $lc_name ),
+			'update_item'           => sprintf( esc_html__( 'Update %s', $text_domain ), $singular_name ),
+			'archives'              => sprintf( esc_html__( '%s Archives', $text_domain ), $singular_name ),
+			'insert_into_item'      => sprintf( esc_html__( 'Insert into %s', $text_domain ), $lc_singular_name ),
+			'uploaded_to_this_item' => sprintf( esc_html__( 'Uploaded to this %s', $text_domain ), $lc_singular_name ),
 			'items_list'            => sprintf( esc_html__( '%s list', $text_domain ), $plural_name ),
 			'items_list_navigation' => sprintf( esc_html__( '%s list navigation', $text_domain ), $plural_name ),
 			'filter_items_list'     => sprintf( esc_html__( 'Filter %s list', $text_domain ), $lc_plural_name ),
@@ -110,11 +135,22 @@ class Pngx__Register_Post_Type {
 	}
 
 
-	public static function register_post_types( $post_type, $cap_plural, $name, $labels, $slug, $text_domain, $updates ) {
+	/**
+	 * Registers the Custom Post Type with WordPress
+	 *
+	 * @param $post_type
+	 * @param $cap_plural
+	 * @param $singular_name
+	 * @param $labels
+	 * @param $slug
+	 * @param $text_domain
+	 * @param $updates
+	 */
+	public static function register_post_types( $post_type, $cap_plural, $singular_name, $labels, $slug, $text_domain, $updates ) {
 
-		$args = self::merge_defaults( array(
-			'label'               => sprintf( esc_html__( '%s', $text_domain ), $name ),
-			'description'         => sprintf( esc_html__( 'Creates a %s Custom Post Type', $text_domain ), $name ),
+		$args = Pngx__Main::merge_defaults( array(
+			'label'               => sprintf( esc_html__( '%s', $text_domain ), $singular_name ),
+			'description'         => sprintf( esc_html__( 'Creates a %s Custom Post Type', $text_domain ), $singular_name ),
 			'labels'              => $labels,
 			'supports'            => '',
 			'hierarchical'        => false,
@@ -149,22 +185,6 @@ class Pngx__Register_Post_Type {
 		), $updates );
 
 		register_post_type( $post_type, $args );
-
-	}
-
-	protected static function merge_defaults( $defualts, $updates ) {
-
-		$updates = (array) $updates;
-		$out     = array();
-		foreach ( $defualts as $name => $default ) {
-			if ( array_key_exists( $name, $updates ) ) {
-				$out[ $name ] = $updates[ $name ];
-			} else {
-				$out[ $name ] = $default;
-			}
-		}
-
-		return $out;
 
 	}
 
