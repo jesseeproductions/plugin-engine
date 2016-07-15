@@ -37,7 +37,9 @@ class Pngx__Main {
 
 		$this->plugin_path = trailingslashit( dirname( dirname( dirname( __FILE__ ) ) ) );
 		$this->plugin_dir  = trailingslashit( basename( $this->plugin_path ) );
-		$this->plugin_url  = plugins_url( $this->plugin_dir );
+		//$this->plugin_url  = plugins_url( $this->plugin_dir );
+		//$parent_plugin_dir = trailingslashit( plugin_basename( $this->plugin_path ) );
+		//$this->plugin_url  = plugins_url( $parent_plugin_dir === $this->plugin_dir ? $this->plugin_dir : $parent_plugin_dir );
 
 		$this->load_text_domain( 'plugin-engine', basename( dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) ) . '/plugin-engine/lang/' );
 

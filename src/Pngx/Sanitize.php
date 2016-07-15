@@ -4,7 +4,6 @@ if ( $_SERVER['SCRIPT_FILENAME'] == __FILE__ ) {
 	die( 'Access denied.' );
 }
 
-
 /**
  * Class Pngx__Sanitize
  */
@@ -327,4 +326,4 @@ class Pngx__Sanitize {
 
 	}
 
-} //end Coupon_Creator_Plugin_Sanitize Class
+} //end

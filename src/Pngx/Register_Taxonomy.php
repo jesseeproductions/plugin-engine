@@ -15,33 +15,31 @@ class Pngx__Register_Taxonomy {
 	 * Generate Labels for Taxonomy
 	 *
 	 * @param $singular_tax_name
+	 * @param $lc_singular_tax_name
 	 * @param $plural_tax_name
-	 * @param $singular_cpt_name
-	 * @param $plural_cpt_name
-	 * @param $lc_singular_cpt_name
-	 * @param $lc_plural_cpt_name
+	 * @param $lc_plural_tax_name
 	 * @param $text_domain
 	 *
 	 * @return array
 	 */
-	public static function generate_taxonomy_labels( $singular_tax_name, $plural_tax_name, $singular_cpt_name, $plural_cpt_name, $lc_singular_cpt_name, $lc_plural_cpt_name, $text_domain ) {
+	public static function generate_taxonomy_labels( $singular_tax_name, $lc_singular_tax_name, $plural_tax_name, $lc_plural_tax_name, $text_domain ) {
 
 		$labels = array(
-			'name'                       => sprintf( esc_html__( '%s %s', $text_domain ), $singular_cpt_name, $singular_tax_name ),
-			'singular_name'              => sprintf( esc_html__( '%s %s', $text_domain ), $singular_cpt_name, $plural_tax_name ),
-			'search_items'               => sprintf( esc_html__( 'Search %s %s', $text_domain ), $singular_cpt_name, $plural_tax_name ),
-			'all_items'                  => sprintf( esc_html__( 'All %s %s', $text_domain ), $singular_cpt_name, $plural_tax_name ),
-			'parent_item'                => sprintf( esc_html__( 'Parent %s %s', $text_domain ), $singular_cpt_name, $plural_tax_name ),
-			'parent_item_colon'          => sprintf( esc_html__( 'Parent %s %s:', $text_domain ), $singular_cpt_name, $plural_tax_name ),
-			'edit_item'                  => sprintf( esc_html__( 'Edit %s %s', $text_domain ), $singular_cpt_name, $plural_tax_name ),
-			'update_item'                => sprintf( esc_html__( 'Update %s %s', $text_domain ), $singular_cpt_name, $plural_tax_name ),
-			'add_new_item'               => sprintf( esc_html__( 'Add New %s %s', $text_domain ), $singular_cpt_name, $singular_tax_name ),
-			'new_item_name'              => sprintf( esc_html__( 'New %s %s Name', $text_domain ), $singular_cpt_name, $plural_tax_name ),
-			'menu_name'                  => sprintf( esc_html__( '%s %s', $text_domain ), $singular_cpt_name, $singular_tax_name ),
-			'popular_items'              => sprintf( esc_html__( 'Popular %s', $text_domain ), $plural_cpt_name ),
-			'separate_items_with_commas' => sprintf( esc_html__( 'Separate %s with commas', $text_domain ), $lc_plural_cpt_name ),
-			'add_or_remove_items'        => sprintf( esc_html__( 'Add or remove  %s', $text_domain ), $lc_plural_cpt_name ),
-			'choose_from_most_used'      => sprintf( esc_html__( 'Choose from the most used %s', $text_domain ), $lc_plural_cpt_name ),
+			'name'                       => sprintf( esc_html__( '%s', $text_domain ), $singular_tax_name ),
+			'singular_name'              => sprintf( esc_html__( '%s', $text_domain ), $plural_tax_name ),
+			'search_items'               => sprintf( esc_html__( 'Search %s', $text_domain ), $plural_tax_name ),
+			'all_items'                  => sprintf( esc_html__( 'All %s', $text_domain ), $plural_tax_name ),
+			'parent_item'                => sprintf( esc_html__( 'Parent %s', $text_domain ), $plural_tax_name ),
+			'parent_item_colon'          => sprintf( esc_html__( 'Parent %s:', $text_domain ), $plural_tax_name ),
+			'edit_item'                  => sprintf( esc_html__( 'Edit %s', $text_domain ), $singular_tax_name ),
+			'update_item'                => sprintf( esc_html__( 'Update %s', $text_domain ), $plural_tax_name ),
+			'add_new_item'               => sprintf( esc_html__( 'Add New %s', $text_domain ), $singular_tax_name ),
+			'new_item_name'              => sprintf( esc_html__( 'New %s Name', $text_domain ), $singular_tax_name ),
+			'menu_name'                  => sprintf( esc_html__( '%s', $text_domain ), $plural_tax_name ),
+			'popular_items'              => sprintf( esc_html__( 'Popular %s', $text_domain ), $plural_tax_name ),
+			'separate_items_with_commas' => sprintf( esc_html__( 'Separate %s with commas', $text_domain ), $lc_plural_tax_name ),
+			'add_or_remove_items'        => sprintf( esc_html__( 'Add or remove %s', $text_domain ), $lc_singular_tax_name ),
+			'choose_from_most_used'      => sprintf( esc_html__( 'Choose from the most used %s', $text_domain ), $lc_plural_tax_name ),
 		);
 
 		return $labels;
