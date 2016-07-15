@@ -12,13 +12,13 @@ if ( class_exists( 'Pngx__Main' ) ) {
 	return;
 }
 
+
 class Pngx__Main {
 
+	const VERSION = '2.3';
 
-	const VERSION           = '2.3';
-
-	//protected $plugin_context;
-	//protected $plugin_context_class;
+	protected $plugin_context;
+	protected $plugin_context_class;
 	//protected $doing_ajax = false;
 
 	public $plugin_dir;
@@ -31,7 +31,7 @@ class Pngx__Main {
 	public function __construct( $context = null ) {
 
 		if ( is_object( $context ) ) {
-			$this->plugin_context = $context;
+			$this->plugin_context       = $context;
 			$this->plugin_context_class = get_class( $context );
 		}
 
@@ -66,14 +66,15 @@ class Pngx__Main {
 			require_once dirname( __FILE__ ) . '/Autoloader.php';
 		}
 
-		$prefixes = array( 'Pngx__' => dirname( __FILE__ ) );
+		$prefixes   = array( 'Pngx__' => dirname( __FILE__ ) );
 		$autoloader = Pngx__Autoloader::instance();
 		$autoloader->register_prefixes( $prefixes );
 		$autoloader->register_autoloader();
 	}
 
 	/**
-	 * Get's the class name of the instantiated plugin context of this class. I.e. the class name of the object that instantiated this one.
+	 * Get's the class name of the instantiated plugin context of this class. I.e. the class name of the object that
+	 * instantiated this one.
 	 */
 	public function context_class() {
 		return $this->plugin_context_class;
@@ -223,7 +224,8 @@ class Pngx__Main {
 	}
 
 	/**
-	 * Helper function for getting Post Id. Accepts null or a post id. If no $post object exists, returns false to avoid a PHP NOTICE
+	 * Helper function for getting Post Id. Accepts null or a post id. If no $post object exists, returns false to
+	 * avoid a PHP NOTICE
 	 *
 	 * @param int $post (optional)
 	 *

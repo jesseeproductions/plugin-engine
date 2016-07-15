@@ -24,7 +24,7 @@ class Pngx__Register_Post_Type {
 	 * @param $cpt is a string for the registered post type
 	 * @param $title_msg is string for title placeholder
 	 */
-	public function __construct( $cpt, $title_msg ) {
+	public function __construct( $cpt=null, $title_msg=null ) {
 		if ( ! $cpt ) {
 			return;
 		}
