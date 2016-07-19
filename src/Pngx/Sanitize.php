@@ -4,10 +4,14 @@ if ( $_SERVER['SCRIPT_FILENAME'] == __FILE__ ) {
 	die( 'Access denied.' );
 }
 
+if ( class_exists( 'Pngx__Sanitize' ) ) {
+	return;
+}
+
+
 /**
  * Class Pngx__Sanitize
  */
-
 class Pngx__Sanitize {
 
 	/**

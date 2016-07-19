@@ -1,13 +1,11 @@
 <?php
-/**
- * Register Custom Post Types with WordPress
- */
-
 // Don't load directly
 if ( ! defined( 'ABSPATH' ) ) {
 	die( '-1' );
 }
-
+if ( class_exists( 'Pngx__Register_Post_Type' ) ) {
+	return;
+}
 
 /**
  * Class Pngx__Register_Post_Type
@@ -21,10 +19,10 @@ class Pngx__Register_Post_Type {
 	/**
 	 * Construct to Modify Messaging for Post Type
 	 *
-	 * @param $cpt is a string for the registered post type
+	 * @param $cpt       is a string for the registered post type
 	 * @param $title_msg is string for title placeholder
 	 */
-	public function __construct( $cpt=null, $title_msg=null ) {
+	public function __construct( $cpt = null, $title_msg = null ) {
 		if ( ! $cpt ) {
 			return;
 		}

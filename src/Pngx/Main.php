@@ -1,8 +1,4 @@
 <?php
-/**
- * Main Plugin Engine class.
- */
-
 // Don't load directly
 if ( ! defined( 'ABSPATH' ) ) {
 	die( '-1' );
@@ -13,6 +9,9 @@ if ( class_exists( 'Pngx__Main' ) ) {
 }
 
 
+/**
+ * Main Plugin Engine class.
+ */
 class Pngx__Main {
 
 	const VERSION = '2.3';

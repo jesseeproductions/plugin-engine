@@ -1,14 +1,16 @@
 <?php
-/**
- * Register Taxonomies with WordPress
- */
-
 // Don't load directly
 if ( ! defined( 'ABSPATH' ) ) {
 	die( '-1' );
 }
+if ( class_exists( 'Pngx__Register_Taxonomy' ) ) {
+	return;
+}
 
 
+/**
+ * Register Taxonomies with WordPress
+ */
 class Pngx__Register_Taxonomy {
 
 	/**

@@ -4,6 +4,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die( '-1' );
 }
 
+if ( class_exists( 'Pngx__Add_Capabilities' ) ) {
+	return;
+}
+
 
 /**
  * Class Pngx__Add_Capabilities
