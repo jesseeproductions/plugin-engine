@@ -14,17 +14,55 @@ if ( class_exists( 'Pngx__Admin__Help' ) ) {
  */
 class Pngx__Admin__Help {
 
-//TODO Set abstract property for fields
-//TODO set abstract method set_help_fields
-//todo remove all instances of cctor in pngx_admin_help
-
-	//Help Fields
+	//Help Fields array()
 	protected $fields = array();
 
+	/**
+	 * Return Array of Help Fields
+	 *
+	 * @return array
+	 */
 	public function get_options() {
-
 		return $this->fields;
+	}
 
+	/**
+	 * Array of All Help Fields
+	 */
+	protected function set_help_fields() {
+		/*
+		 * Sample Help Section
+		 *
+		 * Help Sections should aways start with a heading and end with end_list
+		 *
+		 * Choose either section or tab to place the content
+		 */
+		$this->fields['header_video_guides_content'] = array(  // unique id
+			'section' => '', // options tab to place help content
+			'tab'     => 'content', // meta tab to place help content
+			'text'    => 'Coupon Content', // title for content section on help tab
+			'type'    => 'heading' //field type heading only used in opening
+		);
+		$this->fields['video_creating_coupon']       = array( // unique id
+			'section'  => '', //option tab to place help
+			'tab'      => 'content', //meta tab to place help
+			'text'     => 'Overview of Creating a Coupon', //descriptive text for help
+			'video_id' => 'I1v9HxdIsSE', //Youtube Video ID
+			'type'     => 'video' //field type video
+		);
+		$this->fields['link_pro_hide_deal']           = array( // unique id
+			'section' => '', //option tab to place help
+			'tab'     => 'content', //meta tab to place help
+			'text'    => 'How to Hide the Deal in any Coupon View',//descriptive text for help
+			'link'    => 'http://cctor.link/Ihoro', //helo link
+			'pro'     => 'Pro', //Add Pro superscript for pro only feature
+			'type'    => 'links' //field type links
+		);
+		$this->fields['video_end_list_content']      = array( // unique id
+			'section' => '', // options tab close for this content
+			'tab'     => 'content', // meta tab close for this content
+			'type'    => 'end_list'
+		);
 	}
 
 	/**
@@ -53,7 +91,7 @@ class Pngx__Admin__Help {
 	 *
 	 * @param null $section
 	 */
-	public function display_help( $section = null ) {
+	public function display_help( $section = null, $page_screen_id = null, $class = null ) {
 
 		if ( ! $section ) {
 			return;
@@ -67,22 +105,21 @@ class Pngx__Admin__Help {
 
 		if ( 'all' != $section ) {
 
-			if ( 'cctor_coupon_page_coupon-options' == $screen->id ) {
+			if ( $page_screen_id == $screen->id ) {
 				echo '</td></tr><tr valign="top"><td colspan="2">';
 			}
 
-			echo '<div class="cctor-meta-field-wrap cctor-section-help-container">';
+			echo '<div class="' . esc_html( $class ) . ' pngx-meta-field-wrap pngx-section-help-container">';
 
-
-			echo '<button aria-expanded="false" class="cctor-section-help-container-toggle" type="button">
+			echo '<button aria-expanded="false" class="pngx-section-help-container-toggle" type="button">
 					<span class="dashicons-before dashicons-editor-help">Help</span>
 					<span class="dashicons toggle__arrow dashicons-arrow-down"></span>
 				</button>';
 
-			echo '<div class="cctor-section-help-slideout">';
+			echo '<div class="pngx-section-help-slideout">';
 
-			echo '<div class="cctor-meta-field-content video">';
-			echo '<h4>' . __( 'Video Guides', 'coupon-creator' ) . '</h4>';
+			echo '<div class="pngx-meta-field-content video">';
+			echo '<h4>' . __( 'Video Guides', 'plugin-engine' ) . '</h4>';
 			echo '<ul>';
 			foreach ( $this->fields as $help_field ) {
 
@@ -96,8 +133,8 @@ class Pngx__Admin__Help {
 			}
 			echo '</ul></div>';
 
-			echo '<div class="cctor-meta-field-content text">';
-			echo '<h4>' . __( 'Guides', 'coupon-creator' ) . '</h4>';
+			echo '<div class="pngx-meta-field-content text">';
+			echo '<h4>' . __( 'Guides', 'plugin-engine' ) . '</h4>';
 			echo '<ul>';
 			foreach ( $this->fields as $help_field ) {
 
@@ -113,7 +150,7 @@ class Pngx__Admin__Help {
 
 			echo '</div></div>';
 
-			if ( 'cctor_coupon_page_coupon-options' == $screen->id ) {
+			if ( $page_screen_id == $screen->id ) {
 				echo '</td></tr>';
 			}
 
@@ -141,7 +178,7 @@ class Pngx__Admin__Help {
 			case 'heading':
 				?>
 
-				<h4 class="coupon-heading"><?php echo esc_html( $help_field['text'] ); ?></h4>
+				<h4 class="pngx-heading"><?php echo esc_html( $help_field['text'] ); ?></h4>
 				<ul>
 				<?php break;
 
@@ -157,10 +194,10 @@ class Pngx__Admin__Help {
 				}
 				$pro = '';
 				if ( isset( $help_field['pro'] ) ) {
-					$pro = '<sup class="pro-help-sup">' . esc_html( $help_field['pro'] ) . '</sup>';
+					$pro = '<sup class="promote-sup">' . esc_html( $help_field['pro'] ) . '</sup>';
 				}
 				?>
-				<li><a class="cctor-support youtube_colorbox"
+				<li><a class="pngx-support youtube_colorbox"
 				       href="http://www.youtube.com/embed/<?php echo esc_html( $help_field['video_id'] ); ?>?hd=1&autohide=1&rel=0&showsearch=0&autoplay=1"
 				       rel="<?php echo esc_attr( $rel ); ?>"><?php echo esc_html( $help_field['text'] ); ?></a><?php echo $pro; ?>
 				</li>
@@ -173,7 +210,7 @@ class Pngx__Admin__Help {
 					$pro = '<sup class="pro-help-sup">' . esc_html( $help_field['pro'] ) . '</sup>';
 				}
 				?>
-				<li><a class="cctor-support" target="_blank"
+				<li><a class="pngx-support" target="_blank"
 				       href="<?php echo esc_url( $help_field['link'] ); ?>"><?php echo esc_html( $help_field['text'] ); ?></a><?php echo $pro; ?>
 				</li>
 				<?php break;

@@ -1,0 +1,8 @@
+[
+  "pngx-common.php",
+  "pngx-autoload.php",
+  "src/**/*",
+  "language/**/*",
+  "README.md",
+  "vendor/**/*"
+]

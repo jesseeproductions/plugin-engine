@@ -1,0 +1,19 @@
+{
+  "name": "plugin-engine",
+  "version": "2.3.0",
+  "repository": "git@github.com:jesseeproductions/plugin-engine.git",
+  "_resourcepath": "src/resources",
+  "_domainPath": "languages",
+  "_textDomain": "plugin-engine",
+  "engines": {
+    "node": "0.10.30",
+    "npm": "1.4.23"
+  },
+  "devDependencies": {
+    "archiver": "^0.10.1",
+    "glob": "~4.0.5",
+    "gulp": "^3.9.1",
+    "product-taskmaster": "git+https://github.com/jesseeproductions/coupon-product-taskmaster.git",
+    "require-dir": "^0.3.0"
+  }
+}

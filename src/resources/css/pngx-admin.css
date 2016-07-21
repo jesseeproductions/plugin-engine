@@ -1,0 +1,74 @@
+/*
+	Plugin Engine Admin CSS
+
+*/
+/* ==========================================================================
+   Help CSS
+   ========================================================================== */
+.pngx-section-help-container {
+  background-color: #ccc;
+  border-radius: 10px 10px 0;
+  margin-bottom: 1em;
+  overflow: hidden; }
+
+.pngx-section-help-container-toggle {
+  background-color: #ccc;
+  border: medium none;
+  color: white;
+  cursor: pointer;
+  margin: 0;
+  outline: medium none;
+  padding: 0.5em;
+  text-align: left;
+  width: 100%; }
+
+.pngx-section-help-container:hover,
+.pngx-section-help-container-toggle:hover {
+  background: #4d6eab none repeat scroll 0 0;
+  border: 1px solid #003ca9;
+  color: #000; }
+
+.pngx-section-help-container-toggle .dashicons-before::before {
+  margin-right: 5px; }
+
+.pngx-section-help-container-toggle .toggle__arrow {
+  text-decoration: none; }
+
+.pngx-section-help-slideout {
+  background-color: #fff;
+  border: 1px solid #003ca9;
+  border-bottom-left-radius: 10px;
+  display: none;
+  overflow: hidden;
+  padding: 0.5em; }
+
+.ui-widget-content a.pngx-support,
+.pngx-support {
+  color: #003ca9; }
+
+.ui-widget-content a.pngx-support:hover,
+.pngx-support:hover {
+  color: #4d6eab; }
+
+.pngx-help-images {
+  box-shadow: 0 1px 2px 0 #4d6eab;
+  display: none;
+  margin: 10px;
+  max-width: 95%; }
+
+.pngx-meta-field-content {
+  width: 49%;
+  display: inline-block;
+  vertical-align: top; }
+
+.pngx-meta-field-content.text {
+  margin: 0 0 0 2%; }
+
+.promote-sup {
+  color: #777; }
+
+@media only screen and (max-width: 640px) {
+  .pngx-meta-field-content,
+  .pngx-meta-field-content.text {
+    margin: 0;
+    width: 100%; } }

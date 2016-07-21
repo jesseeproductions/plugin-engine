@@ -23,6 +23,8 @@ class Pngx__Main {
 	public $plugin_dir;
 	public $plugin_path;
 	public $plugin_url;
+	public $resource_path;
+	public $resource_url;
 
 	/**
 	 * constructor
@@ -36,9 +38,12 @@ class Pngx__Main {
 
 		$this->plugin_path = trailingslashit( dirname( dirname( dirname( __FILE__ ) ) ) );
 		$this->plugin_dir  = trailingslashit( basename( $this->plugin_path ) );
-		//$this->plugin_url  = plugins_url( $this->plugin_dir );
-		//$parent_plugin_dir = trailingslashit( plugin_basename( $this->plugin_path ) );
-		//$this->plugin_url  = plugins_url( $parent_plugin_dir === $this->plugin_dir ? $this->plugin_dir : $parent_plugin_dir );
+		$this->plugin_url  = plugins_url( $this->plugin_dir );
+		$parent_plugin_dir = trailingslashit( plugin_basename( $this->plugin_path ) );
+		$this->plugin_url  = plugins_url( $parent_plugin_dir === $this->plugin_dir ? $this->plugin_dir : $parent_plugin_dir );
+		$this->resource_path = $this->plugin_path . 'src/resources/';
+		$this->resource_url  = $this->plugin_url . 'src/resources/';
+
 
 		$this->load_text_domain( 'plugin-engine', basename( dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) ) . '/plugin-engine/lang/' );
 
@@ -92,44 +97,15 @@ class Pngx__Main {
 	}
 
 	/**
-	 * Registers resources that can/should be enqueued
-	 */
-	public function load_assets() {
-		// These ones are only registred
-		/*tribe_assets(
-			$this,
-			array(
-				array( 'tribe-jquery-ui-theme', 'vendor/jquery/ui.theme.css' ),
-			)
-		);
-
-		// These ones will be enqueued on `admin_enqueue_scripts` if the conditional method on filter is met
-		tribe_assets(
-			$this,
-			array(
-				array( 'tribe-common-admin', 'tribe-common-admin.css', array( 'tribe-dependency-style' ) ),
-				array( 'tribe-bumpdown', 'bumpdown.js', array( 'jquery', 'underscore', 'hoverIntent' ) ),
-				array( 'tribe-dependency', 'dependency.js', array( 'jquery', 'underscore' ) ),
-				array( 'tribe-dependency-style', 'dependency.css' ),
-				array( 'tribe-notice-dismiss', 'notice-dismiss.js' ),
-			),
-			'admin_enqueue_scripts',
-			array(
-				'filter' => array( Tribe__Admin__Helpers::instance(), 'is_post_type_screen' ),
-			)
-		);*/
-	}
-
-	/**
 	 * Adds core hooks
 	 */
 	public function add_hooks() {
-		//add_action( 'plugins_loaded', array( 'Tribe__App_Shop', 'instance' ) );
-		//add_action( 'plugins_loaded', array( 'Tribe__Assets', 'instance' ), 1 );
 
-		// Register for the assets to be availble everywhere
-		//add_action( 'init', array( $this, 'load_assets' ), 1 );
-		//add_action( 'plugins_loaded', array( 'Tribe__Admin__Notices', 'instance' ), 1 );
+		//Load Admin Class if in Admin Section
+		if ( is_admin() ) {
+			new Pngx__Admin__Main();
+		}
+
 	}
 
 	/**
