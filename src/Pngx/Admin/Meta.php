@@ -50,7 +50,7 @@ class Pngx__Admin__Meta {
 
 		$js_troubleshoot_url = 'http://cctor.link/R7KRa';
 
-		$js_msg = '<div class="javascript-conflict cctor-error"><p>' . sprintf( __( 'There maybe a javascript conflict preventing some features from working.  <a href="%s" target="_blank" >Please check this guide to narrow down the cause.</a>', 'coupon-creator' ), esc_url( $js_troubleshoot_url ) ) . '</p></div>';
+		$js_msg = '<div class="javascript-conflict pngx-error"><p>' . sprintf( __( 'There maybe a javascript conflict preventing some features from working.  <a href="%s" target="_blank" >Please check this guide to narrow down the cause.</a>', 'coupon-creator' ), esc_url( $js_troubleshoot_url ) ) . '</p></div>';
 
 		return $js_msg;
 
@@ -142,7 +142,7 @@ class Pngx__Admin__Meta {
              'type'      => 'heading', //field type
              'section'   => 'coupon_creator_meta_box', //meta box
              'tab'       => 'content', //tab
-             'wrapclass' => 'cctor-img-coupon' //optional class
+             'wrapclass' => 'pngx-img-coupon' //optional class
 		);
 
 		$this->fields = $fields;
@@ -196,8 +196,8 @@ class Pngx__Admin__Meta {
 
 		ob_start(); ?>
 
-		<div class="cctor-tabs">
-			<ul class="cctor-tabs-nav">
+		<div class="pngx-tabs">
+			<ul class="pngx-tabs-nav">
 
 				<?php //Create Tabs
 				foreach ( self::get_tabs() as $tab_slug => $tab ) {
@@ -208,9 +208,9 @@ class Pngx__Admin__Meta {
 
 			<?php foreach ( self::get_tabs() as $tab_slug => $tab ) { ?>
 
-				<div class="coupon-section-fields form-table">
+				<div class="pngx-section-fields form-table">
 
-					<h3 class="cctor-tab-heading-<?php echo $tab_slug; ?>"><?php echo $tab; ?></h3>
+					<h3 class="pngx-tab-heading-<?php echo $tab_slug; ?>"><?php echo $tab; ?></h3>
 
 					<?php
 
@@ -229,12 +229,12 @@ class Pngx__Admin__Meta {
 							?>
 
 							<div
-								class="cctor-meta-field-wrap field-wrap-<?php echo esc_html( $field['type'] ); ?> field-wrap-<?php echo esc_html( $field['id'] ); ?> <?php echo esc_html( $wrapclass ); ?>">
+								class="pngx-meta-field-wrap field-wrap-<?php echo esc_html( $field['type'] ); ?> field-wrap-<?php echo esc_html( $field['id'] ); ?> <?php echo esc_html( $wrapclass ); ?>">
 
 								<?php if ( isset( $field['label'] ) ) { ?>
 
 									<div
-										class="cctor-meta-label label-<?php echo $field['type']; ?> label-<?php echo $field['id']; ?>">
+										class="pngx-meta-label label-<?php echo $field['type']; ?> label-<?php echo $field['id']; ?>">
 										<label
 											for="<?php echo $field['id']; ?>"><?php echo $field['label']; ?></label>
 									</div>
@@ -242,7 +242,7 @@ class Pngx__Admin__Meta {
 								<?php } ?>
 
 								<div
-									class="cctor-meta-field field-<?php echo $field['type']; ?> field-<?php echo $field['id']; ?>">
+									class="pngx-meta-field field-<?php echo $field['type']; ?> field-<?php echo $field['id']; ?>">
 
 									<?php switch ( $field['type'] ) {
 
@@ -264,7 +264,7 @@ class Pngx__Admin__Meta {
 										case 'text':
 											?>
 											<?php if ( isset( $field['alert'] ) && $field['alert'] != '' && cctor_options( $field['condition'] ) == 1 ) {
-											echo '<div class="cctor-error">&nbsp;&nbsp;' . $field['alert'] . '</div>';
+											echo '<div class="pngx-error">&nbsp;&nbsp;' . $field['alert'] . '</div>';
 										}
 											?>
 											<input type="text" name="<?php echo $field['id']; ?>"
@@ -443,9 +443,9 @@ class Pngx__Admin__Meta {
 									} ?>
 
 								</div>
-								<!-- end .cctor-meta-field.field-<?php echo $field['type']; ?>.field-<?php echo $field['id']; ?> -->
+								<!-- end .pngx-meta-field.field-<?php echo $field['type']; ?>.field-<?php echo $field['id']; ?> -->
 
-							</div> <!-- end .cctor-meta-field-wrap.field-wrap-<?php echo $field['type']; ?>.field-wrap-<?php echo $field['id']; ?>	-->
+							</div> <!-- end .pngx-meta-field-wrap.field-wrap-<?php echo $field['type']; ?>.field-wrap-<?php echo $field['id']; ?>	-->
 
 							<?php
 						endif; //end if in section check
@@ -456,7 +456,7 @@ class Pngx__Admin__Meta {
 
 			<?php } // end foreach tabs?>
 
-		</div>    <!-- end .cctor-tabs -->
+		</div>    <!-- end .pngx-tabs -->
 
 		<?php
 		echo ob_get_clean();

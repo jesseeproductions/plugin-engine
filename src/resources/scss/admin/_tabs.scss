@@ -1,15 +1,14 @@
 /* ==========================================================================
    Tabs CSS
    ========================================================================== */
-.cctor-woo-tabs.ui-tabs.ui-widget-content,
-.cctor-tabs.ui-tabs.ui-widget-content {
+
+.pngx-tabs.ui-tabs.ui-widget-content {
 	background: none;
 	border: none;
-	font-family: "Open Sans", sans-serif;
 }
 
-.ui-tabs .cctor-woo-tabs-nav.ui-tabs-nav,
-.ui-tabs .cctor-tabs-nav.ui-tabs-nav {
+
+.ui-tabs .pngx-tabs-nav.ui-tabs-nav {
 	background: none;
 	border: none;
 	height: 100%;
@@ -17,23 +16,22 @@
 	padding: 0;
 }
 
-.ui-tabs .cctor-woo-tabs-nav.ui-tabs-nav li,
-.ui-tabs .cctor-tabs-nav.ui-tabs-nav li {
+
+.ui-tabs .pngx-tabs-nav.ui-tabs-nav li {
 	display: block;
 	float: left;
 	margin: 0;
 }
 
-.ui-tabs .cctor-woo-tabs-nav.ui-tabs-nav li.ui-state-default,
-.ui-tabs .cctor-woo-tabs-nav.ui-tabs-nav li.ui-state-active,
-.ui-tabs .cctor-tabs-nav.ui-tabs-nav li.ui-state-default,
-.ui-tabs .cctor-tabs-nav.ui-tabs-nav li.ui-state-active {
+
+.ui-tabs .pngx-tabs-nav.ui-tabs-nav li.ui-state-default,
+.ui-tabs .pngx-tabs-nav.ui-tabs-nav li.ui-state-active {
 	background: none;
 	border: none;
 }
 
-.ui-tabs .cctor-woo-tabs-nav.ui-tabs-nav li a,
-.ui-tabs .cctor-tabs-nav.ui-tabs-nav li a {
+
+.ui-tabs .pngx-tabs-nav.ui-tabs-nav li a {
 	border-color: #fff;
 	border-radius: 8px 8px 0 0;
 	border-style: solid;
@@ -49,10 +47,8 @@
 	text-shadow: rgba(255, 255, 255, 1) 0 1px 0;
 }
 
-.ui-tabs .cctor-woo-tabs-nav.ui-tabs-nav li.ui-tabs-selected a,
-.ui-tabs .cctor-woo-tabs-nav.ui-tabs-nav li.ui-state-active a,
-.ui-tabs .cctor-tabs-nav.ui-tabs-nav li.ui-tabs-selected a,
-.ui-tabs .cctor-tabs-nav.ui-tabs-nav li.ui-state-active a {
+.ui-tabs .pngx-tabs-nav.ui-tabs-nav li.ui-tabs-selected a,
+.ui-tabs .pngx-tabs-nav.ui-tabs-nav li.ui-state-active a {
 	background: #fff;
 	border-width: 1px 1px 0;
 	box-shadow: 0 0 5px 0 rgba(18, 68, 107, 1.0);
@@ -63,9 +59,7 @@
 	margin: 3px 0 0;
 }
 
-.cctor-promo-boxes,
-.cctor-woo-tabs-panel.ui-tabs-panel.ui-widget-content,
-.cctor-tabs-panel.ui-tabs-panel.ui-widget-content {
+.pngx-tabs-panel.ui-tabs-panel.ui-widget-content {
 	background: #fff;
 	box-shadow: 0 0 1px 0 rgba(50, 50, 50, 0.5);
 	clear: both;
@@ -73,8 +67,8 @@
 	padding: 2%;
 }
 
-.cctor-tabs-panel.ui-tabs-panel.ui-widget-content h3 {
-	color: $blue;
+.pngx-tabs-panel.ui-tabs-panel.ui-widget-content h3 {
+	color: #2A5A8A;
 	font: italic normal normal 24px/29px Georgia, Times, serif;
 	line-height: 35px;
 	margin: 0;
@@ -82,27 +76,13 @@
 	text-shadow: 0 1px 0 #fff;
 }
 
-.cctor-promo-boxes h3,
-.cctor-tabs-panel.ui-tabs-panel.ui-widget-content h4 {
-	color: $green;
+.pngx-tabs-panel.ui-tabs-panel.ui-widget-content h4 {
+	color: #048C7F;
 	font-size: 15px;
 	font-weight: bold;
 }
 
-.cctor_coupon_page_coupon-options .cctor-tabs-panel.ui-tabs-panel.ui-widget-content h4 {
-	margin: 0 0 0 -10px;
-}
-@include media($tablet) {
-	.cctor_coupon_page_coupon-options .cctor-tabs-panel.ui-tabs-panel.ui-widget-content h4 {
-		margin: 0 0 0 0px;
-	}
-}
-.cctor_coupon_page_coupon-options .cctor-tabs-panel.ui-tabs-panel.ui-widget-content .cctor-section-help-slideout h4 {
-	margin: 0;
-}
-
-.cctor-promo-boxes h3:after,
-.cctor-tabs-panel.ui-tabs-panel.ui-widget-content h4:after {
+.pngx-tabs-panel.ui-tabs-panel.ui-widget-content h4:after {
 	background: rgb(0, 0, 0);
 	background: -moz-linear-gradient(left, rgba(0, 0, 0, 1) 1%, rgba(155, 155, 155, 1) 28%, rgba(255, 255, 255, 1) 85%);
 	background: -webkit-gradient(linear, left top, right top, color-stop(1%, rgba(0, 0, 0, 1)), color-stop(28%, rgba(155, 155, 155, 1)), color-stop(85%, rgba(255, 255, 255, 1)));
@@ -119,28 +99,25 @@
 
 /* Responsive Tab Mode
 ------------------------------------------------------------ */
-.cctor-tabs-nav-mobile,
-.cctor-woo-tabs-nav-mobile {
+.pngx-tabs-nav-mobile {
 	background: #fff;
 	border-color: #fff;
 	border-radius: 8px 8px 0 0;
 	border-style: solid;
 	border-width: 1px 1px 0;
 	box-shadow: 0 0 5px 0 rgba(18, 68, 107, 1);
-	color: $blue;
+	color: #2A5A8A;
 	cursor: pointer;
 	display: none;
 	margin-bottom: 2px;
 	padding: 3px 10px 8px;
 }
 
-.cctor-woo-tabs-nav-mobile.show,
-.cctor-tabs-nav-mobile.show {
+.pngx-tabs-nav-mobile.show {
 	display: block;
 }
 
-.cctor-woo-tabs-nav-mobile:after,
-.cctor-tabs-nav-mobile:after {
+.pngx-tabs-nav-mobile:after {
 	content: "?";
 	pointer-events: none;
 	position: absolute;
@@ -149,8 +126,7 @@
 	z-index: 2;
 }
 
-.ui-tabs .cctor-woo-tabs-nav.cctor_accordiantabs,
-.ui-tabs .cctor-tabs-nav.cctor_accordiantabs {
+.ui-tabs .pngx-tabs-nav.pngx-accordian-tabs {
 	background: #fff;
 	border-bottom: 0;
 	display: none;
@@ -158,8 +134,7 @@
 	margin: 5px 0 15px;
 }
 
-.cctor-woo-tabs-nav.cctor_accordiantabs li a.ui-tabs-anchor,
-.cctor-tabs-nav.cctor_accordiantabs li a.ui-tabs-anchor {
+.pngx-tabs-nav.pngx-accordian-tabs li a.ui-tabs-anchor {
 	border: none;
 	border-radius: 0;
 	display: block;
@@ -169,8 +144,7 @@
 	position: relative;
 }
 
-.cctor-woo-tabs-nav.cctor_accordiantabs li.ui-state-default,
-.cctor-tabs-nav.cctor_accordiantabs li.ui-state-default {
+.pngx-tabs-nav.pngx-accordian-tabs li.ui-state-default {
 	display: block;
 	float: none;
 }
