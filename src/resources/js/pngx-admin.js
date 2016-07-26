@@ -36,22 +36,24 @@ var pngx_admin_help_scripts = pngx_admin_help_scripts || {};
 
 })( jQuery, pngx_admin_help_scripts );
 
-
-console.log('define variable');
-/*
- * jQuery UI Tabs for Meta Box
- *
+/**
+ * jQuery UI Tabs
+ * @type {{}}
  */
-var Pngx__Tabs = {
+var pngx_admin_tabs = pngx_admin_tabs || {};
+(function ( $, my ) {
+	'use strict';
 
-	init: function ( sections ) {
-		console.log(sections);
+	my.init = function ( sections, updated_tab, id ) {
 
-		var sections = sections;
-		init_scripts();
-	},
+		this.tabs = sections;
+		this.updated_tab = updated_tab;
+		this.id = id;
+		this.init_tab_scripts();
 
-	init_scripts: function () {
+	};
+
+	my.init_tab_scripts = function () {
 
 		var wrapped = $( ".wrap h3" ).wrap( "<div class=\"pngx-tabs-panel\">" );
 
@@ -60,7 +62,7 @@ var Pngx__Tabs = {
 		} );
 
 		$( ".pngx-tabs-panel" ).each( function ( index ) {
-			$( this ).attr( "id", sections[$( this ).children( "h3" ).text()] );
+			$( this ).attr( "id", my.tabs[$( this ).children( "h3" ).text()] );
 			if ( index > 0 )
 				$( this ).addClass( "pngx-tabs-hide" );
 		} );
@@ -77,13 +79,13 @@ var Pngx__Tabs = {
 			//
 
 			//  Define friendly index name
-			var index = "pngx-meta-tab" + cctor_coupon_meta_js_vars.cctor_coupon_id;
+			var index = "pngx-meta-tab" + this.id;
 
 			//  Define friendly data store name
 			var dataStore = window.sessionStorage;
 
 			//If Saved then use tab index, otherwise default to first tab
-			if ( cctor_coupon_meta_js_vars.cctor_coupon_updated ) {
+			if ( my.updated_tab ) {
 				//  Start magic!
 				try {
 					// getter: Fetch previous value
@@ -121,7 +123,7 @@ var Pngx__Tabs = {
 			} );
 		} );
 
-		$( "input[type=text], textarea" ).each( function () {
+		/*$( "input[type=text], textarea" ).each( function () {
 			if ( $( this ).val() == $( this ).attr( "placeholder" ) || $( this ).val() == "" )
 				$( this ).css( "color", "#999" );
 		} );
@@ -136,25 +138,24 @@ var Pngx__Tabs = {
 				$( this ).val( $( this ).attr( "placeholder" ) );
 				$( this ).css( "color", "#999" );
 			}
-		} );
+		} );*/
 
 		$( ".wrap h3, .wrap table" ).show();
 
 		// Browser compatibility
-		if ( $.browser.mozilla )
+		/*if ( $.browser.mozilla )
 			$( "form" ).attr( "autocomplete", "off" );
 
 		/*
 		 * 	Responsive Tabs Find Breakpoint to Change or Accordion Layout or Back to Tabs
-		 * 	since 2.0
 		 */
 		//Calculate Total Tab Length to determine when to switch between Responsive and Regular Tabs
 		var tabText = 0;
-		var tabCount = 0;
+		var tabCount = 1;
 
 		$( ".pngx-tabs-nav li" ).each( function () {
 
-			tabText = tabText + $( this ).my.textWidth();
+			tabText = tabText + $(this).find('a').width();
 
 			tabCount = tabCount + 1;
 
@@ -164,7 +165,7 @@ var Pngx__Tabs = {
 		$( window ).on( 'resize load', function ( e ) {
 
 			// 38px per tab for padding
-			var tabTotallength = tabText + ( tabCount * 38 );
+			var tabTotallength = tabText + ( tabCount * 40 );
 
 			if ( tabTotallength > $( '.pngx-tabs' ).width() ) {
 
@@ -205,29 +206,15 @@ var Pngx__Tabs = {
 			my.toggleMobileMenu( event, tabClass );
 		} )
 
-	},
-
-	/*
-	 *	Calculate Width of Text
-	 *	http://stackoverflow.com/questions/1582534/calculating-text-width-with-jquery
-	 */
-	textWidth: function ( text, font ) {
-		if ( !$.fn.textWidth.fakeEl ) $.fn.textWidth.fakeEl = $( '<span>' ).hide().appendTo( document.body );
-		$.fn.textWidth.fakeEl.text( text || this.val() || this.text() ).css( 'font', font || this.css( 'font' ) );
-		return $.fn.textWidth.fakeEl.width();
-	},
+	};
 
 	/*
 	 * Toogle Responsive Tabs
 	 */
-	toggleMobileMenu: function ( event, tabClass ) {
+	my.toggleMobileMenu = function ( event, tabClass ) {
 		tabClass = tabClass.slice( 0, -7 );
 
 		$( '.' + tabClass ).slideToggle();
-	}
+	};
 
-}
-
-
-
-//new Pngx__Tabs.init( {"Content":"content"} );
+})( jQuery, pngx_admin_tabs );
