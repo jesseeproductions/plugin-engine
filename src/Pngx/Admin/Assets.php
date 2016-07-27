@@ -28,8 +28,9 @@ class Pngx__Admin__Assets {
 		wp_register_script(
 			'pngx-admin',
 			Pngx__Main::instance()->resource_url . 'js/pngx-admin.js',
-			false,
-			filemtime( Pngx__Main::instance()->resource_path . 'js/pngx-admin.js' )
+			array( 'jquery-ui-tabs' ),
+			filemtime( Pngx__Main::instance()->resource_path . 'js/pngx-admin.js' ),
+			true
 		);
 		// @formatter:on
 

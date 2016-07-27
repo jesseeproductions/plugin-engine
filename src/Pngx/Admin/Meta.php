@@ -197,6 +197,7 @@ class Pngx__Admin__Meta {
 		ob_start(); ?>
 
 		<div class="pngx-tabs">
+
 			<ul class="pngx-tabs-nav">
 
 				<?php //Create Tabs
