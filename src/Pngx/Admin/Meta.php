@@ -192,7 +192,7 @@ class Pngx__Admin__Meta {
 			'cctor_coupon_id'      => $post_id,
 		);
 
-		wp_localize_script( 'cctor_coupon_meta_js', 'cctor_coupon_meta_js_vars', $cctor_tabs_variables );
+		wp_localize_script( 'cctor_admin_js', 'cctor_admin_js_vars', $cctor_tabs_variables );
 
 		ob_start(); ?>
 
@@ -250,7 +250,7 @@ class Pngx__Admin__Meta {
 										case 'heading':
 											?>
 
-											<h4 class="coupon-heading"><?php echo $field['desc']; ?></h4>
+											<h4 class="pngx-fields-heading"><?php echo $field['desc']; ?></h4>
 
 											<?php break;
 
@@ -361,12 +361,12 @@ class Pngx__Admin__Meta {
 											<?php echo $image; ?><br/>
 											<input name="<?php echo $field['id']; ?>"
 											       id="<?php echo $field['id']; ?>" type="hidden"
-											       class="upload_coupon_image" type="text" size="36" name="ad_image"
+											       class="pngx-upload-image" type="text" size="36" name="ad_image"
 											       value="<?php echo esc_attr( $meta ); ?>"/>
-											<input id="<?php echo $field['id']; ?>" class="coupon_image_button"
+											<input id="<?php echo $field['id']; ?>" class="pngx-image-button"
 											       type="button" value="Upload Image"/>
 											<small><a href="#" id="<?php echo $field['id']; ?>"
-											          class="cctor_coupon_clear_image_button">Remove Image</a>
+											          class="pngx-clear-image">Remove Image</a>
 											</small>
 											<br/><span class="description"><?php echo $field['desc']; ?></span>
 

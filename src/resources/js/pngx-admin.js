@@ -1,16 +1,40 @@
 /**
- * Help Section Scripts
+ * Fields
  * @type {{}}
  */
-var pngx_admin_help_scripts = pngx_admin_help_scripts || {};
-(function ( $, my ) {
+var pngx_admin_fields_init = pngx_admin_fields_init || {};
+(function ( $, obj ) {
 	'use strict';
 
-	my.init = function () {
+	obj.init = function () {
 		this.init_scripts();
 	};
 
-	my.init_scripts = function () {
+	obj.init_scripts = function () {
+
+		$( 'html' ).addClass( 'pngx-js' );
+
+	};
+
+	$( function () {
+		obj.init();
+	} );
+
+})( jQuery, pngx_admin_fields_init );
+
+/**
+ * Help
+ * @type {{}}
+ */
+var pngx_admin_help_scripts = pngx_admin_help_scripts || {};
+(function ( $, obj ) {
+	'use strict';
+
+	obj.init = function () {
+		this.init_scripts();
+	};
+
+	obj.init_scripts = function () {
 
 		/*
 		 * Help Slideout
@@ -28,10 +52,21 @@ var pngx_admin_help_scripts = pngx_admin_help_scripts || {};
 
 		} );
 
+		/*
+		 * Color Box Init for Help Videos
+		 */
+		$( ".youtube_colorbox" ).colorbox( {
+			rel: "how_to_videos",
+			current: "video {current} of {total}",
+			iframe: true,
+			width: "90%",
+			height: "90%"
+		} );
+
 	};
 
 	$( function () {
-		my.init();
+		obj.init();
 	} );
 
 })( jQuery, pngx_admin_help_scripts );
@@ -216,26 +251,145 @@ var pngx_admin_tabs = pngx_admin_tabs || {};
 
 })( jQuery, pngx_admin_tabs );
 
-var $ = jQuery.noConflict();
 
-jQuery( function ( $ ) {
-	/*$( "input[type=text], textarea" ).each( function () {
-	 console.log( 'here1' );
-	 if ( $( this ).val() == $( this ).attr( "placeholder" ) || $( this ).val() == "" )
-	 $( this ).css( "color", "#999" );
-	 } );
+/**
+ * Fields Toggle
+ * @type {{}}
+ */
+var pngx_fields_toggle = pngx_fields_toggle || {};
+(function ( $, obj ) {
+	'use strict';
 
-	 $( "input[type=text], textarea" ).focus( function () {
-	 console.log( 'here2' );
-	 if ( $( this ).val() == $( this ).attr( "placeholder" ) || $( this ).val() == "" ) {
-	 $( this ).val( "" );
-	 $( this ).css( "color", "#000" );
-	 }
-	 } ).blur( function () {
-	 console.log( 'here3' );
-	 if ( $( this ).val() == "" || $( this ).val() == $( this ).attr( "placeholder" ) ) {
-	 $( this ).val( $( this ).attr( "placeholder" ) );
-	 $( this ).css( "color", "#999" );
-	 }
-	 } );*/
-} );
+	obj.tab_wrap = '.pngx-tabs';
+	obj.tabs = '';
+
+	obj.init = function ( wrap, sections, updated_tab, page_id ) {
+		if ( wrap ) {
+			obj.tab_wrap = wrap;
+		}
+
+		obj.init_tabs();
+
+	};
+
+	obj.prepare = function( field_check, remove_img ) {
+
+		if ( field_check == 'input#cctor_image' ) {
+
+			var cctor_img_id = $( field_check ).val();
+			//Continue if ID Found
+			if ( cctor_img_id != '' || remove_img == true ) {
+
+				var show_fields = [".cctor-img-coupon"];
+				var dissable_style_fields_arr = '';
+				var message_div = {
+					".cctor-tab-heading-content": '',
+					".cctor-tab-heading-style": ''
+				};
+
+				if ( cctor_img_id != '' ) {
+
+					var border_disable = "sawtooth-border";
+					$( "select#cctor_coupon_border_themes" ).children( 'option[value="' + border_disable + '"]' ).prop( 'disabled', false );
+
+					dissable_style_fields_arr = [".cctor-img-coupon"];
+
+					if ( !$( '.pngx-tabs .cctor-tab-heading-links' ).length ) {
+						var message_div = {
+							".cctor-tab-heading-content": cctor_meta_js.cctor_disable_content_msg,
+							".cctor-tab-heading-style": cctor_meta_js.cctor_disable_style_msg
+						};
+					} else {
+						var message_div = {
+							".cctor-tab-heading-content": cctor_meta_js.cctor_disable_content_msg,
+							".cctor-tab-heading-style": ''
+						};
+
+						//If Saw Tooth Border is Selected then change as it does not work with the Image Coupon
+						if ( $( "#cctor_coupon_border_themes option:selected" ).val() == border_disable ) {
+
+							$( "select#cctor_coupon_border_themes" ).prop( "selectedIndex", 0 );
+
+							if ( typeof cctor_pro_prepare_toggle_fields == 'function' ) {
+
+								cctor_pro_prepare_toggle_fields( '#cctor_coupon_border_themes' );
+							}
+						}
+						$( "select#cctor_coupon_border_themes" ).children( 'option[value="' + border_disable + '"]' ).prop( 'disabled', true );
+					}
+				}
+			}
+		}
+
+		obj.toggle( field_check, dissable_style_fields_arr, show_fields, message_div );
+	};
+
+	obj.toggle = function( field_check, field_display, show_fields, message_div ) {
+		if ( ( $( field_check ).prop( 'checked' ) ) || ( field_check == '' && cctor_pro_meta_js.cctor_disable_print == 1 ) ) {
+			$.each( field_display, function ( index, field_class ) {
+				$( field_class ).fadeOut();
+				$( field_class + " input:text" ).val( '' );
+				$( field_class + " input:checked" ).removeAttr( 'checked' );
+			} );
+		} else if ( field_check && show_fields ) {
+			$.each( show_fields, function ( index, field_class ) {
+				$( field_class ).fadeIn( 'fast' );
+			} );
+			if ( field_display ) {
+				$.each( field_display, function ( index, field_class ) {
+					$( field_class ).fadeOut();
+				} );
+			}
+		} else if ( field_display ) {
+			$.each( field_display, function ( index, field_class ) {
+				$( field_class ).fadeIn();
+			} );
+		}
+		//Only Run if Variable is an Object
+		if ( typeof message_div === 'object' ) {
+			//Remove Message
+			$.each( message_div, function ( key, value ) {
+				$( key ).next( 'div.cctor-error' ).remove();
+			} );
+			//Add Message
+			$.each( message_div, function ( key, value ) {
+				if ( key && value ) {
+					$( key ).after( '<div class="cctor-error">' + value + '</div>' );
+				}
+			} );
+		}
+
+	};
+
+	obj.toggle_basic = function( common_wrap, value, selector ) {
+
+		var $selector = selector + value;
+
+		//Hide All Fields with Common Wrap
+		$( common_wrap ).each( function () {
+			$( this ).css( 'display', 'none' );
+		} );
+
+		//Show Fields Based on Value of a Field
+		$( $selector ).each( function () {
+			$( this ).css( 'display', 'block' );
+		} );
+
+	};
+
+	/*
+	 * Hide or Display Help Images
+	 */
+	obj.show = function( helpid ) {
+
+		var toggleImage = document.getElementById( helpid );
+
+		if ( toggleImage.style.display == "inline" ) {
+			document.getElementById( helpid ).style.display = 'none';
+		} else {
+			document.getElementById( helpid ).style.display = 'inline';
+		}
+
+		return false;
+	}
+})( jQuery, pngx_fields_toggle );
