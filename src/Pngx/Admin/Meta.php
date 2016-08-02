@@ -229,8 +229,7 @@ class Pngx__Admin__Meta {
 							$wrapclass = isset( $field['wrapclass'] ) ? $field['wrapclass'] : '';
 							?>
 
-							<div
-								class="pngx-meta-field-wrap field-wrap-<?php echo esc_html( $field['type'] ); ?> field-wrap-<?php echo esc_html( $field['id'] ); ?> <?php echo esc_html( $wrapclass ); ?>">
+							<div class="pngx-meta-field-wrap field-wrap-<?php echo esc_html( $field['type'] ); ?> field-wrap-<?php echo esc_html( $field['id'] ); ?> <?php echo esc_html( $wrapclass ); ?>" <?php echo $field['data']; ?>>
 
 								<?php if ( isset( $field['label'] ) ) { ?>
 
@@ -362,7 +361,9 @@ class Pngx__Admin__Meta {
 											<input name="<?php echo $field['id']; ?>"
 											       id="<?php echo $field['id']; ?>" type="hidden"
 											       class="pngx-upload-image" type="text" size="36" name="ad_image"
-											       value="<?php echo esc_attr( $meta ); ?>"/>
+											       value="<?php echo esc_attr( $meta ); ?>"
+											       <?php echo $field['data']; ?>
+											       />
 											<input id="<?php echo $field['id']; ?>" class="pngx-image-button"
 											       type="button" value="Upload Image"/>
 											<small><a href="#" id="<?php echo $field['id']; ?>"
