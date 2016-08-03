@@ -269,7 +269,29 @@ var pngx_fields_toggle = pngx_fields_toggle || {};
 
 	};
 
-	obj.toggle = function( field_check, field_display, show_fields, message_div ) {
+	obj.toggle = function( field, field_group, field_display, message ) {
+
+		if ( ! field || ! field_group ) {
+			return;
+		}
+
+		console.log( obj.toggle_field_manager( field ) );
+
+		if ( 'hide' === obj.toggle_field_manager( field ) )	{
+			$( field_group ).each( function () {
+				$( this ).fadeOut();
+			} );
+
+			if ( field_display ) {
+				$( field_display ).each( function () {
+					$( this ).fadeIn( 'fast' );
+				} );
+			}
+		} else {
+			$( field_group ).each( function () {
+				$( this ).fadeIn( 'fast' );
+			} );
+		}
 
 
 		/*
@@ -295,24 +317,43 @@ var pngx_fields_toggle = pngx_fields_toggle || {};
 		}*/
 
 		//Only Run if Variable is an Object
-		if ( typeof message_div === 'object' ) {
-			obj.toggle_msg(message_div);
+		if ( 'object' === typeof message ) {
+			obj.toggle_msg( message );
 		}
 
 	};
 
-	obj.toggle_msg = function( message_div ) {
-			//Remove Message
-			$.each( message_div, function ( key, value ) {
-				$( key ).next( 'div.pngx-error' ).remove();
-			} );
-			//Add Message
-			$.each( message_div, function ( key, value ) {
-				if ( key && value ) {
-					$( key ).after( '<div class="pngx-error">' + value + '</div>' );
-				}
-			} );
+	obj.toggle_field_manager = function ( field ) {
 
+		var $field_type = $( field ).prop( 'nodeName' );
+
+		if ( 'INPUT' == $field_type ) {
+			if ( $( field ).val() ) {
+				return 'hide';
+			} else {
+				return 'show';
+			}
+		} else if ( 'SELECT' == $field_type ) {
+
+		} else if ( 'CHECK' == $field_type ) {
+
+		}
+
+	};
+
+	obj.toggle_msg = function( message ) {
+		//Remove Message
+		$.each( message, function ( key, value ) {
+			var div_class = '.pngx-tab-heading-' + key;
+			$( div_class ).next( 'div.pngx-error' ).remove();
+		} );
+		//Add Message
+		$.each( message, function ( key, value ) {
+			if ( key && value ) {
+				var div_class = '.pngx-tab-heading-' + key;
+				$( div_class ).after( '<div class="pngx-error">' + value + '</div>' );
+			}
+		} );
 	};
 
 	obj.toggle_basic = function( common_wrap, value, selector ) {

@@ -227,9 +227,15 @@ class Pngx__Admin__Meta {
 
 							//Wrap Class for Conditionals
 							$wrapclass = isset( $field['wrapclass'] ) ? $field['wrapclass'] : '';
+
+							$toggle_field = isset( $field['toggle_field'] ) ? 'data-toggle-input="' . esc_html( $field['toggle_field'] ) . '#'. esc_html( $field['id'] ) .'"' : '';
+							$toggle_group = isset( $field['toggle_group'] ) ? 'data-toggle-group="' . esc_html( $field['toggle_group'] ) . '"' : '';
+							$toggle_show = isset( $field['toggle_show'] ) ? 'data-toggle-show="' . esc_html( $field['toggle_show'] ) . '"' : '';
+							$toggle_msg = isset( $field['toggle_msg'] ) ? 'data-toggle-msg=\'' . json_encode( $field['toggle_msg'], JSON_HEX_APOS ) . '\'' : '';
+
 							?>
 
-							<div class="pngx-meta-field-wrap field-wrap-<?php echo esc_html( $field['type'] ); ?> field-wrap-<?php echo esc_html( $field['id'] ); ?> <?php echo esc_html( $wrapclass ); ?>" <?php echo $field['data']; ?>>
+							<div class="pngx-meta-field-wrap field-wrap-<?php echo esc_html( $field['type'] ); ?> field-wrap-<?php echo esc_html( $field['id'] ); ?> <?php echo esc_html( $wrapclass ); ?>" <?php echo $toggle_field; echo $toggle_group; echo $toggle_show; echo $toggle_msg; ?> >
 
 								<?php if ( isset( $field['label'] ) ) { ?>
 
@@ -352,9 +358,9 @@ class Pngx__Admin__Meta {
 											if ( is_numeric( $meta ) ) {
 												$image = wp_get_attachment_image_src( $meta, 'medium' );
 												$image = $image[0];
-												$image = '<div style="display:none" id="' . $field['id'] . '" class="cctor_coupon_default_image cctor_coupon_box">' . $field['image'] . '</div> <img src="' . $image . '" id="' . $field['id'] . '" class="cctor_coupon_image cctor_coupon_box_img" />';
+												$image = '<div style="display:none" id="' . $field['id'] . '" class="pngx-default-image cctor_coupon_box">' . $field['image'] . '</div> <img src="' . $image . '" id="' . $field['id'] . '" class="pngx-image cctor_coupon_box_img" />';
 											} else {
-												$image = '<div style="display:block" id="' . $field['id'] . '" class="cctor_coupon_default_image cctor_coupon_box">' . $field['image'] . '</div> <img style="display:none" src="" id="' . $field['id'] . '" class="cctor_coupon_image cctor_coupon_box_img" />';
+												$image = '<div style="display:block" id="' . $field['id'] . '" class="pngx-default-image cctor_coupon_box">' . $field['image'] . '</div> <img style="display:none" src="" id="' . $field['id'] . '" class="pngx-image cctor_coupon_box_img" />';
 											} ?>
 
 											<?php echo $image; ?><br/>
@@ -362,8 +368,7 @@ class Pngx__Admin__Meta {
 											       id="<?php echo $field['id']; ?>" type="hidden"
 											       class="pngx-upload-image" type="text" size="36" name="ad_image"
 											       value="<?php echo esc_attr( $meta ); ?>"
-											       <?php echo $field['data']; ?>
-											       />
+												/>
 											<input id="<?php echo $field['id']; ?>" class="pngx-image-button"
 											       type="button" value="Upload Image"/>
 											<small><a href="#" id="<?php echo $field['id']; ?>"
