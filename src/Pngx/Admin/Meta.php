@@ -384,7 +384,7 @@ class Pngx__Admin__Meta {
 												$meta = $field['value'];
 											}
 											?>
-											<input class="color-picker" type="text"
+											<input class="pngx-color-picker" type="text"
 											       name="<?php echo $field['id']; ?>"
 											       id="<?php echo $field['id']; ?>"
 											       value="<?php echo esc_attr( $meta ); ?>"
@@ -414,7 +414,7 @@ class Pngx__Admin__Meta {
 											}
 											?>
 
-											<input type="text" class="datepicker" name="<?php echo $field['id']; ?>"
+											<input type="text" class="pngx-datepicker" name="<?php echo $field['id']; ?>"
 											       id="<?php echo $field['id']; ?>"
 											       value="<?php echo esc_attr( $meta ); ?>" size="10"/>
 											<br/><span class="description"><?php echo $field['desc']; ?></span>

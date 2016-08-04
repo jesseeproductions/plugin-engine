@@ -14,7 +14,116 @@ var pngx_admin_fields_init = pngx_admin_fields_init || {};
 
 		$( 'html' ).addClass( 'pngx-js' );
 
+		obj.date_picker();
+
+		obj.color_picker();
+
+		//obj.toggle__field_help();
+
+		/*
+		 * Media Manager 3.5
+		 */
+		$( '.pngx-image-button' ).click( function ( e ) {
+
+			//Create Media Manager On Click to allow multiple on one Page
+			var img_uploader, attachment;
+
+			e.preventDefault();
+
+			//Setup the Variables based on the Button Clicked to enable multiple
+			var img_input_id = '#' + this.id + '.pngx-upload-image';
+			var img_src = 'img#' + this.id + '.pngx-image';
+			var default_msg = 'div#' + this.id + '.pngx-default-image';
+
+			//If the uploader object has already been created, reopen the dialog
+			if ( img_uploader ) {
+				img_uploader.open();
+				return;
+			}
+
+			//Extend the wp.media object
+			img_uploader = wp.media.frames.file_frame = wp.media( {
+				title: 'Choose Coupon Image',
+				button: {
+					text: 'Use Image'
+				},
+				multiple: false
+			} );
+
+			//When a file is selected, grab the URL and set it as the text field's value
+			img_uploader.on( 'select', function () {
+				attachment = img_uploader.state().get( 'selection' ).first().toJSON();
+				//Set the Field with the Image ID
+				$( img_input_id ).val( attachment.id );
+				//Set the Sample Image with the URL
+				$( img_src ).attr( 'src', attachment.url );
+				//Show Image
+				$( img_src ).show();
+				//Hide Message
+				$( default_msg ).hide();
+				//Trigger New Image Uploaded
+				$( 'input#cctor_image' ).trigger( 'display' );
+			} );
+
+			//Open the uploader dialog
+			img_uploader.open();
+
+		} );
+
+		/*
+		 * Remove Image and replace with default and Erase Image ID for Coupon
+		 */
+		$( '.pngx-clear-image' ).click( function ( e ) {
+			e.preventDefault();
+			var remove_input_id = 'input#' + this.id + '.pngx-upload-image';
+			var img_src = 'img#' + this.id + '.pngx-image';
+
+			$( remove_input_id ).val( '' );
+			$( img_src ).hide();
+			$( 'div#' + this.id + '.pngx-default-image' ).show();
+			$( 'input#cctor_image' ).trigger( 'display' );
+		} );
+
 	};
+
+	/*
+	 * WP Date Picker
+	 */
+	obj.date_picker = function( helpid ) {
+
+		$( '.pngx-datepicker' ).datepicker( {
+			beforeShow: function ( input, inst ) {
+				$( "#ui-datepicker-div" ).addClass( "pngx-ui" )
+			}
+		} );
+
+	};
+
+	/*
+	 * Color Picker
+	 */
+	obj.color_picker = function( helpid ) {
+
+		$( '.pngx-color-picker' ).wpColorPicker();
+
+	};
+
+	/*
+	 * Hide or Display Help Images
+	 */
+	obj.toggle__field_help = function( helpid ) {
+
+		var toggleImage = document.getElementById( helpid );
+
+		if ( toggleImage.style.display == "inline" ) {
+			document.getElementById( helpid ).style.display = 'none';
+		} else {
+			document.getElementById( helpid ).style.display = 'inline';
+		}
+
+		return false;
+	};
+
 
 	$( function () {
 		obj.init();
@@ -275,9 +384,8 @@ var pngx_fields_toggle = pngx_fields_toggle || {};
 			return;
 		}
 
-		console.log( obj.toggle_field_manager( field ) );
-
-		if ( 'hide' === obj.toggle_field_manager( field ) )	{
+		var display = obj.toggle_field_manager( field );
+		if ( 'hide' === display || 'toggle' === display )	{
 			$( field_group ).each( function () {
 				$( this ).fadeOut();
 			} );
@@ -293,32 +401,9 @@ var pngx_fields_toggle = pngx_fields_toggle || {};
 			} );
 		}
 
-
-		/*
-		if ( ( $( field_check ).prop( 'checked' ) ) || ( field_check == '' && cctor_pro_meta_js.cctor_disable_print == 1 ) ) {
-			$.each( field_display, function ( index, field_class ) {
-				$( field_class ).fadeOut();
-				$( field_class + " input:text" ).val( '' );
-				$( field_class + " input:checked" ).removeAttr( 'checked' );
-			} );
-		} else if ( field_check && show_fields ) {
-			$.each( show_fields, function ( index, field_class ) {
-				$( field_class ).fadeIn( 'fast' );
-			} );
-			if ( field_display ) {
-				$.each( field_display, function ( index, field_class ) {
-					$( field_class ).fadeOut();
-				} );
-			}
-		} else if ( field_display ) {
-			$.each( field_display, function ( index, field_class ) {
-				$( field_class ).fadeIn();
-			} );
-		}*/
-
 		//Only Run if Variable is an Object
 		if ( 'object' === typeof message ) {
-			obj.toggle_msg( message );
+			obj.toggle_msg( message, display );
 		}
 
 	};
@@ -334,57 +419,28 @@ var pngx_fields_toggle = pngx_fields_toggle || {};
 				return 'show';
 			}
 		} else if ( 'SELECT' == $field_type ) {
-
+			return 'toggle';
 		} else if ( 'CHECK' == $field_type ) {
 
 		}
 
 	};
 
-	obj.toggle_msg = function( message ) {
+	obj.toggle_msg = function( message, display ) {
 		//Remove Message
 		$.each( message, function ( key, value ) {
 			var div_class = '.pngx-tab-heading-' + key;
 			$( div_class ).next( 'div.pngx-error' ).remove();
 		} );
 		//Add Message
-		$.each( message, function ( key, value ) {
-			if ( key && value ) {
-				var div_class = '.pngx-tab-heading-' + key;
-				$( div_class ).after( '<div class="pngx-error">' + value + '</div>' );
-			}
-		} );
-	};
-
-	obj.toggle_basic = function( common_wrap, value, selector ) {
-
-		var $selector = selector + value;
-
-		//Hide All Fields with Common Wrap
-		$( common_wrap ).each( function () {
-			$( this ).css( 'display', 'none' );
-		} );
-
-		//Show Fields Based on Value of a Field
-		$( $selector ).each( function () {
-			$( this ).css( 'display', 'block' );
-		} );
-
-	};
-
-	/*
-	 * Hide or Display Help Images
-	 */
-	obj.show = function( helpid ) {
-
-		var toggleImage = document.getElementById( helpid );
-
-		if ( toggleImage.style.display == "inline" ) {
-			document.getElementById( helpid ).style.display = 'none';
-		} else {
-			document.getElementById( helpid ).style.display = 'inline';
+		if ( 'hide' === display ) {
+			$.each( message, function ( key, value ) {
+				if ( key && value ) {
+					var div_class = '.pngx-tab-heading-' + key;
+					$( div_class ).after( '<div class="pngx-error">' + value + '</div>' );
+				}
+			} );
 		}
+	};
 
-		return false;
-	}
 })( jQuery, pngx_fields_toggle );
