@@ -136,13 +136,20 @@ class Pngx__Admin__Meta {
 
 		//Sample Field Array
 		$fields[ $prefix . 'heading_deal' ] = array( //prefix and id
-             'id'        => $prefix . 'heading_deal', //prefix and id
-             'title'     => '', //Label
-             'desc'      => __( 'Coupon Deal', 'coupon-creator' ), //description or header
-             'type'      => 'heading', //field type
-             'section'   => 'coupon_creator_meta_box', //meta box
-             'tab'       => 'content', //tab
-             'wrapclass' => 'pngx-img-coupon' //optional class
+		                                             'id'        => $prefix . 'heading_deal',
+		                                             //prefix and id
+		                                             'title'     => '',
+		                                             //Label
+		                                             'desc'      => __( 'Coupon Deal', 'coupon-creator' ),
+		                                             //description or header
+		                                             'type'      => 'heading',
+		                                             //field type
+		                                             'section'   => 'coupon_creator_meta_box',
+		                                             //meta box
+		                                             'tab'       => 'content',
+		                                             //tab
+		                                             'wrapclass' => 'pngx-img-coupon'
+		                                             //optional class
 		);
 
 		$this->fields = $fields;
@@ -228,14 +235,11 @@ class Pngx__Admin__Meta {
 							//Wrap Class for Conditionals
 							$wrapclass = isset( $field['wrapclass'] ) ? $field['wrapclass'] : '';
 
-							$toggle_field = isset( $field['toggle_field'] ) ? 'data-toggle-input="' . esc_html( $field['toggle_field'] ) . '#'. esc_html( $field['id'] ) .'"' : '';
-							$toggle_group = isset( $field['toggle_group'] ) ? 'data-toggle-group="' . esc_html( $field['toggle_group'] ) . '"' : '';
-							$toggle_show = isset( $field['toggle_show'] ) ? 'data-toggle-show="' . esc_html( $field['toggle_show'] ) . '"' : '';
-							$toggle_msg = isset( $field['toggle_msg'] ) ? 'data-toggle-msg=\'' . json_encode( $field['toggle_msg'], JSON_HEX_APOS ) . '\'' : '';
-
 							?>
 
-							<div class="pngx-meta-field-wrap field-wrap-<?php echo esc_html( $field['type'] ); ?> field-wrap-<?php echo esc_html( $field['id'] ); ?> <?php echo esc_html( $wrapclass ); ?>" <?php echo $toggle_field; echo $toggle_group; echo $toggle_show; echo $toggle_msg; ?> >
+							<div
+								class="pngx-meta-field-wrap field-wrap-<?php echo esc_html( $field['type'] ); ?> field-wrap-<?php echo esc_html( $field['id'] ); ?> <?php echo esc_html( $wrapclass ); ?>"
+								<?php isset( $field['toggle'] ) ? Pngx__Admin__Meta::toggle( $field['toggle'], $field['id'] ) : null; ?> >
 
 								<?php if ( isset( $field['label'] ) ) { ?>
 
@@ -414,7 +418,8 @@ class Pngx__Admin__Meta {
 											}
 											?>
 
-											<input type="text" class="pngx-datepicker" name="<?php echo $field['id']; ?>"
+											<input type="text" class="pngx-datepicker"
+											       name="<?php echo $field['id']; ?>"
 											       id="<?php echo $field['id']; ?>"
 											       value="<?php echo esc_attr( $meta ); ?>" size="10"/>
 											<br/><span class="description"><?php echo $field['desc']; ?></span>
@@ -461,14 +466,42 @@ class Pngx__Admin__Meta {
 
 				</div>    <!-- end .coupon-section-fields.form-table -->
 
-			<?php } // end foreach tabs?>
+			<?php } // end foreach tabs
+			?>
 
 		</div>    <!-- end .pngx-tabs -->
 
-		<?php
-		echo ob_get_clean();
+		<?php echo ob_get_clean();
 	}
 
+	/*
+	* Toggle Field Data Setup
+	*/
+	public static function toggle( $toggle_fields, $id ) {
+
+		if ( isset( $toggle_fields ) && is_array( $toggle_fields ) ) {
+
+			foreach ( $toggle_fields as $key => $toggle_data ) {
+				$toggle = '';
+				if ( 'field' == $key ) {
+					$toggle = esc_html( $toggle_data ) . '#' . esc_attr( $id );
+				} elseif ( 'group' == $key || 'show' == $key ) {
+					$toggle = esc_html( $toggle_data );
+				} elseif ( 'msg' == $key ) {
+					$toggle = json_encode( $toggle_data, JSON_HEX_APOS );
+				}
+
+				//echo 'data-toggle-field="' . esc_html( $field['toggle_field'] ) . '#' . esc_html( $field['id'] ) . '"';
+				//echo 'data-toggle-group="' . esc_html( $field['toggle_group'] ) . '"';
+				//echo 'data-toggle-show="' . esc_html( $field['toggle_show'] ) . '"';
+				//echo 'data-toggle-msg=\'' . json_encode( $field['toggle_msg'], JSON_HEX_APOS ) . '\'';
+
+				echo 'data-toggle-' . esc_attr( $key ) . '=\'' . $toggle . '\'';
+			}
+
+		}
+
+	}
 
 	/*
 	* Save Meta Fields
@@ -499,7 +532,7 @@ class Pngx__Admin__Meta {
 
 		//todo this is used to save the ignore expiration with the new expriation options
 		//Expiration Option Auto Check Ignore Input
-		if ( isset( $_POST['cctor_ignore_expiration'] ) &&  1 == $_POST['cctor_expiration_option'] ) {
+		if ( isset( $_POST['cctor_ignore_expiration'] ) && 1 == $_POST['cctor_expiration_option'] ) {
 			$_POST['cctor_ignore_expiration'] = 'on';
 		} elseif ( isset( $_POST['cctor_ignore_expiration'] ) && 'on' == $_POST['cctor_ignore_expiration'] && 1 != $_POST['cctor_expiration_option'] ) {
 			unset( $_POST['cctor_ignore_expiration'] );

@@ -18,7 +18,75 @@ var pngx_admin_fields_init = pngx_admin_fields_init || {};
 
 		obj.color_picker();
 
-		//obj.toggle__field_help();
+	};
+
+	/*
+	 * WP Date Picker
+	 */
+	obj.date_picker = function ( helpid ) {
+
+		$( '.pngx-datepicker' ).datepicker( {
+			beforeShow: function ( input, inst ) {
+				$( "#ui-datepicker-div" ).addClass( "pngx-ui" )
+			}
+		} );
+
+	};
+
+	/*
+	 * Color Picker
+	 */
+	obj.color_picker = function ( helpid ) {
+
+		$( '.pngx-color-picker' ).wpColorPicker();
+
+	};
+
+	/*
+	 * Hide or Display Help Images
+	 */
+	obj.toggle__field_help = function ( helpid ) {
+
+		var toggleImage = document.getElementById( helpid );
+
+		if ( toggleImage.style.display == "inline" ) {
+			document.getElementById( helpid ).style.display = 'none';
+		} else {
+			document.getElementById( helpid ).style.display = 'inline';
+		}
+
+		return false;
+	};
+
+
+	$( function () {
+		obj.init();
+	} );
+
+})( jQuery, pngx_admin_fields_init );
+
+
+/**
+ * Media Upload Object
+ * @type {{}}
+ */
+function PNGX__Media( $, field_id, upload_title, button_text ) {
+
+	this.field_id = field_id;
+	this.upload_title = upload_title;
+	this.button_text = button_text;
+
+	this.init = function () {
+		this.upload();
+		this.clear();
+	};
+
+
+	this.upload = function () {
+
+		var upload_title = this.upload_title;
+		var button_text = this.button_text;
+		var field_id = this.field_id;
 
 		/*
 		 * Media Manager 3.5
@@ -43,9 +111,9 @@ var pngx_admin_fields_init = pngx_admin_fields_init || {};
 
 			//Extend the wp.media object
 			img_uploader = wp.media.frames.file_frame = wp.media( {
-				title: 'Choose Coupon Image',
+				title: upload_title,
 				button: {
-					text: 'Use Image'
+					text: button_text
 				},
 				multiple: false
 			} );
@@ -62,7 +130,7 @@ var pngx_admin_fields_init = pngx_admin_fields_init || {};
 				//Hide Message
 				$( default_msg ).hide();
 				//Trigger New Image Uploaded
-				$( 'input#cctor_image' ).trigger( 'display' );
+				$( field_id ).trigger( 'display' );
 			} );
 
 			//Open the uploader dialog
@@ -70,6 +138,11 @@ var pngx_admin_fields_init = pngx_admin_fields_init || {};
 
 		} );
 
+	};
+
+	this.clear = function () {
+
+		var field_id = this.field_id;
 		/*
 		 * Remove Image and replace with default and Erase Image ID for Coupon
 		 */
@@ -81,55 +154,15 @@ var pngx_admin_fields_init = pngx_admin_fields_init || {};
 			$( remove_input_id ).val( '' );
 			$( img_src ).hide();
 			$( 'div#' + this.id + '.pngx-default-image' ).show();
-			$( 'input#cctor_image' ).trigger( 'display' );
+			$( field_id ).trigger( 'display' );
 		} );
 
 	};
 
-	/*
-	 * WP Date Picker
-	 */
-	obj.date_picker = function( helpid ) {
 
-		$( '.pngx-datepicker' ).datepicker( {
-			beforeShow: function ( input, inst ) {
-				$( "#ui-datepicker-div" ).addClass( "pngx-ui" )
-			}
-		} );
+	this.init()
 
-	};
-
-	/*
-	 * Color Picker
-	 */
-	obj.color_picker = function( helpid ) {
-
-		$( '.pngx-color-picker' ).wpColorPicker();
-
-	};
-
-	/*
-	 * Hide or Display Help Images
-	 */
-	obj.toggle__field_help = function( helpid ) {
-
-		var toggleImage = document.getElementById( helpid );
-
-		if ( toggleImage.style.display == "inline" ) {
-			document.getElementById( helpid ).style.display = 'none';
-		} else {
-			document.getElementById( helpid ).style.display = 'inline';
-		}
-
-		return false;
-	};
-
-
-	$( function () {
-		obj.init();
-	} );
-
-})( jQuery, pngx_admin_fields_init );
+}
 
 /**
  * Help
@@ -378,14 +411,14 @@ var pngx_fields_toggle = pngx_fields_toggle || {};
 
 	};
 
-	obj.toggle = function( field, field_group, field_display, message ) {
+	obj.toggle = function ( field, field_group, field_display, message ) {
 
-		if ( ! field || ! field_group ) {
+		if ( !field || !field_group ) {
 			return;
 		}
 
 		var display = obj.toggle_field_manager( field );
-		if ( 'hide' === display || 'toggle' === display )	{
+		if ( 'hide' === display || 'toggle' === display ) {
 			$( field_group ).each( function () {
 				$( this ).fadeOut();
 			} );
@@ -426,7 +459,7 @@ var pngx_fields_toggle = pngx_fields_toggle || {};
 
 	};
 
-	obj.toggle_msg = function( message, display ) {
+	obj.toggle_msg = function ( message, display ) {
 		//Remove Message
 		$.each( message, function ( key, value ) {
 			var div_class = '.pngx-tab-heading-' + key;
