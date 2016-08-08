@@ -222,20 +222,20 @@ var pngx_admin_tabs = pngx_admin_tabs || {};
 	'use strict';
 
 	obj.tab_wrap = '.pngx-tabs';
-	obj.tabs = '';
-	obj.updated_tab = '';
-	obj.page_id = '';
-	obj.tab_text = 0;
+	obj.data = obj.tabs = obj.updated_tab = obj.page_id = '';
+	obj.tab_text = obj.tab_total_length = 0;
 	obj.tab_count = 1;
-	obj.tab_total_length = 0;
 
-	obj.init = function ( wrap, sections, updated_tab, page_id ) {
+	obj.init = function ( wrap ) {
 		if ( wrap ) {
 			obj.tab_wrap = wrap;
 		}
-		obj.tabs = sections;
-		obj.updated_tab = updated_tab;
-		obj.page_id = page_id;
+
+		//Set Tabs
+		obj.data =  $( obj.tab_wrap ).data();
+		obj.tabs = obj.data.toggleTabs;
+		obj.updated_tab = obj.data.toggleUpdate_message;
+		obj.page_id = obj.data.toggleId;
 
 		obj.init_tabs();
 

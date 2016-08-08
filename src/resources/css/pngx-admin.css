@@ -289,3 +289,27 @@
   .pngx-meta-field-content.text {
     margin: 0;
     width: 100%; } }
+
+/* ==========================================================================
+   Fields CSS
+   ========================================================================== */
+/**
+* Image Field
+***************************************/
+.pngx-default-image,
+.pngx-image {
+  border: 1px solid #dbdbdb;
+  font-size: 16px;
+  height: auto;
+  padding: 20px 5px;
+  text-align: center;
+  width: 360px;
+  max-width: 100%; }
+
+#image_coupon .pngx-default-image,
+#image_coupon .pngx-image {
+  border: 3px dashed #000000; }
+
+/* ==========================================================================
+   Meta Box
+   ========================================================================== */

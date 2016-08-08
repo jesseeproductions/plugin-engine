@@ -45,7 +45,7 @@ class Pngx__Main {
 		$this->resource_url  = $this->plugin_url . 'src/resources/';
 
 
-		$this->load_text_domain( 'plugin-engine', basename( dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) ) . '/plugin-engine/lang/' );
+		$this->load_text_domain( 'plugin-engine', basename( dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) ) . '/plugin-engine/languages/' );
 
 		$this->init_autoloading();
 

@@ -50,7 +50,7 @@ class Pngx__Admin__Meta {
 
 		$js_troubleshoot_url = 'http://cctor.link/R7KRa';
 
-		$js_msg = '<div class="javascript-conflict pngx-error"><p>' . sprintf( __( 'There maybe a javascript conflict preventing some features from working.  <a href="%s" target="_blank" >Please check this guide to narrow down the cause.</a>', 'coupon-creator' ), esc_url( $js_troubleshoot_url ) ) . '</p></div>';
+		$js_msg = '<div class="javascript-conflict pngx-error"><p>' . sprintf( __( 'There maybe a javascript conflict preventing some features from working.  <a href="%s" target="_blank" >Please check this guide to narrow down the cause.</a>', 'plugin-engine' ), esc_url( $js_troubleshoot_url ) ) . '</p></div>';
 
 		return $js_msg;
 
@@ -102,7 +102,7 @@ class Pngx__Admin__Meta {
 	protected function set_tabs() {
 
 		//CPT Fields Tabs
-		$tabs['content'] = __( 'Content', 'coupon-creator' ); //set key and tab title
+		$tabs['content'] = __( 'Content', 'plugin-engine' ); //set key and tab title
 
 		$this->tabs = $tabs;
 
@@ -135,21 +135,15 @@ class Pngx__Admin__Meta {
 		$prefix = self::get_fields_prefix();
 
 		//Sample Field Array
-		$fields[ $prefix . 'heading_deal' ] = array( //prefix and id
-		                                             'id'        => $prefix . 'heading_deal',
-		                                             //prefix and id
-		                                             'title'     => '',
-		                                             //Label
-		                                             'desc'      => __( 'Coupon Deal', 'coupon-creator' ),
-		                                             //description or header
-		                                             'type'      => 'heading',
-		                                             //field type
-		                                             'section'   => 'coupon_creator_meta_box',
-		                                             //meta box
-		                                             'tab'       => 'content',
-		                                             //tab
-		                                             'wrapclass' => 'pngx-img-coupon'
-		                                             //optional class
+		$fields[ $prefix . 'heading_deal' ] = array( //prefix
+             'id'        => $prefix . 'heading_deal', //id
+             'title'     => '', //Label
+             'desc'      => __( 'Coupon Deal', 'plugin-engine' ),//description or header
+             'type'      => 'heading',//field type
+             'section'   => 'plugin_engine_meta_box',//meta box
+             'tab'       => 'content',//tab
+             'wrapclass' => 'pngx-img',//optional class
+             'toggle'    => array()//field toggle infomation based on value or selection
 		);
 
 		$this->fields = $fields;
@@ -176,7 +170,7 @@ class Pngx__Admin__Meta {
 
 		//Set for WP 4.3 and replacing wp_htmledit_pre
 		global $wp_version;
-		$cctor_required_wp_version = '4.3';
+		$required_wp_version = '4.3';
 
 		//Create Array of Tabs and Localize to Meta Script
 		$tabs_array = array();
@@ -185,25 +179,21 @@ class Pngx__Admin__Meta {
 			$tabs_array[ $tab ] = $tab_slug;
 		}
 
-		$tabs_json_array = json_encode( $tabs_array );
-
-		$post_id = isset( $_GET['post'] ) ? absint( $_GET['post'] ) : '';
+		//$tabs_json_array = json_encode( $tabs_array );
+		//$post_id = isset( $_GET['post'] ) ? absint( $_GET['post'] ) : '';
 
 		//Detect if we saved or tried to save to set the current tab.
-		//todo remove coupon mentions from tabs
-		//add in css and js to pngx
 		global $message;
-		$cctor_tabs_variables = array(
-			'tabs_arr'             => $tabs_json_array,
-			'cctor_coupon_updated' => $message,
-			'cctor_coupon_id'      => $post_id,
-		);
 
-		wp_localize_script( 'cctor_admin_js', 'cctor_admin_js_vars', $cctor_tabs_variables );
+		$tab_data = array(
+			'tabs'             => $tabs_array,
+			'update_message' => $message,
+			'id'      => isset( $_GET['post'] ) ? absint( $_GET['post'] ) : ''
+		);
 
 		ob_start(); ?>
 
-		<div class="pngx-tabs">
+		<div class="pngx-tabs" <?php Pngx__Admin__Meta::toggle( $tab_data, null ); ?> >
 
 			<ul class="pngx-tabs-nav">
 
@@ -222,8 +212,12 @@ class Pngx__Admin__Meta {
 
 					<?php
 
-					$help_class = new Cctor__Coupon__Admin__Help();
-					$help_class->display_help( $tab_slug, false, 'coupon' );
+					/**
+					 * Hook to connect help section into a tab
+					 *
+					 * @parm $tab_slug string of current slug
+					 */
+					do_action( 'pngx-per-tab-help', $tab_slug );
 
 					foreach ( self::get_fields() as $field ) {
 
@@ -294,7 +288,7 @@ class Pngx__Admin__Meta {
 											<?php break;
 										// textarea
 										case 'textarea': ?>
-											<?php if ( version_compare( $wp_version, $cctor_required_wp_version, '<' ) ) { ?>
+											<?php if ( version_compare( $wp_version, $required_wp_version, '<' ) ) { ?>
 												<textarea name="<?php echo $field['id']; ?>"
 												          id="<?php echo $field['id']; ?>" cols="60"
 												          rows="4"><?php echo wp_htmledit_pre( $meta ); ?></textarea>
@@ -362,9 +356,9 @@ class Pngx__Admin__Meta {
 											if ( is_numeric( $meta ) ) {
 												$image = wp_get_attachment_image_src( $meta, 'medium' );
 												$image = $image[0];
-												$image = '<div style="display:none" id="' . $field['id'] . '" class="pngx-default-image cctor_coupon_box">' . $field['image'] . '</div> <img src="' . $image . '" id="' . $field['id'] . '" class="pngx-image cctor_coupon_box_img" />';
+												$image = '<div style="display:none" id="' . $field['id'] . '" class="pngx-default-image pngx-image-wrap">' . $field['image'] . '</div> <img src="' . $image . '" id="' . $field['id'] . '" class="pngx-image pngx-image-wrap-img" />';
 											} else {
-												$image = '<div style="display:block" id="' . $field['id'] . '" class="pngx-default-image cctor_coupon_box">' . $field['image'] . '</div> <img style="display:none" src="" id="' . $field['id'] . '" class="pngx-image cctor_coupon_box_img" />';
+												$image = '<div style="display:block" id="' . $field['id'] . '" class="pngx-default-image pngx-image-wrap">' . $field['image'] . '</div> <img style="display:none" src="" id="' . $field['id'] . '" class="pngx-image pngx-image-wrap-img" />';
 											} ?>
 
 											<?php echo $image; ?><br/>
@@ -400,7 +394,7 @@ class Pngx__Admin__Meta {
 										case 'date':
 
 											//Blog Time According to WordPress
-											$cctor_todays_date = "";
+											$todays_date = "";
 											if ( $field['id'] == "cctor_expiration" ) {
 												$cc_blogtime = current_time( 'mysql' );
 
@@ -414,7 +408,7 @@ class Pngx__Admin__Meta {
 													$today_second = $today_day;
 												}
 
-												$cctor_todays_date = '<span class="description">' . __( 'Today\'s Date is ', 'coupon-creator' ) . $today_first . '/' . $today_second . '/' . $today_year . '</span>';
+												$todays_date = '<span class="description">' . __( 'Today\'s Date is ', 'plugin-engine' ) . $today_first . '/' . $today_second . '/' . $today_year . '</span>';
 											}
 											?>
 
@@ -423,18 +417,20 @@ class Pngx__Admin__Meta {
 											       id="<?php echo $field['id']; ?>"
 											       value="<?php echo esc_attr( $meta ); ?>" size="10"/>
 											<br/><span class="description"><?php echo $field['desc']; ?></span>
-											<?php echo $cctor_todays_date; ?>
+											<?php echo $todays_date; ?>
 
 											<?php break;
-										// Videos
-										case 'cctor_support':
+										// Help
+										case 'help':
 
-											$help_class->display_help( 'all', false, 'coupon' );
-											echo Cctor__Coupon__Admin__Help::get_cctor_support_core_contact();
+											/**
+											 * Hook into help tab that display all help content for a plugin
+											 */
+											do_action( 'pngx-help-tab', $tab_slug );
 
 											break;
 
-										// Videos
+										// Pro
 										case 'cctor_pro':
 
 											echo ! defined( 'CCTOR_HIDE_UPGRADE' ) || ! CCTOR_HIDE_UPGRADE ? Cctor__Coupon__Admin__Options::display_pro_section() : '';
@@ -447,7 +443,7 @@ class Pngx__Admin__Meta {
 										/**
 										 * Filter the cases for Coupon Creator Meta
 										 *
-										 * @param array $field current coupon meta field being displayed.
+										 * @param array $field current meta field being displayed.
 										 * @param array $meta  current value of meta saved.
 										 * @param obj   $post  object of current post beign edited.
 										 */
@@ -464,7 +460,7 @@ class Pngx__Admin__Meta {
 
 					} // end foreach fields?>
 
-				</div>    <!-- end .coupon-section-fields.form-table -->
+				</div>    <!-- end .pngx-section-fields.form-table -->
 
 			<?php } // end foreach tabs
 			?>
@@ -485,9 +481,11 @@ class Pngx__Admin__Meta {
 				$toggle = '';
 				if ( 'field' == $key ) {
 					$toggle = esc_html( $toggle_data ) . '#' . esc_attr( $id );
-				} elseif ( 'group' == $key || 'show' == $key ) {
+				} elseif ( 'group' == $key || 'show' == $key || 'update_message' == $key ) {
 					$toggle = esc_html( $toggle_data );
-				} elseif ( 'msg' == $key ) {
+				} elseif ( 'id' == $key) {
+					$toggle = absint( $toggle_data );
+				} elseif ( 'msg' == $key || 'tabs' == $key ) {
 					$toggle = json_encode( $toggle_data, JSON_HEX_APOS );
 				}
 
