@@ -164,7 +164,7 @@ class Pngx__Admin__Meta {
 	 * @param $post
 	 * @param $metabox
 	 */
-	public static function show_fields( $post, $metabox ) {
+	public static function display_fields( $post, $metabox ) {
 
 		wp_nonce_field( 'pngx_save_fields', 'pngx_nonce' );
 
@@ -179,9 +179,6 @@ class Pngx__Admin__Meta {
 			$tabs_array[ $tab ] = $tab_slug;
 		}
 
-		//$tabs_json_array = json_encode( $tabs_array );
-		//$post_id = isset( $_GET['post'] ) ? absint( $_GET['post'] ) : '';
-
 		//Detect if we saved or tried to save to set the current tab.
 		global $message;
 
@@ -193,7 +190,7 @@ class Pngx__Admin__Meta {
 
 		ob_start(); ?>
 
-		<div class="pngx-tabs" <?php Pngx__Admin__Meta::toggle( $tab_data, null ); ?> >
+		<div class="pngx-tabs" <?php Pngx__Admin__Fields::toggle( $tab_data, null ); ?> >
 
 			<ul class="pngx-tabs-nav">
 
@@ -233,7 +230,7 @@ class Pngx__Admin__Meta {
 
 							<div
 								class="pngx-meta-field-wrap field-wrap-<?php echo esc_html( $field['type'] ); ?> field-wrap-<?php echo esc_html( $field['id'] ); ?> <?php echo esc_html( $wrapclass ); ?>"
-								<?php isset( $field['toggle'] ) ? Pngx__Admin__Meta::toggle( $field['toggle'], $field['id'] ) : null; ?> >
+								<?php isset( $field['toggle'] ) ? Pngx__Admin__Fields::toggle( $field['toggle'], $field['id'] ) : null; ?> >
 
 								<?php if ( isset( $field['label'] ) ) { ?>
 
@@ -468,37 +465,6 @@ class Pngx__Admin__Meta {
 		</div>    <!-- end .pngx-tabs -->
 
 		<?php echo ob_get_clean();
-	}
-
-	/*
-	* Toggle Field Data Setup
-	*/
-	public static function toggle( $toggle_fields, $id ) {
-
-		if ( isset( $toggle_fields ) && is_array( $toggle_fields ) ) {
-
-			foreach ( $toggle_fields as $key => $toggle_data ) {
-				$toggle = '';
-				if ( 'field' == $key ) {
-					$toggle = esc_html( $toggle_data ) . '#' . esc_attr( $id );
-				} elseif ( 'group' == $key || 'show' == $key || 'update_message' == $key ) {
-					$toggle = esc_html( $toggle_data );
-				} elseif ( 'id' == $key) {
-					$toggle = absint( $toggle_data );
-				} elseif ( 'msg' == $key || 'tabs' == $key ) {
-					$toggle = json_encode( $toggle_data, JSON_HEX_APOS );
-				}
-
-				//echo 'data-toggle-field="' . esc_html( $field['toggle_field'] ) . '#' . esc_html( $field['id'] ) . '"';
-				//echo 'data-toggle-group="' . esc_html( $field['toggle_group'] ) . '"';
-				//echo 'data-toggle-show="' . esc_html( $field['toggle_show'] ) . '"';
-				//echo 'data-toggle-msg=\'' . json_encode( $field['toggle_msg'], JSON_HEX_APOS ) . '\'';
-
-				echo 'data-toggle-' . esc_attr( $key ) . '=\'' . $toggle . '\'';
-			}
-
-		}
-
 	}
 
 	/*
