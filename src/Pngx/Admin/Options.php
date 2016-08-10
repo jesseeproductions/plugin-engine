@@ -76,7 +76,8 @@ class Pngx__Admin__Options {
 		register_setting( 'plugin_engine_options', 'plugin_engine_options', array( $this, 'validate_options' ) );
 
 		foreach ( $this->sections as $slug => $title ) {
-			add_settings_section( $slug, $title, array( $this, 'display_fields' ), $this->options_slug );
+			//set to this an empty method as this ignores the WordPress Setting Sections
+			add_settings_section( $slug, $title, array( $this, 'display_section' ), $this->options_slug );
 		}
 
 		foreach ( $this->fields as $id => $option ) {
@@ -87,13 +88,18 @@ class Pngx__Admin__Options {
 	}
 
 	/*
+	* Display Section
+	*/
+	public function display_section() {
+		//Empty Method that is need to prevent infinite redirects
+	}
+
+	/*
 	* Get Section Tabs
 	*/
 	public function set_sections() {
-
 		//Section Tab Headings
 		$this->sections['defaults']   = __( 'Defaults', 'plugin-engine' );
-
 	}
 
 	/*
@@ -112,11 +118,11 @@ class Pngx__Admin__Options {
 			'id'        => 'default_id',
 			'title'     => __( 'Default' ),
 			'desc'      => __( 'This is a default description.' ),
+			'section'   => 'general',
 			'alert'     => '',
 			'condition' => '',
 			'std'       => '',
 			'type'      => 'text',
-			'section'   => 'general',
 			'choices'   => array(),
 			'class'     => '',
 			'imagemsg'  => '',
@@ -130,10 +136,16 @@ class Pngx__Admin__Options {
 			$this->checkboxes[] = $option_args['id'];
 		}
 
-		add_settings_field( $option_args['id'], $option_args['title'],
+		add_settings_field(
+			$option_args['id'],
+			$option_args['title'],
 			array( 'Pngx__Admin__Fields', 'display_field' ),
-			 $this->options_slug, $option_args['section'], $option_args );
+			$this->options_slug,
+			$option_args['section'],
+			$option_args
+		);
 	}
+
 
 	/*
 	* Coupon Creator Admin Validate Options
@@ -252,30 +264,16 @@ class Pngx__Admin__Options {
 		$tab_data = array(
 			'tabs'             => $tabs_array,
 			'update_message' => get_settings_errors(),
-			'id'      => isset( $_GET['post'] ) ? absint( $_GET['post'] ) : ''
+			'wp_version'            => $wp_version,
 		);
 
-		$js_troubleshoot_url = 'http://cctor.link/R7KRa';
-
-		echo '<div class="wrap">
-				<div class="icon32" id="icon-options-general"></div>
-				<h2><img src="' . Cctor__Coupon__Main::instance()->resource_url . 'images/coupon_creator.png"/>  ' . __( 'Coupon Creator Options', 'coupon-creator' ) . '</h2>
-
-				<div class="javascript-conflict pngx-error"><p>' . sprintf( __( 'There maybe a javascript conflict preventing some features from working.  <a href="%s" target="_blank" >Please check this guide to narrow down the cause.</a>', 'coupon-creator' ), esc_url( $js_troubleshoot_url ) ) . '</p></div>
-
-				<h4>Coupon Creator: ' . get_option( Cctor__Coupon__Main::CCTOR_VERSION_KEY ) . '</h4>';
+		echo '<h1>Coupon Creator:</h1>';
 
 		/**
-		 * Before Coupon Options Form
-		 *
-		 * @since 1.90
+		 * Before Options Form
 		 *
 		 */
-		do_action( 'cctor_before_option_form' );
-
-		if ( isset( $_GET['settings-updated'] ) && $_GET['settings-updated'] == true ) {
-			echo '<div class="updated fade"><p>' . __( 'Coupon Creator Options updated.', 'coupon-creator' ) . '</p></div>';
-		}
+		do_action( 'pngx_before_option_form' );
 
 		echo '<form action="options.php" method="post">';
 
@@ -290,7 +288,7 @@ class Pngx__Admin__Options {
 
 		echo '</ul>';
 
-		//do_settings_sections( $_GET['page'] );
+		do_settings_sections( $_GET['page'] );
 
 		echo '</div>
 					<p class="submit"><input name="Submit" type="submit" class="button-primary" value="' . __( 'Save Changes' ) . '" /></p>
@@ -298,16 +296,15 @@ class Pngx__Admin__Options {
 				</form>';
 
 		/**
-		 * After Coupon Options Form
+		 * After Coupon Options Forms
 		 *
-		 * @since 1.90
 		 *
 		 */
-		do_action( 'cctor_after_option_form' );
+		do_action( 'pngx_after_option_form' );
 
-		echo '<p style="text-align:right;">&copy; ' . date( "Y" ) . ' Jessee Productions, LLC</p>
+		echo '<p style="text-align:right;">&copy; ' . date( "Y" ) . ' Jessee Productions, LLC</p>';
 
-			</div>';
+		echo '</div>';
 	}
 
 

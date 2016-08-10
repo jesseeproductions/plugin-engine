@@ -27,7 +27,7 @@ class Pngx__Admin__Fields {
 					$toggle = esc_html( $toggle_data ) . '#' . esc_attr( $id );
 				} elseif ( 'group' == $key || 'show' == $key || 'update_message' == $key ) {
 					$toggle = esc_html( $toggle_data );
-				} elseif ( 'id' == $key) {
+				} elseif ( 'id' == $key || 'wp_version' == $key  ) {
 					$toggle = absint( $toggle_data );
 				} elseif ( 'msg' == $key || 'tabs' == $key ) {
 					$toggle = json_encode( $toggle_data, JSON_HEX_APOS );
@@ -38,7 +38,7 @@ class Pngx__Admin__Fields {
 				//echo 'data-toggle-show="' . esc_html( $field['toggle_show'] ) . '"';
 				//echo 'data-toggle-msg=\'' . json_encode( $field['toggle_msg'], JSON_HEX_APOS ) . '\'';
 
-				echo 'data-toggle-' . esc_attr( $key ) . '=\'' . $toggle . '\'';
+				return 'data-toggle-' . esc_attr( $key ) . '=\'' . $toggle . '\'';
 			}
 
 		}
@@ -50,11 +50,6 @@ class Pngx__Admin__Fields {
 	*/
 	public static function get_option_fields() {
 
-		//defaults section
-		$fields['defaults_help']   = array(
-			'section' => 'defaults',
-			'type'    => 'help'
-		);
 		$fields['header_defaults'] = array(
 			'section' => 'defaults',
 			'title'   => '',
@@ -69,19 +64,6 @@ class Pngx__Admin__Fields {
 			'type'    => 'heading'
 		);
 
-		$expiration_options = array(
-			'1' => __( 'Ignore Expiration', 'coupon-creator' ),
-			'2' => __( 'Expiration Date', 'coupon-creator' )
-		);
-		if ( class_exists( 'Coupon_Creator_Pro_Plugin' ) ) {
-			$expiration_options = array(
-				'1' => __( 'Ignore Expiration', 'coupon-creator' ),
-				'2' => __( 'Expiration Date', 'coupon-creator' ),
-				'3' => __( 'Recurring Expiration', 'coupon-creator' ),
-				'4' => __( 'Expires in X Days', 'coupon-creator' )
-			);
-		}
-
 		return $fields;
 
 	}
@@ -91,7 +73,7 @@ class Pngx__Admin__Fields {
 	*/
 	public static function display_field( $option_args = array() ) {
 
-		//Set for WP 4.3 and replacing wp_htmledit_pre
+			//Set for WP 4.3 and replacing wp_htmledit_pre
 		global $wp_version;
 		$cctor_required_wp_version = '4.3';
 
@@ -102,6 +84,7 @@ class Pngx__Admin__Fields {
 		} elseif ( ! isset( $options[ $option_args['id'] ] ) ) {
 			$options[ $option_args['id'] ] = 0;
 		}
+
 
 		switch ( $option_args['type'] ) {
 

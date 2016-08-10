@@ -190,7 +190,7 @@ class Pngx__Admin__Meta {
 
 		ob_start(); ?>
 
-		<div class="pngx-tabs" <?php Pngx__Admin__Fields::toggle( $tab_data, null ); ?> >
+		<div class="pngx-tabs" <?php echo Pngx__Admin__Fields::toggle( $tab_data, null ); ?> >
 
 			<ul class="pngx-tabs-nav">
 
@@ -230,7 +230,7 @@ class Pngx__Admin__Meta {
 
 							<div
 								class="pngx-meta-field-wrap field-wrap-<?php echo esc_html( $field['type'] ); ?> field-wrap-<?php echo esc_html( $field['id'] ); ?> <?php echo esc_html( $wrapclass ); ?>"
-								<?php isset( $field['toggle'] ) ? Pngx__Admin__Fields::toggle( $field['toggle'], $field['id'] ) : null; ?> >
+								<?php echo isset( $field['toggle'] ) ? Pngx__Admin__Fields::toggle( $field['toggle'], $field['id'] ) : null; ?> >
 
 								<?php if ( isset( $field['label'] ) ) { ?>
 
