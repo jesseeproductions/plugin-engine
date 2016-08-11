@@ -14,6 +14,8 @@ if ( class_exists( 'Pngx__Admin__Meta' ) ) {
  */
 class Pngx__Admin__Meta {
 
+	protected static $instance;
+
 	//tabs key and label
 	protected static $tabs = array();
 
@@ -136,14 +138,14 @@ class Pngx__Admin__Meta {
 
 		//Sample Field Array
 		$fields[ $prefix . 'heading_deal' ] = array( //prefix
-             'id'        => $prefix . 'heading_deal', //id
-             'title'     => '', //Label
-             'desc'      => __( 'Coupon Deal', 'plugin-engine' ),//description or header
-             'type'      => 'heading',//field type
-             'section'   => 'plugin_engine_meta_box',//meta box
-             'tab'       => 'content',//tab
-             'wrapclass' => 'pngx-img',//optional class
-             'toggle'    => array()//field toggle infomation based on value or selection
+		                                             'id'        => $prefix . 'heading_deal', //id
+		                                             'title'     => '', //Label
+		                                             'desc'      => __( 'Coupon Deal', 'plugin-engine' ),//description or header
+		                                             'type'      => 'heading',//field type
+		                                             'section'   => 'plugin_engine_meta_box',//meta box
+		                                             'tab'       => 'content',//tab
+		                                             'wrapclass' => 'pngx-img',//optional class
+		                                             'toggle'    => array()//field toggle infomation based on value or selection
 		);
 
 		$this->fields = $fields;
@@ -166,11 +168,9 @@ class Pngx__Admin__Meta {
 	 */
 	public static function display_fields( $post, $metabox ) {
 
-		wp_nonce_field( 'pngx_save_fields', 'pngx_nonce' );
-
-		//Set for WP 4.3 and replacing wp_htmledit_pre
 		global $wp_version;
-		$required_wp_version = '4.3';
+
+		wp_nonce_field( 'pngx_save_fields', 'pngx_nonce' );
 
 		//Create Array of Tabs and Localize to Meta Script
 		$tabs_array = array();
@@ -183,9 +183,10 @@ class Pngx__Admin__Meta {
 		global $message;
 
 		$tab_data = array(
-			'tabs'             => $tabs_array,
+			'tabs'           => $tabs_array,
 			'update_message' => $message,
-			'id'      => isset( $_GET['post'] ) ? absint( $_GET['post'] ) : ''
+			'id'             => isset( $_GET['post'] ) ? absint( $_GET['post'] ) : '',
+			'wp_version'     => $wp_version,
 		);
 
 		ob_start(); ?>
@@ -228,224 +229,26 @@ class Pngx__Admin__Meta {
 
 							?>
 
-							<div
-								class="pngx-meta-field-wrap field-wrap-<?php echo esc_html( $field['type'] ); ?> field-wrap-<?php echo esc_html( $field['id'] ); ?> <?php echo esc_html( $wrapclass ); ?>"
+							<div class="pngx-meta-field-wrap field-wrap-<?php echo esc_html( $field['type'] ); ?> field-wrap-<?php echo esc_html( $field['id'] ); ?> <?php echo esc_html( $wrapclass ); ?>"
 								<?php echo isset( $field['toggle'] ) ? Pngx__Admin__Fields::toggle( $field['toggle'], $field['id'] ) : null; ?> >
 
 								<?php if ( isset( $field['label'] ) ) { ?>
 
-									<div
-										class="pngx-meta-label label-<?php echo $field['type']; ?> label-<?php echo $field['id']; ?>">
-										<label
-											for="<?php echo $field['id']; ?>"><?php echo $field['label']; ?></label>
+									<div class="pngx-meta-label label-<?php echo $field['type']; ?> label-<?php echo $field['id']; ?>">
+										<label for="<?php echo $field['id']; ?>"><?php echo $field['label']; ?></label>
 									</div>
 
 								<?php } ?>
 
-								<div
-									class="pngx-meta-field field-<?php echo $field['type']; ?> field-<?php echo $field['id']; ?>">
+								<div class="pngx-meta-field field-<?php echo $field['type']; ?> field-<?php echo $field['id']; ?>">
 
-									<?php switch ( $field['type'] ) {
+									<?php
 
-										case 'heading':
-											?>
 
-											<h4 class="pngx-fields-heading"><?php echo $field['desc']; ?></h4>
+									echo Pngx__Admin__Fields::display_meta_field( $field, $meta, $tab_slug, $post, $wp_version );
 
-											<?php break;
 
-										case 'message':
-											?>
-
-											<span class="description"><?php echo $field['desc']; ?></span>
-
-											<?php break;
-
-										// text
-										case 'text':
-											?>
-											<?php if ( isset( $field['alert'] ) && $field['alert'] != '' && cctor_options( $field['condition'] ) == 1 ) {
-											echo '<div class="pngx-error">&nbsp;&nbsp;' . $field['alert'] . '</div>';
-										}
-											?>
-											<input type="text" name="<?php echo $field['id']; ?>"
-											       id="<?php echo $field['id']; ?>"
-											       value="<?php echo esc_attr( $meta ); ?>" size="30"/>
-											<br/><span class="description"><?php echo $field['desc']; ?></span>
-
-											<?php break;
-										// url
-										case 'url':
-											?>
-											<input type="text" name="<?php echo $field['id']; ?>"
-											       id="<?php echo $field['id']; ?>"
-											       value="<?php echo esc_url( $meta ); ?>" size="30"/>
-											<br/><span class="description"><?php echo $field['desc']; ?></span>
-
-											<?php break;
-										// textarea
-										case 'textarea': ?>
-											<?php if ( version_compare( $wp_version, $required_wp_version, '<' ) ) { ?>
-												<textarea name="<?php echo $field['id']; ?>"
-												          id="<?php echo $field['id']; ?>" cols="60"
-												          rows="4"><?php echo wp_htmledit_pre( $meta ); ?></textarea>
-												<br/><span class="description"><?php echo $field['desc']; ?></span>
-											<?php } else { ?>
-												<textarea name="<?php echo $field['id']; ?>"
-												          id="<?php echo $field['id']; ?>" cols="60"
-												          rows="4"><?php echo format_for_editor( $meta ); ?></textarea>
-												<br/><span class="description"><?php echo $field['desc']; ?></span>
-											<?php } ?>
-											<?php break;
-
-										// checkbox
-										case 'checkbox':
-
-											//Check for Default
-											global $pagenow;
-											$selected = '';
-											if ( $meta ) {
-												$selected = $meta;
-											} elseif ( $pagenow == 'post-new.php' && isset( $field['value'] ) ) {
-												$selected = $field['value'];
-											}
-
-											?>
-
-											<input type="checkbox" name="<?php echo $field['id']; ?>"
-											       id="<?php echo $field['id']; ?>" <?php echo checked( $selected, 1, false ); ?>/>
-											<label
-												for="<?php echo $field['id']; ?>"><?php echo $field['desc']; ?></label>
-
-											<?php break;
-
-										case 'select':
-
-											//Check for Default
-											global $pagenow;
-											$selected = '';
-											if ( $meta ) {
-												$selected = $meta;
-											} elseif ( $pagenow == 'post-new.php' ) {
-												$selected = isset( $field['value'] ) ? $field['value'] : '';
-											}
-
-											?>
-											<select id="<?php echo $field['id']; ?>"
-											        class="select <?php echo $field['id']; ?>"
-											        name="<?php echo $field['id']; ?>">
-
-												<?php foreach ( $field['choices'] as $value => $label ) {
-
-													echo '<option value="' . esc_attr( $value ) . '"' . selected( $value, $selected ) . '>' . $label . '</option>';
-
-												} ?>
-											</select>
-											<span class="description"><?php echo $field['desc']; ?></span>
-
-											<?php break;
-										// image using Media Manager from WP 3.5 and greater
-										case 'image': ?>
-
-											<?php //Check existing field and if numeric
-											$image = "";
-
-											if ( is_numeric( $meta ) ) {
-												$image = wp_get_attachment_image_src( $meta, 'medium' );
-												$image = $image[0];
-												$image = '<div style="display:none" id="' . $field['id'] . '" class="pngx-default-image pngx-image-wrap">' . $field['image'] . '</div> <img src="' . $image . '" id="' . $field['id'] . '" class="pngx-image pngx-image-wrap-img" />';
-											} else {
-												$image = '<div style="display:block" id="' . $field['id'] . '" class="pngx-default-image pngx-image-wrap">' . $field['image'] . '</div> <img style="display:none" src="" id="' . $field['id'] . '" class="pngx-image pngx-image-wrap-img" />';
-											} ?>
-
-											<?php echo $image; ?><br/>
-											<input name="<?php echo $field['id']; ?>"
-											       id="<?php echo $field['id']; ?>" type="hidden"
-											       class="pngx-upload-image" type="text" size="36" name="ad_image"
-											       value="<?php echo esc_attr( $meta ); ?>"
-												/>
-											<input id="<?php echo $field['id']; ?>" class="pngx-image-button"
-											       type="button" value="Upload Image"/>
-											<small><a href="#" id="<?php echo $field['id']; ?>"
-											          class="pngx-clear-image">Remove Image</a>
-											</small>
-											<br/><span class="description"><?php echo $field['desc']; ?></span>
-
-											<?php break;
-										// color
-										case 'color': ?>
-											<?php //Check if Values and If None, then use default
-											if ( ! $meta ) {
-												$meta = $field['value'];
-											}
-											?>
-											<input class="pngx-color-picker" type="text"
-											       name="<?php echo $field['id']; ?>"
-											       id="<?php echo $field['id']; ?>"
-											       value="<?php echo esc_attr( $meta ); ?>"
-											       data-default-color="<?php echo $field['value']; ?>"/>
-											<br/><span class="description"><?php echo $field['desc']; ?></span>
-
-											<?php break;
-										// date
-										case 'date':
-
-											//Blog Time According to WordPress
-											$todays_date = "";
-											if ( $field['id'] == "cctor_expiration" ) {
-												$cc_blogtime = current_time( 'mysql' );
-
-												list( $today_year, $today_month, $today_day, $hour, $minute, $second ) = preg_split( '([^0-9])', $cc_blogtime );
-
-												if ( cctor_options( 'cctor_default_date_format' ) == 1 || $meta == 1 ) {
-													$today_first  = $today_day;
-													$today_second = $today_month;
-												} else {
-													$today_first  = $today_month;
-													$today_second = $today_day;
-												}
-
-												$todays_date = '<span class="description">' . __( 'Today\'s Date is ', 'plugin-engine' ) . $today_first . '/' . $today_second . '/' . $today_year . '</span>';
-											}
-											?>
-
-											<input type="text" class="pngx-datepicker"
-											       name="<?php echo $field['id']; ?>"
-											       id="<?php echo $field['id']; ?>"
-											       value="<?php echo esc_attr( $meta ); ?>" size="10"/>
-											<br/><span class="description"><?php echo $field['desc']; ?></span>
-											<?php echo $todays_date; ?>
-
-											<?php break;
-										// Help
-										case 'help':
-
-											/**
-											 * Hook into help tab that display all help content for a plugin
-											 */
-											do_action( 'pngx-help-tab', $tab_slug );
-
-											break;
-
-										// Pro
-										case 'cctor_pro':
-
-											echo ! defined( 'CCTOR_HIDE_UPGRADE' ) || ! CCTOR_HIDE_UPGRADE ? Cctor__Coupon__Admin__Options::display_pro_section() : '';
-
-											break;
-
-									} //end switch
-
-									if ( has_filter( 'cctor_filter_meta_cases' ) ) {
-										/**
-										 * Filter the cases for Coupon Creator Meta
-										 *
-										 * @param array $field current meta field being displayed.
-										 * @param array $meta  current value of meta saved.
-										 * @param obj   $post  object of current post beign edited.
-										 */
-										echo apply_filters( 'cctor_filter_meta_cases', $field, $meta, $post );
-									} ?>
+									?>
 
 								</div>
 								<!-- end .pngx-meta-field.field-<?php echo $field['type']; ?>.field-<?php echo $field['id']; ?> -->
@@ -563,4 +366,17 @@ class Pngx__Admin__Meta {
 
 	}
 
+	/**
+	 * Static Singleton Factory Method
+	 *
+	 * @return Pngx__Admin__Meta
+	 */
+	public static function instance() {
+		if ( ! isset( self::$instance ) ) {
+			$className      = __CLASS__;
+			self::$instance = new $className;
+		}
+
+		return self::$instance;
+	}
 }

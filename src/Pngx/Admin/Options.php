@@ -10,10 +10,11 @@ if ( class_exists( 'Pngx__Admin__Options' ) ) {
 
 /**
  * Class Pngx__Admin__Options
- * Create, Save, Display Options for a Plugin
+ * Create, Save, Display Options
  */
 class Pngx__Admin__Options {
 
+	protected static $instance;
 	/*
 	* Tab Sections
 	*/
@@ -33,27 +34,41 @@ class Pngx__Admin__Options {
 	protected $options_slug = 'plugin-engine-options';
 
 	/*
+	* Options ID
+	*/
+	protected $options_id = 'plugin_engine_options';
+
+	/*
+	* Field Prefix
+	*/
+	protected $field_prefix = 'pngx_';
+
+
+	/*
 	* Construct
 	*/
 	public function __construct() {
 
 		$this->checkboxes = array();
-		$this->fields = Pngx__Admin__Fields::get_option_fields();
+		$this->fields     = Pngx__Admin__Fields::get_option_fields();
 		$this->set_sections();
 
 		add_action( 'admin_menu', array( $this, 'options_page' ) );
 		add_action( 'admin_init', array( $this, 'register_options' ), 15 );
 		//add_action( 'admin_init', array( __CLASS__, 'flush_permalinks' ) );
 
-		if ( ! get_option( 'pngx_options' ) ) {
+		if ( ! get_option( $this->options_id ) ) {
 			add_action( 'admin_init', array( $this, 'set_defaults' ), 10 );
 		}
 
+		add_action( 'pngx_before_option_form', array( __CLASS__, 'display_options_header' ), 5 );
+		add_action( 'pngx_after_option_form', array( __CLASS__, 'display_options_footer' ), 5 );
+
 	}
 
-	/*
-	* Admin Options Page
-	*/
+	/**
+	 * Setup Options Page
+	 */
 	public function options_page() {
 
 		$admin_page = add_submenu_page( 'options-general.php', // parent_slug
@@ -73,7 +88,7 @@ class Pngx__Admin__Options {
 	*/
 	public function register_options() {
 
-		register_setting( 'plugin_engine_options', 'plugin_engine_options', array( $this, 'validate_options' ) );
+		register_setting( $this->options_id, $this->options_id, array( $this, 'validate_options' ) );
 
 		foreach ( $this->sections as $slug => $title ) {
 			//set to this an empty method as this ignores the WordPress Setting Sections
@@ -82,7 +97,7 @@ class Pngx__Admin__Options {
 
 		foreach ( $this->fields as $id => $option ) {
 			$option['id'] = $id;
-			$this->create_option( $option );
+			$this->create_field( $option );
 		}
 
 	}
@@ -112,7 +127,7 @@ class Pngx__Admin__Options {
 	/*
 	* Individual Fields Framework
 	*/
-	public function create_option( $args = array() ) {
+	public function create_field( $args = array() ) {
 
 		$defaults = array(
 			'id'        => 'default_id',
@@ -130,33 +145,39 @@ class Pngx__Admin__Options {
 			'toggle'    => array(),
 		);
 
-		$option_args = wp_parse_args( $args, $defaults );
+		$field_args = wp_parse_args( $args, $defaults );
 
-		if ( $option_args['type'] == 'checkbox' ) {
-			$this->checkboxes[] = $option_args['id'];
+		if ( $field_args['type'] == 'checkbox' ) {
+			$this->checkboxes[] = $field_args['id'];
 		}
 
 		add_settings_field(
-			$option_args['id'],
-			$option_args['title'],
-			array( 'Pngx__Admin__Fields', 'display_field' ),
+			$field_args['id'],
+			$field_args['title'],
+			array( $this, 'display_field' ),
 			$this->options_slug,
-			$option_args['section'],
-			$option_args
+			$field_args['section'],
+			$field_args
 		);
 	}
 
 
 	/*
-	* Coupon Creator Admin Validate Options
+	* Validate Options
 	*/
 	public function validate_options( $input ) {
+		$options = get_option( $this->options_id );
+		//log_me( 'validate' );
+		//log_me( $options );
+		//log_me( $input );
+		//log_me( $_POST );
+		$clean = '';
 
 		//if Reset is Checked then delete all options
 		if ( ! isset( $input['reset_theme'] ) ) {
 
 			//If No CheckBox Sent, then Unset the Option
-			$options = get_option( 'coupon_creator_options' );
+			$options = get_option( $this->options_id );
 
 			foreach ( $this->checkboxes as $id ) {
 				if ( isset( $options[ $id ] ) && ! isset( $input[ $id ] ) ) {
@@ -194,7 +215,7 @@ class Pngx__Admin__Options {
 					$license_info = array();
 
 					//License WP Option Name
-					$license = "cctor_" . $option['class'];
+					$license = $this->field_prefix . $option['class'];
 
 					//License Key
 					$license_info['key'] = $sanitize->result;
@@ -214,13 +235,13 @@ class Pngx__Admin__Options {
 
 					}
 
-					// Remove to not save with Coupon Option Array
+					// Remove to not save with Option Array
 					$input[ $id ] = "";
 				}
 
 				// Handle License Status
 				if ( $option['type'] == 'license_status' ) {
-					// Remove to not save with Coupon Option Array
+					// Remove to not save with Option Array
 					$input[ $id ] = "";
 				}
 
@@ -229,18 +250,21 @@ class Pngx__Admin__Options {
 
 					//Send Input to Sanitize Class, will return sanitized input or no input if no sanitization method
 					$sanitize = new Pngx__Sanitize( $option['type'], $input[ $id ], $option );
-
+					//log_me( 'are we saving?' );
+					//log_me( $sanitize );
 					//Set Sanitized Input in Array
 					$clean[ $id ] = $sanitize->result;
 
 				}
 
 			}
-
+			//log_me( '$clean' );
+			//log_me( $clean );
 			return $clean;
 		}
 
 		//Set Option to Flush Permalinks on Next Load as Reset was checked
+		//todo change this so it is dynamic for permalink fields
 		update_option( 'cctor_coupon_base_change', true );
 
 		return false;
@@ -262,55 +286,98 @@ class Pngx__Admin__Options {
 		}
 
 		$tab_data = array(
-			'tabs'             => $tabs_array,
+			'tabs'           => $tabs_array,
 			'update_message' => get_settings_errors(),
-			'wp_version'            => $wp_version,
+			'wp_version'     => $wp_version,
 		);
 
-		echo '<h1>Coupon Creator:</h1>';
+		echo '<div class="wrap">';
 
 		/**
-		 * Before Options Form
+		 * Before Plugin Engine Options Form
 		 *
+		 * @param string $this ->options_slug options page string
 		 */
-		do_action( 'pngx_before_option_form' );
+		do_action( 'pngx_before_option_form', $this->options_slug );
 
 		echo '<form action="options.php" method="post">';
 
-		settings_fields( 'coupon_creator_options' );
+		settings_fields( $this->options_id );
 
-		echo '<div class="pngx-tabs" ' . Pngx__Admin__Fields::toggle( $tab_data, null ) . '>
-						<ul class="pngx-tabs-nav">';
+		echo '<div class="pngx-tabs" ' . Pngx__Admin__Fields::toggle( $tab_data, null ) . '>';
 
-		foreach ( $this->sections as $section_slug => $section ) {
-			echo '<li><a href="#' . $section_slug . '">' . $section . '</a></li>';
-		}
+		echo '<ul class="pngx-tabs-nav">';
+
+			foreach ( $this->sections as $section_slug => $section ) {
+				echo '<li><a href="#' . $section_slug . '">' . $section . '</a></li>';
+			}
 
 		echo '</ul>';
 
-		do_settings_sections( $_GET['page'] );
+			do_settings_sections( $_GET['page'] );
 
-		echo '</div>
-					<p class="submit"><input name="Submit" type="submit" class="button-primary" value="' . __( 'Save Changes' ) . '" /></p>
+		echo '</div><!-- .pngx-tabs -->';
 
-				</form>';
+		echo '<p class="submit"><input name="Submit" type="submit" class="button-primary" value="' . __( 'Save Changes' ) . '" /></p>';
+
+		echo '</form>';
 
 		/**
-		 * After Coupon Options Forms
+		 * After Plugin Engine Options Form
 		 *
-		 *
+		 * @param string $this ->options_slug options page string
 		 */
-		do_action( 'pngx_after_option_form' );
+		do_action( 'pngx_after_option_form', $this->options_slug );
 
-		echo '<p style="text-align:right;">&copy; ' . date( "Y" ) . ' Jessee Productions, LLC</p>';
+		echo '</div><!-- .wrap -->';
 
-		echo '</div>';
 	}
 
 
 	/*
-	* Set Default Options
+	 * Options Header
+	 *
+	 */
+	public static function display_options_header( $slug ) {
+
+		echo '<h1>Plugin Engine Options</h1>';
+
+	}
+
+	/*
+	 * Option Footer Fields
+	 *
+	 */
+	public static function display_options_footer( $slug ) {
+
+		echo '<p style="text-align:right;">&copy; ' . date( "Y" ) . ' Jessee Productions, LLC</p>';
+
+	}
+
+	/*
+	* Display Individual Fields
 	*/
+	public function display_field( $field = array() ) {
+
+		global $wp_version;
+
+		$options = get_option( $this->options_id );
+		//log_me( 'display_field' );
+		//log_me( $options );
+		//log_me( $field );
+		if ( ! isset( $options[ $field['id'] ] ) && 'checkbox' != $field['type'] ) {
+			$options[ $field['id'] ] = $field['std'];
+		} elseif ( ! isset( $options[ $field['id'] ] ) ) {
+			$options[ $field['id'] ] = 0;
+		}
+
+		Pngx__Admin__Fields::display_field( $field, $options, $this->options_id, $wp_version );
+
+
+	}
+	/*
+	 * Set Default Options
+	 */
 	public function set_defaults() {
 		$this->initialize_options();
 	}
@@ -322,36 +389,41 @@ class Pngx__Admin__Options {
 
 		$default_options = array();
 
-		foreach ( $this->fields as $id => $option ) {
+		//log_me('fields');
+		//log_me($this->fields);
+		//log_me($this->options_id);
 
-			if ( $option['type'] != 'heading' && isset( $option['std'] ) ) {
+		if ( is_array( $this->fields ) ) {
+			foreach ( $this->fields as $id => $option ) {
 
-				//Sanitize Default
-				$cctor_sanitize = new Pngx__Sanitize( $option['type'], $option['std'], $option );
+				if ( $option['type'] != 'heading' && isset( $option['std'] ) ) {
 
-				//Set Sanitized Input in Array
-				$default_options[ $id ] = $cctor_sanitize->result;
+					//Sanitize Default
+					$pngx_sanitize = new Pngx__Sanitize( $option['type'], $option['std'], $option );
+
+					//Set Sanitized Input in Array
+					$default_options[ $id ] = $pngx_sanitize->result;
+				}
+
 			}
-
+			//log_me('saving defaults?');
+			update_option( $this->options_id, $default_options );
 		}
-
-		update_option( 'coupon_creator_options', $default_options );
 
 	}
 
-	/*
-	* Flush Permalink on Coupon Option Change
-	*/
-	public static function flush_permalinks() {
-		if ( get_option( 'cctor_coupon_base_change' ) == true || get_option( 'cctor_coupon_category_base_change' ) == true ) {
-
-			Coupon_Creator_Plugin::cctor_register_post_types();
-			flush_rewrite_rules();
-			update_option( 'coupon_flush_perm_change', date( 'l jS \of F Y h:i:s A' ) );
-			update_option( 'cctor_coupon_base_change', false );
-			update_option( 'cctor_coupon_category_base_change', false );
+	/**
+	 * Static Singleton Factory Method
+	 *
+	 * @return Pngx__Admin__Options
+	 */
+	public static function instance() {
+		if ( ! isset( self::$instance ) ) {
+			$className      = __CLASS__;
+			self::$instance = new $className;
 		}
-	}
 
+		return self::$instance;
+	}
 
 }
