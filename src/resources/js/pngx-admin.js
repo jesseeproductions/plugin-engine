@@ -18,6 +18,16 @@ var pngx_admin_fields_init = pngx_admin_fields_init || {};
 
 		obj.color_picker();
 
+		/*
+		* Hide Default Label
+		*/
+		$("tbody tr th:contains(Default)").css("display", "none");
+
+		/*
+		* Hide Row if Label is Empty
+		*/
+		$(".form-table label:empty").parent().hide();
+
 	};
 
 	/*
@@ -57,6 +67,8 @@ var pngx_admin_fields_init = pngx_admin_fields_init || {};
 
 		return false;
 	};
+
+
 
 
 	$( function () {
@@ -278,14 +290,14 @@ var pngx_admin_tabs = pngx_admin_tabs || {};
 	 */
 	obj.wrap_tab_areas = function () {
 
-		var wrapped = $( '.wrap h3' ).wrap( '<div class="' + obj.tab_wrap.replace( /\./g, ' ' ) + '-panel">' );
+		var wrapped = $( '.wrap h2' ).wrap( '<div class="' + obj.tab_wrap.replace( /\./g, ' ' ) + '-panel">' );
 
 		wrapped.each( function () {
 			$( this ).parent().append( $( this ).parent().nextUntil( 'div' + obj.tab_wrap + '-panel' ) );
 		} );
 
 		$( obj.tab_wrap + '-panel' ).each( function ( index ) {
-			$( this ).attr( 'id', obj.tabs[$( this ).children( 'h3' ).text()] );
+			$( this ).attr( 'id', obj.tabs[$( this ).children( 'h2' ).text()] );
 			if ( index > 0 )
 				$( this ).addClass( obj.tab_wrap + '-hide' );
 		} );

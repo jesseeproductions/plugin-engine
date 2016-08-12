@@ -21,3 +21,13 @@
 #image_coupon .pngx-image {
 	border: 3px dashed #000000;
 }
+
+/**
+* Utility
+***************************************************/
+/*.wp-admin.post-type-cctor_coupon .wrap h2,*/
+.wp-admin.post-type-cctor_coupon.wrap table,
+.pngx-js .javascript-conflict,
+#wp-cctor_description-media-buttons a:not(:first-child) {
+	display: none;
+}

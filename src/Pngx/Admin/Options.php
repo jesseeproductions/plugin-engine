@@ -50,7 +50,7 @@ class Pngx__Admin__Options {
 	public function __construct() {
 
 		$this->checkboxes = array();
-		$this->fields     = Pngx__Admin__Fields::get_option_fields();
+		$this->fields     = $this->get_option_fields();
 		$this->set_sections();
 
 		add_action( 'admin_menu', array( $this, 'options_page' ) );
@@ -114,7 +114,7 @@ class Pngx__Admin__Options {
 	*/
 	public function set_sections() {
 		//Section Tab Headings
-		$this->sections['defaults']   = __( 'Defaults', 'plugin-engine' );
+		$this->sections['defaults'] = __( 'Defaults', 'plugin-engine' );
 	}
 
 	/*
@@ -151,16 +151,33 @@ class Pngx__Admin__Options {
 			$this->checkboxes[] = $field_args['id'];
 		}
 
-		add_settings_field(
-			$field_args['id'],
-			$field_args['title'],
-			array( $this, 'display_field' ),
-			$this->options_slug,
-			$field_args['section'],
-			$field_args
-		);
+		add_settings_field( $field_args['id'], $field_args['title'], array( $this, 'display_field' ), $this->options_slug, $field_args['section'], $field_args );
 	}
 
+	/*
+	* Option Fields
+	*/
+	public function get_option_fields() {
+
+		//Expiration
+		$fields['header_expiration'] = array(
+			'section' => 'defaults',
+			'title'   => '',
+			'desc'    => __( 'Heading', 'coupon-creator' ),
+			'type'    => 'heading'
+		);
+		$fields['plugin_text_field'] = array(
+			'section' => 'defaults',
+			'title'   => __( 'Text Field', 'plugin-engine' ),
+			'desc'    => __( 'Enter Text', 'plugin-engine' ),
+			'std'     => '',
+			'type'    => 'text',
+			'class'   => ''
+		);
+
+		return $fields;
+
+	}
 
 	/*
 	* Validate Options
@@ -291,7 +308,7 @@ class Pngx__Admin__Options {
 			'wp_version'     => $wp_version,
 		);
 
-		echo '<div class="wrap">';
+		echo '<div class="wrap pngx-wrapper">';
 
 		/**
 		 * Before Plugin Engine Options Form
@@ -308,13 +325,13 @@ class Pngx__Admin__Options {
 
 		echo '<ul class="pngx-tabs-nav">';
 
-			foreach ( $this->sections as $section_slug => $section ) {
-				echo '<li><a href="#' . $section_slug . '">' . $section . '</a></li>';
-			}
+		foreach ( $this->sections as $section_slug => $section ) {
+			echo '<li><a href="#' . $section_slug . '">' . $section . '</a></li>';
+		}
 
 		echo '</ul>';
 
-			do_settings_sections( $_GET['page'] );
+		do_settings_sections( $_GET['page'] );
 
 		echo '</div><!-- .pngx-tabs -->';
 
@@ -371,10 +388,10 @@ class Pngx__Admin__Options {
 			$options[ $field['id'] ] = 0;
 		}
 
-		Pngx__Admin__Fields::display_field( $field, $options, $this->options_id, $wp_version );
-
+		Pngx__Admin__Fields::display_field( $field, $options, $this->options_id, false, false, false, $wp_version );
 
 	}
+
 	/*
 	 * Set Default Options
 	 */

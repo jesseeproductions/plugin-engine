@@ -138,14 +138,14 @@ class Pngx__Admin__Meta {
 
 		//Sample Field Array
 		$fields[ $prefix . 'heading_deal' ] = array( //prefix
-		                                             'id'        => $prefix . 'heading_deal', //id
-		                                             'title'     => '', //Label
-		                                             'desc'      => __( 'Coupon Deal', 'plugin-engine' ),//description or header
-		                                             'type'      => 'heading',//field type
-		                                             'section'   => 'plugin_engine_meta_box',//meta box
-		                                             'tab'       => 'content',//tab
-		                                             'wrapclass' => 'pngx-img',//optional class
-		                                             'toggle'    => array()//field toggle infomation based on value or selection
+	         'id'        => $prefix . 'heading_deal', //id
+	         'title'     => '', //Label
+	         'desc'      => __( 'Coupon Deal', 'plugin-engine' ),//description or header
+	         'type'      => 'heading',//field type
+	         'section'   => 'plugin_engine_meta_box',//meta box
+	         'tab'       => 'content',//tab
+	         'wrapclass' => 'pngx-img',//optional class
+	         'toggle'    => array()//field toggle infomation based on value or selection
 		);
 
 		$this->fields = $fields;
@@ -206,7 +206,7 @@ class Pngx__Admin__Meta {
 
 				<div class="pngx-section-fields form-table">
 
-					<h3 class="pngx-tab-heading-<?php echo $tab_slug; ?>"><?php echo $tab; ?></h3>
+					<h2 class="pngx-tab-heading-<?php echo $tab_slug; ?>"><?php echo $tab; ?></h2>
 
 					<?php
 
@@ -245,7 +245,7 @@ class Pngx__Admin__Meta {
 									<?php
 
 
-									echo Pngx__Admin__Fields::display_meta_field( $field, $meta, $tab_slug, $post, $wp_version );
+									Pngx__Admin__Fields::display_field( $field, false, false, $meta, $tab_slug, $post, $wp_version );
 
 
 									?>
