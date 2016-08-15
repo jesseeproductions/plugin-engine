@@ -53,13 +53,13 @@ class Pngx__Admin__Fields {
 	*/
 	public static function flush_permalinks() {
 
-		if ( get_option( 'cctor_coupon_base_change' ) == true || get_option( 'cctor_coupon_category_base_change' ) == true ) {
-
+		if ( true == get_option( 'pngx_permalink_change' ) ) {
+			log_me( 'flush_permalinks' );
 			//Coupon_Creator_Plugin::cctor_register_post_types();
 			flush_rewrite_rules();
-			update_option( 'coupon_flush_perm_change', date( 'l jS \of F Y h:i:s A' ) );
-			update_option( 'cctor_coupon_base_change', false );
-			update_option( 'cctor_coupon_category_base_change', false );
+			update_option( 'pngx_permalink_flush', date( 'l jS \of F Y h:i:s A' ) );
+			update_option( 'pngx_permalink_change', false );
+
 		}
 
 	}
@@ -78,12 +78,19 @@ class Pngx__Admin__Fields {
 
 			case 'checkbox':
 
+				Pngx__Admin__Field__Checkbox::display( $field, $options, $options_id, $meta );
 
 				break;
 
-			// color
 			case 'color':
 
+				Pngx__Admin__Field__Color::display( $field, $options, $options_id, $meta );
+
+				break;
+
+			case 'date':
+
+				Pngx__Admin__Field__Date::display( $field, $options, $options_id, $meta );
 
 				break;
 

@@ -3,8 +3,43 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	die( '-1' );
 }
-if ( class_exists( 'Pngx__Admin__Fields__Field__Text' ) ) {
+if ( class_exists( 'Pngx__Admin__Field__Url' ) ) {
 	return;
+}
+
+
+/**
+ * Class Pngx__Admin__Field__Url
+ * Text Field
+ */
+class Pngx__Admin__Field__Url {
+
+	public static function display( $field = array(), $options = array(), $options_id = null, $meta = null ) {
+
+		if ( isset( $options_id ) && ! empty( $options_id ) ) {
+			$name  = $options_id;
+			$value = $options[ $field['id'] ];
+		} else {
+			$name  = $field['id'];
+			$value = $meta;
+		}
+
+		$size  = isset( $field['size'] ) ? $field['size'] : 30;
+		$class = isset( $field['class'] ) ? $field['class'] : '';
+		$std   = isset( $field['std'] ) ? $field['std'] : '';
+
+		if ( isset( $field['alert'] ) && '' != $field['alert'] && 1 == cctor_options( $field['condition'] ) ) {
+			echo '<div class="pngx-error">&nbsp;&nbsp;' . $field['alert'] . '</div>';
+		}
+
+		echo '<input type="text" class="regular-text ' . esc_attr( $class ) . '"  id="' . $field['id'] . '" name="' . esc_attr( $name ) . '" placeholder="' . esc_attr( $std ) . '" value="' . esc_attr( $value ) . '" size="' . absint( $size ) . '" />';
+
+		if ( "" != $field['desc'] ) {
+			echo '<br /><span class="description">' . $field['desc'] . '</span>';
+		}
+
+	}
+
 }
 
 
@@ -12,7 +47,7 @@ if ( class_exists( 'Pngx__Admin__Fields__Field__Text' ) ) {
  * Class Pngx__Admin__Fields__Field__Text
  * Text Field
  */
-class Pngx__Admin__Fields__Field__Text {
+class Pngx__Admin__Fields__Field__Text_Remove {
 
 	/*
 	* Display Individual Fields
@@ -36,39 +71,6 @@ class Pngx__Admin__Fields__Field__Text {
 				} else {
 					echo '</td></tr><tr valign="top"><td colspan="2"><h4>' . $field['desc'] . '</h4>';
 				}
-				break;
-
-			case 'text':
-				if ( '' != $field['alert'] && 1 == cctor_options( $field['condition'] ) ) {
-					echo '<div class="cctor-error">' . $field['alert'] . '</div>';
-				}
-
-				echo '<input class="regular-text' . $field['class'] . '" type="text" id="' . $field['id'] . '" name="' . esc_attr( $options_id ) . '" placeholder="' . $field['std'] . '" value="' . esc_attr( $options[ $field['id'] ] ) . '" size="' . $field['size'] . '" />';
-
-				if ( $field['desc'] != '' ) {
-					echo '<br /><span class="description">' . $field['desc'] . '</span>';
-				}
-
-				break;
-
-			case 'checkbox':
-
-				echo '<input class="checkbox' . $field['class'] . '" type="checkbox" id="' . $field['id'] . '" name="' . esc_attr( $options_id ) . '" value="1" ' . checked( $options[ $field['id'] ], 1, false ) . ' /> <label for="' . $field['id'] . '">' . $field['desc'] . '</label>';
-
-				break;
-
-			// color
-			case 'color':
-
-				$default_color = '';
-				if ( isset( $field['std'] ) ) {
-					if ( $options[ $field['id'] ] != $field['std'] ) {
-						$default_color = ' data-default-color="' . $field['std'] . '" ';
-					}
-				}
-
-				echo '<input class="color-picker ' . $field['class'] . '" type="text" id="' . $field['id'] . '" name="' . esc_attr( $options_id ) . '" placeholder="' . $field['std'] . '" value="' . esc_attr( $options[ $field['id'] ] ) . '"' . $default_color . ' /><br /><span class="description">' . $field['desc'] . '</span>';
-
 				break;
 
 			case 'select':
@@ -238,19 +240,6 @@ class Pngx__Admin__Fields__Field__Text {
 
 					<?php break;
 
-				// text
-				case 'text':
-					?>
-					<?php if ( isset( $field['alert'] ) && $field['alert'] != '' && cctor_options( $field['condition'] ) == 1 ) {
-					echo '<div class="pngx-error">&nbsp;&nbsp;' . $field['alert'] . '</div>';
-				}
-					?>
-					<input type="text" name="<?php echo $field['id']; ?>"
-					       id="<?php echo $field['id']; ?>"
-					       value="<?php echo esc_attr( $meta ); ?>" size="30"/>
-					<br/><span class="description"><?php echo $field['desc']; ?></span>
-
-					<?php break;
 				// url
 				case 'url':
 					?>
@@ -273,27 +262,6 @@ class Pngx__Admin__Fields__Field__Text {
 						          rows="4"><?php echo format_for_editor( $meta ); ?></textarea>
 						<br/><span class="description"><?php echo $field['desc']; ?></span>
 					<?php } ?>
-					<?php break;
-
-				// checkbox
-				case 'checkbox':
-
-					//Check for Default
-					global $pagenow;
-					$selected = '';
-					if ( $meta ) {
-						$selected = $meta;
-					} elseif ( $pagenow == 'post-new.php' && isset( $field['value'] ) ) {
-						$selected = $field['value'];
-					}
-
-					?>
-
-					<input type="checkbox" name="<?php echo $field['id']; ?>"
-					       id="<?php echo $field['id']; ?>" <?php echo checked( $selected, 1, false ); ?>/>
-					<label
-						for="<?php echo $field['id']; ?>"><?php echo $field['desc']; ?></label>
-
 					<?php break;
 
 				case 'select':
@@ -347,51 +315,7 @@ class Pngx__Admin__Fields__Field__Text {
 					<br/><span class="description"><?php echo $field['desc']; ?></span>
 
 					<?php break;
-				// color
-				case 'color': ?>
-					<?php //Check if Values and If None, then use default
-					if ( ! $meta ) {
-						$meta = $field['value'];
-					}
-					?>
-					<input class="pngx-color-picker" type="text"
-					       name="<?php echo $field['id']; ?>"
-					       id="<?php echo $field['id']; ?>"
-					       value="<?php echo esc_attr( $meta ); ?>"
-					       data-default-color="<?php echo $field['value']; ?>"/>
-					<br/><span class="description"><?php echo $field['desc']; ?></span>
 
-					<?php break;
-				// date
-				case 'date':
-
-					//Blog Time According to WordPress
-					$todays_date = "";
-					if ( $field['id'] == "cctor_expiration" ) {
-						$cc_blogtime = current_time( 'mysql' );
-
-						list( $today_year, $today_month, $today_day, $hour, $minute, $second ) = preg_split( '([^0-9])', $cc_blogtime );
-
-						if ( cctor_options( 'cctor_default_date_format' ) == 1 || $meta == 1 ) {
-							$today_first  = $today_day;
-							$today_second = $today_month;
-						} else {
-							$today_first  = $today_month;
-							$today_second = $today_day;
-						}
-
-						$todays_date = '<span class="description">' . __( 'Today\'s Date is ', 'plugin-engine' ) . $today_first . '/' . $today_second . '/' . $today_year . '</span>';
-					}
-					?>
-
-					<input type="text" class="pngx-datepicker"
-					       name="<?php echo $field['id']; ?>"
-					       id="<?php echo $field['id']; ?>"
-					       value="<?php echo esc_attr( $meta ); ?>" size="10"/>
-					<br/><span class="description"><?php echo $field['desc']; ?></span>
-					<?php echo $todays_date; ?>
-
-					<?php break;
 				// Help
 				case 'help':
 

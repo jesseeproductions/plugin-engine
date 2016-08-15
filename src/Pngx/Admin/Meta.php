@@ -137,15 +137,17 @@ class Pngx__Admin__Meta {
 		$prefix = self::get_fields_prefix();
 
 		//Sample Field Array
-		$fields[ $prefix . 'heading_deal' ] = array( //prefix
-	         'id'        => $prefix . 'heading_deal', //id
-	         'title'     => '', //Label
-	         'desc'      => __( 'Coupon Deal', 'plugin-engine' ),//description or header
-	         'type'      => 'heading',//field type
-	         'section'   => 'plugin_engine_meta_box',//meta box
-	         'tab'       => 'content',//tab
-	         'wrapclass' => 'pngx-img',//optional class
-	         'toggle'    => array()//field toggle infomation based on value or selection
+		$fields[ $prefix . 'heading_deal' ] = array(
+             'id'        => $prefix . 'heading_deal', //id
+             'title'     => '', //Label
+             'desc'      => __( 'Coupon Deal', 'plugin-engine' ),//description or header
+             'type'      => 'heading',//field type
+             'section'   => 'plugin_engine_meta_box',//meta box
+             'tab'       => 'content',//tab
+             'condition' => 'pngx-img',//optional condition used in some fields
+             'class'     => 'pngx-img',//optional field class
+             'wrapclass' => 'pngx-img',//optional wrap css class
+             'toggle'    => array()//field toggle infomation based on value or selection
 		);
 
 		$this->fields = $fields;

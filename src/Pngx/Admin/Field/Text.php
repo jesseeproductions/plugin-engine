@@ -25,7 +25,7 @@ class Pngx__Admin__Field__Text {
 		}
 
 		$size  = isset( $field['size'] ) ? $field['size'] : 30;
-		$class = isset( $field['class'] ) ? $field['class'] : 'regular-text';
+		$class = isset( $field['class'] ) ? $field['class'] : '';
 		$std   = isset( $field['std'] ) ? $field['std'] : '';
 
 		if ( isset( $field['alert'] ) && '' != $field['alert'] && 1 == cctor_options( $field['condition'] ) ) {
