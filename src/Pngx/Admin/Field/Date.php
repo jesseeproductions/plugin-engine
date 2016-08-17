@@ -10,7 +10,7 @@ if ( class_exists( 'Pngx__Admin__Field__Date' ) ) {
 
 /**
  * Class Pngx__Admin__Field__Date
- * Text Field
+ * Date Field
  */
 class Pngx__Admin__Field__Date {
 
@@ -24,10 +24,9 @@ class Pngx__Admin__Field__Date {
 			$value = $meta;
 		}
 
-		$size  = isset( $field['size'] ) ? $field['size'] : 15;
+		$size  = isset( $field['size'] ) ? $field['size'] : 10;
 		$class = isset( $field['class'] ) ? $field['class'] : '';
-		$std   = isset( $field['std'] ) ? $field['std'] : '';
-		//todo date field not saving correctly
+
 		echo '<input type="text" class="pngx-datepicker ' . esc_attr( $class ) . '"  id="' . $field['id'] . '" name="' . esc_attr( $name ) . '" value="' . esc_attr( $value ) . '" size="' . absint( $size ) . '" />';
 
 		if ( '' != $field['desc'] ) {
@@ -40,7 +39,7 @@ class Pngx__Admin__Field__Date {
 			$blogtime = current_time( 'mysql' );
 
 			list( $today_year, $today_month, $today_day, $hour, $minute, $second ) = preg_split( '([^0-9])', $blogtime );
-			log_me($field['format'] );
+
 			if ( 1 == $field['format'] ) {
 				$today_first  = $today_day;
 				$today_second = $today_month;

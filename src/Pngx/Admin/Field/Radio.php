@@ -10,33 +10,45 @@ if ( class_exists( 'Pngx__Admin__Field__Radio' ) ) {
 
 /**
  * Class Pngx__Admin__Field__Radio
- * Text Field
+ * Radio Field
  */
 class Pngx__Admin__Field__Radio {
 
 	public static function display( $field = array(), $options = array(), $options_id = null, $meta = null ) {
 
+		global $pagenow;
+		$selected = '';
+
 		if ( isset( $options_id ) && ! empty( $options_id ) ) {
-			$name  = $options_id;
-			$value = $options[ $field['id'] ];
+			$name     = $options_id;
+			$selected = $options[ $field['id'] ];
 		} else {
-			$name  = $field['id'];
-			$value = $meta;
+			$name = $field['id'];
+
+			//Set Meta Default
+			if ( $meta ) {
+				$selected = $meta;
+			} elseif ( $pagenow == 'post-new.php' && isset( $field['value'] ) ) {
+				$selected = $field['value'];
+			}
 		}
 
-		$size  = isset( $field['size'] ) ? $field['size'] : 30;
 		$class = isset( $field['class'] ) ? $field['class'] : '';
-		$std   = isset( $field['std'] ) ? $field['std'] : '';
 
-		if ( isset( $field['alert'] ) && '' != $field['alert'] && 1 == cctor_options( $field['condition'] ) ) {
-			echo '<div class="pngx-error">&nbsp;&nbsp;' . $field['alert'] . '</div>';
+		$i = 0;
+		foreach ( $field['choices'] as $value => $label ) {
+			echo '<input type="radio" class="radio ' . esc_attr( $class ) . '" name="' . esc_attr( $name ) . '" id="' . $field['id'] . $i . '" value="' . esc_attr( $value ) . '" ' . checked( $selected, $value, false ) . '>
+			<label for="' . $field['id'] . $i . '">' . esc_attr( $label ) . '</label>';
+			if ( $i < count( $options ) - 1 ) {
+				echo '<br>';
+			}
+			$i ++;
 		}
-
-		echo '<input type="text" class="regular-text ' . esc_attr( $class ) . '"  id="' . $field['id'] . '" name="' . esc_attr( $name ) . '" placeholder="' . esc_attr( $std ) . '" value="' . esc_attr( $value ) . '" size="' . absint( $size ) . '" />';
 
 		if ( "" != $field['desc'] ) {
-			echo '<br /><span class="description">' . $field['desc'] . '</span>';
+			echo '<br><span class="description">' . $field['desc'] . '</span>';
 		}
+
 
 	}
 

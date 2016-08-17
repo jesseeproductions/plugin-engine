@@ -58,80 +58,6 @@ class Pngx__Admin__Fields__Field__Text_Remove {
 
 		switch ( $field['type'] ) {
 
-			case 'help':
-
-				$help_class = new Cctor__Coupon__Admin__Help();
-				$help_class->display_help( $field['section'], 'cctor_coupon_page_coupon-options', 'coupon' );
-
-				break;
-
-			case 'heading':
-				if ( $field['alert'] ) {
-					echo '</td></tr><tr valign="top"><td colspan="2"><span class="description">' . $field['alert'] . '</span>';
-				} else {
-					echo '</td></tr><tr valign="top"><td colspan="2"><h4>' . $field['desc'] . '</h4>';
-				}
-				break;
-
-			case 'select':
-
-				$cctor_select_value = $options[ $field['id'] ] ? $options[ $field['id'] ] : $field['std'];
-
-				echo '<select class="select ' . $field['class'] . '" name="' . esc_attr( $options_id ) . '">';
-
-				foreach ( $field['choices'] as $value => $label ) {
-
-					$cctor_option_style = $field['class'] == 'css-select' ? 'style="' . esc_attr( $value ) . '"' : '';
-
-					echo '<option ' . $cctor_option_style . ' value="' . esc_attr( $value ) . '"' . selected( $cctor_select_value, $value, false ) . '>' . esc_attr( $label ) . '</option>';
-
-				}
-
-				echo '</select>';
-
-				if ( $field['desc'] != '' ) {
-					echo '<br /><span class="description">' . $field['desc'] . '</span>';
-				}
-
-				break;
-
-			case 'radio':
-				$i = 0;
-				foreach ( $field['choices'] as $value => $label ) {
-					echo '<input class="radio' . $field['class'] . '" type="radio" name="' . esc_attr( $options_id ) . '" id="' . $field['id'] . $i . '" value="' . esc_attr( $value ) . '" ' . checked( $options[ $field['id'] ], $value, false ) . '> <label for="' . $field['id'] . $i . '">' . esc_attr( $label ) . '</label>';
-					if ( $i < count( $options ) - 1 ) {
-						echo '<br />';
-					}
-					$i ++;
-				}
-
-				if ( $field['desc'] != '' ) {
-					echo '<br /><span class="description">' . $field['desc'] . '</span>';
-				}
-
-				break;
-
-			case 'textarea':
-				global $wp_version;
-				if ( version_compare( $wp_version, '4.3', '<' ) ) {
-					echo '<textarea class="' . $field['class'] . '" id="' . $field['id'] . '" name="' . esc_attr( $options_id ) . '" placeholder="' . $field['std'] . '" rows="12" cols="50">' . wp_htmledit_pre( $options[ $field['id'] ] ) . '</textarea>';
-				} else {
-					echo '<textarea class="' . $field['class'] . '" id="' . $field['id'] . '" name="' . esc_attr( $options_id ) . '" placeholder="' . $field['std'] . '" rows="12" cols="50">' . format_for_editor( $options[ $field['id'] ] ) . '</textarea>';
-				}
-
-				if ( $field['desc'] != '' ) {
-					echo '<br /><span class="description">' . $field['desc'] . '</span><br />';
-				}
-				break;
-
-			case 'help':
-
-				$help_class = new Cctor__Coupon__Admin__Help();
-				$help_class->display_help( 'all', false, 'coupon' );
-				echo Cctor__Coupon__Admin__Help::get_cctor_support_core_contact();
-
-				break;
-
 			case 'license':
 
 				$cctor_license_info = array();
@@ -207,15 +133,6 @@ class Pngx__Admin__Fields__Field__Text_Remove {
 				break;
 		}
 
-		if ( has_filter( 'pngx_field_types' ) ) {
-			/**
-			 * Filter the Plugin Engine Fields for Meta and Options
-			 *
-			 * @param array $options current coupon field being displayed.
-			 * @param array $field   current value of option saved.
-			 */
-			echo apply_filters( 'pngx_field_types', $options, $field );
-		}
 	}
 
 
@@ -227,19 +144,6 @@ class Pngx__Admin__Fields__Field__Text_Remove {
 
 		switch ( $field['type'] ) {
 
-				case 'heading':
-
-					echo '<h4 class="pngx-fields-heading">'. $field["desc"].'</h4>';
-
-					break;
-
-				case 'message':
-					?>
-
-					<span class="description"><?php echo $field['desc']; ?></span>
-
-					<?php break;
-
 				// url
 				case 'url':
 					?>
@@ -249,46 +153,10 @@ class Pngx__Admin__Fields__Field__Text_Remove {
 					<br/><span class="description"><?php echo $field['desc']; ?></span>
 
 					<?php break;
-				// textarea
-				case 'textarea': ?>
-					<?php if ( version_compare( $wp_version, '4.3', '<' ) ) { ?>
-						<textarea name="<?php echo $field['id']; ?>"
-						          id="<?php echo $field['id']; ?>" cols="60"
-						          rows="4"><?php echo wp_htmledit_pre( $meta ); ?></textarea>
-						<br/><span class="description"><?php echo $field['desc']; ?></span>
-					<?php } else { ?>
-						<textarea name="<?php echo $field['id']; ?>"
-						          id="<?php echo $field['id']; ?>" cols="60"
-						          rows="4"><?php echo format_for_editor( $meta ); ?></textarea>
-						<br/><span class="description"><?php echo $field['desc']; ?></span>
-					<?php } ?>
-					<?php break;
 
-				case 'select':
 
-					//Check for Default
-					global $pagenow;
-					$selected = '';
-					if ( $meta ) {
-						$selected = $meta;
-					} elseif ( $pagenow == 'post-new.php' ) {
-						$selected = isset( $field['value'] ) ? $field['value'] : '';
-					}
 
-					?>
-					<select id="<?php echo $field['id']; ?>"
-					        class="select <?php echo $field['id']; ?>"
-					        name="<?php echo $field['id']; ?>">
 
-						<?php foreach ( $field['choices'] as $value => $label ) {
-
-							echo '<option value="' . esc_attr( $value ) . '"' . selected( $value, $selected ) . '>' . $label . '</option>';
-
-						} ?>
-					</select>
-					<span class="description"><?php echo $field['desc']; ?></span>
-
-					<?php break;
 				// image using Media Manager from WP 3.5 and greater
 				case 'image': ?>
 
@@ -315,16 +183,6 @@ class Pngx__Admin__Fields__Field__Text_Remove {
 					<br/><span class="description"><?php echo $field['desc']; ?></span>
 
 					<?php break;
-
-				// Help
-				case 'help':
-
-					/**
-					 * Hook into help tab that display all help content for a plugin
-					 */
-					do_action( 'pngx-help-tab', $tab_slug );
-
-					break;
 
 				// Pro
 				case 'cctor_pro':

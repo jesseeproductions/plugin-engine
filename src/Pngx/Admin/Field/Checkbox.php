@@ -10,7 +10,7 @@ if ( class_exists( 'Pngx__Admin__Field__Checkbox' ) ) {
 
 /**
  * Class Pngx__Admin__Field__Checkbox
- * Text Field
+ * Checkbox Field
  */
 class Pngx__Admin__Field__Checkbox {
 

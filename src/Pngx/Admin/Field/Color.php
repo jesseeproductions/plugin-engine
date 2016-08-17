@@ -10,7 +10,7 @@ if ( class_exists( 'Pngx__Admin__Field__Color' ) ) {
 
 /**
  * Class Pngx__Admin__Field__Color
- * Text Field
+ * Color Field
  */
 class Pngx__Admin__Field__Color {
 

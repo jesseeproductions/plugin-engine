@@ -36,6 +36,7 @@ var pngx_admin_fields_init = pngx_admin_fields_init || {};
 	obj.date_picker = function ( helpid ) {
 
 		$( '.pngx-datepicker' ).datepicker( {
+			dateFormat: "mm/dd/yy",
 			beforeShow: function ( input, inst ) {
 				$( "#ui-datepicker-div" ).addClass( "pngx-ui" )
 			}
@@ -247,7 +248,7 @@ var pngx_admin_tabs = pngx_admin_tabs || {};
 		obj.data =  $( obj.tab_wrap ).data();
 		obj.tabs = obj.data.toggleTabs;
 		obj.updated_tab = obj.data.toggleUpdate_message;
-		obj.page_id = obj.data.toggleId;
+		obj.id = obj.data.toggleId;
 
 		obj.init_tabs();
 

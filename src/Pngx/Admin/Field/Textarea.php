@@ -10,11 +10,11 @@ if ( class_exists( 'Pngx__Admin__Field__Textarea' ) ) {
 
 /**
  * Class Pngx__Admin__Field__Textarea
- * Text Field
+ * Textarea Field
  */
 class Pngx__Admin__Field__Textarea {
 
-	public static function display( $field = array(), $options = array(), $options_id = null, $meta = null ) {
+	public static function display( $field = array(), $options = array(), $options_id = null, $meta = null, $wp_version = null ) {
 
 		if ( isset( $options_id ) && ! empty( $options_id ) ) {
 			$name  = $options_id;
@@ -24,15 +24,16 @@ class Pngx__Admin__Field__Textarea {
 			$value = $meta;
 		}
 
-		$size  = isset( $field['size'] ) ? $field['size'] : 30;
+		$rows  = isset( $field['rows'] ) ? $field['rows'] : 12;
+		$cols  = isset( $field['cols'] ) ? $field['cols'] : 50;
 		$class = isset( $field['class'] ) ? $field['class'] : '';
 		$std   = isset( $field['std'] ) ? $field['std'] : '';
 
-		if ( isset( $field['alert'] ) && '' != $field['alert'] && 1 == cctor_options( $field['condition'] ) ) {
-			echo '<div class="pngx-error">&nbsp;&nbsp;' . $field['alert'] . '</div>';
+		if ( version_compare( $wp_version, '4.3', '<' ) ) {
+			echo '<textarea class="' . esc_attr( $class ) . '" id="' . $field['id'] . '" name="' . esc_attr( $name ) . '" placeholder="' . esc_attr( $std ) . '" rows="' . absint( $rows ) . '" cols="' . absint( $cols ) . '">' . wp_htmledit_pre( $value ) . '</textarea>';
+		} else {
+			echo '<textarea class="' . esc_attr( $class ) . '" id="' . $field['id'] . '" name="' . esc_attr( $name ) . '" placeholder="' . esc_attr( $std ) . '" rows="' . absint( $rows ) . '" cols="' . absint( $cols ) . '">' . format_for_editor( $value ) . '</textarea>';
 		}
-
-		echo '<input type="text" class="regular-text ' . esc_attr( $class ) . '"  id="' . $field['id'] . '" name="' . esc_attr( $name ) . '" placeholder="' . esc_attr( $std ) . '" value="' . esc_attr( $value ) . '" size="' . absint( $size ) . '" />';
 
 		if ( "" != $field['desc'] ) {
 			echo '<br /><span class="description">' . $field['desc'] . '</span>';

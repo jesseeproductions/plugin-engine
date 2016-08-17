@@ -21,12 +21,22 @@ class Pngx__Admin__Fields {
 
 		if ( isset( $toggle_fields ) && is_array( $toggle_fields ) ) {
 
+			$data = '';
+
 			foreach ( $toggle_fields as $key => $toggle_data ) {
 				$toggle = '';
 				if ( 'field' == $key ) {
 					$toggle = esc_html( $toggle_data ) . '#' . esc_attr( $id );
 				} elseif ( 'group' == $key || 'show' == $key || 'update_message' == $key ) {
-					$toggle = esc_html( $toggle_data );
+
+					//handle options page update message in array
+					if ( is_array( $toggle_data ) ) {
+						if ( isset( $toggle_data[0]['code'] ) ) {
+							$toggle = esc_html( $toggle_data[0]['code'] );
+						}
+					} else {
+						$toggle = esc_html( $toggle_data );
+					}
 				} elseif ( 'id' == $key || 'wp_version' == $key ) {
 					$toggle = absint( $toggle_data );
 				} elseif ( 'msg' == $key || 'tabs' == $key ) {
@@ -39,8 +49,10 @@ class Pngx__Admin__Fields {
 				//echo 'data-toggle-show="' . esc_html( $field['toggle_show'] ) . '"';
 				//echo 'data-toggle-msg=\'' . json_encode( $field['toggle_msg'], JSON_HEX_APOS ) . '\'';
 
-				return 'data-toggle-' . esc_attr( $key ) . '=\'' . $toggle . '\'';
+				$data .= 'data-toggle-' . esc_attr( $key ) . '=\'' . $toggle . '\' ';
 			}
+
+			return $data;
 
 		}
 
@@ -96,11 +108,13 @@ class Pngx__Admin__Fields {
 
 			case 'heading':
 
+				Pngx__Admin__Field__Heading::display( $field, $options, $options_id, $meta );
 
 				break;
 
 			case 'help':
 
+				Pngx__Admin__Field__Help::display( $field, $options, $options_id, $meta );
 
 				break;
 
@@ -116,6 +130,8 @@ class Pngx__Admin__Fields {
 
 			case 'message':
 
+				Pngx__Admin__Field__Message::display( $field, $options, $options_id, $meta );
+
 				break;
 
 			case 'pro':
@@ -125,12 +141,14 @@ class Pngx__Admin__Fields {
 
 			case 'radio':
 
+				Pngx__Admin__Field__Radio::display( $field, $options, $options_id, $meta );
 
 				break;
 
 
 			case 'select':
 
+				Pngx__Admin__Field__Select::display( $field, $options, $options_id, $meta );
 
 				break;
 
@@ -141,6 +159,8 @@ class Pngx__Admin__Fields {
 				break;
 
 			case 'textarea':
+
+				Pngx__Admin__Field__Textarea::display( $field, $options, $options_id, $meta, $wp_version );
 
 				break;
 

@@ -304,6 +304,7 @@ class Pngx__Admin__Options {
 		$tab_data = array(
 			'tabs'           => $tabs_array,
 			'update_message' => get_settings_errors(),
+			'id' => 'pngx-options',
 			'wp_version'     => $wp_version,
 		);
 
