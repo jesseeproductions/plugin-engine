@@ -79,7 +79,7 @@ class Pngx__Admin__Fields {
 	/*
 	* Display Individual Fields
 	*/
-	public static function display_field( $field = array(), $options = array(), $options_id = null, $meta = null, $tab_slug = null, $post = null, $wp_version ) {
+	public static function display_field( $field = array(), $options = array(), $options_id = null, $meta = null, $wp_version ) {
 
 		//Create Different Name for Option Fields and Not Meta Fields
 		if ( $options ) {
@@ -108,34 +108,38 @@ class Pngx__Admin__Fields {
 
 			case 'heading':
 
-				Pngx__Admin__Field__Heading::display( $field, $options, $options_id, $meta );
+				Pngx__Admin__Field__Heading::display( $field, $options_id );
 
 				break;
 
-			case 'help':
+			//case 'help':
 
-				Pngx__Admin__Field__Help::display( $field, $options, $options_id, $meta );
+				//Pngx__Admin__Field__Help::display( $field, $options, $options_id, $meta );
+
+				//break;
+
+			case 'image':
+
+				Pngx__Admin__Field__Image::display( $field, $options, $options_id, $meta );
 
 				break;
 
 			case 'license':
+
+				Pngx__Admin__Field__License::display( $field, $options, $options_id, $meta );
 
 
 				break;
 
 			case 'license_status':
 
+				Pngx__Admin__Field__License_Status::display( $field, $options, $options_id, $meta );
 
 				break;
 
 			case 'message':
 
 				Pngx__Admin__Field__Message::display( $field, $options, $options_id, $meta );
-
-				break;
-
-			case 'pro':
-
 
 				break;
 
@@ -167,6 +171,7 @@ class Pngx__Admin__Fields {
 
 			case 'url':
 
+				Pngx__Admin__Field__Url::display( $field, $options, $options_id, $meta );
 
 				break;
 		}
@@ -178,7 +183,7 @@ class Pngx__Admin__Fields {
 			 * @param array $options current coupon field being displayed.
 			 * @param array $field   current value of option saved.
 			 */
-			echo apply_filters( 'pngx_field_types', $options, $field );
+			echo apply_filters( 'pngx_field_types', $field, $options, $options_id, $meta, $wp_version );
 		}
 	}
 

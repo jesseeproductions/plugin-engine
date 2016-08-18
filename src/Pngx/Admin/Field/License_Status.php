@@ -10,32 +10,51 @@ if ( class_exists( 'Pngx__Admin__Field__License_Status' ) ) {
 
 /**
  * Class Pngx__Admin__Field__License_Status
- * Text Field
+ * License Status Field
  */
 class Pngx__Admin__Field__License_Status {
 
 	public static function display( $field = array(), $options = array(), $options_id = null, $meta = null ) {
 
-		if ( isset( $options_id ) && ! empty( $options_id ) ) {
-			$name  = $options_id;
-			$value = $options[ $field['id'] ];
+		$expiration_msg = $expiration_date = '';
+		$license        = $field['class'];
+		$license_info   = get_option( $license );
+
+		if ( isset( $license_info['expires'] ) ) { // Only Display Expiration if Date
+
+			$expiration_date = strtotime( $license_info['expires'] );
+			//Use WordPress Date Format to Display
+			$expiration_date = date( get_option( 'date_format' ), $expiration_date );
+			$expiration_msg  = sprintf( __( ' and Expires on %s', 'coupon-creator' ), esc_attr( $expiration_date ) );
+		}
+
+		echo '<input type="hidden" class="pngx_license_key" name="pngx_license_key" value="' . esc_attr( $license ) . '"/>';
+		echo '<input type="hidden" class="pngx_license_name" name="pngx_license_name" value="' . esc_attr( $field['condition'] ) . '"/>';
+
+		if ( isset( $license_info['status'] ) && false !== $license_info['status'] && 'valid' == $license_info['status'] ) {
+
+			echo '<span style="color:green;">' . __( 'License is Active', 'coupon-creator' ) . $expiration_msg . '</span><br><br>';
+
+			wp_nonce_field( 'pngx_license_nonce', 'pngx_license_nonce' );
+
+			echo '<input type="submit" class="pngx-license-button-act" name="pngx_license_deactivate" value="' . _( 'Deactivate License' ) . '"/>';
+
 		} else {
-			$name  = $field['id'];
-			$value = $meta;
-		}
 
-		$size  = isset( $field['size'] ) ? $field['size'] : 30;
-		$class = isset( $field['class'] ) ? $field['class'] : '';
-		$std   = isset( $field['std'] ) ? $field['std'] : '';
+			if ( isset( $license_info['status'] ) && ( 'invalid' == $license_info['status'] || 'missing' == $license_info['status'] ) && ! $license_info['expired'] ) {
+				$license_info_valid = __( 'License is Invalid', 'coupon-creator' );
+			} elseif ( isset( $license_info['expired'] ) && 'expired' == $license_info['expired'] ) {
+				$license_info_valid = sprintf( __( 'License Expired on %s', 'coupon-creator' ), esc_attr( $expiration_date ) );
+			} else {
+				$license_info_valid = __( 'License is Not Active', 'coupon-creator' );
+			}
 
-		if ( isset( $field['alert'] ) && '' != $field['alert'] && 1 == cctor_options( $field['condition'] ) ) {
-			echo '<div class="pngx-error">&nbsp;&nbsp;' . $field['alert'] . '</div>';
-		}
+			echo '<span style="color:red;">' . $license_info_valid . '</span><br><br>';
 
-		echo '<input type="text" class="regular-text ' . esc_attr( $class ) . '"  id="' . $field['id'] . '" name="' . esc_attr( $name ) . '" placeholder="' . esc_attr( $std ) . '" value="' . esc_attr( $value ) . '" size="' . absint( $size ) . '" />';
+			wp_nonce_field( 'pngx_license_nonce', 'pngx_license_nonce' );
 
-		if ( "" != $field['desc'] ) {
-			echo '<br /><span class="description">' . $field['desc'] . '</span>';
+			echo '<input type="submit" class="pngx-license-button-det" name="pngx_license_activate" value="' . __( 'Activate License' ) . '"/>';
+
 		}
 
 	}

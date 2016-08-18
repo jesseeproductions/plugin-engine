@@ -10,32 +10,31 @@ if ( class_exists( 'Pngx__Admin__Field__License' ) ) {
 
 /**
  * Class Pngx__Admin__Field__License
- * Text Field
+ * License Field only works on WordPress Options Page
  */
 class Pngx__Admin__Field__License {
 
-	public static function display( $field = array(), $options = array(), $options_id = null, $meta = null ) {
+	public static function display( $field = array(), $options = array(), $options_id = null ) {
 
 		if ( isset( $options_id ) && ! empty( $options_id ) ) {
-			$name  = $options_id;
-			$value = $options[ $field['id'] ];
-		} else {
-			$name  = $field['id'];
-			$value = $meta;
-		}
+			$name         = $options_id;
+			$license      = $field['class'];
+			$license_info = get_option( $license );
+			$value        = isset( $license_info['key'] ) ? $license_info['key'] : '';
 
-		$size  = isset( $field['size'] ) ? $field['size'] : 30;
-		$class = isset( $field['class'] ) ? $field['class'] : '';
-		$std   = isset( $field['std'] ) ? $field['std'] : '';
+			$size  = isset( $field['size'] ) ? $field['size'] : 30;
+			$class = isset( $field['class'] ) ? $field['class'] : '';
+			$std   = isset( $field['std'] ) ? $field['std'] : '';
 
-		if ( isset( $field['alert'] ) && '' != $field['alert'] && 1 == cctor_options( $field['condition'] ) ) {
-			echo '<div class="pngx-error">&nbsp;&nbsp;' . $field['alert'] . '</div>';
-		}
+			if ( isset( $field['alert'] ) && '' != $field['alert'] && 1 == cctor_options( $field['condition'] ) ) {
+				echo '<div class="pngx-error">&nbsp;&nbsp;' . $field['alert'] . '</div>';
+			}
 
-		echo '<input type="text" class="regular-text ' . esc_attr( $class ) . '"  id="' . $field['id'] . '" name="' . esc_attr( $name ) . '" placeholder="' . esc_attr( $std ) . '" value="' . esc_attr( $value ) . '" size="' . absint( $size ) . '" />';
+			echo '<input type="text" class="license-field ' . esc_attr( $class ) . '"  id="' . esc_attr( $field['id'] ) . '" name="' . esc_attr( $name ) . '" placeholder="' . esc_attr( $std ) . '" value="' . esc_attr( $value ) . '" size="' . absint( $size ) . '" />';
 
-		if ( "" != $field['desc'] ) {
-			echo '<br /><span class="description">' . $field['desc'] . '</span>';
+			if ( "" != $field['desc'] ) {
+				echo '<br /><span class="description">' . $field['desc'] . '</span>';
+			}
 		}
 
 	}

@@ -17,21 +17,25 @@ class Pngx__Admin__Field__Help {
 	public static function display( $field = array(), $options = array(), $options_id = null, $meta = null ) {
 
 		if ( isset( $options_id ) && ! empty( $options_id ) ) {
-			$name  = $options_id;
-			$value = $options[ $field['id'] ];
+			$tab       = $field['section'];
+			$screen_id = 'plugin_engine_options_coupon-options';
 		} else {
-			$name  = $field['id'];
-			$value = $meta;
+			$tab       = $field['tab'];
+			$screen_id = '';
 		}
 
-		$help_class = new Cctor__Coupon__Admin__Help();
-		$help_class->display_help( $field['section'], 'cctor_coupon_page_coupon-options', 'coupon' );
+		if ( 'cctor_all_help' == $field['id'] ) {
+			$help_class = new Pngx__Admin__Help();
+			$help_class->display_help( 'all', false, 'pngx' );
+			//echo Cctor__Coupon__Admin__Help::get_cctor_support_core_contact();
 
+			//Return as this is only showing all the help documents
+			return;
+		}
 
-		$help_class = new Cctor__Coupon__Admin__Help();
-		$help_class->display_help( 'all', false, 'coupon' );
-		echo Cctor__Coupon__Admin__Help::get_cctor_support_core_contact();
-
+		//Display Help Per Tab
+		$help_class = new Pngx__Admin__Help();
+		$help_class->display_help( $tab, $screen_id, 'pngx' );
 
 	}
 

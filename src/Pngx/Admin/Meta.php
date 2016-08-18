@@ -246,9 +246,7 @@ class Pngx__Admin__Meta {
 
 									<?php
 
-
-									Pngx__Admin__Fields::display_field( $field, false, false, $meta, $tab_slug, $post, $wp_version );
-
+									Pngx__Admin__Fields::display_field( $field, false, false, $meta, $wp_version );
 
 									?>
 
