@@ -3,6 +3,338 @@
 
 */
 /* ==========================================================================
+   Fields CSS
+   ========================================================================== */
+/**
+* All Fields
+***************************************************/
+.pngx-meta-field-wrap {
+  margin: 10px 0;
+  overflow: hidden; }
+
+.pngx-meta-field,
+.pngx-meta-label {
+  float: left;
+  overflow: hidden; }
+
+.pngx-meta-label {
+  width: 30%; }
+
+.pngx-meta-field {
+  width: 70%; }
+
+.pngx-meta-field.field-help {
+  width: 100%; }
+
+/**
+* Headings
+***************************************************/
+.postbox h4.pngx-fields-heading {
+  color: #003ca9;
+  font-size: 15px;
+  font-weight: bold;
+  margin: 0 0 10px; }
+
+.postbox h4.pngx-fields-heading:after {
+  background: linear-gradient(to right, black 1%, #9b9b9b 28%, white 85%) repeat scroll 0 0 transparent;
+  content: "";
+  display: block;
+  height: 1px;
+  margin-top: 10px; }
+
+/**
+* Image Field
+***************************************************/
+.pngx-default-image,
+.pngx-image {
+  border: 1px solid #dbdbdb;
+  font-size: 16px;
+  height: auto;
+  padding: 20px 5px;
+  text-align: center;
+  width: 360px;
+  max-width: 94%; }
+
+#image_coupon .pngx-default-image,
+#image_coupon .pngx-image {
+  border: 3px dashed #000000; }
+
+/* License Button
+------------------------------------------------------------ */
+.pngx-license-button-act {
+  background: #003ca9;
+  border: 1px solid #003ca9;
+  color: #fff; }
+
+.pngx-license-button-act:hover {
+  background: #1e4164;
+  cursor: pointer; }
+
+.pngx-license-button-det {
+  background: #3ca900;
+  border: 1px solid #3ca900;
+  color: #fff; }
+
+.pngx-license-button-det:hover {
+  background: #003ca9;
+  cursor: pointer; }
+
+/**
+* Text Input
+***************************************************/
+.pngx-wrapper input.regular-text {
+  width: auto; }
+
+/**
+* Textarea / Wysiwyg
+***************************************************/
+.pngx-meta-field textarea,
+.pngx-meta-field.field-wysiwyg {
+  width: 100%; }
+
+/**
+* Submit
+***************************************************/
+.pngx-wrapper p.submit {
+  overflow: hidden; }
+
+.pngx-wrapper.wp-core-ui .button-primary {
+  float: right; }
+
+/**
+* Utility
+***************************************************/
+/*.wp-admin.post-type-pngx_coupon .wrap h2,*/
+.wp-admin.post-type-pngx_coupon.wrap table,
+.pngx-js .javascript-conflict,
+#wp-pngx_description-media-buttons a:not(:first-child) {
+  display: none; }
+
+/* ==========================================================================
+   Help CSS
+   ========================================================================== */
+.pngx-section-help-container {
+  background-color: #ccc;
+  border-radius: 10px 10px 0;
+  margin-bottom: 1em;
+  overflow: hidden; }
+
+.pngx-section-help-container-toggle {
+  background-color: #ccc;
+  border: medium none;
+  color: white;
+  cursor: pointer;
+  margin: 0;
+  outline: medium none;
+  padding: 0.5em;
+  text-align: left;
+  width: 100%; }
+
+.pngx-section-help-container:hover,
+.pngx-section-help-container-toggle:hover {
+  background: #4d6eab none repeat scroll 0 0;
+  border: 1px solid #003ca9;
+  color: #000; }
+
+.pngx-section-help-container-toggle .dashicons-before::before {
+  margin-right: 5px; }
+
+.pngx-section-help-container-toggle .toggle__arrow {
+  text-decoration: none; }
+
+.pngx-section-help-slideout {
+  background-color: #fff;
+  border: 1px solid #003ca9;
+  border-bottom-left-radius: 10px;
+  display: none;
+  overflow: hidden;
+  padding: 0.5em; }
+
+.ui-widget-content a.pngx-support,
+.pngx-support {
+  color: #003ca9; }
+
+.ui-widget-content a.pngx-support:hover,
+.pngx-support:hover {
+  color: #4d6eab; }
+
+.pngx-help-images {
+  box-shadow: 0 1px 2px 0 #4d6eab;
+  display: none;
+  margin: 10px;
+  max-width: 95%; }
+
+.pngx-meta-field-content {
+  width: 49%;
+  display: inline-block;
+  vertical-align: top; }
+
+.pngx-meta-field-content.text {
+  margin: 0 0 0 2%; }
+
+.promote-sup {
+  color: #777; }
+
+@media only screen and (max-width: 640px) {
+  .pngx-meta-field-content,
+  .pngx-meta-field-content.text {
+    margin: 0;
+    width: 100%; } }
+
+/* ==========================================================================
+  jQuery UI CSS
+   ========================================================================== */
+.ui-datepicker.pngx-ui,
+.ui-dialog.pngx-ui {
+  background: #fefefe;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), 0 8px 0 -5px #eee, 0 8px 1px -4px rgba(0, 0, 0, 0.15), 0 14px 0 -8px #eee, 0 14px 1px -9px rgba(0, 0, 0, 0.15);
+  height: 250px;
+  padding: 10px;
+  z-index: 101;
+  /* The third layer shadow */ }
+
+.ui-datepicker.pngx-ui {
+  height: auto; }
+
+.ui-datepicker.pngx-ui:after,
+.ui-datepicker.pngx-ui:before,
+.ui-dialog.pngx-ui:after,
+.ui-dialog.pngx-ui:before {
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  bottom: 0;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+  content: '';
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: -10; }
+
+.pngx-ui .ui-widget-header .ui-state-default.ui-dialog-titlebar-close,
+.pngx-ui .ui-widget-header {
+  background: none;
+  border: none;
+  color: #000;
+  font-weight: bold; }
+
+.pngx-ui .ui-widget-header .ui-icon {
+  background-image: url("../images/ui-icons_2e83ff_256x240.png"); }
+
+.ui-dialog.pngx-ui .ui-dialog-titlebar-close span.ui-icon-closethick {
+  background-image: url("../images/ui-icons_2e83ff_256x240.png");
+  margin-left: -3px;
+  margin-top: -14px; }
+
+.pngx-ui .ui-state-default, .pngx-ui.ui-widget-content .ui-state-default, .pngx-ui .ui-widget-header .ui-state-default {
+  background: url("../images/ui-bg_flat_65_2a5a8a_40x100.png") repeat-x scroll 50% 50% #e6e6e6;
+  border: 1px solid #d3d3d3;
+  color: #fff;
+  font-weight: normal; }
+
+.pngx-ui .ui-state-hover, .pngx-ui.ui-widget-content .ui-state-hover, .pngx-ui .ui-widget-header .ui-state-hover, .pngx-ui .ui-state-focus, .pngx-ui.ui-widget-content .ui-state-focus, .pngx-ui .ui-widget-header .ui-state-focus {
+  filter: alpha(opacity=70);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(opacity=70)";
+  /* for IE8 in IE7 mode; must be before filter below */
+  opacity: 0.7;
+  /* IE6-IE8 */ }
+
+.ui-dialog.pngx-ui .ui-dialog-content {
+  overflow: hidden; }
+
+/* ==========================================================================
+  Loading CSS
+   ========================================================================== */
+#pngx-loading {
+  background: #fff;
+  background: rgba(255, 255, 255, 0.8);
+  display: none;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  transition: all 1s linear;
+  -moz-transition: all 1s linear;
+  -ms-transition: all 1s linear;
+  -o-transition: all 1s linear;
+  width: 100%;
+  z-index: 4;
+  webkit-transition: all 1s linear; }
+
+#pngx-loading span {
+  background: url(../images/pngx-loading.gif) 0 0 no-repeat;
+  background-size: 32px 32px;
+  height: 32px;
+  left: 50%;
+  margin: -16px 0 0 -16px;
+  position: absolute;
+  top: 50%;
+  width: 32px;
+  -webkit-background-size: 32px 32px; }
+
+/* ==========================================================================
+   Messages CSS
+   ========================================================================== */
+.pngx-meta-bg {
+  background-color: #fff;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+  margin: 5px 0 15px;
+  overflow: hidden;
+  padding: 8px 12px; }
+
+.success,
+.pngx-message {
+  border-left: 4px solid #3ca900;
+  font-weight: bold; }
+
+.pngx-error {
+  border-left: 4px solid #dd3d36;
+  color: #dd3d36; }
+
+.success {
+  padding: 1px 12px; }
+
+.pngx-error {
+  padding: 1px 12px; }
+
+.pngx-section-fields .pngx-error {
+  margin: 30px 0; }
+
+.pngx-error div,
+.pngx-message div {
+  float: left;
+  padding: 0 2% 0 0;
+  width: 48%; }
+
+/* ==========================================================================
+   Meta Box
+   ========================================================================== */
+/* ==========================================================================
+   Options CSS
+   ========================================================================== */
+/*hides empty row and support label*/
+#help .form-table th,
+.form-table tr > *:empty {
+  display: none; }
+
+.pngx-wrapper .pngx-tabs-panel.ui-tabs-panel.ui-widget-content h4 {
+  margin: 0 0 0 -10px; }
+
+@media screen and (max-width: 768px) {
+  .pngx-wrapper .pngx-tabs-panel.ui-tabs-panel.ui-widget-content h4 {
+    margin: 0 0 0 0px; } }
+
+.pngx-wrapper .pngx-tabs-panel.ui-tabs-panel.ui-widget-content .pngx-section-help-slideout h4 {
+  margin: 0; }
+
+/* ==========================================================================
    Tabs CSS
    ========================================================================== */
 .pngx-tabs {
@@ -15,7 +347,7 @@
     background: none;
     border: none;
     height: 100%;
-    margin: 20px 0 -2px;
+    margin: 20px 0 -7px;
     padding: 0; }
   .pngx-tabs.ui-tabs .pngx-tabs-nav.ui-tabs-nav li {
     display: block;
@@ -117,234 +449,26 @@
     float: none; }
 
 /* ==========================================================================
-  jQuery UI CSS
+  Tooltips CSS
    ========================================================================== */
-.ui-datepicker.pngx-ui,
-.ui-dialog.pngx-ui {
-  background: #fefefe;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), 0 8px 0 -5px #eee, 0 8px 1px -4px rgba(0, 0, 0, 0.15), 0 14px 0 -8px #eee, 0 14px 1px -9px rgba(0, 0, 0, 0.15);
-  height: 250px;
-  padding: 10px;
-  z-index: 101;
-  /* The third layer shadow */ }
-
-.ui-datepicker.pngx-ui {
-  height: auto; }
-
-.ui-datepicker.pngx-ui:after,
-.ui-datepicker.pngx-ui:before,
-.ui-dialog.pngx-ui:after,
-.ui-dialog.pngx-ui:before {
-  border-radius: 3px;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-  bottom: 0;
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
-  -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
-  content: '';
-  left: 0;
-  position: absolute;
-  right: 0;
-  top: 0;
-  z-index: -10; }
-
-.pngx-ui .ui-widget-header .ui-state-default.ui-dialog-titlebar-close,
-.pngx-ui .ui-widget-header {
-  background: none;
-  border: none;
-  color: #000;
-  font-weight: bold; }
-
-.pngx-ui .ui-widget-header .ui-icon {
-  background-image: url("../images/ui-icons_2e83ff_256x240.png"); }
-
-.ui-dialog.pngx-ui .ui-dialog-titlebar-close span.ui-icon-closethick {
-  background-image: url("../images/ui-icons_2e83ff_256x240.png");
-  margin-left: -3px;
-  margin-top: -14px; }
-
-.pngx-ui .ui-state-default, .pngx-ui.ui-widget-content .ui-state-default, .pngx-ui .ui-widget-header .ui-state-default {
-  background: url("../images/ui-bg_flat_65_2a5a8a_40x100.png") repeat-x scroll 50% 50% #e6e6e6;
-  border: 1px solid #d3d3d3;
-  color: #fff;
-  font-weight: normal; }
-
-.pngx-ui .ui-state-hover, .pngx-ui.ui-widget-content .ui-state-hover, .pngx-ui .ui-widget-header .ui-state-hover, .pngx-ui .ui-state-focus, .pngx-ui.ui-widget-content .ui-state-focus, .pngx-ui .ui-widget-header .ui-state-focus {
-  filter: alpha(opacity=70);
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(opacity=70)";
-  /* for IE8 in IE7 mode; must be before filter below */
-  opacity: 0.7;
-  /* IE6-IE8 */ }
-
-.ui-dialog.pngx-ui .ui-dialog-content {
-  overflow: hidden; }
-
-/* ==========================================================================
-   Messages CSS
-   ========================================================================== */
-.pngx-meta-bg {
-  background-color: #fff;
-  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
-  margin: 5px 0 15px;
-  overflow: hidden;
-  padding: 8px 12px; }
-
-.success,
-.pngx-message {
-  border-left: 4px solid #3ca900;
-  font-weight: bold; }
-
-.pngx-error,
-.pngx-error {
-  border-left: 4px solid #dd3d36;
-  color: #dd3d36; }
-
-.success {
-  padding: 1px 12px; }
-
-.pngx-error {
-  padding: 1px 12px; }
-
-.pngx-section-fields .pngx-error {
-  margin: 30px 0; }
-
-.pngx-error div,
-.pngx-message div {
-  float: left;
-  padding: 0 2% 0 0;
-  width: 48%; }
-
-/* ==========================================================================
-   Help CSS
-   ========================================================================== */
-.pngx-section-help-container {
-  background-color: #ccc;
-  border-radius: 10px 10px 0;
-  margin-bottom: 1em;
-  overflow: hidden; }
-
-.pngx-section-help-container-toggle {
-  background-color: #ccc;
-  border: medium none;
-  color: white;
-  cursor: pointer;
-  margin: 0;
-  outline: medium none;
-  padding: 0.5em;
-  text-align: left;
-  width: 100%; }
-
-.pngx-section-help-container:hover,
-.pngx-section-help-container-toggle:hover {
-  background: #4d6eab none repeat scroll 0 0;
-  border: 1px solid #003ca9;
-  color: #000; }
-
-.pngx-section-help-container-toggle .dashicons-before::before {
-  margin-right: 5px; }
-
-.pngx-section-help-container-toggle .toggle__arrow {
-  text-decoration: none; }
-
-.pngx-section-help-slideout {
-  background-color: #fff;
-  border: 1px solid #003ca9;
-  border-bottom-left-radius: 10px;
-  display: none;
-  overflow: hidden;
-  padding: 0.5em; }
-
-.ui-widget-content a.pngx-support,
-.pngx-support {
-  color: #003ca9; }
-
-.ui-widget-content a.pngx-support:hover,
-.pngx-support:hover {
-  color: #4d6eab; }
-
-.pngx-help-images {
-  box-shadow: 0 1px 2px 0 #4d6eab;
-  display: none;
-  margin: 10px;
-  max-width: 95%; }
-
-.pngx-meta-field-content {
-  width: 49%;
+.pngx-tooltip {
+  border-bottom: 1px dotted black;
   display: inline-block;
-  vertical-align: top; }
+  position: relative; }
 
-.pngx-meta-field-content.text {
-  margin: 0 0 0 2%; }
-
-.promote-sup {
-  color: #777; }
-
-@media only screen and (max-width: 640px) {
-  .pngx-meta-field-content,
-  .pngx-meta-field-content.text {
-    margin: 0;
-    width: 100%; } }
-
-/* ==========================================================================
-   Fields CSS
-   ========================================================================== */
-/**
-* Image Field
-***************************************************/
-.pngx-default-image,
-.pngx-image {
-  border: 1px solid #dbdbdb;
-  font-size: 16px;
-  height: auto;
-  padding: 20px 5px;
+.pngx-tooltip .pngx-tooltiptext {
+  background-color: black;
+  border-radius: 6px;
+  color: #fff;
+  left: 50%;
+  margin-left: -60px;
+  padding: 5px 0;
+  position: absolute;
   text-align: center;
-  width: 360px;
-  max-width: 94%; }
+  top: 100%;
+  visibility: hidden;
+  width: 120px;
+  z-index: 1; }
 
-#image_coupon .pngx-default-image,
-#image_coupon .pngx-image {
-  border: 3px dashed #000000; }
-
-/**
-* Utility
-***************************************************/
-/*.wp-admin.post-type-cctor_coupon .wrap h2,*/
-.wp-admin.post-type-cctor_coupon.wrap table,
-.pngx-js .javascript-conflict,
-#wp-cctor_description-media-buttons a:not(:first-child) {
-  display: none; }
-
-/* ==========================================================================
-   Meta Box
-   ========================================================================== */
-/* ==========================================================================
-   Options CSS
-   ========================================================================== */
-.pngx-wrapper input.regular-text {
-  width: auto; }
-
-.pngx-wrapper p.submit {
-  overflow: hidden; }
-
-.pngx-wrapper.wp-core-ui .button-primary {
-  float: right; }
-
-/*hides empty row and support label*/
-#help .form-table th,
-.form-table tr > *:empty {
-  display: none; }
-
-.pngx-wrapper .pngx-tabs-panel.ui-tabs-panel.ui-widget-content h4 {
-  margin: 0 0 0 -10px; }
-
-@media screen and (max-width: 768px) {
-  .pngx-wrapper .pngx-tabs-panel.ui-tabs-panel.ui-widget-content h4 {
-    margin: 0 0 0 0px; } }
-
-.pngx-wrapper .pngx-tabs-panel.ui-tabs-panel.ui-widget-content .pngx-section-help-slideout h4 {
-  margin: 0; }
+.pngx-tooltip:hover .pngx-tooltiptext {
+  visibility: visible; }

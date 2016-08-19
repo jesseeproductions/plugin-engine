@@ -2,6 +2,49 @@
    Fields CSS
    ========================================================================== */
 
+/**
+* All Fields
+***************************************************/
+.pngx-meta-field-wrap {
+	margin: 10px 0;
+	overflow: hidden;
+}
+
+.pngx-meta-field,
+.pngx-meta-label {
+	float: left;
+	overflow: hidden;
+}
+
+.pngx-meta-label {
+	width: 30%;
+}
+
+.pngx-meta-field {
+	width: 70%;
+}
+
+.pngx-meta-field.field-help {
+	width: 100%;
+}
+
+/**
+* Headings
+***************************************************/
+.postbox h4.pngx-fields-heading {
+	color: $color__link;
+	font-size: 15px;
+	font-weight: bold;
+	margin: 0 0 10px;
+}
+
+.postbox h4.pngx-fields-heading:after {
+	background: linear-gradient(to right, rgba(0, 0, 0, 1) 1%, rgba(155, 155, 155, 1) 28%, rgba(255, 255, 255, 1) 85%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+	content: "";
+	display: block;
+	height: 1px;
+	margin-top: 10px;
+}
 
 /**
 * Image Field
@@ -22,12 +65,62 @@
 	border: 3px dashed #000000;
 }
 
+/* License Button
+------------------------------------------------------------ */
+.pngx-license-button-act {
+	background: $color__link;
+	border: 1px solid $color__link;
+	color: $white;
+}
+
+.pngx-license-button-act:hover {
+	background: #1e4164;
+	cursor: pointer;
+}
+
+.pngx-license-button-det {
+	background: $color__sucess;
+	border: 1px solid $color__sucess;
+	color: $white;
+}
+
+.pngx-license-button-det:hover {
+	background: $color__link;
+	cursor: pointer;
+}
+
+/**
+* Text Input
+***************************************************/
+.pngx-wrapper input.regular-text {
+	width: auto;
+}
+
+/**
+* Textarea / Wysiwyg
+***************************************************/
+.pngx-meta-field textarea,
+.pngx-meta-field.field-wysiwyg {
+	width: 100%;
+}
+
+/**
+* Submit
+***************************************************/
+.pngx-wrapper p.submit {
+	overflow: hidden;
+}
+
+.pngx-wrapper.wp-core-ui .button-primary {
+	float: right;
+}
+
 /**
 * Utility
 ***************************************************/
-/*.wp-admin.post-type-cctor_coupon .wrap h2,*/
-.wp-admin.post-type-cctor_coupon.wrap table,
+/*.wp-admin.post-type-pngx_coupon .wrap h2,*/
+.wp-admin.post-type-pngx_coupon.wrap table,
 .pngx-js .javascript-conflict,
-#wp-cctor_description-media-buttons a:not(:first-child) {
+#wp-pngx_description-media-buttons a:not(:first-child) {
 	display: none;
 }

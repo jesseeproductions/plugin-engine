@@ -3,16 +3,16 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	die( '-1' );
 }
-if ( class_exists( 'Pngx__Admin__Field__Text' ) ) {
+if ( class_exists( 'Pngx__Admin__Field__Number' ) ) {
 	return;
 }
 
 
 /**
- * Class Pngx__Admin__Field__Text
- * Text Field
+ * Class Pngx__Admin__Field__Number
+ * Number Field
  */
-class Pngx__Admin__Field__Text {
+class Pngx__Admin__Field__Number {
 
 	public static function display( $field = array(), $options = array(), $options_id = null, $meta = null ) {
 
@@ -28,16 +28,10 @@ class Pngx__Admin__Field__Text {
 		$class = isset( $field['class'] ) ? $field['class'] : '';
 		$std   = isset( $field['std'] ) ? $field['std'] : '';
 
-		if ( isset( $field['alert'] ) && '' != $field['alert'] && 1 == cctor_options( $field['condition'] ) ) {
-			echo '<div class="pngx-error">&nbsp;&nbsp;' . $field['alert'] . '</div>';
-		}
-
-		echo '<input type="text" id="' . esc_attr( $field['id'] ) . '" class="regular-text ' . esc_attr( $class ) . '"  name="' . esc_attr( $name ) . '" placeholder="' . esc_attr( $std ) . '" value="' . esc_attr( $value ) . '" size="' . absint( $size ) . '" />';
+		echo '<input type="number" class="regular-number ' . esc_attr( $class ) . '"  id="' . esc_attr( $field['id'] ) . '" name="' . esc_attr( $name ) . '" placeholder="' . esc_attr( $std ) . '" value="' . esc_attr( $value ) . '" min="0" max="2000" size="' . absint( $size ) . '" style="width:60px; padding-right:0; />';
 
 		if ( "" != $field['desc'] ) {
 			echo '<br /><span class="description">' . $field['desc'] . '</span>';
 		}
-
 	}
-
 }

@@ -1,17 +1,6 @@
 /* ==========================================================================
    Options CSS
    ========================================================================== */
-.pngx-wrapper input.regular-text {
-	width: auto;
-}
-
-.pngx-wrapper p.submit {
-	overflow: hidden;
-}
-
-.pngx-wrapper.wp-core-ui .button-primary {
-	float: right;
-}
 
 /*hides empty row and support label*/
 #help .form-table th,
@@ -22,11 +11,13 @@
 .pngx-wrapper .pngx-tabs-panel.ui-tabs-panel.ui-widget-content h4 {
 	margin: 0 0 0 -10px;
 }
+
 @include media($tablet) {
 	.pngx-wrapper .pngx-tabs-panel.ui-tabs-panel.ui-widget-content h4 {
 		margin: 0 0 0 0px;
 	}
 }
+
 .pngx-wrapper .pngx-tabs-panel.ui-tabs-panel.ui-widget-content .pngx-section-help-slideout h4 {
 	margin: 0;
 }

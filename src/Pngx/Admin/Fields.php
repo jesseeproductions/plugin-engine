@@ -112,11 +112,11 @@ class Pngx__Admin__Fields {
 
 				break;
 
-			//case 'help':
+			case 'hidden':
 
-				//Pngx__Admin__Field__Help::display( $field, $options, $options_id, $meta );
+				Pngx__Admin__Field__Hidden::display( $field, $options, $options_id, $meta );
 
-				//break;
+				break;
 
 			case 'image':
 
@@ -126,7 +126,7 @@ class Pngx__Admin__Fields {
 
 			case 'license':
 
-				Pngx__Admin__Field__License::display( $field, $options, $options_id, $meta );
+				Pngx__Admin__Field__License::display( $field, $options_id );
 
 
 				break;
@@ -140,6 +140,12 @@ class Pngx__Admin__Fields {
 			case 'message':
 
 				Pngx__Admin__Field__Message::display( $field, $options, $options_id, $meta );
+
+				break;
+
+			case 'number':
+
+				Pngx__Admin__Field__Number::display( $field, $options, $options_id, $meta );
 
 				break;
 
@@ -172,6 +178,12 @@ class Pngx__Admin__Fields {
 			case 'url':
 
 				Pngx__Admin__Field__Url::display( $field, $options, $options_id, $meta );
+
+				break;
+
+			case 'wysiwyg':
+
+				Pngx__Admin__Field__Wysiwyg::display( $field, $options, $options_id, $meta );
 
 				break;
 		}

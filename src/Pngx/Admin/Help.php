@@ -207,7 +207,7 @@ class Pngx__Admin__Help {
 			case 'links':
 				$pro = '';
 				if ( isset( $help_field['pro'] ) ) {
-					$pro = '<sup class="pro-help-sup">' . esc_html( $help_field['pro'] ) . '</sup>';
+					$pro = '<sup class="promote-sup">' . esc_html( $help_field['pro'] ) . '</sup>';
 				}
 				?>
 				<li><a class="pngx-support" target="_blank"

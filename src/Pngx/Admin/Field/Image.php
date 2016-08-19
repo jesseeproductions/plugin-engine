@@ -37,8 +37,8 @@ class Pngx__Admin__Field__Image {
 
 		echo $imagedisplay . '<br>';
 
-		echo '<input class="pngx-upload-image ' . esc_attr( $class ) . '"  type="hidden" id="' . esc_attr( $field['id'] ) . '" name="' . esc_attr( $name ) . '" value="' . absint( $value ) . '" />';
-		echo '<input id="' . esc_attr( $field['id'] ) . '" class="pngx-image-button" type="button" value="Upload Image" />';
+		echo '<input class="pngx-upload-image ' . esc_attr( $class ) . '"  type="hidden" id="' . esc_attr( $field['id'] ) . '" name="' . esc_attr( $name ) . '" value="' . esc_attr( $value ) . '" />';
+		echo '<button id="' . esc_attr( $field['id'] ) . '" class="pngx-image-button">Upload Image</button>';
 		echo '<small> <a href="#" id="' . esc_attr( $field['id'] ) . '" class="pngx-clear-image">Remove Image</a></small>';
 
 		if ( "" != $field['desc'] ) {

@@ -42,7 +42,7 @@ class Pngx__Admin__Field__Select {
 
 		$class = isset( $field['class'] ) ? $field['class'] : '';
 
-		echo '<select class="select ' . esc_attr( $class ) . '" name="' . esc_attr( $name ) . '">';
+		echo '<select id="' . esc_attr( $field['id'] ) . '" class="select ' . esc_attr( $class ) . '" name="' . esc_attr( $name ) . '">';
 
 		foreach ( $field['choices'] as $value => $label ) {
 

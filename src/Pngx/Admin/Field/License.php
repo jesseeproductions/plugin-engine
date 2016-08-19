@@ -14,7 +14,7 @@ if ( class_exists( 'Pngx__Admin__Field__License' ) ) {
  */
 class Pngx__Admin__Field__License {
 
-	public static function display( $field = array(), $options = array(), $options_id = null ) {
+	public static function display( $field = array(), $options_id = null ) {
 
 		if ( isset( $options_id ) && ! empty( $options_id ) ) {
 			$name         = $options_id;
