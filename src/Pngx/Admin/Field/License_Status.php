@@ -21,9 +21,7 @@ class Pngx__Admin__Field__License_Status {
 		$license_info   = get_option( $license );
 
 		if ( isset( $license_info['expires'] ) ) { // Only Display Expiration if Date
-
 			$expiration_date = strtotime( $license_info['expires'] );
-			//Use WordPress Date Format to Display
 			$expiration_date = date( get_option( 'date_format' ), $expiration_date );
 			$expiration_msg  = sprintf( __( ' and Expires on %s', 'coupon-creator' ), esc_attr( $expiration_date ) );
 		}

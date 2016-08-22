@@ -11,6 +11,11 @@ if ( class_exists( 'Pngx__Admin__Meta' ) ) {
 /**
  * Class Pngx__Admin__Meta
  * Create, Save, Display Custom Fields for a CPT
+ *
+ * @property array  post_type
+ * @property  tabs
+ * @property string user_capability
+ * @property  fields
  */
 class Pngx__Admin__Meta {
 
@@ -40,7 +45,7 @@ class Pngx__Admin__Meta {
 		add_action( 'save_post', array( __CLASS__, 'save_meta' ), 10, 2 );
 
 		//JS Error Check
-		add_action( 'cctor_meta_message', array( __CLASS__, 'get_js_error_check_msg' ) );
+		add_action( 'pngx_meta_message', array( __CLASS__, 'get_js_error_check_msg' ) );
 	}
 
 	/**
@@ -55,6 +60,25 @@ class Pngx__Admin__Meta {
 		$js_msg = '<div class="javascript-conflict pngx-error"><p>' . sprintf( __( 'There maybe a javascript conflict preventing some features from working.  <a href="%s" target="_blank" >Please check this guide to narrow down the cause.</a>', 'plugin-engine' ), esc_url( $js_troubleshoot_url ) ) . '</p></div>';
 
 		return $js_msg;
+
+	}
+
+	/*
+	* Set Current Screen Variables
+	*/
+	protected static function get_screen_variables() {
+
+		global $pagenow, $typenow;
+		$current_screen['pagenow'] = $pagenow;
+		$current_screen['post']    = isset( $_GET['post'] ) ? $_GET['post'] : '';
+		$current_screen['type']    = $typenow;
+
+		if ( empty( $current_screen['type'] ) && ! empty( $current_screen['type'] ) ) {
+			$current_screen['post_obj'] = get_post( $_GET['post'] );
+			$current_screen['type']     = $current_screen['post_obj']->post_type;
+		}
+
+		return $current_screen;
 
 	}
 
@@ -138,16 +162,16 @@ class Pngx__Admin__Meta {
 
 		//Sample Field Array
 		$fields[ $prefix . 'heading_deal' ] = array(
-             'id'        => $prefix . 'heading_deal', //id
-             'title'     => '', //Label
-             'desc'      => __( 'Coupon Deal', 'plugin-engine' ),//description or header
-             'type'      => 'heading',//field type
-             'section'   => 'plugin_engine_meta_box',//meta box
-             'tab'       => 'content',//tab
-             'condition' => 'pngx-img',//optional condition used in some fields
-             'class'     => 'pngx-img',//optional field class
-             'wrapclass' => 'pngx-img',//optional wrap css class
-             'toggle'    => array()//field toggle infomation based on value or selection
+			'id'        => $prefix . 'heading_deal', //id
+			'title'     => '', //Label
+			'desc'      => __( 'Coupon Deal', 'plugin-engine' ),//description or header
+			'type'      => 'heading',//field type
+			'section'   => 'plugin_engine_meta_box',//meta box
+			'tab'       => 'content',//tab
+			'condition' => 'pngx-img',//optional condition used in some fields
+			'class'     => 'pngx-img',//optional field class
+			'wrapclass' => 'pngx-img',//optional wrap css class
+			'toggle'    => array()//field toggle infomation based on value or selection
 		);
 
 		$this->fields = $fields;

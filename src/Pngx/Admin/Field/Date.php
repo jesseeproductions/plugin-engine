@@ -33,27 +33,16 @@ class Pngx__Admin__Field__Date {
 			echo '<br><span class="description">' . $field['desc'] . '</span>';
 		}
 
-		//Blog Time According to WordPress
-		$todays_date = "";
 		if ( isset( $field['condition'] ) && 'show_current_date' == $field['condition'] ) {
-			$blogtime = current_time( 'mysql' );
 
-			list( $today_year, $today_month, $today_day, $hour, $minute, $second ) = preg_split( '([^0-9])', $blogtime );
+			$date = Pngx__Date::display_date( $field['format'] );
 
-			if ( 1 == $field['format'] ) {
-				$today_first  = $today_day;
-				$today_second = $today_month;
-			} else {
-				$today_first  = $today_month;
-				$today_second = $today_day;
+			if ( $date ) {
+				echo '<br><span class="description">' . __( 'Today\'s Date is ', 'plugin-engine' ) . $date . '</span>';
 			}
 
-			$todays_date = '<br><span class="description">' . __( 'Today\'s Date is ', 'plugin-engine' ) . $today_first . '/' . $today_second . '/' . $today_year . '</span>';
 		}
 
-		if ( '' != $todays_date ) {
-			echo $todays_date;
-		}
 
 	}
 
