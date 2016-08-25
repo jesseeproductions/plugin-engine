@@ -55,14 +55,14 @@ class Pngx__Sanitize {
 		$this->option = $option;
 
 		//Return Sanitized Input only if a method exists to sanitize the field type
-		if ( method_exists( $this, 'cctor_sanitize_' . $this->type ) && is_callable( array(
+		if ( method_exists( $this, 'sanitize_' . $this->type ) && is_callable( array(
 				$this,
-				'cctor_sanitize_' . $this->type
+				'sanitize_' . $this->type
 			) )
 		) {
 
 			//result
-			$this->result = $this->{'cctor_sanitize_' . $this->type}();
+			$this->result = $this->{'sanitize_' . $this->type}();
 
 		} else {
 
@@ -77,9 +77,9 @@ class Pngx__Sanitize {
 	* License Key Sanitize
 	* @version 2.1
 	*/
-	private function cctor_sanitize_license() {
+	private function sanitize_license() {
 
-		return $this->cctor_sanitize_text( trim( $this->input ) );
+		return $this->sanitize_text( trim( $this->input ) );
 
 	}
 
@@ -87,9 +87,9 @@ class Pngx__Sanitize {
 	* License Status Sanitize
 	* @version 2.1
 	*/
-	private function cctor_sanitize_license_status() {
+	private function sanitize_license_status() {
 
-		return $this->cctor_sanitize_text( trim( $this->input ) );
+		return $this->sanitize_text( trim( $this->input ) );
 
 	}
 
@@ -102,7 +102,7 @@ class Pngx__Sanitize {
 	 *
 	 * @return string         Sanitized version of the the text
 	 */
-	private function cctor_sanitize_text() {
+	private function sanitize_text() {
 
 		return sanitize_text_field( $this->input );
 
@@ -112,7 +112,7 @@ class Pngx__Sanitize {
 	* Sanitize Textarea
 	* @version 2.1
 	*/
-	private function cctor_sanitize_textarea() {
+	private function sanitize_textarea() {
 
 		if ( $this->option['class'] != "code" ) {
 
@@ -130,7 +130,7 @@ class Pngx__Sanitize {
 	* Wysiwyg Sanitize
 	* @version 2.1
 	*/
-	private function cctor_sanitize_wysiwyg() {
+	private function sanitize_wysiwyg() {
 
 		if ( current_user_can( 'unfiltered_html' ) ) {
 			$input = $this->input;
@@ -147,7 +147,7 @@ class Pngx__Sanitize {
 	* Sanitize urls
 	* @version 2.1
 	*/
-	private function cctor_sanitize_url() {
+	private function sanitize_url() {
 
 		return esc_url( $this->input );
 
@@ -157,9 +157,9 @@ class Pngx__Sanitize {
 	* Select Sanitize
 	* @version 2.1
 	*/
-	private function cctor_sanitize_select() {
+	private function sanitize_select() {
 
-		return $this->cctor_sanitize_enum( $this->input, $this->option );
+		return $this->sanitize_enum( $this->input, $this->option );
 
 	}
 
@@ -167,9 +167,9 @@ class Pngx__Sanitize {
 	* Select Page Sanitize
 	* @version 2.1
 	*/
-	private function cctor_sanitize_selectpage() {
+	private function sanitize_selectpage() {
 
-		return $this->cctor_sanitize_enum( $this->input, $this->option );
+		return $this->sanitize_enum( $this->input, $this->option );
 
 	}
 
@@ -177,9 +177,9 @@ class Pngx__Sanitize {
 	* Radio Sanitize
 	* @version 2.1
 	*/
-	private function cctor_sanitize_radio() {
+	private function sanitize_radio() {
 
-		return $this->cctor_sanitize_enum( $this->input, $this->option );
+		return $this->sanitize_enum( $this->input, $this->option );
 
 	}
 
@@ -187,7 +187,7 @@ class Pngx__Sanitize {
 	* Select and Radio Sanitize
 	* @version 2.1
 	*/
-	private function cctor_sanitize_enum() {
+	private function sanitize_enum() {
 
 		if ( array_key_exists( $this->input, $this->option['choices'] ) ) {
 			$this->input = sanitize_text_field( $this->input );
@@ -201,7 +201,7 @@ class Pngx__Sanitize {
 	* Checkbox Sanitize
 	* @version 2.1
 	*/
-	private function cctor_sanitize_checkbox() {
+	private function sanitize_checkbox() {
 		if ( $this->input ) {
 			$this->input = '1';
 		} else {
@@ -215,7 +215,7 @@ class Pngx__Sanitize {
 	* Sanitize Date
 	* @version 2.1
 	*/
-	private function cctor_sanitize_date() {
+	private function sanitize_date() {
 
 		$this->input = preg_replace( "([^0-9/])", "", $this->input );
 
@@ -226,7 +226,7 @@ class Pngx__Sanitize {
 	* Color Sanitize
 	* @version 2.1
 	*/
-	private function cctor_sanitize_color() {
+	private function sanitize_color() {
 
 		if ( $this->cctor_validate_hex( $this->input ) ) {
 			return $this->input;
@@ -256,7 +256,7 @@ class Pngx__Sanitize {
 	* Image ID Sanitize
 	* @version 2.1
 	*/
-	private function cctor_sanitize_image() {
+	private function sanitize_image() {
 
 		return $this->sanitize_absint( $this->input );
 
@@ -266,7 +266,7 @@ class Pngx__Sanitize {
 	* Pro Image ID Sanitize
 	* @version 2.1
 	*/
-	private function cctor_sanitize_proimage() {
+	private function sanitize_proimage() {
 
 		return $this->sanitize_absint( $this->input );
 
@@ -276,7 +276,7 @@ class Pngx__Sanitize {
 	* Dimensions ID Sanitize
 	* @version 2.1
 	*/
-	private function cctor_sanitize_dimensions() {
+	private function sanitize_dimensions() {
 
 		return $this->sanitize_absint( $this->input );
 
@@ -312,11 +312,11 @@ class Pngx__Sanitize {
 	* Sanitize Google Analytics
 	* @version 2.1
 	*/
-	private function cctor_sanitize_ga_analytics() {
+	private function sanitize_ga_analytics() {
 
 		$this->input = trim( esc_html( $this->input ) );
 		// en dash to minus, prevents issue with code copied from web with "fancy" dash
-		$this->input = str_replace( '–', '-', $this->input );
+		$this->input = str_replace( 'ï¿½', '-', $this->input );
 
 		if ( ! preg_match( '|^UA-\d{4,}-\d+$|', $this->input ) ) {
 

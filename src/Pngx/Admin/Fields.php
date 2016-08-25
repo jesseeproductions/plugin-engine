@@ -66,8 +66,7 @@ class Pngx__Admin__Fields {
 	public static function flush_permalinks() {
 
 		if ( true == get_option( 'pngx_permalink_change' ) ) {
-			log_me( 'flush_permalinks' );
-			//Coupon_Creator_Plugin::cctor_register_post_types();
+
 			flush_rewrite_rules();
 			update_option( 'pngx_permalink_flush', date( 'l jS \of F Y h:i:s A' ) );
 			update_option( 'pngx_permalink_change', false );
@@ -192,7 +191,7 @@ class Pngx__Admin__Fields {
 			/**
 			 * Filter the Plugin Engine Fields for Meta and Options
 			 *
-			 * @param array $options current coupon field being displayed.
+			 * @param array $options current field being displayed.
 			 * @param array $field   current value of option saved.
 			 */
 			echo apply_filters( 'pngx_field_types', $field, $options, $options_id, $meta, $wp_version );

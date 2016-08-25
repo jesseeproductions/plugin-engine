@@ -40,20 +40,20 @@ class Pngx__Admin__Help {
 		$this->fields['header_video_guides_content'] = array(  // unique id
 			'section' => '', // options tab to place help content
 			'tab'     => 'content', // meta tab to place help content
-			'text'    => 'Coupon Content', // title for content section on help tab
+			'text'    => 'Content', // title for content section on help tab
 			'type'    => 'heading' //field type heading only used in opening
 		);
-		$this->fields['video_creating_coupon']       = array( // unique id
+		$this->fields['video_creating']       = array( // unique id
 			'section'  => '', //option tab to place help
 			'tab'      => 'content', //meta tab to place help
-			'text'     => 'Overview of Creating a Coupon', //descriptive text for help
+			'text'     => 'Overview of Creating', //descriptive text for help
 			'video_id' => 'I1v9HxdIsSE', //Youtube Video ID
 			'type'     => 'video' //field type video
 		);
 		$this->fields['link_pro_hide_deal']           = array( // unique id
 			'section' => '', //option tab to place help
 			'tab'     => 'content', //meta tab to place help
-			'text'    => 'How to Hide the Deal in any Coupon View',//descriptive text for help
+			'text'    => 'Descriptive Text',//descriptive text for help
 			'link'    => 'http://cctor.link/Ihoro', //helo link
 			'pro'     => 'Pro', //Add Pro superscript for pro only feature
 			'type'    => 'links' //field type links

@@ -79,7 +79,7 @@ class Pngx__Admin__Options {
 			array( $this, 'display_fields' ) // function
 		);
 
-		//add_action( 'admin_print_scripts-' . $admin_page,  array( 'Pngx__Admin__Assets', 'load_assets' ) );
+		add_action( 'admin_print_scripts-' . $admin_page, array( 'Pngx__Admin__Assets', 'load_assets' ) );
 
 	}
 
@@ -151,7 +151,10 @@ class Pngx__Admin__Options {
 			$this->checkboxes[] = $field_args['id'];
 		}
 
-		add_settings_field( $field_args['id'], $field_args['title'], array( $this, 'display_field' ), $this->options_slug, $field_args['section'], $field_args );
+		add_settings_field( $field_args['id'], $field_args['title'], array(
+			$this,
+			'display_field'
+		), $this->options_slug, $field_args['section'], $field_args );
 	}
 
 	/*
@@ -163,7 +166,7 @@ class Pngx__Admin__Options {
 		$fields['header_expiration'] = array(
 			'section' => 'defaults',
 			'title'   => '',
-			'desc'    => __( 'Heading', 'coupon-creator' ),
+			'desc'    => __( 'Heading', 'plugin-engine' ),
 			'type'    => 'heading'
 		);
 		$fields['plugin_text_field'] = array(
@@ -183,11 +186,7 @@ class Pngx__Admin__Options {
 	* Validate Options
 	*/
 	public function validate_options( $input ) {
-		$options = get_option( $this->options_id );
-		//log_me( 'validate' );
-		//log_me( $options );
-		//log_me( $input );
-		//log_me( $_POST );
+
 		$clean = '';
 
 		//if Reset is Checked then delete all options
@@ -207,7 +206,7 @@ class Pngx__Admin__Options {
 
 				if ( isset( $option['class'] ) ) {
 					// Change Permalink Class Options to Lowercase
-					if ( $option['class'] == 'permalink' ) {
+					if ( 'permalink' == $option['class'] ) {
 						$input[ $id ] = str_replace( " ", "-", strtolower( trim( $input[ $id ] ) ) );
 						//if option is new then set to flush permalinks
 						if ( $options[ $id ] != $input[ $id ] ) {
@@ -217,14 +216,14 @@ class Pngx__Admin__Options {
 					}
 				}
 				//Prevent Placeholder From Saving in Option for Text Areas
-				if ( $option['type'] == "textarea" ) {
+				if ( "textarea" == $option['type'] ) {
 					if ( $input[ $id ] == $option['std'] ) {
 						$input[ $id ] = false;
 					}
 				}
 
 				// Create Separate License Option and Status
-				if ( $option['type'] == 'license' && isset( $input[ $id ] ) ) {
+				if ( 'license' == $option['type'] && isset( $input[ $id ] ) ) {
 
 					//Send Input to Sanitize Class, will return sanitized input or no input if no sanitization method
 					$sanitize = new Pngx__Sanitize( $option['type'], $input[ $id ], $option );
@@ -263,20 +262,18 @@ class Pngx__Admin__Options {
 				}
 
 				// Sanitization Filter for each Option Type
-				if ( isset( $input[ $id ] ) && $option['type'] != 'license' && $option['type'] != 'license_status' ) {
+				if ( isset( $input[ $id ] ) && 'license' != $option['type'] && 'license_status' != $option['type'] ) {
 
 					//Send Input to Sanitize Class, will return sanitized input or no input if no sanitization method
 					$sanitize = new Pngx__Sanitize( $option['type'], $input[ $id ], $option );
-					//log_me( 'are we saving?' );
-					//log_me( $sanitize );
+
 					//Set Sanitized Input in Array
 					$clean[ $id ] = $sanitize->result;
 
 				}
 
 			}
-			//log_me( '$clean' );
-			//log_me( $clean );
+
 			return $clean;
 		}
 
@@ -304,7 +301,7 @@ class Pngx__Admin__Options {
 		$tab_data = array(
 			'tabs'           => $tabs_array,
 			'update_message' => get_settings_errors(),
-			'id' => 'pngx-options',
+			'id'             => 'pngx-options',
 			'wp_version'     => $wp_version,
 		);
 
@@ -357,7 +354,9 @@ class Pngx__Admin__Options {
 	 */
 	public static function display_options_header( $slug ) {
 
-		echo '<h1>Plugin Engine Options</h1>';
+		if ( 'plugin-engine-options' == $slug ) {
+			echo '<h1>Plugin Engine Options</h1>';
+		}
 
 	}
 
@@ -365,7 +364,7 @@ class Pngx__Admin__Options {
 	 * Option Footer Fields
 	 *
 	 */
-	public static function display_options_footer( $slug ) {
+	public static function display_options_footer() {
 
 		echo '<p style="text-align:right;">&copy; ' . date( "Y" ) . ' Jessee Productions, LLC</p>';
 
@@ -379,9 +378,7 @@ class Pngx__Admin__Options {
 		global $wp_version;
 
 		$options = get_option( $this->options_id );
-		//log_me( 'display_field' );
-		//log_me( $options );
-		//log_me( $field );
+
 		if ( ! isset( $options[ $field['id'] ] ) && 'checkbox' != $field['type'] ) {
 			$options[ $field['id'] ] = $field['std'];
 		} elseif ( ! isset( $options[ $field['id'] ] ) ) {
@@ -406,10 +403,6 @@ class Pngx__Admin__Options {
 
 		$default_options = array();
 
-		//log_me('fields');
-		//log_me($this->fields);
-		//log_me($this->options_id);
-
 		if ( is_array( $this->fields ) ) {
 			foreach ( $this->fields as $id => $option ) {
 
@@ -423,7 +416,7 @@ class Pngx__Admin__Options {
 				}
 
 			}
-			//log_me('saving defaults?');
+
 			update_option( $this->options_id, $default_options );
 		}
 

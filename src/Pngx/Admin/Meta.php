@@ -13,9 +13,7 @@ if ( class_exists( 'Pngx__Admin__Meta' ) ) {
  * Create, Save, Display Custom Fields for a CPT
  *
  * @property array  post_type
- * @property  tabs
  * @property string user_capability
- * @property  fields
  */
 class Pngx__Admin__Meta {
 
@@ -89,7 +87,7 @@ class Pngx__Admin__Meta {
 
 		$post_type[] = 'pngx';
 
-		$this->post_type = $post_type;
+		self::$post_type = $post_type;
 
 	}
 
@@ -109,7 +107,7 @@ class Pngx__Admin__Meta {
 
 		$user_capability = 'edit_post';
 
-		$this->user_capability = $user_capability;
+		self::$user_capability = $user_capability;
 
 	}
 
@@ -163,8 +161,8 @@ class Pngx__Admin__Meta {
 		//Sample Field Array
 		$fields[ $prefix . 'heading_deal' ] = array(
 			'id'        => $prefix . 'heading_deal', //id
-			'title'     => '', //Label
-			'desc'      => __( 'Coupon Deal', 'plugin-engine' ),//description or header
+			'title'     => __( 'PNGX Field Title', 'plugin-engine' ), //Label
+			'desc'      => __( 'PNGX Field Description', 'plugin-engine' ),//description or header
 			'type'      => 'heading',//field type
 			'section'   => 'plugin_engine_meta_box',//meta box
 			'tab'       => 'content',//tab
@@ -317,16 +315,6 @@ class Pngx__Admin__Meta {
 		//Verify Nonce
 		if ( isset( $_POST['pngx_nonce'] ) && ! wp_verify_nonce( $_POST['pngx_nonce'], 'pngx_save_fields' ) && ( isset( $_POST['_inline_edit'] ) && ! wp_verify_nonce( $_POST['_inline_edit'], 'inlineeditnonce' ) ) ) {
 			return;
-		}
-
-		// Save data
-
-		//todo this is used to save the ignore expiration with the new expriation options
-		//Expiration Option Auto Check Ignore Input
-		if ( isset( $_POST['cctor_ignore_expiration'] ) && 1 == $_POST['cctor_expiration_option'] ) {
-			$_POST['cctor_ignore_expiration'] = 'on';
-		} elseif ( isset( $_POST['cctor_ignore_expiration'] ) && 'on' == $_POST['cctor_ignore_expiration'] && 1 != $_POST['cctor_expiration_option'] ) {
-			unset( $_POST['cctor_ignore_expiration'] );
 		}
 
 		/**

@@ -18,7 +18,6 @@ class Pngx__Main {
 
 	protected $plugin_context;
 	protected $plugin_context_class;
-	//protected $doing_ajax = false;
 
 	public $plugin_dir;
 	public $plugin_path;
@@ -48,11 +47,8 @@ class Pngx__Main {
 		$this->load_text_domain( 'plugin-engine', basename( dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) ) . '/plugin-engine/languages/' );
 
 		$this->init_autoloading();
-
-		$this->init_libraries();
 		$this->add_hooks();
 
-		//$this->doing_ajax = defined( 'DOING_AJAX' ) && DOING_AJAX;
 	}
 
 	/**
@@ -82,18 +78,6 @@ class Pngx__Main {
 	 */
 	public function context_class() {
 		return $this->plugin_context_class;
-	}
-
-	/**
-	 * initializes all required libraries
-	 */
-	public function init_libraries() {
-		//Tribe__Debug::instance();
-		//Tribe__Settings_Manager::instance();
-
-		//require_once $this->plugin_path . 'src/functions/template-tags/general.php';
-		//require_once $this->plugin_path . 'src/functions/template-tags/date.php';
-
 	}
 
 	/**
@@ -151,90 +135,9 @@ class Pngx__Main {
 	 * Returns the post types registered with plugin engine
 	 */
 	public static function get_post_types() {
-		// we default the post type array to empty in tribe-common. Plugins like TEC add to it
+		// we default the post type array to empty in plugin engine. Plugins like TEC add to it
 		return apply_filters( 'pngx_post_types', array() );
-	}
 
-	/**
-	 * Insert an array after a specified key within another array.
-	 *
-	 * @param $key
-	 * @param $source_array
-	 * @param $insert_array
-	 *
-	 * @return array
-	 *
-	 */
-	public static function array_insert_after_key( $key, $source_array, $insert_array ) {
-		/*if ( array_key_exists( $key, $source_array ) ) {
-			$position     = array_search( $key, array_keys( $source_array ) ) + 1;
-			$source_array = array_slice( $source_array, 0, $position, true ) + $insert_array + array_slice( $source_array, $position, null, true );
-		} else {
-			// If no key is found, then add it to the end of the array.
-			$source_array += $insert_array;
-		}
-
-		return $source_array;*/
-	}
-
-	/**
-	 * Insert an array immediately before a specified key within another array.
-	 *
-	 * @param $key
-	 * @param $source_array
-	 * @param $insert_array
-	 *
-	 * @return array
-	 */
-	public static function array_insert_before_key( $key, $source_array, $insert_array ) {
-		/*if ( array_key_exists( $key, $source_array ) ) {
-			$position     = array_search( $key, array_keys( $source_array ) );
-			$source_array = array_slice( $source_array, 0, $position, true ) + $insert_array + array_slice( $source_array, $position, null, true );
-		} else {
-			// If no key is found, then add it to the end of the array.
-			$source_array += $insert_array;
-		}
-
-		return $source_array;*/
-	}
-
-	/**
-	 * Helper function for getting Post Id. Accepts null or a post id. If no $post object exists, returns false to
-	 * avoid a PHP NOTICE
-	 *
-	 * @param int $post (optional)
-	 *
-	 * @return int post ID or False
-	 */
-	public static function post_id_helper( $post = null ) {
-		/*if ( ! is_null( $post ) && is_numeric( $post ) > 0 ) {
-			return (int) $post;
-		} elseif ( is_object( $post ) && ! empty( $post->ID ) ) {
-			return (int) $post->ID;
-		} else {
-			if ( ! empty( $GLOBALS['post'] ) && $GLOBALS['post'] instanceof WP_Post ) {
-				return get_the_ID();
-			} else {
-				return false;
-			}
-		}*/
-	}
-
-	/**
-	 * Helper function to indicate whether the current execution context is AJAX
-	 *
-	 * This method exists to allow us test code that behaves differently depending on the execution
-	 * context.
-	 *
-	 * @since 4.0
-	 * @return boolean
-	 */
-	public function doing_ajax( $doing_ajax = null ) {
-		/*if ( ! is_null( $doing_ajax ) ) {
-			$this->doing_ajax = $doing_ajax;
-		}
-
-		return $this->doing_ajax;*/
 	}
 
 	/**

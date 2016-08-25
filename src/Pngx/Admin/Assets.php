@@ -42,11 +42,18 @@ class Pngx__Admin__Assets {
 	}
 
 	/*
+	* Enqueue Plugin Engine Assets
+	*/
+	public static function load_assets( ) {
+
+	}
+
+	/*
 	* Detect if External Asset is Available
 	*/
 	public static function detect_external_asset( $file ) {
 
-		$file_headers = @get_headers( $file );
+		$file_headers = get_headers( $file );
 		if ( ! $file_headers || 'HTTP/1.0 404 Not Found' == $file_headers[0] ) {
 			return false;
 		}
