@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 /**
- * Coupon Admin Class
+ * Plugin Engine Admin Class
  *
  *
  */

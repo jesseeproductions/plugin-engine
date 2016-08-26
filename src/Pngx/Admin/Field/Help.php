@@ -18,16 +18,16 @@ class Pngx__Admin__Field__Help {
 
 		if ( isset( $options_id ) && ! empty( $options_id ) ) {
 			$tab       = $field['section'];
-			$screen_id = 'plugin_engine_options_coupon-options';
+			$screen_id = 'plugin_engine_options_plugin-engine-options';
 		} else {
 			$tab       = $field['tab'];
 			$screen_id = '';
 		}
 
-		if ( 'cctor_all_help' == $field['id'] ) {
+		if ( 'pmgx_all_help' == $field['id'] ) {
 			$help_class = new Pngx__Admin__Help();
 			$help_class->display_help( 'all', false, 'pngx' );
-			//echo Cctor__Coupon__Admin__Help::get_cctor_support_core_contact();
+			//echo Pngx__Admin__Help::get_cctor_support_core_contact();
 
 			//Return as this is only showing all the help documents
 			return;

@@ -62,7 +62,7 @@ class Pngx__Autoloader {
 	 * An arrays of arrays each containing absolute paths.
 	 *
 	 * Paths are stored trimming any trailing `/`.
-	 * E.g. `/var/www/cctor/wp-content/plugins/coupon-creator/src/Pngx`
+	 * E.g. `/var/www/public/wp-content/plugins/coupon-creator/src/Pngx`
 	 *
 	 * @var string[][]
 	 */

@@ -60,11 +60,6 @@
 	max-width: 94%;
 }
 
-#image_coupon .pngx-default-image,
-#image_coupon .pngx-image {
-	border: 3px dashed #000000;
-}
-
 /* License Button
 ------------------------------------------------------------ */
 .pngx-license-button-act {
@@ -118,8 +113,6 @@
 /**
 * Utility
 ***************************************************/
-/*.wp-admin.post-type-pngx_coupon .wrap h2,*/
-.wp-admin.post-type-pngx_coupon.wrap table,
 .pngx-js .javascript-conflict,
 #wp-pngx_description-media-buttons a:not(:first-child) {
 	display: none;

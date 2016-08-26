@@ -22,13 +22,9 @@ class Pngx__Admin__Field__License {
 			$license_info = get_option( $license );
 			$value        = isset( $license_info['key'] ) ? $license_info['key'] : '';
 
-			$size  = isset( $field['size'] ) ? $field['size'] : 30;
-			$class = isset( $field['class'] ) ? $field['class'] : '';
-			$std   = isset( $field['std'] ) ? $field['std'] : '';
-
-			if ( isset( $field['alert'] ) && '' != $field['alert'] && 1 == cctor_options( $field['condition'] ) ) {
-				echo '<div class="pngx-error">&nbsp;&nbsp;' . $field['alert'] . '</div>';
-			}
+			$size      = isset( $field['size'] ) ? $field['size'] : 30;
+			$class     = isset( $field['class'] ) ? $field['class'] : '';
+			$std       = isset( $field['std'] ) ? $field['std'] : '';
 
 			echo '<input type="text" class="license-field ' . esc_attr( $class ) . '"  id="' . esc_attr( $field['id'] ) . '" name="' . esc_attr( $name ) . '" placeholder="' . esc_attr( $std ) . '" value="' . esc_attr( $value ) . '" size="' . absint( $size ) . '" />';
 

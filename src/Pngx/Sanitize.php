@@ -228,7 +228,7 @@ class Pngx__Sanitize {
 	*/
 	private function sanitize_color() {
 
-		if ( $this->cctor_validate_hex( $this->input ) ) {
+		if ( $this->validate_hex( $this->input ) ) {
 			return $this->input;
 		}
 	}
@@ -237,7 +237,7 @@ class Pngx__Sanitize {
 	* Hex Sanitize
 	* @version 2.1
 	*/
-	private function cctor_validate_hex( $hex ) {
+	private function validate_hex( $hex ) {
 		$hex = trim( $hex );
 		if ( 0 === strpos( $hex, '#' ) ) {
 			$hex = substr( $hex, 1 );

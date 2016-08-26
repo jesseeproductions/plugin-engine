@@ -67,7 +67,10 @@ class Pngx__Admin__Fields {
 
 		if ( true == get_option( 'pngx_permalink_change' ) ) {
 
+			do_action( 'pngx_flush_permalinks' );
+
 			flush_rewrite_rules();
+
 			update_option( 'pngx_permalink_flush', date( 'l jS \of F Y h:i:s A' ) );
 			update_option( 'pngx_permalink_change', false );
 

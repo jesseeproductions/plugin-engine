@@ -157,7 +157,7 @@ function PNGX__Media( $, field_id, upload_title, button_text ) {
 
 		var field_id = this.field_id;
 		/*
-		 * Remove Image and replace with default and Erase Image ID for Coupon
+		 * Remove Image and replace with default and Erase Image ID
 		 */
 		$( '.pngx-clear-image' ).click( function ( e ) {
 			e.preventDefault();

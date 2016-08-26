@@ -23,7 +23,7 @@ class Pngx__Admin__Field__License_Status {
 		if ( isset( $license_info['expires'] ) ) { // Only Display Expiration if Date
 			$expiration_date = strtotime( $license_info['expires'] );
 			$expiration_date = date( get_option( 'date_format' ), $expiration_date );
-			$expiration_msg  = sprintf( __( ' and Expires on %s', 'coupon-creator' ), esc_attr( $expiration_date ) );
+			$expiration_msg  = sprintf( __( ' and Expires on %s', 'plugin-engine' ), esc_attr( $expiration_date ) );
 		}
 
 		echo '<input type="hidden" class="pngx_license_key" name="pngx_license_key" value="' . esc_attr( $license ) . '"/>';
@@ -31,7 +31,7 @@ class Pngx__Admin__Field__License_Status {
 
 		if ( isset( $license_info['status'] ) && false !== $license_info['status'] && 'valid' == $license_info['status'] ) {
 
-			echo '<span style="color:green;">' . __( 'License is Active', 'coupon-creator' ) . $expiration_msg . '</span><br><br>';
+			echo '<span style="color:green;">' . __( 'License is Active', 'plugin-engine' ) . $expiration_msg . '</span><br><br>';
 
 			wp_nonce_field( 'pngx_license_nonce', 'pngx_license_nonce' );
 
@@ -40,11 +40,11 @@ class Pngx__Admin__Field__License_Status {
 		} else {
 
 			if ( isset( $license_info['status'] ) && ( 'invalid' == $license_info['status'] || 'missing' == $license_info['status'] ) && ! $license_info['expired'] ) {
-				$license_info_valid = __( 'License is Invalid', 'coupon-creator' );
+				$license_info_valid = __( 'License is Invalid', 'plugin-engine' );
 			} elseif ( isset( $license_info['expired'] ) && 'expired' == $license_info['expired'] ) {
-				$license_info_valid = sprintf( __( 'License Expired on %s', 'coupon-creator' ), esc_attr( $expiration_date ) );
+				$license_info_valid = sprintf( __( 'License Expired on %s', 'plugin-engine' ), esc_attr( $expiration_date ) );
 			} else {
-				$license_info_valid = __( 'License is Not Active', 'coupon-creator' );
+				$license_info_valid = __( 'License is Not Active', 'plugin-engine' );
 			}
 
 			echo '<span style="color:red;">' . $license_info_valid . '</span><br><br>';

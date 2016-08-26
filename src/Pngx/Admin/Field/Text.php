@@ -24,11 +24,12 @@ class Pngx__Admin__Field__Text {
 			$value = $meta;
 		}
 
-		$size  = isset( $field['size'] ) ? $field['size'] : 30;
-		$class = isset( $field['class'] ) ? $field['class'] : '';
-		$std   = isset( $field['std'] ) ? $field['std'] : '';
+		$size      = isset( $field['size'] ) ? $field['size'] : 30;
+		$class     = isset( $field['class'] ) ? $field['class'] : '';
+		$std       = isset( $field['std'] ) ? $field['std'] : '';
+		$condition = isset( $field['condition'] ) ? $field['condition'] : '';
 
-		if ( isset( $field['alert'] ) && '' != $field['alert'] && 1 == cctor_options( $field['condition'] ) ) {
+		if ( isset( $field['alert'] ) && '' != $field['alert'] && 1 == $condition ) {
 			echo '<div class="pngx-error">&nbsp;&nbsp;' . $field['alert'] . '</div>';
 		}
 

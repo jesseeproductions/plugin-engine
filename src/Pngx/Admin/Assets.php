@@ -53,8 +53,8 @@ class Pngx__Admin__Assets {
 	*/
 	public static function detect_external_asset( $file ) {
 
-		$file_headers = get_headers( $file );
-		if ( ! $file_headers || 'HTTP/1.0 404 Not Found' == $file_headers[0] ) {
+		$file_headers = @get_headers( $file );
+		if ( FALSE === $file_headers || 'HTTP/1.0 404 Not Found' == $file_headers[0] ) {
 			return false;
 		}
 

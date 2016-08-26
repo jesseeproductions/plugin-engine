@@ -55,10 +55,6 @@
   width: 360px;
   max-width: 94%; }
 
-#image_coupon .pngx-default-image,
-#image_coupon .pngx-image {
-  border: 3px dashed #000000; }
-
 /* License Button
 ------------------------------------------------------------ */
 .pngx-license-button-act {
@@ -104,8 +100,6 @@
 /**
 * Utility
 ***************************************************/
-/*.wp-admin.post-type-pngx_coupon .wrap h2,*/
-.wp-admin.post-type-pngx_coupon.wrap table,
 .pngx-js .javascript-conflict,
 #wp-pngx_description-media-buttons a:not(:first-child) {
   display: none; }
@@ -377,8 +371,6 @@
     border-width: 1px 1px 0;
     box-shadow: 0 0 5px 0 #12446b;
     color: #2A5A8A; }
-  .pngx-tabs .coupon-section-fields {
-    margin: 3px 0 0; }
   .pngx-tabs .pngx-tabs-panel.ui-tabs-panel.ui-widget-content {
     background: #fff;
     box-shadow: 0 0 1px 0 rgba(50, 50, 50, 0.5);
