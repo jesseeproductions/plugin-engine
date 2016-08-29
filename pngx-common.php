@@ -2,7 +2,7 @@
 /*
 Plugin Name: Plugin Engine
 Description: An event settings framework for managing shared options
-Version: 2.4
+Version: 2.4dev
 Author: Jessee Productions, LLC
 Author URI: https://jesseeproductions.com/
 Text Domain: plugin-engine

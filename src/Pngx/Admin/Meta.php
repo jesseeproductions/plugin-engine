@@ -14,6 +14,8 @@ if ( class_exists( 'Pngx__Admin__Meta' ) ) {
  *
  * @property array  post_type
  * @property string user_capability
+ * @property array tabs
+ * @property array fields
  */
 class Pngx__Admin__Meta {
 
@@ -29,10 +31,10 @@ class Pngx__Admin__Meta {
 	protected static $fields = array();
 
 	//post type
-	protected static $post_type = array();
+	protected $post_type = array( 'pngx' );
 
 	//user capability
-	protected static $user_capability = array();
+	protected $user_capability = 'edit_post';
 
 	/*
 	* Construct
@@ -81,33 +83,11 @@ class Pngx__Admin__Meta {
 	}
 
 	/*
-	* Set Post Type
-	*/
-	protected function set_post_type() {
-
-		$post_type[] = 'pngx';
-
-		self::$post_type = $post_type;
-
-	}
-
-	/*
 	* Get Post Type
 	*/
 	public static function get_post_types() {
 
-		return self::$post_type;
-
-	}
-
-	/*
-	* Set User Capability
-	*/
-	protected function set_user_capability() {
-
-		$user_capability = 'edit_post';
-
-		self::$user_capability = $user_capability;
+		return self::instance()->post_type;
 
 	}
 
@@ -116,7 +96,7 @@ class Pngx__Admin__Meta {
 	*/
 	public static function get_user_capability() {
 
-		return self::$user_capability;
+		return self::instance()->user_capability;
 
 	}
 
@@ -161,8 +141,8 @@ class Pngx__Admin__Meta {
 		//Sample Field Array
 		$fields[ $prefix . 'heading_deal' ] = array(
 			'id'        => $prefix . 'heading_deal', //id
-			'title'     => __( 'PNGX Field Title', 'plugin-engine' ), //Label
-			'desc'      => __( 'PNGX Field Description', 'plugin-engine' ),//description or header
+			'title'     => 'PNGX Field Title', //Label  __( 'use translation', 'plugin-engine' )
+			'desc'      => 'PNGX Field Description',//description or header __( 'use translation', 'plugin-engine' )
 			'type'      => 'heading',//field type
 			'section'   => 'plugin_engine_meta_box',//meta box
 			'tab'       => 'content',//tab

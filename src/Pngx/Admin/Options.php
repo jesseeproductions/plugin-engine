@@ -72,8 +72,8 @@ class Pngx__Admin__Options {
 	public function options_page() {
 
 		$admin_page = add_submenu_page( 'options-general.php', // parent_slug
-			__( 'Plugin Engine Options', 'plugin-engine' ), // page_title
-			__( 'Plugin Engine', 'plugin-engine' ), // menu_title
+			'Plugin Engine Options', // page_title __( 'use translation', 'plugin-engine' )
+			'Plugin Engine', // menu_title __( 'use translation', 'plugin-engine' )
 			'manage_options', // capability
 			$this->options_slug, // menu_slug
 			array( $this, 'display_fields' ) // function
@@ -114,7 +114,7 @@ class Pngx__Admin__Options {
 	*/
 	public function set_sections() {
 		//Section Tab Headings
-		$this->sections['defaults'] = __( 'Defaults', 'plugin-engine' );
+		$this->sections['defaults'] = 'Defaults'; // use __( 'use translation', 'plugin-engine' )
 	}
 
 	/*
@@ -131,8 +131,8 @@ class Pngx__Admin__Options {
 
 		$defaults = array(
 			'id'        => 'default_id',
-			'title'     => __( 'Default' ),
-			'desc'      => __( 'This is a default description.' ),
+			'title'     => 'Default', //__( 'use translation', 'plugin-engine' )
+			'desc'      => 'This is a default description.', //__( 'use translation', 'plugin-engine' )
 			'section'   => 'general',
 			'alert'     => '',
 			'condition' => '',
@@ -166,13 +166,13 @@ class Pngx__Admin__Options {
 		$fields['header_expiration'] = array(
 			'section' => 'defaults',
 			'title'   => '',
-			'desc'    => __( 'Heading', 'plugin-engine' ),
+			'desc'    => 'Heading', //__( 'use translation', 'plugin-engine' )
 			'type'    => 'heading'
 		);
 		$fields['plugin_text_field'] = array(
 			'section' => 'defaults',
-			'title'   => __( 'Text Field', 'plugin-engine' ),
-			'desc'    => __( 'Enter Text', 'plugin-engine' ),
+			'title'   => 'Text Field', //__( 'use translation', 'plugin-engine' )
+			'desc'    => 'Enter Text', //__( 'use translation', 'plugin-engine' )
 			'std'     => '',
 			'type'    => 'text',
 			'class'   => ''

@@ -14,7 +14,7 @@ if ( class_exists( 'Pngx__Main' ) ) {
  */
 class Pngx__Main {
 
-	const VERSION = '2.3';
+	const VERSION = '2.4dev';
 
 	protected $plugin_context;
 	protected $plugin_context_class;
@@ -138,6 +138,49 @@ class Pngx__Main {
 		// we default the post type array to empty in plugin engine. Plugins like TEC add to it
 		return apply_filters( 'pngx_post_types', array() );
 
+	}
+
+	/**
+	 * Insert an array after a specified key within another array.
+	 *
+	 * @param $key
+	 * @param $source_array
+	 * @param $insert_array
+	 *
+	 * @return array
+	 *
+	 */
+	public static function array_insert_after_key( $key, $source_array, $insert_array ) {
+		if ( array_key_exists( $key, $source_array ) ) {
+			$position     = array_search( $key, array_keys( $source_array ) ) + 1;
+			$source_array = array_slice( $source_array, 0, $position, true ) + $insert_array + array_slice( $source_array, $position, null, true );
+		} else {
+			// If no key is found, then add it to the end of the array.
+			$source_array += $insert_array;
+		}
+
+		return $source_array;
+	}
+
+	/**
+	 * Insert an array immediately before a specified key within another array.
+	 *
+	 * @param $key
+	 * @param $source_array
+	 * @param $insert_array
+	 *
+	 * @return array
+	 */
+	public static function array_insert_before_key( $key, $source_array, $insert_array ) {
+		if ( array_key_exists( $key, $source_array ) ) {
+			$position     = array_search( $key, array_keys( $source_array ) );
+			$source_array = array_slice( $source_array, 0, $position, true ) + $insert_array + array_slice( $source_array, $position, null, true );
+		} else {
+			// If no key is found, then add it to the end of the array.
+			$source_array += $insert_array;
+		}
+
+		return $source_array;
 	}
 
 	/**
