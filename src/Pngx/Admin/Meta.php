@@ -14,8 +14,8 @@ if ( class_exists( 'Pngx__Admin__Meta' ) ) {
  *
  * @property array  post_type
  * @property string user_capability
- * @property array tabs
- * @property array fields
+ * @property array  tabs
+ * @property array  fields
  */
 class Pngx__Admin__Meta {
 

@@ -43,7 +43,6 @@ class Pngx__Main {
 		$this->resource_path = $this->plugin_path . 'src/resources/';
 		$this->resource_url  = $this->plugin_url . 'src/resources/';
 
-
 		$this->load_text_domain( 'plugin-engine', basename( dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) ) . '/plugin-engine/languages/' );
 
 		$this->init_autoloading();
@@ -103,6 +102,7 @@ class Pngx__Main {
 	 * @return bool  If it was able to load the text domain
 	 */
 	public function load_text_domain( $domain, $dir = false ) {
+
 		// Added safety just in case this runs twice...
 		if ( is_textdomain_loaded( $domain ) && ! is_a( $GLOBALS['l10n'][ $domain ], 'NOOP_Translations' ) ) {
 			return true;
@@ -124,7 +124,7 @@ class Pngx__Main {
 
 		$loaded = load_plugin_textdomain( $domain, false, $mofile );
 
-		if ( $dir !== false && ! $loaded ) {
+		if ( false !== $dir && ! $loaded ) {
 			return load_plugin_textdomain( $domain, false, $dir );
 		}
 
