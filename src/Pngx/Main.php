@@ -42,6 +42,8 @@ class Pngx__Main {
 		$this->plugin_url  = plugins_url( $parent_plugin_dir === $this->plugin_dir ? $this->plugin_dir : $parent_plugin_dir );
 		$this->resource_path = $this->plugin_path . 'src/resources/';
 		$this->resource_url  = $this->plugin_url . 'src/resources/';
+		$this->vendor_path = $this->plugin_path . 'vendor/';
+		$this->vendor_url  = $this->plugin_url . 'vendor/';
 
 		$this->load_text_domain( 'plugin-engine', basename( dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) ) . '/plugin-engine/languages/' );
 
