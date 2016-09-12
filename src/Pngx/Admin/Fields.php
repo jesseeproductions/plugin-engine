@@ -84,10 +84,13 @@ class Pngx__Admin__Fields {
 	public static function display_field( $field = array(), $options = array(), $options_id = null, $meta = null, $wp_version ) {
 
 		//Create Different Name for Option Fields and Not Meta Fields
-		if ( $options ) {
+		log_me($options_id);
+		log_me($field['id']);
+		log_me(substr( trim( $options_id ) , -1 ));
+		if ( $options && ']' != substr( trim( $options_id ) , -1 ) ) {
 			$options_id = $options_id . '[' . $field['id'] . ']';
 		}
-
+		log_me($options_id);
 		switch ( $field['type'] ) {
 
 			case 'checkbox':
