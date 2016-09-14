@@ -490,3 +490,44 @@ var pngx_fields_toggle = pngx_fields_toggle || {};
 	};
 
 })( jQuery, pngx_fields_toggle );
+
+/**
+ * Fields Dialog
+ * @type {{}}
+ */
+var pngx_dialog = pngx_dialog || {};
+(function ( $, obj ) {
+	'use strict';
+
+	obj.init = function ( message ) {
+
+		$( '<div id="pngx-dialog"></div>' )
+			.html( message )
+			.dialog( {
+				autoOpen: true,
+				modal: true,
+				width: 300,
+				height: 150,
+				position: {my: "center", at: "center", of: window},
+				draggable: false,
+				resizable: false,
+				dialogClass: 'pngx-ui',
+				buttons: {
+					"OK": function () {
+
+						$( this ).dialog( "close" );
+						$( this ).dialog( 'destroy' ).remove();
+
+					}
+				}
+			} );
+
+		//Center Dialog on Screen Resize
+		$(window).on("resize scroll",function(e){
+
+			$("#pngx-dialog").dialog( "option", "position", { my: "center", at: "center", of: window } );
+
+		});
+	};
+
+})( jQuery, pngx_dialog );

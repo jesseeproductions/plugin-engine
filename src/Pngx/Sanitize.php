@@ -276,7 +276,7 @@ class Pngx__Sanitize {
 	* Dimensions ID Sanitize
 	* @version 2.1
 	*/
-	private function sanitize_dimensions() {
+	private function sanitize_number() {
 
 		return $this->sanitize_absint( $this->input );
 
