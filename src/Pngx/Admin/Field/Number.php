@@ -28,7 +28,7 @@ class Pngx__Admin__Field__Number {
 		$class = isset( $field['class'] ) ? $field['class'] : '';
 		$std   = isset( $field['std'] ) ? $field['std'] : '';
 
-		echo '<input type="number" class="regular-number ' . esc_attr( $class ) . '"  id="' . esc_attr( $field['id'] ) . '" name="' . esc_attr( $name ) . '" placeholder="' . esc_attr( $std ) . '" value="' . esc_attr( $value ) . '" min="0" max="2000" size="' . absint( $size ) . '" style="width:60px; padding-right:0; />';
+		echo '<input type="number" class="regular-number ' . esc_attr( $class ) . '"  id="' . esc_attr( $field['id'] ) . '" name="' . esc_attr( $name ) . '" placeholder="' . esc_attr( $std ) . '" value="' . esc_attr( $value ) . '" min="0" max="2000" size="' . absint( $size ) . '" style="width:60px; padding-right:0;" />';
 
 		if ( "" != $field['desc'] ) {
 			echo '<br /><span class="description">' . $field['desc'] . '</span>';

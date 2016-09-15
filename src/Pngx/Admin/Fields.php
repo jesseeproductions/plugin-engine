@@ -88,6 +88,10 @@ class Pngx__Admin__Fields {
 			$options_id = $options_id . '[' . $field['id'] . ']';
 		}
 
+		if (isset( $field['before'] ) ) {
+			echo  $field['before'];
+		}
+
 		switch ( $field['type'] ) {
 
 			case 'checkbox':
@@ -197,8 +201,13 @@ class Pngx__Admin__Fields {
 			 * @param array $options current field being displayed.
 			 * @param array $field   current value of option saved.
 			 */
-			echo apply_filters( 'pngx_field_types', $field, $options, $options_id, $meta, $wp_version );
+			apply_filters( 'pngx_field_types', $field, $options, $options_id, $meta, $wp_version );
 		}
+
+		if (isset( $field['after'] ) ) {
+			echo  $field['after'];
+		}
+
 	}
 
 }

@@ -56,7 +56,7 @@ var pngx_admin_fields_init = pngx_admin_fields_init || {};
 	/*
 	 * Hide or Display Help Images
 	 */
-	obj.toggle__field_help = function ( helpid ) {
+	obj.toggle_field_help = function ( helpid ) {
 
 		var toggleImage = document.getElementById( helpid );
 
@@ -531,3 +531,50 @@ var pngx_dialog = pngx_dialog || {};
 	};
 
 })( jQuery, pngx_dialog );
+
+
+/**
+ * Load Scripts
+ * @type {{}}
+ */
+var pngx_loadScript = pngx_loadScript || {};
+(function ( $, obj ) {
+	/*
+	* loadScript Function instead of jQuery getScript
+	* @version 2.0
+	* https://gist.github.com/bradvin/2313262
+	* Author: bradvin
+	*/
+	$.loadScript = function (url, arg1, arg2) {
+	  var cache = false, callback = null;
+	  //arg1 and arg2 can be interchangable as either the callback function or the cache bool
+	  if ($.isFunction(arg1)){
+		callback = arg1;
+		cache = arg2 || cache;
+	  } else {
+		cache = arg1 || cache;
+		callback = arg2 || callback;
+	  }
+
+	  var load = true;
+	  //check all existing script tags in the page for the url we are trying to load
+	  $('script[type="text/javascript"]').each(function () { return load = (url != $(this).attr('src')); });
+	  if (load){
+		//didn't find it in the page, so load it
+		//equivalent to a $.getScript but with control over cacheing
+		$.ajax({
+		  type: 'GET',
+		  url: url,
+		  success: callback,
+		  dataType: 'script',
+		  cache: cache
+		});
+	  } else {
+		//already loaded so just call the callback
+		if ($.isFunction(callback)) {
+		  callback.call(this);
+		}
+	  }
+	};
+
+})( jQuery, pngx_loadScript );

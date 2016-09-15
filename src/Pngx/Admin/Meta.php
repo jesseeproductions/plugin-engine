@@ -66,7 +66,7 @@ class Pngx__Admin__Meta {
 	/*
 	* Set Current Screen Variables
 	*/
-	protected static function get_screen_variables() {
+	public static function get_screen_variables() {
 
 		global $pagenow, $typenow;
 		$current_screen['pagenow'] = $pagenow;
