@@ -320,7 +320,7 @@ class Pngx__Admin__Options {
 
 		settings_fields( $this->options_id );
 
-		echo '<div class="pngx-tabs" ' . Pngx__Admin__Fields::toggle( $tab_data, null ) . '>';
+		echo '<div class="main pngx-tabs" ' . Pngx__Admin__Fields::toggle( $tab_data, null ) . '>';
 
 		echo '<ul class="pngx-tabs-nav">';
 

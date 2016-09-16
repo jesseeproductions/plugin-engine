@@ -195,7 +195,7 @@ class Pngx__Admin__Meta {
 
 		ob_start(); ?>
 
-		<div class="pngx-tabs" <?php echo Pngx__Admin__Fields::toggle( $tab_data, null ); ?> >
+		<div class="main pngx-tabs" <?php echo Pngx__Admin__Fields::toggle( $tab_data, null ); ?> >
 
 			<ul class="pngx-tabs-nav">
 

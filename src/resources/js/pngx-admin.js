@@ -7,10 +7,6 @@ var pngx_admin_fields_init = pngx_admin_fields_init || {};
 	'use strict';
 
 	obj.init = function () {
-		this.init_scripts();
-	};
-
-	obj.init_scripts = function () {
 
 		$( 'html' ).addClass( 'pngx-js' );
 
@@ -33,7 +29,7 @@ var pngx_admin_fields_init = pngx_admin_fields_init || {};
 	/*
 	 * WP Date Picker
 	 */
-	obj.date_picker = function ( helpid ) {
+	obj.date_picker = function () {
 
 		$( '.pngx-datepicker' ).datepicker( {
 			dateFormat: "mm/dd/yy",
@@ -243,7 +239,6 @@ var pngx_admin_tabs = pngx_admin_tabs || {};
 		if ( wrap ) {
 			obj.tab_wrap = wrap;
 		}
-
 		//Set Tabs
 		obj.data =  $( obj.tab_wrap ).data();
 		obj.tabs = obj.data.toggleTabs;
@@ -291,7 +286,7 @@ var pngx_admin_tabs = pngx_admin_tabs || {};
 	 */
 	obj.wrap_tab_areas = function () {
 
-		var wrapped = $( '.wrap h2' ).wrap( '<div class="' + obj.tab_wrap.replace( /\./g, ' ' ) + '-panel">' );
+		var wrapped = $( obj.tab_wrap ).find( 'h2' ).wrap( '<div class="' + obj.tab_wrap.replace( /\./g, ' ' ) + '-panel">' );
 
 		wrapped.each( function () {
 			$( this ).parent().append( $( this ).parent().nextUntil( 'div' + obj.tab_wrap + '-panel' ) );
@@ -545,7 +540,7 @@ var pngx_loadScript = pngx_loadScript || {};
 	* https://gist.github.com/bradvin/2313262
 	* Author: bradvin
 	*/
-	$.loadScript = function (url, arg1, arg2) {
+	obj.init = function (url, arg1, arg2) {
 	  var cache = false, callback = null;
 	  //arg1 and arg2 can be interchangable as either the callback function or the cache bool
 	  if ($.isFunction(arg1)){
