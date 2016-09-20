@@ -27,7 +27,7 @@ class Pngx__Admin__Fields {
 				$toggle = '';
 				if ( 'field' == $key ) {
 					$toggle = esc_html( $toggle_data ) . '#' . esc_attr( $id );
-				} elseif ( 'group' == $key || 'show' == $key || 'update_message' == $key ) {
+				} elseif ( 'group' == $key || 'show' == $key || 'update_message' == $key || 'type' == $key ) {
 
 					//handle options page update message in array
 					if ( is_array( $toggle_data ) ) {

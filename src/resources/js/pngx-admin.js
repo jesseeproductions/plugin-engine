@@ -409,52 +409,82 @@ var pngx_admin_tabs = pngx_admin_tabs || {};
 var pngx_fields_toggle = pngx_fields_toggle || {};
 (function ( $, obj ) {
 	'use strict';
+	obj.id = [];
+	obj.field = [];
+	obj.type = [];
+	obj.field_group = [];
+	obj.field_display = [];
+	obj.message = [];
 
-	obj.tab_wrap = '.pngx-tabs';
-	obj.tabs = '';
+	obj.init = function ( id, field, type, field_group, field_display, field_value, message ) {
+		console.log(id);
+		//console.log(obj.field[id]);
+		console.log(obj.field[id]);
+		obj.id = id;
+		obj.field[id] = field;
+		obj.type[id] = type;
+		obj.field_group[id] = field_group;
+		obj.field_display[id] = field_display;
+		obj.message[id] = message;
 
-	obj.init = function ( field_check, remove_img ) {
+		//Initial Load
+		obj.toggle( id, field_value );
 
-		obj.prepare( field_check, remove_img );
+		//Change of Fields
+		obj.toggle_change( id );
+
+		if ( 'image' == type ) {
+			console.log( type );
+			obj.img_change( id );
+		}
+
+		return obj;
 
 	};
 
-	obj.toggle = function ( field, field_group, field_display, message ) {
-
-		if ( !field || !field_group ) {
+	obj.toggle = function ( id, field_value ) {
+		console.log('toggle1');
+		console.log(this.field);
+		if ( !obj.field[id] || !obj.field_group[id] ) {
 			return;
 		}
-
-		var display = obj.toggle_field_manager( field );
+		console.log('toggle2');
+		var display = obj.toggle_field_manager( id, obj.field[id] );
+		var current_value = obj.field_display[id] + field_value;
+		console.log( display );
+		console.log( current_value );
+		console.log('toggle3');
 		if ( 'hide' === display || 'toggle' === display ) {
-			$( field_group ).each( function () {
+			console.log('toggle4');
+			$( obj.field_group[id] ).each( function () {
 				$( this ).fadeOut();
 			} );
 
-			if ( field_display ) {
-				$( field_display ).each( function () {
+			if ( current_value ) {
+				$( current_value ).each( function () {
+					console.log('toggle5');
 					$( this ).fadeIn( 'fast' );
 				} );
 			}
 		} else {
-			$( field_group ).each( function () {
+			$( obj.field_group[id] ).each( function () {
 				$( this ).fadeIn( 'fast' );
 			} );
 		}
 
 		//Only Run if Variable is an Object
-		if ( 'object' === typeof message ) {
-			obj.toggle_msg( message, display );
+		if ( 'object' === typeof obj.message[id] ) {
+			obj.toggle_msg( id, obj.message[id], display );
 		}
 
 	};
 
-	obj.toggle_field_manager = function ( field ) {
+	obj.toggle_field_manager = function ( id, field ) {
 
 		var $field_type = $( field ).prop( 'nodeName' );
 
 		if ( 'INPUT' == $field_type ) {
-			if ( $( field ).val() ) {
+			if ( $( obj.field[id] ).val() ) {
 				return 'hide';
 			} else {
 				return 'show';
@@ -467,9 +497,9 @@ var pngx_fields_toggle = pngx_fields_toggle || {};
 
 	};
 
-	obj.toggle_msg = function ( message, display ) {
+	obj.toggle_msg = function ( id, display ) {
 		//Remove Message
-		$.each( message, function ( key, value ) {
+		$.each( obj.message[id], function ( key, value ) {
 			var div_class = '.pngx-tab-heading-' + key;
 			$( div_class ).next( 'div.pngx-error' ).remove();
 		} );
@@ -484,8 +514,93 @@ var pngx_fields_toggle = pngx_fields_toggle || {};
 		}
 	};
 
-})( jQuery, pngx_fields_toggle );
+	obj.toggle_change = function ( id ) {
 
+		console.log('setup change');
+
+		$( obj.field[id] ).on( 'change', function () {
+			console.log('detect change');
+			obj.toggle(
+				id,
+				$( this ).val()
+			);
+		} );
+
+	};
+
+	obj.img_change = function ( id ) {
+
+		console.log('setup image change');
+
+		$( obj.field[id] ).on( 'display', function ( )  {
+			console.log('change3');
+			obj.toggle(
+				id,
+				$( this ).val()
+			);
+		} );
+
+		$( ".pngx-clear-image" ).on( "click", function () {
+			console.log('change4');
+			obj.toggle(
+				id,
+				$( this ).val()
+			);
+		} );
+
+	};
+
+})( jQuery, pngx_fields_toggle );
+/**
+ * Init Conditionals
+ */
+(function ( $ ) {
+
+	//Todo img coupon toggle - disable style message when pro active
+	//todo img coupon toggle - disbale saw tooth border
+
+	var $data = [];
+	var $toggle = [];
+	var data_counter = 0;
+
+	$( '.pngx-meta-field-wrap' ).each( function () {
+		if ( !$.isEmptyObject( $( this ).data() ) ) {
+
+			$data[data_counter] = ( $( this ).data() );
+
+			$toggle[data_counter] = new pngx_fields_toggle.init(
+				data_counter,
+				$data[data_counter].toggleField,
+				$data[data_counter].toggleType,
+				$data[data_counter].toggleGroup,
+				$data[data_counter].toggleShow,
+				$( $data[data_counter].toggleField ).val(),
+				$data[data_counter].toggleMsg
+			);
+
+			data_counter++;
+		}
+	} );
+
+	console.log( $toggle );
+
+	/*if ( $data && $data.length ) {
+		for ( var id in $data ) {
+
+			//console.log( id );
+			//console.log( $data[id] );
+			pngx_fields_toggle.init(
+				$data[id].toggleField,
+				$data[id].toggleType,
+				$data[id].toggleGroup,
+				$data[id].toggleShow,
+				$( $data[id].toggleField ).val(),
+				$data[id].toggleMsg
+			);
+		}
+	}*/
+
+})( jQuery );
 /**
  * Fields Dialog
  * @type {{}}
