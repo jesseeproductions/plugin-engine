@@ -417,9 +417,9 @@ var pngx_fields_toggle = pngx_fields_toggle || {};
 	obj.message = [];
 
 	obj.init = function ( id, field, type, field_group, field_display, field_value, message ) {
-		console.log(id);
+		//console.log(id);
 		//console.log(obj.field[id]);
-		console.log(obj.field[id]);
+		//console.log(obj.field[id]);
 		obj.id = id;
 		obj.field[id] = field;
 		obj.type[id] = type;
@@ -434,7 +434,7 @@ var pngx_fields_toggle = pngx_fields_toggle || {};
 		obj.toggle_change( id );
 
 		if ( 'image' == type ) {
-			console.log( type );
+			//console.log( type );
 			obj.img_change( id );
 		}
 
@@ -443,26 +443,22 @@ var pngx_fields_toggle = pngx_fields_toggle || {};
 	};
 
 	obj.toggle = function ( id, field_value ) {
-		console.log('toggle1');
-		console.log(this.field);
+
 		if ( !obj.field[id] || !obj.field_group[id] ) {
 			return;
 		}
-		console.log('toggle2');
+
 		var display = obj.toggle_field_manager( id, obj.field[id] );
 		var current_value = obj.field_display[id] + field_value;
-		console.log( display );
-		console.log( current_value );
-		console.log('toggle3');
+
 		if ( 'hide' === display || 'toggle' === display ) {
-			console.log('toggle4');
+
 			$( obj.field_group[id] ).each( function () {
 				$( this ).fadeOut();
 			} );
 
 			if ( current_value ) {
 				$( current_value ).each( function () {
-					console.log('toggle5');
 					$( this ).fadeIn( 'fast' );
 				} );
 			}
@@ -474,7 +470,7 @@ var pngx_fields_toggle = pngx_fields_toggle || {};
 
 		//Only Run if Variable is an Object
 		if ( 'object' === typeof obj.message[id] ) {
-			obj.toggle_msg( id, obj.message[id], display );
+			obj.toggle_msg( id, display );
 		}
 
 	};
@@ -505,7 +501,7 @@ var pngx_fields_toggle = pngx_fields_toggle || {};
 		} );
 		//Add Message
 		if ( 'hide' === display ) {
-			$.each( message, function ( key, value ) {
+			$.each( obj.message[id], function ( key, value ) {
 				if ( key && value ) {
 					var div_class = '.pngx-tab-heading-' + key;
 					$( div_class ).after( '<div class="pngx-error">' + value + '</div>' );
@@ -516,10 +512,7 @@ var pngx_fields_toggle = pngx_fields_toggle || {};
 
 	obj.toggle_change = function ( id ) {
 
-		console.log('setup change');
-
 		$( obj.field[id] ).on( 'change', function () {
-			console.log('detect change');
 			obj.toggle(
 				id,
 				$( this ).val()
@@ -530,10 +523,7 @@ var pngx_fields_toggle = pngx_fields_toggle || {};
 
 	obj.img_change = function ( id ) {
 
-		console.log('setup image change');
-
 		$( obj.field[id] ).on( 'display', function ( )  {
-			console.log('change3');
 			obj.toggle(
 				id,
 				$( this ).val()
@@ -541,7 +531,6 @@ var pngx_fields_toggle = pngx_fields_toggle || {};
 		} );
 
 		$( ".pngx-clear-image" ).on( "click", function () {
-			console.log('change4');
 			obj.toggle(
 				id,
 				$( this ).val()
@@ -555,12 +544,11 @@ var pngx_fields_toggle = pngx_fields_toggle || {};
  * Init Conditionals
  */
 (function ( $ ) {
+	//todo style toggle handling inside radius fields with image coupons
 
-	//Todo img coupon toggle - disable style message when pro active
-	//todo img coupon toggle - disbale saw tooth border
+	//todo links toggle
 
 	var $data = [];
-	var $toggle = [];
 	var data_counter = 0;
 
 	$( '.pngx-meta-field-wrap' ).each( function () {
@@ -568,7 +556,7 @@ var pngx_fields_toggle = pngx_fields_toggle || {};
 
 			$data[data_counter] = ( $( this ).data() );
 
-			$toggle[data_counter] = new pngx_fields_toggle.init(
+			new pngx_fields_toggle.init(
 				data_counter,
 				$data[data_counter].toggleField,
 				$data[data_counter].toggleType,
@@ -581,24 +569,6 @@ var pngx_fields_toggle = pngx_fields_toggle || {};
 			data_counter++;
 		}
 	} );
-
-	console.log( $toggle );
-
-	/*if ( $data && $data.length ) {
-		for ( var id in $data ) {
-
-			//console.log( id );
-			//console.log( $data[id] );
-			pngx_fields_toggle.init(
-				$data[id].toggleField,
-				$data[id].toggleType,
-				$data[id].toggleGroup,
-				$data[id].toggleShow,
-				$( $data[id].toggleField ).val(),
-				$data[id].toggleMsg
-			);
-		}
-	}*/
 
 })( jQuery );
 /**
