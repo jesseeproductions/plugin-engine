@@ -27,8 +27,7 @@ class Pngx__Admin__Fields {
 				$toggle = '';
 				if ( 'field' == $key ) {
 					$toggle = esc_html( $toggle_data ) . '#' . esc_attr( $id );
-				} elseif ( 'group' == $key || 'show' == $key || 'update_message' == $key || 'type' == $key ) {
-
+				} elseif ( 'group' == $key || 'show' == $key || 'update_message' == $key || 'type' == $key || 'connection' == $key ) {
 					//handle options page update message in array
 					if ( is_array( $toggle_data ) ) {
 						if ( isset( $toggle_data[0]['code'] ) ) {
@@ -37,17 +36,11 @@ class Pngx__Admin__Fields {
 					} else {
 						$toggle = esc_html( $toggle_data );
 					}
-				} elseif ( 'id' == $key || 'wp_version' == $key ) {
+				} elseif ( 'id' == $key || 'wp_version' == $key || 'priority' == $key ) {
 					$toggle = absint( $toggle_data );
 				} elseif ( 'msg' == $key || 'tabs' == $key ) {
 					$toggle = json_encode( $toggle_data, JSON_HEX_APOS );
 				}
-
-				//todo remove
-				//echo 'data-toggle-field="' . esc_html( $field['toggle_field'] ) . '#' . esc_html( $field['id'] ) . '"';
-				//echo 'data-toggle-group="' . esc_html( $field['toggle_group'] ) . '"';
-				//echo 'data-toggle-show="' . esc_html( $field['toggle_show'] ) . '"';
-				//echo 'data-toggle-msg=\'' . json_encode( $field['toggle_msg'], JSON_HEX_APOS ) . '\'';
 
 				$data .= 'data-toggle-' . esc_attr( $key ) . '=\'' . $toggle . '\' ';
 			}

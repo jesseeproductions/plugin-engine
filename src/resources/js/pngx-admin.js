@@ -15,14 +15,14 @@ var pngx_admin_fields_init = pngx_admin_fields_init || {};
 		obj.color_picker();
 
 		/*
-		* Hide Default Label
-		*/
-		$("tbody tr th:contains(Default)").css("display", "none");
+		 * Hide Default Label
+		 */
+		$( "tbody tr th:contains(Default)" ).css( "display", "none" );
 
 		/*
-		* Hide Row if Label is Empty
-		*/
-		$(".form-table label:empty").parent().hide();
+		 * Hide Row if Label is Empty
+		 */
+		$( ".form-table label:empty" ).parent().hide();
 
 	};
 
@@ -64,8 +64,6 @@ var pngx_admin_fields_init = pngx_admin_fields_init || {};
 
 		return false;
 	};
-
-
 
 
 	$( function () {
@@ -240,7 +238,7 @@ var pngx_admin_tabs = pngx_admin_tabs || {};
 			obj.tab_wrap = wrap;
 		}
 		//Set Tabs
-		obj.data =  $( obj.tab_wrap ).data();
+		obj.data = $( obj.tab_wrap ).data();
 		obj.tabs = obj.data.toggleTabs;
 		obj.updated_tab = obj.data.toggleUpdate_message;
 		obj.id = obj.data.toggleId;
@@ -412,38 +410,49 @@ var pngx_fields_toggle = pngx_fields_toggle || {};
 	obj.id = [];
 	obj.field = [];
 	obj.type = [];
+	obj.priority = [];
+	obj.connection = [];
 	obj.field_group = [];
 	obj.field_display = [];
 	obj.message = [];
 
-	obj.init = function ( id, field, type, field_group, field_display, field_value, message ) {
+	obj.set_fields = function ( id, field, type, priority, connection, field_group, field_display, field_value, message ) {
+		//console.log('setfields');
 		//console.log(id);
 		//console.log(obj.field[id]);
 		//console.log(obj.field[id]);
 		obj.id = id;
 		obj.field[id] = field;
 		obj.type[id] = type;
+		obj.priority[id] = priority;
+		obj.connection[id] = connection;
 		obj.field_group[id] = field_group;
 		obj.field_display[id] = field_display;
 		obj.message[id] = message;
 
+	};
+
+	obj.init = function ( id ) {
+		//console.log('init fields');
+		//console.log(id);
+		//console.log( obj.field[id] );
 		//Initial Load
-		obj.toggle( id, field_value );
+		obj.toggle( id, $( obj.field[id] ).val() );
 
 		//Change of Fields
 		obj.toggle_change( id );
 
-		if ( 'image' == type ) {
+		if ( 'image' == obj.type[id] ) {
 			//console.log( type );
 			obj.img_change( id );
 		}
-
-		return obj;
-
 	};
 
 	obj.toggle = function ( id, field_value ) {
-
+		//console.log('toggle');
+		//console.log(id);
+		//console.log(field_value);
+		//console.log(field_value);
 		if ( !obj.field[id] || !obj.field_group[id] ) {
 			return;
 		}
@@ -509,21 +518,53 @@ var pngx_fields_toggle = pngx_fields_toggle || {};
 			} );
 		}
 	};
+	obj.priority_toggle = function ( id, field_value ) {
+
+		if ( obj.connection[id] ) {
+			$.each( obj.field, function ( key, value ) {
+				if ( value === obj.connection[id] && obj.priority[key] >= obj.priority[id] ) {
+					obj.toggle(
+						key,
+						$( obj.field[key] ).val()
+					);
+				}
+			} );
+		}
+
+		obj.toggle(
+			id,
+			field_value
+		);
+
+		if ( obj.connection[id] ) {
+			$.each( obj.field, function ( key, value ) {
+				if ( value == obj.connection[id] && obj.priority[key] < obj.priority[id] ) {
+					obj.toggle(
+						key,
+						$( obj.field[key] ).val()
+					);
+				}
+			} );
+		}
+
+	};
 
 	obj.toggle_change = function ( id ) {
 
 		$( obj.field[id] ).on( 'change', function () {
-			obj.toggle(
+
+			obj.priority_toggle(
 				id,
 				$( this ).val()
 			);
+
 		} );
 
 	};
 
 	obj.img_change = function ( id ) {
 
-		$( obj.field[id] ).on( 'display', function ( )  {
+		$( obj.field[id] ).on( 'display', function () {
 			obj.toggle(
 				id,
 				$( this ).val()
@@ -540,15 +581,16 @@ var pngx_fields_toggle = pngx_fields_toggle || {};
 	};
 
 })( jQuery, pngx_fields_toggle );
+
 /**
  * Init Conditionals
  */
 (function ( $ ) {
-	//todo style toggle handling inside radius fields with image coupons
 
 	//todo links toggle
 
 	var $data = [];
+	var priority = {};
 	var data_counter = 0;
 
 	$( '.pngx-meta-field-wrap' ).each( function () {
@@ -556,21 +598,43 @@ var pngx_fields_toggle = pngx_fields_toggle || {};
 
 			$data[data_counter] = ( $( this ).data() );
 
-			new pngx_fields_toggle.init(
+			pngx_fields_toggle.set_fields(
 				data_counter,
 				$data[data_counter].toggleField,
 				$data[data_counter].toggleType,
+				$data[data_counter].togglePriority,
+				$data[data_counter].toggleConnection,
 				$data[data_counter].toggleGroup,
 				$data[data_counter].toggleShow,
 				$( $data[data_counter].toggleField ).val(),
 				$data[data_counter].toggleMsg
 			);
 
+			priority[$data[data_counter].togglePriority] = data_counter;
+
 			data_counter++;
 		}
 	} );
 
+	/**
+	 * Sort by Priority and then Toggle Fields with Highest Priority First
+	 */
+	var keys = Object.keys( priority ),
+		i, len = keys.length;
+
+	keys.sort( function ( a, b ) {
+		return b - a
+	} );
+
+	for ( i = 0; i < len; i++ ) {
+		k = keys[i];
+		pngx_fields_toggle.init(
+			priority[k]
+		);
+	}
+
 })( jQuery );
+
 /**
  * Fields Dialog
  * @type {{}}
@@ -603,11 +667,11 @@ var pngx_dialog = pngx_dialog || {};
 			} );
 
 		//Center Dialog on Screen Resize
-		$(window).on("resize scroll",function(e){
+		$( window ).on( "resize scroll", function ( e ) {
 
-			$("#pngx-dialog").dialog( "option", "position", { my: "center", at: "center", of: window } );
+			$( "#pngx-dialog" ).dialog( "option", "position", {my: "center", at: "center", of: window} );
 
-		});
+		} );
 	};
 
 })( jQuery, pngx_dialog );
@@ -620,41 +684,43 @@ var pngx_dialog = pngx_dialog || {};
 var pngx_loadScript = pngx_loadScript || {};
 (function ( $, obj ) {
 	/*
-	* loadScript Function instead of jQuery getScript
-	* @version 2.0
-	* https://gist.github.com/bradvin/2313262
-	* Author: bradvin
-	*/
-	obj.init = function (url, arg1, arg2) {
-	  var cache = false, callback = null;
-	  //arg1 and arg2 can be interchangable as either the callback function or the cache bool
-	  if ($.isFunction(arg1)){
-		callback = arg1;
-		cache = arg2 || cache;
-	  } else {
-		cache = arg1 || cache;
-		callback = arg2 || callback;
-	  }
-
-	  var load = true;
-	  //check all existing script tags in the page for the url we are trying to load
-	  $('script[type="text/javascript"]').each(function () { return load = (url != $(this).attr('src')); });
-	  if (load){
-		//didn't find it in the page, so load it
-		//equivalent to a $.getScript but with control over cacheing
-		$.ajax({
-		  type: 'GET',
-		  url: url,
-		  success: callback,
-		  dataType: 'script',
-		  cache: cache
-		});
-	  } else {
-		//already loaded so just call the callback
-		if ($.isFunction(callback)) {
-		  callback.call(this);
+	 * loadScript Function instead of jQuery getScript
+	 * @version 2.0
+	 * https://gist.github.com/bradvin/2313262
+	 * Author: bradvin
+	 */
+	obj.init = function ( url, arg1, arg2 ) {
+		var cache = false, callback = null;
+		//arg1 and arg2 can be interchangable as either the callback function or the cache bool
+		if ( $.isFunction( arg1 ) ) {
+			callback = arg1;
+			cache = arg2 || cache;
+		} else {
+			cache = arg1 || cache;
+			callback = arg2 || callback;
 		}
-	  }
+
+		var load = true;
+		//check all existing script tags in the page for the url we are trying to load
+		$( 'script[type="text/javascript"]' ).each( function () {
+			return load = (url != $( this ).attr( 'src' ));
+		} );
+		if ( load ) {
+			//didn't find it in the page, so load it
+			//equivalent to a $.getScript but with control over cacheing
+			$.ajax( {
+				type: 'GET',
+				url: url,
+				success: callback,
+				dataType: 'script',
+				cache: cache
+			} );
+		} else {
+			//already loaded so just call the callback
+			if ( $.isFunction( callback ) ) {
+				callback.call( this );
+			}
+		}
 	};
 
 })( jQuery, pngx_loadScript );
