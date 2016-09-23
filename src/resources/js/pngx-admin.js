@@ -234,16 +234,19 @@ var pngx_admin_tabs = pngx_admin_tabs || {};
 	obj.tab_count = 1;
 
 	obj.init = function ( wrap ) {
+
 		if ( wrap ) {
 			obj.tab_wrap = wrap;
 		}
 		//Set Tabs
 		obj.data = $( obj.tab_wrap ).data();
-		obj.tabs = obj.data.toggleTabs;
-		obj.updated_tab = obj.data.toggleUpdate_message;
-		obj.id = obj.data.toggleId;
+		if ( "undefined" !== typeof obj.data ) {
+			obj.tabs = obj.data.toggleTabs;
+			obj.updated_tab = obj.data.toggleUpdate_message;
+			obj.id = obj.data.toggleId;
 
-		obj.init_tabs();
+			obj.init_tabs();
+		}
 
 	};
 
@@ -417,10 +420,6 @@ var pngx_fields_toggle = pngx_fields_toggle || {};
 	obj.message = [];
 
 	obj.set_fields = function ( id, field, type, priority, connection, field_group, field_display, field_value, message ) {
-		//console.log('setfields');
-		//console.log(id);
-		//console.log(obj.field[id]);
-		//console.log(obj.field[id]);
 		obj.id = id;
 		obj.field[id] = field;
 		obj.type[id] = type;
@@ -429,13 +428,10 @@ var pngx_fields_toggle = pngx_fields_toggle || {};
 		obj.field_group[id] = field_group;
 		obj.field_display[id] = field_display;
 		obj.message[id] = message;
-
 	};
 
 	obj.init = function ( id ) {
-		//console.log('init fields');
-		//console.log(id);
-		//console.log( obj.field[id] );
+
 		//Initial Load
 		obj.toggle( id, $( obj.field[id] ).val() );
 
@@ -443,16 +439,12 @@ var pngx_fields_toggle = pngx_fields_toggle || {};
 		obj.toggle_change( id );
 
 		if ( 'image' == obj.type[id] ) {
-			//console.log( type );
 			obj.img_change( id );
 		}
 	};
 
 	obj.toggle = function ( id, field_value ) {
-		//console.log('toggle');
-		//console.log(id);
-		//console.log(field_value);
-		//console.log(field_value);
+
 		if ( !obj.field[id] || !obj.field_group[id] ) {
 			return;
 		}
@@ -471,10 +463,15 @@ var pngx_fields_toggle = pngx_fields_toggle || {};
 					$( this ).fadeIn( 'fast' );
 				} );
 			}
+
+			$( obj.field[id] ).attr( 'data-active', true );
+
 		} else {
 			$( obj.field_group[id] ).each( function () {
 				$( this ).fadeIn( 'fast' );
 			} );
+
+			$( obj.field[id] ).attr( 'data-active', false );
 		}
 
 		//Only Run if Variable is an Object
@@ -488,7 +485,13 @@ var pngx_fields_toggle = pngx_fields_toggle || {};
 
 		var $field_type = $( field ).prop( 'nodeName' );
 
-		if ( 'INPUT' == $field_type ) {
+		if ( 'INPUT' == $field_type && 'checkbox' == obj.type[id] ) {
+			if ( $( obj.field[id] ).is( ':checked' ) ) {
+				return 'hide';
+			} else {
+				return 'show';
+			}
+		} else if ( 'INPUT' == $field_type ) {
 			if ( $( obj.field[id] ).val() ) {
 				return 'hide';
 			} else {
@@ -496,8 +499,6 @@ var pngx_fields_toggle = pngx_fields_toggle || {};
 			}
 		} else if ( 'SELECT' == $field_type ) {
 			return 'toggle';
-		} else if ( 'CHECK' == $field_type ) {
-
 		}
 
 	};
@@ -518,11 +519,21 @@ var pngx_fields_toggle = pngx_fields_toggle || {};
 			} );
 		}
 	};
+
+	/**
+	 * Toggle Connected Fields by Priority Only if Field Is Active
+	 *
+	 * @param id
+	 * @param field_value
+	 */
 	obj.priority_toggle = function ( id, field_value ) {
+
+		var $data = '';
 
 		if ( obj.connection[id] ) {
 			$.each( obj.field, function ( key, value ) {
-				if ( value === obj.connection[id] && obj.priority[key] >= obj.priority[id] ) {
+				$data = $( obj.field[key] ).data();
+				if ( value === obj.connection[id] && obj.priority[key] >= obj.priority[id] && true == $data.active ) {
 					obj.toggle(
 						key,
 						$( obj.field[key] ).val()
@@ -538,7 +549,8 @@ var pngx_fields_toggle = pngx_fields_toggle || {};
 
 		if ( obj.connection[id] ) {
 			$.each( obj.field, function ( key, value ) {
-				if ( value == obj.connection[id] && obj.priority[key] < obj.priority[id] ) {
+				$data = $( obj.field[key] ).data();
+				if ( value == obj.connection[id] && obj.priority[key] < obj.priority[id] && true == $data.active ) {
 					obj.toggle(
 						key,
 						$( obj.field[key] ).val()
@@ -552,12 +564,10 @@ var pngx_fields_toggle = pngx_fields_toggle || {};
 	obj.toggle_change = function ( id ) {
 
 		$( obj.field[id] ).on( 'change', function () {
-
 			obj.priority_toggle(
 				id,
 				$( this ).val()
 			);
-
 		} );
 
 	};
@@ -587,32 +597,30 @@ var pngx_fields_toggle = pngx_fields_toggle || {};
  */
 (function ( $ ) {
 
-	//todo links toggle
-
 	var $data = [];
 	var priority = {};
-	var data_counter = 0;
+	var count = 0;
 
 	$( '.pngx-meta-field-wrap' ).each( function () {
 		if ( !$.isEmptyObject( $( this ).data() ) ) {
 
-			$data[data_counter] = ( $( this ).data() );
+			$data[count] = ( $( this ).data() );
 
 			pngx_fields_toggle.set_fields(
-				data_counter,
-				$data[data_counter].toggleField,
-				$data[data_counter].toggleType,
-				$data[data_counter].togglePriority,
-				$data[data_counter].toggleConnection,
-				$data[data_counter].toggleGroup,
-				$data[data_counter].toggleShow,
-				$( $data[data_counter].toggleField ).val(),
-				$data[data_counter].toggleMsg
+				count,
+				$data[count].toggleField,
+				$data[count].toggleType,
+				$data[count].togglePriority,
+				$data[count].toggleConnection,
+				$data[count].toggleGroup,
+				$data[count].toggleShow,
+				$( $data[count].toggleField ).val(),
+				$data[count].toggleMsg
 			);
 
-			priority[$data[data_counter].togglePriority] = data_counter;
+			priority[$data[count].togglePriority] = count;
 
-			data_counter++;
+			count++;
 		}
 	} );
 
