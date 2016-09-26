@@ -263,11 +263,20 @@ var pngx_admin_tabs = pngx_admin_tabs || {};
 		//On Resize or Load check if Tabs will fit
 		$( window ).on( 'resize load', function ( e ) {
 			// 40px per tab for padding
+			console.log('responsive');
+
 			obj.tab_total_length = obj.tab_text + ( obj.tab_count * 40 );
+
+			console.log(obj.tab_total_length);
+			console.log( obj.tab_wrap );
+			console.log($( obj.tab_wrap ).width());
+
 			if ( obj.tab_total_length > $( obj.tab_wrap ).width() ) {
+				console.log('add show');
 				$( obj.tab_wrap + '-nav' ).addClass( obj.tab_wrap.replace( /\./g, ' ' ) + '-accordian' );
 				$( obj.tab_wrap + '-nav-mobile' ).addClass( 'show' );
 			} else {
+				console.log('remove show');
 				$( obj.tab_wrap + '-nav' ).fadeIn( 'fast', function () {
 					$( this ).removeClass( obj.tab_wrap.replace( /\./g, ' ' ) + '-accordian' );
 				} );
@@ -278,7 +287,7 @@ var pngx_admin_tabs = pngx_admin_tabs || {};
 		//Open Tabs in Responsive Mode
 		$( document ).on( 'click', obj.tab_wrap + '-nav-mobile', function ( event ) {
 			var tabClass = $( this ).attr( 'class' ).split( " " )[0];
-			toggle_mobile_menu( event, tabClass );
+			obj.toggle_mobile_menu( event, tabClass );
 		} )
 	};
 
@@ -394,7 +403,7 @@ var pngx_admin_tabs = pngx_admin_tabs || {};
 	/*
 	 * Toogle Responsive Tabs
 	 */
-	function toggle_mobile_menu( event, tabClass ) {
+	obj.toggle_mobile_menu = function ( event, tabClass ) {
 		tabClass = tabClass.slice( 0, -7 );
 
 		$( '.' + tabClass ).slideToggle();

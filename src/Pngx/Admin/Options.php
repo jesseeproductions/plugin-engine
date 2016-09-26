@@ -322,7 +322,7 @@ class Pngx__Admin__Options {
 
 		echo '<div class="main pngx-tabs" ' . Pngx__Admin__Fields::toggle( $tab_data, null ) . '>';
 
-		echo '<ul class="pngx-tabs-nav">';
+		echo '<ul class="main pngx-tabs-nav">';
 
 		foreach ( $this->sections as $section_slug => $section ) {
 			echo '<li><a href="#' . $section_slug . '">' . $section . '</a></li>';

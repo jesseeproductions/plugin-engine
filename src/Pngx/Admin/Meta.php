@@ -197,7 +197,7 @@ class Pngx__Admin__Meta {
 
 		<div class="main pngx-tabs" <?php echo Pngx__Admin__Fields::toggle( $tab_data, null ); ?> >
 
-			<ul class="pngx-tabs-nav">
+			<ul class="main pngx-tabs-nav">
 
 				<?php //Create Tabs
 				foreach ( self::get_tabs() as $tab_slug => $tab ) {
