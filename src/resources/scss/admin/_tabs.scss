@@ -17,12 +17,6 @@
 		padding: 0;
 	}
 
-	&.ui-tabs .pngx-tabs-nav.ui-tabs-nav li {
-		display: block;
-		float: left;
-		margin: 0;
-	}
-
 	&.ui-tabs .pngx-tabs-nav.ui-tabs-nav li.ui-state-default,
 	&.ui-tabs .pngx-tabs-nav.ui-tabs-nav li.ui-state-active {
 		background: none;
@@ -120,7 +114,7 @@
 		z-index: 2;
 	}
 
-	.ui-tabs .pngx-tabs-nav.pngx-tabs-accordian {
+	.pngx-tabs-nav.ui-tabs-nav.ui-corner-all.pngx-tabs-accordian {
 		background: #fff;
 		border-bottom: 0;
 		display: none;
@@ -141,5 +135,6 @@
 	.pngx-tabs-nav.pngx-tabs-accordian li.ui-state-default {
 		display: block;
 		float: none;
+		margin-right: 0;
 	}
 }

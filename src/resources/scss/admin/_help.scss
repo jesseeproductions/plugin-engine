@@ -69,7 +69,7 @@
 .promote-sup {
 	color: $color__grey;
 }
-@media only screen and (max-width: 640px) {
+@include media($mobile) {
 	.pngx-meta-field-content,
 	.pngx-meta-field-content.text {
 		margin: 0;

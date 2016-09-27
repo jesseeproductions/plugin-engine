@@ -11,6 +11,9 @@
 .pngx-meta-field-wrap {
   margin: 10px 0;
   overflow: hidden; }
+  @media screen and (max-width: 639px) {
+    .pngx-meta-field-wrap {
+      margin: 15px 0; } }
 
 .pngx-meta-field,
 .pngx-meta-label {
@@ -22,9 +25,20 @@
 
 .pngx-meta-field {
   width: 70%; }
+  .pngx-meta-field input,
+  .pngx-meta-field textarea,
+  .pngx-meta-field input {
+    max-width: 99%; }
 
 .pngx-meta-field.field-help {
   width: 100%; }
+
+@media screen and (max-width: 639px) {
+  .pngx-meta-field,
+  .pngx-meta-label {
+    width: 100%; }
+  .pngx-meta-label {
+    font-weight: 700; } }
 
 /**
 * Headings
@@ -34,6 +48,9 @@
   font-size: 15px;
   font-weight: bold;
   margin: 0 0 10px; }
+  @media screen and (max-width: 639px) {
+    .postbox h4.pngx-fields-heading {
+      margin: 0; } }
 
 .postbox h4.pngx-fields-heading:after {
   background: linear-gradient(to right, black 1%, #9b9b9b 28%, white 85%) repeat scroll 0 0 transparent;
@@ -53,7 +70,7 @@
   padding: 10px;
   text-align: center;
   width: 360px;
-  max-width: 94%; }
+  max-width: 90%; }
 
 /* License Button
 ------------------------------------------------------------ */
@@ -169,7 +186,7 @@
 .promote-sup {
   color: #777; }
 
-@media only screen and (max-width: 640px) {
+@media screen and (max-width: 639px) {
   .pngx-meta-field-content,
   .pngx-meta-field-content.text {
     margin: 0;
@@ -350,10 +367,6 @@
     height: 100%;
     margin: 20px 0 -7px;
     padding: 0; }
-  .pngx-tabs.ui-tabs .pngx-tabs-nav.ui-tabs-nav li {
-    display: block;
-    float: left;
-    margin: 0; }
   .pngx-tabs.ui-tabs .pngx-tabs-nav.ui-tabs-nav li.ui-state-default,
   .pngx-tabs.ui-tabs .pngx-tabs-nav.ui-tabs-nav li.ui-state-active {
     background: none;
@@ -429,7 +442,7 @@
     right: 15px;
     top: 8px;
     z-index: 2; }
-  .pngx-tabs .ui-tabs .pngx-tabs-nav.pngx-tabs-accordian {
+  .pngx-tabs .pngx-tabs-nav.ui-tabs-nav.ui-corner-all.pngx-tabs-accordian {
     background: #fff;
     border-bottom: 0;
     display: none;
@@ -445,7 +458,8 @@
     position: relative; }
   .pngx-tabs .pngx-tabs-nav.pngx-tabs-accordian li.ui-state-default {
     display: block;
-    float: none; }
+    float: none;
+    margin-right: 0; }
 
 /* ==========================================================================
   Tooltips CSS

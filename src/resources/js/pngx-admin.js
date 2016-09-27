@@ -224,77 +224,71 @@ var pngx_admin_help_scripts = pngx_admin_help_scripts || {};
  * jQuery UI Tabs
  * @type {{}}
  */
-var pngx_admin_tabs = pngx_admin_tabs || {};
-(function ( $, obj ) {
-	'use strict';
+function Pngx_Admin_Tabs( $, obj ) {
 
-	obj.tab_wrap = '.pngx-tabs';
+	obj.tab_wrap = '';
 	obj.data = obj.tabs = obj.updated_tab = obj.page_id = '';
 	obj.tab_text = obj.tab_total_length = 0;
 	obj.tab_count = 1;
 
-	obj.init = function ( wrap ) {
+	this.init = function ( wrap ) {
 
 		if ( wrap ) {
 			obj.tab_wrap = wrap;
 		}
+
 		//Set Tabs
 		obj.data = $( obj.tab_wrap ).data();
+
 		if ( "undefined" !== typeof obj.data ) {
+
 			obj.tabs = obj.data.toggleTabs;
 			obj.updated_tab = obj.data.toggleUpdate_message;
 			obj.id = obj.data.toggleId;
 
-			obj.init_tabs();
+			this.init_tabs();
 		}
 
 	};
 
-	obj.init_tabs = function () {
+	this.init_tabs = function () {
 
-		obj.wrap_tab_areas();
+		this.wrap_tab_areas();
 
-		obj.setup_tabs();
+		this.setup_tabs();
 
-		obj.tab_breakpoint();
+		this.tab_breakpoint();
 
-		obj.setup_responsive_accordion();
+		this.setup_responsive_accordion();
 
 		//On Resize or Load check if Tabs will fit
 		$( window ).on( 'resize load', function ( e ) {
 			// 40px per tab for padding
-			console.log('responsive');
-
 			obj.tab_total_length = obj.tab_text + ( obj.tab_count * 40 );
 
-			console.log(obj.tab_total_length);
-			console.log( obj.tab_wrap );
-			console.log($( obj.tab_wrap ).width());
-
 			if ( obj.tab_total_length > $( obj.tab_wrap ).width() ) {
-				console.log('add show');
-				$( obj.tab_wrap + '-nav' ).addClass( obj.tab_wrap.replace( /\./g, ' ' ) + '-accordian' );
+				$( obj.tab_wrap + '-nav' ).addClass( 'pngx-tabs-accordian' );
 				$( obj.tab_wrap + '-nav-mobile' ).addClass( 'show' );
 			} else {
-				console.log('remove show');
 				$( obj.tab_wrap + '-nav' ).fadeIn( 'fast', function () {
-					$( this ).removeClass( obj.tab_wrap.replace( /\./g, ' ' ) + '-accordian' );
+					$( obj.tab_wrap + '-nav' ).removeClass( 'pngx-tabs-accordian' );
 				} );
 				$( obj.tab_wrap + '-nav-mobile' ).removeClass( 'show' );
 			}
 		} );
 
 		//Open Tabs in Responsive Mode
-		$( document ).on( 'click', obj.tab_wrap + '-nav-mobile', function ( event ) {
-			var tabClass = $( this ).attr( 'class' ).split( " " )[0];
-			obj.toggle_mobile_menu( event, tabClass );
+		$( document ).on( 'click', obj.tab_wrap + ' ' + obj.tab_wrap + '-nav-mobile', function ( event ) {
+
+			$(this).siblings( ".pngx-tabs-accordian" ).slideToggle();
+
 		} )
 	};
 
 	/*
 	 * Wrap Tab Areas
 	 */
-	obj.wrap_tab_areas = function () {
+	this.wrap_tab_areas = function () {
 
 		var wrapped = $( obj.tab_wrap ).find( 'h2' ).wrap( '<div class="' + obj.tab_wrap.replace( /\./g, ' ' ) + '-panel">' );
 
@@ -313,7 +307,7 @@ var pngx_admin_tabs = pngx_admin_tabs || {};
 	/*
 	 * Init Tabs
 	 */
-	obj.setup_tabs = function () {
+	this.setup_tabs = function () {
 		/*
 		 *	Coding Built from the following resources
 		 *  http://stackoverflow.com/questions/4299435/remember-which-tab-was-active-after-refresh
@@ -373,7 +367,7 @@ var pngx_admin_tabs = pngx_admin_tabs || {};
 	/*
 	 * Responsive Tab Breakpoint
 	 */
-	obj.tab_breakpoint = function () {
+	this.tab_breakpoint = function () {
 
 		$( obj.tab_wrap + '-nav li' ).each( function () {
 
@@ -388,7 +382,7 @@ var pngx_admin_tabs = pngx_admin_tabs || {};
 	/*
 	 * Setup Responsive Accordion
 	 */
-	obj.setup_responsive_accordion = function () {
+	this.setup_responsive_accordion = function () {
 
 		$( obj.tab_wrap + '-nav' ).before( '<div class="' + obj.tab_wrap.replace( /\./g, ' ' ) + '-nav-mobile">Menu</div>' );
 
@@ -400,16 +394,7 @@ var pngx_admin_tabs = pngx_admin_tabs || {};
 
 	};
 
-	/*
-	 * Toogle Responsive Tabs
-	 */
-	obj.toggle_mobile_menu = function ( event, tabClass ) {
-		tabClass = tabClass.slice( 0, -7 );
-
-		$( '.' + tabClass ).slideToggle();
-	}
-
-})( jQuery, pngx_admin_tabs );
+}
 
 
 /**

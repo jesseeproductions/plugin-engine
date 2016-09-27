@@ -8,6 +8,9 @@
 .pngx-meta-field-wrap {
 	margin: 10px 0;
 	overflow: hidden;
+	@include media($mobile) {
+		margin: 15px 0;
+	}
 }
 
 .pngx-meta-field,
@@ -18,14 +21,28 @@
 
 .pngx-meta-label {
 	width: 30%;
+	font-weight: 700;
 }
 
 .pngx-meta-field {
 	width: 70%;
+
+	& input,
+	& textarea,
+	& input {
+		max-width: 99%;
+	}
 }
 
 .pngx-meta-field.field-help {
 	width: 100%;
+}
+
+@include media($mobile) {
+	.pngx-meta-field,
+	.pngx-meta-label {
+		width: 100%;
+	}
 }
 
 /**
@@ -36,6 +53,9 @@
 	font-size: 15px;
 	font-weight: bold;
 	margin: 0 0 10px;
+	@include media($mobile) {
+		margin: 0;
+	}
 }
 
 .postbox h4.pngx-fields-heading:after {
@@ -57,7 +77,7 @@
 	padding: 10px;
 	text-align: center;
 	width: 360px;
-	max-width: 94%;
+	max-width: 90%;
 }
 
 /* License Button
