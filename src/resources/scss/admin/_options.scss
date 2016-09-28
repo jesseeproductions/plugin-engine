@@ -2,6 +2,14 @@
    Options CSS
    ========================================================================== */
 
+.pngx-wrapper * {
+	box-sizing: border-box;
+
+	.form-table {
+	    table-layout: fixed;
+	}
+}
+
 /*hides empty row and support label*/
 #help .form-table th,
 .form-table tr > *:empty {

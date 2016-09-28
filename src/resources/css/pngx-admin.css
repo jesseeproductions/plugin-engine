@@ -21,7 +21,8 @@
   overflow: hidden; }
 
 .pngx-meta-label {
-  width: 30%; }
+  width: 30%;
+  font-weight: 700; }
 
 .pngx-meta-field {
   width: 70%; }
@@ -36,9 +37,7 @@
 @media screen and (max-width: 639px) {
   .pngx-meta-field,
   .pngx-meta-label {
-    width: 100%; }
-  .pngx-meta-label {
-    font-weight: 700; } }
+    width: 100%; } }
 
 /**
 * Headings
@@ -334,6 +333,11 @@
 /* ==========================================================================
    Options CSS
    ========================================================================== */
+.pngx-wrapper * {
+  box-sizing: border-box; }
+  .pngx-wrapper * .form-table {
+    table-layout: fixed; }
+
 /*hides empty row and support label*/
 #help .form-table th,
 .form-table tr > *:empty {

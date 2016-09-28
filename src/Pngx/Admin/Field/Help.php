@@ -27,7 +27,6 @@ class Pngx__Admin__Field__Help {
 		if ( 'pmgx_all_help' == $field['id'] ) {
 			$help_class = new Pngx__Admin__Help();
 			$help_class->display_help( 'all', false, 'pngx' );
-			//echo Pngx__Admin__Help::get_cctor_support_core_contact();
 
 			//Return as this is only showing all the help documents
 			return;

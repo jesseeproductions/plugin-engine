@@ -76,8 +76,15 @@ class Pngx__Admin__Fields {
 	*/
 	public static function display_field( $field = array(), $options = array(), $options_id = null, $meta = null, $wp_version ) {
 
-		//Create Different Name for Option Fields and Not Meta Fields
-		if ( $options && 'coupon_creator_options' == $options_id ) {
+		/**
+		 * Filter the Options Name ID for Display of Fields
+		 *
+		 * @parm string 'plugin_engine_options' name of field id
+		 */
+		$option_name = apply_filters( 'pngx_options_name_id', 'plugin_engine_options' );
+
+		//Create Different name attribute for Option Fields and Not Meta Fields
+		if ( $options && $options_id == $option_name ) {
 			$options_id = $options_id . '[' . $field['id'] . ']';
 		}
 

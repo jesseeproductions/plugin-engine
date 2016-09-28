@@ -14,7 +14,8 @@ if ( class_exists( 'Pngx__Main' ) ) {
  */
 class Pngx__Main {
 
-	const VERSION = '2.4dev';
+	const VERSION    = '2.4dev';
+	const OPTIONS_ID = 'plugin_engine_options';
 
 	protected $plugin_context;
 	protected $plugin_context_class;
@@ -35,15 +36,15 @@ class Pngx__Main {
 			$this->plugin_context_class = get_class( $context );
 		}
 
-		$this->plugin_path = trailingslashit( dirname( dirname( dirname( __FILE__ ) ) ) );
-		$this->plugin_dir  = trailingslashit( basename( $this->plugin_path ) );
-		$this->plugin_url  = plugins_url( $this->plugin_dir );
-		$parent_plugin_dir = trailingslashit( plugin_basename( $this->plugin_path ) );
-		$this->plugin_url  = plugins_url( $parent_plugin_dir === $this->plugin_dir ? $this->plugin_dir : $parent_plugin_dir );
+		$this->plugin_path   = trailingslashit( dirname( dirname( dirname( __FILE__ ) ) ) );
+		$this->plugin_dir    = trailingslashit( basename( $this->plugin_path ) );
+		$this->plugin_url    = plugins_url( $this->plugin_dir );
+		$parent_plugin_dir   = trailingslashit( plugin_basename( $this->plugin_path ) );
+		$this->plugin_url    = plugins_url( $parent_plugin_dir === $this->plugin_dir ? $this->plugin_dir : $parent_plugin_dir );
 		$this->resource_path = $this->plugin_path . 'src/resources/';
 		$this->resource_url  = $this->plugin_url . 'src/resources/';
-		$this->vendor_path = $this->plugin_path . 'vendor/';
-		$this->vendor_url  = $this->plugin_url . 'vendor/';
+		$this->vendor_path   = $this->plugin_path . 'vendor/';
+		$this->vendor_url    = $this->plugin_url . 'vendor/';
 
 		$this->load_text_domain( 'plugin-engine', basename( dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) ) . '/plugin-engine/languages/' );
 

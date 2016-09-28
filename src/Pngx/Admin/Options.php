@@ -36,7 +36,7 @@ class Pngx__Admin__Options {
 	/*
 	* Options ID
 	*/
-	protected $options_id = 'plugin_engine_options';
+	protected $options_id = Pngx__Main::OPTIONS_ID;
 
 	/*
 	* Field Prefix
@@ -404,7 +404,7 @@ class Pngx__Admin__Options {
 	public function initialize_options() {
 
 		$default_options = array();
-		$this->fields = $this->get_option_fields();
+		$this->fields    = $this->get_option_fields();
 
 		if ( is_array( $this->fields ) ) {
 
