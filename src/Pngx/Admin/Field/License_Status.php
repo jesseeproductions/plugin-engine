@@ -18,6 +18,11 @@ class Pngx__Admin__Field__License_Status {
 
 		$expiration_msg = $expiration_date = '';
 		$license        = $field['class'];
+		//handle older versions of Pro so they can update
+		if ( defined( 'CCTOR_PRO_VERSION_NUM' ) && 2.4 > CCTOR_PRO_VERSION_NUM && 'pro_license' == $license && ! strpos($license, 'cctor_') ) {
+			$license = 'cctor_' . $license;
+		}
+
 		$license_info   = get_option( $license );
 
 		if ( isset( $license_info['expires'] ) ) { // Only Display Expiration if Date
@@ -35,7 +40,7 @@ class Pngx__Admin__Field__License_Status {
 
 			wp_nonce_field( 'pngx_license_nonce', 'pngx_license_nonce' );
 
-			echo '<input type="submit" class="pngx-license-button-act" name="pngx_license_deactivate" value="' . _( 'Deactivate License' ) . '"/>';
+			echo '<input type="submit" class="pngx-license-button-act" name="pngx_license_deactivate" value="' . __( 'Deactivate License', 'plugin-engine' ) . '"/>';
 
 		} else {
 
@@ -51,7 +56,7 @@ class Pngx__Admin__Field__License_Status {
 
 			wp_nonce_field( 'pngx_license_nonce', 'pngx_license_nonce' );
 
-			echo '<input type="submit" class="pngx-license-button-det" name="pngx_license_activate" value="' . __( 'Activate License' ) . '"/>';
+			echo '<input type="submit" class="pngx-license-button-det" name="pngx_license_activate" value="' . __( 'Activate License', 'plugin-engine' ) . '"/>';
 
 		}
 

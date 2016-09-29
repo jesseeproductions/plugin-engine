@@ -1,22 +1,22 @@
 msgid ""
 msgstr ""
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Project-Id-Version: Plugin Engine\n"
-"POT-Creation-Date: 2016-08-29 11:18-0400\n"
-"PO-Revision-Date: 2016-08-29 11:23-0400\n"
+"POT-Creation-Date: 2016-09-29 09:27-0400\n"
+"PO-Revision-Date: 2016-09-29 09:28-0400\n"
+"Last-Translator: \n"
 "Language-Team: \n"
+"Language: es_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.8.9\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-WPHeader: pngx-common.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
 "esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
 "_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
-"Last-Translator: \n"
-"Language: es_ES\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 "X-Poedit-SearchPathExcluded-1: .git\n"
@@ -29,43 +29,43 @@ msgstr ""
 msgid "Today's Date is "
 msgstr "La fecha de hoy es "
 
-#: src/Pngx/Admin/Field/License_Status.php:26
+#: src/Pngx/Admin/Field/License_Status.php:31
 #, php-format
 msgid " and Expires on %s"
 msgstr "y expira el %s"
 
-#: src/Pngx/Admin/Field/License_Status.php:34
+#: src/Pngx/Admin/Field/License_Status.php:39
 msgid "License is Active"
 msgstr "Licencia Activa"
 
-#: src/Pngx/Admin/Field/License_Status.php:38
+#: src/Pngx/Admin/Field/License_Status.php:43
 msgid "Deactivate License"
 msgstr "Desactivar Licencia"
 
-#: src/Pngx/Admin/Field/License_Status.php:43
+#: src/Pngx/Admin/Field/License_Status.php:48
 msgid "License is Invalid"
 msgstr "Licencia no válida"
 
-#: src/Pngx/Admin/Field/License_Status.php:45
+#: src/Pngx/Admin/Field/License_Status.php:50
 #, php-format
 msgid "License Expired on %s"
 msgstr "Licencia Expiró el %s"
 
-#: src/Pngx/Admin/Field/License_Status.php:47
+#: src/Pngx/Admin/Field/License_Status.php:52
 msgid "License is Not Active"
 msgstr "Licencia no es activo"
 
-#: src/Pngx/Admin/Field/License_Status.php:54
+#: src/Pngx/Admin/Field/License_Status.php:59
 msgid "Activate License"
 msgstr "Activar licencia"
 
 #: src/Pngx/Admin/Help.php:122
 msgid "Video Guides"
-msgstr ""
+msgstr "Guías de vídeo"
 
 #: src/Pngx/Admin/Help.php:137
 msgid "Guides"
-msgstr ""
+msgstr "Guías"
 
 #: src/Pngx/Admin/Meta.php:60
 #, php-format
@@ -74,52 +74,55 @@ msgid ""
 "href=\"%s\" target=\"_blank\" >Please check this guide to narrow down the "
 "cause.</a>"
 msgstr ""
+"Allí tal vez un conflicto de javascript prevenir algunas de las "
+"características de trabajo.  <a href=\"%s\" target=\"_blank\">Consulte esta "
+"guía para reducir la causa.</a>"
 
 #: src/Pngx/Admin/Meta.php:109
 msgid "Content"
-msgstr ""
+msgstr "Contenido"
 
-#: src/Pngx/Admin/Options.php:335
+#: src/Pngx/Admin/Options.php:337
 msgid "Save Changes"
-msgstr ""
+msgstr "Salvar cambios"
 
 #: src/Pngx/Register_Post_Type.php:54
 #, php-format
 msgid "%s updated. <a href=\"%s\">View %s</a>"
-msgstr ""
+msgstr "%s actualizado. <a href=“%s”>Ver %s</a>"
 
 #: src/Pngx/Register_Post_Type.php:55
 msgid "Custom field updated."
-msgstr ""
+msgstr "Campo personalizado actualizado."
 
 #: src/Pngx/Register_Post_Type.php:56
 msgid "Custom field deleted."
-msgstr ""
+msgstr "Campo personalizado borrado."
 
 #: src/Pngx/Register_Post_Type.php:57
 #, php-format
 msgid "%s updated."
-msgstr ""
+msgstr "%s actualizado."
 
 #: src/Pngx/Register_Post_Type.php:58
 #, php-format
 msgid "%s restored to revision from %s"
-msgstr ""
+msgstr "%s restaurado a la revisión de %s"
 
 #: src/Pngx/Register_Post_Type.php:59
 #, php-format
 msgid "%s published. <a href=\"%s\">View %s</a>"
-msgstr ""
+msgstr "%s publicado. <a href=“%s”>Ver %s</a>"
 
 #: src/Pngx/Register_Post_Type.php:60
 #, php-format
 msgid "%s saved."
-msgstr ""
+msgstr "%s guardados."
 
 #: src/Pngx/Register_Post_Type.php:61
 #, php-format
 msgid "%s submitted. <a target=\"_blank\" href=\"%s\">Preview %s</a>"
-msgstr ""
+msgstr "%s enviado. <a target=“_blank” href=“%s”>Vista Previa %s</a>"
 
 #: src/Pngx/Register_Post_Type.php:62
 #, php-format
@@ -127,6 +130,8 @@ msgid ""
 "%s scheduled for: <strong>%1$s</strong>. <a target=\"_blank\" href=\"%2$s"
 "\">Preview %s</a>"
 msgstr ""
+"%s programado para: <strong>%1$s</strong>. <a target=“_blank” "
+"href=“%2$s”>Vista previa %s</a>"
 
 #: src/Pngx/Register_Post_Type.php:62
 msgid "M j, Y @ G:i"
@@ -136,6 +141,7 @@ msgstr ""
 #, php-format
 msgid "%s draft updated. <a target=\"_blank\" href=\"%s\">Preview %s</a>"
 msgstr ""
+"%s borrador actualizado. <a target=“_blank” href=“%s”>Vista previa %s</a>"
 
 #: src/Pngx/Register_Post_Type.php:108 src/Pngx/Register_Post_Type.php:109
 #: src/Pngx/Register_Post_Type.php:110 src/Pngx/Register_Post_Type.php:111
@@ -147,130 +153,130 @@ msgstr ""
 
 #: src/Pngx/Register_Post_Type.php:112
 msgid "Add New"
-msgstr ""
+msgstr "Agregar Nuevo"
 
 #: src/Pngx/Register_Post_Type.php:113 src/Pngx/Register_Taxonomy.php:38
 #, php-format
 msgid "Add New %s"
-msgstr ""
+msgstr "Agregar Nuevo %s"
 
 #: src/Pngx/Register_Post_Type.php:114 src/Pngx/Register_Taxonomy.php:36
 #, php-format
 msgid "Edit %s"
-msgstr ""
+msgstr "Editar %s"
 
 #: src/Pngx/Register_Post_Type.php:115
 #, php-format
 msgid "New %s"
-msgstr ""
+msgstr "Nueva %s"
 
 #: src/Pngx/Register_Post_Type.php:116
 #, php-format
 msgid "View %s"
-msgstr ""
+msgstr "Mostrar %s"
 
 #: src/Pngx/Register_Post_Type.php:117 src/Pngx/Register_Taxonomy.php:32
 #, php-format
 msgid "Search %s"
-msgstr ""
+msgstr "Buscar %s "
 
 #: src/Pngx/Register_Post_Type.php:118
 #, php-format
 msgid "No %s found"
-msgstr ""
+msgstr "No se encontrarón %s"
 
 #: src/Pngx/Register_Post_Type.php:119
 #, php-format
 msgid "No %s found in Trash"
-msgstr ""
+msgstr "No hay %s en la Papelera"
 
 #: src/Pngx/Register_Post_Type.php:120 src/Pngx/Register_Taxonomy.php:34
 #, php-format
 msgid "Parent %s"
-msgstr ""
+msgstr "Principal %s"
 
 #: src/Pngx/Register_Post_Type.php:121 src/Pngx/Register_Taxonomy.php:33
 #, php-format
 msgid "All %s"
-msgstr ""
+msgstr "Todos %s"
 
 #: src/Pngx/Register_Post_Type.php:122 src/Pngx/Register_Taxonomy.php:37
 #, php-format
 msgid "Update %s"
-msgstr ""
+msgstr "Actualizar %s"
 
 #: src/Pngx/Register_Post_Type.php:123
 #, php-format
 msgid "%s Archives"
-msgstr ""
+msgstr "%s Archivos"
 
 #: src/Pngx/Register_Post_Type.php:124
 #, php-format
 msgid "Insert into %s"
-msgstr ""
+msgstr "Insertar en %s"
 
 #: src/Pngx/Register_Post_Type.php:125
 #, php-format
 msgid "Uploaded to this %s"
-msgstr ""
+msgstr "Actualizado a este %s"
 
 #: src/Pngx/Register_Post_Type.php:126
 #, php-format
 msgid "%s list"
-msgstr ""
+msgstr "%s lista"
 
 #: src/Pngx/Register_Post_Type.php:127
 #, php-format
 msgid "%s list navigation"
-msgstr ""
+msgstr "Lista Navegación %s"
 
 #: src/Pngx/Register_Post_Type.php:128
 #, php-format
 msgid "Filter %s list"
-msgstr ""
+msgstr "%s Lista de Navigation"
 
 #: src/Pngx/Register_Post_Type.php:151
 #, php-format
 msgid "Creates a %s Custom Post Type"
-msgstr ""
+msgstr "Crea un tipo de mensaje personalizado de %s"
 
 #: src/Pngx/Register_Taxonomy.php:35
 #, php-format
 msgid "Parent %s:"
-msgstr ""
+msgstr "%s superior:"
 
 #: src/Pngx/Register_Taxonomy.php:39
 #, php-format
 msgid "New %s Name"
-msgstr ""
+msgstr "Nueva%s Nombre"
 
 #: src/Pngx/Register_Taxonomy.php:41
 #, php-format
 msgid "Popular %s"
-msgstr ""
+msgstr "%s populares"
 
 #: src/Pngx/Register_Taxonomy.php:42
 #, php-format
 msgid "Separate %s with commas"
-msgstr ""
+msgstr "%s se separan con comas"
 
 #: src/Pngx/Register_Taxonomy.php:43
 #, php-format
 msgid "Add or remove %s"
-msgstr ""
+msgstr "Agregar o eliminar %s"
 
 #: src/Pngx/Register_Taxonomy.php:44
 #, php-format
 msgid "Choose from the most used %s"
-msgstr ""
+msgstr "Elegir el más utilizado de %s"
 
 #. Plugin Name of the plugin/theme
 msgid "Plugin Engine"
 msgstr "Plugin Engine"
 
 #. Description of the plugin/theme
-msgid "An event settings framework for managing shared options"
-msgstr ""
+msgid "A plugin framework to be embeded in the core plugin"
+msgstr "Manten el plugin coreo <strong>GRATIS</strong>!"
 
 #. Author of the plugin/theme
 msgid "Jessee Productions, LLC"
@@ -279,3 +285,8 @@ msgstr "Jessee Productions, LLC"
 #. Author URI of the plugin/theme
 msgid "https://jesseeproductions.com/"
 msgstr "https://jesseeproductions.com/"
+
+#~ msgid "An event settings framework for managing shared options"
+#~ msgstr ""
+#~ "Un marco para la gestión de la configuración de eventos opciones "
+#~ "compartidas"

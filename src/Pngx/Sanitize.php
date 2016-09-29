@@ -273,10 +273,20 @@ class Pngx__Sanitize {
 	}
 
 	/*
-	* Dimensions ID Sanitize
+	* Numbers ID Sanitize
 	* @version 2.1
 	*/
 	private function sanitize_number() {
+
+		return $this->sanitize_absint( $this->input );
+
+	}
+
+	/*
+	* Numbers ID Sanitize
+	* @version 2.1
+	*/
+	private function sanitize_dimensions() {
 
 		return $this->sanitize_absint( $this->input );
 

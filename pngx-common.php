@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Plugin Engine
-Description: An event settings framework for managing shared options
+Description: A plugin framework to be embeded in the core plugin
 Version: 2.4dev
 Author: Jessee Productions, LLC
 Author URI: https://jesseeproductions.com/

@@ -1,15 +1,15 @@
-#, fuzzy
 msgid ""
 msgstr ""
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Plugin Engine\n"
-"POT-Creation-Date: 2016-09-29 09:28-0400\n"
-"PO-Revision-Date: 2016-08-29 11:16-0400\n"
+"POT-Creation-Date: 2016-09-29 09:27-0400\n"
+"PO-Revision-Date: 2016-09-29 09:29-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 1.8.9\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-WPHeader: pngx-common.php\n"
@@ -27,45 +27,45 @@ msgstr ""
 
 #: src/Pngx/Admin/Field/Date.php:41
 msgid "Today's Date is "
-msgstr ""
+msgstr "Data de hoje é"
 
 #: src/Pngx/Admin/Field/License_Status.php:31
 #, php-format
 msgid " and Expires on %s"
-msgstr ""
+msgstr "e expira em %s"
 
 #: src/Pngx/Admin/Field/License_Status.php:39
 msgid "License is Active"
-msgstr ""
+msgstr "A Chave de Licença está Ativa."
 
 #: src/Pngx/Admin/Field/License_Status.php:43
 msgid "Deactivate License"
-msgstr ""
+msgstr "Desativar licença"
 
 #: src/Pngx/Admin/Field/License_Status.php:48
 msgid "License is Invalid"
-msgstr ""
+msgstr "Esta licença não é válida"
 
 #: src/Pngx/Admin/Field/License_Status.php:50
 #, php-format
 msgid "License Expired on %s"
-msgstr ""
+msgstr "Licença expirou em %s"
 
 #: src/Pngx/Admin/Field/License_Status.php:52
 msgid "License is Not Active"
-msgstr ""
+msgstr "Licença não está ativa"
 
 #: src/Pngx/Admin/Field/License_Status.php:59
 msgid "Activate License"
-msgstr ""
+msgstr "Ativar a Licença"
 
 #: src/Pngx/Admin/Help.php:122
 msgid "Video Guides"
-msgstr ""
+msgstr "Guias de vídeo"
 
 #: src/Pngx/Admin/Help.php:137
 msgid "Guides"
-msgstr ""
+msgstr "Guias"
 
 #: src/Pngx/Admin/Meta.php:60
 #, php-format
@@ -74,52 +74,55 @@ msgid ""
 "href=\"%s\" target=\"_blank\" >Please check this guide to narrow down the "
 "cause.</a>"
 msgstr ""
+"Há talvez um conflito de javascript, impedindo que alguns recursos "
+"funcionem  <a href=\"%s\" target=\"_blank\">Por favor, verifique este guia "
+"para diminuir a causa.</a>"
 
 #: src/Pngx/Admin/Meta.php:109
 msgid "Content"
-msgstr ""
+msgstr "Conteudo"
 
 #: src/Pngx/Admin/Options.php:337
 msgid "Save Changes"
-msgstr ""
+msgstr "Salvar alerações"
 
 #: src/Pngx/Register_Post_Type.php:54
 #, php-format
 msgid "%s updated. <a href=\"%s\">View %s</a>"
-msgstr ""
+msgstr "%s atualizado. <a href=\"%s\">Veja %s</a>"
 
 #: src/Pngx/Register_Post_Type.php:55
 msgid "Custom field updated."
-msgstr ""
+msgstr "Cor do campo de oferta"
 
 #: src/Pngx/Register_Post_Type.php:56
 msgid "Custom field deleted."
-msgstr ""
+msgstr "Campo personalizado deletado."
 
 #: src/Pngx/Register_Post_Type.php:57
 #, php-format
 msgid "%s updated."
-msgstr ""
+msgstr "e expira em %s"
 
 #: src/Pngx/Register_Post_Type.php:58
 #, php-format
 msgid "%s restored to revision from %s"
-msgstr ""
+msgstr "%s restaurado da revisão de %s"
 
 #: src/Pngx/Register_Post_Type.php:59
 #, php-format
 msgid "%s published. <a href=\"%s\">View %s</a>"
-msgstr ""
+msgstr "%s publicado. <a href=\\”%s\\”>Ver %s </a>"
 
 #: src/Pngx/Register_Post_Type.php:60
 #, php-format
 msgid "%s saved."
-msgstr ""
+msgstr "Licença expirou em %s"
 
 #: src/Pngx/Register_Post_Type.php:61
 #, php-format
 msgid "%s submitted. <a target=\"_blank\" href=\"%s\">Preview %s</a>"
-msgstr ""
+msgstr "%s enviado. <a target=“_blank” href=“%s”>Pré-visualizar %s</a>"
 
 #: src/Pngx/Register_Post_Type.php:62
 #, php-format
@@ -127,6 +130,8 @@ msgid ""
 "%s scheduled for: <strong>%1$s</strong>. <a target=\"_blank\" href=\"%2$s"
 "\">Preview %s</a>"
 msgstr ""
+"%s agendado para: <strong>%1$s</strong>. <a target=\\\"_blank\\\" href=\\"
+"\"%2$s\\\">Pré-visualizar </a>"
 
 #: src/Pngx/Register_Post_Type.php:62
 msgid "M j, Y @ G:i"
@@ -136,6 +141,8 @@ msgstr ""
 #, php-format
 msgid "%s draft updated. <a target=\"_blank\" href=\"%s\">Preview %s</a>"
 msgstr ""
+"Rascunho de %s atualizado. <a target=\\”_blank\\” href=\\”%s\\”>Pré-"
+"visualizar  %s </a>"
 
 #: src/Pngx/Register_Post_Type.php:108 src/Pngx/Register_Post_Type.php:109
 #: src/Pngx/Register_Post_Type.php:110 src/Pngx/Register_Post_Type.php:111
@@ -147,135 +154,135 @@ msgstr ""
 
 #: src/Pngx/Register_Post_Type.php:112
 msgid "Add New"
-msgstr ""
+msgstr "Adicionar Novo"
 
 #: src/Pngx/Register_Post_Type.php:113 src/Pngx/Register_Taxonomy.php:38
 #, php-format
 msgid "Add New %s"
-msgstr ""
+msgstr "Adicionar Novo %s"
 
 #: src/Pngx/Register_Post_Type.php:114 src/Pngx/Register_Taxonomy.php:36
 #, php-format
 msgid "Edit %s"
-msgstr ""
+msgstr "Editar %s"
 
 #: src/Pngx/Register_Post_Type.php:115
 #, php-format
 msgid "New %s"
-msgstr ""
+msgstr "Novo %s"
 
 #: src/Pngx/Register_Post_Type.php:116
 #, php-format
 msgid "View %s"
-msgstr ""
+msgstr "e expira em %s"
 
 #: src/Pngx/Register_Post_Type.php:117 src/Pngx/Register_Taxonomy.php:32
 #, php-format
 msgid "Search %s"
-msgstr ""
+msgstr "Buscar %s"
 
 #: src/Pngx/Register_Post_Type.php:118
 #, php-format
 msgid "No %s found"
-msgstr ""
+msgstr "Nenhum %s encontrado"
 
 #: src/Pngx/Register_Post_Type.php:119
 #, php-format
 msgid "No %s found in Trash"
-msgstr ""
+msgstr "Licença expirou em %s"
 
 #: src/Pngx/Register_Post_Type.php:120 src/Pngx/Register_Taxonomy.php:34
 #, php-format
 msgid "Parent %s"
-msgstr ""
+msgstr "Matriz %s"
 
 #: src/Pngx/Register_Post_Type.php:121 src/Pngx/Register_Taxonomy.php:33
 #, php-format
 msgid "All %s"
-msgstr ""
+msgstr "e expira em %s"
 
 #: src/Pngx/Register_Post_Type.php:122 src/Pngx/Register_Taxonomy.php:37
 #, php-format
 msgid "Update %s"
-msgstr ""
+msgstr "Atualizar %s"
 
 #: src/Pngx/Register_Post_Type.php:123
 #, php-format
 msgid "%s Archives"
-msgstr ""
+msgstr "Licença expirou em %s"
 
 #: src/Pngx/Register_Post_Type.php:124
 #, php-format
 msgid "Insert into %s"
-msgstr ""
+msgstr "Inserir %s"
 
 #: src/Pngx/Register_Post_Type.php:125
 #, php-format
 msgid "Uploaded to this %s"
-msgstr ""
+msgstr "Licença expirou em %s"
 
 #: src/Pngx/Register_Post_Type.php:126
 #, php-format
 msgid "%s list"
-msgstr ""
+msgstr "Licença expirou em %s"
 
 #: src/Pngx/Register_Post_Type.php:127
 #, php-format
 msgid "%s list navigation"
-msgstr ""
+msgstr "Licença expirou em %s"
 
 #: src/Pngx/Register_Post_Type.php:128
 #, php-format
 msgid "Filter %s list"
-msgstr ""
+msgstr "Lista de filtros de %s"
 
 #: src/Pngx/Register_Post_Type.php:151
 #, php-format
 msgid "Creates a %s Custom Post Type"
-msgstr ""
+msgstr "Cria um tipo de Post personalizado de %s"
 
 #: src/Pngx/Register_Taxonomy.php:35
 #, php-format
 msgid "Parent %s:"
-msgstr ""
+msgstr "Matriz %s:"
 
 #: src/Pngx/Register_Taxonomy.php:39
 #, php-format
 msgid "New %s Name"
-msgstr ""
+msgstr "Novo %s Nome"
 
 #: src/Pngx/Register_Taxonomy.php:41
 #, php-format
 msgid "Popular %s"
-msgstr ""
+msgstr "Licença expirou em %s"
 
 #: src/Pngx/Register_Taxonomy.php:42
 #, php-format
 msgid "Separate %s with commas"
-msgstr ""
+msgstr "Separar %s por vírgulas"
 
 #: src/Pngx/Register_Taxonomy.php:43
 #, php-format
 msgid "Add or remove %s"
-msgstr ""
+msgstr "Adicionar ou remover %s"
 
 #: src/Pngx/Register_Taxonomy.php:44
 #, php-format
 msgid "Choose from the most used %s"
-msgstr ""
+msgstr "Escolher entre os mais utilizados %s"
 
 #. Plugin Name of the plugin/theme
 msgid "Plugin Engine"
-msgstr ""
+msgstr "Plugin Engine"
 
 #. Description of the plugin/theme
 msgid "A plugin framework to be embeded in the core plugin"
-msgstr ""
+msgstr "Um quadro de plugin para ser embeded no núcleo plugin"
 
 #. Author of the plugin/theme
 msgid "Jessee Productions, LLC"
-msgstr ""
+msgstr "Jessee Productions, LLC"
 
 #. Author URI of the plugin/theme
 msgid "https://jesseeproductions.com/"
-msgstr ""
+msgstr "https://jesseeproductions.com/"

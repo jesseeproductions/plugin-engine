@@ -19,6 +19,10 @@ class Pngx__Admin__Field__License {
 		if ( isset( $options_id ) && ! empty( $options_id ) ) {
 			$name         = $options_id;
 			$license      = $field['class'];
+			//handle older versions of Pro so they can update
+			if ( defined( 'CCTOR_PRO_VERSION_NUM' ) && 2.4 > CCTOR_PRO_VERSION_NUM && 'pro_license' == $license && ! strpos($license, 'cctor_') ) {
+				$license = 'cctor_' . $license;
+			}
 			$license_info = get_option( $license );
 			$value        = isset( $license_info['key'] ) ? $license_info['key'] : '';
 
