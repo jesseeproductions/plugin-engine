@@ -5,8 +5,14 @@
 .pngx-wrapper * {
 	box-sizing: border-box;
 
-	.form-table {
-	    table-layout: fixed;
+}
+
+@include media($mobile) {
+	.pngx-wrapper * {
+
+		.form-table {
+		    table-layout: fixed;
+		}
 	}
 }
 

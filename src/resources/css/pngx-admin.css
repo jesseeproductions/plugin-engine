@@ -335,8 +335,10 @@
    ========================================================================== */
 .pngx-wrapper * {
   box-sizing: border-box; }
+
+@media screen and (max-width: 639px) {
   .pngx-wrapper * .form-table {
-    table-layout: fixed; }
+    table-layout: fixed; } }
 
 /*hides empty row and support label*/
 #help .form-table th,
