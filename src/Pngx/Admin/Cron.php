@@ -34,20 +34,20 @@ abstract class Pngx__Admin__Cron {
 	 */
 	protected $current_id = 0;
 
-	/*
-	* Construct
-	* since 1.90
-	*/
-	public function __construct() {
+
+	/**
+	 * Construct
+	 */
+	abstract public function __construct();
+
+	/*public function __construct() {
 
 		add_action( 'cctor_activate', array( __CLASS__, 'register_scheduled_task' ) );
 
 		add_action( self::SCHEDULED_TASK, array( $this, 'process_queue' ), 20, 0 );
 
 		add_action( 'cctor_deactivate', array( __CLASS__, 'clear_scheduled_task' ) );
-	}
-
-	/***************************************************************************/
+	}*/
 
 	/**
 	 * Runs upon plugin update, registering the task to batch process recurring expiration
