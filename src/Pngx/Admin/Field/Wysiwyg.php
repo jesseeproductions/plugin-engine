@@ -24,9 +24,12 @@ class Pngx__Admin__Field__Wysiwyg {
 			$value = $meta;
 		}
 
-		$wysiwyg_options = isset( $field['options'] ) ? $field['options'] : array();
+
+		$std = isset( $field['std'] ) ? $field['std'] : '';
+
+		$wysiwyg_options                  = isset( $field['options'] ) ? $field['options'] : array();
 		$wysiwyg_options['textarea_name'] = $name;
-		$wysiwyg_options['editor_class'] = $name;
+		$wysiwyg_options['editor_class']  = $name;
 
 		wp_editor( $value, $field['id'], $wysiwyg_options );
 
