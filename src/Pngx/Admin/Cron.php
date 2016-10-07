@@ -13,7 +13,10 @@ if ( $_SERVER['SCRIPT_FILENAME'] == __FILE__ ) {
 
 abstract class Pngx__Admin__Cron {
 
-	const SCHEDULED_TASK = 'pngx_cron_job';
+	/**
+	 * @var string
+	 */
+	protected $scheduled_task = 'pngx_cron_job';
 
 	/**
 	 * Number of items to be processed in a single batch.
@@ -42,18 +45,19 @@ abstract class Pngx__Admin__Cron {
 
 	/*public function __construct() {
 
-		add_action( 'cctor_activate', array( __CLASS__, 'register_scheduled_task' ) );
+		add_action( 'cctor_activate', array( $this, 'register_scheduled_task' ) );
 
-		add_action( self::SCHEDULED_TASK, array( $this, 'process_queue' ), 20, 0 );
+		add_action( $this->scheduled_task, array( $this, 'process_queue' ), 20, 0 );
 
-		add_action( 'cctor_deactivate', array( __CLASS__, 'clear_scheduled_task' ) );
+		add_action( 'cctor_deactivate', array( $this, 'clear_scheduled_task' ) );
 	}*/
 
 	/**
 	 * Runs upon plugin update, registering the task to batch process recurring expiration
 	 */
-	public static function register_scheduled_task() {
-		if ( ! wp_next_scheduled( self::SCHEDULED_TASK ) ) {
+	public function register_scheduled_task() {
+
+		if ( ! wp_next_scheduled( $this->scheduled_task ) ) {
 			/**
 			 * Filter the interval at which to process recurring expiration queues.
 			 *
@@ -62,19 +66,18 @@ abstract class Pngx__Admin__Cron {
 			 *
 			 * @see wp_schedule_event() or 'cron_schedules'
 			 */
-			$interval = apply_filters( self::SCHEDULED_TASK . '_interval', 'every_30mins' );
+			$interval = apply_filters( $this->scheduled_task . '_interval', 'every_30mins' );
 
-			wp_schedule_event( time(), $interval, self::SCHEDULED_TASK );
+			wp_schedule_event( time(), $interval, $this->scheduled_task );
 		}
 	}
 
 	/**
 	 * Expected to fire upon plugin deactivation.
 	 */
-	public static function clear_scheduled_task() {
-		wp_clear_scheduled_hook( self::SCHEDULED_TASK );
+	public function clear_scheduled_task() {
+		wp_clear_scheduled_hook( $this->scheduled_task );
 	}
-
 	/**
 	 * Processes the next item in que
 	 *
@@ -87,7 +90,7 @@ abstract class Pngx__Admin__Cron {
 			 *
 			 * @param int $default_batch_size
 			 */
-			$this->batch_size = (int) apply_filters( self::SCHEDULED_TASK . '_batch_size', 100 );
+			$this->batch_size = (int) apply_filters( $this->scheduled_task . '_batch_size', 100 );
 		} else {
 			$this->batch_size = (int) $batch_size;
 		}
