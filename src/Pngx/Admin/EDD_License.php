@@ -11,13 +11,17 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Pngx__Admin__EDD_License {
 
-	private static $default_update_url = 'https://couponcreatorplugin.com/edd-sl-api/';
+	protected $update_url = '';
+	protected $options_id = Pngx__Main::OPTIONS_ID;
+	protected $license    = '';
 
-	private $update_url = '';
+	public function __construct( $shop_url, $options_id, $license ) {
 
-	public function __construct() {
+		$this->update_url = trailingslashit( $shop_url );
 
-		$this->set_update_url();
+		$this->options_id = $options_id;
+
+		$this->license = $license;
 
 	}
 
@@ -26,25 +30,15 @@ class Pngx__Admin__EDD_License {
 	 *
 	 * @return string
 	 */
-	public static function get_update_url() {
-		return apply_filters( 'cctor_update_url', self::$default_update_url );
-	}
-
-	/**
-	 * Set the Plugin update URL
-	 *
-	 * This can be overridden using the global constant 'COUPON_CREATOR_STORE_URL'
-	 *
-	 */
-	private function set_update_url() {
-		$this->update_url = Cctor__Coupon__Main::COUPON_CREATOR_STORE_URL ? trailingslashit( Cctor__Coupon__Main::COUPON_CREATOR_STORE_URL ) : trailingslashit( self::get_update_url() );
+	public function get_update_url() {
+		return apply_filters( 'pngx_update_url', $this->update_url );
 	}
 
 	/*
 	* Register and Enqueue Style and Scripts on Coupon Edit Screens
 	*
 	*/
-	public static function activate_license() {
+	public function activate_license() {
 
 		// listen for our activate button to be clicked
 		if ( isset( $_POST['pngx_license_activate'] ) ) {
@@ -54,6 +48,10 @@ class Pngx__Admin__EDD_License {
 				return false; // get out if we didn't click the Activate button
 			}
 
+			if ( $_POST['pngx_license_key'] != $this->license ) {
+				return false; //not this plugins license
+			}
+
 			//Set WordPress Option Name
 			$license_option_name = esc_attr( $_POST['pngx_license_key'] );
 
@@ -61,9 +59,9 @@ class Pngx__Admin__EDD_License {
 			$license_info = get_option( $license_option_name );
 
 			//Check if the License has changed and deactivate
-			if ( $_POST[ Cctor__Coupon__Main::OPTIONS_ID ][ $license_option_name ] != $license_info['key'] ) {
+			if ( $_POST[ $this->options_id ][ $license_option_name ] != $license_info['key'] ) {
 
-				$license_info['key'] = esc_attr( trim( $_POST[ Cctor__Coupon__Main::OPTIONS_ID ][ $license_option_name ] ) );
+				$license_info['key'] = esc_attr( trim( $_POST[ $this->options_id ][ $license_option_name ] ) );
 
 				delete_option( $license_option_name );
 
@@ -128,7 +126,7 @@ class Pngx__Admin__EDD_License {
 	* Deactivate a license key.
 	*
 	*/
-	public static function deactivate_license() {
+	public function deactivate_license() {
 
 		// listen for our activate button to be clicked
 		if ( isset( $_POST['pngx_license_deactivate'] ) ) {
@@ -136,6 +134,10 @@ class Pngx__Admin__EDD_License {
 			// run a quick security check
 			if ( ! check_admin_referer( 'pngx_license_nonce', 'pngx_license_nonce' ) ) {
 				return false; // get out if we didn't click the Activate button
+			}
+
+			if ( $_POST['pngx_license_key'] != $this->license ) {
+				return false; //not this plugins license
 			}
 
 			$license_option_name = esc_attr( $_POST['pngx_license_key'] );
@@ -167,7 +169,7 @@ class Pngx__Admin__EDD_License {
 			$license_data = json_decode( wp_remote_retrieve_body( $response ) );
 
 			// $license_data->license will be either "deactivated" or "failed"
-			if ( 'deactivated' == $license_data->license || 'failed'  == $license_data->license ) {
+			if ( 'deactivated' == $license_data->license || 'failed' == $license_data->license ) {
 
 				unset( $license_info['status'] );
 				unset( $license_info['expires'] );
