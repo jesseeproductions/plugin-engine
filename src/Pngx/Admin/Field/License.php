@@ -17,18 +17,21 @@ class Pngx__Admin__Field__License {
 	public static function display( $field = array(), $options_id = null ) {
 
 		if ( isset( $options_id ) && ! empty( $options_id ) ) {
-			$name         = $options_id;
-			$license      = $field['class'];
+			$name    = $options_id;
+			$license = $field['license_key'];
+
 			//handle older versions of Pro so they can update
-			if ( defined( 'CCTOR_PRO_VERSION_NUM' ) && 2.4 > CCTOR_PRO_VERSION_NUM && 'pro_license' == $license && ! strpos($license, 'cctor_') ) {
+			if ( defined( 'CCTOR_PRO_VERSION_NUM' ) && 2.4 > CCTOR_PRO_VERSION_NUM && 'pro_license' == $license && ! strpos( $license, 'cctor_' ) ) {
+				$license = $field['class'];
 				$license = 'cctor_' . $license;
 			}
+
 			$license_info = get_option( $license );
 			$value        = isset( $license_info['key'] ) ? $license_info['key'] : '';
 
-			$size      = isset( $field['size'] ) ? $field['size'] : 30;
-			$class     = isset( $field['class'] ) ? $field['class'] : '';
-			$std       = isset( $field['std'] ) ? $field['std'] : '';
+			$size  = isset( $field['size'] ) ? $field['size'] : 30;
+			$class = isset( $field['class'] ) ? $field['class'] : '';
+			$std   = isset( $field['std'] ) ? $field['std'] : '';
 
 			echo '<input type="text" class="license-field ' . esc_attr( $class ) . '"  id="' . esc_attr( $field['id'] ) . '" name="' . esc_attr( $name ) . '" placeholder="' . esc_attr( $std ) . '" value="' . esc_attr( $value ) . '" size="' . absint( $size ) . '" />';
 

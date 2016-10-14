@@ -41,19 +41,19 @@ class Pngx__Admin__EDD_License {
 	public function activate_license() {
 
 		// listen for our activate button to be clicked
-		if ( isset( $_POST['pngx_license_activate'] ) ) {
+		if ( isset( $_POST[ 'pngx_license_activate_' . $this->license ] ) ) {
 
 			// run a quick security check
-			if ( ! check_admin_referer( 'pngx_license_nonce', 'pngx_license_nonce' ) ) {
+			if ( ! check_admin_referer( 'pngx_license_nonce_' . $this->license, 'pngx_license_nonce_' . $this->license ) ) {
 				return false; // get out if we didn't click the Activate button
 			}
 
-			if ( $_POST['pngx_license_key'] != $this->license ) {
+			if ( $_POST[ 'pngx_license_key_' . $this->license ] != $this->license ) {
 				return false; //not this plugins license
 			}
 
 			//Set WordPress Option Name
-			$license_option_name = esc_attr( $_POST['pngx_license_key'] );
+			$license_option_name = esc_attr( $_POST[ 'pngx_license_key_' . $this->license ] );
 
 			// retrieve the license from the database
 			$license_info = get_option( $license_option_name );
@@ -73,7 +73,7 @@ class Pngx__Admin__EDD_License {
 			$api_params = array(
 				'edd_action' => 'activate_license',
 				'license'    => esc_attr( trim( $license_info['key'] ) ),
-				'item_name'  => urlencode( esc_attr( $_POST['pngx_license_name'] ) ), // the name of our product in EDD
+				'item_name'  => urlencode( esc_attr( $_POST[ 'pngx_license_name_' . $this->license ] ) ), // the name of our product in EDD
 				'url'        => home_url()
 			);
 
@@ -129,18 +129,18 @@ class Pngx__Admin__EDD_License {
 	public function deactivate_license() {
 
 		// listen for our activate button to be clicked
-		if ( isset( $_POST['pngx_license_deactivate'] ) ) {
+		if ( isset( $_POST[ 'pngx_license_deactivate_' . $this->license ] ) ) {
 
 			// run a quick security check
-			if ( ! check_admin_referer( 'pngx_license_nonce', 'pngx_license_nonce' ) ) {
+			if ( ! check_admin_referer( 'pngx_license_nonce_' . $this->license, 'pngx_license_nonce_' . $this->license ) ) {
 				return false; // get out if we didn't click the Activate button
 			}
 
-			if ( $_POST['pngx_license_key'] != $this->license ) {
+			if ( $_POST[ 'pngx_license_key_' . $this->license ] != $this->license ) {
 				return false; //not this plugins license
 			}
 
-			$license_option_name = esc_attr( $_POST['pngx_license_key'] );
+			$license_option_name = esc_attr( $_POST[ 'pngx_license_key_' . $this->license ] );
 
 			// retrieve the license from the database
 			$license_info = get_option( $license_option_name );
@@ -149,7 +149,7 @@ class Pngx__Admin__EDD_License {
 			$api_params = array(
 				'edd_action' => 'deactivate_license',
 				'license'    => esc_attr( trim( $license_info['key'] ) ),
-				'item_name'  => urlencode( esc_attr( $_POST['pngx_license_name'] ) ),
+				'item_name'  => urlencode( esc_attr( $_POST[ 'pngx_license_name_' . $this->license ] ) ),
 				// the name of our product in EDD
 				'url'        => home_url()
 			);
