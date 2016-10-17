@@ -17,12 +17,14 @@ class Pngx__Admin__Field__License_Status {
 	public static function display( $field = array(), $options = array(), $options_id = null, $meta = null ) {
 
 		$expiration_msg = $expiration_date = '';
-		$license        = $field['license_key'];
+		$license        = isset( $field['license_key'] ) ? $field['license_key'] : '';
 
 		//handle older versions of Pro so they can update
-		if ( defined( 'CCTOR_PRO_VERSION_NUM' ) && 2.4 > CCTOR_PRO_VERSION_NUM && 'pro_license' == $license && ! strpos( $license, 'cctor_' ) ) {
-			$license = $field['class'];
-			$license = 'cctor_' . $license;
+		if ( defined( 'CCTOR_PRO_VERSION_NUM' ) && 2.4 > CCTOR_PRO_VERSION_NUM && ! $license ) {
+			if ( isset( $field['class'] ) && 'pro_license' == $field['class'] && ! strpos( $field['class'], 'cctor_' ) ) {
+				$license = $field['class'];
+				$license = 'cctor_' . $license;
+			}
 		}
 
 		$license_info = get_option( $license );
