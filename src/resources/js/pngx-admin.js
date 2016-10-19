@@ -280,7 +280,7 @@ function Pngx_Admin_Tabs( $, obj ) {
 		//Open Tabs in Responsive Mode
 		$( document ).on( 'click', obj.tab_wrap + ' ' + obj.tab_wrap + '-nav-mobile', function ( event ) {
 
-			$(this).siblings( ".pngx-tabs-accordian" ).slideToggle();
+			$( this ).siblings( ".pngx-tabs-accordian" ).slideToggle();
 
 		} )
 	};

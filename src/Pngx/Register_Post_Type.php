@@ -7,6 +7,7 @@ if ( class_exists( 'Pngx__Register_Post_Type' ) ) {
 	return;
 }
 
+
 /**
  * Class Pngx__Register_Post_Type
  * Register Custom Post Types in WordPress and Modify Messaging

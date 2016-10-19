@@ -18,6 +18,9 @@ class Pngx__Add_Capabilities {
 
 	/**
 	 * constructor
+	 *
+	 * @param $post_type
+	 * @param $cap_plural
 	 */
 	public function __construct( $post_type, $cap_plural ) {
 

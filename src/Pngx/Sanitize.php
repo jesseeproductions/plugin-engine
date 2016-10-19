@@ -43,10 +43,11 @@ class Pngx__Sanitize {
 	public $result;
 
 	/**
-	 * class constructer
-	 * init necessary functions
+	 * constructer
 	 *
-	 * @version 2.1
+	 * @param $type
+	 * @param $input
+	 * @param $option
 	 */
 	function __construct( $type, $input, $option ) {
 
@@ -73,45 +74,44 @@ class Pngx__Sanitize {
 		return $this->result;
 	}
 
-	/*
-	* License Key Sanitize
-	* @version 2.1
-	*/
+	/**
+	 * License Key Sanitize
+	 *
+	 * @return string
+	 */
 	private function sanitize_license() {
 
-		return $this->sanitize_text( trim( $this->input ) );
+		return $this->sanitize_text();
 
 	}
 
 	/*
 	* License Status Sanitize
-	* @version 2.1
-	*/
+	 *
+	 * @return string
+	 */
 	private function sanitize_license_status() {
 
-		return $this->sanitize_text( trim( $this->input ) );
+		return $this->sanitize_text();
 
 	}
 
 	/**
 	 * Sanitize Text
 	 *
-	 * @param  string $input A string
-	 *
-	 * @since  2.1
-	 *
-	 * @return string         Sanitized version of the the text
+	 * @return string
 	 */
 	private function sanitize_text() {
 
-		return sanitize_text_field( $this->input );
+		return sanitize_text_field( trim( $this->input ) );
 
 	}
 
-	/*
-	* Sanitize Textarea
-	* @version 2.1
-	*/
+	/**
+	 * Sanitize Textarea
+	 *
+	 * @return string
+	 */
 	private function sanitize_textarea() {
 
 		if ( $this->option['class'] != "code" ) {
@@ -126,10 +126,11 @@ class Pngx__Sanitize {
 		return $input;
 	}
 
-	/*
-	* Wysiwyg Sanitize
-	* @version 2.1
-	*/
+	/**
+	 * Wysiwyg Sanitize
+	 *
+	 * @return string
+	 */
 	private function sanitize_wysiwyg() {
 
 		if ( current_user_can( 'unfiltered_html' ) ) {
@@ -143,50 +144,55 @@ class Pngx__Sanitize {
 
 	}
 
-	/*
-	* Sanitize urls
-	* @version 2.1
-	*/
+	/**
+	 * Sanitize urls
+	 *
+	 * @return string
+	 */
 	private function sanitize_url() {
 
 		return esc_url( $this->input );
 
 	}
 
-	/*
-	* Select Sanitize
-	* @version 2.1
-	*/
+	/**
+	 * Select Sanitize
+	 *
+	 * @return mixed|string
+	 */
 	private function sanitize_select() {
 
-		return $this->sanitize_enum( $this->input, $this->option );
+		return $this->sanitize_enum();
 
 	}
 
-	/*
-	* Select Page Sanitize
-	* @version 2.1
-	*/
+	/**
+	 * Select Page Sanitize
+	 *
+	 * @return mixed|string
+	 */
 	private function sanitize_selectpage() {
 
-		return $this->sanitize_enum( $this->input, $this->option );
+		return $this->sanitize_enum();
 
 	}
 
-	/*
-	* Radio Sanitize
-	* @version 2.1
-	*/
+	/**
+	 * Radio Sanitize
+	 *
+	 * @return mixed|string
+	 */
 	private function sanitize_radio() {
 
-		return $this->sanitize_enum( $this->input, $this->option );
+		return $this->sanitize_enum();
 
 	}
 
-	/*
-	* Select and Radio Sanitize
-	* @version 2.1
-	*/
+	/**
+	 * Select and Radio Sanitize
+	 *
+	 * @return mixed|string
+	 */
 	private function sanitize_enum() {
 
 		if ( array_key_exists( $this->input, $this->option['choices'] ) ) {
@@ -196,11 +202,11 @@ class Pngx__Sanitize {
 		return $this->input;
 	}
 
-
-	/*
-	* Checkbox Sanitize
-	* @version 2.1
-	*/
+	/**
+	 * Checkbox Sanitize
+	 *
+	 * @return bool|mixed|string
+	 */
 	private function sanitize_checkbox() {
 		if ( $this->input ) {
 			$this->input = '1';
@@ -211,10 +217,11 @@ class Pngx__Sanitize {
 		return $this->input;
 	}
 
-	/*
-	* Sanitize Date
-	* @version 2.1
-	*/
+	/**
+	 * Sanitize Date
+	 *
+	 * @return mixed
+	 */
 	private function sanitize_date() {
 
 		$this->input = preg_replace( "([^0-9/])", "", $this->input );
@@ -222,21 +229,27 @@ class Pngx__Sanitize {
 		return $this->input;
 	}
 
-	/*
-	* Color Sanitize
-	* @version 2.1
-	*/
+	/**
+	 * Color Sanitize
+	 *
+	 * @return bool|mixed
+	 */
 	private function sanitize_color() {
 
 		if ( $this->validate_hex( $this->input ) ) {
 			return $this->input;
 		}
+
+		return false;
 	}
 
-	/*
-	* Hex Sanitize
-	* @version 2.1
-	*/
+	/**
+	 * Hex Sanitize
+	 *
+	 * @param $hex
+	 *
+	 * @return bool
+	 */
 	private function validate_hex( $hex ) {
 		$hex = trim( $hex );
 		if ( 0 === strpos( $hex, '#' ) ) {
@@ -252,54 +265,54 @@ class Pngx__Sanitize {
 	}
 
 
-	/*
-	* Image ID Sanitize
-	* @version 2.1
-	*/
+	/**
+	 * Image ID Sanitize
+	 *
+	 * @return string
+	 */
 	private function sanitize_image() {
 
-		return $this->sanitize_absint( $this->input );
+		return $this->sanitize_absint();
 
 	}
 
-	/*
-	* Pro Image ID Sanitize
-	* @version 2.1
-	*/
+	/**
+	 * Pro Image ID Sanitize
+	 *
+	 * @return string
+	 */
 	private function sanitize_proimage() {
 
-		return $this->sanitize_absint( $this->input );
+		return $this->sanitize_absint();
 
 	}
 
-	/*
-	* Numbers ID Sanitize
-	* @version 2.1
-	*/
+	/**
+	 * Numbers ID Sanitize
+	 *
+	 * @return string
+	 */
 	private function sanitize_number() {
 
-		return $this->sanitize_absint( $this->input );
+		return $this->sanitize_absint();
 
 	}
 
-	/*
-	* Numbers ID Sanitize
-	* @version 2.1
-	*/
+	/**
+	 * Numbers ID Sanitize
+	 *
+	 * @return string
+	 */
 	private function sanitize_dimensions() {
 
-		return $this->sanitize_absint( $this->input );
+		return $this->sanitize_absint();
 
 	}
 
 	/**
 	 * A 32bit absolute integer method, returns as String
 	 *
-	 * @param  string $input A numeric Integer
-	 *
-	 * @since  2.1
-	 *
-	 * @return string         Sanitized version of the Absolute Integer
+	 * @return bool|mixed
 	 */
 	private function sanitize_absint() {
 		// If it's not numeric we forget about it
@@ -318,10 +331,11 @@ class Pngx__Sanitize {
 		return $this->input;
 	}
 
-	/*
-	* Sanitize Google Analytics
-	* @version 2.1
-	*/
+	/**
+	 * Sanitize Google Analytics
+	 *
+	 * @return bool|mixed
+	 */
 	private function sanitize_ga_analytics() {
 
 		$this->input = trim( esc_html( $this->input ) );
