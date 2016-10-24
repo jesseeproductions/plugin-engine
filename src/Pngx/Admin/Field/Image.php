@@ -16,6 +16,8 @@ class Pngx__Admin__Field__Image {
 
 	public static function display( $field = array(), $options = array(), $options_id = null, $meta = null ) {
 
+		global $pagenow;
+
 		if ( isset( $options_id ) && ! empty( $options_id ) ) {
 			$name  = $options_id;
 			$value = $options[ $field['id'] ];
@@ -23,6 +25,11 @@ class Pngx__Admin__Field__Image {
 			$name  = $field['id'];
 			$value = $meta;
 		}
+
+		if ( 'post-new.php' == $pagenow && ! $value && isset( $field['std'] ) ) {
+			$value = $field['std'];
+		}
+
 		$imagemsg = isset( $field['imagemsg'] ) ? $field['imagemsg'] : '';
 		$class    = isset( $field['class'] ) ? $field['class'] : '';
 		$imagesrc = '';
