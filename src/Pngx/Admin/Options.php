@@ -53,8 +53,7 @@ class Pngx__Admin__Options {
 
 		add_action( 'admin_menu', array( $this, 'options_page' ) );
 		add_action( 'admin_init', array( $this, 'register_options' ), 15 );
-		add_action( 'init', array( 'Pngx__Admin__Fields', 'flush_permalinks' ) );
-
+		
 		if ( ! get_option( $this->options_id ) ) {
 			add_action( 'admin_init', array( $this, 'set_defaults' ), 10 );
 		}
