@@ -134,12 +134,17 @@ class Pngx__Admin__Fields {
 
 				Pngx__Admin__Field__License::display( $field, $options_id );
 
-
 				break;
 
 			case 'license_status':
 
 				Pngx__Admin__Field__License_Status::display( $field, $options, $options_id, $meta );
+
+				break;
+
+			case 'list':
+
+				Pngx__Admin__Field__List::display( $field, $options, $options_id, $meta );
 
 				break;
 
