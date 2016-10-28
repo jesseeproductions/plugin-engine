@@ -42,21 +42,30 @@
 /**
 * Headings
 ***************************************************/
+.pro-heading,
 .postbox h4.pngx-fields-heading {
   color: #003ca9;
   font-size: 15px;
   font-weight: bold;
   margin: 0 0 10px; }
   @media screen and (max-width: 639px) {
+    .pro-heading,
     .postbox h4.pngx-fields-heading {
       margin: 0; } }
 
+.pro-heading:before,
 .postbox h4.pngx-fields-heading:after {
   background: linear-gradient(to right, black 1%, #9b9b9b 28%, white 85%) repeat scroll 0 0 transparent;
   content: "";
   display: block;
   height: 1px;
   margin-top: 10px; }
+
+.pro-heading {
+  margin: 40px 0 0; }
+
+.pro-heading:before {
+  margin: 0 0 15px; }
 
 /**
 * Image Field
@@ -90,6 +99,20 @@
 .pngx-license-button-det:hover {
   background: #003ca9;
   cursor: pointer; }
+
+/**
+* List Field
+***************************************************/
+.pngx-list {
+  list-style-type: none; }
+  .pngx-list li {
+    padding-left: 1em;
+    text-indent: -.7em;
+    color: #000; }
+  .pngx-list li:before {
+    content: "\002022 ";
+    color: #950402;
+    padding-right: 10px; }
 
 /**
 * Text Input

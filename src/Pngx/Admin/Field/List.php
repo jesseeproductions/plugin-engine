@@ -22,11 +22,11 @@ class Pngx__Admin__Field__List {
 			echo '</td></tr><tr valign="top"><td colspan="2">';
 		}
 
-		echo '<ul id="' . esc_attr( $field['id'] ) . '" class="list ' . esc_attr( $class ) . '">';
+		echo '<ul id="' . esc_attr( $field['id'] ) . '" class="pngx-list ' . esc_attr( $class ) . '">';
 
 		foreach ( $field['choices'] as $value => $label ) {
 
-			echo '<li>' . esc_attr( $label ) . '</li>';
+			echo '<li>' . strip_tags( $label, '<span><br><b><strong><em><i><a><img>' ) . '</li>';
 
 		}
 

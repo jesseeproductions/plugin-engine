@@ -48,6 +48,7 @@
 /**
 * Headings
 ***************************************************/
+.pro-heading,
 .postbox h4.pngx-fields-heading {
 	color: $color__link;
 	font-size: 15px;
@@ -58,6 +59,7 @@
 	}
 }
 
+.pro-heading:before,
 .postbox h4.pngx-fields-heading:after {
 	background: linear-gradient(to right, rgba(0, 0, 0, 1) 1%, rgba(155, 155, 155, 1) 28%, rgba(255, 255, 255, 1) 85%) repeat scroll 0 0 rgba(0, 0, 0, 0);
 	content: "";
@@ -66,6 +68,12 @@
 	margin-top: 10px;
 }
 
+.pro-heading {
+	margin: 40px 0 0;
+}
+.pro-heading:before {
+	margin: 0 0 15px;
+}
 /**
 * Image Field
 ***************************************************/
@@ -102,6 +110,25 @@
 .pngx-license-button-det:hover {
 	background: $color__link;
 	cursor: pointer;
+}
+
+/**
+* List Field
+***************************************************/
+.pngx-list {
+	list-style-type: none;
+
+	li {
+	    padding-left: 1em;
+	    text-indent: -.7em;
+		color: $black;
+	}
+
+	li:before {
+	    content: "\002022 ";
+		color: $darkred;
+		padding-right: 10px;
+	}
 }
 
 /**
