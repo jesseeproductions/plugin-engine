@@ -104,6 +104,7 @@
 * List Field
 ***************************************************/
 .pngx-list {
+  margin: 0;
   list-style-type: none; }
   .pngx-list li {
     padding-left: 1em;
@@ -113,6 +114,9 @@
     content: "\002022 ";
     color: #950402;
     padding-right: 10px; }
+
+.pngx-wrapper .pngx-list {
+  margin: -15px 0 0; }
 
 /**
 * Text Input

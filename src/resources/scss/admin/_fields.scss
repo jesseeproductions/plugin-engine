@@ -116,6 +116,7 @@
 * List Field
 ***************************************************/
 .pngx-list {
+	margin: 0;
 	list-style-type: none;
 
 	li {
@@ -130,7 +131,11 @@
 		padding-right: 10px;
 	}
 }
-
+.pngx-wrapper {
+	.pngx-list {
+		margin: -15px 0 0;
+	}
+}
 /**
 * Text Input
 ***************************************************/
