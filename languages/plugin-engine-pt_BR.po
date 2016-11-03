@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Plugin Engine\n"
-"POT-Creation-Date: 2016-10-20 09:04-0400\n"
-"PO-Revision-Date: 2016-10-20 09:04-0400\n"
+"POT-Creation-Date: 2016-11-03 12:29-0400\n"
+"PO-Revision-Date: 2016-11-03 12:29-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_BR\n"
@@ -103,7 +103,7 @@ msgstr ""
 msgid "Content"
 msgstr "Conteudo"
 
-#: src/Pngx/Admin/Options.php:337
+#: src/Pngx/Admin/Options.php:336
 msgid "Save Changes"
 msgstr "Salvar alerações"
 

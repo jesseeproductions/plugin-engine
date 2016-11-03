@@ -2,14 +2,14 @@
 /*
 Plugin Name: Plugin Engine
 Description: A plugin framework to be embeded in the core plugin
-Version: 2.4dev
+Version: 2.4
 Author: Jessee Productions, LLC
 Author URI: https://jesseeproductions.com/
 Text Domain: plugin-engine
 License: GPLv2 or later
 */
 /*
-Copyright 2009-2016 by essee Productions, LLC and the contributors
+Copyright 2009-2016 by Jessee Productions, LLC and the contributors
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 2
