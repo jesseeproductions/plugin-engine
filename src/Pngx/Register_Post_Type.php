@@ -164,7 +164,7 @@ class Pngx__Register_Post_Type {
 			'map_meta_cap'        => true,
 			'exclude_from_search' => false,
 			'publicly_queryable'  => true,
-			'capability_type'     => array( $post_type, $post_type ),
+			'capability_type'     => array( $post_type, "{$capability_type}s" ),
 			'capabilities'        => array(
 				// Meta capabilities
 				'edit_post'               => "edit_{$capability_type}",

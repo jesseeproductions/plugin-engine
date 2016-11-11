@@ -105,7 +105,7 @@ class Pngx__Add_Capabilities {
 		}
 
 		//Set Option to Prevent this from Running Again
-		update_option( $post_type . '_capabilities_register', date( 'l jS \of F Y h:i:s A' ) );
+		update_option( $capability_type . '_capabilities_register', date( 'l jS \of F Y h:i:s A' ) );
 
 	}
 
