@@ -22,63 +22,63 @@ class Pngx__Add_Capabilities {
 	 * @param $post_type
 	 * @param $cap_plural
 	 */
-	public function __construct( $post_type, $cap_plural ) {
+	public function __construct( $capability_type ) {
 
 		//Administrator
 		$caps['administrator'] = array(
-			'read_' . $post_type,
-			'read_private_' . $cap_plural,
-			'edit_' . $post_type,
-			'edit_' . $cap_plural,
-			'edit_private_' . $cap_plural,
-			'edit_published_' . $cap_plural,
-			'edit_others_' . $cap_plural,
-			'publish_' . $cap_plural,
-			'delete_' . $post_type,
-			'delete_' . $cap_plural,
-			'delete_private_' . $cap_plural,
-			'delete_published_' . $cap_plural,
-			'delete_others_' . $cap_plural,
+			"read_{$capability_type}",
+			"read_private_{$capability_type}s",
+			"edit_{$capability_type}",
+			"edit_{$capability_type}s",
+			"edit_private_{$capability_type}s",
+			"edit_published_{$capability_type}s",
+			"edit_others_{$capability_type}s",
+			"publish_{$capability_type}s",
+			"delete_{$capability_type}",
+			"delete_{$capability_type}s",
+			"delete_private_{$capability_type}s",
+			"delete_published_{$capability_type}s",
+			"delete_others_{$capability_type}s",
 		);
 		//Editor
 		$caps['editor'] = array(
-			'read_' . $post_type,
-			'read_private_' . $cap_plural,
-			'edit_' . $post_type,
-			'edit_' . $cap_plural,
-			'edit_private_' . $cap_plural,
-			'edit_published_' . $cap_plural,
-			'edit_others_' . $cap_plural,
-			'publish_' . $cap_plural,
-			'delete_' . $post_type,
-			'delete_' . $cap_plural,
-			'delete_private_' . $cap_plural,
-			'delete_published_' . $cap_plural,
-			'delete_others_' . $cap_plural,
+			"read_{$capability_type}",
+			"read_private_{$capability_type}s",
+			"edit_{$capability_type}",
+			"edit_{$capability_type}s",
+			"edit_private_{$capability_type}s",
+			"edit_published_{$capability_type}s",
+			"edit_others_{$capability_type}s",
+			"publish_{$capability_type}s",
+			"delete_{$capability_type}",
+			"delete_{$capability_type}s",
+			"delete_private_{$capability_type}s",
+			"delete_published_{$capability_type}s",
+			"delete_others_{$capability_type}s",
 		);
 		//Author
 		$caps['author'] = array(
-			'edit_' . $post_type,
-			'read_' . $post_type,
-			'delete_' . $post_type,
-			'delete_' . $cap_plural,
-			'edit_' . $cap_plural,
-			'publish_' . $cap_plural,
-			'edit_published_' . $cap_plural,
-			'delete_published_' . $cap_plural,
+			"edit_{$capability_type}",
+			"read_{$capability_type}",
+			"delete_{$capability_type}",
+			"delete_{$capability_type}s",
+			"edit_{$capability_type}s",
+			"publish_{$capability_type}s",
+			"edit_published_{$capability_type}s",
+			"delete_published_{$capability_type}s",
 		);
 		//Contributor
 		$caps['contributor'] = array(
-			'edit_' . $post_type,
-			'read_' . $post_type,
-			'delete_' . $post_type,
-			'delete_' . $cap_plural,
-			'edit_' . $cap_plural,
+			"edit_{$capability_type}",
+			"read_{$capability_type}",
+			"delete_{$capability_type}",
+			"delete_{$capability_type}s",
+			"edit_{$capability_type}s",
 
 		);
 		//Subscriber
 		$caps['subscriber'] = array(
-			'read_' . $post_type,
+			"read_{$capability_type}",
 		);
 
 		$roles = array(
@@ -105,7 +105,7 @@ class Pngx__Add_Capabilities {
 		}
 
 		//Set Option to Prevent this from Running Again
-		update_option( $post_type . '_capabilities_register', date( 'l jS \of F Y h:i:s A' ) );
+		update_option( $capability_type . '_capabilities_register', date( 'l jS \of F Y h:i:s A' ) );
 
 	}
 
