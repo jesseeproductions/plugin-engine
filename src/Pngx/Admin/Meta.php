@@ -206,7 +206,11 @@ class Pngx__Admin__Meta {
 				?>
 			</ul>
 
-			<?php foreach ( self::get_tabs() as $tab_slug => $tab ) { ?>
+			<?php foreach ( self::get_tabs() as $tab_slug => $tab ) {
+
+				//set variable for template area
+				$template_area = '';
+				?>
 
 				<div class="pngx-section-fields form-table">
 
@@ -223,28 +227,58 @@ class Pngx__Admin__Meta {
 
 					foreach ( self::get_fields() as $field ) {
 
-						if ( $field['type'] && $field['section'] == $metabox['id'] && $tab_slug == $field['tab'] ) :
+						if ( $field['type'] && $field['section'] == $metabox['id'] && $tab_slug == $field['tab'] ) {
 
 							// get value of this field if it exists for this post
-							$meta      = get_post_meta( $post->ID, $field['id'], true );
+							$meta = get_post_meta( $post->ID, $field['id'], true );
 
 							//Wrap Class for Conditionals
 							$wrapclass = isset( $field['wrapclass'] ) ? $field['wrapclass'] : '';
 
+							//Template Wrap for AJAX
+							if ( "template_start" === $field['type'] ) {
+								//Start Template Section Wrap and set value for templates
+								$template_select = get_post_meta( $post->ID, $wrapclass, true );
+								$template_area   = ! empty( $template_select ) ? $template_select : 'default';
+								?>
+                                <div class="pngx-meta-template-wrap template-wrap-<?php echo esc_html( $wrapclass ); ?>" >
+								<?php
+								continue;
+
+							} elseif ( "template_end" === $field['type'] ) {
+								//End Template Section Wrap
+								$template_area = '';
+								?>
+                                </div>
+								<?php
+								continue;
+							}
+
+							//if in template area only get fields with the template value
+							if ( $template_area ) {
+								$field_template = isset( $field['template'] ) ? $field['template'] : array();
+								if ( ! in_array( $template_area, $field_template ) ) {
+									continue;
+								}
+
+							} elseif ( ! $template_area && isset( $field['template'] ) ) {
+								//if not template area set, but there is a template then do not display the field
+								continue;
+							}
 							?>
 
-							<div class="pngx-meta-field-wrap field-wrap-<?php echo esc_html( $field['type'] ); ?> field-wrap-<?php echo esc_html( $field['id'] ); ?> <?php echo esc_html( $wrapclass ); ?>"
+                            <div class="pngx-meta-field-wrap field-wrap-<?php echo esc_html( $field['type'] ); ?> field-wrap-<?php echo esc_html( $field['id'] ); ?> <?php echo esc_html( $wrapclass ); ?>"
 								<?php echo isset( $field['toggle'] ) ? Pngx__Admin__Fields::toggle( $field['toggle'], $field['id'] ) : null; ?> >
 
 								<?php if ( isset( $field['label'] ) ) { ?>
 
-									<div class="pngx-meta-label label-<?php echo $field['type']; ?> label-<?php echo $field['id']; ?>">
-										<label for="<?php echo $field['id']; ?>"><?php echo $field['label']; ?></label>
-									</div>
+                                    <div class="pngx-meta-label label-<?php echo $field['type']; ?> label-<?php echo $field['id']; ?>">
+                                        <label for="<?php echo $field['id']; ?>"><?php echo $field['label']; ?></label>
+                                    </div>
 
 								<?php } ?>
 
-								<div class="pngx-meta-field field-<?php echo $field['type']; ?> field-<?php echo $field['id']; ?>">
+                                <div class="pngx-meta-field field-<?php echo $field['type']; ?> field-<?php echo $field['id']; ?>">
 
 									<?php
 
@@ -252,13 +286,13 @@ class Pngx__Admin__Meta {
 
 									?>
 
-								</div>
-								<!-- end .pngx-meta-field.field-<?php echo $field['type']; ?>.field-<?php echo $field['id']; ?> -->
+                                </div>
+                                <!-- end .pngx-meta-field.field-<?php echo $field['type']; ?>.field-<?php echo $field['id']; ?> -->
 
-							</div> <!-- end .pngx-meta-field-wrap.field-wrap-<?php echo $field['type']; ?>.field-wrap-<?php echo $field['id']; ?>	-->
+                            </div> <!-- end .pngx-meta-field-wrap.field-wrap-<?php echo $field['type']; ?>.field-wrap-<?php echo $field['id']; ?>	-->
 
 							<?php
-						endif; //end if in section check
+						}//end if in section check
 
 					} // end foreach fields?>
 
