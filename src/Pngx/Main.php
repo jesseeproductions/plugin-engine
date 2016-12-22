@@ -19,6 +19,7 @@ class Pngx__Main {
 
 	protected $plugin_context;
 	protected $plugin_context_class;
+	public $doing_ajax = false;
 
 	public $plugin_dir;
 	public $plugin_path;

@@ -40,6 +40,8 @@ class Pngx__Admin__Fields {
 					$toggle = absint( $toggle_data );
 				} elseif ( 'msg' == $key || 'tabs' == $key ) {
 					$toggle = json_encode( $toggle_data, JSON_HEX_APOS );
+				} else {
+					$toggle = esc_html( $toggle_data );
 				}
 
 				$data .= 'data-toggle-' . esc_attr( $key ) . '=\'' . $toggle . '\' ';
@@ -194,7 +196,7 @@ class Pngx__Admin__Fields {
 
 			case 'wysiwyg':
 
-				Pngx__Admin__Field__Wysiwyg::display( $field, $options, $options_id, $meta );
+				Pngx__Admin__Field__Wysiwyg::display( $field, $options, $options_id, $meta, $wp_version );
 
 				break;
 		}

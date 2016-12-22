@@ -44,10 +44,20 @@ class Pngx__Admin__Field__Image {
 
 		echo $imagedisplay . '<br>';
 
-		echo '<input class="pngx-upload-image ' . esc_attr( $class ) . '"  type="hidden" id="' . esc_attr( $field['id'] ) . '" name="' . esc_attr( $name ) . '" value="' . esc_attr( $value ) . '" />';
-		echo '<button id="' . esc_attr( $field['id'] ) . '" class="pngx-image-button">Upload Image</button>';
-		echo '<small> <a href="#" id="' . esc_attr( $field['id'] ) . '" class="pngx-clear-image">Remove Image</a></small>';
+		?>
 
+		<input
+			class="pngx-upload-image <?php echo esc_attr( $class ); ?>"
+			type="hidden" id="<?php echo esc_attr( $field['id'] ); ?>"
+			name="<?php echo esc_attr( $name ); ?>"
+			value="<?php echo esc_attr( $value ); ?>"
+		/>
+
+		<button id="<?php echo esc_attr( $field['id'] ); ?>" class="pngx-image-button" <?php echo isset( $field['function'] ) ? Pngx__Admin__Fields::toggle( $field['function'], $field['id'] ) : null; ?> >Upload Image</button>
+
+		<small><a href="#" id="<?php echo esc_attr( $field['id'] ); ?>" class="pngx-clear-image">Remove Image</a></small>
+
+		<?php
 		if ( "" != $field['desc'] ) {
 			echo '<br /><span class="description">' . $field['desc'] . '</span>';
 		}

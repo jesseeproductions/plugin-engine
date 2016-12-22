@@ -77,11 +77,19 @@ var pngx_admin_fields_init = pngx_admin_fields_init || {};
  * Media Upload Object
  * @type {{}}
  */
-function PNGX__Media( $, field_id, upload_title, button_text ) {
+/**
+ *
+ * @param $
+ * @param field_id
+ * @param upload_title
+ * @param button_text
+ * @constructor
+ */
+function PNGX__Media( $, field_id ) {
 
 	this.field_id = field_id;
-	this.upload_title = upload_title;
-	this.button_text = button_text;
+	upload_title = 'Choose Image';
+	button_text = 'Use Image';
 
 	this.init = function () {
 		this.upload();
@@ -91,19 +99,23 @@ function PNGX__Media( $, field_id, upload_title, button_text ) {
 
 	this.upload = function () {
 
-		var upload_title = this.upload_title;
-		var button_text = this.button_text;
-		var field_id = this.field_id;
-
 		/*
 		 * Media Manager 3.5
 		 */
-		$( '.pngx-image-button' ).click( function ( e ) {
+
+		$( 'button#' + this.field_id ).click( function ( e ) {
 
 			//Create Media Manager On Click to allow multiple on one Page
 			var img_uploader, attachment;
 
 			e.preventDefault();
+
+			field_data = $( this ).data();
+
+			if ( "undefined" !== typeof field_data ) {
+				upload_title = field_data.toggleUpload_title;
+				button_text = field_data.toggleButton_text;
+			}
 
 			//Setup the Variables based on the Button Clicked to enable multiple
 			var img_input_id = '#' + this.id + '.pngx-upload-image';
@@ -137,7 +149,7 @@ function PNGX__Media( $, field_id, upload_title, button_text ) {
 				//Hide Message
 				$( default_msg ).hide();
 				//Trigger New Image Uploaded
-				$( field_id ).trigger( 'display' );
+				$( 'input#' + this.field_id ).trigger( 'display' );
 			} );
 
 			//Open the uploader dialog
@@ -149,7 +161,6 @@ function PNGX__Media( $, field_id, upload_title, button_text ) {
 
 	this.clear = function () {
 
-		var field_id = this.field_id;
 		/*
 		 * Remove Image and replace with default and Erase Image ID
 		 */
@@ -161,7 +172,7 @@ function PNGX__Media( $, field_id, upload_title, button_text ) {
 			$( remove_input_id ).val( '' );
 			$( img_src ).hide();
 			$( 'div#' + this.id + '.pngx-default-image' ).show();
-			$( field_id ).trigger( 'display' );
+			$( 'input#' + this.field_id ).trigger( 'display' );
 		} );
 
 	};
@@ -170,6 +181,17 @@ function PNGX__Media( $, field_id, upload_title, button_text ) {
 	this.init()
 
 }
+/**
+ * Scan for Image Upload Fields and Setup Upload Script
+ */
+(function ( $ ) {
+	var image_upload = $( ".pngx-section-fields .pngx-meta-field.field-image" );
+	var selector_img;
+	for ( i = 0; i < image_upload.length; i++ ) {
+		selector_img = $( image_upload[i] ).find( 'input' ).attr( 'id' );
+		new PNGX__Media( $, selector_img );
+	}
+})( jQuery );
 
 /**
  * Help
