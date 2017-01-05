@@ -24,9 +24,6 @@ class Pngx__Admin__Meta {
 	//tabs key and label
 	protected static $tabs = array();
 
-	//fields id prefix
-	protected $fields_prefix = 'pngx_';
-
 	//fields
 	protected static $fields = array();
 
@@ -122,37 +119,11 @@ class Pngx__Admin__Meta {
 	}
 
 	/*
-	* Get Fields ID Prefix
-	*/
-	public function get_fields_prefix() {
-
-		return $this->fields_prefix;
-
-	}
-
-	/*
 	* Load Meta Box Functions
 	*/
 	public function set_fields() {
 
-		//Prefix for fields id
-		$prefix = self::get_fields_prefix();
-
-		//Sample Field Array
-		$fields[ $prefix . 'heading_deal' ] = array(
-			'id'        => $prefix . 'heading_deal', //id
-			'title'     => 'PNGX Field Title', //Label  __( 'use translation', 'plugin-engine' )
-			'desc'      => 'PNGX Field Description',//description or header __( 'use translation', 'plugin-engine' )
-			'type'      => 'heading',//field type
-			'section'   => 'plugin_engine_meta_box',//meta box
-			'tab'       => 'content',//tab
-			'condition' => 'pngx-img',//optional condition used in some fields
-			'class'     => 'pngx-img',//optional field class
-			'wrapclass' => 'pngx-img',//optional wrap css class
-			'toggle'    => array()//field toggle infomation based on value or selection
-		);
-
-		$this->fields = $fields;
+		$this->fields = Pngx__Meta__Fields::get_fields();
 	}
 
 	/*
