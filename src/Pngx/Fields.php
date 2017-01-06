@@ -25,7 +25,7 @@ class Pngx__Fields {
 		// get value of this field if it exists for this post
 		$meta = get_post_meta( $coupon_id, $field['id'], true );
 
-		switch ( $field['type'] ) {
+		switch ( $field['display']['type'] ) {
 
 			case 'text':
 
@@ -33,9 +33,9 @@ class Pngx__Fields {
 
 				break;
 
-			case 'wysiwyg':
+			case 'expiration':
 
-				Pngx__Field__Wysiwyg::display( $field, $coupon_id, $meta );
+				Pngx__Field__Expiration::display( $field, $coupon_id, $meta );
 
 				break;
 		}
