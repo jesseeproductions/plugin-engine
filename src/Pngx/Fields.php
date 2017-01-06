@@ -27,9 +27,9 @@ class Pngx__Fields {
 
 		switch ( $field['display']['type'] ) {
 
-			case 'text':
+			case 'content':
 
-				Pngx__Field__Text::display( $field, $coupon_id, $meta );
+				Pngx__Field__Content::display( $field, $coupon_id, $meta );
 
 				break;
 

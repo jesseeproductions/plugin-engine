@@ -3,16 +3,16 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	die( '-1' );
 }
-if ( class_exists( 'Pngx__Field__Text' ) ) {
+if ( class_exists( 'Pngx__Field__Content' ) ) {
 	return;
 }
 
 
 /**
- * Class Pngx__Field__Text
+ * Class Pngx__Field__Content
  * Wysiwyg Field
  */
-class Pngx__Field__Text {
+class Pngx__Field__Content {
 
 	public static function display( $field = array(), $couponid = null, $meta = null ) {
 
