@@ -26,6 +26,8 @@ class Pngx__Main {
 	public $plugin_url;
 	public $resource_path;
 	public $resource_url;
+	public $vendor_path;
+	public $vendor_url;
 
 	/**
 	 * constructor

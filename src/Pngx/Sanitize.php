@@ -236,7 +236,15 @@ class Pngx__Sanitize {
 	 */
 	private function sanitize_color() {
 
-		if ( $this->validate_hex( $this->input ) ) {
+		// If string does not start with 'rgba', then treat as hex
+		// sanitize the hex color and finally convert hex to rgba
+		if ( false === strpos( $this->input, 'rgba' ) ) {
+			$this->validate_hex( $this->input );
+
+			return $this->input;
+		}
+
+		if ( $this->validate_rgba( $this->input ) ) {
 			return $this->input;
 		}
 
@@ -264,6 +272,30 @@ class Pngx__Sanitize {
 		}
 	}
 
+	/**
+	 * Validate RGBA Inputs
+	 *
+	 * @param $value
+	 *
+	 * @return bool
+	 */
+	private function validate_rgba( $rgba ) {
+
+		// If empty or an array return transparent
+		if ( empty( $rgba ) || is_array( $rgba ) ) {
+			$this->input = '';
+
+			return false;
+		}
+		$red  = $green = $blue = $alpha = '';
+		$rgba = str_replace( ' ', '', $rgba );
+
+		sscanf( $rgba, 'rgba(%d,%d,%d,%f)', $red, $green, $blue, $alpha );
+		$this->input = 'rgba(' . $red . ',' . $green . ',' . $blue . ',' . $alpha . ')';
+
+		return true;
+
+	}
 
 	/**
 	 * Image ID Sanitize

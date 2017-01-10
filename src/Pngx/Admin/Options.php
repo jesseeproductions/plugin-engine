@@ -386,7 +386,7 @@ class Pngx__Admin__Options {
 			$options[ $field['id'] ] = 0;
 		}
 
-		Pngx__Admin__Fields::display_field( $field, $options, $this->options_id, false, $wp_version );
+		Pngx__Admin__Fields::display_field( $field, $options, $this->options_id, false, $wp_version, false );
 
 	}
 

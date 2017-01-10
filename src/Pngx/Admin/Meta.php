@@ -194,11 +194,13 @@ class Pngx__Admin__Meta {
 					 *
 					 * @parm $tab_slug string of current slug
 					 */
-					do_action( 'pngx-per-tab-help', $tab_slug );
+					do_action( 'pngx_per_tab_help', $tab_slug );
 
-					foreach ( self::get_fields() as $field ) {
+					$fields = self::get_fields();
 
-						if ( $field['type'] && $field['section'] == $metabox['id'] && $tab_slug == $field['tab'] ) {
+					foreach ( $fields as $field ) {
+
+						if ( $field['type'] && $field['section'] === $metabox['id'] && ( isset( $field['tab'] ) && $tab_slug === $field['tab'] ) ) {
 
 							// get value of this field if it exists for this post
 							$meta = get_post_meta( $post->ID, $field['id'], true );
@@ -212,7 +214,7 @@ class Pngx__Admin__Meta {
 								$template_select = get_post_meta( $post->ID, $wrapclass, true );
 								$template_area   = ! empty( $template_select ) ? $template_select : 'default';
 								?>
-                                <div class="pngx-meta-template-wrap template-wrap-<?php echo esc_html( $wrapclass ); ?>" >
+								<div class="pngx-meta-template-wrap template-wrap-<?php echo esc_html( $wrapclass ); ?>" >
 								<?php
 								continue;
 
@@ -220,7 +222,7 @@ class Pngx__Admin__Meta {
 								//End Template Section Wrap
 								$template_area = '';
 								?>
-                                </div>
+								</div>
 								<?php
 								continue;
 							}
@@ -238,29 +240,59 @@ class Pngx__Admin__Meta {
 							}
 							?>
 
-                            <div class="pngx-meta-field-wrap field-wrap-<?php echo esc_html( $field['type'] ); ?> field-wrap-<?php echo esc_html( $field['id'] ); ?> <?php echo esc_html( $wrapclass ); ?>"
+							<div class="pngx-meta-field-wrap field-wrap-<?php echo esc_html( $field['type'] ); ?> field-wrap-<?php echo esc_html( $field['id'] ); ?> <?php echo esc_html( $wrapclass ); ?>"
 								<?php echo isset( $field['toggle'] ) ? Pngx__Admin__Fields::toggle( $field['toggle'], $field['id'] ) : null; ?> >
 
 								<?php if ( isset( $field['label'] ) ) { ?>
 
-                                    <div class="pngx-meta-label label-<?php echo $field['type']; ?> label-<?php echo $field['id']; ?>">
-                                        <label for="<?php echo $field['id']; ?>"><?php echo $field['label']; ?></label>
-                                    </div>
+									<div class="pngx-meta-label label-<?php echo $field['type']; ?> label-<?php echo $field['id']; ?>">
+										<label for="<?php echo $field['id']; ?>"><?php echo $field['label']; ?></label>
+									</div>
 
 								<?php } ?>
 
-                                <div class="pngx-meta-field field-<?php echo $field['type']; ?> field-<?php echo $field['id']; ?>">
+								<div class="pngx-meta-field field-<?php echo $field['type']; ?> field-<?php echo $field['id']; ?>">
 
 									<?php
 
 									Pngx__Admin__Fields::display_field( $field, false, false, $meta, $wp_version );
 
+
+									// Display Linked Style Fields
+									if ( isset( $field['styles'] ) && is_array( $field['styles'] ) ) {
+
+										?>
+										<div class="pngx-meta-field pngx-meta-field-styles field-<?php echo $field['type']; ?>-styles field-<?php echo $field['id']; ?>-styles">
+											<?php
+
+											foreach ( $field['styles'] as $type => $field_name ) {
+
+												if ( ! isset( $fields[ $field_name ] ) ) {
+													continue;
+												}
+
+												if ( 'font-color' === $type || 'background-color' === $type ) {
+													$meta = get_post_meta( $post->ID, $field_name, true );
+													Pngx__Admin__Field__Color::display( $fields[ $field_name ], false, false, $meta );
+												}
+
+												if ( 'background-opacity' === $type ) {
+
+												}
+
+											}
+
+											?>
+										</div>
+										<?php
+									}
+
 									?>
 
-                                </div>
-                                <!-- end .pngx-meta-field.field-<?php echo $field['type']; ?>.field-<?php echo $field['id']; ?> -->
+								</div>
+								<!-- end .pngx-meta-field.field-<?php echo $field['type']; ?>.field-<?php echo $field['id']; ?> -->
 
-                            </div> <!-- end .pngx-meta-field-wrap.field-wrap-<?php echo $field['type']; ?>.field-wrap-<?php echo $field['id']; ?>	-->
+							</div> <!-- end .pngx-meta-field-wrap.field-wrap-<?php echo $field['type']; ?>.field-wrap-<?php echo $field['id']; ?>	-->
 
 							<?php
 						}//end if in section check

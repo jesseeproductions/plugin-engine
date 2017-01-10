@@ -26,9 +26,17 @@ class Pngx__Admin__Assets {
 		);
 
 		wp_register_script(
+			'pngx-color-picker-alpha',
+			Pngx__Main::instance()->vendor_url . 'wp-color-picker-alpha/wp-color-picker-alpha.min.js',
+			array(),
+			filemtime( Pngx__Main::instance()->vendor_path . 'wp-color-picker-alpha/wp-color-picker-alpha.min.js' ),
+			true
+		);
+
+		wp_register_script(
 			'pngx-admin',
 			Pngx__Main::instance()->resource_url . 'js/pngx-admin.js',
-			array( 'jquery-ui-tabs' ),
+			array( 'pngx-color-picker-alpha', 'jquery-ui-tabs' ),
 			filemtime( Pngx__Main::instance()->resource_path . 'js/pngx-admin.js' ),
 			true
 		);

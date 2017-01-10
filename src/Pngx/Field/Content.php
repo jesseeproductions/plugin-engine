@@ -16,14 +16,30 @@ class Pngx__Field__Content {
 
 	public static function display( $field = array(), $couponid = null, $meta = null ) {
 
-
+		$class = $field['display']['class'] ? ' class="' . $field['display']['class'] . ' " ' : ' ';
+		$style = '';
 		$tags  = $field['display']['tags'];
-		$class = $field['display']['class'] ? ' class="' . $field['display']['class'] . '" ' : '';
 		$wrap  = $field['display']['wrap'];
+
+		if ( isset( $field['styles'] ) && is_array( $field['styles'] ) ) {
+			$style = ' style=" ';
+			foreach ( $field['styles'] as $type => $field_name ) {
+
+				if ( 'font-color' === $type && $color = get_post_meta( $couponid, $field_name, true ) ) {
+					$style .= 'color:' . $color . '; ';
+				}
+
+				if ( 'background-color' === $type && $color = get_post_meta( $couponid, $field_name, true ) ) {
+					$style .= 'background-color:' . $color . '; ';
+				}
+
+			}
+			$style .= ' " ';
+		}
 
 		?>
 
-		<?php echo $wrap ? '<' . $wrap . $class . '>' : ''; ?>
+		<?php echo $wrap ? '<' . $wrap . $class . $style . '>' : ''; ?>
 
 		<?php echo strip_tags( $meta, Pngx__Allowed_Tags::$tags() ); ?>
 
