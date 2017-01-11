@@ -257,35 +257,8 @@ class Pngx__Admin__Meta {
 
 									Pngx__Admin__Fields::display_field( $field, false, false, $meta, $wp_version );
 
-
-									// Display Linked Style Fields
-									if ( isset( $field['styles'] ) && is_array( $field['styles'] ) ) {
-
-										?>
-										<div class="pngx-meta-field pngx-meta-field-styles field-<?php echo $field['type']; ?>-styles field-<?php echo $field['id']; ?>-styles">
-											<?php
-
-											foreach ( $field['styles'] as $type => $field_name ) {
-
-												if ( ! isset( $fields[ $field_name ] ) ) {
-													continue;
-												}
-
-												if ( 'font-color' === $type || 'background-color' === $type ) {
-													$meta = get_post_meta( $post->ID, $field_name, true );
-													Pngx__Admin__Field__Color::display( $fields[ $field_name ], false, false, $meta );
-												}
-
-												if ( 'background-opacity' === $type ) {
-
-												}
-
-											}
-
-											?>
-										</div>
-										<?php
-									}
+									// Display admin linked style fields
+									Pngx__Admin__Style__Linked::display_styles( $fields, $field, $post->ID );
 
 									?>
 

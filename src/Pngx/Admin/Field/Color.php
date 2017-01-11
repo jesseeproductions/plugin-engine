@@ -29,11 +29,16 @@ class Pngx__Admin__Field__Color {
 
 		$class = isset( $field['class'] ) ? $field['class'] : '';
 		$std   = isset( $field['std'] ) ? $field['std'] : '';
+		$alpha = isset( $field['alpha'] ) && 'true' === $field['alpha'] ? true : false;
 
-		echo '<input type="text" class="pngx-color-picker ' . esc_attr( $class ) . '"  id="' . esc_attr( $field['id'] ) . '" name="' . esc_attr( $name ) . '" placeholder="' . esc_attr( $std ) . '" value="' . esc_attr( $value ) . '" data-default-color="' . esc_attr( $std ) . '"" data-alpha="true" />';
+		echo '<input type="text" class="pngx-color-picker ' . esc_attr( $class ) . '"  id="' . esc_attr( $field['id'] ) . '" name="' . esc_attr( $name ) . '" placeholder="' . esc_attr( $std ) . '" value="' . esc_attr( $value ) . '" data-default-color="' . esc_attr( $std ) . '"" data-alpha="' . esc_attr( $alpha ) . '" />';
+
+		if ( isset( $field['inside_label'] ) && '' !== $field['inside_label'] ) {
+			echo '<label class="pngx-inside-label">' . esc_html( $field['inside_label'] ) . '</label>';
+		}
 
 		if ( '' !== $field['desc'] ) {
-			echo '<br /><span class="description">' . $field['desc'] . '</span>';
+			echo '<br /><span class="description">' . esc_html( $field['desc'] ) . '</span>';
 		}
 
 	}

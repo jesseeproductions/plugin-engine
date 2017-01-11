@@ -17,25 +17,9 @@ class Pngx__Field__Content {
 	public static function display( $field = array(), $couponid = null, $meta = null ) {
 
 		$class = $field['display']['class'] ? ' class="' . $field['display']['class'] . ' " ' : ' ';
-		$style = '';
+		$style = Pngx__Style__Linked::get_styles( $field, $couponid );
 		$tags  = $field['display']['tags'];
 		$wrap  = $field['display']['wrap'];
-
-		if ( isset( $field['styles'] ) && is_array( $field['styles'] ) ) {
-			$style = ' style=" ';
-			foreach ( $field['styles'] as $type => $field_name ) {
-
-				if ( 'font-color' === $type && $color = get_post_meta( $couponid, $field_name, true ) ) {
-					$style .= 'color:' . $color . '; ';
-				}
-
-				if ( 'background-color' === $type && $color = get_post_meta( $couponid, $field_name, true ) ) {
-					$style .= 'background-color:' . $color . '; ';
-				}
-
-			}
-			$style .= ' " ';
-		}
 
 		?>
 

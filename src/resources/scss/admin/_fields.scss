@@ -71,9 +71,11 @@
 .pro-heading {
 	margin: 40px 0 0;
 }
+
 .pro-heading:before {
 	margin: 0 0 15px;
 }
+
 /**
 * Image Field
 ***************************************************/
@@ -86,6 +88,17 @@
 	text-align: center;
 	width: 360px;
 	max-width: 90%;
+}
+
+/**
+* Linked Style Fields
+***************************************************/
+.pngx-inside-label {
+	color: $color__dark_grey;
+	font-size: 10px;
+	margin: 0 15px 0 0;
+	line-height: 26px;
+	vertical-align: top;
 }
 
 /* License Button
@@ -113,6 +126,13 @@
 }
 
 /**
+* Linked Style Fields
+***************************************************/
+.pngx-meta-field-styles {
+	margin: 10px 0;
+}
+
+/**
 * List Field
 ***************************************************/
 .pngx-list {
@@ -120,22 +140,24 @@
 	list-style-type: none;
 
 	li {
-	    padding-left: 1em;
-	    text-indent: -.7em;
+		padding-left: 1em;
+		text-indent: -.7em;
 		color: $black;
 	}
 
 	li:before {
-	    content: "\002022 ";
+		content: "\002022 ";
 		color: $darkred;
 		padding-right: 10px;
 	}
 }
+
 .pngx-wrapper {
 	.pngx-list {
 		margin: -15px 0 0;
 	}
 }
+
 /**
 * Text Input
 ***************************************************/
