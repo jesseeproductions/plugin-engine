@@ -14,6 +14,8 @@ var pngx_admin_fields_init = pngx_admin_fields_init || {};
 
 		obj.color_picker();
 
+		obj.icon_picker();
+
 		/*
 		 * Hide Default Label
 		 */
@@ -46,6 +48,19 @@ var pngx_admin_fields_init = pngx_admin_fields_init || {};
 	obj.color_picker = function ( helpid ) {
 
 		$( '.pngx-color-picker' ).wpColorPicker();
+
+	};
+
+
+	/*
+	 * Icon Picker
+	 */
+	obj.icon_picker = function ( helpid ) {
+
+		$( '.icp-dd' ).iconpicker( {
+			//title: 'Dropdown with picker',
+			//component:'.btn > i'
+		} );
 
 	};
 

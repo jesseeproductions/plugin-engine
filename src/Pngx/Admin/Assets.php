@@ -19,10 +19,25 @@ class Pngx__Admin__Assets {
 
 		// @formatter:off
 		wp_register_style(
+			'pngx-font-icon-picker',
+			Pngx__Main::instance()->vendor_url . 'fontawesome-iconpicker/dist/css/fontawesome-iconpicker.css',
+			false,
+			filemtime( Pngx__Main::instance()->vendor_path . 'fontawesome-iconpicker/dist/css/fontawesome-iconpicker.css' )
+		);
+
+		wp_register_style(
 			'pngx-admin',
 			Pngx__Main::instance()->resource_url . 'css/pngx-admin.css',
-			false,
+			array( 'pngx-font-icon-picker' ),
 			filemtime( Pngx__Main::instance()->resource_path . 'css/pngx-admin.css' )
+		);
+
+		wp_register_script(
+			'pngx-font-icon-picker',
+			Pngx__Main::instance()->vendor_url . 'fontawesome-iconpicker/dist/js/fontawesome-iconpicker.js',
+			array(),
+			filemtime( Pngx__Main::instance()->vendor_path . 'fontawesome-iconpicker/dist/js/fontawesome-iconpicker.js' ),
+			true
 		);
 
 		wp_register_script(
@@ -36,7 +51,7 @@ class Pngx__Admin__Assets {
 		wp_register_script(
 			'pngx-admin',
 			Pngx__Main::instance()->resource_url . 'js/pngx-admin.js',
-			array( 'pngx-color-picker-alpha', 'jquery-ui-tabs' ),
+			array( 'pngx-color-picker-alpha', 'pngx-font-icon-picker', 'jquery-ui-tabs' ),
 			filemtime( Pngx__Main::instance()->resource_path . 'js/pngx-admin.js' ),
 			true
 		);
@@ -52,7 +67,7 @@ class Pngx__Admin__Assets {
 	/*
 	* Enqueue Plugin Engine Assets
 	*/
-	public static function load_assets( ) {
+	public static function load_assets() {
 
 	}
 
@@ -62,11 +77,11 @@ class Pngx__Admin__Assets {
 	public static function detect_external_asset( $file ) {
 
 		$file_headers = @get_headers( $file );
-		if ( FALSE === $file_headers || 'HTTP/1.0 404 Not Found' == $file_headers[0] ) {
+		if ( false === $file_headers || 'HTTP/1.0 404 Not Found' == $file_headers[0] ) {
 			return false;
 		}
 
-			return true;
+		return true;
 
 	}
 

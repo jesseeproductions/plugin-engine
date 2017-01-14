@@ -126,6 +126,12 @@ class Pngx__Admin__Fields {
 
 				break;
 
+			case 'icon':
+
+				Pngx__Admin__Field__Icon::display( $field, $options, $options_id, $meta );
+
+				break;
+
 			case 'image':
 
 				Pngx__Admin__Field__Image::display( $field, $options, $options_id, $meta );
