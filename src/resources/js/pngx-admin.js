@@ -57,10 +57,6 @@ var pngx_admin_fields_init = pngx_admin_fields_init || {};
 	 */
 	obj.icon_picker = function ( helpid ) {
 
-		$( '.icp-dd' ).iconpicker( {
-			//title: 'Dropdown with picker',
-			//component:'.btn > i'
-		} );
 
 	};
 

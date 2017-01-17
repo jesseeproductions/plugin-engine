@@ -75,6 +75,17 @@ class Pngx__Sanitize {
 	}
 
 	/**
+	 * Icon Sanitize
+	 *
+	 * @return string
+	 */
+	private function sanitize_icon() {
+
+		return $this->sanitize_text();
+
+	}
+
+	/**
 	 * License Key Sanitize
 	 *
 	 * @return string
@@ -161,6 +172,17 @@ class Pngx__Sanitize {
 	 * @return mixed|string
 	 */
 	private function sanitize_select() {
+
+		return $this->sanitize_enum();
+
+	}
+
+	/**
+	 * Select Variety Select
+	 *
+	 * @return mixed|string
+	 */
+	private function sanitize_variety() {
 
 		return $this->sanitize_enum();
 

@@ -15,31 +15,42 @@ if ( class_exists( 'Pngx__Admin__Field__Icon' ) ) {
 class Pngx__Admin__Field__Icon {
 
 	public static function display( $field = array(), $options = array(), $options_id = null, $meta = null ) {
+		global $pagenow;
+		$value = '';
 
 		if ( isset( $options_id ) && ! empty( $options_id ) ) {
 			$name  = $options_id;
 			$value = $options[ $field['id'] ];
 		} else {
-			$name  = $field['id'];
-			$value = $meta;
-			if ( ! $value ) {
+			$name = $field['id'];
+			//Set Meta Default
+			if ( $meta ) {
+				$value = $meta;
+			} elseif ( $pagenow == 'post-new.php' && isset( $field['value'] ) ) {
 				$value = $field['value'];
 			}
 		}
 
 		$class = isset( $field['class'] ) ? $field['class'] : '';
-		$std   = isset( $field['std'] ) ? $field['std'] : '';
-		$alpha = isset( $field['alpha'] ) && 'true' === $field['alpha'] ? true : false;
-
 		?>
-		<input type="text" name="<?php echo esc_attr( $name ); ?>" id="<?php echo esc_attr( $field['id'] ); ?>" class="<?php echo esc_attr( $class ); ?>"/>
 
-		<button type="button" class="btn btn-primary iconpicker-component"><i class="fa fa-fw fa-heart"></i></button>
-		<button type="button" class="icp icp-dd btn btn-primary dropdown-toggle" data-selected="fa-car" data-toggle="dropdown">
-			<span class="caret"></span>
-			<span class="sr-only">Toggle Dropdown</span>
+		<!-- Button tag -->
+		<button
+				class="btn btn-default <?php echo esc_attr( $class ); ?>"
+				data-iconset="fontawesome"
+				data-icon="<?php echo esc_attr( $value ); ?>"
+				data-label-header="<?php echo sprintf( esc_html_x( '%1s - %2s', 'Icon Popup Header', 'plugin-engine' ), '{0}', '{1}' ); ?>"
+				data-arrow-prev-icon-class="glyphicon glyphicon-circle-arrow-left"
+				data-arrow-next-icon-class="glyphicon glyphicon-circle-arrow-right"
+				data-rows="4"
+				data-cols="6"
+				data-placement="top"
+				data-label-footer="<?php echo sprintf( esc_html_x( '%1s - %2s of %3s', 'Icon Popup Footer', 'plugin-engine' ), '{0}', '{1}', '{2}' ); ?>"
+				data-search-text="<?php echo esc_html__( 'Search...', 'plugin-engine' ); ?>"
+				name="<?php echo esc_attr( $name ); ?>"
+				role="iconpicker"
+		>
 		</button>
-		<div class="dropdown-menu"></div>
 
 		<?php
 
