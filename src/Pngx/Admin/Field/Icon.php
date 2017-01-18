@@ -36,7 +36,7 @@ class Pngx__Admin__Field__Icon {
 
 		<!-- Button tag -->
 		<button
-				class="btn btn-default <?php echo esc_attr( $class ); ?>"
+				class="btn btn-default pngx-icon-picker <?php echo esc_attr( $class ); ?>"
 				data-iconset="fontawesome"
 				data-icon="<?php echo esc_attr( $value ); ?>"
 				data-label-header="<?php echo sprintf( esc_html_x( '%1s - %2s', 'Icon Popup Header', 'plugin-engine' ), '{0}', '{1}' ); ?>"
