@@ -181,6 +181,12 @@ class Pngx__Admin__Fields {
 
 				break;
 
+			case 'template_chooser':
+
+				Pngx__Admin__Field__Template::display( $field, $options, $options_id, $meta );
+
+				break;
+
 			case 'text':
 
 				Pngx__Admin__Field__Text::display( $field, $options, $options_id, $meta );
@@ -197,6 +203,12 @@ class Pngx__Admin__Fields {
 			case 'url':
 
 				Pngx__Admin__Field__Url::display( $field, $options, $options_id, $meta );
+
+				break;
+
+			case 'variety':
+
+				Pngx__Admin__Field__Variety::display( $field, $options, $options_id, $meta );
 
 				break;
 

@@ -41,19 +41,26 @@ class Pngx__Admin__Field__Select {
 		}
 
 		$class = isset( $field['class'] ) ? $field['class'] : '';
+		?>
 
-		echo '<select id="' . esc_attr( $field['id'] ) . '" class="select ' . esc_attr( $class ) . '" name="' . esc_attr( $name ) . '">';
+		<select
+				id="<?php echo esc_attr( $field['id'] ); ?>"
+				class="select <?php echo esc_attr( $class ); ?>"
+				name="<?php echo esc_attr( $name ); ?>"
+			<?php echo isset( $field['data'] ) ? Pngx__Admin__Fields::toggle( $field['data'], null ) : ''; ?>
+		>
+			<?php
+			foreach ( $field['choices'] as $value => $label ) {
 
-		foreach ( $field['choices'] as $value => $label ) {
+				$style = isset( $field['class'] ) && 'css-select' == $field['class'] ? 'style="' . esc_attr( $value ) . '"' : '';
 
-			$style = isset( $field['class'] ) && 'css-select' == $field['class'] ? 'style="' . esc_attr( $value ) . '"' : '';
+				echo '<option ' . $style . ' value="' . esc_attr( $value ) . '"' . selected( $selected, $value, false ) . '>' . esc_attr( $label ) . '</option>';
 
-			echo '<option ' . $style . ' value="' . esc_attr( $value ) . '"' . selected( $selected, $value, false ) . '>' . esc_attr( $label ) . '</option>';
+			}
+			?>
+		</select>
 
-		}
-
-		echo '</select>';
-
+		<?php
 	}
 
 }

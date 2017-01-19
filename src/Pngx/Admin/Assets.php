@@ -63,9 +63,25 @@ class Pngx__Admin__Assets {
 		);
 
 		wp_register_script(
+			'pngx-wp-editor',
+			Pngx__Main::instance()->resource_url . 'js/wp_editor.js',
+			array(),
+			filemtime( Pngx__Main::instance()->resource_path . 'js/wp_editor.js' ),
+			true
+		);
+
+		wp_register_script(
+			'pngx-load-template-ajax',
+			Pngx__Main::instance()->resource_url . 'js/templates.js',
+			array(),
+			filemtime( Pngx__Main::instance()->resource_path . 'js/templates.js' ),
+			true
+		);
+
+		wp_register_script(
 			'pngx-admin',
 			Pngx__Main::instance()->resource_url . 'js/pngx-admin.js',
-			array( 'pngx-color-picker-alpha', 'pngx-bootstrap', 'pngx-bootstrap-iconpicker-fontawesome', 'pngx-bootstrap-iconpicker', 'jquery-ui-tabs' ),
+			array( 'pngx-wp-editor', 'pngx-load-template-ajax', 'pngx-color-picker-alpha', 'pngx-bootstrap', 'pngx-bootstrap-iconpicker-fontawesome', 'pngx-bootstrap-iconpicker', 'jquery-ui-tabs' ),
 			filemtime( Pngx__Main::instance()->resource_path . 'js/pngx-admin.js' ),
 			true
 		);

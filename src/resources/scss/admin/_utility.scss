@@ -77,3 +77,16 @@
 		width: 100%;
 	}
 }
+
+.pngx-field-align {
+	display: inline-block;
+	vertical-align: top;
+}
+
+.pngx-field-one-third {
+	width: ( percentage( 1/3 )-1 );
+}
+
+.pngx-field-two-thirds {
+	width: ( percentage( 2/3 )-1 );
+}
