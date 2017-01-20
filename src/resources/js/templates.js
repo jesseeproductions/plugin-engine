@@ -44,13 +44,13 @@ jQuery( function ( $ ) {
 					var selector;
 					for ( var i = 0; i < editors.length; i++ ) {
 
-						console.log( editors[i], editors[i].id );
+						//console.log( editors[i], editors[i].id );
 
 						selector = '#' + editors[i].id;
 
 						//console.log(selector);
 
-						$( selector ).wp_editor( false, 'apid' + i, true );
+						$( selector ).wp_editor( false, 'apid' + i, false );
 
 						//console.log( 'id', i );
 						if ( 0 == i ) {

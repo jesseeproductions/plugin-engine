@@ -118,7 +118,7 @@
 				"wpeditimage_disable_captions": false,
 				"wpeditimage_html5_captions": false,
 				"plugins": "charmap,hr,media,paste,tabfocus,textcolor,fullscreen,wordpress,wpeditimage,wpgallery,wplink,wpdialogs,wpview,image",
-				"content_css": ap_vars.includes_url + "css/dashicons.css?ver=4.7," + ap_vars.includes_url + "js/mediaelement/mediaelementplayer.min.css?ver=4.7," + ap_vars.includes_url + "js/mediaelement/wp-mediaelement.css?ver=4.7," + ap_vars.includes_url + "js/tinymce/skins/wordpress/wp-content.css?ver=4.7",
+				"content_css": ap_vars.includes_url + "css/dashicons.css?ver=4.7," + ap_vars.includes_url + "js/mediaelement/mediaelementplayer.min.css?ver=4.7," + ap_vars.includes_url + "js/mediaelement/wp-mediaelement.css?ver=4.7," + ap_vars.includes_url + "js/tinymce/skins/wordpress/wp-content.css?ver=4.7, http://couponsdev.localhost/wp-content/plugins/coupon-creator-pro/src/resources/css/coupon-editor-style.css?ver=4.7",
 				"selector": "#" + uni_key,
 				"resize": "vertical",
 				"menubar": false,
