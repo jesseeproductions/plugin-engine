@@ -70,6 +70,7 @@ class Pngx__Admin__Field__Variety {
 			$fields = apply_filters( 'pngx_meta_template_fields', array() );
 
 			global $post;
+
 			if ( isset( $field['variety_choices'][ $selected ] ) ) {
 				foreach ( $field['variety_choices'][ $selected ] as $label ) {
 
@@ -77,7 +78,12 @@ class Pngx__Admin__Field__Variety {
 						continue;
 					}
 
-					$meta = get_post_meta( $post->ID, $label, true );
+					$post_id = $post->ID;
+					if ( Pngx__Main::instance()->doing_ajax && isset( $_POST['post_id'] ) ) {
+                        $post_id =  absint( $_POST['post_id'] );
+					}
+
+					$meta = get_post_meta( $post_id, $label, true );
 					Pngx__Admin__Fields::display_field( $fields[ $label ], false, false, $meta, null );
 
 				}

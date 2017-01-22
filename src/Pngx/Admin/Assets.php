@@ -25,9 +25,15 @@ class Pngx__Admin__Assets {
 			filemtime( Pngx__Main::instance()->vendor_path . 'bootstrap-iconpicker/bootstrap-iconpicker/css/bootstrap-iconpicker.min.css' )
 		);
 		wp_register_style(
+			'pngx-font-awesome',
+			Pngx__Main::instance()->vendor_url . 'bootstrap-iconpicker/icon-fonts/font-awesome-4.3.0/css/font-awesome.css',
+			false,
+			filemtime( Pngx__Main::instance()->vendor_path . 'bootstrap-iconpicker/icon-fonts/font-awesome-4.3.0/css/font-awesome.css' )
+		);
+		wp_register_style(
 			'pngx-admin',
 			Pngx__Main::instance()->resource_url . 'css/pngx-admin.css',
-			array( 'pngx-bootstrap-iconpicker', 'pngx-bootstrap-iconpicker' ),
+			array( 'pngx-bootstrap-iconpicker','pngx-font-awesome', 'pngx-bootstrap-iconpicker' ),
 			filemtime( Pngx__Main::instance()->resource_path . 'css/pngx-admin.css' )
 		);
 

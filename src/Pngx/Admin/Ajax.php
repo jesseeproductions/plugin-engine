@@ -29,30 +29,20 @@ class Pngx__Admin__Ajax {
 
 	public function load_templates() {
 
-		global $wp_version;
-
-		//log_me( 'load_templates' );
-		//log_me( $_POST );
-
-		//End if not the correct action
+		// End if not the correct action
 		if ( ! isset( $_POST['action'] ) || 'pngx_templates' != $_POST['action'] ) {
 			wp_send_json_error( __( 'Permission Error', 'plugin-engine' ) );
 		}
-		//log_me( 'load_templates1' );
-		//End if not correct nonce
+
+		// End if not correct nonce
 		if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'pngx_admin_' . $_POST['post_id'] ) ) {
 			wp_send_json_error( __( 'Permission Error', 'plugin-engine' ) );
 		}
 
-		//End if no ID or title
-		//if ( ! isset( $_POST['post_id'] ) ) {
-		//	wp_send_json_error( __( 'No Extension ID', 'plugin-engine' ) );
-		//}
-		//log_me( 'load_templates2' );
 		if ( ! isset( $_POST['option'] ) ) {
 			wp_send_json_error( __( 'No Template ID', 'plugin-engine' ) );
 		}
-		//log_me( 'load_templates3' );
+
 		Pngx__Main::instance()->doing_ajax = defined( 'DOING_AJAX' ) && DOING_AJAX;
 
 		ob_start();
@@ -62,8 +52,7 @@ class Pngx__Admin__Ajax {
 		 */
 		$fields = apply_filters( 'pngx_meta_fields', array() );
 
-		//log_me( $fields );
-		//log_me( 'start' );
+        global $wp_version;
 
 		foreach ( $fields as $field ) {
 

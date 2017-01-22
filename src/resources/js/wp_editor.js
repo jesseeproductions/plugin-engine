@@ -32,6 +32,8 @@
  */
 
 (function ( $, window ) {
+
+
 	$.fn.wp_editor = function ( options, uni_key, reduced ) {
 
 		if ( !$( this ).is( 'textarea' ) ) {
@@ -46,92 +48,12 @@
 			return this;
 		}
 
-		var default_toolbar1 = "bold,italic,strikethrough,bullist,numlist,blockquote,hr,alignleft,aligncenter,alignright,link,unlink,wp_more,spellchecker,fullscreen,wp_adv";
-		var default_toolbar2 = "formatselect,underline,alignjustify,forecolor,pastetext,removeformat,charmap,outdent,indent,undo,redo,wp_help";
+		var default_toolbar1 = get_toolbar_1();
+		var default_toolbar2 = get_toolbar_2();
 
-		if ( reduced ) {
-			var default_toolbar1 = "bold,italic,forecolor,underline,strikethrough,pastetext,removeformat,charmap,hr,alignleft,aligncenter,alignright,link,unlink,spellchecker";
-			var default_toolbar2 = "";
-		}
+		var default_options = get_defaults( ap_vars.includes_url, uni_key, default_toolbar1, default_toolbar2 );
 
-		var default_options = {
-			'mode': 'tmce',
-			'mceInit': {
-				"theme": "modern",
-				"skin": "lightgray",
-				"language": "en",
-				"formats": {
-					"alignleft": [
-						{
-							"selector": "p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li",
-							"styles": {"textAlign": "left"},
-							"deep": false,
-							"remove": "none"
-						},
-						{
-							"selector": "img,table,dl.wp-caption",
-							"classes": ["alignleft"],
-							"deep": false,
-							"remove": "none"
-						}
-					],
-					"aligncenter": [
-						{
-							"selector": "p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li",
-							"styles": {"textAlign": "center"},
-							"deep": false,
-							"remove": "none"
-						},
-						{
-							"selector": "img,table,dl.wp-caption",
-							"classes": ["aligncenter"],
-							"deep": false,
-							"remove": "none"
-						}
-					],
-					"alignright": [
-						{
-							"selector": "p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li",
-							"styles": {"textAlign": "right"},
-							"deep": false,
-							"remove": "none"
-						},
-						{
-							"selector": "img,table,dl.wp-caption",
-							"classes": ["alignright"],
-							"deep": false,
-							"remove": "none"
-						}
-					],
-					"strikethrough": {"inline": "del", "deep": true, "split": true}
-				},
-				"relative_urls": false,
-				"remove_script_host": false,
-				"convert_urls": false,
-				"browser_spellcheck": true,
-				"fix_list_elements": true,
-				"entities": "38,amp,60,lt,62,gt",
-				"entity_encoding": "raw",
-				"keep_styles": false,
-				"paste_webkit_styles": "font-weight font-style color",
-				"preview_styles": "font-family font-size font-weight font-style text-decoration text-transform",
-				"wpeditimage_disable_captions": false,
-				"wpeditimage_html5_captions": false,
-				"plugins": "charmap,hr,media,paste,tabfocus,textcolor,fullscreen,wordpress,wpeditimage,wpgallery,wplink,wpdialogs,wpview,image",
-				"content_css": ap_vars.includes_url + "css/dashicons.css?ver=4.7," + ap_vars.includes_url + "js/mediaelement/mediaelementplayer.min.css?ver=4.7," + ap_vars.includes_url + "js/mediaelement/wp-mediaelement.css?ver=4.7," + ap_vars.includes_url + "js/tinymce/skins/wordpress/wp-content.css?ver=4.7, http://couponsdev.localhost/wp-content/plugins/coupon-creator-pro/src/resources/css/coupon-editor-style.css?ver=4.7",
-				"selector": "#" + uni_key,
-				"resize": "vertical",
-				"menubar": false,
-				"wpautop": true,
-				"indent": false,
-				"toolbar1": default_toolbar1,
-				"toolbar2": default_toolbar2,
-				"toolbar3": "",
-				"toolbar4": "",
-				"tabfocus_elements": ":prev,:next",
-				"body_class": uni_key
-			}
-		}, id_regexp = new RegExp( uni_key, 'g' );
+		id_regexp = new RegExp( uni_key, 'g' );
 
 		if ( tinyMCEPreInit.mceInit[uni_key] ) {
 			default_options.mceInit = tinyMCEPreInit.mceInit[uni_key];
@@ -146,27 +68,18 @@
 			} else {
 				var current_id = $( this ).attr( 'id' );
 
-				//console.log( 'id_regexp', id_regexp );
-
 				$.each( options.mceInit, function ( key, value ) {
 					if ( $.type( value ) == 'string' )
 						options.mceInit[key] = value.replace( id_regexp, current_id );
 				} );
 				options.mode = options.mode == 'tmce' ? 'tmce' : 'html';
 
-				//console.log( 'id', current_id );
 				//if tiny mce exists for id, remove it to reinit
 				if ( typeof tinyMCEPreInit.mceInit[current_id] !== 'undefined' ) {
-					//console.log( 'defined', current_id );
-
-					//tinymce.init(tinyMCEPreInit.mceInit[current_id]);
-
 					tinyMCE.remove( tinymce.editors[current_id] );
 				}
 
 				tinyMCEPreInit.mceInit[current_id] = options.mceInit;
-
-				//console.log( 'mceInit', tinyMCEPreInit.mceInit[current_id]);
 
 				$( this ).addClass( 'wp-editor-area' ).show();
 				var self = this;
@@ -238,5 +151,129 @@
 				} );
 			}
 		} );
+	};
+
+	function get_toolbar_1( reduced ) {
+		if ( reduced ) {
+			return "forecolor,bold,italic,underline,strikethrough,hr,charmap,hr,alignleft,aligncenter,alignright,link,unlink,spellchecker,pastetext,removeformat";
+		}
+		return "formatselect,forecolor,bold,italic,underline,strikethrough,hr,bullist,numlist,alignleft,aligncenter,alignright,link,unlink,wp_adv";
+
 	}
+
+	function get_toolbar_2( reduced ) {
+		if ( reduced ) {
+			return '';
+		}
+		return "showhook,showprint,fontselect,fontsizeselect,blockquote,pastetext,removeformat,charmap,outdent,indent,undo,redo,spellchecker,fullscreen,wp_help";
+
+	}
+
+	function get_defaults( resource_url, uni_key, default_toolbar1, default_toolbar2 ) {
+
+		return {
+			'mode': 'tmce',
+			'mceInit': {
+				"theme": "modern",
+				"skin": "lightgray",
+				"language": "en",
+				"formats": {
+					"alignleft": [
+						{
+							"selector": "p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li",
+							"styles": {"textAlign": "left"},
+							"deep": false,
+							"remove": "none"
+						},
+						{
+							"selector": "img,table,dl.wp-caption",
+							"classes": ["alignleft"],
+							"deep": false,
+							"remove": "none"
+						}
+					],
+					"aligncenter": [
+						{
+							"selector": "p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li",
+							"styles": {"textAlign": "center"},
+							"deep": false,
+							"remove": "none"
+						},
+						{
+							"selector": "img,table,dl.wp-caption",
+							"classes": ["aligncenter"],
+							"deep": false,
+							"remove": "none"
+						}
+					],
+					"alignright": [
+						{
+							"selector": "p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li",
+							"styles": {"textAlign": "right"},
+							"deep": false,
+							"remove": "none"
+						},
+						{
+							"selector": "img,table,dl.wp-caption",
+							"classes": ["alignright"],
+							"deep": false,
+							"remove": "none"
+						}
+					],
+					"strikethrough": {"inline": "del", "deep": true, "split": true}
+				},
+				"relative_urls": false,
+				"remove_script_host": false,
+				"convert_urls": false,
+				"browser_spellcheck": true,
+				"fix_list_elements": true,
+				"entities": "38,amp,60,lt,62,gt",
+				"entity_encoding": "raw",
+				"keep_styles": false,
+				"paste_webkit_styles": "font-weight font-style color",
+				"preview_styles": "font-family font-size font-weight font-style text-decoration text-transform",
+				"wpeditimage_disable_captions": false,
+				"wpeditimage_html5_captions": false,
+				"plugins": "charmap,hr,media,paste,tabfocus,textcolor,fullscreen,wordpress,wpeditimage,wpgallery,wplink,wpdialogs,wpview,image",
+				"content_css": resource_url + "css/dashicons.css?ver=4.7," + resource_url + "js/mediaelement/mediaelementplayer.min.css?ver=4.7," + resource_url + "js/mediaelement/wp-mediaelement.css?ver=4.7," + resource_url + "js/tinymce/skins/wordpress/wp-content.css?ver=4.7, http://couponsdev.localhost/wp-content/plugins/coupon-creator-pro/src/resources/css/coupon-editor-style.css?ver=4.7",
+				"selector": "#" + uni_key,
+				"resize": "vertical",
+				"menubar": false,
+				"wpautop": true,
+				"indent": false,
+				"toolbar1": default_toolbar1,
+				"toolbar2": default_toolbar2,
+				"toolbar3": '',
+				"toolbar4": '',
+				"tabfocus_elements": ":prev,:next",
+				"body_class": uni_key,
+				setup: function ( editor ) {
+					editor.addButton( 'showhook', {
+						title: 'Add Show Hook Shortcode',
+						text: '[showhook]',
+						icon: false,
+						onclick: function () {
+							var selected_text = editor.selection.getContent();
+							var return_text = '';
+							return_text = '[showhook]' + selected_text + '[/showhook]';
+							editor.execCommand( 'mceInsertContent', 0, return_text );
+						}
+					} );
+					editor.addButton( 'showprint', {
+						title: 'Add Show Print Shortcode',
+						text: '[showprint]',
+						icon: false,
+						onclick: function () {
+							var selected_text = editor.selection.getContent();
+							var return_text = '';
+							return_text = '[showprint]' + selected_text + '[/showprint]';
+							editor.execCommand( 'mceInsertContent', 0, return_text );
+						}
+					} );
+				}
+			}
+		};
+
+	}
+
 })( jQuery, window );
