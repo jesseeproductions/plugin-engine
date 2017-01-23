@@ -40,18 +40,18 @@
 			console.warn( 'Element must be a textarea' );
 		}
 
-		if ( typeof tinyMCEPreInit == 'undefined' || typeof QTags == 'undefined' || typeof ap_vars == 'undefined' ) {
+		if ( typeof tinyMCEPreInit == 'undefined' || typeof QTags == 'undefined' || typeof pngx_editor_vars == 'undefined' ) {
 			console.warn( 'js_wp_editor( $settings ); must be loaded' );
 		}
 
-		if ( !$( this ).is( 'textarea' ) || typeof tinyMCEPreInit == 'undefined' || typeof QTags == 'undefined' || typeof ap_vars == 'undefined' ) {
+		if ( !$( this ).is( 'textarea' ) || typeof tinyMCEPreInit == 'undefined' || typeof QTags == 'undefined' || typeof pngx_editor_vars == 'undefined' ) {
 			return this;
 		}
 
 		var default_toolbar1 = get_toolbar_1();
 		var default_toolbar2 = get_toolbar_2();
 
-		var default_options = get_defaults( ap_vars.includes_url, uni_key, default_toolbar1, default_toolbar2 );
+		var default_options = get_defaults( pngx_editor_vars.includes_url, uni_key, default_toolbar1, default_toolbar2, pngx_editor_vars.editor_buttons );
 
 		id_regexp = new RegExp( uni_key, 'g' );
 
@@ -119,7 +119,7 @@
 							$( self ).before( '<link rel="stylesheet" type="text/css" href="' + this + '">' );
 					} );
 
-				$( self ).before( '<link rel="stylesheet" id="editor-buttons-css" href="' + ap_vars.includes_url + 'css/editor.css" type="text/css" media="all">' );
+				$( self ).before( '<link rel="stylesheet" id="editor-buttons-css" href="' + pngx_editor_vars.includes_url + 'css/editor.css" type="text/css" media="all">' );
 
 				$( self ).before( wrap );
 				$( self ).remove();
@@ -169,7 +169,7 @@
 
 	}
 
-	function get_defaults( resource_url, uni_key, default_toolbar1, default_toolbar2 ) {
+	function get_defaults( resource_url, uni_key, default_toolbar1, default_toolbar2, editor_buttons ) {
 
 		return {
 			'mode': 'tmce',
@@ -248,28 +248,26 @@
 				"tabfocus_elements": ":prev,:next",
 				"body_class": uni_key,
 				setup: function ( editor ) {
-					editor.addButton( 'showhook', {
-						title: 'Add Show Hook Shortcode',
-						text: '[showhook]',
-						icon: false,
-						onclick: function () {
-							var selected_text = editor.selection.getContent();
-							var return_text = '';
-							return_text = '[showhook]' + selected_text + '[/showhook]';
-							editor.execCommand( 'mceInsertContent', 0, return_text );
+
+					// Setup Buttons
+					for ( i = 0; i < editor_buttons.length; i++ ) {
+						// Simple Wrap Button
+						if ( 'wrap' === editor_buttons[i]['type'] ) {
+							editor.addButton( editor_buttons[i]['addButton'], {
+								title: editor_buttons[i]['title'],
+								text: editor_buttons[i]['text'],
+								icon: editor_buttons[i]['icon'],
+								onclick: (function ( i, buttons ) {
+									return function () {
+										var selected_text = editor.selection.getContent();
+										var return_text = '';
+										return_text = buttons['wrapopentag'] + selected_text + buttons['wrapclosetag'];
+										editor.execCommand( 'mceInsertContent', 0, return_text );
+									};
+								})( i, editor_buttons[i] )
+							} );
 						}
-					} );
-					editor.addButton( 'showprint', {
-						title: 'Add Show Print Shortcode',
-						text: '[showprint]',
-						icon: false,
-						onclick: function () {
-							var selected_text = editor.selection.getContent();
-							var return_text = '';
-							return_text = '[showprint]' + selected_text + '[/showprint]';
-							editor.execCommand( 'mceInsertContent', 0, return_text );
-						}
-					} );
+					}
 				}
 			}
 		};

@@ -39,29 +39,18 @@ jQuery( function ( $ ) {
 
 					$( $ajax_field ).html( JSON.parse( results.data ) );
 
+					pngx_admin_fields_init.visual_editor();
 
-					var editors = document.getElementsByClassName( "pngx-ajax-wp-editor" );
+					/*var editors = document.getElementsByClassName( "pngx-ajax-wp-editor" );
 					var selector;
 					for ( var i = 0; i < editors.length; i++ ) {
 
-						//console.log( editors[i], editors[i].id );
-
 						selector = '#' + editors[i].id;
 
-						//console.log(selector);
+						$( selector ).wp_editor( false, editors[i].id, false );
 
-						$( selector ).wp_editor( false, 'apid' + i, false );
+					}*/
 
-						//console.log( 'id', i );
-						if ( 0 == i ) {
-							//console.log( 'id2', i, editors[i].id );
-							//	selector = '#' + editors[i].id;
-						} else {
-							//console.log( 'id3', i, editors[i].id );
-							//	selector = selector + ', #' + editors[i].id;
-						}
-						//console.log( selector );
-					}
 					var image_upload = $( ".pngx-meta-template-wrap .pngx-meta-field.field-image" );
 					var selector_img;
 					for ( i = 0; i < image_upload.length; i++ ) {
