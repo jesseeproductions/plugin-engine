@@ -33,7 +33,6 @@
 
 (function ( $, window ) {
 
-
 	$.fn.wp_editor = function ( options, uni_key, reduced ) {
 
 		if ( !$( this ).is( 'textarea' ) ) {
@@ -48,10 +47,9 @@
 			return this;
 		}
 
-		var default_toolbar1 = get_toolbar_1();
-		var default_toolbar2 = get_toolbar_2();
-
-		var default_options = get_defaults( pngx_editor_vars.includes_url, uni_key, default_toolbar1, default_toolbar2, pngx_editor_vars.editor_buttons );
+		// Set Variables
+		var default_options = {};
+		var pngx_options = get_defaults( pngx_editor_vars.includes_url, uni_key, pngx_editor_vars.editor_buttons, reduced );
 
 		id_regexp = new RegExp( uni_key, 'g' );
 
@@ -59,7 +57,9 @@
 			default_options.mceInit = tinyMCEPreInit.mceInit[uni_key];
 		}
 
-		var options = $.extend( true, default_options, options );
+		pngx_options = $.extend( true, default_options, pngx_options );
+
+		options = $.extend( true, pngx_options, options );
 
 		return this.each( function () {
 
@@ -153,23 +153,49 @@
 		} );
 	};
 
-	function get_toolbar_1( reduced ) {
-		if ( reduced ) {
-			return "forecolor,bold,italic,underline,strikethrough,hr,charmap,hr,alignleft,aligncenter,alignright,link,unlink,spellchecker,pastetext,removeformat";
+	function get_toolbar_1( uni_key, reduced ) {
+
+		var $tool_bar_1 = $( '#' + uni_key ).data( 'toggleToolbar_1' );
+		if ( $tool_bar_1 ) {
+			return $tool_bar_1;
+		} else if ( reduced ) {
+			return 'forecolor,bold,italic,underline,strikethrough,hr,charmap,hr,alignleft,aligncenter,alignright,link,unlink,spellchecker,pastetext,removeformat';
 		}
-		return "formatselect,forecolor,bold,italic,underline,strikethrough,hr,bullist,numlist,alignleft,aligncenter,alignright,link,unlink,wp_adv";
+		return 'formatselect,forecolor,bold,italic,underline,strikethrough,hr,bullist,numlist,alignleft,aligncenter,alignright,link,unlink,wp_adv';
 
 	}
 
-	function get_toolbar_2( reduced ) {
-		if ( reduced ) {
+	function get_toolbar_2( uni_key, reduced ) {
+
+		var $tool_bar_2 = $( '#' + uni_key ).data( 'toggleToolbar_2' );
+		if ( $tool_bar_2 ) {
+			return $tool_bar_2;
+		} else if ( reduced ) {
 			return '';
 		}
-		return "showhook,showprint,fontselect,fontsizeselect,blockquote,pastetext,removeformat,charmap,outdent,indent,undo,redo,spellchecker,fullscreen,wp_help";
+		return 'fontselect,fontsizeselect,blockquote,pastetext,removeformat,charmap,outdent,indent,undo,redo,spellchecker,fullscreen,wp_help';
 
 	}
 
-	function get_defaults( resource_url, uni_key, default_toolbar1, default_toolbar2, editor_buttons ) {
+	function get_toolbar_3( uni_key ) {
+
+		var $tool_bar_3 = $( '#' + uni_key ).data( 'toggleToolbar_3' );
+
+		if ( $tool_bar_3 ) {
+			return $tool_bar_3;
+		}
+
+		return '';
+
+	}
+
+	function get_defaults( resource_url, uni_key, editor_buttons, reduced ) {
+
+		var $content_css = $( '#' + uni_key ).data( 'toggleContent_css' );
+
+		var $wpautop = $( '#' + uni_key ).data( 'toggleWpautop' );
+
+		console.log( $wpautop ? false : true )
 
 		return {
 			'mode': 'tmce',
@@ -177,6 +203,7 @@
 				"theme": "modern",
 				"skin": "lightgray",
 				"language": "en",
+				"fontsize_formats": "6px 8px 10px 12px 14px 16px 18px 20px 22px 24px 26px 28px 30px 36px 40px",
 				"formats": {
 					"alignleft": [
 						{
@@ -235,15 +262,19 @@
 				"wpeditimage_disable_captions": false,
 				"wpeditimage_html5_captions": false,
 				"plugins": "charmap,hr,media,paste,tabfocus,textcolor,fullscreen,wordpress,wpeditimage,wpgallery,wplink,wpdialogs,wpview,image",
-				"content_css": resource_url + "css/dashicons.css?ver=4.7," + resource_url + "js/mediaelement/mediaelementplayer.min.css?ver=4.7," + resource_url + "js/mediaelement/wp-mediaelement.css?ver=4.7," + resource_url + "js/tinymce/skins/wordpress/wp-content.css?ver=4.7, http://couponsdev.localhost/wp-content/plugins/coupon-creator-pro/src/resources/css/coupon-editor-style.css?ver=4.7",
+				"content_css": resource_url + "css/dashicons.css?ver=4.7," +
+				resource_url + "js/mediaelement/mediaelementplayer.min.css?ver=4.7," +
+				resource_url + "js/mediaelement/wp-mediaelement.css?ver=4.7," +
+				resource_url + "js/tinymce/skins/wordpress/wp-content.css?ver=4.7, " +
+				$content_css,
 				"selector": "#" + uni_key,
 				"resize": "vertical",
 				"menubar": false,
-				"wpautop": true,
+				"wpautop":  $wpautop ? false : true,
 				"indent": false,
-				"toolbar1": default_toolbar1,
-				"toolbar2": default_toolbar2,
-				"toolbar3": '',
+				"toolbar1": get_toolbar_1( uni_key, reduced ),
+				"toolbar2": get_toolbar_2( uni_key, reduced ),
+				"toolbar3": get_toolbar_3( uni_key ),
 				"toolbar4": '',
 				"tabfocus_elements": ":prev,:next",
 				"body_class": uni_key,

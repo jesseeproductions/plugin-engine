@@ -29,7 +29,6 @@ class Pngx__Admin__Field__Template {
 		wp_localize_script( 'pngx-load-template-ajax', 'pngx_admin_ajax', array(
 			'ajaxurl'        => admin_url( 'admin-ajax.php', ( is_ssl() ? 'https' : 'http' ) ),
 			'nonce'          => wp_create_nonce( 'pngx_admin_' . $post->ID ),
-			'coupon_version' => Cctor__Coupon__Main::VERSION_NUM,
 			'post_id'        => $post->ID
 		) );
 

@@ -10,7 +10,7 @@ if ( class_exists( 'Pngx__Admin__Field__Wysiwyg' ) ) {
 
 /**
  * Class Pngx__Admin__Field__Wysiwyg
- * Text Field
+ * Visual Editor Field
  */
 class Pngx__Admin__Field__Wysiwyg {
 
@@ -32,7 +32,7 @@ class Pngx__Admin__Field__Wysiwyg {
 		if ( ! class_exists( '_WP_Editors' ) ) {
 			require( ABSPATH . WPINC . '/class-wp-editor.php' );
 		}
-		$set = _WP_Editors::parse_settings( 'apid', $settings );
+		$set = _WP_Editors::parse_settings( esc_attr( $field['id'] ), $settings );
 		if ( ! current_user_can( 'upload_files' ) ) {
 			$set['media_buttons'] = false;
 		}
@@ -53,71 +53,49 @@ class Pngx__Admin__Field__Wysiwyg {
 
 		_WP_Editors::editor_settings( esc_attr( $field['id'] ), $set );
 
-		$functions = array(
-			array(
-				'addButton'    => 'showhook',
-				'title'        => 'Add Show Hook Shortcode',
-				'text'         => '[showhook]',
-				'icon'         => false,
-				'type'         => 'wrap',
-				'wrapopentag'  => '[showhook]',
-				'wrapclosetag' => '[/showhook]',
-			),
-			array(
-				'addButton'    => 'showprint',
-				'title'        => 'Add Print Hook Shortcode',
-				'text'         => '[showprint]',
-				'icon'         => false,
-				'type'         => 'wrap',
-				'wrapopentag'  => '[showprint]',
-				'wrapclosetag' => '[/showprint]',
-			),
-		);
+		/**
+		 * Filter Tiny MCE Buttons for PNGX Editor Script
+		 *
+		 * @param array() an    array of attributes to create the button
+		 * @param         $post current post object
+		 */
+		$pngx_editor_buttons = apply_filters( 'pngx_visual_editor_functions', array(), $post );
 
 		$pngx_editor_vars = array(
 			'url'            => get_home_url(),
 			'includes_url'   => includes_url(),
-			'editor_buttons' => apply_filters( 'pngx_visual_editor_functions', $functions, $post ),
+			'editor_buttons' => $pngx_editor_buttons,
 		);
 
 		wp_localize_script( 'pngx-wp-editor', 'pngx_editor_vars', $pngx_editor_vars );
 
-
-		//if ( Pngx__Main::instance()->doing_ajax ) {
 		$rows  = isset( $field['rows'] ) ? $field['rows'] : 12;
 		$cols  = isset( $field['cols'] ) ? $field['cols'] : 50;
 		$class = isset( $field['class'] ) ? $field['class'] : '';
 
-		if ( version_compare( $wp_version, '4.3', '<' ) ) {
-			echo '<textarea 
-						class="pngx-ajax-wp-editor ' . esc_attr( $class ) . '" 
-						id="' . esc_attr( $field['id'] ) . '" 
-						name="' . esc_attr( $name ) . '" 
-						placeholder="' . esc_attr( $std ) . '" 
-						rows="' . absint( $rows ) . '" 
-						cols="' . absint( $cols ) . '"
-						>' . wp_htmledit_pre( $value ) . '</textarea>';
-		} else {
-			echo '<textarea 
-						class="pngx-ajax-wp-editor ' . esc_attr( $class ) . '" 
-						id="' . esc_attr( $field['id'] ) . '" 
-						name="' . esc_attr( $name ) . '" 
-						placeholder="' . esc_attr( $std ) . '" 
-						rows="' . absint( $rows ) . '" 
-						cols="' . absint( $cols ) . '"
-						>' . format_for_editor( $value ) . '</textarea>';
-		}
+		?>
 
-		/*} else {
-
-			$wysiwyg_options                  = isset( $field['options'] ) ? $field['options'] : array();
-			$wysiwyg_options['textarea_name'] = $name;
-			$wysiwyg_options['editor_class']  = $name;
-
-			wp_editor( $value, $field['id'], $wysiwyg_options );
-		}*/
+		<textarea
+				class="pngx-ajax-wp-editor <?php echo esc_attr( $class ); ?>"
+				id="<?php echo esc_attr( $field['id'] ); ?>"
+				name="<?php echo esc_attr( $name ); ?>"
+				placeholder="<?php echo esc_attr( $std ); ?>"
+				rows="<?php echo absint( $rows ); ?>"
+				cols="<?php echo absint( $cols ); ?>"
+				<?php echo isset( $field['data'] ) ? Pngx__Admin__Fields::toggle( $field['data'], null ) : ''; ?>
+		>
+				<?php
+				if ( version_compare( $wp_version, '4.3', '<' ) ) {
+					echo wp_htmledit_pre( $value );
+				} else {
+					echo format_for_editor( $value );
+				}
+				?>
+		</textarea>
+		<?php
 
 		if ( "" != $field['desc'] ) {
+
 			echo '<br /><span class="description">' . $field['desc'] . '</span>';
 		}
 

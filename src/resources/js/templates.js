@@ -11,7 +11,7 @@ jQuery( function ( $ ) {
 		var $ajax_action = $( this ).data( 'toggleAjax_action' );
 
 		if ( ! $ajax_field && ! $ajax_field_id && ! $ajax_action ) {
-			console.log('missing');
+			//console.log('missing');
 			return;
 		}
 
@@ -39,27 +39,21 @@ jQuery( function ( $ ) {
 
 					$( $ajax_field ).html( JSON.parse( results.data ) );
 
+					// Init Visual Editors
 					pngx_admin_fields_init.visual_editor();
 
-					/*var editors = document.getElementsByClassName( "pngx-ajax-wp-editor" );
-					var selector;
-					for ( var i = 0; i < editors.length; i++ ) {
-
-						selector = '#' + editors[i].id;
-
-						$( selector ).wp_editor( false, editors[i].id, false );
-
-					}*/
-
-					var image_upload = $( ".pngx-meta-template-wrap .pngx-meta-field.field-image" );
+					// Init Image Fields
+					var image_upload = $( $ajax_field + ' .pngx-meta-field.field-image' );
 					var selector_img;
 					for ( i = 0; i < image_upload.length; i++ ) {
 						selector_img = $( image_upload[i] ).find( 'input' ).attr( 'id' );
 						new PNGX__Media( $, selector_img );
 					}
 
+					// Init Color Pickers
 					$( $ajax_field + ' .pngx-color-picker' ).wpColorPicker();
 
+					//Init Icon Pickers
 					$( $ajax_field + ' .pngx-icon-picker' ).iconpicker();
 
 				}
