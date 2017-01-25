@@ -70,12 +70,9 @@ var pngx_admin_fields_init = pngx_admin_fields_init || {};
 	 */
 	obj.visual_editor = function () {
 
-		//console.log( 'loading' );
 		var editors = document.getElementsByClassName( "pngx-ajax-wp-editor" );
 		var selector;
 		for ( var i = 0; i < editors.length; i++ ) {
-
-			//console.log( editors[i], editors[i].id );
 
 			selector = '#' + editors[i].id;
 

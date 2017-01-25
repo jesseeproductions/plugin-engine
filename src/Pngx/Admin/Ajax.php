@@ -23,24 +23,23 @@ class Pngx__Admin__Ajax {
 		add_action( 'wp_ajax_pngx_templates', [ $this, 'load_templates' ] );
 
 		add_action( 'wp_ajax_pngx_variety', [ $this, 'load_variety' ] );
-		//add_action( 'wp_ajax_nopriv_pngx_templates', [ $this, 'load_templates' ] );
 
 	}
 
 	public function load_templates() {
 
 		// End if not the correct action
-		if ( ! isset( $_POST['action'] ) || 'pngx_templates' != $_POST['action'] ) {
-			wp_send_json_error( __( 'Permission Error', 'plugin-engine' ) );
+		if ( ! isset( $_POST['action'] ) || 'pngx_templates' !== $_POST['action'] ) {
+			wp_send_json_error( __( 'A Permission Error has occurred. Please save, reload, and try again.', 'plugin-engine' ) );
 		}
 
 		// End if not correct nonce
 		if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'pngx_admin_' . $_POST['post_id'] ) ) {
-			wp_send_json_error( __( 'Permission Error', 'plugin-engine' ) );
+			wp_send_json_error( __( 'Permission Error has occurred. Please save, reload, and try again.', 'plugin-engine' ) );
 		}
 
 		if ( ! isset( $_POST['option'] ) ) {
-			wp_send_json_error( __( 'No Template ID', 'plugin-engine' ) );
+			wp_send_json_error( __( 'No Template ID. Please save, reload, and try again.', 'plugin-engine' ) );
 		}
 
 		Pngx__Main::instance()->doing_ajax = defined( 'DOING_AJAX' ) && DOING_AJAX;
@@ -111,20 +110,20 @@ class Pngx__Admin__Ajax {
 
 		//End if not the correct action
 		if ( ! isset( $_POST['action'] ) || 'pngx_variety' != $_POST['action'] ) {
-			wp_send_json_error( __( 'Permission Error', 'plugin-engine' ) );
+			wp_send_json_error( __( 'Permission Error has occurred. Please save, reload, and try again.', 'plugin-engine' ) );
 		}
 
 		//End if not correct nonce
 		if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'pngx_admin_' . $_POST['post_id'] ) ) {
-			wp_send_json_error( __( 'Permission Error', 'plugin-engine' ) );
+			wp_send_json_error( __( 'Permission Error has occurred. Please save, reload, and try again.', 'plugin-engine' ) );
 		}
 
 		if ( ! isset( $_POST['field'] ) ) {
-			wp_send_json_error( __( 'No Field ID', 'plugin-engine' ) );
+			wp_send_json_error( __( 'No Field ID. Please save, reload, and try again.', 'plugin-engine' ) );
 		}
 
 		if ( ! isset( $_POST['option'] ) ) {
-			wp_send_json_error( __( 'No Option ID', 'plugin-engine' ) );
+			wp_send_json_error( __( 'No Option ID. Please save, reload, and try again.', 'plugin-engine' ) );
 		}
 
 		Pngx__Main::instance()->doing_ajax = defined( 'DOING_AJAX' ) && DOING_AJAX;

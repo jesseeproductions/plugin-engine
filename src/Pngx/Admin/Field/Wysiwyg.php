@@ -59,15 +59,27 @@ class Pngx__Admin__Field__Wysiwyg {
 		 * @param array() an    array of attributes to create the button
 		 * @param         $post current post object
 		 */
-		$pngx_editor_buttons = apply_filters( 'pngx_visual_editor_functions', array(), $post );
+		$pngx_visual_editor_buttons = apply_filters( 'pngx_visual_editor_functions', array(), $post );
 
+		/**
+		 * Filter HTML Editor Buttons for PNGX Editor Script
+		 *
+		 * @param array() an    array of attributes to create the button
+		 * @param         $post current post object
+		 */
+		$pngx_html_editor_buttons = apply_filters( 'pngx_html_editor_functions', array(), $post );
+
+		/**
+		 * Variables for WP Editor Script
+		 */
 		$pngx_editor_vars = array(
 			'url'            => get_home_url(),
 			'includes_url'   => includes_url(),
-			'editor_buttons' => $pngx_editor_buttons,
+			'visual_editor_buttons' => $pngx_visual_editor_buttons,
+			'html_editor_buttons' => $pngx_html_editor_buttons,
 		);
-
 		wp_localize_script( 'pngx-wp-editor', 'pngx_editor_vars', $pngx_editor_vars );
+
 
 		$rows  = isset( $field['rows'] ) ? $field['rows'] : 12;
 		$cols  = isset( $field['cols'] ) ? $field['cols'] : 50;

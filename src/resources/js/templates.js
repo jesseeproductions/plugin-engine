@@ -10,8 +10,7 @@ jQuery( function ( $ ) {
 		var $ajax_field_id = $( this ).data( 'toggleAjax_field_id' );
 		var $ajax_action = $( this ).data( 'toggleAjax_action' );
 
-		if ( ! $ajax_field && ! $ajax_field_id && ! $ajax_action ) {
-			//console.log('missing');
+		if ( !$ajax_field && !$ajax_field_id && !$ajax_action ) {
 			return;
 		}
 
@@ -31,11 +30,7 @@ jQuery( function ( $ ) {
 			},
 			success: function ( results ) {
 
-				//console.log(results);
-
 				if ( results.success ) {
-
-					//console.log(JSON.parse( results.data ) );
 
 					$( $ajax_field ).html( JSON.parse( results.data ) );
 
@@ -56,15 +51,12 @@ jQuery( function ( $ ) {
 					//Init Icon Pickers
 					$( $ajax_field + ' .pngx-icon-picker' ).iconpicker();
 
+				} else {
+
+					$( $ajax_field ).html( '<h1>' + results.data + '</h1>' );
+
 				}
-			},
-			failure: function ( results ) {
-
-					console.log('failed');
-				//console.log(results);
-
 			}
-
 		} );
 
 	} );

@@ -49,7 +49,7 @@
 
 		// Set Variables
 		var default_options = {};
-		var pngx_options = get_defaults( pngx_editor_vars.includes_url, uni_key, pngx_editor_vars.editor_buttons, reduced );
+		var pngx_options = get_defaults( pngx_editor_vars.includes_url, uni_key, pngx_editor_vars.visual_editor_buttons, reduced );
 
 		id_regexp = new RegExp( uni_key, 'g' );
 
@@ -63,94 +63,138 @@
 
 		return this.each( function () {
 
-			if ( !$( this ).is( 'textarea' ) ) {
-				console.warn( 'Element must be a textarea' );
-			} else {
-				var current_id = $( this ).attr( 'id' );
+				if ( !$( this ).is( 'textarea' ) ) {
+					console.warn( 'Element must be a textarea' );
+				} else {
+					var current_id = $( this ).attr( 'id' );
 
-				$.each( options.mceInit, function ( key, value ) {
-					if ( $.type( value ) == 'string' )
-						options.mceInit[key] = value.replace( id_regexp, current_id );
-				} );
-				options.mode = options.mode == 'tmce' ? 'tmce' : 'html';
-
-				//if tiny mce exists for id, remove it to reinit
-				if ( typeof tinyMCEPreInit.mceInit[current_id] !== 'undefined' ) {
-					tinyMCE.remove( tinymce.editors[current_id] );
-				}
-
-				tinyMCEPreInit.mceInit[current_id] = options.mceInit;
-
-				$( this ).addClass( 'wp-editor-area' ).show();
-				var self = this;
-				if ( $( this ).closest( '.wp-editor-wrap' ).length ) {
-					var parent_el = $( this ).closest( '.wp-editor-wrap' ).parent();
-					$( this ).closest( '.wp-editor-wrap' ).before( $( this ).clone() );
-					$( this ).closest( '.wp-editor-wrap' ).remove();
-					self = parent_el.find( 'textarea[id="' + current_id + '"]' );
-				}
-
-				var wrap = $( '<div id="wp-' + current_id + '-wrap" class="wp-core-ui wp-editor-wrap ' + options.mode + '-active" />' ),
-					editor_tools = $( '<div id="wp-' + current_id + '-editor-tools" class="wp-editor-tools hide-if-no-js" />' ),
-					editor_tabs = $( '<div class="wp-editor-tabs" />' ),
-					switch_editor_tmce = $( '<a id="' + current_id + '-tmce" class="wp-switch-editor switch-tmce" data-wp-editor-id="' + current_id + '">Visual</a>' ),
-					switch_editor_html = $( '<a id="' + current_id + '-html" class="wp-switch-editor switch-html" data-wp-editor-id="' + current_id + '">Text</a>' ),
-					media_buttons = $( '<div id="wp-' + current_id + '-media-buttons" class="wp-media-buttons" />' ),
-					insert_media_button = $( '<a href="#" id="insert-media-button" class="button insert-media add_media" data-editor="' + current_id + '" title="Add Media"><span class="wp-media-buttons-icon"></span> Add Media</a>' ),
-					editor_container = $( '<div id="wp-' + current_id + '-editor-container" class="wp-editor-container" />' ),
-					content_css = /*Object.prototype.hasOwnProperty.call(tinyMCEPreInit.mceInit[current_id], 'content_css') ? tinyMCEPreInit.mceInit[current_id]['content_css'].split(',') :*/ false;
-
-				insert_media_button.appendTo( media_buttons );
-				media_buttons.appendTo( editor_tools );
-
-				switch_editor_tmce.appendTo( editor_tabs );
-				switch_editor_html.appendTo( editor_tabs );
-				editor_tabs.appendTo( editor_tools );
-				if ( !reduced ) {
-					editor_tools.appendTo( wrap );
-				}
-				editor_container.appendTo( wrap );
-
-				editor_container.append( $( self ).clone().addClass( 'wp-editor-area' ) );
-
-				if ( content_css != false )
-					$.each( content_css, function () {
-						if ( !$( 'link[href="' + this + '"]' ).length )
-							$( self ).before( '<link rel="stylesheet" type="text/css" href="' + this + '">' );
+					$.each( options.mceInit, function ( key, value ) {
+						if ( $.type( value ) == 'string' )
+							options.mceInit[key] = value.replace( id_regexp, current_id );
 					} );
+					options.mode = options.mode == 'tmce' ? 'tmce' : 'html';
 
-				$( self ).before( '<link rel="stylesheet" id="editor-buttons-css" href="' + pngx_editor_vars.includes_url + 'css/editor.css" type="text/css" media="all">' );
-
-				$( self ).before( wrap );
-				$( self ).remove();
-
-				new QTags( current_id );
-				QTags._buttonsInit();
-				switchEditors.go( current_id, options.mode );
-
-				$( wrap ).on( 'click', '.insert-media', function ( event ) {
-					var elem = $( event.currentTarget ),
-						editor = elem.data( 'editor' ),
-						options = {
-							frame: 'post',
-							state: 'insert',
-							title: wp.media.view.l10n.addMedia,
-							multiple: true
-						};
-
-					event.preventDefault();
-
-					elem.blur();
-
-					if ( elem.hasClass( 'gallery' ) ) {
-						options.state = 'gallery';
-						options.title = wp.media.view.l10n.createGalleryTitle;
+					//if tiny mce exists for id, remove it to reinit
+					if ( typeof tinyMCEPreInit.mceInit[current_id] !== 'undefined' ) {
+						tinyMCE.remove( tinymce.editors[current_id] );
 					}
 
-					wp.media.editor.open( editor, options );
-				} );
+					tinyMCEPreInit.mceInit[current_id] = options.mceInit;
+
+					$( this ).addClass( 'wp-editor-area' ).show();
+					var self = this;
+					if ( $( this ).closest( '.wp-editor-wrap' ).length ) {
+						var parent_el = $( this ).closest( '.wp-editor-wrap' ).parent();
+						$( this ).closest( '.wp-editor-wrap' ).before( $( this ).clone() );
+						$( this ).closest( '.wp-editor-wrap' ).remove();
+						self = parent_el.find( 'textarea[id="' + current_id + '"]' );
+					}
+
+					var wrap = $( '<div id="wp-' + current_id + '-wrap" class="wp-core-ui wp-editor-wrap ' + options.mode + '-active" />' ),
+						editor_tools = $( '<div id="wp-' + current_id + '-editor-tools" class="wp-editor-tools hide-if-no-js" />' ),
+						editor_tabs = $( '<div class="wp-editor-tabs" />' ),
+						switch_editor_tmce = $( '<a id="' + current_id + '-tmce" class="wp-switch-editor switch-tmce" data-wp-editor-id="' + current_id + '">Visual</a>' ),
+						switch_editor_html = $( '<a id="' + current_id + '-html" class="wp-switch-editor switch-html" data-wp-editor-id="' + current_id + '">Text</a>' ),
+						media_buttons = $( '<div id="wp-' + current_id + '-media-buttons" class="wp-media-buttons" />' ),
+						insert_media_button = $( '<a href="#" id="insert-media-button" class="button insert-media add_media" data-editor="' + current_id + '" title="Add Media"><span class="wp-media-buttons-icon"></span> Add Media</a>' ),
+						editor_container = $( '<div id="wp-' + current_id + '-editor-container" class="wp-editor-container" />' ),
+						content_css = /*Object.prototype.hasOwnProperty.call(tinyMCEPreInit.mceInit[current_id], 'content_css') ? tinyMCEPreInit.mceInit[current_id]['content_css'].split(',') :*/ false;
+
+					insert_media_button.appendTo( media_buttons );
+					media_buttons.appendTo( editor_tools );
+
+					switch_editor_tmce.appendTo( editor_tabs );
+					switch_editor_html.appendTo( editor_tabs );
+					editor_tabs.appendTo( editor_tools );
+					if ( !reduced ) {
+						editor_tools.appendTo( wrap );
+					}
+					editor_container.appendTo( wrap );
+
+					editor_container.append( $( self ).clone().addClass( 'wp-editor-area' ) );
+
+					if ( content_css != false )
+						$.each( content_css, function () {
+							if ( !$( 'link[href="' + this + '"]' ).length )
+								$( self ).before( '<link rel="stylesheet" type="text/css" href="' + this + '">' );
+						} );
+
+					$( self ).before( '<link rel="stylesheet" id="editor-buttons-css" href="' + pngx_editor_vars.includes_url + 'css/editor.css" type="text/css" media="all">' );
+
+					$( self ).before( wrap );
+					$( self ).remove();
+
+
+					new QTags( uni_key );
+					QTags._buttonsInit();
+
+					var $html_buttons = $( '#' + uni_key ).data( 'toggleHtml_buttons' );
+
+					if ( $html_buttons && pngx_editor_vars.html_editor_buttons ) {
+
+						$html_buttons = $html_buttons.split( ',' );
+
+						// Get Existing Buttons to Detect if to add or not to prevent duplicates
+						var existing_buttons = [];
+						if ( "undefined" != typeof edButtons ) {
+
+							edButtons.forEach( function ( element ) {
+								existing_buttons.push( element.id );
+							} );
+
+						}
+
+						// Setup HTML Buttons and do not add if already added
+						for ( i = 0; i < pngx_editor_vars.html_editor_buttons.length; i++ ) {
+
+							if ( jQuery.inArray( pngx_editor_vars.html_editor_buttons[i]['id'], existing_buttons ) >= 0 ) {
+								continue;
+							}
+
+							if ( jQuery.inArray( pngx_editor_vars.html_editor_buttons[i]['id'], $html_buttons ) >= 0 ) {
+
+								QTags.addButton(
+									pngx_editor_vars.html_editor_buttons[i]['id'],
+									pngx_editor_vars.html_editor_buttons[i]['display'],
+									pngx_editor_vars.html_editor_buttons[i]['arg1'],
+									pngx_editor_vars.html_editor_buttons[i]['arg2'],
+									pngx_editor_vars.html_editor_buttons[i]['access_key'],
+									pngx_editor_vars.html_editor_buttons[i]['title'],
+									pngx_editor_vars.html_editor_buttons[i]['priority'],
+									uni_key
+								);
+							}
+						}
+
+					}
+
+
+					switchEditors.go( current_id, options.mode );
+
+					$( wrap ).on( 'click', '.insert-media', function ( event ) {
+						var elem = $( event.currentTarget ),
+							editor = elem.data( 'editor' ),
+							options = {
+								frame: 'post',
+								state: 'insert',
+								title: wp.media.view.l10n.addMedia,
+								multiple: true
+							};
+
+						event.preventDefault();
+
+						elem.blur();
+
+						if ( elem.hasClass( 'gallery' ) ) {
+							options.state = 'gallery';
+							options.title = wp.media.view.l10n.createGalleryTitle;
+						}
+
+						wp.media.editor.open( editor, options );
+					} );
+				}
 			}
-		} );
+		);
 	};
 
 	function get_toolbar_1( uni_key, reduced ) {
@@ -194,8 +238,6 @@
 		var $content_css = $( '#' + uni_key ).data( 'toggleContent_css' );
 
 		var $wpautop = $( '#' + uni_key ).data( 'toggleWpautop' );
-
-		console.log( $wpautop ? false : true )
 
 		return {
 			'mode': 'tmce',
@@ -270,7 +312,7 @@
 				"selector": "#" + uni_key,
 				"resize": "vertical",
 				"menubar": false,
-				"wpautop":  $wpautop ? false : true,
+				"wpautop": $wpautop ? false : true,
 				"indent": false,
 				"toolbar1": get_toolbar_1( uni_key, reduced ),
 				"toolbar2": get_toolbar_2( uni_key, reduced ),
