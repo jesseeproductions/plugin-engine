@@ -235,9 +235,11 @@
 
 	function get_defaults( resource_url, uni_key, editor_buttons, reduced ) {
 
-		var $content_css = $( '#' + uni_key ).data( 'toggleContent_css' );
+		var $data = $( '#' + uni_key ).data()
 
-		var $wpautop = $( '#' + uni_key ).data( 'toggleWpautop' );
+		var $content_css = $data.toggleContent_css;
+
+		var $wpautop_disable = $data.toggleWpautop_disable;
 
 		return {
 			'mode': 'tmce',
@@ -312,7 +314,7 @@
 				"selector": "#" + uni_key,
 				"resize": "vertical",
 				"menubar": false,
-				"wpautop": $wpautop ? false : true,
+				"wpautop": $wpautop_disable ? false : true,
 				"indent": false,
 				"toolbar1": get_toolbar_1( uni_key, reduced ),
 				"toolbar2": get_toolbar_2( uni_key, reduced ),

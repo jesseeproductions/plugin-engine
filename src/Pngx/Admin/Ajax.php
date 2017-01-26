@@ -97,12 +97,11 @@ class Pngx__Admin__Ajax {
 				<?php
 			}
 		} // end foreach fields
-		//log_me( 'end' );
+
 		$template_fields = ob_get_contents();
-		//log_me( $template_fields );
 
 		ob_end_clean();
-		//log_me( 'success' );
+
 		wp_send_json_success( json_encode( $template_fields ) );
 	}
 

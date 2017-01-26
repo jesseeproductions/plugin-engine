@@ -14,27 +14,16 @@ if ( class_exists( 'Pngx__Admin__Field__Template' ) ) {
  */
 class Pngx__Admin__Field__Template {
 
-	public static function display( $field = array(), $options = array(), $options_id = null, $meta = null ) {
-
-		if ( isset( $options_id ) && ! empty( $options_id ) ) {
-			$name  = $options_id;
-			$value = $options[ $field['id'] ];
-		} else {
-			$name  = $field['id'];
-			$value = $meta;
-		}
+	public static function display() {
 
 		global $post;
 
 		wp_localize_script( 'pngx-load-template-ajax', 'pngx_admin_ajax', array(
-			'ajaxurl'        => admin_url( 'admin-ajax.php', ( is_ssl() ? 'https' : 'http' ) ),
-			'nonce'          => wp_create_nonce( 'pngx_admin_' . $post->ID ),
-			'post_id'        => $post->ID
+			'ajaxurl' => admin_url( 'admin-ajax.php', ( is_ssl() ? 'https' : 'http' ) ),
+			'nonce'   => wp_create_nonce( 'pngx_admin_' . $post->ID ),
+			'post_id' => $post->ID
 		) );
 
 	}
 
 }
-
-
-?>

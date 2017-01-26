@@ -183,7 +183,7 @@ class Pngx__Admin__Fields {
 
 			case 'template_chooser':
 
-				Pngx__Admin__Field__Template::display( $field, $options, $options_id, $meta );
+				Pngx__Admin__Field__Template::display();
 
 				break;
 
