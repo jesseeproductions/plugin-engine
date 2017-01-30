@@ -35,7 +35,7 @@ class Pngx__Admin__Field__Textarea {
 			echo '<textarea class="' . esc_attr( $class ) . '" id="' . esc_attr( $field['id'] ) . '" name="' . esc_attr( $name ) . '" placeholder="' . esc_attr( $std ) . '" rows="' . absint( $rows ) . '" cols="' . absint( $cols ) . '">' . format_for_editor( $value ) . '</textarea>';
 		}
 
-		if ( "" != $field['desc'] ) {
+		if ( isset( $field['desc'] ) && "" != $field['desc'] ) {
 			echo '<br /><span class="description">' . $field['desc'] . '</span>';
 		}
 

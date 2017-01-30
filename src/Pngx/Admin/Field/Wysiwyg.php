@@ -111,7 +111,7 @@ class Pngx__Admin__Field__Wysiwyg {
 		</textarea>
 		<?php
 
-		if ( "" != $field['desc'] ) {
+		if ( isset( $field['desc'] ) && "" != $field['desc'] ) {
 
 			echo '<br /><span class="description">' . $field['desc'] . '</span>';
 		}

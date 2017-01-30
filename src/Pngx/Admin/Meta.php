@@ -339,6 +339,40 @@ class Pngx__Admin__Meta {
 
 			}
 
+			//handle repeatable fields
+			if ( 'repeatable' === $option['type'] ) {
+                   // log_me($option);
+                    //log_me($_POST);
+                $old     = get_post_meta( $post_id, $option['id'], true );
+                log_me($old);
+              		$new     = array();
+                    $options     = array();
+              		//$options = self::hhs_get_sample_options();
+
+              		$names   = $_POST['name'];
+              		$urls    = $_POST['url'];
+
+              		$count = count( $names );
+
+              		for ( $i = 0; $i < $count; $i ++ ) {
+              			if ( $names[ $i ] != '' ) :
+              				$new[ $i ]['name'] = stripslashes( strip_tags( $names[ $i ] ) );
+
+              				if ( $urls[ $i ] == 'http://' ) {
+              					$new[ $i ]['url'] = '';
+              				} else {
+              					$new[ $i ]['url'] = stripslashes( $urls[ $i ] );
+              				} // and however you want to sanitize
+              			endif;
+              		}
+              		if ( ! empty( $new ) && $new != $old ) {
+              			update_post_meta( $post_id,  $option['id'], $new );
+              		} elseif ( empty( $new ) && $old ) {
+              			delete_post_meta( $post_id,  $option['id'], $old );
+              		}
+
+			}
+
 			// Final Check if value should be saved then sanitize and save
 			if ( isset( $_POST[ $option['id'] ] ) ) {
 

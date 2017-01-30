@@ -35,7 +35,7 @@ class Pngx__Admin__Field__Text {
 
 		echo '<input type="text" id="' . esc_attr( $field['id'] ) . '" class="regular-text ' . esc_attr( $class ) . '"  name="' . esc_attr( $name ) . '" placeholder="' . esc_attr( $std ) . '" value="' . esc_attr( $value ) . '" size="' . absint( $size ) . '" />';
 
-		if ( "" != $field['desc'] ) {
+		if ( isset( $field['desc'] ) && "" != $field['desc'] ) {
 			echo '<br /><span class="description">' . $field['desc'] . '</span>';
 		}
 

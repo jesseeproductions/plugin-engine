@@ -31,7 +31,7 @@ class Pngx__Admin__Field__Number {
 
 		echo '<input type="number" class="regular-number ' . esc_attr( $class ) . '"  id="' . esc_attr( $field['id'] ) . '" name="' . esc_attr( $name ) . '" placeholder="' . esc_attr( $std ) . '" value="' . esc_attr( $value ) . '" min="0" size="' . absint( $size ) . '" style="width:60px; padding-right:0;" /> ' . esc_attr( $numbertype );
 
-		if ( "" != $field['desc'] ) {
+		if ( isset( $field['desc'] ) && "" != $field['desc'] ) {
 			echo '<br /><span class="description">' . $field['desc'] . '</span>';
 		}
 	}

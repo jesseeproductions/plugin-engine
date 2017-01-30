@@ -58,7 +58,7 @@ class Pngx__Admin__Field__Image {
 		<small><a href="#" id="<?php echo esc_attr( $field['id'] ); ?>" class="pngx-clear-image">Remove Image</a></small>
 
 		<?php
-		if ( "" != $field['desc'] ) {
+		if ( isset( $field['desc'] ) && "" != $field['desc'] ) {
 			echo '<br /><span class="description">' . $field['desc'] . '</span>';
 		}
 

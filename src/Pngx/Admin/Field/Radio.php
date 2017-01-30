@@ -45,7 +45,7 @@ class Pngx__Admin__Field__Radio {
 			$i ++;
 		}
 
-		if ( "" != $field['desc'] ) {
+		if ( isset( $field['desc'] ) && "" != $field['desc'] ) {
 			echo '<br><span class="description">' . $field['desc'] . '</span>';
 		}
 

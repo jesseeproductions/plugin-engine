@@ -29,7 +29,7 @@ class Pngx__Admin__Field__Url {
 
 		echo '<input type="text" class="url ' . esc_attr( $class ) . '"  id="' . esc_attr( $field['id'] ) . '" name="' . esc_attr( $name ) . '" value="' . esc_url( $value ) . '" size="' . absint( $size ) . '" />';
 
-		if ( "" != $field['desc'] ) {
+		if ( isset( $field['desc'] ) && "" != $field['desc'] ) {
 			echo '<br /><span class="description">' . $field['desc'] . '</span>';
 		}
 

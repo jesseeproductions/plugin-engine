@@ -37,7 +37,7 @@ class Pngx__Admin__Field__License {
 
 			echo '<input type="text" class="license-field ' . esc_attr( $class ) . '"  id="' . esc_attr( $field['id'] ) . '" name="' . esc_attr( $name ) . '" placeholder="' . esc_attr( $std ) . '" value="' . esc_attr( $value ) . '" size="' . absint( $size ) . '" />';
 
-			if ( "" != $field['desc'] ) {
+			if ( isset( $field['desc'] ) && "" != $field['desc'] ) {
 				echo '<br /><span class="description">' . $field['desc'] . '</span>';
 			}
 		}

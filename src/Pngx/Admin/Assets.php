@@ -31,9 +31,15 @@ class Pngx__Admin__Assets {
 			filemtime( Pngx__Main::instance()->vendor_path . 'bootstrap-iconpicker/icon-fonts/font-awesome-4.3.0/css/font-awesome.css' )
 		);
 		wp_register_style(
+			'pngx-colorbox',
+			Pngx__Main::instance()->vendor_url . 'colorbox/colorbox.css',
+			false,
+			filemtime( Pngx__Main::instance()->vendor_path . 'colorbox/colorbox.css' )
+		);
+		wp_register_style(
 			'pngx-admin',
 			Pngx__Main::instance()->resource_url . 'css/pngx-admin.css',
-			array( 'pngx-bootstrap-iconpicker','pngx-font-awesome', 'pngx-bootstrap-iconpicker' ),
+			array( 'pngx-colorbox', 'pngx-bootstrap-iconpicker','pngx-font-awesome', 'pngx-bootstrap-iconpicker' ),
 			filemtime( Pngx__Main::instance()->resource_path . 'css/pngx-admin.css' )
 		);
 
@@ -83,11 +89,17 @@ class Pngx__Admin__Assets {
 			filemtime( Pngx__Main::instance()->resource_path . 'js/templates.js' ),
 			true
 		);
-
+		wp_register_script(
+			'pngx-colorbox',
+			Pngx__Main::instance()->vendor_url . 'colorbox/jquery.colorbox-min.js',
+			array( 'jquery' ),
+			filemtime( Pngx__Main::instance()->vendor_path . 'colorbox/jquery.colorbox-min.js' ),
+			true
+		);
 		wp_register_script(
 			'pngx-admin',
 			Pngx__Main::instance()->resource_url . 'js/pngx-admin.js',
-			array( 'pngx-wp-editor', 'pngx-load-template-ajax', 'pngx-color-picker-alpha', 'pngx-bootstrap', 'pngx-bootstrap-iconpicker-fontawesome', 'pngx-bootstrap-iconpicker', 'jquery-ui-tabs' ),
+			array( 'pngx-colorbox', 'pngx-wp-editor', 'pngx-load-template-ajax', 'pngx-color-picker-alpha', 'pngx-bootstrap', 'pngx-bootstrap-iconpicker-fontawesome', 'pngx-bootstrap-iconpicker', 'jquery-ui-tabs' ),
 			filemtime( Pngx__Main::instance()->resource_path . 'js/pngx-admin.js' ),
 			true
 		);
