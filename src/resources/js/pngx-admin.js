@@ -14,7 +14,10 @@ var pngx_admin_fields_init = pngx_admin_fields_init || {};
 
 		obj.color_picker();
 
-		obj.icon_picker();
+		// Load Repeatable Fields
+		$( function () {
+			obj.repeatable_fields();
+		} );
 
 		// Load Visual Editor
 		$( function () {
@@ -58,9 +61,40 @@ var pngx_admin_fields_init = pngx_admin_fields_init || {};
 
 
 	/*
-	 * Icon Picker
+	 * Repeatable Fields
 	 */
-	obj.icon_picker = function ( helpid ) {
+	obj.repeatable_fields = function ( helpid ) {
+
+		$( document ).on( 'click', '.add-repeatable', function ( e ) {
+
+			e.preventDefault();
+
+			var $repeat_field = '#' + $( this ).data( 'repeater' );
+
+			var row = $( $repeat_field ).find('.empty-row.screen-reader-text' ).clone( true );
+
+			row.removeClass( 'empty-row screen-reader-text' );
+
+			row.appendTo( $( this ).parent() );
+
+			return false;
+
+		} );
+
+		$( document ).on( 'click', '.remove-repeatable', function ( e ) {
+
+			$( this ).parent().remove();
+
+			return false;
+
+		} );
+
+		$( '.pngx-repeatable' ).sortable( {
+			opacity: 0.6,
+			revert: true,
+			cursor: 'move',
+			handle: '.sort'
+		} );
 
 
 	};

@@ -85,17 +85,18 @@ class Pngx__Admin__Field__Wysiwyg {
 			$post->load_scripts = true;
 		}
 
-		$std   = isset( $field['std'] ) ? $field['std'] : '';
-		$rows  = isset( $field['rows'] ) ? $field['rows'] : 12;
-		$cols  = isset( $field['cols'] ) ? $field['cols'] : 50;
-		$class = isset( $field['class'] ) ? $field['class'] : '';
+		$std       = isset( $field['std'] ) ? $field['std'] : '';
+		$rows      = isset( $field['rows'] ) ? $field['rows'] : 12;
+		$cols      = isset( $field['cols'] ) ? $field['cols'] : 50;
+		$class     = isset( $field['class'] ) ? $field['class'] : '';
+		$repeating = isset( $field['repeating'] ) ? '[]' : '';
 
 		?>
 
 		<textarea
 				class="pngx-ajax-wp-editor <?php echo esc_attr( $class ); ?>"
 				id="<?php echo esc_attr( $field['id'] ); ?>"
-				name="<?php echo esc_attr( $name ); ?>"
+				name="<?php echo esc_attr( $name ) . $repeating; ?>"
 				placeholder="<?php echo esc_attr( $std ); ?>"
 				rows="<?php echo absint( $rows ); ?>"
 				cols="<?php echo absint( $cols ); ?>"

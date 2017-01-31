@@ -40,13 +40,14 @@ class Pngx__Admin__Field__Select {
 			$selected = $field['value'];
 		}
 
-		$class = isset( $field['class'] ) ? $field['class'] : '';
+		$class     = isset( $field['class'] ) ? $field['class'] : '';
+		$repeating = isset( $field['repeating'] ) ? '[]' : '';
 		?>
 
 		<select
 				id="<?php echo esc_attr( $field['id'] ); ?>"
 				class="select <?php echo esc_attr( $class ); ?>"
-				name="<?php echo esc_attr( $name ); ?>"
+				name="<?php echo esc_attr( $name ) . $repeating; ?>"
 			<?php echo isset( $field['data'] ) ? Pngx__Admin__Fields::toggle( $field['data'], null ) : ''; ?>
 		>
 			<?php

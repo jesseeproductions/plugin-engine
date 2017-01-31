@@ -33,11 +33,12 @@ class Pngx__Admin__Field__Radio {
 			}
 		}
 
-		$class = isset( $field['class'] ) ? $field['class'] : '';
+		$class     = isset( $field['class'] ) ? $field['class'] : '';
+		$repeating = isset( $field['repeating'] ) ? '[]' : '';
 
 		$i = 0;
 		foreach ( $field['choices'] as $value => $label ) {
-			echo '<input type="radio" class="radio ' . esc_attr( $class ) . '" name="' . esc_attr( $name ) . '" id="' . $field['id'] . $i . '" value="' . esc_attr( $value ) . '" ' . checked( $selected, $value, false ) . '>
+			echo '<input type="radio" class="radio ' . esc_attr( $class ) . '" name="' . esc_attr( $name ) . $repeating . '" id="' . $field['id'] . $i . '" value="' . esc_attr( $value ) . '" ' . checked( $selected, $value, false ) . '>
 			<label for="' . $field['id'] . $i . '">' . esc_attr( $label ) . '</label>';
 			if ( $i < count( $options ) - 1 ) {
 				echo '<br>';

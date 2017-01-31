@@ -125,7 +125,7 @@ class Pngx__Sanitize {
 	 */
 	private function sanitize_textarea() {
 
-		if ( $this->option['class'] != "code" ) {
+		if ( isset( $this->option['class'] ) && "code" != $this->option['class'] ) {
 
 			global $allowedtags;
 			$input = wp_kses( $this->input, $allowedtags );

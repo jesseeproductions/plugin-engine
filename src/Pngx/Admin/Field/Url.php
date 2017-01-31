@@ -24,10 +24,11 @@ class Pngx__Admin__Field__Url {
 			$value = $meta;
 		}
 
-		$size  = isset( $field['size'] ) ? $field['size'] : 30;
-		$class = isset( $field['class'] ) ? $field['class'] : '';
+		$size      = isset( $field['size'] ) ? $field['size'] : 30;
+		$class     = isset( $field['class'] ) ? $field['class'] : '';
+		$repeating = isset( $field['repeating'] ) ? '[]' : '';
 
-		echo '<input type="text" class="url ' . esc_attr( $class ) . '"  id="' . esc_attr( $field['id'] ) . '" name="' . esc_attr( $name ) . '" value="' . esc_url( $value ) . '" size="' . absint( $size ) . '" />';
+		echo '<input type="text" class="url ' . esc_attr( $class ) . '"  id="' . esc_attr( $field['id'] ) . '" name="' . esc_attr( $name ) . $repeating . '" value="' . esc_url( $value ) . '" size="' . absint( $size ) . '" />';
 
 		if ( isset( $field['desc'] ) && "" != $field['desc'] ) {
 			echo '<br /><span class="description">' . $field['desc'] . '</span>';

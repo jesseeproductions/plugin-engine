@@ -341,41 +341,56 @@ class Pngx__Admin__Meta {
 
 			//handle repeatable fields
 			if ( 'repeatable' === $option['type'] ) {
-                   // log_me($option);
-                    //log_me($_POST);
-                $old     = get_post_meta( $post_id, $option['id'], true );
-                log_me($old);
-              		$new     = array();
-                    $options     = array();
-              		//$options = self::hhs_get_sample_options();
 
-              		$names   = $_POST['name'];
-              		$urls    = $_POST['url'];
+				//log_me($option);
+				//log_me($_POST);
 
-              		$count = count( $names );
+				$old = get_post_meta( $post_id, $option['id'], true );
 
-              		for ( $i = 0; $i < $count; $i ++ ) {
-              			if ( $names[ $i ] != '' ) :
-              				$new[ $i ]['name'] = stripslashes( strip_tags( $names[ $i ] ) );
+				$new = array();
 
-              				if ( $urls[ $i ] == 'http://' ) {
-              					$new[ $i ]['url'] = '';
-              				} else {
-              					$new[ $i ]['url'] = stripslashes( $urls[ $i ] );
-              				} // and however you want to sanitize
-              			endif;
-              		}
-              		if ( ! empty( $new ) && $new != $old ) {
-              			update_post_meta( $post_id,  $option['id'], $new );
-              		} elseif ( empty( $new ) && $old ) {
-              			delete_post_meta( $post_id,  $option['id'], $old );
-              		}
+				foreach ( $option['repeatable_fields'] as $repeater ) {
+
+					//log_me( $repeater );
+
+					if ( ! isset( $_POST[ $repeater['id'] ] ) ) {
+						continue;
+					}
+
+					$count = count( $_POST[ $repeater['id'] ] );
+
+					//log_me( $count );
+					//log_me( $_POST[ $repeater['id'] ] );
+
+					for ( $i = 0; $i < $count; $i ++ ) {
+						if ( '' != $_POST[ $repeater['id'] ][ $i ] ) {
+							//log_me( $_POST[ $repeater['id'] ][ $i ] );
+							$sanitized = new Pngx__Sanitize( $repeater['type'], $_POST[ $repeater['id'] ][ $i ], $repeater );
+
+							$new[ $i ][ $repeater['id'] ] = $sanitized->result;
+
+						}
+					}
+
+				}
+
+				//log_me( 'old - new' );
+				//log_me( $old );
+				//log_me( $new );
+
+				if ( ! empty( $new ) && $new != $old ) {
+					update_post_meta( $post_id, $option['id'], $new );
+				} elseif ( empty( $new ) && $old ) {
+					delete_post_meta( $post_id, $option['id'], $old );
+				}
+
+				// Got to next custom field to save as repeatable field is done
+				continue;
 
 			}
 
 			// Final Check if value should be saved then sanitize and save
 			if ( isset( $_POST[ $option['id'] ] ) ) {
-
 				//Send Input to Sanitize Class, will return sanitized input or no input if no sanitization method
 				$sanitized = new Pngx__Sanitize( $option['type'], $_POST[ $option['id'] ], $option );
 

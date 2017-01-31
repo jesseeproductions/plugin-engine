@@ -24,15 +24,16 @@ class Pngx__Admin__Field__Textarea {
 			$value = $meta;
 		}
 
-		$rows  = isset( $field['rows'] ) ? $field['rows'] : 12;
-		$cols  = isset( $field['cols'] ) ? $field['cols'] : 50;
-		$class = isset( $field['class'] ) ? $field['class'] : '';
-		$std   = isset( $field['std'] ) ? $field['std'] : '';
+		$rows      = isset( $field['rows'] ) ? $field['rows'] : 12;
+		$cols      = isset( $field['cols'] ) ? $field['cols'] : 50;
+		$class     = isset( $field['class'] ) ? $field['class'] : '';
+		$std       = isset( $field['std'] ) ? $field['std'] : '';
+		$repeating = isset( $field['repeating'] ) ? '[]' : '';
 
 		if ( version_compare( $wp_version, '4.3', '<' ) ) {
-			echo '<textarea class="' . esc_attr( $class ) . '" id="' . esc_attr( $field['id'] ) . '" name="' . esc_attr( $name ) . '" placeholder="' . esc_attr( $std ) . '" rows="' . absint( $rows ) . '" cols="' . absint( $cols ) . '">' . wp_htmledit_pre( $value ) . '</textarea>';
+			echo '<textarea class="' . esc_attr( $class ) . '" id="' . esc_attr( $field['id'] ) . '" name="' . esc_attr( $name ) . $repeating . '" placeholder="' . esc_attr( $std ) . '" rows="' . absint( $rows ) . '" cols="' . absint( $cols ) . '">' . wp_htmledit_pre( $value ) . '</textarea>';
 		} else {
-			echo '<textarea class="' . esc_attr( $class ) . '" id="' . esc_attr( $field['id'] ) . '" name="' . esc_attr( $name ) . '" placeholder="' . esc_attr( $std ) . '" rows="' . absint( $rows ) . '" cols="' . absint( $cols ) . '">' . format_for_editor( $value ) . '</textarea>';
+			echo '<textarea class="' . esc_attr( $class ) . '" id="' . esc_attr( $field['id'] ) . '" name="' . esc_attr( $name ) . $repeating . '" placeholder="' . esc_attr( $std ) . '" rows="' . absint( $rows ) . '" cols="' . absint( $cols ) . '">' . format_for_editor( $value ) . '</textarea>';
 		}
 
 		if ( isset( $field['desc'] ) && "" != $field['desc'] ) {

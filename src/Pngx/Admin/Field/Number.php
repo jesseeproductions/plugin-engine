@@ -24,12 +24,13 @@ class Pngx__Admin__Field__Number {
 			$value = $meta;
 		}
 
-		$size  = isset( $field['size'] ) ? $field['size'] : 30;
-		$class = isset( $field['class'] ) ? $field['class'] : '';
-		$std   = isset( $field['std'] ) ? $field['std'] : '';
-		$numbertype   = isset( $field['numbertype'] ) ? $field['numbertype'] : '';
+		$size       = isset( $field['size'] ) ? $field['size'] : 30;
+		$class      = isset( $field['class'] ) ? $field['class'] : '';
+		$std        = isset( $field['std'] ) ? $field['std'] : '';
+		$numbertype = isset( $field['numbertype'] ) ? $field['numbertype'] : '';
+		$repeating  = isset( $field['repeating'] ) ? '[]' : '';
 
-		echo '<input type="number" class="regular-number ' . esc_attr( $class ) . '"  id="' . esc_attr( $field['id'] ) . '" name="' . esc_attr( $name ) . '" placeholder="' . esc_attr( $std ) . '" value="' . esc_attr( $value ) . '" min="0" size="' . absint( $size ) . '" style="width:60px; padding-right:0;" /> ' . esc_attr( $numbertype );
+		echo '<input type="number" class="regular-number ' . esc_attr( $class ) . '"  id="' . esc_attr( $field['id'] ) . '" name="' . esc_attr( $name ) . $repeating . '" placeholder="' . esc_attr( $std ) . '" value="' . esc_attr( $value ) . '" min="0" size="' . absint( $size ) . '" style="width:60px; padding-right:0;" /> ' . esc_attr( $numbertype );
 
 		if ( isset( $field['desc'] ) && "" != $field['desc'] ) {
 			echo '<br /><span class="description">' . $field['desc'] . '</span>';

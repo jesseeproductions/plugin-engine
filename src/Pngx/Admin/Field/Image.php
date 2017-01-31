@@ -30,9 +30,10 @@ class Pngx__Admin__Field__Image {
 			$value = $field['std'];
 		}
 
-		$imagemsg = isset( $field['imagemsg'] ) ? $field['imagemsg'] : '';
-		$class    = isset( $field['class'] ) ? $field['class'] : '';
-		$imagesrc = '';
+		$imagemsg  = isset( $field['imagemsg'] ) ? $field['imagemsg'] : '';
+		$class     = isset( $field['class'] ) ? $field['class'] : '';
+		$repeating = isset( $field['repeating'] ) ? '[]' : '';
+		$imagesrc  = '';
 
 		if ( is_numeric( $value ) ) {
 			$imagesrc     = wp_get_attachment_image_src( absint( $value ), 'medium' );
@@ -47,10 +48,10 @@ class Pngx__Admin__Field__Image {
 		?>
 
 		<input
-			class="pngx-upload-image <?php echo esc_attr( $class ); ?>"
-			type="hidden" id="<?php echo esc_attr( $field['id'] ); ?>"
-			name="<?php echo esc_attr( $name ); ?>"
-			value="<?php echo esc_attr( $value ); ?>"
+				class="pngx-upload-image <?php echo esc_attr( $class ); ?>"
+				type="hidden" id="<?php echo esc_attr( $field['id'] ); ?>"
+				name="<?php echo esc_attr( $name ) . $repeating; ?>"
+				value="<?php echo esc_attr( $value ); ?>"
 		/>
 
 		<button id="<?php echo esc_attr( $field['id'] ); ?>" class="pngx-image-button" <?php echo isset( $field['function'] ) ? Pngx__Admin__Fields::toggle( $field['function'], $field['id'] ) : null; ?> >Upload Image</button>

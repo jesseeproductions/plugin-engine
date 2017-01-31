@@ -36,10 +36,6 @@ class Pngx__Admin__Main {
 		//Register Admin Assets
 		add_action( 'admin_enqueue_scripts', array( 'Pngx__Admin__Assets', 'register_assets' ), 0 );
 
-		add_filter( 'pngx_visual_editor_functions', array( 'Cctor__Coupon__Pro__Admin__Fields', 'add_tiny_mce_buttons' ) );
-
-		add_filter( 'pngx_html_editor_functions', array( 'Cctor__Coupon__Pro__Admin__Fields', 'add_html_editor_buttons' ) );
-
 	} //end admin_init
 
 }

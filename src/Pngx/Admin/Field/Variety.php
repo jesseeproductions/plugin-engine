@@ -40,14 +40,15 @@ class Pngx__Admin__Field__Variety {
 			$selected = $field['value'];
 		}
 
-		$class = isset( $field['class'] ) ? $field['class'] : '';
+		$class     = isset( $field['class'] ) ? $field['class'] : '';
+		$repeating = isset( $field['repeating'] ) ? '[]' : '';
 
 		?>
 		<div class="pngx-one-third pngx-first">
 			<select
 					id="<?php echo esc_attr( $field['id'] ); ?>"
 					class="select pngx-variety-select <?php echo esc_attr( $class ); ?>"
-					name="<?php echo esc_attr( $name ); ?>"
+					name="<?php echo esc_attr( $name ) . $repeating; ?>"
 				<?php echo isset( $field['data'] ) ? Pngx__Admin__Fields::toggle( $field['data'], null ) : ''; ?>
 			>
 				<?php
@@ -80,7 +81,7 @@ class Pngx__Admin__Field__Variety {
 
 					$post_id = $post->ID;
 					if ( Pngx__Main::instance()->doing_ajax && isset( $_POST['post_id'] ) ) {
-                        $post_id =  absint( $_POST['post_id'] );
+						$post_id = absint( $_POST['post_id'] );
 					}
 
 					$meta = get_post_meta( $post_id, $label, true );

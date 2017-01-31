@@ -28,12 +28,13 @@ class Pngx__Admin__Field__Text {
 		$class     = isset( $field['class'] ) ? $field['class'] : '';
 		$std       = isset( $field['std'] ) ? $field['std'] : '';
 		$condition = isset( $field['condition'] ) ? $field['condition'] : '';
+		$repeating = isset( $field['repeating'] ) ? '[]' : '';
 
 		if ( isset( $field['alert'] ) && '' != $field['alert'] && 1 == $condition ) {
 			echo '<div class="pngx-error">&nbsp;&nbsp;' . $field['alert'] . '</div>';
 		}
 
-		echo '<input type="text" id="' . esc_attr( $field['id'] ) . '" class="regular-text ' . esc_attr( $class ) . '"  name="' . esc_attr( $name ) . '" placeholder="' . esc_attr( $std ) . '" value="' . esc_attr( $value ) . '" size="' . absint( $size ) . '" />';
+		echo '<input type="text" id="' . esc_attr( $field['id'] ) . '" class="regular-text ' . esc_attr( $class ) . '"  name="' . esc_attr( $name ) . $repeating . '" placeholder="' . esc_attr( $std ) . '" value="' . esc_attr( $value ) . '" size="' . absint( $size ) . '" />';
 
 		if ( isset( $field['desc'] ) && "" != $field['desc'] ) {
 			echo '<br /><span class="description">' . $field['desc'] . '</span>';
