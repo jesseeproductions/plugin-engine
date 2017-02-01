@@ -14,20 +14,20 @@ if ( class_exists( 'Pngx__Field__Content' ) ) {
  */
 class Pngx__Field__Content {
 
-	public static function display( $field = array(), $couponid = null, $meta = null ) {
+	public static function display( $field = array(), $coupon_id = null, $meta = null, $template_fields = array() ) {
 
 		$class = $field['display']['class'] ? ' class="' . $field['display']['class'] . ' " ' : ' ';
-		$style = Pngx__Style__Linked::get_styles( $field, $couponid );
-		$tags  = $field['display']['tags'];
-		$wrap  = $field['display']['wrap'];
+		$style = Pngx__Style__Linked::get_styles( $field, $coupon_id );
+		$tags  = isset( $field['display']['tags'] ) ? $field['display']['tags'] : 'title';
+		$wrap  = isset( $field['display']['wrap'] )  ? $field['display']['wrap'] : 'div';
 
 		?>
 
-		<?php echo $wrap ? '<' . $wrap . $class . $style . '>' : ''; ?>
+		<?php echo $wrap ? '<' . esc_attr( $wrap ) .  $class .  $style . '>' : ''; ?>
 
 		<?php echo strip_tags( $meta, Pngx__Allowed_Tags::$tags() ); ?>
 
-		<?php echo $wrap ? '</' . $wrap . '>' : ''; ?>
+		<?php echo $wrap ? '</' .  esc_attr( $wrap ) . '>' : ''; ?>
 
 		<?php
 

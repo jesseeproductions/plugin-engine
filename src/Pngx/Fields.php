@@ -20,7 +20,7 @@ class Pngx__Fields {
 	 * @param array $field     meta field attributes
 	 * @param int   $coupon_id single coupon id
 	 */
-	public static function display_field( $field = array(), $coupon_id = null ) {
+	public static function display_field( $field = array(), $coupon_id = null, $template_fields = array() ) {
 
 		// get value of this field if it exists for this post
 		$meta = get_post_meta( $coupon_id, $field['id'], true );
@@ -29,13 +29,25 @@ class Pngx__Fields {
 
 			case 'content':
 
-				Pngx__Field__Content::display( $field, $coupon_id, $meta );
+				Pngx__Field__Content::display( $field, $coupon_id, $meta, $template_fields );
 
 				break;
 
 			case 'expiration':
 
-				Pngx__Field__Expiration::display( $field, $coupon_id, $meta );
+				Pngx__Field__Expiration::display( $field, $coupon_id, $meta, $template_fields );
+
+				break;
+
+			case 'icon':
+
+				Pngx__Field__Icon::display( $field, $coupon_id, $meta, $template_fields );
+
+				break;
+
+			case 'variety':
+
+				Pngx__Field__Variety::display( $field, $coupon_id, $meta, $template_fields );
 
 				break;
 		}
