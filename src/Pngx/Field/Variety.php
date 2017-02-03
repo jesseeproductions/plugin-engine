@@ -14,7 +14,7 @@ if ( class_exists( 'Pngx__Field__Variety' ) ) {
  */
 class Pngx__Field__Variety {
 
-	public static function display( $field = array(), $coupon_id = null, $meta = null, $template_fields = array() ) {
+	public static function display( $field = array(), $coupon_id = null, $meta = null, $template_fields = array(), $var = array() ) {
 
 		if ( ! isset( $field['variety_choices'][ $meta ] ) ) {
 			return;
@@ -35,7 +35,7 @@ class Pngx__Field__Variety {
 
 			if ( isset( $template_fields[ $variety_fields ] ) ) {
 
-				Pngx__Fields::display_field( $template_fields[ $variety_fields ], $coupon_id, $template_fields );
+				Pngx__Fields::display_field( $template_fields[ $variety_fields ], $coupon_id, $template_fields, $var );
 
 			}
 

@@ -14,7 +14,7 @@ if ( class_exists( 'Pngx__Field__Icon' ) ) {
  */
 class Pngx__Field__Icon {
 
-	public static function display( $field = array(), $coupon_id = null, $meta = null, $template_fields = array() ) {
+	public static function display( $field = array(), $coupon_id = null, $meta = null, $template_fields = array(), $var = array() ) {
 
 		$class = $field['display']['class'] ? ' class="' . $field['display']['class'] . ' " ' : ' ';
 		$style = Pngx__Style__Linked::get_styles( $field, $coupon_id );
