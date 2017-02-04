@@ -97,9 +97,16 @@ class Pngx__Admin__Assets {
 			true
 		);
 		wp_register_script(
+			'pngx-dragula',
+			Pngx__Main::instance()->vendor_url . 'dragula/dragula.min.js',
+			array( 'jquery' ),
+			filemtime( Pngx__Main::instance()->vendor_path . 'dragula/dragula.min.js' ),
+			true
+		);
+		wp_register_script(
 			'pngx-admin',
 			Pngx__Main::instance()->resource_url . 'js/pngx-admin.js',
-			array( 'pngx-colorbox', 'pngx-wp-editor', 'pngx-load-template-ajax', 'pngx-color-picker-alpha', 'pngx-bootstrap', 'pngx-bootstrap-iconpicker-fontawesome', 'pngx-bootstrap-iconpicker', 'jquery-ui-tabs' ),
+			array( 'pngx-dragula', 'pngx-colorbox', 'pngx-wp-editor', 'pngx-load-template-ajax', 'pngx-color-picker-alpha', 'pngx-bootstrap', 'pngx-bootstrap-iconpicker-fontawesome', 'pngx-bootstrap-iconpicker', 'jquery-ui-tabs' ),
 			filemtime( Pngx__Main::instance()->resource_path . 'js/pngx-admin.js' ),
 			true
 		);

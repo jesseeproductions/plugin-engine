@@ -24,6 +24,14 @@ var pngx_admin_fields_init = pngx_admin_fields_init || {};
 			obj.visual_editor();
 		} );
 
+		// Load Visual Editor
+		$( function () {
+			dragula( [   document.querySelector('.menu-column-1'),
+				        document.querySelector('menu-column-2'),
+				        document.querySelector('menu-column-2' )]
+				);
+		} );
+
 		/*
 		 * Hide Default Label
 		 */
