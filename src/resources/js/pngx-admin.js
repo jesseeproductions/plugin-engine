@@ -26,9 +26,9 @@ var pngx_admin_fields_init = pngx_admin_fields_init || {};
 
 		// Load Visual Editor
 		$( function () {
-			dragula( [   document.querySelector('.menu-column-1'),
-				        document.querySelector('menu-column-2'),
-				        document.querySelector('menu-column-2' )]
+			dragula( [   document.querySelector('.menu-column-0-0'),
+				        document.querySelector('menu-column-0-1'),
+				        document.querySelector('menu-column-0-2' )]
 				);
 		} );
 
