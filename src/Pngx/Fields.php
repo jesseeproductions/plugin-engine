@@ -3,7 +3,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	die( '-1' );
 }
-if ( class_exists( 'Pngx__Admin__Fields' ) ) {
+if ( class_exists( 'Pngx__Fields' ) ) {
 	return;
 }
 
@@ -67,7 +67,7 @@ class Pngx__Fields {
 			 * @param array $coupon_id current id
 			 * @param array $meta      current value of field
 			 */
-			apply_filters( 'pngx_front_field_types', $field, $coupon_id, $meta );
+			apply_filters( 'pngx_front_field_types', $field, $coupon_id, $meta, $template_fields, $var );
 		}
 
 	}
