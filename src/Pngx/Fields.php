@@ -22,6 +22,11 @@ class Pngx__Fields {
 	 */
 	public static function display_field( $field = array(), $coupon_id = null, $template_fields = array(), $var = array() ) {
 
+		//Only display fields with display index
+		if ( ! isset( $field['display'] ) ) {
+			return false;
+		}
+
 		// get value of this field if it exists for this post
 		$meta = get_post_meta( $coupon_id, $field['id'], true );
 
@@ -30,12 +35,6 @@ class Pngx__Fields {
 			case 'content':
 
 				Pngx__Field__Content::display( $field, $coupon_id, $meta, $template_fields, $var );
-
-				break;
-
-			case 'expiration':
-
-				Pngx__Field__Expiration::display( $field, $coupon_id, $meta, $template_fields, $var );
 
 				break;
 
