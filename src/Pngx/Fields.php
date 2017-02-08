@@ -50,17 +50,21 @@ class Pngx__Fields {
 
 				break;
 
+
+			case 'variety':
+
+				Pngx__Field__Variety::display( $field, $coupon_id, $meta, $template_fields, $var );
+
+				break;
 		}
 
 		if ( has_filter( 'pngx_front_field_types' ) ) {
 			/**
 			 * Filter the Plugin Engine Fields for Front End
 			 *
-			 * @param array $field           current field attributes
-			 * @param array $coupon_id       current id
-			 * @param array $meta            current value of field
-			 * @param array $template_fields template fields available for display
-			 * @param array $var             optional array of variables that can be passed to fields
+			 * @param array $field     current field attributes
+			 * @param array $coupon_id current id
+			 * @param array $meta      current value of field
 			 */
 			apply_filters( 'pngx_front_field_types', $field, $coupon_id, $meta, $template_fields, $var );
 		}
