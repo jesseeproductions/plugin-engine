@@ -14,7 +14,7 @@ if ( class_exists( 'Pngx__Style__Linked' ) ) {
  */
 class Pngx__Style__Linked {
 
-	public static function get_styles( $field = array(), $couponid = null ) {
+	public static function get_styles( $field = array(), $post_id = null ) {
 
 		$style = '';
 
@@ -22,11 +22,11 @@ class Pngx__Style__Linked {
 			$style = ' style=" ';
 			foreach ( $field['styles'] as $type => $field_name ) {
 
-				if ( 'font-color' === $type && $color = get_post_meta( $couponid, $field_name, true ) ) {
+				if ( 'font-color' === $type && $color = get_post_meta( $post_id, $field_name, true ) ) {
 					$style .= 'color:' . $color . '; ';
 				}
 
-				if ( 'background-color' === $type && $color = get_post_meta( $couponid, $field_name, true ) ) {
+				if ( 'background-color' === $type && $color = get_post_meta( $post_id, $field_name, true ) ) {
 					$style .= 'background-color:' . $color . '; ';
 				}
 

@@ -32,7 +32,7 @@ class Pngx__Cron_20 {
 
 		$schedules['every_20mins'] = array(
 			'interval' => 20 * MINUTE_IN_SECONDS,
-			'display'  => __( 'Once Every 20 Mins', 'cctor_coupon' ),
+			'display'  => __( 'Once Every 20 Mins', 'plugin-engine' ),
 		);
 
 		return $schedules;

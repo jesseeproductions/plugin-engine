@@ -14,7 +14,7 @@ if ( class_exists( 'Pngx__Admin__Style__Linked' ) ) {
  */
 class Pngx__Admin__Style__Linked {
 
-	public static function display_styles( $fields = array(), $field = array(), $couponid = null ) {
+	public static function display_styles( $fields = array(), $field = array(), $post_id = null ) {
 
 		// Display Linked Style Fields
 		if ( isset( $field['styles'] ) && is_array( $field['styles'] ) ) {
@@ -30,7 +30,7 @@ class Pngx__Admin__Style__Linked {
 					}
 
 					if ( 'font-color' === $type || 'background-color' === $type ) {
-						$meta = get_post_meta( $couponid, $field_name, true );
+						$meta = get_post_meta( $post_id, $field_name, true );
 						Pngx__Admin__Field__Color::display( $fields[ $field_name ], false, false, $meta );
 					}
 

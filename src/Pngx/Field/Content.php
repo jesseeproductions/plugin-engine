@@ -14,10 +14,10 @@ if ( class_exists( 'Pngx__Field__Content' ) ) {
  */
 class Pngx__Field__Content {
 
-	public static function display( $field = array(), $coupon_id = null, $meta = null, $template_fields = array(), $var = array() ) {
+	public static function display( $field = array(), $post_id = null, $meta = null, $template_fields = array(), $var = array() ) {
 
 		$class = $field['display']['class'] ? $field['display']['class'] : '';
-		$style = Pngx__Style__Linked::get_styles( $field, $coupon_id );
+		$style = Pngx__Style__Linked::get_styles( $field, $post_id );
 		$tags  = isset( $field['display']['tags'] ) ? $field['display']['tags'] : 'title';
 		$wrap  = isset( $field['display']['wrap'] ) ? $field['display']['wrap'] : 'div';
 
