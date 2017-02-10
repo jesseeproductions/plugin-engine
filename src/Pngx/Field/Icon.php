@@ -20,7 +20,7 @@ class Pngx__Field__Icon {
 		$style = Pngx__Style__Linked::get_styles( $field, $post_id );
 		?>
 
-		<div class="<?php echo esc_attr( $class ); ?>" <?php echo esc_html( $style ); ?>>
+		<div class="pngx-icon <?php echo esc_attr( $class ); ?>" <?php echo sanitize_textarea_field( $style ); ?>>
 
 			<?php echo '<i class="fa ' . esc_html( $meta ) . '"></i>'; ?>
 

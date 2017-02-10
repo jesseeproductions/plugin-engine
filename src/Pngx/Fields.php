@@ -50,6 +50,12 @@ class Pngx__Fields {
 
 				break;
 
+			case 'title':
+
+				Pngx__Field__Title::display( $field, $post_id, $meta, $template_fields, $var );
+
+				break;
+
 
 			case 'variety':
 

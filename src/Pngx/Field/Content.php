@@ -10,7 +10,7 @@ if ( class_exists( 'Pngx__Field__Content' ) ) {
 
 /**
  * Class Pngx__Field__Content
- * Wysiwyg Field
+ * Title
  */
 class Pngx__Field__Content {
 
@@ -19,16 +19,24 @@ class Pngx__Field__Content {
 		$class = $field['display']['class'] ? $field['display']['class'] : '';
 		$style = Pngx__Style__Linked::get_styles( $field, $post_id );
 		$tags  = isset( $field['display']['tags'] ) ? $field['display']['tags'] : 'title';
-		$wrap  = isset( $field['display']['wrap'] ) ? $field['display']['wrap'] : 'div';
+
+		//Apply all the_content filters manually
+		$meta = wptexturize( $meta );
+		$meta = convert_smilies( $meta );
+
+		//WPAutop
+		if ( cctor_options( 'cctor_wpautop', true, 1 ) != 1 ) {
+			$meta = wpautop( $meta );
+		}
+		$meta = shortcode_unautop( $meta );
+		$meta = prepend_attachment( $meta );
+		//Run Shortcodes
+		$meta = do_shortcode( $meta );
 
 		?>
-
-		<?php echo $wrap ? '<' . esc_attr( $wrap ) . ' class="' . esc_attr( $class ) . '" ' . $style . '>' : ''; ?>
-
-		<?php echo strip_tags( $meta, Pngx__Allowed_Tags::$tags() ); ?>
-
-		<?php echo $wrap ? '</' . esc_attr( $wrap ) . '>' : ''; ?>
-
+		<div class="pngx-content <?php echo esc_attr( $class ); ?>" <?php echo sanitize_textarea_field( $style ); ?>>
+			<?php echo strip_tags( $meta, Pngx__Allowed_Tags::$tags() ); ?>
+		</div>
 		<?php
 
 	}

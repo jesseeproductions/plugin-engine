@@ -31,7 +31,7 @@ class Pngx__Field__Image {
 
 		?>
 
-		<div class="<?php echo esc_attr( $class ); ?>" <?php echo esc_html( $style ); ?>>
+		<div class="pngx-image <?php echo esc_attr( $class ); ?>" <?php echo sanitize_textarea_field( $style ); ?>>
 			<img src='<?php echo esc_url( $image_src ); ?>' alt='<?php echo get_the_title(); ?>' title='<?php echo get_the_title(); ?>'>
 		</div>
 		<?php
