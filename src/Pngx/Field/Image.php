@@ -29,11 +29,12 @@ class Pngx__Field__Image {
 		$image_id  = wp_get_attachment_image_src( $image_id, $img_size );
 		$image_src = $image_id[0];
 
-		?>
-
-		<div class="pngx-image <?php echo esc_attr( $class ); ?>" <?php echo sanitize_textarea_field( $style ); ?>>
-			<img src='<?php echo esc_url( $image_src ); ?>' alt='<?php echo get_the_title(); ?>' title='<?php echo get_the_title(); ?>'>
-		</div>
-		<?php
+		if ( $image_src ) {
+			?>
+			<div class="pngx-image <?php echo esc_attr( $class ); ?>" <?php echo sanitize_textarea_field( $style ); ?>>
+				<img src='<?php echo esc_url( $image_src ); ?>' alt='<?php echo get_the_title(); ?>' title='<?php echo get_the_title(); ?>'>
+			</div>
+			<?php
+		}
 	}
 }

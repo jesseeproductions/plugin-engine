@@ -62,6 +62,18 @@ class Pngx__Fields {
 				Pngx__Field__Variety::display( $field, $post_id, $meta, $template_fields, $var );
 
 				break;
+
+			case 'wrap-start':
+
+				Pngx__Field__Wrap::display_start( $field, $post_id, $meta, $template_fields, $var );
+
+				break;
+
+			case 'wrap-end':
+
+				Pngx__Field__Wrap::display_end( $field, $post_id, $meta, $template_fields, $var );
+
+				break;
 		}
 
 		if ( has_filter( 'pngx_front_field_types' ) ) {
