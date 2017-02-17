@@ -35,7 +35,7 @@ class Pngx__Admin__EDD_License {
 	}
 
 	/*
-	* Register and Enqueue Style and Scripts on Coupon Edit Screens
+	* Register and Enqueue Style and Scripts on Options Screens
 	*
 	*/
 	public function activate_license() {

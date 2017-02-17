@@ -14,28 +14,27 @@ if ( class_exists( 'Pngx__Field__Image' ) ) {
  */
 class Pngx__Field__Image {
 
-	public static function display( $field = array(), $coupon_id = null, $meta = null, $template_fields = array(), $var = array() ) {
+	public static function display( $field = array(), $post_id = null, $meta = null, $template_fields = array(), $var = array() ) {
 
-		$class = $field['display']['class'] ? ' class="' . $field['display']['class'] . ' " ' : ' ';
-		$style = Pngx__Style__Linked::get_styles( $field, $coupon_id );
-		$tags  = isset( $field['display']['tags'] ) ? $field['display']['tags'] : 'title';
-		$wrap  = isset( $field['display']['wrap'] ) ? $field['display']['wrap'] : 'div';
+		$class            = $field['display']['class'] ? $field['display']['class'] : '';
+		$style            = Pngx__Style__Linked::get_styles( $field, $post_id );
+		$display_img_size = $field['display']['image_size'] ? $field['display']['image_size'] : array();
 
-		$cctor_img_size = 'full';
-		$couponimage_id = get_post_meta( $coupon_id, $field['id'], true );
-		$couponimage    = wp_get_attachment_image_src( $couponimage_id, $cctor_img_size );
-		$couponimage    = $couponimage[0];
+		$img_size = 'full';
+		if ( ! empty( $display_img_size['name'] ) ) {
+			$img_size = $display_img_size['name'];
+		}
 
-		?>
+		$image_id  = get_post_meta( $post_id, $field['id'], true );
+		$image_id  = wp_get_attachment_image_src( $image_id, $img_size );
+		$image_src = $image_id[0];
 
-		<?php echo $wrap ? '<' . esc_attr( $wrap ) . $class . $style . '>' : ''; ?>
-
-		<img src='<?php echo esc_url( $couponimage ); ?>' alt='<?php echo get_the_title(); ?>' title='<?php echo get_the_title(); ?>'>
-
-		<?php echo $wrap ? '</' . esc_attr( $wrap ) . '>' : ''; ?>
-
-		<?php
-
+		if ( $image_src ) {
+			?>
+			<div class="pngx-image <?php echo esc_attr( $class ); ?>" <?php echo sanitize_textarea_field( $style ); ?>>
+				<img src='<?php echo esc_url( $image_src ); ?>' alt='<?php echo get_the_title(); ?>' title='<?php echo get_the_title(); ?>'>
+			</div>
+			<?php
+		}
 	}
-
 }

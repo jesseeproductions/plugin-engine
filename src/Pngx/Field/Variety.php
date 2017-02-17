@@ -14,42 +14,30 @@ if ( class_exists( 'Pngx__Field__Variety' ) ) {
  */
 class Pngx__Field__Variety {
 
-	public static function display( $field = array(), $coupon_id = null, $meta = null, $template_fields = array(), $var = array() ) {
+	public static function display( $field = array(), $post_id = null, $meta = null, $template_fields = array(), $var = array() ) {
 
 		if ( ! isset( $field['variety_choices'][ $meta ] ) ) {
 			return;
 		}
 
-		$class = $field['display']['class'] ? ' class="' . $field['display']['class'] . ' " ' : ' ';
-		$style = Pngx__Style__Linked::get_styles( $field, $coupon_id );
-		//$tags  = isset( $field['display']['tags'] ) ? $field['display']['tags'] : 'title';
-		$wrap = isset( $field['display']['wrap'] ) ? $field['display']['wrap'] : 'div';
+		$class = $field['display']['class'] ? $field['display']['class'] : '';
+		$style = Pngx__Style__Linked::get_styles( $field, $post_id );
 
 		?>
 
-		<?php echo $wrap ? '<' . esc_attr( $wrap ) .  $class .  $style . '>' : ''; ?>
+		<div class="pngx-variety <?php echo esc_attr( $class ); ?>" <?php echo sanitize_textarea_field( $style ); ?>>
+			<?php
+			foreach ( $field['variety_choices'][ $meta ] as $variety_fields ) {
 
-		<?php
+				if ( isset( $template_fields[ $variety_fields ] ) ) {
 
-		foreach ( $field['variety_choices'][ $meta ] as $variety_fields ) {
+					Pngx__Fields::display_field( $template_fields[ $variety_fields ], $post_id, $template_fields, $var );
 
-			if ( isset( $template_fields[ $variety_fields ] ) ) {
-
-				Pngx__Fields::display_field( $template_fields[ $variety_fields ], $coupon_id, $template_fields, $var );
+				}
 
 			}
-
-		}
-
-
-		?>
-
-
-		<?php // echo strip_tags( $meta, Pngx__Allowed_Tags::$tags() ); ?>
-
-
-		<?php echo $wrap ? '</' . esc_attr( $wrap ) . '>' : ''; ?>
-
+			?>
+		</div>
 		<?php
 
 	}

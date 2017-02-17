@@ -1,5 +1,5 @@
 /*
- *	JavaScript Wordpress Editor Forked for Coupon Creator
+ *	JavaScript Wordpress Editor Forked for Plugin Engine
  *	Author: 		Ante Primorac / Brian Jessee (Forked)
  *	Author URI: 	http://anteprimorac.from.hr
  *	Version: 		1.2
