@@ -26,10 +26,10 @@ var pngx_admin_fields_init = pngx_admin_fields_init || {};
 
 		// Load Visual Editor
 		$( function () {
-			dragula( [   document.querySelector('.menu-column-0-0'),
-				        document.querySelector('menu-column-0-1'),
-				        document.querySelector('menu-column-0-2' )]
-				);
+			dragula( [document.querySelector( '.menu-column-0-0' ),
+				document.querySelector( 'menu-column-0-1' ),
+				document.querySelector( 'menu-column-0-2' )]
+			);
 		} );
 
 		/*
@@ -78,14 +78,47 @@ var pngx_admin_fields_init = pngx_admin_fields_init || {};
 			e.preventDefault();
 
 			var $repeat_field = '#' + $( this ).data( 'repeater' );
+			var $clone_info = $( $repeat_field ).data( 'clone' );
+			var $ajax_field_id = $( $repeat_field ).data( 'toggleAjax_field_id' );
+			var $ajax_action = $( $repeat_field ).data( 'toggleAjax_action' );
 
-			var row = $( $repeat_field ).find('.empty-row.screen-reader-text' ).clone( true );
+			console.log( $repeat_field, $clone_info );
 
-			row.removeClass( 'empty-row screen-reader-text' );
+			if ( !$repeat_field && !$clone_info ) {
+				return;
+			}
+
+			//var row = $( $repeat_field ).find( '.empty-row.screen-reader-text' ).clone( true );
+
+			//row.removeClass( 'empty-row screen-reader-text' );
+
+			//row.appendTo( $( this ).parent() );
+
+			$.ajax( {
+				url: pngx_admin_ajax.ajaxurl,
+				type: 'post',
+				cache: false,
+				dataType: 'json',
+				data: {
+					nonce: pngx_admin_repeatable_ajax.nonce,
+					post_id: pngx_admin_repeatable_ajax.post_id,
+					field: $ajax_field_id,
+					action: $ajax_action
+				},
+				success: function ( results ) {
+
+					if ( results.success ) {
+
+						var row = '<li class="repeatable-item">' + JSON.parse( results.data ) + '</li>';
+
+					} else {
+						var row = '<h1>' + results.data + '</h1>';
+					}
+				}
+			} );
 
 			row.appendTo( $( this ).parent() );
 
-			return false;
 
 		} );
 
