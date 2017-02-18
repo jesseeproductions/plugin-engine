@@ -23,6 +23,7 @@ class Pngx__Admin__Field__Textarea {
 			$name  = $field['id'];
 			$value = $meta;
 		}
+		global $wp_version;
 
 		$rows      = isset( $field['rows'] ) ? $field['rows'] : 12;
 		$cols      = isset( $field['cols'] ) ? $field['cols'] : 50;

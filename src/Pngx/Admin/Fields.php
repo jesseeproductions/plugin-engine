@@ -174,10 +174,15 @@ class Pngx__Admin__Fields {
 
 				break;
 
+			case 'repeatable':
+
+				Pngx__Admin__Field__Repeatable::display( $field, $options, $options_id, $meta, $wp_version );
+
+				break;
 
 			case 'select':
 
-				Pngx__Admin__Field__Select::display( $field, $options, $options_id, $meta );
+				Pngx__Admin__Field__Select::display( $field, $options, $options_id, $meta, $wp_version );
 
 				break;
 

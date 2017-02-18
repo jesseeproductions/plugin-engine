@@ -71,60 +71,30 @@ var pngx_admin_fields_init = pngx_admin_fields_init || {};
 	/*
 	 * Repeatable Fields
 	 */
-	obj.repeatable_fields = function ( helpid ) {
+	obj.repeatable_fields = function () {
 
 		$( document ).on( 'click', '.add-repeatable', function ( e ) {
 
 			e.preventDefault();
 
-			var $repeat_field = '#' + $( this ).data( 'repeater' );
-			var $clone_info = $( $repeat_field ).data( 'clone' );
-			var $ajax_field_id = $( $repeat_field ).data( 'toggleAjax_field_id' );
-			var $ajax_action = $( $repeat_field ).data( 'toggleAjax_action' );
-
-			console.log( $repeat_field, $clone_info );
-
-			if ( !$repeat_field && !$clone_info ) {
-				return;
-			}
-
-			//var row = $( $repeat_field ).find( '.empty-row.screen-reader-text' ).clone( true );
-
-			//row.removeClass( 'empty-row screen-reader-text' );
-
-			//row.appendTo( $( this ).parent() );
-
-			$.ajax( {
-				url: pngx_admin_ajax.ajaxurl,
-				type: 'post',
-				cache: false,
-				dataType: 'json',
-				data: {
-					nonce: pngx_admin_repeatable_ajax.nonce,
-					post_id: pngx_admin_repeatable_ajax.post_id,
-					field: $ajax_field_id,
-					action: $ajax_action
-				},
-				success: function ( results ) {
-
-					if ( results.success ) {
-
-						var row = '<li class="repeatable-item">' + JSON.parse( results.data ) + '</li>';
-
-					} else {
-						var row = '<h1>' + results.data + '</h1>';
-					}
-				}
-			} );
-
-			row.appendTo( $( this ).parent() );
-
+			obj.repeatable_loader( $( this ) );
 
 		} );
 
 		$( document ).on( 'click', '.remove-repeatable', function ( e ) {
 
-			$( this ).parent().remove();
+			e.preventDefault();
+
+			var $this = $( this );
+			var $repeat_field = '#' + $this.data( 'repeater' );
+
+			if ( 1 === $( $repeat_field ).children().length ) {
+				//console.log( $( $repeat_field ).children().length );
+				obj.repeatable_loader( $this, true );
+				return false;
+			}
+
+			$this.parent().remove();
 
 			return false;
 
@@ -139,6 +109,56 @@ var pngx_admin_fields_init = pngx_admin_fields_init || {};
 
 
 	};
+	/*
+	 * Repeatable Loader
+	 */
+	obj.repeatable_loader = function ( $this, $remove ) {
+
+		if ( !$this ) {
+			return;
+		}
+		//console.log( 'add1' );
+		var $repeat_field = '#' + $this.data( 'repeater' );
+		var $clone_info = $( $repeat_field ).data( 'clone' );
+		var $ajax_field_id = $( $repeat_field ).data( 'ajax_field_id' );
+		var $ajax_action = $( $repeat_field ).data( 'ajax_action' );
+
+		if ( !$repeat_field && !$clone_info && !$ajax_field_id && !$ajax_action ) {
+			return;
+		}
+		//console.log( 'add2' );
+		$.ajax( {
+			url: pngx_admin_ajax.ajaxurl,
+			type: 'post',
+			cache: false,
+			dataType: 'json',
+			data: {
+				nonce: pngx_admin_repeatable_ajax.nonce,
+				post_id: pngx_admin_repeatable_ajax.post_id,
+				field: $ajax_field_id,
+				action: $ajax_action
+			},
+			success: function ( results ) {
+
+				if ( results.success ) {
+					var row = JSON.parse( results.data );
+
+				} else {
+					var row = '<h1>' + results.data + '</h1>';
+				}
+
+				$( row ).insertAfter( $this.closest( '.repeatable-item' ) );
+
+				if ( $remove ) {
+				//	console.log( 'add4' );
+					$this.parent().remove();
+				}
+
+			}
+		} );
+		//console.log( 'add3' );
+	};
+
 
 	/*
 	 * Visual Editor

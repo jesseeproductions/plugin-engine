@@ -24,6 +24,8 @@ class Pngx__Admin__Ajax {
 
 		add_action( 'wp_ajax_pngx_variety', [ $this, 'load_variety' ] );
 
+		add_action( 'wp_ajax_pngx_repeatable', [ $this, 'load_repeatable' ] );
+
 	}
 
 	public function load_templates() {
@@ -51,7 +53,7 @@ class Pngx__Admin__Ajax {
 		 */
 		$fields = apply_filters( 'pngx_meta_fields', array() );
 
-        global $wp_version;
+		global $wp_version;
 
 		foreach ( $fields as $field ) {
 
@@ -67,18 +69,18 @@ class Pngx__Admin__Ajax {
 
 				?>
 
-				<div class="pngx-meta-field-wrap field-wrap-<?php echo esc_html( $field['type'] ); ?> field-wrap-<?php echo esc_html( $field['id'] ); ?> <?php echo esc_html( $wrapclass ); ?>"
+                <div class="pngx-meta-field-wrap field-wrap-<?php echo esc_html( $field['type'] ); ?> field-wrap-<?php echo esc_html( $field['id'] ); ?> <?php echo esc_html( $wrapclass ); ?>"
 					<?php echo isset( $field['toggle'] ) ? Pngx__Admin__Fields::toggle( $field['toggle'], $field['id'] ) : null; ?> >
 
 					<?php if ( isset( $field['label'] ) ) { ?>
 
-						<div class="pngx-meta-label label-<?php echo $field['type']; ?> label-<?php echo $field['id']; ?>">
-							<label for="<?php echo $field['id']; ?>"><?php echo $field['label']; ?></label>
-						</div>
+                        <div class="pngx-meta-label label-<?php echo $field['type']; ?> label-<?php echo $field['id']; ?>">
+                            <label for="<?php echo $field['id']; ?>"><?php echo $field['label']; ?></label>
+                        </div>
 
 					<?php } ?>
 
-					<div class="pngx-meta-field field-<?php echo $field['type']; ?> field-<?php echo $field['id']; ?>">
+                    <div class="pngx-meta-field field-<?php echo $field['type']; ?> field-<?php echo $field['id']; ?>">
 
 						<?php
 
@@ -89,10 +91,10 @@ class Pngx__Admin__Ajax {
 
 						?>
 
-					</div>
-					<!-- end .pngx-meta-field.field-<?php echo $field['type']; ?>.field-<?php echo $field['id']; ?> -->
+                    </div>
+                    <!-- end .pngx-meta-field.field-<?php echo $field['type']; ?>.field-<?php echo $field['id']; ?> -->
 
-				</div> <!-- end .pngx-meta-field-wrap.field-wrap-<?php echo $field['type']; ?>.field-wrap-<?php echo $field['id']; ?>	-->
+                </div> <!-- end .pngx-meta-field-wrap.field-wrap-<?php echo $field['type']; ?>.field-wrap-<?php echo $field['id']; ?>	-->
 
 				<?php
 			}
@@ -159,12 +161,12 @@ class Pngx__Admin__Ajax {
 	public function load_repeatable() {
 
 		//End if not the correct action
-		if ( ! isset( $_POST['action'] ) || 'pngx_variety' != $_POST['action'] ) {
+		if ( ! isset( $_POST['action'] ) || 'pngx_repeatable' != $_POST['action'] ) {
 			wp_send_json_error( __( 'Permission Error has occurred. Please save, reload, and try again.', 'plugin-engine' ) );
 		}
 
 		//End if not correct nonce
-		if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'pngx_admin_' . $_POST['post_id'] ) ) {
+		if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'pngx_admin_rep_' . $_POST['post_id'] ) ) {
 			wp_send_json_error( __( 'Permission Error has occurred. Please save, reload, and try again.', 'plugin-engine' ) );
 		}
 
@@ -173,10 +175,10 @@ class Pngx__Admin__Ajax {
 		}
 
 		if ( ! isset( $_POST['option'] ) ) {
-			wp_send_json_error( __( 'No Option ID. Please save, reload, and try again.', 'plugin-engine' ) );
+			//	wp_send_json_error( __( 'No Option ID. Please save, reload, and try again.', 'plugin-engine' ) );
 		}
 
-		Pngx__Main::instance()->doing_ajax = defined( 'DOING_AJAX' ) && DOING_AJAX;
+		//Pngx__Main::instance()->doing_ajax = defined( 'DOING_AJAX' ) && DOING_AJAX;
 
 		ob_start();
 
@@ -185,26 +187,27 @@ class Pngx__Admin__Ajax {
 		 */
 		$fields = apply_filters( 'pngx_meta_fields', array() );
 
-		if ( isset( $fields[ $_POST['field'] ]['variety_choices'][ $_POST['option'] ] ) ) {
-			foreach ( $fields[ $_POST['field'] ]['variety_choices'][ $_POST['option'] ] as $label ) {
-
-				if ( ! isset( $fields[ $label ] ) ) {
-					continue;
-				}
-				$meta = '';
-				if ( isset( $_POST['post_id'] ) ) {
-					$meta = get_post_meta( $_POST['post_id'], $label, true );
-				}
-				Pngx__Admin__Fields::display_field( $fields[ $label ], false, false, $meta, null );
-
-			}
+		if ( ! isset( $fields[ $_POST['field'] ] ) ) {
+			wp_send_json_error( __( 'No Field Exists.', 'plugin-engine' ) );
 		}
 
-		$field = ob_get_contents();
+		$field = $fields[ $_POST['field'] ];
+
+		global $wp_version;
+
+		//foreach ( $fields as $field ) {
+
+		Pngx__Admin__Field__Repeatable::display_repeat_fields( $field['repeatable_fields'], $field, null, false, null, $wp_version );
+
+		//}
+		//} // end foreach fields
+
+		$template_fields = ob_get_contents();
 
 		ob_end_clean();
 
-		wp_send_json_success( json_encode( $field ) );
+		wp_send_json_success( json_encode( $template_fields ) );
+
 	}
 
 }
