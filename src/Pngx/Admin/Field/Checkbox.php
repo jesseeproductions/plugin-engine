@@ -14,7 +14,7 @@ if ( class_exists( 'Pngx__Admin__Field__Checkbox' ) ) {
  */
 class Pngx__Admin__Field__Checkbox {
 
-	public static function display( $field = array(), $options = array(), $options_id = null, $meta = null ) {
+	public static function display( $field = array(), $options = array(), $options_id = null, $meta = null, $repeat_obj = null ) {
 
 		global $pagenow;
 		$selected = '';

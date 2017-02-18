@@ -376,8 +376,6 @@ class Pngx__Admin__Options {
 	*/
 	public function display_field( $field = array() ) {
 
-		global $wp_version;
-
 		$options = get_option( $this->options_id );
 
 		if ( ! isset( $options[ $field['id'] ] ) && 'checkbox' != $field['type'] ) {
@@ -386,7 +384,7 @@ class Pngx__Admin__Options {
 			$options[ $field['id'] ] = 0;
 		}
 
-		Pngx__Admin__Fields::display_field( $field, $options, $this->options_id, false, $wp_version, false );
+		Pngx__Admin__Fields::display_field( $field, $options, $this->options_id, false, null );
 
 	}
 

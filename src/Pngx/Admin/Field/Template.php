@@ -24,6 +24,12 @@ class Pngx__Admin__Field__Template {
 			'post_id' => $post->ID
 		) );
 
+		wp_localize_script( 'pngx-admin', 'pngx_admin_repeatable_ajax', array(
+			'ajaxurl' => admin_url( 'admin-ajax.php', ( is_ssl() ? 'https' : 'http' ) ),
+			'nonce'   => wp_create_nonce( 'pngx_admin_rep_' . $post->ID ),
+			'post_id' => $post->ID
+		) );
+
 	}
 
 }

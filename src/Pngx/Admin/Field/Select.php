@@ -14,7 +14,7 @@ if ( class_exists( 'Pngx__Admin__Field__Select' ) ) {
  */
 class Pngx__Admin__Field__Select {
 
-	public static function display( $field = array(), $options = array(), $options_id = null, $meta = null ) {
+	public static function display( $field = array(), $options = array(), $options_id = null, $meta = null, $repeat_obj = null ) {
 
 		global $pagenow;
 		$selected = '';
@@ -41,13 +41,21 @@ class Pngx__Admin__Field__Select {
 		}
 
 		$class     = isset( $field['class'] ) ? $field['class'] : '';
-		$repeating = isset( $field['repeating'] ) ? '[]' : '';
+
+		if ( $repeat_obj ) {
+			//log_me( 'repeat meta select' );
+			//log_me( $repeat_obj );
+			//$name = 'wpe_menu_section[' . $name . $repeat_obj->get_current_sec_col() . ']';
+			$name = $name = $repeat_obj->get_field_name( $name );
+			//$repeating = $repeat_obj->get_current_sec_col() . '[]';
+		}
+
 		?>
 
 		<select
 				id="<?php echo esc_attr( $field['id'] ); ?>"
 				class="select <?php echo esc_attr( $class ); ?>"
-				name="<?php echo esc_attr( $name ) . $repeating; ?>"
+				name="<?php echo esc_attr( $name ); ?>"
 			<?php echo isset( $field['data'] ) ? Pngx__Admin__Fields::toggle( $field['data'], null ) : ''; ?>
 		>
 			<?php

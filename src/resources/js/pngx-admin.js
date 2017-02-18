@@ -119,14 +119,20 @@ var pngx_admin_fields_init = pngx_admin_fields_init || {};
 		}
 		//console.log( 'add1' );
 		var $repeat_field = '#' + $this.data( 'repeater' );
-		var $clone_info = $( $repeat_field ).data( 'clone' );
+		var $ajax_section = $this.data( 'section' );
+		var $ajax_column = $this.data( 'column' );
+
+		//var $clone_info = $( $repeat_field ).data( 'clone' );
 		var $ajax_field_id = $( $repeat_field ).data( 'ajax_field_id' );
 		var $ajax_action = $( $repeat_field ).data( 'ajax_action' );
+		var $ajax_repeat_type = $( $repeat_field ).data( 'repeat-type' );
 
-		if ( !$repeat_field && !$clone_info && !$ajax_field_id && !$ajax_action ) {
-			return;
+		if ( 'section' === $ajax_repeat_type ) {
+			$ajax_section++;
+		} else if ( 'column' === $ajax_repeat_type ) {
+			//$ajax_column++;
 		}
-		//console.log( 'add2' );
+
 		$.ajax( {
 			url: pngx_admin_ajax.ajaxurl,
 			type: 'post',
@@ -136,6 +142,9 @@ var pngx_admin_fields_init = pngx_admin_fields_init || {};
 				nonce: pngx_admin_repeatable_ajax.nonce,
 				post_id: pngx_admin_repeatable_ajax.post_id,
 				field: $ajax_field_id,
+				repeat_type: $ajax_repeat_type,
+				section: $ajax_section,
+				column: $ajax_column,
 				action: $ajax_action
 			},
 			success: function ( results ) {
@@ -150,7 +159,7 @@ var pngx_admin_fields_init = pngx_admin_fields_init || {};
 				$( row ).insertAfter( $this.closest( '.repeatable-item' ) );
 
 				if ( $remove ) {
-				//	console.log( 'add4' );
+					//	console.log( 'add4' );
 					$this.parent().remove();
 				}
 

@@ -14,7 +14,7 @@ if ( class_exists( 'Pngx__Admin__Field__Wysiwyg' ) ) {
  */
 class Pngx__Admin__Field__Wysiwyg {
 
-	public static function display( $field = array(), $options = array(), $options_id = null, $meta = null, $wp_version ) {
+	public static function display( $field = array(), $options = array(), $options_id = null, $meta = null, $repeat_obj = null ) {
 
 		if ( isset( $options_id ) && ! empty( $options_id ) ) {
 			$name  = $options_id;
@@ -24,7 +24,7 @@ class Pngx__Admin__Field__Wysiwyg {
 			$value = $meta;
 		}
 
-		global $post;
+		global $post, $wp_version;
 
 		$settings = array();
 		if ( ! class_exists( '_WP_Editors' ) ) {

@@ -14,7 +14,7 @@ if ( class_exists( 'Pngx__Admin__Field__List' ) ) {
  */
 class Pngx__Admin__Field__List {
 
-	public static function display( $field = array(), $options = array(), $options_id = null, $meta = null ) {
+	public static function display( $field = array(), $options = array(), $options_id = null, $meta = null, $repeat_obj = null ) {
 
 		$class = isset( $field['class'] ) ? $field['class'] : '';
 

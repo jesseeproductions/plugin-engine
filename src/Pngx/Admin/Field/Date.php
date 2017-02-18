@@ -14,7 +14,7 @@ if ( class_exists( 'Pngx__Admin__Field__Date' ) ) {
  */
 class Pngx__Admin__Field__Date {
 
-	public static function display( $field = array(), $options = array(), $options_id = null, $meta = null ) {
+	public static function display( $field = array(), $options = array(), $options_id = null, $meta = null, $repeat_obj = null ) {
 
 		if ( isset( $options_id ) && ! empty( $options_id ) ) {
 			$name  = $options_id;

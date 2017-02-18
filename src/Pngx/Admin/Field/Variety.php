@@ -14,7 +14,7 @@ if ( class_exists( 'Pngx__Admin__Field__Variety' ) ) {
  */
 class Pngx__Admin__Field__Variety {
 
-	public static function display( $field = array(), $options = array(), $options_id = null, $meta = null ) {
+	public static function display( $field = array(), $options = array(), $options_id = null, $meta = null, $repeat_obj = null ) {
 
 		global $pagenow;
 		$selected = '';
@@ -82,8 +82,10 @@ class Pngx__Admin__Field__Variety {
 							continue;
 						}
 
-						$post_id = $post->ID;
-						if ( Pngx__Main::instance()->doing_ajax && isset( $_POST['post_id'] ) ) {
+						$post_id = '';
+						if ( is_object( $post ) ) {
+							$post_id = $post->ID;
+						} elseif ( Pngx__Main::instance()->doing_ajax && isset( $_POST['post_id'] ) ) {
 							$post_id = absint( $_POST['post_id'] );
 						}
 

@@ -14,7 +14,7 @@ if ( class_exists( 'Pngx__Admin__Field__Repeatable' ) ) {
  */
 class Pngx__Admin__Field__Repeatable {
 
-	public static function display( $field = array(), $options = array(), $options_id = null, $meta = null, $wp_version = null ) {
+	public static function display( $field = array(), $options = array(), $options_id = null, $meta = null, $repeat_obj = null ) {
 
 		if ( ! isset( $field['repeatable_fields'] ) || ! is_array( $field['repeatable_fields'] ) ) {
 			return;
@@ -22,22 +22,28 @@ class Pngx__Admin__Field__Repeatable {
 
 		global $post;
 
+		if ( ! $repeat_obj ) {
+			$repeat_obj = new Pngx__Admin__Repeater__Main( $field['id'], (int)$meta );
+		}
 
-		log_me('repeat meta');
-		log_me($meta);
+		//log_me( 'repeat meta' );
+		//log_me( count( $meta ) );
+		//log_me( $repeat_obj );
+		//log_me( $meta );
 
-		wp_localize_script( 'pngx-admin', 'pngx_admin_repeatable_ajax', array(
-			'ajaxurl' => admin_url( 'admin-ajax.php', ( is_ssl() ? 'https' : 'http' ) ),
-			'nonce'   => wp_create_nonce( 'pngx_admin_rep_' . $post->ID ),
-			'post_id' => $post->ID
-		) );
-
-		$class     = isset( $field['class'] ) ? $field['class'] : '';
+		$class = isset( $field['class'] ) ? $field['class'] : '';
 
 		$options[] = array(
 			'wrap'  => 'li',
 			'class' => 'repeatable-item',
 		);
+
+		$repeating_type = '';
+		if ( $repeat_obj->get_repeating_sections_status() ) {
+			$repeating_type = 'section';
+		} elseif ( $repeat_obj->get_repeating_columns_status() ) {
+			$repeating_type = 'column';
+		}
 
 		?>
 		<ul
@@ -46,19 +52,35 @@ class Pngx__Admin__Field__Repeatable {
 				data-clone="<?php echo esc_attr( json_encode( $options ) ); ?>"
 				data-ajax_field_id="<?php echo esc_attr( $field['id'] ); ?>"
 				data-ajax_action="pngx_repeatable"
+				data-repeat-type="<?php echo esc_attr( $repeating_type ); ?>"
 		>
 
 			<?php
-			if ( $meta ) {
 
-				foreach ( $meta as $row ) {
 
-					self::display_repeat_fields( $field['repeatable_fields'], $field, $row, false, $meta, $wp_version );
+			$count = $repeat_obj->get_total_sections();
+			if ( $repeat_obj->get_repeating_columns_status() ) {
+				$count = $repeat_obj->get_total_columns();
+			}
 
+			for ( $i = 0; $i < $count; $i ++ ) {
+
+				$section = get_post_meta( $post->ID, $repeat_obj->get_meta_id(), true );
+
+				if ( ! is_array( $section ) ) {
+					self::display_repeat_fields( $field['repeatable_fields'], $field, null, $repeat_obj, $meta );
 				}
-			} else {
+				//log_me($section);
+				foreach( $section as $row ) {
+				//	log_me($row);
+					self::display_repeat_fields( $field['repeatable_fields'], $field, $row, $repeat_obj, $meta );
+				}
 
-				self::display_repeat_fields( $field['repeatable_fields'], $field, null, false, $meta, $wp_version );
+				if ( $repeat_obj->get_repeating_sections_status() ) {
+					$repeat_obj->update_section_count();
+				} elseif ( $repeat_obj->get_repeating_columns_status() ) {
+					$repeat_obj->update_column_count();
+				}
 
 			}
 
@@ -66,16 +88,16 @@ class Pngx__Admin__Field__Repeatable {
 		</ul>
 
 		<?php
-		if ( isset( $field['desc'] ) && "" != $field['desc'] ) {
-			echo '<br /><span class="description">' . $field['desc'] . '</span>';
-		}
+
 	}
 
-	public static function display_repeat_fields( $fields = array(), $parent = array(), $row = null, $meta = null, $wp_version ) {
+	public static function display_repeat_fields( $fields = array(), $parent = array(), $row = null, $repeat_obj, $meta = null ) {
 
-        $counter = 0;
+		if ( ! is_object( $repeat_obj ) ) {
+			return;
+		}
 		?>
-		<li class="repeatable-item repeatable-item-<?php echo absint( $counter ); ?>">
+		<li class="repeatable-item repeatable-item-<?php echo esc_attr( $repeat_obj->get_current_sec_col() ); ?>">
 
 			<span class="sort hndle">|||</span>
 			<?php
@@ -100,7 +122,9 @@ class Pngx__Admin__Field__Repeatable {
 					<div class="pngx-meta-field field-<?php echo $repeater['type']; ?> field-<?php echo $repeater['id']; ?>">
 
 						<?php
-						Pngx__Admin__Fields::display_field( $repeater, false, false, $repeat_field_val, $wp_version );
+
+
+						Pngx__Admin__Fields::display_field( $repeater, false, false, $repeat_field_val, $repeat_obj );
 
 						?>
 
@@ -108,11 +132,21 @@ class Pngx__Admin__Field__Repeatable {
 
 				</div>
 				<?php
-                $counter++;
+
 			}
 			?>
-			<a class="add-repeatable button" data-repeater="<?php echo esc_attr( $parent['id'] ); ?>-repeatable" href="#">+</a>
-			<a class="remove-repeatable button" data-repeater="<?php echo esc_attr( $parent['id'] ); ?>-repeatable" href="#">X</a>
+			<a class="add-repeatable button"
+			   data-repeater="<?php echo esc_attr( $parent['id'] ); ?>-repeatable"
+			   data-section="<?php echo absint( $repeat_obj->get_current_section() ); ?>"
+			   data-column="<?php echo esc_attr( $repeat_obj->get_current_column() ); ?>"
+			   href="#"
+			>+</a>
+			<a class="remove-repeatable button"
+			   data-repeater="<?php echo esc_attr( $parent['id'] ); ?>-repeatable"
+			   data-section="<?php echo absint( $repeat_obj->get_current_section() ); ?>"
+			   data-column="<?php echo esc_attr( $repeat_obj->get_current_column() ); ?>"
+			   href="#"
+			>X</a>
 		</li>
 		<?php
 	}

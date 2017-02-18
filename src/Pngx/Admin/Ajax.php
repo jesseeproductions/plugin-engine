@@ -53,8 +53,6 @@ class Pngx__Admin__Ajax {
 		 */
 		$fields = apply_filters( 'pngx_meta_fields', array() );
 
-		global $wp_version;
-
 		foreach ( $fields as $field ) {
 
 			$field_template = isset( $field['template'] ) ? $field['template'] : array();
@@ -69,32 +67,34 @@ class Pngx__Admin__Ajax {
 
 				?>
 
-                <div class="pngx-meta-field-wrap field-wrap-<?php echo esc_html( $field['type'] ); ?> field-wrap-<?php echo esc_html( $field['id'] ); ?> <?php echo esc_html( $wrapclass ); ?>"
+				<div class="pngx-meta-field-wrap field-wrap-<?php echo esc_html( $field['type'] ); ?> field-wrap-<?php echo esc_html( $field['id'] ); ?> <?php echo esc_html( $wrapclass ); ?>"
 					<?php echo isset( $field['toggle'] ) ? Pngx__Admin__Fields::toggle( $field['toggle'], $field['id'] ) : null; ?> >
 
 					<?php if ( isset( $field['label'] ) ) { ?>
 
-                        <div class="pngx-meta-label label-<?php echo $field['type']; ?> label-<?php echo $field['id']; ?>">
-                            <label for="<?php echo $field['id']; ?>"><?php echo $field['label']; ?></label>
-                        </div>
+						<div class="pngx-meta-label label-<?php echo $field['type']; ?> label-<?php echo $field['id']; ?>">
+							<label for="<?php echo $field['id']; ?>"><?php echo $field['label']; ?></label>
+						</div>
 
 					<?php } ?>
 
-                    <div class="pngx-meta-field field-<?php echo $field['type']; ?> field-<?php echo $field['id']; ?>">
+					<div class="pngx-meta-field field-<?php echo $field['type']; ?> field-<?php echo $field['id']; ?>">
 
 						<?php
 
-						Pngx__Admin__Fields::display_field( $field, false, false, $meta, $wp_version );
+						Pngx__Admin__Fields::display_field( $field, false, false, $meta );
+
+						//Pngx__Admin__Fields::display_field( $field, false, false, $meta, $repeat_obj );
 
 						// Display admin linked style fields
 						Pngx__Admin__Style__Linked::display_styles( $fields, $field, $_POST['post_id'] );
 
 						?>
 
-                    </div>
-                    <!-- end .pngx-meta-field.field-<?php echo $field['type']; ?>.field-<?php echo $field['id']; ?> -->
+					</div>
+					<!-- end .pngx-meta-field.field-<?php echo $field['type']; ?>.field-<?php echo $field['id']; ?> -->
 
-                </div> <!-- end .pngx-meta-field-wrap.field-wrap-<?php echo $field['type']; ?>.field-wrap-<?php echo $field['id']; ?>	-->
+				</div> <!-- end .pngx-meta-field-wrap.field-wrap-<?php echo $field['type']; ?>.field-wrap-<?php echo $field['id']; ?>	-->
 
 				<?php
 			}
@@ -174,11 +174,19 @@ class Pngx__Admin__Ajax {
 			wp_send_json_error( __( 'No Field ID. Please save, reload, and try again.', 'plugin-engine' ) );
 		}
 
-		if ( ! isset( $_POST['option'] ) ) {
-			//	wp_send_json_error( __( 'No Option ID. Please save, reload, and try again.', 'plugin-engine' ) );
+		if ( ! isset( $_POST['repeat_type'] ) ) {
+			//wp_send_json_error( __( 'No Repeat Type Provided Provided.', 'plugin-engine' ) );
 		}
 
-		//Pngx__Main::instance()->doing_ajax = defined( 'DOING_AJAX' ) && DOING_AJAX;
+		if ( ! isset( $_POST['section'] ) ) {
+			wp_send_json_error( __( 'No Section Number Provided.', 'plugin-engine' ) );
+		}
+
+		if ( ! isset( $_POST['column'] ) ) {
+			wp_send_json_error( __( 'No Column Number Provided.', 'plugin-engine' ) );
+		}
+
+		Pngx__Main::instance()->doing_ajax = defined( 'DOING_AJAX' ) && DOING_AJAX;
 
 		ob_start();
 
@@ -193,11 +201,13 @@ class Pngx__Admin__Ajax {
 
 		$field = $fields[ $_POST['field'] ];
 
-		global $wp_version;
-
 		//foreach ( $fields as $field ) {
 
-		Pngx__Admin__Field__Repeatable::display_repeat_fields( $field['repeatable_fields'], $field, null, false, null, $wp_version );
+		if ( ! isset( $repeat_obj ) ) {
+			$repeat_obj = new Pngx__Admin__Repeater__Main( $_POST['field'], false, absint( $_POST['section'] ), absint( $_POST['column'] ) );
+		}
+
+		Pngx__Admin__Field__Repeatable::display_repeat_fields( $field['repeatable_fields'], $field, null, $repeat_obj, null );
 
 		//}
 		//} // end foreach fields

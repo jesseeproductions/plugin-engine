@@ -76,7 +76,7 @@ class Pngx__Admin__Fields {
 	/*
 	* Display Individual Fields
 	*/
-	public static function display_field( $field = array(), $options = array(), $options_id = null, $meta = null, $wp_version ) {
+	public static function display_field( $field = array(), $options = array(), $options_id = null, $meta = null, $repeat_obj = null ) {
 
 		/**
 		 * Filter the Options Name ID for Display of Fields
@@ -98,19 +98,19 @@ class Pngx__Admin__Fields {
 
 			case 'checkbox':
 
-				Pngx__Admin__Field__Checkbox::display( $field, $options, $options_id, $meta );
+				Pngx__Admin__Field__Checkbox::display( $field, $options, $options_id, $meta, $repeat_obj );
 
 				break;
 
 			case 'color':
 
-				Pngx__Admin__Field__Color::display( $field, $options, $options_id, $meta );
+				Pngx__Admin__Field__Color::display( $field, $options, $options_id, $meta, $repeat_obj );
 
 				break;
 
 			case 'date':
 
-				Pngx__Admin__Field__Date::display( $field, $options, $options_id, $meta );
+				Pngx__Admin__Field__Date::display( $field, $options, $options_id, $meta, $repeat_obj );
 
 				break;
 
@@ -122,19 +122,19 @@ class Pngx__Admin__Fields {
 
 			case 'hidden':
 
-				Pngx__Admin__Field__Hidden::display( $field, $options, $options_id, $meta );
+				Pngx__Admin__Field__Hidden::display( $field, $options, $options_id, $meta, $repeat_obj );
 
 				break;
 
 			case 'icon':
 
-				Pngx__Admin__Field__Icon::display( $field, $options, $options_id, $meta );
+				Pngx__Admin__Field__Icon::display( $field, $options, $options_id, $meta, $repeat_obj );
 
 				break;
 
 			case 'image':
 
-				Pngx__Admin__Field__Image::display( $field, $options, $options_id, $meta );
+				Pngx__Admin__Field__Image::display( $field, $options, $options_id, $meta, $repeat_obj );
 
 				break;
 
@@ -146,43 +146,43 @@ class Pngx__Admin__Fields {
 
 			case 'license_status':
 
-				Pngx__Admin__Field__License_Status::display( $field, $options, $options_id, $meta );
+				Pngx__Admin__Field__License_Status::display( $field, $options, $options_id, $meta, $repeat_obj );
 
 				break;
 
 			case 'list':
 
-				Pngx__Admin__Field__List::display( $field, $options, $options_id, $meta );
+				Pngx__Admin__Field__List::display( $field, $options, $options_id, $meta, $repeat_obj );
 
 				break;
 
 			case 'message':
 
-				Pngx__Admin__Field__Message::display( $field, $options, $options_id, $meta );
+				Pngx__Admin__Field__Message::display( $field, $options, $options_id, $meta, $repeat_obj );
 
 				break;
 
 			case 'number':
 
-				Pngx__Admin__Field__Number::display( $field, $options, $options_id, $meta );
+				Pngx__Admin__Field__Number::display( $field, $options, $options_id, $meta, $repeat_obj );
 
 				break;
 
 			case 'radio':
 
-				Pngx__Admin__Field__Radio::display( $field, $options, $options_id, $meta );
+				Pngx__Admin__Field__Radio::display( $field, $options, $options_id, $meta, $repeat_obj );
 
 				break;
 
 			case 'repeatable':
 
-				Pngx__Admin__Field__Repeatable::display( $field, $options, $options_id, $meta, $wp_version );
+				Pngx__Admin__Field__Repeatable::display( $field, $options, $options_id, $meta, $repeat_obj );
 
 				break;
 
 			case 'select':
 
-				Pngx__Admin__Field__Select::display( $field, $options, $options_id, $meta, $wp_version );
+				Pngx__Admin__Field__Select::display( $field, $options, $options_id, $meta, $repeat_obj );
 
 				break;
 
@@ -194,32 +194,32 @@ class Pngx__Admin__Fields {
 
 			case 'text':
 
-				Pngx__Admin__Field__Text::display( $field, $options, $options_id, $meta );
+				Pngx__Admin__Field__Text::display( $field, $options, $options_id, $meta, $repeat_obj );
 
 				break;
 
 			case 'textarea':
 
-				Pngx__Admin__Field__Textarea::display( $field, $options, $options_id, $meta, $wp_version );
+				Pngx__Admin__Field__Textarea::display( $field, $options, $options_id, $meta, $repeat_obj );
 
 				break;
 
 
 			case 'url':
 
-				Pngx__Admin__Field__Url::display( $field, $options, $options_id, $meta );
+				Pngx__Admin__Field__Url::display( $field, $options, $options_id, $meta, $repeat_obj );
 
 				break;
 
 			case 'variety':
 
-				Pngx__Admin__Field__Variety::display( $field, $options, $options_id, $meta );
+				Pngx__Admin__Field__Variety::display( $field, $options, $options_id, $meta, $repeat_obj );
 
 				break;
 
 			case 'wysiwyg':
 
-				Pngx__Admin__Field__Wysiwyg::display( $field, $options, $options_id, $meta, $wp_version );
+				Pngx__Admin__Field__Wysiwyg::display( $field, $options, $options_id, $meta, $repeat_obj );
 
 				break;
 		}
@@ -231,7 +231,7 @@ class Pngx__Admin__Fields {
 			 * @param array $options current field being displayed.
 			 * @param array $field   current value of option saved.
 			 */
-			apply_filters( 'pngx_field_types', $field, $options, $options_id, $meta, $wp_version );
+			apply_filters( 'pngx_field_types', $field, $options, $options_id, $meta, $repeat_obj );
 		}
 
 		if ( isset( $field['after'] ) ) {
