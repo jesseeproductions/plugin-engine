@@ -166,16 +166,16 @@ class Pngx__Admin__Meta {
 
 		ob_start(); ?>
 
-		<div class="main pngx-tabs" <?php echo Pngx__Admin__Fields::toggle( $tab_data, null ); ?> >
+        <div class="main pngx-tabs" <?php echo Pngx__Admin__Fields::toggle( $tab_data, null ); ?> >
 
-			<ul class="main pngx-tabs-nav">
+            <ul class="main pngx-tabs-nav">
 
 				<?php //Create Tabs
 				foreach ( self::get_tabs() as $tab_slug => $tab ) {
 					echo '<li><a href="#' . $tab_slug . '">' . $tab . '</a></li>';
 				}
 				?>
-			</ul>
+            </ul>
 
 			<?php foreach ( self::get_tabs() as $tab_slug => $tab ) {
 
@@ -183,9 +183,9 @@ class Pngx__Admin__Meta {
 				$template_area = '';
 				?>
 
-				<div class="pngx-section-fields form-table">
+                <div class="pngx-section-fields form-table">
 
-					<h2 class="pngx-tab-heading-<?php echo $tab_slug; ?>"><?php echo $tab; ?></h2>
+                    <h2 class="pngx-tab-heading-<?php echo $tab_slug; ?>"><?php echo $tab; ?></h2>
 
 					<?php
 
@@ -214,7 +214,7 @@ class Pngx__Admin__Meta {
 								$template_select = get_post_meta( $post->ID, $wrapclass, true );
 								$template_area   = ! empty( $template_select ) ? $template_select : 'default';
 								?>
-								<div class="pngx-meta-template-wrap template-wrap-<?php echo esc_html( $wrapclass ); ?>" >
+                                <div class="pngx-meta-template-wrap template-wrap-<?php echo esc_html( $wrapclass ); ?>" >
 								<?php
 								continue;
 
@@ -222,7 +222,7 @@ class Pngx__Admin__Meta {
 								//End Template Section Wrap
 								$template_area = '';
 								?>
-								</div>
+                                </div>
 								<?php
 								continue;
 							}
@@ -240,18 +240,18 @@ class Pngx__Admin__Meta {
 							}
 							?>
 
-							<div class="pngx-meta-field-wrap field-wrap-<?php echo esc_html( $field['type'] ); ?> field-wrap-<?php echo esc_html( $field['id'] ); ?> <?php echo esc_html( $wrapclass ); ?>"
+                            <div class="pngx-meta-field-wrap field-wrap-<?php echo esc_html( $field['type'] ); ?> field-wrap-<?php echo esc_html( $field['id'] ); ?> <?php echo esc_html( $wrapclass ); ?>"
 								<?php echo isset( $field['toggle'] ) ? Pngx__Admin__Fields::toggle( $field['toggle'], $field['id'] ) : null; ?> >
 
 								<?php if ( isset( $field['label'] ) ) { ?>
 
-									<div class="pngx-meta-label label-<?php echo $field['type']; ?> label-<?php echo $field['id']; ?>">
-										<label for="<?php echo $field['id']; ?>"><?php echo $field['label']; ?></label>
-									</div>
+                                    <div class="pngx-meta-label label-<?php echo $field['type']; ?> label-<?php echo $field['id']; ?>">
+                                        <label for="<?php echo $field['id']; ?>"><?php echo $field['label']; ?></label>
+                                    </div>
 
 								<?php } ?>
 
-								<div class="pngx-meta-field field-<?php echo $field['type']; ?> field-<?php echo $field['id']; ?>">
+                                <div class="pngx-meta-field field-<?php echo $field['type']; ?> field-<?php echo $field['id']; ?>">
 
 									<?php
 									//todo do I need to change the null for repeater here?
@@ -262,22 +262,22 @@ class Pngx__Admin__Meta {
 
 									?>
 
-								</div>
-								<!-- end .pngx-meta-field.field-<?php echo $field['type']; ?>.field-<?php echo $field['id']; ?> -->
+                                </div>
+                                <!-- end .pngx-meta-field.field-<?php echo $field['type']; ?>.field-<?php echo $field['id']; ?> -->
 
-							</div> <!-- end .pngx-meta-field-wrap.field-wrap-<?php echo $field['type']; ?>.field-wrap-<?php echo $field['id']; ?>	-->
+                            </div> <!-- end .pngx-meta-field-wrap.field-wrap-<?php echo $field['type']; ?>.field-wrap-<?php echo $field['id']; ?>	-->
 
 							<?php
 						}//end if in section check
 
 					} // end foreach fields?>
 
-				</div>    <!-- end .pngx-section-fields.form-table -->
+                </div>    <!-- end .pngx-section-fields.form-table -->
 
 			<?php } // end foreach tabs
 			?>
 
-		</div>    <!-- end .pngx-tabs -->
+        </div>    <!-- end .pngx-tabs -->
 
 		<?php echo ob_get_clean();
 	}
@@ -343,7 +343,7 @@ class Pngx__Admin__Meta {
 			if ( 'repeatable' === $option['type'] && isset ( $_POST[ $option['id'] ] ) ) {
 
 				//log_me($option);
-				//log_me( $_POST );
+				// log_me( $_POST );
 				//log_me( count( $_POST[ $option['id'] ] ) );
 				//log_me( $_POST[ $option['id'] ] );
 
@@ -376,14 +376,15 @@ class Pngx__Admin__Meta {
 					//log_me($section_i);
 
 					//$section_post = $repeater_post[ $section_i ];
-/*
-					$column_id = isset( $option['columns'] ) ? $option['columns'] . ${'repeat_obj' . $option['id']}->get_current_sec_col() : '';
-					if ( $column_id && isset( $_POST[ $column_id ] ) ) {
-						${'repeat_obj' . $option['id']}->set_columns( $_POST[ $column_id ] );
-					}*/
+					/*
+										$column_id = isset( $option['columns'] ) ? $option['columns'] . ${'repeat_obj' . $option['id']}->get_current_sec_col() : '';
+										if ( $column_id && isset( $_POST[ $column_id ] ) ) {
+											${'repeat_obj' . $option['id']}->set_columns( $_POST[ $column_id ] );
+										}*/
 
+					$section_post = $repeater_post[ $section_i ];
 
-					self::save_repeatable( $post_id, ${'repeat_obj' . $option['id']}, $repeater_post, $section_i, $option, self::get_fields() );
+					self::save_repeatable( $post_id, ${'repeat_obj' . $option['id']}, $section_post, $option, self::get_fields() );
 
 
 					/**
@@ -492,89 +493,122 @@ class Pngx__Admin__Meta {
 	/*
 	* Save Repeatable
 	*/
-	public static function save_repeatable( $post_id, $repeat_obj, $repeater_post, $section_i, $option, $options ) {
+	public static function save_repeatable( $post_id, $repeat_obj, $section_post, $option, $options, $internal = false ) {
 
 		/**
 		 * Section Loop
 		 */
 		//for ( $section_i = 0; $section_i < $repeat_obj->get_total_sections(); $section_i ++ ) {
 
-			log_me('save_repeatable');
-			//log_me($repeat_obj->get_total_sections() );
-			//log_me($repeater_post);
-			log_me($section_i);
+		//log_me( 'save_repeatable' );
+		//log_me($repeat_obj->get_total_sections() );
+		//log_me( $section_post );
+		//log_me($section_i);
 
-			$section_post = $repeater_post[ $section_i ];
 
-			$column_id = isset( $option['columns'] ) ? $option['columns'] . $repeat_obj->get_current_sec_col() : '';
-			if ( $column_id && isset( $_POST[ $column_id ] ) ) {
-				$repeat_obj->set_columns( $_POST[ $column_id ] );
-			}
+		$column_id = isset( $option['columns'] ) ? $option['columns'] . $repeat_obj->get_current_sec_col() : '';
+		if ( $column_id && isset( $_POST[ $column_id ] ) ) {
+			$repeat_obj->set_columns( $_POST[ $column_id ] );
+		}
 
-			/**
-			 * Column Loop to Save all Fields in Column under one array
-			 *
-			 */
-			for ( $col_i = 0; $col_i < $repeat_obj->get_total_columns(); $col_i ++ ) {
+		/**
+		 * Column Loop to Save all Fields in Column under one array
+		 *
+		 */
+		for ( $col_i = 0; $col_i < $repeat_obj->get_total_columns(); $col_i ++ ) {
 
-				//log_me('columns');
-				//log_me($repeat_obj->get_total_columns() );
-				//log_me($col_i);
+			//log_me('columns');
+			//log_me($repeat_obj->get_total_columns() );
+			//log_me($col_i);
 
-				$column_postfix = $repeat_obj->get_current_sec_col();
+			$column_postfix = $repeat_obj->get_current_sec_col();
 
-				$col_saving_id = $repeat_obj->get_id() . $column_postfix;
+			$col_saving_id = $repeat_obj->get_id() . $column_postfix;
 
-				$old = get_post_meta( $post_id, $col_saving_id, true );
-				$new = array();
+			$old = get_post_meta( $post_id, $col_saving_id, true );
+			$new = array();
 
-				foreach ( $option['repeatable_fields'] as $repeater ) {
+			foreach ( $option['repeatable_fields'] as $repeater ) {
 
-					if ( 'wpe_menu_r_column' ===  $repeater['id'] ) {
-						//log_me( $repeater );
+				$repeater_id = $repeater['id'] . $column_postfix;
+				//log_me( $repeater_id );
+				// if repeater in repeater then run through its fields to save
+				if ( isset( $repeater['child_repeater'] ) && $options[ $repeater['child_repeater'] ] ) {
+
+					// if we have another repeating field and there is saved data lets try to save
+					if ( isset( $repeater['child_repeater'] ) && isset( $section_post[ $repeater['child_repeater'] ] ) ) {
+						//log_me( 'repeater-repeater25' );
+						$new[ $repeater_id ] = self::save_repeatable( $post_id, $repeat_obj, $section_post[ $repeater['child_repeater'] ], $options[ $repeater['child_repeater'] ], $options, true );
 					}
 
-					// if repeater in repeater then run through its fields to save
-					if ( isset( $repeater['inside_repeating'] ) && $options[ $repeater['inside_repeating'] ] ) {
-						// log_me( 'repeater-repeater' );
-						//log_me( $options[ $repeater['inside_repeating'] ] );
-						self::save_repeatable( $post_id, $repeat_obj, $repeater_post, $section_i, $options[ $repeater['inside_repeating'] ], $options );
-					}
+					if ( isset( $options[ $repeater['child_repeater'] ]['repeatable_fields'] ) ) {
+						//log_me( 'repeater-repeater3' );
+						$child_repeater = self::save_repeatable( $post_id, $repeat_obj, $section_post, $options[ $repeater['child_repeater'] ], $options, true );
+						log_me( 'inside1' );
+						//log_me( $child_repeater );
+						if ( is_array( $child_repeater ) ) {
+							foreach ( $child_repeater as $repeater_id => $value ) {
+								//log_me( 'inside2' );
+								//log_me( $repeater_id );
+								//log_me( $value );
+								$new[ $repeater_id ] = $value;
+							}
+						}
 
-					$repeater_id = $repeater['id'] . $column_postfix;
+						log_me($new);
 
-					if ( ! isset( $section_post[ $repeater_id ] ) ) {
 						continue;
 					}
 
-					$count = count( $section_post[ $repeater_id ] );
+				}
 
-					for ( $i = 0; $i < $count; $i ++ ) {
-						if ( '' != $section_post[ $repeater_id ][ $i ] ) {
+				if ( ! isset( $section_post[ $repeater_id ] ) ) {
+					continue;
+				}
 
-							$sanitized = new Pngx__Sanitize( $repeater['type'], $section_post[ $repeater_id ][ $i ], $repeater );
+				$count = count( $section_post[ $repeater_id ] );
+				//log_me( 'counter1' );
+				//log_me( $count );
+				//log_me( $repeater_id );
+				//log_me( $section_post[ $repeater_id ] );
+				for ( $i = 0; $i < $count; $i ++ ) {
 
-							$new[ $repeater_id ] = $sanitized->result;
+					log_me( 'counter2' );
+					log_me( $i );
+					log_me( $repeater_id );
 
-						}
+					if ( $section_post[ $repeater_id ][ $i ] ) {
+
+						$sanitized = new Pngx__Sanitize( $repeater['type'], $section_post[ $repeater_id ][ $i ], $repeater );
+
+						$new[ $repeater_id ][ $i ] = $sanitized->result;
+
+						log_me($new[ $repeater_id ][ $i ] );
+
 					}
-
 				}
+				log_me('new');
+                log_me($new );
+			}
 
-				//log_me( 'old - new' );
-				//log_me( $old );
-				//log_me( $new );
+			if ( $internal ) {
+				return $new;
+			}
 
-				if ( ! empty( $new ) && $new != $old ) {
-					update_post_meta( $post_id, $col_saving_id, $new );
-				} elseif ( empty( $new ) && $old ) {
-					delete_post_meta( $post_id, $col_saving_id, $old );
-				}
+			log_me( 'old - new' );
+			//log_me( $old );
+			log_me( $new );
 
-				// Got to next custom field to save as repeatable field is done
-				continue;
+			if ( ! empty( $new ) && $new != $old ) {
+				update_post_meta( $post_id, $col_saving_id, $new );
+			} elseif ( empty( $new ) && $old ) {
+				delete_post_meta( $post_id, $col_saving_id, $old );
+			}
 
-			} //End For Columns
+			// Got to next custom field to save as repeatable field is done
+			continue;
+
+		} //End For Columns
 
 		/*	$repeat_obj->update_section_count();
 

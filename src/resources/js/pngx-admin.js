@@ -123,6 +123,7 @@ var pngx_admin_fields_init = pngx_admin_fields_init || {};
 		var $ajax_column = $this.data( 'column' );
 
 		//var $clone_info = $( $repeat_field ).data( 'clone' );
+		var $name_id = $( $repeat_field ).data( 'name_id' );
 		var $ajax_field_id = $( $repeat_field ).data( 'ajax_field_id' );
 		var $ajax_action = $( $repeat_field ).data( 'ajax_action' );
 		var $ajax_repeat_type = $( $repeat_field ).data( 'repeat-type' );
@@ -143,6 +144,7 @@ var pngx_admin_fields_init = pngx_admin_fields_init || {};
 				post_id: pngx_admin_repeatable_ajax.post_id,
 				field: $ajax_field_id,
 				repeat_type: $ajax_repeat_type,
+				name_id: $name_id,
 				section: $ajax_section,
 				column: $ajax_column,
 				action: $ajax_action
