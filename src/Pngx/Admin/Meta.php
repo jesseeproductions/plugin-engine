@@ -287,6 +287,8 @@ class Pngx__Admin__Meta {
 	*/
 	public static function save_meta( $post_id, $post ) {
 
+		log_me($_POST);
+
 		//Autosave or no past variable then kick out
 		if ( empty( $_POST ) || ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) ) {
 			return;
@@ -342,106 +344,20 @@ class Pngx__Admin__Meta {
 			//handle repeatable fields
 			if ( 'repeatable' === $option['type'] && isset ( $_POST[ $option['id'] ] ) ) {
 
-				//log_me($option);
-				// log_me( $_POST );
-				//log_me( count( $_POST[ $option['id'] ] ) );
-				//log_me( $_POST[ $option['id'] ] );
-
-				/***
-				 * we are in repeater
-				 * do we have columns?
-				 * if no then set to 0
-				 * if yes set number too loop through in this section
-				 * loop through columns and save per column
-				 * end section is there another
-				 * if yes repeat
-				 * if no, then finish
-				 *
-				 *
-				 */
-
 				if ( ! isset( ${'repeat_obj' . $option['id']} ) ) {
 					${'repeat_obj' . $option['id']} = new Pngx__Admin__Repeater__Main( $option['id'], (int) count( $_POST[ $option['id'] ] ) );
 				}
 
 				$repeater_post = $_POST[ $option['id'] ];
-				//log_me(${'repeat_obj' . $option['id']});
+
 				/**
 				 * Section Loop
 				 */
 				for ( $section_i = 0; $section_i < ${'repeat_obj' . $option['id']}->get_total_sections(); $section_i ++ ) {
 
-					//log_me('section');
-					//log_me(${'repeat_obj' . $option['id']}->get_total_sections() );
-					//log_me($section_i);
-
-					//$section_post = $repeater_post[ $section_i ];
-					/*
-										$column_id = isset( $option['columns'] ) ? $option['columns'] . ${'repeat_obj' . $option['id']}->get_current_sec_col() : '';
-										if ( $column_id && isset( $_POST[ $column_id ] ) ) {
-											${'repeat_obj' . $option['id']}->set_columns( $_POST[ $column_id ] );
-										}*/
-
 					$section_post = $repeater_post[ $section_i ];
 
 					self::save_repeatable( $post_id, ${'repeat_obj' . $option['id']}, $section_post, $option, self::get_fields() );
-
-
-					/**
-					 * Column Loop to Save all Fields in Column under one array
-					 *
-					 */
-					/*for ( $col_i = 0; $col_i < ${'repeat_obj' . $option['id']}->get_total_columns(); $col_i ++ ) {
-
-						//log_me('columns');
-						//log_me(${'repeat_obj' . $option['id']}->get_total_columns() );
-						//log_me($col_i);
-
-						$column_postfix = ${'repeat_obj' . $option['id']}->get_current_sec_col();
-
-						$col_saving_id = ${'repeat_obj' . $option['id']}->get_id() . $column_postfix;
-
-						$old = get_post_meta( $post_id, $col_saving_id, true );
-						$new = array();
-
-						foreach ( $option['repeatable_fields'] as $repeater ) {
-
-							//log_me( $repeater );
-
-							$repeater_id = $repeater['id'] . $column_postfix;
-
-							if ( ! isset( $section_post[ $repeater_id ] ) ) {
-								continue;
-							}
-
-							$count = count( $section_post[ $repeater_id ] );
-
-							for ( $i = 0; $i < $count; $i ++ ) {
-								if ( '' != $section_post[ $repeater_id ][ $i ] ) {
-
-									$sanitized = new Pngx__Sanitize( $repeater['type'], $section_post[ $repeater_id ][ $i ], $repeater );
-
-									$new[ $repeater_id ] = $sanitized->result;
-
-								}
-							}
-
-						}
-
-						//log_me( 'old - new' );
-						//log_me( $old );
-						//log_me( $new );
-
-						if ( ! empty( $new ) && $new != $old ) {
-							update_post_meta( $post_id, $col_saving_id, $new );
-						} elseif ( empty( $new ) && $old ) {
-							delete_post_meta( $post_id, $col_saving_id, $old );
-						}
-
-						// Got to next custom field to save as repeatable field is done
-						continue;
-
-					} //End For Columns */
 
 					${'repeat_obj' . $option['id']}->update_section_count();
 
@@ -498,13 +414,6 @@ class Pngx__Admin__Meta {
 		/**
 		 * Section Loop
 		 */
-		//for ( $section_i = 0; $section_i < $repeat_obj->get_total_sections(); $section_i ++ ) {
-
-		//log_me( 'save_repeatable' );
-		//log_me($repeat_obj->get_total_sections() );
-		//log_me( $section_post );
-		//log_me($section_i);
-
 
 		$column_id = isset( $option['columns'] ) ? $option['columns'] . $repeat_obj->get_current_sec_col() : '';
 		if ( $column_id && isset( $_POST[ $column_id ] ) ) {
@@ -517,10 +426,6 @@ class Pngx__Admin__Meta {
 		 */
 		for ( $col_i = 0; $col_i < $repeat_obj->get_total_columns(); $col_i ++ ) {
 
-			//log_me('columns');
-			//log_me($repeat_obj->get_total_columns() );
-			//log_me($col_i);
-
 			$column_postfix = $repeat_obj->get_current_sec_col();
 
 			$col_saving_id = $repeat_obj->get_id() . $column_postfix;
@@ -531,7 +436,7 @@ class Pngx__Admin__Meta {
 			foreach ( $option['repeatable_fields'] as $repeater ) {
 
 				$repeater_id = $repeater['id'] . $column_postfix;
-				//log_me( $repeater_id );
+
 				// if repeater in repeater then run through its fields to save
 				if ( isset( $repeater['child_repeater'] ) && $options[ $repeater['child_repeater'] ] ) {
 
@@ -542,21 +447,12 @@ class Pngx__Admin__Meta {
 					}
 
 					if ( isset( $options[ $repeater['child_repeater'] ]['repeatable_fields'] ) ) {
-						//log_me( 'repeater-repeater3' );
 						$child_repeater = self::save_repeatable( $post_id, $repeat_obj, $section_post, $options[ $repeater['child_repeater'] ], $options, true );
-						log_me( 'inside1' );
-						//log_me( $child_repeater );
 						if ( is_array( $child_repeater ) ) {
 							foreach ( $child_repeater as $repeater_id => $value ) {
-								//log_me( 'inside2' );
-								//log_me( $repeater_id );
-								//log_me( $value );
 								$new[ $repeater_id ] = $value;
 							}
 						}
-
-						log_me($new);
-
 						continue;
 					}
 
@@ -567,15 +463,7 @@ class Pngx__Admin__Meta {
 				}
 
 				$count = count( $section_post[ $repeater_id ] );
-				//log_me( 'counter1' );
-				//log_me( $count );
-				//log_me( $repeater_id );
-				//log_me( $section_post[ $repeater_id ] );
 				for ( $i = 0; $i < $count; $i ++ ) {
-
-					log_me( 'counter2' );
-					log_me( $i );
-					log_me( $repeater_id );
 
 					if ( $section_post[ $repeater_id ][ $i ] ) {
 
@@ -587,17 +475,16 @@ class Pngx__Admin__Meta {
 
 					}
 				}
-				log_me('new');
-                log_me($new );
+
 			}
 
 			if ( $internal ) {
 				return $new;
 			}
 
-			log_me( 'old - new' );
+			//log_me( 'old - new' );
 			//log_me( $old );
-			log_me( $new );
+			//log_me( $new );
 
 			if ( ! empty( $new ) && $new != $old ) {
 				update_post_meta( $post_id, $col_saving_id, $new );

@@ -119,14 +119,14 @@ var pngx_admin_fields_init = pngx_admin_fields_init || {};
 		}
 		//console.log( 'add1' );
 		var $repeat_field = '#' + $this.data( 'repeater' );
-		var $ajax_section = $this.data( 'section' );
-		var $ajax_column = $this.data( 'column' );
 
 		//var $clone_info = $( $repeat_field ).data( 'clone' );
 		var $name_id = $( $repeat_field ).data( 'name_id' );
 		var $ajax_field_id = $( $repeat_field ).data( 'ajax_field_id' );
 		var $ajax_action = $( $repeat_field ).data( 'ajax_action' );
 		var $ajax_repeat_type = $( $repeat_field ).data( 'repeat-type' );
+		var $ajax_section = $( $repeat_field ).data( 'section' );
+		var $ajax_column = $( $repeat_field ).data( 'column' );
 
 		if ( 'section' === $ajax_repeat_type ) {
 			$ajax_section++;
