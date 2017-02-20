@@ -86,6 +86,7 @@ class Pngx__Repeater__Main {
 	public function __construct( $section_id, $meta, $current_section = 0, $current_column = 0 ) {
 
 		$this->analyze = new Pngx__Repeater__Analyze();
+		$this->id                = $section_id;
 		$this->meta    = is_array( $meta ) ? $meta : array();
 		$this->repeater_fields = apply_filters( 'pngx_meta_repeater_fields', array() );
 
@@ -104,7 +105,7 @@ class Pngx__Repeater__Main {
 		$this->current_column    = $current_column;
 		$this->repeating_section = true;
 		$this->repeating_column  = false;
-		$this->id                = $section_id;
+
 
 	}
 

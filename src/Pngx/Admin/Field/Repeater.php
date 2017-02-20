@@ -82,13 +82,13 @@ class Pngx__Admin__Field__Repeater {
 
 												<div class="pngx-meta-field-wrap field-wrap-text field-wrap-cctor_highlight_title ">
 													<div class="pngx-meta-field field-text field-cctor_highlight_title">
-														<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[0][wpe_menu_column][0][items][0][title]" value="Field 1 0 col 0" size="30" type="text">
+														<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[0][wpe_menu_column][0][wpe_menu_items][0][wpe_menu_name]" value="Field 1 0 col 0" size="30" type="text">
 													</div>
 												</div>
 
 												<div class="pngx-meta-field-wrap field-wrap-text field-wrap-cctor_highlight_title ">
 													<div class="pngx-meta-field field-text field-cctor_highlight_title">
-														<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[0][wpe_menu_column][0][items][0][place]" value="Field 2 0 col 0" size="30" type="text">
+														<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[0][wpe_menu_column][0][wpe_menu_items][0][wpe_menu_description]" value="Field 2 0 col 0" size="30" type="text">
 													</div>
 												</div>
 
@@ -110,13 +110,13 @@ class Pngx__Admin__Field__Repeater {
 
 															<div class="pngx-meta-field-wrap field-wrap-text field-wrap-cctor_highlight_title ">
 																<div class="pngx-meta-field field-text field-cctor_highlight_title">
-																	<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[0][wpe_menu_column][0][items][0][price][]" value="Price 13" size="30" type="text">
+																	<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[0][wpe_menu_column][0][wpe_menu_items][0][wpe_menu_r_cost][0][wpe_menu_price][]" value="Price 13" size="30" type="text">
 																</div>
 															</div>
 
 															<div class="pngx-meta-field-wrap field-wrap-text field-wrap-cctor_highlight_title ">
 																<div class="pngx-meta-field field-text field-cctor_highlight_title">
-																	<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[0][wpe_menu_column][0][items][0][price][]" value="Price 23" size="30" type="text">
+																	<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[0][wpe_menu_column][0][wpe_menu_items][0][wpe_menu_r_cost][0][wpe_menu_price][]" value="Price 23" size="30" type="text">
 																</div>
 															</div>
 
@@ -187,13 +187,13 @@ class Pngx__Admin__Field__Repeater {
 
 												<div class="pngx-meta-field-wrap field-wrap-text field-wrap-cctor_highlight_title ">
 													<div class="pngx-meta-field field-text field-cctor_highlight_title">
-														<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[0][wpe_menu_column][1][items][0][title]" value="Field 1 0 col 1" size="30" type="text">
+														<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[0][wpe_menu_column][1][wpe_menu_items][0][wpe_menu_name]" value="Field 1 0 col 1" size="30" type="text">
 													</div>
 												</div>
 
 												<div class="pngx-meta-field-wrap field-wrap-text field-wrap-cctor_highlight_title ">
 													<div class="pngx-meta-field field-text field-cctor_highlight_title">
-														<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[0][wpe_menu_column][1][items][0][place]" value="Field 2 0 col 1" size="30" type="text">
+														<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[0][wpe_menu_column][1][wpe_menu_items][0][wpe_menu_description]" value="Field 2 0 col 1" size="30" type="text">
 													</div>
 												</div>
 
@@ -216,13 +216,13 @@ class Pngx__Admin__Field__Repeater {
 
 																<div class="pngx-meta-field-wrap field-wrap-text field-wrap-cctor_highlight_title ">
 																	<div class="pngx-meta-field field-text field-cctor_highlight_title">
-																		<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[0][wpe_menu_column][0][items][0][items][0][title]" value="Nested Field 1 0 col 1" size="30" type="text">
+																		<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[0][wpe_menu_column][0][wpe_menu_items][0][wpe_menu_items][0][wpe_menu_name]" value="Nested Field 1 0 col 1" size="30" type="text">
 																	</div>
 																</div>
 
 																<div class="pngx-meta-field-wrap field-wrap-text field-wrap-cctor_highlight_title ">
 																	<div class="pngx-meta-field field-text field-cctor_highlight_title">
-																		<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[0][wpe_menu_column][0][items][0][items][0][place]" value="Nested Field 2 0 col 1" size="30" type="text">
+																		<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[0][wpe_menu_column][0][wpe_menu_items][0][wpe_menu_items][0][wpe_menu_description]" value="Nested Field 2 0 col 1" size="30" type="text">
 																	</div>
 																</div>
 
