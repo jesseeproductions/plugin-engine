@@ -10,7 +10,32 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  *
  */
-class Pngx__Admin__Repeater__Main {
+class Pngx__Repeater__Main {
+
+	/**
+	 * Total Sections
+	 *
+	 * @var
+	 */
+	protected $analyze;
+
+	/**
+	 * Total Sections
+	 *
+	 * @var
+	 */
+	protected $meta;
+
+	/**
+	 * Total Sections
+	 *
+	 * @var
+	 */
+	protected $repeater_fields;
+
+
+
+
 
 	/**
 	 * Total Sections
@@ -56,12 +81,17 @@ class Pngx__Admin__Repeater__Main {
 
 
 	/**
-	 * Pngx__Admin__Repeater__Main constructor.
+	 * Pngx__Repeater__Main constructor.
 	 */
 	public function __construct( $section_id, $meta, $current_section = 0, $current_column = 0 ) {
 
-		$this->analyze = new Pngx__Admin__Repeater__Analyze();
+		$this->analyze = new Pngx__Repeater__Analyze();
 		$this->meta    = is_array( $meta ) ? $meta : array();
+		$this->repeater_fields = apply_filters( 'pngx_meta_repeater_fields', array() );
+
+
+
+
 		$this->count  = count( $this->meta );
 		$this->depth1  = $this->analyze->array_depth( $this->meta );
 		$this->depth2  = $this->analyze->array_depth_2( $this->meta );

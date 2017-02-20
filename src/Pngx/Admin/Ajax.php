@@ -204,7 +204,7 @@ class Pngx__Admin__Ajax {
 		//foreach ( $fields as $field ) {
 
 		if ( ! isset( $repeat_obj ) ) {
-			$repeat_obj = new Pngx__Admin__Repeater__Main( $_POST['name_id'], false, absint( $_POST['section'] ), absint( $_POST['column'] ) );
+			$repeat_obj = new Pngx__Repeater__Main( $_POST['name_id'], false, absint( $_POST['section'] ), absint( $_POST['column'] ) );
 		}
 
 		Pngx__Admin__Field__Repeatable::display_repeat_fields( $field['repeatable_fields'], $field, null, $repeat_obj, null );

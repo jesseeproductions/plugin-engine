@@ -22,7 +22,7 @@ class Pngx__Admin__Field__Repeater {
 
 		global $post;
 		if ( ! $repeat_obj ) {
-			$repeat_obj = new Pngx__Admin__Repeater__Main( $field['id'], $meta );
+			$repeat_obj = new Pngx__Repeater__Main( $field['id'], $meta );
 		}
 
 		$class = isset( $field['class'] ) ? $field['class'] : '';
@@ -294,7 +294,7 @@ class Pngx__Admin__Field__Repeater {
 		global $post;
 
 		if ( ! $repeat_obj ) {
-			$repeat_obj = new Pngx__Admin__Repeater__Main( $field['id'], (int) $meta );
+			$repeat_obj = new Pngx__Repeater__Main( $field['id'], (int) $meta );
 		}
 
 		//log_me( 'repeat meta' );

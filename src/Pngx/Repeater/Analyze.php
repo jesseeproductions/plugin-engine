@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  *
  */
-class Pngx__Admin__Repeater__Analyze {
+class Pngx__Repeater__Analyze {
 
 	/**
 	 * Repeating Columns if True
