@@ -1,10 +1,10 @@
-.pngx-meta-field.field-repeatable {
+.pngx-meta-field.field-repeater {
 	width: 100%;
 }
-.pngx-meta-field.field-repeatable * {
+.pngx-meta-field.field-repeater * {
 	box-sizing: border-box;
 }
-.repeatable-item {
+.repeater-item {
 	background: #eee;
 	//box-shadow: 0 1px 2px #c7c7c7;
 	border: 1px solid #999999;
@@ -21,13 +21,13 @@
 	left: 2px;
 }
 
-.add-repeatable {
+.add-repeater {
 	position: absolute;
 	bottom: 0;
 	right: 35px;
 }
 
-.remove-repeatable {
+.remove-repeater {
 	position: absolute;
 	bottom: 0;
 	right: 2px;
@@ -37,7 +37,7 @@
 	margin: 20px;
 }
 
-.repeatable-column {
+.repeater-column {
 	width: 45.5%;
 	display: inline-block;
 	vertical-align: top;

@@ -174,9 +174,9 @@ class Pngx__Admin__Fields {
 
 				break;
 
-			case 'repeatable':
+			case 'repeater':
 
-				Pngx__Admin__Field__Repeatable::display( $field, $options, $options_id, $meta, $repeat_obj );
+				Pngx__Admin__Field__Repeater::display( $field, $options, $options_id, $meta, $repeat_obj );
 
 				break;
 

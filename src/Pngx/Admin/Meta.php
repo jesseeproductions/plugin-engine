@@ -200,7 +200,7 @@ class Pngx__Admin__Meta {
 
 					foreach ( $fields as $field ) {
 
-						if ( $field['type'] && $field['section'] === $metabox['id'] && ( isset( $field['tab'] ) && $tab_slug === $field['tab'] ) ) {
+						if ( isset( $field['section'] ) && $field['type'] && $field['section'] === $metabox['id'] && ( isset( $field['tab'] ) && $tab_slug === $field['tab'] ) ) {
 
 							// get value of this field if it exists for this post
 							$meta = get_post_meta( $post->ID, $field['id'], true );
@@ -287,8 +287,6 @@ class Pngx__Admin__Meta {
 	*/
 	public static function save_meta( $post_id, $post ) {
 
-		log_me($_POST);
-
 		//Autosave or no past variable then kick out
 		if ( empty( $_POST ) || ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) ) {
 			return;
@@ -342,11 +340,13 @@ class Pngx__Admin__Meta {
 			}
 
 			//handle repeatable fields
-			if ( 'repeatable' === $option['type'] && isset ( $_POST[ $option['id'] ] ) ) {
+			if ( 'repeater' === $option['type'] && isset ( $_POST[ $option['id'] ] ) ) {
 
 				if ( ! isset( ${'repeat_obj' . $option['id']} ) ) {
-					${'repeat_obj' . $option['id']} = new Pngx__Admin__Repeater__Main( $option['id'], (int) count( $_POST[ $option['id'] ] ) );
+					${'repeat_obj' . $option['id']} = new Pngx__Admin__Repeater__Main( $option['id'], $_POST[ $option['id'] ] );
 				}
+
+				log_me( ${'repeat_obj' . $option['id']} );
 
 				$repeater_post = $_POST[ $option['id'] ];
 
@@ -357,7 +357,7 @@ class Pngx__Admin__Meta {
 
 					$section_post = $repeater_post[ $section_i ];
 
-					self::save_repeatable( $post_id, ${'repeat_obj' . $option['id']}, $section_post, $option, self::get_fields() );
+					//self::save_repeatable( $post_id, ${'repeat_obj' . $option['id']}, $section_post, $option, self::get_fields() );
 
 					${'repeat_obj' . $option['id']}->update_section_count();
 
@@ -471,7 +471,7 @@ class Pngx__Admin__Meta {
 
 						$new[ $repeater_id ][ $i ] = $sanitized->result;
 
-						log_me($new[ $repeater_id ][ $i ] );
+						log_me( $new[ $repeater_id ][ $i ] );
 
 					}
 				}

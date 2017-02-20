@@ -1307,13 +1307,13 @@ fieldset[disabled] .btn-primary.active {
 .wp-core-ui .pngx-wrapper .button-primary {
   float: right; }
 
-.pngx-meta-field.field-repeatable {
+.pngx-meta-field.field-repeater {
   width: 100%; }
 
-.pngx-meta-field.field-repeatable * {
+.pngx-meta-field.field-repeater * {
   box-sizing: border-box; }
 
-.repeatable-item {
+.repeater-item {
   background: #eee;
   border: 1px solid #999999;
   margin: 20px 0;
@@ -1327,12 +1327,12 @@ fieldset[disabled] .btn-primary.active {
   top: 0;
   left: 2px; }
 
-.add-repeatable {
+.add-repeater {
   position: absolute;
   bottom: 0;
   right: 35px; }
 
-.remove-repeatable {
+.remove-repeater {
   position: absolute;
   bottom: 0;
   right: 2px; }
@@ -1340,7 +1340,7 @@ fieldset[disabled] .btn-primary.active {
 .menu-chooser {
   margin: 20px; }
 
-.repeatable-column {
+.repeater-column {
   width: 45.5%;
   display: inline-block;
   vertical-align: top; }
