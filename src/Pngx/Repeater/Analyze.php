@@ -12,17 +12,77 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Pngx__Repeater__Analyze {
 
-	/**
-	 * Repeating Columns if True
-	 *
-	 * @var
-	 */
-	public $repeating_column;
+
+	protected $repeater_fields;
 
 
-	public function analyze( $meta ) {
+	function __construct( $repeater_fields ) {
+
+		$this->repeater_fields = $repeater_fields;
+
+	}
+
+	/*  level0                  level1              level2          level3              level4
+	 * wpe_menu_section[0][wpe_menu_column][0][wpe_menu_items][0][wpe_menu_r_cost][0][wpe_menu_price][]
+	 *  level0                  level1              level2          level3              level4
+	 * wpe_menu_section[0][wpe_menu_column][0][wpe_menu_items][0][wpe_menu_items][0][wpe_menu_name]
+what if there are two repeaters in repeater_fields
+
+	send in array of fields or a single field and convert to array
+	store fields and then if deeper go deeper, but when it comes back check if at this level to reset the counter
 
 
+
+	*/
+	public function analyze( $fields_at_level, $i = 0 ) {
+
+		$i = 0;
+
+		if ( ! isset( $this->{'level_' . $i} ) &&
+		     $fields[ $repeater_id ] &&
+			'repeater' === $this->repeater_fields[ $repeater_id ]['type']
+			) {
+
+			$this->{'level_' . $i} = array(
+				'id'            => $repeater_id,
+				'type'          => $this->repeater_fields[ $repeater_id ]['type'],
+				'repeater_type' => $this->repeater_fields[ $repeater_id ]['repeater_type'],
+			);
+
+			if( isset( $this->repeater_fields[ $repeater_id ]['repeater_fields'] ) &&
+				is_array( $this->repeater_fields[ $repeater_id ]['repeater_fields'] )
+			) {
+
+				//$sections = $columns = $count = 0;
+
+				$i++;
+
+				self::analyze( $repeater_id, $fields, $i );
+
+				/*foreach ( $fields[ $repeater_id ]['repeater_fields'] as $repeater_fields ) {
+
+					'sections' === $repeater_fields['repeater_type'] ? $sections ++ : '';
+					'columns' === $repeater_fields['repeater_type'] ? $columns ++ : '';
+					$count ++;
+				}
+
+				$this->{'level_' . $i} = array_merge( $this->{'level_' . $i}, array(
+						'child_sections' => $sections,
+						'child_columns'  => $columns,
+						'child_fields'   => $count,
+						'repeater'       => $fields[ $repeater_id ]['repeater_type'],
+					) );
+				*/
+
+			}
+
+		}
+
+
+
+		//return $this->{'level_' . $i};
+
+		return;
 	}
 
 	public function array_depth( array $array ) {

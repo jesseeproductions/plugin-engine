@@ -17,7 +17,7 @@ class Pngx__Repeater__Main {
 	 *
 	 * @var
 	 */
-	protected $analyze;
+	protected $analyzer;
 
 	/**
 	 * Total Sections
@@ -32,9 +32,6 @@ class Pngx__Repeater__Main {
 	 * @var
 	 */
 	protected $repeater_fields;
-
-
-
 
 
 	/**
@@ -83,19 +80,18 @@ class Pngx__Repeater__Main {
 	/**
 	 * Pngx__Repeater__Main constructor.
 	 */
-	public function __construct( $section_id, $meta, $current_section = 0, $current_column = 0 ) {
+	public function __construct( $repeater_id, $meta, $current_section = 0, $current_column = 0 ) {
 
-		$this->analyze = new Pngx__Repeater__Analyze();
-		$this->id                = $section_id;
-		$this->meta    = is_array( $meta ) ? $meta : array();
+		$this->id              = $repeater_id;
+		$this->meta            = is_array( $meta ) ? $meta : array();
 		$this->repeater_fields = apply_filters( 'pngx_meta_repeater_fields', array() );
-
-
+		$this->analyzer        = new Pngx__Repeater__Analyze( $this->repeater_fields );
+		$this->levels = $this->analyzer->analyze( $this->id, $this->repeater_fields );
 
 
 		$this->count  = count( $this->meta );
-		$this->depth1  = $this->analyze->array_depth( $this->meta );
-		$this->depth2  = $this->analyze->array_depth_2( $this->meta );
+		$this->depth1 = $this->analyzer->array_depth( $this->meta );
+		$this->depth2 = $this->analyzer->array_depth_2( $this->meta );
 		//$this->makeNestedList  = $this->analyze->makeNestedList( $this->meta );
 
 
