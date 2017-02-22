@@ -27,8 +27,17 @@ class Pngx__Admin__Field__Url {
 		$size      = isset( $field['size'] ) ? $field['size'] : 30;
 		$class     = isset( $field['class'] ) ? $field['class'] : '';
 		$repeating = isset( $field['repeating'] ) ? '[]' : '';
+		?>
+		<input
+			type="text"
+			class="url <?php echo esc_attr( $class ); ?>"
+			id="<?php echo esc_attr( $field['id'] ); ?>"
+			name="<?php echo esc_attr( $name ) . $repeating; ?>"
+			value="<?php echo esc_url( $value ); ?>"
+			size="<?php echo absint( $size ); ?>"
+		/>
 
-		echo '<input type="text" class="url ' . esc_attr( $class ) . '"  id="' . esc_attr( $field['id'] ) . '" name="' . esc_attr( $name ) . $repeating . '" value="' . esc_url( $value ) . '" size="' . absint( $size ) . '" />';
+		<?php
 
 		if ( isset( $field['desc'] ) && "" != $field['desc'] ) {
 			echo '<br /><span class="description">' . $field['desc'] . '</span>';
