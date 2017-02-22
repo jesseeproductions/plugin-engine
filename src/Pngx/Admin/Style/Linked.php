@@ -29,7 +29,7 @@ class Pngx__Admin__Style__Linked {
 						continue;
 					}
 
-					if ( 'font-color' === $type || 'background-color' === $type ) {
+					if ( 'font-color' === $type || 'background-color' === $type || 'background-color:hover' === $type ) {
 						$meta = get_post_meta( $post_id, $field_name, true );
 						Pngx__Admin__Field__Color::display( $fields[ $field_name ], false, false, $meta );
 					}

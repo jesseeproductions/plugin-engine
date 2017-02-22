@@ -30,6 +30,10 @@ class Pngx__Style__Linked {
 					$style .= 'background-color:' . $color . '; ';
 				}
 
+				if ( 'background-color:hover' === $type && $color = get_post_meta( $post_id, $field_name, true ) ) {
+					$style .= 'background-color:hover:' . $color . '; ';
+				}
+
 			}
 			$style .= ' " ';
 		}
