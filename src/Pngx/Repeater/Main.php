@@ -86,7 +86,7 @@ class Pngx__Repeater__Main {
 		$this->meta            = is_array( $meta ) ? $meta : array();
 		$this->repeater_fields = apply_filters( 'pngx_meta_repeater_fields', array() );
 		$this->analyzer        = new Pngx__Repeater__Analyze( $this->repeater_fields );
-		$this->levels = $this->analyzer->analyze( $this->id, $this->repeater_fields );
+		$this->levels = $this->analyzer->analyze( $this->id );
 
 
 		$this->count  = count( $this->meta );
