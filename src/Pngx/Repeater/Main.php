@@ -33,6 +33,14 @@ class Pngx__Repeater__Main {
 	 */
 	protected $repeater_fields;
 
+	/**
+	 * Total Sections
+	 *
+	 * @var
+	 */
+	protected $levels = 0;
+
+
 
 	/**
 	 * Total Sections
@@ -86,10 +94,12 @@ class Pngx__Repeater__Main {
 		$this->meta            = is_array( $meta ) ? $meta : array();
 		$this->repeater_fields = apply_filters( 'pngx_meta_repeater_fields', array() );
 		$this->analyzer        = new Pngx__Repeater__Analyze( $this->repeater_fields );
-		$this->levels = $this->analyzer->analyze( $this->id );
+		$this->analyzer->analyze( $this->id );
+		$this->depth1 = $this->analyzer->array_depth( $this->meta );
+		$this->count_levels();
 
 
-		$this->count  = count( $this->meta );
+		$this->count = count( $this->meta );
 		$this->depth1 = $this->analyzer->array_depth( $this->meta );
 		$this->depth2 = $this->analyzer->array_depth_2( $this->meta );
 		//$this->makeNestedList  = $this->analyze->makeNestedList( $this->meta );
@@ -104,6 +114,18 @@ class Pngx__Repeater__Main {
 
 
 	}
+
+	protected function count_levels() {
+
+		//Check for maximum levels, not to exceed array depth
+		for ( $i = 0; $i < $this->depth1; $i ++ ) {
+			if ( isset( $this->analyzer->{'level_' . $i} ) ) {
+				$this->levels ++;
+			}
+		}
+
+	}
+
 
 	public function get_total_sections() {
 		return $this->sections;

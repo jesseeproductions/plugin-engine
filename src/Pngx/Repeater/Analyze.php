@@ -39,38 +39,77 @@ what if there are two repeaters in repeater_fields
 		$level_fields = $fields;
 
 		//if we passed a field id only then set to array
-		if ( ! is_array( $level_fields ) && $this->repeater_fields[ $fields ] ) {
+		if ( ! is_array( $level_fields ) && isset( $this->repeater_fields[ $fields ] ) ) {
 			$level_fields = array( $this->repeater_fields[ $fields ] );
-		} elseif ( ! isset( $this->repeater_fields[ $fields ] ) ) {
+		} elseif ( ! is_array( $level_fields ) && ! isset( $this->repeater_fields[ $fields ] ) ) {
 			return;
 		}
 
-		if ( ! isset( $this->{'level_' . $i } ) ) {
-			$this->{'level_' . $i}['counts'] = array(
-				'sections' => 0,
-				'columns'   => 0,
-				'fields'    => 0,
-				'all'      => 0,
-			);
+		// setup initial counts
+		if ( ! isset( $this->{'level_' . $i} ) ) {
+			$this->{'level_' . $i}['counts'] = $this->set_level_counts();
 		}
+
+		// analyze level
 		foreach ( $level_fields as $field ) {
 
-				$this->{'level_' . $i}[] = array(
-					'id'            => $field['id'],
-					'type'          => $field['type'],
-					'repeater_type' => isset( $field['repeater_type'] ) ? $field['repeater_type'] : '',
-				);
+			if ( ! isset( $field['id'] ) || ! isset( $this->repeater_fields[ $field['id'] ] ) ) {
+				continue;
+			}
 
-			$this->{'level_' . $i}['counts']['sections'] = 'sections' == $field['repeater_type'] ? $this->{'level_' . $i}['counts']['sections']++ : $this->{'level_' . $i}['counts']['sections'];
-			$this->{'level_' . $i}['counts']['columns'] = 'column' == $field['repeater_type'] ? $this->{'level_' . $i}['counts']['columns']++ : $this->{'level_' . $i}['counts']['columns'];
-			$this->{'level_' . $i}['counts']['fields'] = 'field' == $field['repeater_type'] ? $this->{'level_' . $i}['counts']['fields']++ : $this->{'level_' . $i}['counts']['fields'];
-			$this->{'level_' . $i}['counts']['all'] = 'field' == $field['repeater_type'] ? $this->{'level_' . $i}['counts']['all']++ : $this->{'level_' . $i}['counts']['all'];
+			$this->{'level_' . $i}[] = array(
+				'id'              => $field['id'],
+				'type'            => $this->repeater_fields[ $field['id'] ]['type'],
+				'repeater_type'   => isset( $this->repeater_fields[ $field['id'] ]['repeater_type'] ) ? $this->repeater_fields[ $field['id'] ]['repeater_type'] : '',
+				'repeater_fields' => isset( $this->repeater_fields[ $field['id'] ]['repeater_fields'] ) ? $this->repeater_fields[ $field['id'] ]['repeater_fields'] : '',
+			);
 
+			if ( isset( $this->repeater_fields[ $field['id'] ]['repeater_type'] ) ) {
+				'section' === $field['repeater_type'] ? $this->{'level_' . $i}['counts']['sections'] ++ : false;
+				'column' === $field['repeater_type'] ? $this->{'level_' . $i}['counts']['columns'] ++ : false;
+				'field' === $field['repeater_type'] ? $this->{'level_' . $i}['counts']['fields'] ++ : false;
+			}
+
+			$this->{'level_' . $i}['counts']['all'] ++;
 
 		}
 
-				//self::analyze( $repeater_id, $i );
+		// iterate to next level if repeater fields
+		// @formatter:off
+		if (
+		0 < $this->{'level_' . $i}['counts']['sections']
+		|| 0 < $this->{'level_' . $i}['counts']['columns']
+		|| 0 < $this->{'level_' . $i}['counts']['fields']
+		) {
+		// @formatter:on
+
+			//store current $i
+			$c_i = $i;
+
+			//increase to next level
+			$i ++;
+
+			foreach ( $this->{'level_' . $c_i} as $field ) {
+
+				if ( isset( $field['repeater_fields'] ) && is_array( $field['repeater_fields'] ) ) {
+
+					self::analyze( $field['repeater_fields'], $i );
+
+				}
+
+			}
+		}
+
 		return;
+	}
+
+	protected function set_level_counts() {
+		return array(
+			'sections' => 0,
+			'columns'  => 0,
+			'fields'   => 0,
+			'all'      => 0,
+		);
 	}
 
 	public function array_depth( array $array ) {
@@ -119,7 +158,7 @@ what if there are two repeaters in repeater_fields
 		return $output;
 	}
 
-// Find the Key that matches the Value
+	// Find the Key that matches the Value
 	public function seekValue( $haystack, $needle ) {
 		foreach ( $haystack as $key => $value ) {
 			if ( $key == $needle ) {
