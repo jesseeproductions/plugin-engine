@@ -31,6 +31,12 @@ what if there are two repeaters in repeater_fields
 	send in array of fields or a single field and convert to array
 	store fields and then if deeper go deeper, but when it comes back check if at this level to reset the counter
 
+	todo build what the name string should be for each level
+
+	level0                  level1              level2          level3              level4
+	wpe_menu_section[0][wpe_menu_column][0][wpe_menu_items][0][wpe_menu_r_cost][0][wpe_menu_price][]
+
+	todo when field is saving, admin display, or front end I should be able to detect what level it is on
 
 
 	*/
