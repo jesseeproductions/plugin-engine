@@ -134,30 +134,14 @@ what if there are two repeaters in repeater_fields
 		return $max_depth;
 	}
 
-	public function array_depth_2( array $array ) {
-		$max_indentation = 1;
-
-		$array_str = print_r( $array, true );
-		$lines     = explode( "\n", $array_str );
-
-		foreach ( $lines as $line ) {
-			$indentation = ( strlen( $line ) - strlen( ltrim( $line ) ) ) / 4;
-
-			if ( $indentation > $max_indentation ) {
-				$max_indentation = $indentation;
-			}
-		}
-
-		return ceil( ( $max_indentation - 1 ) / 2 ) + 1;
-	}
 
 	//Find the value of a Key
-	public function seekKey( $haystack, $needle ) {
+	public function seek_key( $haystack, $needle ) {
 		foreach ( $haystack as $key => $value ) {
 			if ( $key == $needle ) {
 				$output = $value;
 			} elseif ( is_array( $value ) ) {
-				$output = self::seekKey( $value, $needle );
+				$output = self::seek_key( $value, $needle );
 			}
 		}
 
@@ -165,24 +149,24 @@ what if there are two repeaters in repeater_fields
 	}
 
 	// Find the Key that matches the Value
-	public function seekValue( $haystack, $needle ) {
+	public function seek_value( $haystack, $needle ) {
 		foreach ( $haystack as $key => $value ) {
 			if ( $key == $needle ) {
 				$output = $value;
 			} elseif ( is_array( $value ) ) {
-				$output = self::seekValue( $value, $needle );
+				$output = self::seek_value( $value, $needle );
 			}
 		}
 
 		return $output;
 	}
 
-	public function makeNestedList( array $Array ) {
+	public function make_nested_list( array $Array ) {
 		$Output = '<ul>';
 		foreach ( $Array as $Key => $Value ) {
 			$Output .= "<li><strong>{$Key}: </strong>";
 			if ( is_array( $Value ) ) {
-				$Output .= self::makeNestedList( $Value );
+				$Output .= self::make_nested_list( $Value );
 			} else {
 				$Output .= $Value;
 			}

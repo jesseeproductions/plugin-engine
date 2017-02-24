@@ -88,7 +88,7 @@ class Pngx__Repeater__Main {
 	/**
 	 * Pngx__Repeater__Main constructor.
 	 */
-	public function __construct( $repeater_id, $meta, $current_section = 0, $current_column = 0 ) {
+	public function __construct( $repeater_id, $meta, $save = false, $current_section = 0, $current_column = 0 ) {
 
 		$this->id              = $repeater_id;
 		$this->meta            = is_array( $meta ) ? $meta : array();
@@ -97,21 +97,24 @@ class Pngx__Repeater__Main {
 		$this->analyzer->analyze( $this->id );
 		$this->depth1 = $this->analyzer->array_depth( $this->meta );
 		$this->count_levels();
+		$this->save        = new Pngx__Repeater__Save( $this->repeater_fields );
 
+		if ( $save ) {
+			$this->save->save( $this->meta, array() );
+		}
 
-		$this->count = count( $this->meta );
-		$this->depth1 = $this->analyzer->array_depth( $this->meta );
-		$this->depth2 = $this->analyzer->array_depth_2( $this->meta );
+		//$this->count = count( $this->meta );
+		//$this->depth1 = $this->analyzer->array_depth( $this->meta );
 		//$this->makeNestedList  = $this->analyze->makeNestedList( $this->meta );
 
-
+		/*
 		$this->sections          = ! empty( $saved_sections ) ? absint( $saved_sections ) : 1;
 		$this->current_section   = $current_section;
 		$this->columns           = 1;
 		$this->current_column    = $current_column;
 		$this->repeating_section = true;
 		$this->repeating_column  = false;
-
+		*/
 
 	}
 

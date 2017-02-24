@@ -343,10 +343,10 @@ class Pngx__Admin__Meta {
 			if ( 'repeater' === $option['type'] && isset ( $_POST[ $option['id'] ] ) ) {
 
 				if ( ! isset( ${'repeat_obj' . $option['id']} ) ) {
-					${'repeat_obj' . $option['id']} = new Pngx__Repeater__Main( $option['id'], $_POST[ $option['id'] ] );
+					${'repeat_obj' . $option['id']} = new Pngx__Repeater__Main( $option['id'], $_POST[ $option['id'] ], true );
 				}
 
-				log_me( ${'repeat_obj' . $option['id']} );
+				//log_me( ${'repeat_obj' . $option['id']} );
 
 				$repeater_post = $_POST[ $option['id'] ];
 
