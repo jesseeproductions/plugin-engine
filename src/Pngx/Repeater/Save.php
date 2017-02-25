@@ -27,13 +27,33 @@ class Pngx__Repeater__Save {
  * http://stackoverflow.com/questions/6785355/convert-multidimensional-array-into-single-array
  *https://www.codecademy.com/en/forum_questions/556d9d0ad3292f03fb000558
  * http://php.net/manual/en/function.array-walk-recursive.php
+ *
+ *
+ * http://stackoverflow.com/questions/30455995/sanitize-desanitize-multidimensional-array
+ * http://brandonwamboldt.github.io/utilphp/
  */
+	public function logme($item, $key) {
+
+		log_me( "$key holds $item" );
+	}
+
+	public function walk( $meta = array() ) {
+		log_me( "walk" );
+		//array_walk_recursive($meta, array( $this, 'logme') );
+
+		log_me( count( $meta ) );
+		log_me( count( $meta[0] ) );
+		log_me( count( $meta[0]['wpe_menu_column'] ) );
+		log_me( count( $meta[0]['wpe_menu_column'][0] ) );
+		log_me( count( $meta[0]['wpe_menu_column'][0]['wpe_menu_items'] ) );
+		log_me( count( $meta[0]['wpe_menu_column'][0]['wpe_menu_items'][0] ) );
+		log_me( $meta );
+
+	}
+
 
 	public function save( $meta = array(), $new, $i = 0 ) {
 
-		log_me( 'save_' . $i );
-
-		//log_me( $meta );
 
 		if ( ! is_array( $meta ) ) {
 			return;
@@ -47,21 +67,6 @@ class Pngx__Repeater__Save {
 
 		foreach ($meta as $key => $level ) {
 
-			//log_me( 'sanitze field' );
-			//log_me($key);
-			//log_me(isset( $this->repeater_fields[ $key ] ) );
-			//log_me($level);
-
-			//$new[$key];
-
-			/*if ( is_numeric($key) )  {
-				log_me('possible multiple');
-				log_me($key);
-				$new[$key];
-			} else {
-				$new[$key];
-			}*/
-
 			// if repeater go through
 			if
 			(
@@ -69,10 +74,23 @@ class Pngx__Repeater__Save {
 				&& 'repeater' === $this->repeater_fields[ $key ]['type']
 				&& is_array( $level )
 			) {
-				//log_me( 'repeater field' );
-				//log_me($key);
-				$new[] = $key;
-				self::save( $level, $new, $i );
+				log_me( 'repeater field' );
+				log_me( $key );
+				//log_me( $new );
+				//log_me( count( $level ) );
+				//$new[$key] = '';
+				//self::save( $level, $new, $i );
+
+				for ( $l = 0; $l < count( $level ); $l ++ ) {
+
+					//self::iterate( $level[ $l ] );
+					//log_me( 'repeater field for loop' );
+					//log_me( $level[ $l ] );
+					//log_me( $new[$key][$l] );
+					self::save( $level[ $l ], $new[$key][$l] );
+
+				}
+
 			}
 
 			// if field sanitize
@@ -82,13 +100,15 @@ class Pngx__Repeater__Save {
 				isset( $this->repeater_fields[ $key ]['type'] )
 				&& ! is_array( $level )
 			) {
+
 				//log_me( 'sanitze field' );
 				//log_me($key);
+				//log_me($new);
 				//log_me($level);
 				$sanitized = new Pngx__Sanitize( $this->repeater_fields[ $key ]['type'], $level, $this->repeater_fields[ $key ] );
-				log_me( 'sanitzed field' );
-				log_me($new);
-				log_me($sanitized->result);
+				//log_me($new);
+				$new[$key] = $sanitized->result;
+				//log_me($sanitized->result);
 
 			}
 
@@ -97,9 +117,9 @@ class Pngx__Repeater__Save {
 				! isset( $this->repeater_fields[ $key ]['type'] )
 				&& is_array( $level )
 			) {
-				//log_me( 'repeaters' );
-				//log_me($key);
-
+				log_me( 'repeaters' );
+				log_me($key);
+				log_me(count($level));
 				//$new[] = $key;
 
 				self::save( $level, $new, $i );
@@ -108,6 +128,14 @@ class Pngx__Repeater__Save {
 		}
 
 		return $new;
+
+	}
+
+
+	public function iterate( $meta = array() ) {
+
+			log_me($meta);
+
 
 	}
 

@@ -41,7 +41,6 @@ class Pngx__Repeater__Main {
 	protected $levels = 0;
 
 
-
 	/**
 	 * Total Sections
 	 *
@@ -90,17 +89,17 @@ class Pngx__Repeater__Main {
 	 */
 	public function __construct( $repeater_id, $meta, $save = false, $current_section = 0, $current_column = 0 ) {
 
-		$this->id              = $repeater_id;
-		$this->meta            = is_array( $meta ) ? $meta : array();
-		$this->repeater_fields = apply_filters( 'pngx_meta_repeater_fields', array() );
-		$this->analyzer        = new Pngx__Repeater__Analyze( $this->repeater_fields );
+		$this->id                = $repeater_id;
+		$this->meta[ $this->id ] = is_array( $meta ) ? $meta : array();
+		$this->repeater_fields   = apply_filters( 'pngx_meta_repeater_fields', array() );
+		$this->analyzer          = new Pngx__Repeater__Analyze( $this->repeater_fields );
 		$this->analyzer->analyze( $this->id );
 		$this->depth1 = $this->analyzer->array_depth( $this->meta );
 		$this->count_levels();
-		$this->save        = new Pngx__Repeater__Save( $this->repeater_fields );
+		$this->save = new Pngx__Repeater__Save( $this->repeater_fields );
 
 		if ( $save ) {
-			$this->save->save( $this->meta, array() );
+			log_me( $this->save->save( $this->meta, array() ) );
 		}
 
 		//$this->count = count( $this->meta );
