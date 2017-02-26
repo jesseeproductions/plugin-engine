@@ -31,6 +31,10 @@ class Pngx__Repeater__Save {
  *
  * http://stackoverflow.com/questions/30455995/sanitize-desanitize-multidimensional-array
  * http://brandonwamboldt.github.io/utilphp/
+ * https://github.com/search?l=PHP&q=Multidimensional+Array%E2%80%8E&type=Repositories&utf8=%E2%9C%93
+ * http://stackoverflow.com/questions/31394497/iterate-multidimensional-array-recursively-and-return-same-array-structure-and-i
+ * http://stackoverflow.com/questions/8587341/recursive-function-to-generate-multidimensional-array-from-database-result
+ * https://section214.com/2015/05/repeatable-fields-in-meta-boxes/
  */
 	public function logme($item, $key) {
 
@@ -60,10 +64,10 @@ class Pngx__Repeater__Save {
 		}
 
 		//store current $i
-		$c_i = $i;
+		//$c_i = $i;
 
 		//increase to next level
-		$i ++;
+		//$i ++;
 
 		foreach ($meta as $key => $level ) {
 
@@ -87,7 +91,7 @@ class Pngx__Repeater__Save {
 					//log_me( 'repeater field for loop' );
 					//log_me( $level[ $l ] );
 					//log_me( $new[$key][$l] );
-					self::save( $level[ $l ], $new[$key][$l] );
+					self::save( $level[ $l ], $new );
 
 				}
 
@@ -106,20 +110,24 @@ class Pngx__Repeater__Save {
 				//log_me($new);
 				//log_me($level);
 				$sanitized = new Pngx__Sanitize( $this->repeater_fields[ $key ]['type'], $level, $this->repeater_fields[ $key ] );
-				//log_me($new);
+				log_me('new field');
+				log_me($new);
+				log_me($key);
 				$new[$key] = $sanitized->result;
 				//log_me($sanitized->result);
 
 			}
 
+
+			//repeating value fields
 			if
 			(
 				! isset( $this->repeater_fields[ $key ]['type'] )
 				&& is_array( $level )
 			) {
-				log_me( 'repeaters' );
-				log_me($key);
-				log_me(count($level));
+				//log_me( 'repeaters' );
+				//log_me($key);
+				//log_me(count($level));
 				//$new[] = $key;
 
 				self::save( $level, $new, $i );

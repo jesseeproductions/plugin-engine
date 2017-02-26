@@ -40,6 +40,94 @@ what if there are two repeaters in repeater_fields
 
 
 	*/
+	public function build_array( $i = 0 ) {
+
+		$level_fields = $this->repeater_fields;
+
+		//if we passed a field id only then set to array
+		if ( ! is_array( $level_fields ) && isset( $this->repeater_fields[ $fields ] ) ) {
+			$level_fields = array( $this->repeater_fields[ $fields ] );
+		} elseif ( ! is_array( $level_fields ) && ! isset( $this->repeater_fields[ $fields ] ) ) {
+			return;
+		}
+
+		// setup initial counts
+		if ( ! isset( $this->{'level_' . $i} ) ) {
+			$this->{'level_' . $i}['counts'] = $this->set_level_counts();
+		}
+
+		// analyze level
+		foreach ( $level_fields as $field ) {
+
+			if ( ! isset( $field['id'] ) || ! isset( $this->repeater_fields[ $field['id'] ] ) ) {
+				continue;
+			}
+
+			$this->{'level_' . $i}[] = array(
+				'id'              => $field['id'],
+				'type'            => $this->repeater_fields[ $field['id'] ]['type'],
+				'repeater_type'   => isset( $this->repeater_fields[ $field['id'] ]['repeater_type'] ) ? $this->repeater_fields[ $field['id'] ]['repeater_type'] : '',
+				'repeater_fields' => isset( $this->repeater_fields[ $field['id'] ]['repeater_fields'] ) ? $this->repeater_fields[ $field['id'] ]['repeater_fields'] : '',
+			);
+
+			if ( isset( $this->repeater_fields[ $field['id'] ]['repeater_type'] ) ) {
+				'section' === $field['repeater_type'] ? $this->{'level_' . $i}['counts']['sections'] ++ : false;
+				'column' === $field['repeater_type'] ? $this->{'level_' . $i}['counts']['columns'] ++ : false;
+				'field' === $field['repeater_type'] ? $this->{'level_' . $i}['counts']['fields'] ++ : false;
+			}
+
+			$this->{'level_' . $i}['counts']['all'] ++;
+
+		}
+
+		// iterate to next level if repeater fields
+		// @formatter:off
+		if (
+		0 < $this->{'level_' . $i}['counts']['sections']
+		|| 0 < $this->{'level_' . $i}['counts']['columns']
+		|| 0 < $this->{'level_' . $i}['counts']['fields']
+		) {
+		// @formatter:on
+
+			//store current $i
+			$c_i = $i;
+
+			//increase to next level
+			$i ++;
+
+			foreach ( $this->{'level_' . $c_i} as $field ) {
+
+				if ( isset( $field['repeater_fields'] ) && is_array( $field['repeater_fields'] ) ) {
+
+					self::analyze( $field['repeater_fields'], $i );
+
+				}
+
+			}
+		}
+
+		return;
+	}
+
+
+	/*  level0                  level1              level2          level3              level4
+	 * wpe_menu_section[0][wpe_menu_column][0][wpe_menu_items][0][wpe_menu_r_cost][0][wpe_menu_price][]
+	 *  level0                  level1              level2          level3              level4
+	 * wpe_menu_section[0][wpe_menu_column][0][wpe_menu_items][0][wpe_menu_items][0][wpe_menu_name]
+what if there are two repeaters in repeater_fields
+
+	send in array of fields or a single field and convert to array
+	store fields and then if deeper go deeper, but when it comes back check if at this level to reset the counter
+
+	todo build what the name string should be for each level
+
+	level0                  level1              level2          level3              level4
+	wpe_menu_section[0][wpe_menu_column][0][wpe_menu_items][0][wpe_menu_r_cost][0][wpe_menu_price][]
+
+	todo when field is saving, admin display, or front end I should be able to detect what level it is on
+
+
+	*/
 	public function analyze( $fields, $i = 0 ) {
 
 		$level_fields = $fields;

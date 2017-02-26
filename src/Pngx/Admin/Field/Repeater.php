@@ -21,9 +21,9 @@ class Pngx__Admin__Field__Repeater {
 		}
 
 		global $post;
-		if ( ! $repeat_obj ) {
-			$repeat_obj = new Pngx__Repeater__Main( $field['id'], $meta );
-		}
+		//if ( ! $repeat_obj ) {
+			//$repeat_obj = new Pngx__Repeater__Main( $field['id'], $meta, 21 );
+		//}
 
 		$class = isset( $field['class'] ) ? $field['class'] : '';
 

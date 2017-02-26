@@ -343,34 +343,7 @@ class Pngx__Admin__Meta {
 			if ( 'repeater' === $option['type'] && isset ( $_POST[ $option['id'] ] ) ) {
 
 				if ( ! isset( ${'repeat_obj' . $option['id']} ) ) {
-					${'repeat_obj' . $option['id']} = new Pngx__Repeater__Main( $option['id'], $_POST[ $option['id'] ], true );
-				}
-
-				//log_me( ${'repeat_obj' . $option['id']} );
-
-				$repeater_post = $_POST[ $option['id'] ];
-
-				/**
-				 * Section Loop
-				 */
-				for ( $section_i = 0; $section_i < ${'repeat_obj' . $option['id']}->get_total_sections(); $section_i ++ ) {
-
-					$section_post = $repeater_post[ $section_i ];
-
-					//self::save_repeatable( $post_id, ${'repeat_obj' . $option['id']}, $section_post, $option, self::get_fields() );
-
-					${'repeat_obj' . $option['id']}->update_section_count();
-
-				} // End For Section
-
-				//save oount of sections
-				$old = (int) get_post_meta( $post_id, $option['id'], true );
-				$new = (int) ${'repeat_obj' . $option['id']}->get_total_sections();
-
-				if ( ! empty( $new ) && $new != $old ) {
-					update_post_meta( $post_id, $option['id'], absint( $new ) );
-				} elseif ( empty( $new ) && $old ) {
-					delete_post_meta( $post_id, $option['id'], absint( $old ) );
+					${'repeat_obj' . $option['id']} = new Pngx__Repeater__Main( $option['id'], $_POST[ $option['id'] ], $post_id, true );
 				}
 
 				continue;

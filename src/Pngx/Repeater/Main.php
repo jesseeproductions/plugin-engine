@@ -12,188 +12,334 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Pngx__Repeater__Main {
 
-	/**
-	 * Total Sections
-	 *
-	 * @var
-	 */
-	protected $analyzer;
-
-	/**
-	 * Total Sections
-	 *
-	 * @var
-	 */
+	protected $id;
 	protected $meta;
-
-	/**
-	 * Total Sections
-	 *
-	 * @var
-	 */
+	protected $post_id;
 	protected $repeater_fields;
-
-	/**
-	 * Total Sections
-	 *
-	 * @var
-	 */
-	protected $levels = 0;
-
-
-	/**
-	 * Total Sections
-	 *
-	 * @var
-	 */
-	protected $sections;
-
-	/**
-	 * Current Section
-	 *
-	 * @var
-	 */
-	protected $current_section;
-
-	/**
-	 * Repeating Section if True
-	 *
-	 * @var
-	 */
-	protected $repeating_section;
-
-	/**
-	 * Column Per Section
-	 *
-	 * @var
-	 */
-	protected $columns;
-
-	/**
-	 * Current Column
-	 *
-	 * @var
-	 */
-	protected $current_column;
-
-	/**
-	 * Repeating Columns if True
-	 *
-	 * @var
-	 */
-	protected $repeating_column;
-
 
 	/**
 	 * Pngx__Repeater__Main constructor.
 	 */
-	public function __construct( $repeater_id, $meta, $save = false, $current_section = 0, $current_column = 0 ) {
+	public function __construct( $repeater_id, $meta, $post_id, $save = false, $current_section = 0, $current_column = 0 ) {
 
-		$this->id                = $repeater_id;
-		$this->meta[ $this->id ] = is_array( $meta ) ? $meta : array();
-		$this->repeater_fields   = apply_filters( 'pngx_meta_repeater_fields', array() );
-		$this->analyzer          = new Pngx__Repeater__Analyze( $this->repeater_fields );
-		$this->analyzer->analyze( $this->id );
-		$this->depth1 = $this->analyzer->array_depth( $this->meta );
-		$this->count_levels();
-		$this->save = new Pngx__Repeater__Save( $this->repeater_fields );
+		$this->id              = $repeater_id;
+		$this->post_id         = $post_id;
+		$this->meta            = is_array( $meta ) ? $meta : array();
+		$this->repeater_fields = apply_filters( 'pngx_meta_repeater_fields', array() );
 
 		if ( $save ) {
-			log_me( $this->save->save( $this->meta, array() ) );
+
+
 		}
-
-		//$this->count = count( $this->meta );
-		//$this->depth1 = $this->analyzer->array_depth( $this->meta );
-		//$this->makeNestedList  = $this->analyze->makeNestedList( $this->meta );
-
-		/*
-		$this->sections          = ! empty( $saved_sections ) ? absint( $saved_sections ) : 1;
-		$this->current_section   = $current_section;
-		$this->columns           = 1;
-		$this->current_column    = $current_column;
-		$this->repeating_section = true;
-		$this->repeating_column  = false;
-		*/
 
 	}
 
-	protected function count_levels() {
 
-		//Check for maximum levels, not to exceed array depth
-		for ( $i = 0; $i < $this->depth1; $i ++ ) {
-			if ( isset( $this->analyzer->{'level_' . $i} ) ) {
-				$this->levels ++;
+	//public function update_value( $value, $this->post_id, $field ) {
+	public function update_value( $value, $field ) {
+		log_me( 'update_value' );
+		log_me( $value );
+		log_me( $field );
+
+		// vars
+		$total = 0;
+
+
+		// bail early if no sub fields
+		if ( empty( $field['repeater_fields'] ) ) {
+			return $value;
+		}
+
+
+		// update sub fields
+		if ( ! empty( $value ) ) {
+
+			// $i
+			$i = - 1;
+
+
+			// loop through rows
+			foreach ( $value as $row ) {
+
+				// $i
+				$i ++;
+
+
+				// increase total
+				$total ++;
+
+
+				// loop through sub fields
+				foreach ( $field['repeater_fields'] as $sub_field ) {
+
+					// value
+					$v = false;
+
+
+					// key (backend)
+					///if ( isset( $row[ $sub_field['key'] ] ) ) {
+
+					//$v = $row[ $sub_field['key'] ];
+
+					//} elseif ( isset( $row[ $sub_field['name'] ] ) ) {
+					if ( isset( $row[ $sub_field['id'] ] ) ) {
+
+						$v = $row[ $sub_field['id'] ];
+
+					} else {
+
+						// input is not set (hidden by conditioanl logic)
+						continue;
+
+					}
+
+					//log_me($field['name']);
+					//log_me($i);
+					///log_me($sub_field['name']);
+					// modify name for save
+					$sub_field['name'] = "{$field['name']}_{$i}_{$sub_field['name']}";
+
+
+					// update value
+					$this->update_values( $v, $sub_field );
+
+				}
+				// foreach
+
 			}
+			// foreach
+
+		}
+// if
+
+
+		// get old value (db only)
+		$old_total = (int) acf_get_metadata( $this->post_id, $field['name'] );
+
+		if ( $old_total > $total ) {
+
+			for ( $i = $total; $i < $old_total; $i ++ ) {
+
+				foreach ( $field['repeater_fields'] as $sub_field ) {
+
+					// modify name for delete
+					$sub_field['name'] = "{$field['name']}_{$i}_{$sub_field['name']}";
+
+
+					// delete value
+					acf_delete_value( $this->post_id, $sub_field );
+
+				}
+				// foreach
+
+			}
+			// for
+
+		}
+// if
+
+
+// update $value and return to allow for the normal save function to run
+		$value = $total;
+
+
+// save false for empty value
+		if ( empty( $value ) ) {
+
+			$value = '';
+
 		}
 
+
+// return
+		return $value;
 	}
 
 
-	public function get_total_sections() {
-		return $this->sections;
+//  function update_values( $value = null, $this->post_id = 0, $field ) {
+	public function update_values( $value = null, $field ) {
+
+
+		// update value
+		$return = $this->update_metadata( $this->post_id, $field['name'], $value );
+
+
+		// update reference
+		$this->update_metadata( $this->post_id, $field['name'], $field['key'], true );
+
+
+		// clear cache
+		//acf_delete_cache("get_value/post_id={$this->post_id}/name={$field['name']}");
+		//acf_delete_cache("format_value/post_id={$this->post_id}/name={$field['name']}");
+
+
+		// return
+		return $return;
+
 	}
 
+	//public function update_metadata( $this->post_id = 0, $name = '', $value = '', $hidden = false ) {
+	public function update_metadata( $name = '', $value = '', $hidden = false ) {
 
-	public function get_current_section() {
-		return $this->current_section;
+		// vars
+		$return = false;
+		$prefix = $hidden ? '_' : '';
+
+
+		// get post_id info
+		$info = $this->get_post_id_info( $this->post_id );
+
+
+		// bail early if no $this->post_id (acf_form - new_post)
+		if ( ! $info['id'] ) {
+			return $return;
+		}
+
+
+		// option
+		/*if( $info['type'] === 'option' ) {
+
+			$name = $prefix . $this->post_id . '_' . $name;
+			$return = acf_update_option( $name, $value );
+
+		// meta
+		} else {*/
+
+		$name   = $prefix . $name;
+		$return = update_metadata( $info['type'], $info['id'], $name, $value );
+
+		//}
+
+
+		// return
+		return $return;
+
 	}
 
+	public function delete_value( $field ) {
 
-	public function get_total_columns() {
-		return $this->columns;
+		// delete value
+		$return = $this->delete_metadata( $this->post_id, $field['name'] );
+
+
+		// delete reference
+		$this->delete_metadata( $this->post_id, $field['name'], true );
+
+
+		// clear cache
+		//acf_delete_cache("get_value/post_id={$post_id}/name={$field['name']}");
+		//acf_delete_cache("format_value/post_id={$post_id}/name={$field['name']}");
+
+
+		// return
+		return $return;
+
 	}
 
-	public function get_current_column() {
-		return $this->current_column;
+	public function delete_metadata( $name = '', $hidden = false ) {
+
+		// vars
+		$return = false;
+		$prefix = $hidden ? '_' : '';
+
+
+		// get post_id info
+		$info = $this->get_post_id_info( $this->post_id );
+
+
+		// bail early if no $this->post_id (acf_form - new_post)
+		if ( ! $info['id'] ) {
+			return $return;
+		}
+
+
+		// option
+		if ( $info['type'] === 'option' ) {
+
+			$name   = $prefix . $this->post_id . '_' . $name;
+			$return = delete_option( $name );
+
+			// meta
+		} else {
+
+			$name   = $prefix . $name;
+			$return = delete_metadata( $info['type'], $info['id'], $name );
+
+		}
+
+
+		// return
+		return $return;
+
 	}
 
-	public function get_current_sec_col() {
-		return '-' . $this->current_section . '-' . $this->current_column;
-	}
+	public function get_post_id_info( $post_id ) {
 
-	public function get_id() {
-		return $this->id;
-	}
+		// vars
+		$info = array(
+			'type' => 'post',
+			'id'   => 0
+		);
 
-	public function get_meta_id() {
-		return $this->id . $this->get_current_sec_col();
-	}
+		// bail early if no $this->post_id
+		if ( ! $this->post_id ) {
+			return $info;
+		}
 
-	public function get_field_name( $name ) {
-		return $this->id . '[' . $this->current_section . '][' . $name . $this->get_current_sec_col() . '][]';
-	}
 
-	public function update_section_count() {
-		$this->current_section ++;
-	}
+		// check cache
+		// - this function will most likely be called multiple times (saving loading fields from post)
+		//$cache_key = "get_post_id_info/post_id={$this->post_id}";
 
-	public function set_columns( $count = 0 ) {
-		$this->columns = absint( $count );
-	}
+		//if( acf_isset_cache($cache_key) ) return acf_get_cache($cache_key);
 
-	public function update_column_count() {
-		$this->current_column ++;
-	}
 
-	public function reset_column_count() {
-		$this->current_column = 0;
-	}
+		// numeric
+		if ( is_numeric( $this->post_id ) ) {
 
-	public function get_repeating_sections_status() {
-		return $this->repeating_section;
-	}
+			$info['id'] = (int) $this->post_id;
 
-	public function get_repeating_columns_status() {
-		return $this->repeating_column;
-	}
+			// string
+		} elseif ( is_string( $this->post_id ) ) {
 
-	public function repeating_sections() {
-		$this->repeating_section = true;
-		$this->repeating_column  = false;
-	}
+			// vars
+			$glue = '_';
+			$type = explode( $glue, $this->post_id );
+			$id   = array_pop( $type );
+			$type = implode( $glue, $type );
+			$meta = array( 'post', 'user', 'comment', 'term' ); // add in 'term'
 
-	public function repeating_columns() {
-		$this->repeating_section = false;
-		$this->repeating_column  = true;
+
+			// check if is taxonomy (ACF < 5.5)
+			// - avoid scenario where taxonomy exists with name of meta type
+			if ( ! in_array( $type, $meta ) && acf_isset_termmeta( $type ) ) {
+				$type = 'term';
+			}
+
+
+			// meta
+			if ( is_numeric( $id ) && in_array( $type, $meta ) ) {
+
+				$info['type'] = $type;
+				$info['id']   = (int) $id;
+
+				// option
+			} else {
+
+				$info['type'] = 'option';
+				$info['id']   = $this->post_id;
+
+			}
+
+		}
+
+
+		// update cache
+		//acf_set_cache($cache_key, $info);
+
+
+		// return
+		return $info;
+
 	}
 }
