@@ -138,9 +138,9 @@ log_me($row);
 				$value = $row[ $repeater_fields['id'] ];
 
 				// find value (name)
-			} elseif ( isset( $row[ $repeater_fields['name'] ] ) ) {
+			} elseif ( isset( $row[ $repeater_fields['id'] ] ) ) {
 
-				$value = $row[ $repeater_fields['name'] ];
+				$value = $row[ $repeater_fields['id'] ];
 
 				// value does not exist
 			} else {
@@ -151,7 +151,7 @@ log_me($row);
 
 
 			// modify name for save
-			$repeater_fields['name'] = "{$field['name']}_{$i}_{$repeater_fields['name']}";
+			$repeater_fields['id'] = "{$field['id']}_{$i}_{$repeater_fields['id']}";
 
 
 			// update field
@@ -178,7 +178,7 @@ log_me($row);
 		foreach ( $field['repeater_fields'] as $repeater_fields ) {
 
 			// modify name for delete
-			$repeater_fields['name'] = "{$field['name']}_{$i}_{$repeater_fields['name']}";
+			$repeater_fields['id'] = "{$field['id']}_{$i}_{$repeater_fields['id']}";
 
 
 			// delete value
@@ -205,7 +205,7 @@ log_me($row);
 		// filter for 3rd party customization
 		//$value = apply_filters( "acf/update_value", $value, $post_id, $field );
 		//$value = apply_filters( "acf/update_value/type={$field['type']}", $value, $post_id, $field );
-		//$value = apply_filters( "acf/update_value/name={$field['name']}", $value, $post_id, $field );
+		//$value = apply_filters( "acf/update_value/name={$field['id']}", $value, $post_id, $field );
 		//$value = apply_filters( "acf/update_value/key={$field['key']}", $value, $post_id, $field );
 
 
@@ -226,8 +226,8 @@ log_me($row);
 
 
 		// clear cache
-		//acf_delete_cache("get_value/post_id={$post_id}/name={$field['name']}");
-		//acf_delete_cache("format_value/post_id={$post_id}/name={$field['name']}");
+		//acf_delete_cache("get_value/post_id={$post_id}/name={$field['id']}");
+		//acf_delete_cache("format_value/post_id={$post_id}/name={$field['id']}");
 
 
 		// return
@@ -284,8 +284,8 @@ log_me($row);
 
 
 		// clear cache
-		//acf_delete_cache("get_value/post_id={$post_id}/name={$field['name']}");
-		//acf_delete_cache("format_value/post_id={$post_id}/name={$field['name']}");
+		//acf_delete_cache("get_value/post_id={$post_id}/name={$field['id']}");
+		//acf_delete_cache("format_value/post_id={$post_id}/name={$field['id']}");
 
 
 		// return
