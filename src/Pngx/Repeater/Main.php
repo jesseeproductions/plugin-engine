@@ -20,7 +20,7 @@ class Pngx__Repeater__Main {
 	/**
 	 * Pngx__Repeater__Main constructor.
 	 */
-	public function __construct( $repeater_id, $meta, $post_id, $save = false, $current_section = 0, $current_column = 0 ) {
+	public function __construct( $repeater_id, $meta, $post_id, $save = false ) {
 
 		$this->id              = $repeater_id;
 		$this->post_id         = $post_id;
@@ -29,6 +29,7 @@ class Pngx__Repeater__Main {
 
 		if ( $save ) {
 
+			$this->update_value( $this->meta , $this->repeater_fields[$this->id] );
 
 		}
 
@@ -37,140 +38,196 @@ class Pngx__Repeater__Main {
 
 	//public function update_value( $value, $this->post_id, $field ) {
 	public function update_value( $value, $field ) {
-		log_me( 'update_value' );
-		log_me( $value );
+		log_me( 'update value obj' );
+		//log_me($value);
 		log_me( $field );
-
-		// vars
-		$total = 0;
-
-
+		log_me( $field['repeater_fields'] );
 		// bail early if no sub fields
 		if ( empty( $field['repeater_fields'] ) ) {
 			return $value;
 		}
+		log_me( 'update value obj1' );
+
+		// vars
+		$new_value = 0;
+		$old_value = (int) $this->get_metadata( $field['id'] );
 
 
 		// update sub fields
 		if ( ! empty( $value ) ) {
-
-			// $i
 			$i = - 1;
+			log_me( 'update value obj2' );
+			// remove acfcloneindex
+			//if ( isset( $value['acfcloneindex'] ) ) {
 
+			//	unset( $value['acfcloneindex'] );
+
+			//}
 
 			// loop through rows
 			foreach ( $value as $row ) {
-
-				// $i
 				$i ++;
-
-
-				// increase total
-				$total ++;
-
-
-				// loop through sub fields
-				foreach ( $field['repeater_fields'] as $sub_field ) {
-
-					// value
-					$v = false;
-
-
-					// key (backend)
-					///if ( isset( $row[ $sub_field['key'] ] ) ) {
-
-					//$v = $row[ $sub_field['key'] ];
-
-					//} elseif ( isset( $row[ $sub_field['name'] ] ) ) {
-					if ( isset( $row[ $sub_field['id'] ] ) ) {
-
-						$v = $row[ $sub_field['id'] ];
-
-					} else {
-
-						// input is not set (hidden by conditioanl logic)
-						continue;
-
-					}
-
-					//log_me($field['name']);
-					//log_me($i);
-					///log_me($sub_field['name']);
-					// modify name for save
-					$sub_field['name'] = "{$field['name']}_{$i}_{$sub_field['name']}";
-
-
-					// update value
-					$this->update_values( $v, $sub_field );
-
+log_me('row');
+log_me($row);
+				// bail early if no row
+				if ( ! is_array( $row ) ) {
+					continue;
 				}
-				// foreach
+
+
+				// update row
+				$this->update_row( $row, $i, $field );
+
+
+				// append
+				$new_value ++;
 
 			}
-			// foreach
 
 		}
-// if
+		log_me( 'update value obj3' );
 
+		// remove old rows
+		if ( $old_value > $new_value ) {
 
-		// get old value (db only)
-		$old_total = (int) acf_get_metadata( $this->post_id, $field['name'] );
+			// loop
+			for ( $i = $new_value; $i < $old_value; $i ++ ) {
 
-		if ( $old_total > $total ) {
-
-			for ( $i = $total; $i < $old_total; $i ++ ) {
-
-				foreach ( $field['repeater_fields'] as $sub_field ) {
-
-					// modify name for delete
-					$sub_field['name'] = "{$field['name']}_{$i}_{$sub_field['name']}";
-
-
-					// delete value
-					acf_delete_value( $this->post_id, $sub_field );
-
-				}
-				// foreach
+				$this->delete_row( $i, $field );
 
 			}
-			// for
-
-		}
-// if
-
-
-// update $value and return to allow for the normal save function to run
-		$value = $total;
-
-
-// save false for empty value
-		if ( empty( $value ) ) {
-
-			$value = '';
 
 		}
 
+		log_me( 'update value obj4' );
+		// save false for empty value
+		if ( empty( $new_value ) ) {
+			$new_value = '';
+		}
 
-// return
-		return $value;
+		log_me( 'update value obj5' );
+		log_me( $new_value );
+		// return
+		return $new_value;
+	}
+
+	public function update_row( $row, $i = 0, $field ) {
+
+		// bail early if no layout reference
+		if ( ! is_array( $row ) ) {
+			return false;
+		}
+
+
+		// bail early if no layout
+		if ( empty( $field['repeater_fields'] ) ) {
+			return false;
+		}
+
+
+		// loop
+		foreach ( $field['repeater_fields'] as $repeater_fields ) {
+
+			// value
+			$value = null;
+
+
+			// find value (id)
+			if ( isset( $row[ $repeater_fields['id'] ] ) ) {
+
+				$value = $row[ $repeater_fields['id'] ];
+
+				// find value (name)
+			} elseif ( isset( $row[ $repeater_fields['name'] ] ) ) {
+
+				$value = $row[ $repeater_fields['name'] ];
+
+				// value does not exist
+			} else {
+
+				continue;
+
+			}
+
+
+			// modify name for save
+			$repeater_fields['name'] = "{$field['name']}_{$i}_{$repeater_fields['name']}";
+
+
+			// update field
+			$this->update_values( $value, $repeater_fields );
+
+		}
+
+
+		// return
+		return true;
+
 	}
 
 
-//  function update_values( $value = null, $this->post_id = 0, $field ) {
+	function delete_row( $i = 0, $field ) {
+
+		// bail early if no sub fields
+		if ( empty( $field['repeater_fields'] ) ) {
+			return false;
+		}
+
+
+		// loop
+		foreach ( $field['repeater_fields'] as $repeater_fields ) {
+
+			// modify name for delete
+			$repeater_fields['name'] = "{$field['name']}_{$i}_{$repeater_fields['name']}";
+
+
+			// delete value
+			$this->delete_value( $repeater_fields );
+
+		}
+
+
+		// return
+		return true;
+
+	}
+
 	public function update_values( $value = null, $field ) {
+
+		// strip slashes
+		//if( acf_get_setting('stripslashes') ) {
+
+		//	$value = stripslashes_deep($value);
+
+		//}
+
+
+		// filter for 3rd party customization
+		//$value = apply_filters( "acf/update_value", $value, $post_id, $field );
+		//$value = apply_filters( "acf/update_value/type={$field['type']}", $value, $post_id, $field );
+		//$value = apply_filters( "acf/update_value/name={$field['name']}", $value, $post_id, $field );
+		//$value = apply_filters( "acf/update_value/key={$field['key']}", $value, $post_id, $field );
+
+
+		// allow null to delete
+		if ( $value === null ) {
+
+			return $this->delete_value( $field );
+
+		}
 
 
 		// update value
-		$return = $this->update_metadata( $this->post_id, $field['name'], $value );
+		$return = $this->update_metadata( $field['id'], $value );
 
 
 		// update reference
-		$this->update_metadata( $this->post_id, $field['name'], $field['key'], true );
+		$this->update_metadata( $field['id'], $field['id'], true );
 
 
 		// clear cache
-		//acf_delete_cache("get_value/post_id={$this->post_id}/name={$field['name']}");
-		//acf_delete_cache("format_value/post_id={$this->post_id}/name={$field['name']}");
+		//acf_delete_cache("get_value/post_id={$post_id}/name={$field['name']}");
+		//acf_delete_cache("format_value/post_id={$post_id}/name={$field['name']}");
 
 
 		// return
@@ -219,11 +276,11 @@ class Pngx__Repeater__Main {
 	public function delete_value( $field ) {
 
 		// delete value
-		$return = $this->delete_metadata( $this->post_id, $field['name'] );
+		$return = $this->delete_metadata( $field['id'] );
 
 
 		// delete reference
-		$this->delete_metadata( $this->post_id, $field['name'], true );
+		$this->delete_metadata( $field['id'], true );
 
 
 		// clear cache
@@ -312,9 +369,9 @@ class Pngx__Repeater__Main {
 
 			// check if is taxonomy (ACF < 5.5)
 			// - avoid scenario where taxonomy exists with name of meta type
-			if ( ! in_array( $type, $meta ) && acf_isset_termmeta( $type ) ) {
-				$type = 'term';
-			}
+			//if ( ! in_array( $type, $meta ) && acf_isset_termmeta( $type ) ) {
+			//	$type = 'term';
+			//}
 
 
 			// meta
@@ -340,6 +397,49 @@ class Pngx__Repeater__Main {
 
 		// return
 		return $info;
+
+	}
+
+	public function get_metadata( $name = '', $hidden = false ) {
+
+		// vars
+		$value  = null;
+		$prefix = $hidden ? '_' : '';
+
+
+		// get post_id info
+		$info = $this->get_post_id_info( $this->post_id );
+
+
+		// bail early if no $post_id (acf_form - new_post)
+		if ( ! $info['id'] ) {
+			return $value;
+		}
+
+
+		// option
+		if ( $info['type'] === 'option' ) {
+
+			$name  = $prefix . $this->post_id . '_' . $name;
+			$value = get_option( $name, null );
+
+			// meta
+		} else {
+
+			$name = $prefix . $name;
+			$meta = get_metadata( $info['type'], $info['id'], $name, false );
+
+			if ( isset( $meta[0] ) ) {
+
+				$value = $meta[0];
+
+			}
+
+		}
+
+
+		// return
+		return $value;
 
 	}
 }
