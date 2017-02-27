@@ -30,23 +30,75 @@ class Pngx__Repeater__Main {
 		if ( $save ) {
 
 			$this->update_value( $this->meta , $this->repeater_fields[$this->id] );
+			$this->cycle_repeaters( $this->repeater_fields[$this->id] );
 
 		}
 
 	}
+	public function cycle_repeaters( $field ) {
 
+		if ( isset( $field[ 'repeater_fields'] ) ) {
+
+			foreach ( $field[ 'repeater_fields'] as $repeater_field ) {
+
+				//todo see if this function in acf works to get the levels value and if so connect here
+				//$meta = $this->update_sub_field();
+
+				$this->update_value( $this->meta, $repeater_field );
+
+				if ( 'repeater' === $repeater_field['type'] ) {
+				    $this->cycle_repeaters( $repeater_field );
+				}
+
+			}
+		}
+
+	}
+
+	public function update_sub_field( $selector, $value, $post_id = false ) {
+
+		// vars
+		$sub_field = false;
+
+
+		// filter post_id
+		$post_id = acf_get_valid_post_id( $post_id );
+
+
+		// get sub field
+		if( is_array($selector) ) {
+
+			$sub_field = acf_maybe_get_sub_field( $selector, $post_id, false );
+
+		} else {
+
+			$sub_field = get_row_sub_field( $selector );
+
+		}
+
+
+		// bail early if no sub field
+		if( !$sub_field ) return false;
+
+
+		// update
+		return acf_update_value( $value, $post_id, $sub_field );
+
+	}
 
 	//public function update_value( $value, $this->post_id, $field ) {
 	public function update_value( $value, $field ) {
-		log_me( 'update value obj' );
+		global $countermenu;
+		log_me('valuemenu');
+		log_me($countermenu++);
 		//log_me($value);
-		log_me( $field );
-		log_me( $field['repeater_fields'] );
+		log_me($field['id']);
+		//log_me($field);
 		// bail early if no sub fields
 		if ( empty( $field['repeater_fields'] ) ) {
 			return $value;
 		}
-		log_me( 'update value obj1' );
+		//log_me( 'update value obj1' );
 
 		// vars
 		$new_value = 0;
@@ -56,7 +108,7 @@ class Pngx__Repeater__Main {
 		// update sub fields
 		if ( ! empty( $value ) ) {
 			$i = - 1;
-			log_me( 'update value obj2' );
+		//	log_me( 'update value obj2' );
 			// remove acfcloneindex
 			//if ( isset( $value['acfcloneindex'] ) ) {
 
@@ -67,10 +119,11 @@ class Pngx__Repeater__Main {
 			// loop through rows
 			foreach ( $value as $row ) {
 				$i ++;
-log_me('row');
-log_me($row);
+//log_me('row');
+//log_me($row);
 				// bail early if no row
 				if ( ! is_array( $row ) ) {
+				log_me('bail');
 					continue;
 				}
 
@@ -85,7 +138,7 @@ log_me($row);
 			}
 
 		}
-		log_me( 'update value obj3' );
+		//log_me( 'update value obj3' );
 
 		// remove old rows
 		if ( $old_value > $new_value ) {
@@ -99,14 +152,14 @@ log_me($row);
 
 		}
 
-		log_me( 'update value obj4' );
+		//log_me( 'update value obj4' );
 		// save false for empty value
 		if ( empty( $new_value ) ) {
 			$new_value = '';
 		}
 
-		log_me( 'update value obj5' );
-		log_me( $new_value );
+		//log_me( 'update value obj5' );
+		//log_me( $new_value );
 		// return
 		return $new_value;
 	}
@@ -123,7 +176,8 @@ log_me($row);
 		if ( empty( $field['repeater_fields'] ) ) {
 			return false;
 		}
-
+		//log_me('menusub');
+		//log_me($field['repeater_fields']);
 
 		// loop
 		foreach ( $field['repeater_fields'] as $repeater_fields ) {
