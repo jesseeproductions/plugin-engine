@@ -22,83 +22,125 @@ class Pngx__Repeater__Main {
 	 */
 	public function __construct( $repeater_id, $meta, $post_id, $save = false ) {
 
-		$this->id              = $repeater_id;
-		$this->post_id         = $post_id;
-		$this->meta            = is_array( $meta ) ? $meta : array();
-		$this->repeater_fields = apply_filters( 'pngx_meta_repeater_fields', array() );
+		$this->id                = $repeater_id;
+		$this->post_id           = $post_id;
+		$this->meta[ $this->id ] = is_array( $meta ) ? $meta : array();
+		$this->repeater_fields   = apply_filters( 'pngx_meta_repeater_fields', array() );
 
 		if ( $save ) {
 
-			$this->update_value( $this->meta , $this->repeater_fields[$this->id] );
-			$this->cycle_repeaters( $this->repeater_fields[$this->id] );
+			//$this->update_value( $this->meta , $this->repeater_fields[$this->id] );
+			$this->cycle_repeaters();
 
 		}
 
 	}
-	public function cycle_repeaters( $field ) {
 
-		if ( isset( $field[ 'repeater_fields'] ) ) {
+	public function cycle_repeaters() {
 
-			foreach ( $field[ 'repeater_fields'] as $repeater_field ) {
 
-				//todo see if this function in acf works to get the levels value and if so connect here
-				//$meta = $this->update_sub_field();
+		// bail early if no $_POST
+		if ( empty( $this->meta ) ) {
+			return;
+		}
 
-				$this->update_value( $this->meta, $repeater_field );
 
-				if ( 'repeater' === $repeater_field['type'] ) {
-				    $this->cycle_repeaters( $repeater_field );
+		// loop
+		foreach ( $this->meta as $field_key => $value ) {
+
+			// bail early if not found
+			if ( ! $this->repeater_fields[ $field_key ] ) {
+				log_me( 'bail no field' );
+				continue;
+			}
+
+			// get field
+			$field = $this->repeater_fields[ $field_key ];
+			$input = $field_key;
+			//$input = '$this->meta[' . $field_key . ']';
+
+
+			// validate
+			$this->validate_value( $value, $field, $input );
+
+		}
+
+	}
+
+	public function validate_value( $value, $field, $input ) {
+
+		// check sub fields
+		if ( ! empty( $field['repeater_fields'] ) && ! empty( $value ) ) {
+
+			$keys = array_keys( $value );
+
+			foreach ( $keys as $i ) {
+
+				foreach ( $field['repeater_fields'] as $sub_field ) {
+
+					// vars
+					$k = $sub_field['id'];
+
+
+					// test sub field exists
+					if ( ! isset( $value[ $i ][ $k ] ) ) {
+						log_me( 'no value' );
+						continue;
+
+					}
+
+					// validate
+					$this->update_value( $value, $field );
+
+					$this->validate_value( $value[ $i ][ $k ], $sub_field, "{$input}[{$i}][{$k}]" );
 				}
 
 			}
-		}
-
-	}
-
-	public function update_sub_field( $selector, $value, $post_id = false ) {
-
-		// vars
-		$sub_field = false;
-
-
-		// filter post_id
-		$post_id = acf_get_valid_post_id( $post_id );
-
-
-		// get sub field
-		if( is_array($selector) ) {
-
-			$sub_field = acf_maybe_get_sub_field( $selector, $post_id, false );
-
-		} else {
-
-			$sub_field = get_row_sub_field( $selector );
 
 		}
 
-
-		// bail early if no sub field
-		if( !$sub_field ) return false;
-
-
-		// update
-		return acf_update_value( $value, $post_id, $sub_field );
+		//return $valid;
 
 	}
+
+	public function acf_update_value( $value = null, $field ) {
+
+		// strip slashes
+		//if( acf_get_setting('stripslashes') ) {
+
+		//$value = stripslashes_deep($value);
+
+		//}
+
+		// allow null to delete
+		if ( $value === null ) {
+
+			return $this->delete_value( $field );
+
+		}
+
+
+		// update value
+		$return = $this->update_metadata( $field['name'], $value );
+
+
+		// update reference
+		$this->update_metadata( $field['id'], $field['id'], true );
+
+		// return
+		return $return;
+
+	}
+
 
 	//public function update_value( $value, $this->post_id, $field ) {
 	public function update_value( $value, $field ) {
-		global $countermenu;
-		log_me('valuemenu');
-		log_me($countermenu++);
-		//log_me($value);
-		log_me($field['id']);
-		//log_me($field);
+
 		// bail early if no sub fields
 		if ( empty( $field['repeater_fields'] ) ) {
 			return $value;
 		}
-		//log_me( 'update value obj1' );
+
 
 		// vars
 		$new_value = 0;
@@ -108,22 +150,15 @@ class Pngx__Repeater__Main {
 		// update sub fields
 		if ( ! empty( $value ) ) {
 			$i = - 1;
-		//	log_me( 'update value obj2' );
-			// remove acfcloneindex
-			//if ( isset( $value['acfcloneindex'] ) ) {
 
-			//	unset( $value['acfcloneindex'] );
-
-			//}
 
 			// loop through rows
 			foreach ( $value as $row ) {
 				$i ++;
-//log_me('row');
-//log_me($row);
+
 				// bail early if no row
 				if ( ! is_array( $row ) ) {
-				log_me('bail');
+					log_me( 'bail row is not array' );
 					continue;
 				}
 
@@ -138,7 +173,6 @@ class Pngx__Repeater__Main {
 			}
 
 		}
-		//log_me( 'update value obj3' );
 
 		// remove old rows
 		if ( $old_value > $new_value ) {
@@ -152,14 +186,11 @@ class Pngx__Repeater__Main {
 
 		}
 
-		//log_me( 'update value obj4' );
 		// save false for empty value
 		if ( empty( $new_value ) ) {
 			$new_value = '';
 		}
 
-		//log_me( 'update value obj5' );
-		//log_me( $new_value );
 		// return
 		return $new_value;
 	}
@@ -176,8 +207,6 @@ class Pngx__Repeater__Main {
 		if ( empty( $field['repeater_fields'] ) ) {
 			return false;
 		}
-		//log_me('menusub');
-		//log_me($field['repeater_fields']);
 
 		// loop
 		foreach ( $field['repeater_fields'] as $repeater_fields ) {
@@ -209,7 +238,7 @@ class Pngx__Repeater__Main {
 
 
 			// update field
-			$this->update_values( $value, $repeater_fields );
+			$this->acf_update_value( $value, $repeater_fields );
 
 		}
 
@@ -246,87 +275,6 @@ class Pngx__Repeater__Main {
 
 	}
 
-	public function update_values( $value = null, $field ) {
-
-		// strip slashes
-		//if( acf_get_setting('stripslashes') ) {
-
-		//	$value = stripslashes_deep($value);
-
-		//}
-
-
-		// filter for 3rd party customization
-		//$value = apply_filters( "acf/update_value", $value, $post_id, $field );
-		//$value = apply_filters( "acf/update_value/type={$field['type']}", $value, $post_id, $field );
-		//$value = apply_filters( "acf/update_value/name={$field['id']}", $value, $post_id, $field );
-		//$value = apply_filters( "acf/update_value/key={$field['key']}", $value, $post_id, $field );
-
-
-		// allow null to delete
-		if ( $value === null ) {
-
-			return $this->delete_value( $field );
-
-		}
-
-
-		// update value
-		$return = $this->update_metadata( $field['id'], $value );
-
-
-		// update reference
-		$this->update_metadata( $field['id'], $field['id'], true );
-
-
-		// clear cache
-		//acf_delete_cache("get_value/post_id={$post_id}/name={$field['id']}");
-		//acf_delete_cache("format_value/post_id={$post_id}/name={$field['id']}");
-
-
-		// return
-		return $return;
-
-	}
-
-	//public function update_metadata( $this->post_id = 0, $name = '', $value = '', $hidden = false ) {
-	public function update_metadata( $name = '', $value = '', $hidden = false ) {
-
-		// vars
-		$return = false;
-		$prefix = $hidden ? '_' : '';
-
-
-		// get post_id info
-		$info = $this->get_post_id_info( $this->post_id );
-
-
-		// bail early if no $this->post_id (acf_form - new_post)
-		if ( ! $info['id'] ) {
-			return $return;
-		}
-
-
-		// option
-		/*if( $info['type'] === 'option' ) {
-
-			$name = $prefix . $this->post_id . '_' . $name;
-			$return = acf_update_option( $name, $value );
-
-		// meta
-		} else {*/
-
-		$name   = $prefix . $name;
-		$return = update_metadata( $info['type'], $info['id'], $name, $value );
-
-		//}
-
-
-		// return
-		return $return;
-
-	}
-
 	public function delete_value( $field ) {
 
 		// delete value
@@ -336,55 +284,13 @@ class Pngx__Repeater__Main {
 		// delete reference
 		$this->delete_metadata( $field['id'], true );
 
-
-		// clear cache
-		//acf_delete_cache("get_value/post_id={$post_id}/name={$field['id']}");
-		//acf_delete_cache("format_value/post_id={$post_id}/name={$field['id']}");
-
-
 		// return
 		return $return;
 
 	}
 
-	public function delete_metadata( $name = '', $hidden = false ) {
 
-		// vars
-		$return = false;
-		$prefix = $hidden ? '_' : '';
-
-
-		// get post_id info
-		$info = $this->get_post_id_info( $this->post_id );
-
-
-		// bail early if no $this->post_id (acf_form - new_post)
-		if ( ! $info['id'] ) {
-			return $return;
-		}
-
-
-		// option
-		if ( $info['type'] === 'option' ) {
-
-			$name   = $prefix . $this->post_id . '_' . $name;
-			$return = delete_option( $name );
-
-			// meta
-		} else {
-
-			$name   = $prefix . $name;
-			$return = delete_metadata( $info['type'], $info['id'], $name );
-
-		}
-
-
-		// return
-		return $return;
-
-	}
-
-	public function get_post_id_info( $post_id ) {
+	public function get_post_id_info() {
 
 		// vars
 		$info = array(
@@ -396,14 +302,6 @@ class Pngx__Repeater__Main {
 		if ( ! $this->post_id ) {
 			return $info;
 		}
-
-
-		// check cache
-		// - this function will most likely be called multiple times (saving loading fields from post)
-		//$cache_key = "get_post_id_info/post_id={$this->post_id}";
-
-		//if( acf_isset_cache($cache_key) ) return acf_get_cache($cache_key);
-
 
 		// numeric
 		if ( is_numeric( $this->post_id ) ) {
@@ -419,13 +317,6 @@ class Pngx__Repeater__Main {
 			$id   = array_pop( $type );
 			$type = implode( $glue, $type );
 			$meta = array( 'post', 'user', 'comment', 'term' ); // add in 'term'
-
-
-			// check if is taxonomy (ACF < 5.5)
-			// - avoid scenario where taxonomy exists with name of meta type
-			//if ( ! in_array( $type, $meta ) && acf_isset_termmeta( $type ) ) {
-			//	$type = 'term';
-			//}
 
 
 			// meta
@@ -444,13 +335,34 @@ class Pngx__Repeater__Main {
 
 		}
 
+		// return
+		return $info;
 
-		// update cache
-		//acf_set_cache($cache_key, $info);
+	}
+
+	public function update_metadata( $name = '', $value = '', $hidden = false ) {
+
+		// vars
+		$return = false;
+		$prefix = $hidden ? '_' : '';
+
+
+		// get post_id info
+		$info = $this->get_post_id_info();
+
+
+		// bail early if no $post_id (acf_form - new_post)
+		if ( ! $info['id'] ) {
+			return $return;
+		}
+
+
+		$name   = $prefix . $name;
+		$return = update_metadata( $info['type'], $info['id'], $name, $value );
 
 
 		// return
-		return $info;
+		return $return;
 
 	}
 
@@ -462,7 +374,7 @@ class Pngx__Repeater__Main {
 
 
 		// get post_id info
-		$info = $this->get_post_id_info( $this->post_id );
+		$info = $this->get_post_id_info();
 
 
 		// bail early if no $post_id (acf_form - new_post)
@@ -494,6 +406,32 @@ class Pngx__Repeater__Main {
 
 		// return
 		return $value;
+
+	}
+
+	public function delete_metadata( $name = '', $hidden = false ) {
+
+		// vars
+		$return = false;
+		$prefix = $hidden ? '_' : '';
+
+
+		// get post_id info
+		$info = $this->get_post_id_info();
+
+
+		// bail early if no $post_id (acf_form - new_post)
+		if ( ! $info['id'] ) {
+			return $return;
+		}
+
+
+		$name   = $prefix . $name;
+		$return = delete_metadata( $info['type'], $info['id'], $name );
+
+
+		// return
+		return $return;
 
 	}
 }
