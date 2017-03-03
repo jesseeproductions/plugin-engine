@@ -33,6 +33,14 @@ class Pngx__Field__Content {
 		//Run Shortcodes
 		$meta = do_shortcode( $meta );
 
+		/**
+		 * Filter Front End Content Fields
+		 *
+		 * @param $meta content to display
+		 * @param $post_id id of post
+		 */
+		$meta = apply_filters( 'pngx_filter_content_field_output', $meta, $post_id) ;
+
 		?>
 		<div class="pngx-content <?php echo esc_attr( $class ); ?>" <?php echo sanitize_textarea_field( $style ); ?>>
 			<?php echo strip_tags( $meta, Pngx__Allowed_Tags::$tags() ); ?>
