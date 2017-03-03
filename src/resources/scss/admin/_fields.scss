@@ -191,3 +191,15 @@
 #wp-pngx_description-media-buttons a:not(:first-child) {
 	display: none;
 }
+
+/**
+* System Info
+***************************************************/
+.pngx-support-stats {
+	background: #000;
+	border-radius: 2px;
+	color: #888;
+	max-height: 400px;
+	overflow: scroll;
+	padding: 10px;
+}

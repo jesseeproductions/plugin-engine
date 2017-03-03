@@ -186,6 +186,12 @@ class Pngx__Admin__Fields {
 
 				break;
 
+			case 'systeminfo':
+
+				echo Pngx__Admin__Support::getInstance()->formatted_support_stats();
+
+				break;
+
 			case 'template_chooser':
 
 				Pngx__Admin__Field__Template::display();
