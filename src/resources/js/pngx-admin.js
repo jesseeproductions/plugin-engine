@@ -14,6 +14,8 @@ var pngx_admin_fields_init = pngx_admin_fields_init || {};
 
 		obj.color_picker();
 
+		obj.init_copy();
+
 		// Load Repeatable Fields
 		$( function () {
 			obj.repeatable_fields();
@@ -202,6 +204,37 @@ var pngx_admin_fields_init = pngx_admin_fields_init || {};
 		}
 
 		return false;
+	};
+
+	/**
+	 * Initialize system info opt in copy
+	 */
+	obj.init_copy = function () {
+
+		var clipboard = new Clipboard( '.system-info-copy-btn' );
+		var button_icon = '<span class="dashicons dashicons-clipboard license-btn"></span>';
+		var button_text = pngx_admin.clipboard_btn_text;
+
+		//Prevent Button From Doing Anything Else
+		$( ".system-info-copy-btn" ).click( function ( e ) {
+			e.preventDefault();
+		} );
+
+		clipboard.on( 'success', function ( event ) {
+			event.clearSelection();
+			event.trigger.innerHTML = button_icon + '<span class="optin-success">' + pngx_admin.clipboard_copied_text + '<span>';
+			window.setTimeout( function () {
+				event.trigger.innerHTML = button_icon + button_text;
+			}, 5000 );
+		} );
+
+		clipboard.on( 'error', function ( event ) {
+			event.trigger.innerHTML = button_icon + '<span class="optin-fail">' + pngx_admin.clipboard_fail_text + '<span>';
+			window.setTimeout( function () {
+				event.trigger.innerHTML = button_icon + button_text;
+			}, 5000 );
+		} );
+
 	};
 
 

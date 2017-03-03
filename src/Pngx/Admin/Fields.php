@@ -188,6 +188,7 @@ class Pngx__Admin__Fields {
 
 			case 'systeminfo':
 
+				Pngx__Admin__Support::getInstance()->get_system_info_copy();
 				echo Pngx__Admin__Support::getInstance()->formatted_support_stats();
 
 				break;

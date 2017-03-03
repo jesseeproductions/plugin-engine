@@ -41,6 +41,13 @@ if ( ! class_exists( 'Pngx__Admin__Support' ) ) {
 
 		}
 
+		public function get_system_info_copy() {
+			echo '<div class="system-info-copy" >
+						<button data-clipboard-action = "copy" class="system-info-copy-btn" data-clipboard-target = ".pngx-support-stats" >
+							<span class="dashicons dashicons-clipboard license-btn" ></span > ' . __( 'Copy to clipboard', 'tribe - common' ) . ' 
+						</button >
+					</div >';
+		}
 
 		/**
 		 * Collect system information for support

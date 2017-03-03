@@ -43,7 +43,13 @@ class Pngx__Admin__Assets {
 			filemtime( Pngx__Main::instance()->resource_path . 'css/pngx-admin.css' )
 		);
 
-
+		wp_register_script(
+			'pngx-clipboard',
+			Pngx__Main::instance()->vendor_url . 'clipboard/clipboard.js',
+			array(),
+			filemtime( Pngx__Main::instance()->vendor_path . 'clipboard/clipboard.js' ),
+			true
+		);
 		wp_register_script(
 			'pngx-bootstrap',
 			Pngx__Main::instance()->vendor_url . 'bootstrap-iconpicker/bootstrap-3.2.0/js/bootstrap.min.js',
@@ -106,10 +112,18 @@ class Pngx__Admin__Assets {
 		wp_register_script(
 			'pngx-admin',
 			Pngx__Main::instance()->resource_url . 'js/pngx-admin.js',
-			array( 'pngx-dragula', 'pngx-colorbox', 'pngx-wp-editor', 'pngx-load-template-ajax', 'pngx-color-picker-alpha', 'pngx-bootstrap', 'pngx-bootstrap-iconpicker-fontawesome', 'pngx-bootstrap-iconpicker', 'jquery-ui-tabs' ),
+			array( 'pngx-dragula', 'pngx-clipboard', 'pngx-colorbox', 'pngx-wp-editor', 'pngx-load-template-ajax', 'pngx-color-picker-alpha', 'pngx-bootstrap', 'pngx-bootstrap-iconpicker-fontawesome', 'pngx-bootstrap-iconpicker', 'jquery-ui-tabs' ),
 			filemtime( Pngx__Main::instance()->resource_path . 'js/pngx-admin.js' ),
 			true
 		);
+
+		wp_localize_script( 'pngx-admin', 'pngx_admin', array(
+			'ajaxurl'    => admin_url( 'admin-ajax.php', ( is_ssl() ? 'https' : 'http' ) ),
+			'sysinfo_optin_nonce'   => wp_create_nonce( 'sysinfo_optin_nonce' ),
+			'clipboard_btn_text'    => __( 'Copy to clipboard', 'tribe-common' ),
+			'clipboard_copied_text' => __( 'System info copied', 'tribe-common' ),
+			'clipboard_fail_text'   => __( 'Press "Cmd + C" to copy', 'tribe-common' ),
+		) );
 		// @formatter:on
 
 		/**
