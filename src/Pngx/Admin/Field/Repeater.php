@@ -38,7 +38,7 @@ class Pngx__Admin__Field__Repeater {
 				data-section=0
 				data-column=0
 		>
-			<li class="repeater-item repeater-section 0">
+			<li class="repeater-item repeater-section">
 				<span class="sort hndle">|||</span>
 				<h5>Section 0</h5>
 
@@ -110,13 +110,13 @@ class Pngx__Admin__Field__Repeater {
 
 															<div class="pngx-meta-field-wrap field-wrap-text field-wrap-cctor_highlight_title ">
 																<div class="pngx-meta-field field-text field-cctor_highlight_title">
-																	<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[0][wpe_menu_column][0][wpe_menu_items][0][wpe_menu_r_cost][0][wpe_menu_price][]" value="Price 13" size="30" type="text">
+																	<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[0][wpe_menu_column][0][wpe_menu_items][0][wpe_menu_r_price][0][wpe_menu_price][]" value="Price 13" size="30" type="text">
 																</div>
 															</div>
 
 															<div class="pngx-meta-field-wrap field-wrap-text field-wrap-cctor_highlight_title ">
 																<div class="pngx-meta-field field-text field-cctor_highlight_title">
-																	<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[0][wpe_menu_column][0][wpe_menu_items][0][wpe_menu_r_cost][0][wpe_menu_price][]" value="Price 23" size="30" type="text">
+																	<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[0][wpe_menu_column][0][wpe_menu_items][0][wpe_menu_r_price][0][wpe_menu_price][]" value="Price 23" size="30" type="text">
 																</div>
 															</div>
 
@@ -216,13 +216,13 @@ class Pngx__Admin__Field__Repeater {
 
 												<div class="pngx-meta-field-wrap field-wrap-text field-wrap-cctor_highlight_title ">
 													<div class="pngx-meta-field field-text field-cctor_highlight_title">
-														<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[0][wpe_menu_column][1][wpe_menu_items][0][wpe_menu_name]" value="Field 1 2 col 1" size="30" type="text">
+														<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[0][wpe_menu_column][1][wpe_menu_items][1][wpe_menu_name]" value="Field 1 2 col 1" size="30" type="text">
 													</div>
 												</div>
 
 												<div class="pngx-meta-field-wrap field-wrap-text field-wrap-cctor_highlight_title ">
 													<div class="pngx-meta-field field-text field-cctor_highlight_title">
-														<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[0][wpe_menu_column][1][wpe_menu_items][0][wpe_menu_description]" value="Field 2 2 col 1" size="30" type="text">
+														<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[0][wpe_menu_column][1][wpe_menu_items][1][wpe_menu_description]" value="Field 2 2 col 1" size="30" type="text">
 													</div>
 												</div>
 
@@ -256,7 +256,224 @@ class Pngx__Admin__Field__Repeater {
 							>X</a>
 						</li>
 
-				<h5>Section 0</h5>
+	<li class="repeater-item repeater-section">
+				<span class="sort hndle">|||</span>
+				<h5>Section 1</h5>
+
+
+
+
+				<div class="pngx-meta-field-wrap field-repeating-column">
+					<ul
+							id="wpe_menu_column"
+							class="pngx-repeater repeating-column"
+							data-name_id="wpe_menu_section[wpe_menu_column][0]"
+							data-ajax_field_id="wpe_menu_r_column"
+							data-ajax_action="pngx_repeater"
+							data-repeat-type="column"
+							data-section=0
+							data-column=0
+					>
+
+						<li class="repeater-item repeater-column 1">
+							<span class="sort hndle">|||</span>
+							<h5>Column 0</h5>
+
+
+
+									<div class="pngx-meta-field-wrap field-repeating-section">
+
+										<ul
+												id="wpe_menu_items-repeater"
+												class="pngx-repeater repeating-column"
+												data-name_id="wpe_menu_items"
+												data-ajax_field_id="wpe_menu_items"
+												data-ajax_action="pngx_repeater"
+												data-repeat-type="section"
+												data-section=0
+												data-column=0
+										>
+											<li class="repeater-item repeater-section 0">
+												<span class="sort hndle">|||</span>
+												<h5>Child Section 0</h5>
+
+
+												<div class="pngx-meta-field-wrap field-wrap-text field-wrap-cctor_highlight_title ">
+													<div class="pngx-meta-field field-text field-cctor_highlight_title">
+														<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[1][wpe_menu_column][0][wpe_menu_items][0][wpe_menu_name]" value="Field 1 1 col 0" size="30" type="text">
+													</div>
+												</div>
+
+												<div class="pngx-meta-field-wrap field-wrap-text field-wrap-cctor_highlight_title ">
+													<div class="pngx-meta-field field-text field-cctor_highlight_title">
+														<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[1][wpe_menu_column][0][wpe_menu_items][0][wpe_menu_description]" value="Field 2 1 col 0" size="30" type="text">
+													</div>
+												</div>
+
+												<div class="pngx-meta-field-wrap field-repeating-field">
+													<ul
+															id="wpe_menu_items-repeater"
+															class="pngx-repeater repeating-column"
+															data-name_id="wpe_menu_items"
+															data-ajax_field_id="wpe_menu_items"
+															data-ajax_action="pngx_repeater"
+															data-repeat-type="section"
+															data-section=0
+															data-column=0
+													>
+														<li class="repeater-item repeater-field 0">
+															<span class="sort hndle">|||</span>
+															<h5>Field Repeat 0</h5>
+
+
+															<div class="pngx-meta-field-wrap field-wrap-text field-wrap-cctor_highlight_title ">
+																<div class="pngx-meta-field field-text field-cctor_highlight_title">
+																	<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[1][wpe_menu_column][0][wpe_menu_items][0][wpe_menu_r_price][0][wpe_menu_price][]" value="Price 89" size="30" type="text">
+																</div>
+															</div>
+
+															<div class="pngx-meta-field-wrap field-wrap-text field-wrap-cctor_highlight_title ">
+																<div class="pngx-meta-field field-text field-cctor_highlight_title">
+																	<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[1][wpe_menu_column][0][wpe_menu_items][0][wpe_menu_r_price][0][wpe_menu_price][]" value="Price 85" size="30" type="text">
+																</div>
+															</div>
+
+
+															<h5>Field Repeat 0</h5>
+															<a class="add-repeater button"
+															   data-repeater="<?php echo esc_attr( $field['id'] ); ?>-repeater"
+															   href="#"
+															>+</a>
+															<a class="remove-repeater button"
+															   data-repeater="<?php echo esc_attr( $field['id'] ); ?>-repeater"
+															   href="#"
+															>X</a>
+														</li>
+													</ul>
+												</div>
+
+
+												<h5>Child Section 0</h5>
+												<a class="add-repeater button"
+												   data-repeater="<?php echo esc_attr( $field['id'] ); ?>-repeater"
+												   href="#"
+												>+</a>
+												<a class="remove-repeater button"
+												   data-repeater="<?php echo esc_attr( $field['id'] ); ?>-repeater"
+												   href="#"
+												>X</a>
+											</li>
+										</ul>
+									</div>
+
+
+
+
+
+							<h5>Column 0</h5>
+							<a class="add-repeater button"
+							   data-repeater="<?php echo esc_attr( $field['id'] ); ?>-repeater"
+							   href="#"
+							>+</a>
+							<a class="remove-repeater button"
+							   data-repeater="<?php echo esc_attr( $field['id'] ); ?>-repeater"
+							   href="#"
+							>X</a>
+						</li>
+
+						<li class="repeater-item repeater-column 1">
+							<span class="sort hndle">|||</span>
+							<h5>Column 1</h5>
+
+
+
+									<div class="pngx-meta-field-wrap field-repeating-section">
+										<ul
+												id="wpe_menu_items-repeater"
+												class="pngx-repeater repeating-column"
+												data-name_id="wpe_menu_items"
+												data-ajax_field_id="wpe_menu_items"
+												data-ajax_action="pngx_repeater"
+												data-repeat-type="section"
+												data-section=0
+												data-column=0
+										>
+											<li class="repeater-item repeater-section 0">
+												<span class="sort hndle">|||</span>
+												<h5>Child Section 1</h5>
+
+
+												<div class="pngx-meta-field-wrap field-wrap-text field-wrap-cctor_highlight_title ">
+													<div class="pngx-meta-field field-text field-cctor_highlight_title">
+														<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[1][wpe_menu_column][1][wpe_menu_items][0][wpe_menu_name]" value="Field 1 1 col 1" size="30" type="text">
+													</div>
+												</div>
+
+												<div class="pngx-meta-field-wrap field-wrap-text field-wrap-cctor_highlight_title ">
+													<div class="pngx-meta-field field-text field-cctor_highlight_title">
+														<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[1][wpe_menu_column][1][wpe_menu_items][0][wpe_menu_description]" value="Field 2 1 col 1" size="30" type="text">
+													</div>
+												</div>
+
+
+												<h5>Child Section 1</h5>
+												<a class="add-repeater button"
+												   data-repeater="<?php echo esc_attr( $field['id'] ); ?>-repeater"
+												   href="#"
+												>+</a>
+												<a class="remove-repeater button"
+												   data-repeater="<?php echo esc_attr( $field['id'] ); ?>-repeater"
+												   href="#"
+												>X</a>
+											</li>
+
+																			<li class="repeater-item repeater-section 0">
+												<span class="sort hndle">|||</span>
+												<h5>Child Section 2</h5>
+
+
+												<div class="pngx-meta-field-wrap field-wrap-text field-wrap-cctor_highlight_title ">
+													<div class="pngx-meta-field field-text field-cctor_highlight_title">
+														<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[1][wpe_menu_column][1][wpe_menu_items][1][wpe_menu_name]" value="Field 1 1 col 2" size="30" type="text">
+													</div>
+												</div>
+
+												<div class="pngx-meta-field-wrap field-wrap-text field-wrap-cctor_highlight_title ">
+													<div class="pngx-meta-field field-text field-cctor_highlight_title">
+														<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[1][wpe_menu_column][1][wpe_menu_items][1][wpe_menu_description]" value="Field 2 1 col 2" size="30" type="text">
+													</div>
+												</div>
+
+
+												<h5>Child Section 2</h5>
+												<a class="add-repeater button"
+												   data-repeater="<?php echo esc_attr( $field['id'] ); ?>-repeater"
+												   href="#"
+												>+</a>
+												<a class="remove-repeater button"
+												   data-repeater="<?php echo esc_attr( $field['id'] ); ?>-repeater"
+												   href="#"
+												>X</a>
+											</li>
+
+										</ul>
+									</div>
+
+
+
+
+
+							<h5>Column 1</h5>
+							<a class="add-repeater button"
+							   data-repeater="<?php echo esc_attr( $field['id'] ); ?>-repeater"
+							   href="#"
+							>+</a>
+							<a class="remove-repeater button"
+							   data-repeater="<?php echo esc_attr( $field['id'] ); ?>-repeater"
+							   href="#"
+							>X</a>
+						</li>
+
 				<a class="add-repeater button"
 				   data-repeater="<?php echo esc_attr( $field['id'] ); ?>-repeater"
 				   href="#"

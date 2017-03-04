@@ -15,16 +15,28 @@ class Pngx__Repeater__Main {
 	protected $id;
 	protected $meta;
 	protected $post_id;
+	protected $info;
 	protected $repeater_fields;
 
 	/**
 	 * Pngx__Repeater__Main constructor.
 	 */
 	public function __construct( $repeater_id, $meta, $post_id, $save = false ) {
-
+		/**
+		 * todo list
+		 * get values from database on load of admin - do individually at first
+		 * dyanmically generate name and get value (might have to change price)
+		 * save new values
+		 * sanitze values
+		 * delete rows that no longer exist
+		 * display values on front end
+		 * add in repeater system for dynamic fields
+		 *
+		 */
 		$this->id                = $repeater_id;
 		$this->post_id           = $post_id;
 		$this->meta[ $this->id ] = is_array( $meta ) ? $meta : array();
+		$this->info              = $this->get_post_id_info();
 		$this->repeater_fields   = apply_filters( 'pngx_meta_repeater_fields', array() );
 
 		if ( $save ) {
@@ -81,18 +93,28 @@ class Pngx__Repeater__Main {
 					// vars
 					$k = $sub_field['id'];
 
-
 					// test sub field exists
 					if ( ! isset( $value[ $i ][ $k ] ) ) {
-						log_me( 'no value' );
 						continue;
 
 					}
 
-					// validate
-					$this->update_value( $value, $field );
+					if ( 'repeater' === $sub_field['type'] ) {
+						$val = count( $value[ $i ][ $k ] );
+					} else {
+						$val = $value[ $i ][ $k ];
+					}
+
+
+//					$input_name = "{$input}[{$i}][{$k}]";
+//					$input_name = str_replace( "[", "_", $input_name );
+//					$input_name = str_replace( "]", "_", $input_name );
+					//update_metadata( $this->info['type'], $this->info['id'], $input_name, $val );
+
+					update_metadata( $this->info['type'], $this->info['id'], "{$input}[{$i}][{$k}]", $val );
 
 					$this->validate_value( $value[ $i ][ $k ], $sub_field, "{$input}[{$i}][{$k}]" );
+
 				}
 
 			}
@@ -121,7 +143,7 @@ class Pngx__Repeater__Main {
 
 
 		// update value
-		$return = $this->update_metadata( $field['name'], $value );
+		$return = $this->update_metadata( $field['id'], $value );
 
 
 		// update reference
