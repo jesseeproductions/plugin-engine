@@ -20,8 +20,8 @@
 }
 
 .pngx-meta-label {
-	width: 30%;
 	font-weight: 700;
+	width: 30%;
 }
 
 .pngx-meta-field {
@@ -84,10 +84,10 @@
 	border: 1px solid #dbdbdb;
 	font-size: 16px;
 	height: auto;
+	max-width: 90%;
 	padding: 10px;
 	text-align: center;
 	width: 360px;
-	max-width: 90%;
 }
 
 /**
@@ -96,8 +96,8 @@
 .pngx-inside-label {
 	color: $color__dark_grey;
 	font-size: 10px;
-	margin: 0 15px 0 0;
 	line-height: 26px;
+	margin: 0 15px 0 0;
 	vertical-align: top;
 }
 
@@ -136,18 +136,18 @@
 * List Field
 ***************************************************/
 .pngx-list {
-	margin: 0;
 	list-style-type: none;
+	margin: 0;
 
 	li {
+		color: $black;
 		padding-left: 1em;
 		text-indent: -.7em;
-		color: $black;
 	}
 
 	li:before {
-		content: "\002022 ";
 		color: $darkred;
+		content: "\002022 ";
 		padding-right: 10px;
 	}
 }
@@ -202,4 +202,12 @@
 	max-height: 400px;
 	overflow: scroll;
 	padding: 10px;
+
+	dd {
+		margin-bottom: 20px;
+	}
+}
+
+.pngx-system-info-copy .pngx-system-info-copy-btn {
+	padding: 6px;
 }
