@@ -21,11 +21,13 @@ class Pngx__Admin__Field__Repeater {
 		}
 
 		global $post;
-		//if ( ! $repeat_obj ) {
-			//$repeat_obj = new Pngx__Repeater__Main( $field['id'], $meta, 21 );
-		//}
+        log_me(get_post_custom($post->ID));
+        log_me(get_post_custom_keys($post->ID));
+		if ( ! $repeat_obj ) {
+			$repeat_obj = new Pngx__Repeater__Main( $field['id'], $meta, $post->ID );
+		}
 
-		$class = isset( $field['class'] ) ? $field['class'] : '';
+//		$class = isset( $field['class'] ) ? $field['class'] : '';
 
 		?>
 		<ul
@@ -82,13 +84,13 @@ class Pngx__Admin__Field__Repeater {
 
 												<div class="pngx-meta-field-wrap field-wrap-text field-wrap-cctor_highlight_title ">
 													<div class="pngx-meta-field field-text field-cctor_highlight_title">
-														<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[0][wpe_menu_column][0][wpe_menu_items][0][wpe_menu_name]" value="Field 1 0 col 0" size="30" type="text">
+														<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[0][wpe_menu_column][0][wpe_menu_items][0][wpe_menu_name]" value="<?php echo get_post_meta( $post->ID, 'wpe_menu_section[0][wpe_menu_column][0][wpe_menu_items][0][wpe_menu_name]', true); ?>" size="30" type="text">
 													</div>
 												</div>
 
 												<div class="pngx-meta-field-wrap field-wrap-text field-wrap-cctor_highlight_title ">
 													<div class="pngx-meta-field field-text field-cctor_highlight_title">
-														<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[0][wpe_menu_column][0][wpe_menu_items][0][wpe_menu_description]" value="Field 2 0 col 0" size="30" type="text">
+														<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[0][wpe_menu_column][0][wpe_menu_items][0][wpe_menu_description]" value="<?php echo get_post_meta( $post->ID, 'wpe_menu_section[0][wpe_menu_column][0][wpe_menu_items][0][wpe_menu_description]', true); ?>" size="30" type="text">
 													</div>
 												</div>
 
@@ -110,13 +112,13 @@ class Pngx__Admin__Field__Repeater {
 
 															<div class="pngx-meta-field-wrap field-wrap-text field-wrap-cctor_highlight_title ">
 																<div class="pngx-meta-field field-text field-cctor_highlight_title">
-																	<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[0][wpe_menu_column][0][wpe_menu_items][0][wpe_menu_r_price][0][wpe_menu_price][]" value="Price 13" size="30" type="text">
+																	<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[0][wpe_menu_column][0][wpe_menu_items][0][wpe_menu_r_price][0][wpe_menu_price][]" value="<?php $p = get_post_meta( $post->ID, 'wpe_menu_section[0][wpe_menu_column][0][wpe_menu_items][0][wpe_menu_r_price][0][wpe_menu_price]', true); echo $p[0]; ?>" size="30" type="text">
 																</div>
 															</div>
 
 															<div class="pngx-meta-field-wrap field-wrap-text field-wrap-cctor_highlight_title ">
 																<div class="pngx-meta-field field-text field-cctor_highlight_title">
-																	<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[0][wpe_menu_column][0][wpe_menu_items][0][wpe_menu_r_price][0][wpe_menu_price][]" value="Price 23" size="30" type="text">
+																	<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[0][wpe_menu_column][0][wpe_menu_items][0][wpe_menu_r_price][0][wpe_menu_price][]" value="<?php $p = get_post_meta( $post->ID, 'wpe_menu_section[0][wpe_menu_column][0][wpe_menu_items][0][wpe_menu_r_price][0][wpe_menu_price]', true); echo $p[1]; ?>" size="30" type="text">
 																</div>
 															</div>
 
@@ -187,13 +189,13 @@ class Pngx__Admin__Field__Repeater {
 
 												<div class="pngx-meta-field-wrap field-wrap-text field-wrap-cctor_highlight_title ">
 													<div class="pngx-meta-field field-text field-cctor_highlight_title">
-														<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[0][wpe_menu_column][1][wpe_menu_items][0][wpe_menu_name]" value="Field 1 0 col 1" size="30" type="text">
+														<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[0][wpe_menu_column][1][wpe_menu_items][0][wpe_menu_name]" value="<?php echo get_post_meta( $post->ID, 'wpe_menu_section[0][wpe_menu_column][1][wpe_menu_items][0][wpe_menu_name]', true); ?>" size="30" type="text">
 													</div>
 												</div>
 
 												<div class="pngx-meta-field-wrap field-wrap-text field-wrap-cctor_highlight_title ">
 													<div class="pngx-meta-field field-text field-cctor_highlight_title">
-														<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[0][wpe_menu_column][1][wpe_menu_items][0][wpe_menu_description]" value="Field 2 0 col 1" size="30" type="text">
+														<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[0][wpe_menu_column][1][wpe_menu_items][0][wpe_menu_description]" value="<?php echo get_post_meta( $post->ID, 'wpe_menu_section[0][wpe_menu_column][1][wpe_menu_items][0][wpe_menu_description]', true); ?>" size="30" type="text">
 													</div>
 												</div>
 
@@ -216,13 +218,13 @@ class Pngx__Admin__Field__Repeater {
 
 												<div class="pngx-meta-field-wrap field-wrap-text field-wrap-cctor_highlight_title ">
 													<div class="pngx-meta-field field-text field-cctor_highlight_title">
-														<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[0][wpe_menu_column][1][wpe_menu_items][1][wpe_menu_name]" value="Field 1 2 col 1" size="30" type="text">
+														<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[0][wpe_menu_column][1][wpe_menu_items][1][wpe_menu_name]" value="<?php echo get_post_meta( $post->ID, 'wpe_menu_section[0][wpe_menu_column][1][wpe_menu_items][1][wpe_menu_name]', true); ?>" size="30" type="text">
 													</div>
 												</div>
 
 												<div class="pngx-meta-field-wrap field-wrap-text field-wrap-cctor_highlight_title ">
 													<div class="pngx-meta-field field-text field-cctor_highlight_title">
-														<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[0][wpe_menu_column][1][wpe_menu_items][1][wpe_menu_description]" value="Field 2 2 col 1" size="30" type="text">
+														<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[0][wpe_menu_column][1][wpe_menu_items][1][wpe_menu_description]" value="<?php echo get_post_meta( $post->ID, 'wpe_menu_section[0][wpe_menu_column][1][wpe_menu_items][1][wpe_menu_description]', true); ?>" size="30" type="text">
 													</div>
 												</div>
 
@@ -300,13 +302,13 @@ class Pngx__Admin__Field__Repeater {
 
 												<div class="pngx-meta-field-wrap field-wrap-text field-wrap-cctor_highlight_title ">
 													<div class="pngx-meta-field field-text field-cctor_highlight_title">
-														<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[1][wpe_menu_column][0][wpe_menu_items][0][wpe_menu_name]" value="Field 1 1 col 0" size="30" type="text">
+														<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[1][wpe_menu_column][0][wpe_menu_items][0][wpe_menu_name]" value="<?php echo get_post_meta( $post->ID, 'wpe_menu_section[1][wpe_menu_column][0][wpe_menu_items][0][wpe_menu_name]', true); ?>" size="30" type="text">
 													</div>
 												</div>
 
 												<div class="pngx-meta-field-wrap field-wrap-text field-wrap-cctor_highlight_title ">
 													<div class="pngx-meta-field field-text field-cctor_highlight_title">
-														<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[1][wpe_menu_column][0][wpe_menu_items][0][wpe_menu_description]" value="Field 2 1 col 0" size="30" type="text">
+														<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[1][wpe_menu_column][0][wpe_menu_items][0][wpe_menu_description]" value="<?php echo get_post_meta( $post->ID, 'wpe_menu_section[1][wpe_menu_column][0][wpe_menu_items][0][wpe_menu_description]', true); ?>" size="30" type="text">
 													</div>
 												</div>
 
@@ -328,13 +330,13 @@ class Pngx__Admin__Field__Repeater {
 
 															<div class="pngx-meta-field-wrap field-wrap-text field-wrap-cctor_highlight_title ">
 																<div class="pngx-meta-field field-text field-cctor_highlight_title">
-																	<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[1][wpe_menu_column][0][wpe_menu_items][0][wpe_menu_r_price][0][wpe_menu_price][]" value="Price 89" size="30" type="text">
+																	<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[1][wpe_menu_column][0][wpe_menu_items][0][wpe_menu_r_price][0][wpe_menu_price][]" value="<?php $p = get_post_meta( $post->ID, 'wpe_menu_section[1][wpe_menu_column][0][wpe_menu_items][0][wpe_menu_r_price][0][wpe_menu_price]', true); echo $p[0]; ?>" size="30" type="text">
 																</div>
 															</div>
 
 															<div class="pngx-meta-field-wrap field-wrap-text field-wrap-cctor_highlight_title ">
 																<div class="pngx-meta-field field-text field-cctor_highlight_title">
-																	<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[1][wpe_menu_column][0][wpe_menu_items][0][wpe_menu_r_price][0][wpe_menu_price][]" value="Price 85" size="30" type="text">
+																	<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[1][wpe_menu_column][0][wpe_menu_items][0][wpe_menu_r_price][0][wpe_menu_price][]" value="<?php $p = get_post_meta( $post->ID, 'wpe_menu_section[1][wpe_menu_column][0][wpe_menu_items][0][wpe_menu_r_price][0][wpe_menu_price]', true); echo $p[1]; ?>" size="30" type="text">
 																</div>
 															</div>
 
@@ -405,13 +407,13 @@ class Pngx__Admin__Field__Repeater {
 
 												<div class="pngx-meta-field-wrap field-wrap-text field-wrap-cctor_highlight_title ">
 													<div class="pngx-meta-field field-text field-cctor_highlight_title">
-														<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[1][wpe_menu_column][1][wpe_menu_items][0][wpe_menu_name]" value="Field 1 1 col 1" size="30" type="text">
+														<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[1][wpe_menu_column][1][wpe_menu_items][0][wpe_menu_name]" value="<?php echo get_post_meta( $post->ID, 'wpe_menu_section[1][wpe_menu_column][1][wpe_menu_items][0][wpe_menu_name]', true); ?>" size="30" type="text">
 													</div>
 												</div>
 
 												<div class="pngx-meta-field-wrap field-wrap-text field-wrap-cctor_highlight_title ">
 													<div class="pngx-meta-field field-text field-cctor_highlight_title">
-														<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[1][wpe_menu_column][1][wpe_menu_items][0][wpe_menu_description]" value="Field 2 1 col 1" size="30" type="text">
+														<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[1][wpe_menu_column][1][wpe_menu_items][0][wpe_menu_description]" value="<?php echo get_post_meta( $post->ID, 'wpe_menu_section[1][wpe_menu_column][1][wpe_menu_items][0][wpe_menu_description]', true); ?>" size="30" type="text">
 													</div>
 												</div>
 
@@ -434,13 +436,13 @@ class Pngx__Admin__Field__Repeater {
 
 												<div class="pngx-meta-field-wrap field-wrap-text field-wrap-cctor_highlight_title ">
 													<div class="pngx-meta-field field-text field-cctor_highlight_title">
-														<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[1][wpe_menu_column][1][wpe_menu_items][1][wpe_menu_name]" value="Field 1 1 col 2" size="30" type="text">
+														<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[1][wpe_menu_column][1][wpe_menu_items][1][wpe_menu_name]" value="<?php echo get_post_meta( $post->ID, 'wpe_menu_section[1][wpe_menu_column][1][wpe_menu_items][1][wpe_menu_name]', true); ?>" size="30" type="text">
 													</div>
 												</div>
 
 												<div class="pngx-meta-field-wrap field-wrap-text field-wrap-cctor_highlight_title ">
 													<div class="pngx-meta-field field-text field-cctor_highlight_title">
-														<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[1][wpe_menu_column][1][wpe_menu_items][1][wpe_menu_description]" value="Field 2 1 col 2" size="30" type="text">
+														<input id="cctor_highlight_title" class="regular-text" name="wpe_menu_section[1][wpe_menu_column][1][wpe_menu_items][1][wpe_menu_description]" value="<?php echo get_post_meta( $post->ID, 'wpe_menu_section[1][wpe_menu_column][1][wpe_menu_items][1][wpe_menu_description]', true); ?>" size="30" type="text">
 													</div>
 												</div>
 
