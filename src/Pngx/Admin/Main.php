@@ -36,6 +36,8 @@ class Pngx__Admin__Main {
 		//Register Admin Assets
 		add_action( 'admin_enqueue_scripts', array( 'Pngx__Admin__Assets', 'register_assets' ), 0 );
 
+		add_action( 'admin_enqueue_scripts', array( 'Pngx__Admin__Assets', 'register_plugin_list_assets' ), 0 );
+
 	} //end admin_init
 
 }

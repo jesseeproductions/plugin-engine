@@ -377,13 +377,15 @@ fieldset[disabled] .btn-primary.active {
   margin: 0 15px 0 0;
   vertical-align: top; }
 
-/* License Button
+/* License
 ------------------------------------------------------------ */
+.pngx-list-license-button,
 .pngx-license-button-act {
   background: #003ca9;
   border: 1px solid #003ca9;
   color: #fff; }
 
+.pngx-list-license-button:hover,
 .pngx-license-button-act:hover {
   background: #1e4164;
   cursor: pointer; }
@@ -396,6 +398,19 @@ fieldset[disabled] .btn-primary.active {
 .pngx-license-button-det:hover {
   background: #003ca9;
   cursor: pointer; }
+
+.pngx-license-list-key-wrapper .plugin-update {
+  border-left: 4px solid #00a0d2; }
+
+.pngx-license-list-key-wrap {
+  position: relative; }
+  .pngx-license-list-key-wrap .pngx-list-license-button {
+    padding: 4px 10px;
+    display: inline; }
+  .pngx-license-list-key-wrap .pngx-license-field-result-msg {
+    text-align: center; }
+  .pngx-license-list-key-wrap .description {
+    font-style: italic; }
 
 /**
 * Linked Style Fields

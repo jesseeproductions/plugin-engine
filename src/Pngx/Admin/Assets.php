@@ -134,6 +134,39 @@ class Pngx__Admin__Assets {
 	}
 
 	/*
+		* Register Assets
+		*/
+		public static function register_plugin_list_assets() {
+
+			// @formatter:off
+		/*	wp_register_style(
+				'pngx-bootstrap-iconpicker',
+				Pngx__Main::instance()->vendor_url . 'bootstrap-iconpicker/bootstrap-iconpicker/css/bootstrap-iconpicker.min.css',
+				false,
+				filemtime( Pngx__Main::instance()->vendor_path . 'bootstrap-iconpicker/bootstrap-iconpicker/css/bootstrap-iconpicker.min.css' )
+			);*/
+			wp_register_script(
+				'pngx-license',
+				Pngx__Main::instance()->resource_url . 'js/pngx-license.js',
+				array( 'jquery-ui-tabs' ),
+				filemtime( Pngx__Main::instance()->resource_path . 'js/pngx-license.js' ),
+				true
+			);
+
+			wp_localize_script( 'pngx-license', 'pngx_license', array(
+				'ajaxurl'   => admin_url( 'admin-ajax.php', ( is_ssl() ? 'https' : 'http' ) ),
+				'nonce'     => wp_create_nonce( 'pngx_license_updates' ),
+			) );
+			// @formatter:on
+
+			/**
+			 * Hook to Register New Scripts or Styles for the Admin
+			 */
+			do_action( 'pngx_admin_scripts_styles' );
+
+		}
+
+	/*
 	* Enqueue Plugin Engine Assets
 	*/
 	public static function load_assets() {
