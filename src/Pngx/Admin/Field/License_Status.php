@@ -40,7 +40,7 @@ class Pngx__Admin__Field__License_Status {
 
 		if ( isset( $license_info['status'] ) && false !== $license_info['status'] && 'valid' == $license_info['status'] ) {
 
-			echo '<span style="color:green;">' . __( 'License is Active', 'plugin-engine' ) . $expiration_msg . '</span><br><br>';
+			echo '<span style="color:green;">' . esc_html( __( 'License is Active', 'plugin-engine' ) . $expiration_msg ) . '</span><br><br>';
 
 			wp_nonce_field( 'pngx_license_nonce_' . esc_attr( $license ), 'pngx_license_nonce_' . esc_attr( $license ) );
 
@@ -56,11 +56,11 @@ class Pngx__Admin__Field__License_Status {
 				$license_info_valid = __( 'License is Not Active', 'plugin-engine' );
 			}
 
-			echo '<span style="color:red;">' . $license_info_valid . '</span><br><br>';
+			echo '<span style="color:red;">' . esc_html( $license_info_valid ) . '</span><br><br>';
 
 			wp_nonce_field( 'pngx_license_nonce_' . esc_attr( $license ), 'pngx_license_nonce_' . esc_attr( $license ) );
 
-			echo '<input type="submit" class="pngx-license-button-det" name="pngx_license_activate_' . esc_attr( $license ) . '" value="' . __( 'Activate License', 'plugin-engine' ) . '"/>';
+			echo '<input type="submit" class="pngx-license-button-det" name="pngx_license_activate_' . esc_attr( $license ) . '" value="' . esc_html__( 'Activate License', 'plugin-engine' ) . '"/>';
 
 		}
 

@@ -19,7 +19,7 @@ class Pngx__Main {
 
 	protected $plugin_context;
 	protected $plugin_context_class;
-	public $doing_ajax = false;
+	public    $doing_ajax = false;
 
 	public $plugin_dir;
 	public $plugin_path;
@@ -52,7 +52,16 @@ class Pngx__Main {
 		$this->load_text_domain( 'plugin-engine', basename( dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) ) . '/plugin-engine/languages/' );
 
 		$this->init_autoloading();
+
 		$this->add_hooks();
+
+		$this->doing_ajax = defined( 'DOING_AJAX' ) && DOING_AJAX;
+
+		/**
+		 * Runs once all pngx libs are loaded and initial hooks are in place.
+		 *
+		 */
+		do_action( 'plugin_engine_loaded' );
 
 	}
 
@@ -94,6 +103,8 @@ class Pngx__Main {
 		if ( is_admin() ) {
 			new Pngx__Admin__Main();
 		}
+
+		add_action( 'plugins_loaded', array( $this, 'pngx_plugins_loaded' ), PHP_INT_MAX );
 
 	}
 
@@ -211,6 +222,17 @@ class Pngx__Main {
 
 		return $out;
 
+	}
+
+	/**
+	 * Runs pngx_plugins_loaded action, should be hooked to the end of plugins_loaded
+	 */
+	public function pngx_plugins_loaded() {
+		/**
+		 * Runs after all plugins including Plugin Engine ones have loaded
+		 *
+		 */
+		do_action( 'pngx_plugins_loaded' );
 	}
 
 	/**

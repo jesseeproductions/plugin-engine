@@ -10,16 +10,21 @@
 }
 
 .success,
+.pngx-success,
 .pngx-message {
 	border-left: 4px solid $color__sucess;
 	font-weight: bold;
 }
-
+.pngx-success-msg {
+	color: $color__sucess;
+}
 .pngx-error {
 	border-left: 4px solid $color__alert;
 	color: $color__alert;
 }
-
+.pngx-error-msg {
+	color: $color__alert;
+}
 .success {
 	padding: 1px 12px;
 }

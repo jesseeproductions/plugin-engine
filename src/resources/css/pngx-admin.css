@@ -308,8 +308,8 @@ fieldset[disabled] .btn-primary.active {
   overflow: hidden; }
 
 .pngx-meta-label {
-  width: 30%;
-  font-weight: 700; }
+  font-weight: 700;
+  width: 30%; }
 
 .pngx-meta-field {
   width: 70%; }
@@ -362,10 +362,10 @@ fieldset[disabled] .btn-primary.active {
   border: 1px solid #dbdbdb;
   font-size: 16px;
   height: auto;
+  max-width: 90%;
   padding: 10px;
   text-align: center;
-  width: 360px;
-  max-width: 90%; }
+  width: 360px; }
 
 /**
 * Linked Style Fields
@@ -373,17 +373,19 @@ fieldset[disabled] .btn-primary.active {
 .pngx-inside-label {
   color: #333;
   font-size: 10px;
-  margin: 0 15px 0 0;
   line-height: 26px;
+  margin: 0 15px 0 0;
   vertical-align: top; }
 
-/* License Button
+/* License
 ------------------------------------------------------------ */
+.pngx-list-license-button,
 .pngx-license-button-act {
   background: #003ca9;
   border: 1px solid #003ca9;
   color: #fff; }
 
+.pngx-list-license-button:hover,
 .pngx-license-button-act:hover {
   background: #1e4164;
   cursor: pointer; }
@@ -397,6 +399,19 @@ fieldset[disabled] .btn-primary.active {
   background: #003ca9;
   cursor: pointer; }
 
+.pngx-license-list-key-wrapper .plugin-update {
+  border-left: 4px solid #00a0d2; }
+
+.pngx-license-list-key-wrap {
+  position: relative; }
+  .pngx-license-list-key-wrap .pngx-list-license-button {
+    padding: 4px 10px;
+    display: inline; }
+  .pngx-license-list-key-wrap .pngx-license-field-result-msg {
+    text-align: center; }
+  .pngx-license-list-key-wrap .description {
+    font-style: italic; }
+
 /**
 * Linked Style Fields
 ***************************************************/
@@ -407,15 +422,15 @@ fieldset[disabled] .btn-primary.active {
 * List Field
 ***************************************************/
 .pngx-list {
-  margin: 0;
-  list-style-type: none; }
+  list-style-type: none;
+  margin: 0; }
   .pngx-list li {
+    color: #000;
     padding-left: 1em;
-    text-indent: -.7em;
-    color: #000; }
+    text-indent: -.7em; }
   .pngx-list li:before {
-    content: "\002022 ";
     color: #950402;
+    content: "\002022 ";
     padding-right: 10px; }
 
 .pngx-wrapper .pngx-list {
@@ -460,6 +475,11 @@ fieldset[disabled] .btn-primary.active {
   max-height: 400px;
   overflow: scroll;
   padding: 10px; }
+  .pngx-support-stats dd {
+    margin-bottom: 20px; }
+
+.pngx-system-info-copy .pngx-system-info-copy-btn {
+  padding: 6px; }
 
 /* ==========================================================================
    Glyphicons CSS
@@ -1264,12 +1284,19 @@ fieldset[disabled] .btn-primary.active {
   padding: 8px 12px; }
 
 .success,
+.pngx-success,
 .pngx-message {
   border-left: 4px solid #3ca900;
   font-weight: bold; }
 
+.pngx-success-msg {
+  color: #3ca900; }
+
 .pngx-error {
   border-left: 4px solid #dd3d36;
+  color: #dd3d36; }
+
+.pngx-error-msg {
   color: #dd3d36; }
 
 .success {
