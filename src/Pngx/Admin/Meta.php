@@ -339,17 +339,6 @@ class Pngx__Admin__Meta {
 
 			}
 
-			//handle repeatable fields
-			if ( 'repeater' === $option['type'] && isset ( $_POST[ $option['id'] ] ) ) {
-
-				if ( ! isset( ${'repeat_obj' . $option['id']} ) ) {
-					${'repeat_obj' . $option['id']} = new Pngx__Repeater__Main( $option['id'], $_POST[ $option['id'] ], $post_id, true );
-				}
-
-				continue;
-
-			}
-
 			// Final Check if value should be saved then sanitize and save
 			if ( isset( $_POST[ $option['id'] ] ) ) {
 				//Send Input to Sanitize Class, will return sanitized input or no input if no sanitization method
@@ -377,116 +366,6 @@ class Pngx__Admin__Meta {
 		do_action( 'pngx_after_save_meta_fields', $_POST );
 
 	}
-
-
-	/*
-	* Save Repeatable
-	*/
-	public static function save_repeatable( $post_id, $repeat_obj, $section_post, $option, $options, $internal = false ) {
-
-		/**
-		 * Section Loop
-		 */
-
-		$column_id = isset( $option['columns'] ) ? $option['columns'] . $repeat_obj->get_current_sec_col() : '';
-		if ( $column_id && isset( $_POST[ $column_id ] ) ) {
-			$repeat_obj->set_columns( $_POST[ $column_id ] );
-		}
-
-		/**
-		 * Column Loop to Save all Fields in Column under one array
-		 *
-		 */
-		for ( $col_i = 0; $col_i < $repeat_obj->get_total_columns(); $col_i ++ ) {
-
-			$column_postfix = $repeat_obj->get_current_sec_col();
-
-			$col_saving_id = $repeat_obj->get_id() . $column_postfix;
-
-			$old = get_post_meta( $post_id, $col_saving_id, true );
-			$new = array();
-
-			foreach ( $option['repeatable_fields'] as $repeater ) {
-
-				$repeater_id = $repeater['id'] . $column_postfix;
-
-				// if repeater in repeater then run through its fields to save
-				if ( isset( $repeater['child_repeater'] ) && $options[ $repeater['child_repeater'] ] ) {
-
-					// if we have another repeating field and there is saved data lets try to save
-					if ( isset( $repeater['child_repeater'] ) && isset( $section_post[ $repeater['child_repeater'] ] ) ) {
-						//log_me( 'repeater-repeater25' );
-						$new[ $repeater_id ] = self::save_repeatable( $post_id, $repeat_obj, $section_post[ $repeater['child_repeater'] ], $options[ $repeater['child_repeater'] ], $options, true );
-					}
-
-					if ( isset( $options[ $repeater['child_repeater'] ]['repeatable_fields'] ) ) {
-						$child_repeater = self::save_repeatable( $post_id, $repeat_obj, $section_post, $options[ $repeater['child_repeater'] ], $options, true );
-						if ( is_array( $child_repeater ) ) {
-							foreach ( $child_repeater as $repeater_id => $value ) {
-								$new[ $repeater_id ] = $value;
-							}
-						}
-						continue;
-					}
-
-				}
-
-				if ( ! isset( $section_post[ $repeater_id ] ) ) {
-					continue;
-				}
-
-				$count = count( $section_post[ $repeater_id ] );
-				for ( $i = 0; $i < $count; $i ++ ) {
-
-					if ( $section_post[ $repeater_id ][ $i ] ) {
-
-						$sanitized = new Pngx__Sanitize( $repeater['type'], $section_post[ $repeater_id ][ $i ], $repeater );
-
-						$new[ $repeater_id ][ $i ] = $sanitized->result;
-
-						log_me( $new[ $repeater_id ][ $i ] );
-
-					}
-				}
-
-			}
-
-			if ( $internal ) {
-				return $new;
-			}
-
-			//log_me( 'old - new' );
-			//log_me( $old );
-			//log_me( $new );
-
-			if ( ! empty( $new ) && $new != $old ) {
-				update_post_meta( $post_id, $col_saving_id, $new );
-			} elseif ( empty( $new ) && $old ) {
-				delete_post_meta( $post_id, $col_saving_id, $old );
-			}
-
-			// Got to next custom field to save as repeatable field is done
-			continue;
-
-		} //End For Columns
-
-		/*	$repeat_obj->update_section_count();
-
-		} // End For Section
-
-		//save oount of sections
-		$old = (int) get_post_meta( $post_id, $option['id'], true );
-		$new = (int) $repeat_obj->get_total_sections();
-
-		if ( ! empty( $new ) && $new != $old ) {
-			update_post_meta( $post_id, $option['id'], absint( $new ) );
-		} elseif ( empty( $new ) && $old ) {
-			delete_post_meta( $post_id, $option['id'], absint( $old ) );
-		}*/
-
-
-	}
-
 
 	/**
 	 * Static Singleton Factory Method

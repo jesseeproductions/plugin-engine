@@ -174,12 +174,6 @@ class Pngx__Admin__Fields {
 
 				break;
 
-			case 'repeater':
-
-				Pngx__Admin__Field__Repeater::display( $field, $options, $options_id, $meta, $repeat_obj );
-
-				break;
-
 			case 'select':
 
 				Pngx__Admin__Field__Select::display( $field, $options, $options_id, $meta, $repeat_obj );
