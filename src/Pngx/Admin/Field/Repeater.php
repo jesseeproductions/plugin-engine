@@ -21,8 +21,73 @@ class Pngx__Admin__Field__Repeater {
 		}
 
 		global $post;
-        log_me(get_post_custom($post->ID));
-        log_me(get_post_custom_keys($post->ID));
+
+       /* $repeater_meta[] = array(
+
+            'wpe_menu_column' => array(
+
+                   '0' => array(
+                            'wpe_menu_items' => array(
+                                       '0' => array(
+                                                'wpe_menu_name' => 'Menu Item 1'
+                                       )
+                            ),
+
+                   )
+
+            ),
+
+        );*/
+
+        $repeater_meta[] = array(
+
+            'wpe_menu_column' => array(
+
+                 '0' => array(
+
+                    'wpe_menu_name' => 'Menu Item 1',
+                    'wpe_menu_description' => 'Menu Descrtion 1',
+
+                 ),
+                 '1' => array(
+
+                         'wpe_menu_name' => 'Menu Item 2',
+                         'wpe_menu_description' => 'Menu Descrtion 2',
+                         'wpe_menu_r_price' => array(
+                                '0' => array(
+                                    'wpe_menu_price' => array (
+                                            '0' => '24.00',
+                                            '1' => '20.00',
+                                    )
+                                )
+                         )
+
+                  )
+            )
+
+        );
+
+        //log_me($repeater_meta);
+
+
+		if ( ! $repeat_obj ) {
+			$repeat_obj = new Pngx__Repeater__Main( $field['id'], $repeater_meta, $post->ID );
+		}
+
+
+
+}
+
+public static function display_version2( $field = array(), $options = array(), $options_id = null, $meta = null, $repeat_obj = null ) {
+
+
+		if ( ! isset( $field['repeater_fields'] ) || ! is_array( $field['repeater_fields'] ) ) {
+			return;
+		}
+
+		global $post;
+        //log_me(get_post_custom($post->ID));
+       // log_me(get_post_custom_keys($post->ID));
 		if ( ! $repeat_obj ) {
 			$repeat_obj = new Pngx__Repeater__Main( $field['id'], $meta, $post->ID );
 		}
