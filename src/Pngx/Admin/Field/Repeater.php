@@ -45,23 +45,29 @@ class Pngx__Admin__Field__Repeater {
 
                  '0' => array(
 
-                    'wpe_menu_name' => 'Menu Item 1',
-                    'wpe_menu_description' => 'Menu Descrtion 1',
-
+                            'wpe_menu_items' => array(
+                                         '0' => array(
+                                            'wpe_menu_name' => 'Menu Item 1',
+                                            'wpe_menu_description' => 'Menu Descrtion 1',
+                                   )
+                            )
                  ),
                  '1' => array(
 
-                         'wpe_menu_name' => 'Menu Item 2',
-                         'wpe_menu_description' => 'Menu Descrtion 2',
-                         'wpe_menu_r_price' => array(
-                                '0' => array(
-                                    'wpe_menu_price' => array (
-                                            '0' => '24.00',
-                                            '1' => '20.00',
-                                    )
+                          'wpe_menu_items' => array(
+                                         '0' => array(
+                                             'wpe_menu_name' => 'Menu Item 2',
+                                             'wpe_menu_description' => 'Menu Descrtion 2',
+                                             'wpe_menu_r_price' => array(
+                                                    '0' => array(
+                                                        'wpe_menu_price' => array (
+                                                                '0' => '24.00',
+                                                                '1' => '20.00',
+                                                        )
+                                                    )
+                                             )
                                 )
-                         )
-
+                        )
                   )
             )
 

@@ -46,15 +46,15 @@ class Pngx__Repeater__Main {
 
 		$this->new_meta = $this->cycle_repeaters( $this->meta, null );
 
-		echo '<pre>';
-		print_r( $this->meta );
-		print_r( $this->new_meta );
-		echo '</pre>';
+		/*		echo '<pre>';
+				print_r( $this->meta );
+				print_r( $this->new_meta );
+				echo '</pre>';*/
 	}
 
 	public function cycle_repeaters( $array, $input ) {
 
-		echo '<br><br>' . key( $array ) . ' ' . ' start-cycle_repeaters<br>';
+		//	echo '<br><br>' . key( $array ) . ' ' . ' start-cycle_repeaters<br>';
 
 		$cycle = $array;
 
@@ -62,27 +62,29 @@ class Pngx__Repeater__Main {
 
 		$keys = array_keys( $cycle );
 
+		echo 'div class="' . key( $array ) . ' ' . $this->counter ++ . '" <br>';
+
 		foreach ( $keys as $i ) {
 
-			echo $i . ' array_keys<br>';
+			//	echo $i . ' array_keys<br>';
 
 			foreach ( $cycle as $k => $value ) {
 
-				echo $k . ' key<br>';
-/*
-				if ( is_array( $value ) && ( ! is_numeric( $k ) &&  $this->repeater_fields[ $k ]['repeater_type'] && 'field' === $this->repeater_fields[ $k ]['repeater_type'] ) ) {
-					log_me( 'here' );
-					log_me( $value );
+				//echo $k . ' key<br>';
 
-				} else*/
+				if ( is_array( $value ) && ( isset( $this->repeater_fields[ $k ]['repeater_type'] ) && 'single-field' === $this->repeater_fields[ $k ]['repeater_type'] ) ) {
+					//echo $k . ' key<br>';
 
-				if ( is_array( $value ) ) {
+					$builder[ $k ] = $this->field_repeater( $value, $k );
 
-					echo 'value is array<br>';
 
-					if ( isset( $this->repeater_fields[ $k ] ) ) {
-						//$builder[ $k ] = array();
-					}
+				} elseif ( is_array( $value ) ) {
+
+					//echo 'value is array<br>';
+
+					/*					if ( isset( $this->repeater_fields[ $k ] ) ) {
+											//$builder[ $k ] = array();
+										}*/
 
 					$builder[ $k ] = $this->cycle_repeaters( $value, "{$input}[{$i}][{$k}]" );
 
@@ -103,76 +105,28 @@ class Pngx__Repeater__Main {
 
 		}
 
-		echo '<br><br>' . key( $array ) . ' end-cycle_repeaters<br>';
+		//echo '<br><br>' . key( $array ) . ' end-cycle_repeaters<br>';
+
+		echo '/div class="' . key( $array ) . '" <br>';
 
 		return $builder;
 
 	}
 
-	public function cycle_repeaters_2( $array, $input ) {
-
-		echo '<br><br>' . key( $array ) . ' ' . ' start-cycle_repeaters<br>';
+	public function field_repeater( $array, $k ) {
 
 		$cycle = $array;
 
-		$keys = array_keys( $cycle );
+		$builder = array();
 
-//		echo '<br><br><pre>'; print_r( $keys ); echo  '</pre> array_keys<br>';
+		foreach ( $cycle as $value ) {
 
-		//foreach ( $keys as $i ) {
-
-
-		foreach ( $cycle as $field_key => $value ) {
-
-			echo $field_key . ' key<br>';
-
-			$k = $field_key;
-
-			if ( is_array( $value ) ) {
-				echo 'value is array<br>';
-
-				$this->new_meta[] = $field_key;
-
-				if ( is_numeric( key( $value ) ) && $field_key ) {
-					$this->new_meta[ $field_key ] = $field_key;
-				}
-
-				$this->cycle_repeaters( $value, "{$input}[{$i}][{$k}]" );
-
-			} else {
-
-				$this->new_meta = "{$input}[{$i}][{$k}]" . $value;
-
-				echo $value . ' value<br>';
-
-			}
-
-			//print_r( $value );
-			//echo ' value<br>';
-			// bail early if not found
-			/*			if ( ! $this->repeater_fields[ $field_key ] ) {
-							log_me( 'bail no field' );
-							continue;
-						}*/
-
-			// get repeaters field
-			//$field = $this->repeater_fields[ $field_key ];
-			//$input = $field_key;
-			//$input = '$this->meta[' . $field_key . ']';
-
-			//echo ' field<br>';
-			//print_r( $field );
-			//echo ' field<br>';
-			//echo $input . ' input<br>';
-
-			//$this->cycle_repeaters( $value, $field, $input );
+			$sanitized = new Pngx__Sanitize( $this->repeater_fields[ $k ]['type'], $value, $this->repeater_fields[ $k ] );
+			$builder[] = $sanitized->result;
 
 		}
 
-		//}
-
-//		$this->counter++;
-		echo '<br><br>' . key( $array ) . ' end-cycle_repeaters<br>';
+		return $builder;
 
 	}
 }
