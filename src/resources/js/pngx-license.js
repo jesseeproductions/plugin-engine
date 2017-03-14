@@ -24,7 +24,11 @@ var pngx_update_license = pngx_update_license || {};
 
 			var field_wrap = $( this ).closest( '.pngx-license-list-key-wrap' );
 
-			//console.log( form_wrap );
+			var plugin_slug = $( field_wrap ).find( '.pngx_plugin_slug' ).val();
+
+			var deactivate_link = $( field_wrap ).find( '.pngx_deactivate_link' ).val();
+
+			var deactivate_link_msg = $( field_wrap ).find( '.pngx_deactivate_link_msg' ).val();
 
 			setTimeout( function () {
 
@@ -36,7 +40,7 @@ var pngx_update_license = pngx_update_license || {};
 					license_inputs: $( field_wrap ).find( ' .pngx-license-field' ).serialize()
 				};
 
-				obj.update_license( params, field_wrap );
+				obj.update_license( params, field_wrap, plugin_slug, deactivate_link, deactivate_link_msg );
 
 			}, 500 );
 
@@ -45,7 +49,7 @@ var pngx_update_license = pngx_update_license || {};
 	};
 
 
-	obj.update_license = function ( params, field_wrap ) {
+	obj.update_license = function ( params, field_wrap, plugin_slug, deactivate_link, deactivate_link_msg ) {
 
 		if ( params ) {
 
@@ -56,19 +60,28 @@ var pngx_update_license = pngx_update_license || {};
 				params,
 				function ( results ) {
 
-					console.log( results );
-
 					// set action
 					action = results.data.action;
+
+					var plugin = $( '[data-slug=' + plugin_slug + ']' );
 
 					if ( 'deactivate_license' === action ) {
 						// License is Active
 						status = '<span class="pngx-success-msg">' + results.data.license_status + '</span>';
 
+						//Remove Deactivate Button and Add Message
+						$( plugin ).find( '.row-actions .deactivate' ).text( deactivate_link_msg );
+
+						$( field_wrap ).find( '.pngx-license-field' ).prop( 'readonly', true );
+
 					} else if ( 'activate_license' === action ) {
 						// License is Not Active
 						status = '<span class="pngx-error-msg">' + results.data.license_status + '</span>';
 
+						//Add Deactivate Button and Remove Message
+						$( plugin ).find( '.row-actions .deactivate' ).html( deactivate_link );
+
+						$( field_wrap ).find( '.pngx-license-field' ).prop( 'readonly', false );
 					}
 					// Set action for license
 					$( field_wrap ).find( '.pngx_license_action' ).val( action );
@@ -80,8 +93,6 @@ var pngx_update_license = pngx_update_license || {};
 					$( field_wrap ).find( '.pngx-list-license-button' ).text( button );
 
 					if ( results.success ) {
-
-						console.log( 'success' );
 
 						msg = '<span class="pngx-success-msg">' + results.data.message + '</span>';
 						$( field_wrap ).find( '.pngx-license-field-result-msg' ).html( msg ).fadeIn();
@@ -115,9 +126,6 @@ var pngx_update_license = pngx_update_license || {};
 	 * Start and Stop Spin
 	 */
 	obj.start_spin = function ( field_wrap ) {
-		/*var $div_height = $( form_wrap );
-		 var $height = $div_height.height() + 'px';
-		 $div_height.css( 'height', $height );*/
 		$( field_wrap ).find( '#pngx-loading' ).show();
 	};
 

@@ -232,7 +232,7 @@ class Pngx__Admin__EDD_License {
 		}
 
 		//Activated License
-		if ( 'valid' == $license_data->license ) {
+		if ( 'valid' === $license_data->license ) {
 
 			$this->activate( $license_fields, $license_data, $license_info );
 		}
@@ -382,7 +382,7 @@ class Pngx__Admin__EDD_License {
 
 		$data = array(
 			'message'        => esc_html__( 'License Deactivated', 'plugin-engine' ),
-			'status'         => $license_info['status'],
+			'status'         => '',
 			'license_status' => esc_html( __( 'Click Activate License to enable automatic updates.', 'plugin-engine' ) ),
 			'button'         => 'Activate License',
 			'action'         => 'activate_license',

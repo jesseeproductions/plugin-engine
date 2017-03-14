@@ -30,11 +30,7 @@ class Pngx__Admin__Field__Text {
 		$condition = isset( $field['condition'] ) ? $field['condition'] : '';
 
 		if ( $repeat_obj ) {
-			//log_me( 'repeat meta select' );
-			//log_me( $repeat_obj );
-			//$name = 'wpe_menu_section[' . $name . $repeat_obj->get_current_sec_col() . ']';
 			$name = $repeat_obj->get_field_name( $name );
-			//$repeating = $repeat_obj->get_current_sec_col() . '[]';
 		}
 
 		if ( isset( $field['alert'] ) && '' != $field['alert'] && 1 == $condition ) {
