@@ -40,8 +40,8 @@ class Pngx__Admin__Field__Textarea {
 			echo '<textarea class="' . esc_attr( $class ) . '" id="' . esc_attr( $field['id'] ) . '" name="' . esc_attr( $name  . $repeating ) . '" placeholder="' . esc_attr( $std ) . '" rows="' . absint( $rows ) . '" cols="' . absint( $cols ) . '">' . format_for_editor( $value ) . '</textarea>';
 		}
 
-		if ( isset( $field['desc'] ) && "" != $field['desc'] ) {
-			echo '<br /><span class="description">' . $field['desc'] . '</span>';
+		if ( isset( $field['desc'] ) && ! empty( $field['desc'] ) ) {
+			echo '<span class="description">' . esc_html( $field['desc'] ) . '</span>';
 		}
 
 	}

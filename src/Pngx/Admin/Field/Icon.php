@@ -48,7 +48,7 @@ class Pngx__Admin__Field__Icon {
 				data-placement="top"
 				data-label-footer="<?php echo sprintf( esc_html_x( '%1s - %2s of %3s', 'Icon Popup Footer', 'plugin-engine' ), '{0}', '{1}', '{2}' ); ?>"
 				data-search-text="<?php echo esc_html__( 'Search...', 'plugin-engine' ); ?>"
-				name="<?php echo esc_attr( $name ) . $repeating; ?>"
+				name="<?php echo esc_attr( $name . $repeating ); ?>"
 				role="iconpicker"
 		>
 		</button>

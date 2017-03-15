@@ -38,8 +38,8 @@ class Pngx__Admin__Field__Color {
 			echo '<label class="pngx-inside-label">' . esc_html( $field['inside_label'] ) . '</label>';
 		}
 
-		if ( '' !== $field['desc'] ) {
-			echo '<br /><span class="description">' . esc_html( $field['desc'] ) . '</span>';
+		if ( isset( $field['desc'] ) && ! empty( $field['desc'] ) ) {
+			echo '<span class="description">' . esc_html( $field['desc'] ) . '</span>';
 		}
 
 	}

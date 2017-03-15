@@ -7,6 +7,7 @@
 	margin-bottom: 1em;
 	overflow: hidden;
 }
+
 .pngx-section-help-container-toggle {
 	background-color: $color__light_grey;
 	border: medium none;
@@ -42,6 +43,7 @@
 	overflow: hidden;
 	padding: 0.5em;
 }
+
 .ui-widget-content a.pngx-support,
 .pngx-support {
 	color: $color__link;
@@ -58,17 +60,21 @@
 	margin: 10px;
 	max-width: 95%;
 }
+
 .pngx-meta-field-content {
-	width: 49%;
 	display: inline-block;
 	vertical-align: top;
+	width: 49%;
 }
+
 .pngx-meta-field-content.text {
 	margin: 0 0 0 2%;
 }
+
 .promote-sup {
 	color: $color__grey;
 }
+
 @include media($mobile) {
 	.pngx-meta-field-content,
 	.pngx-meta-field-content.text {

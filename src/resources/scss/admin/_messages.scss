@@ -15,16 +15,20 @@
 	border-left: 4px solid $color__sucess;
 	font-weight: bold;
 }
+
 .pngx-success-msg {
 	color: $color__sucess;
 }
+
 .pngx-error {
 	border-left: 4px solid $color__alert;
 	color: $color__alert;
 }
+
 .pngx-error-msg {
 	color: $color__alert;
 }
+
 .success {
 	padding: 1px 12px;
 }
@@ -32,9 +36,11 @@
 .pngx-error {
 	padding: 1px 12px;
 }
+
 .pngx-section-fields .pngx-error {
 	margin: 30px 0;
 }
+
 .pngx-error div,
 .pngx-message div {
 	float: left;

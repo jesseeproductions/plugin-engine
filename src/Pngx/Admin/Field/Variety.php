@@ -98,8 +98,8 @@ class Pngx__Admin__Field__Variety {
 
 			</div>
 			<?php
-			if ( '' !== $field['desc'] ) {
-				echo '<br /><span class="description">' . esc_html( $field['desc'] ) . '</span>';
+			if ( isset( $field['desc'] ) && ! empty( $field['desc'] ) ) {
+				echo '<span class="description">' . esc_html( $field['desc'] ) . '</span>';
 			}
 
 		}

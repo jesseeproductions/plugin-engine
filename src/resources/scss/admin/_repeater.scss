@@ -1,35 +1,37 @@
 .pngx-meta-field.field-repeater {
 	width: 100%;
 }
+
 .pngx-meta-field.field-repeater * {
 	box-sizing: border-box;
 }
+
 .repeater-item {
 	background: #eee;
 	//box-shadow: 0 1px 2px #c7c7c7;
 	border: 1px solid #999999;
 	margin: 20px 0;
-	padding: 2%;
-	width: 100%;
-	position: relative;
 	min-height: 100px;
+	padding: 2%;
+	position: relative;
+	width: 100%;
 }
 
 .sort {
+	left: 2px;
 	position: absolute;
 	top: 0;
-	left: 2px;
 }
 
 .add-repeater {
-	position: absolute;
 	bottom: 0;
+	position: absolute;
 	right: 35px;
 }
 
 .remove-repeater {
-	position: absolute;
 	bottom: 0;
+	position: absolute;
 	right: 2px;
 }
 
@@ -38,7 +40,7 @@
 }
 
 .repeater-column {
-	width: 45.5%;
 	display: inline-block;
 	vertical-align: top;
+	width: 45.5%;
 }

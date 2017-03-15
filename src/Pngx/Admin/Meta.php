@@ -172,7 +172,7 @@ class Pngx__Admin__Meta {
 
 				<?php //Create Tabs
 				foreach ( self::get_tabs() as $tab_slug => $tab ) {
-					echo '<li><a href="#' . $tab_slug . '">' . $tab . '</a></li>';
+					echo '<li><a href="#' . esc_attr(  $tab_slug ) . '">' . esc_attr( $tab ) . '</a></li>';
 				}
 				?>
             </ul>
@@ -185,7 +185,7 @@ class Pngx__Admin__Meta {
 
                 <div class="pngx-section-fields form-table">
 
-                    <h2 class="pngx-tab-heading-<?php echo $tab_slug; ?>"><?php echo $tab; ?></h2>
+                    <h2 class="pngx-tab-heading-<?php echo esc_attr( $tab_slug ); ?>"><?php echo esc_attr( $tab ); ?></h2>
 
 					<?php
 
@@ -241,17 +241,15 @@ class Pngx__Admin__Meta {
 							?>
 
                             <div class="pngx-meta-field-wrap field-wrap-<?php echo esc_html( $field['type'] ); ?> field-wrap-<?php echo esc_html( $field['id'] ); ?> <?php echo esc_html( $wrapclass ); ?>"
-								<?php echo isset( $field['toggle'] ) ? Pngx__Admin__Fields::toggle( $field['toggle'], $field['id'] ) : null; ?> >
+								<?php echo isset( $field['toggle'] ) ? Pngx__Admin__Fields::toggle( $field['toggle'], esc_attr( $field['id'] ) ) : null; ?> >
 
-								<?php if ( isset( $field['label'] ) ) { ?>
+                                <div class="pngx-meta-field field-<?php echo esc_attr( $field['type'] ); ?> field-<?php echo esc_attr( $field['id'] ); ?>">
 
-                                    <div class="pngx-meta-label label-<?php echo $field['type']; ?> label-<?php echo $field['id']; ?>">
-                                        <label for="<?php echo $field['id']; ?>"><?php echo $field['label']; ?></label>
-                                    </div>
-
-								<?php } ?>
-
-                                <div class="pngx-meta-field field-<?php echo $field['type']; ?> field-<?php echo $field['id']; ?>">
+									<?php if ( isset( $field['label'] ) ) { ?>
+	                                        <label for="<?php echo esc_attr( $field['id'] ); ?>">
+	                                        	<?php echo esc_attr( $field['label'] ); ?>
+	                                        </label>
+									<?php } ?>
 
 									<?php
 									//todo do I need to change the null for repeater here?
@@ -263,9 +261,9 @@ class Pngx__Admin__Meta {
 									?>
 
                                 </div>
-                                <!-- end .pngx-meta-field.field-<?php echo $field['type']; ?>.field-<?php echo $field['id']; ?> -->
+                                <!-- end .pngx-meta-field.field-<?php echo esc_attr( $field['type'] ); ?>.field-<?php echo esc_attr( $field['id'] ); ?> -->
 
-                            </div> <!-- end .pngx-meta-field-wrap.field-wrap-<?php echo $field['type']; ?>.field-wrap-<?php echo $field['id']; ?>	-->
+                            </div> <!-- end .pngx-meta-field-wrap.field-wrap-<?php echo esc_attr( $field['type'] ); ?>.field-wrap-<?php echo esc_attr(  $field['id'] ); ?>	-->
 
 							<?php
 						}//end if in section check
