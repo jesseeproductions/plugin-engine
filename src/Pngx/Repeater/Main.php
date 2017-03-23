@@ -12,23 +12,35 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Pngx__Repeater__Main {
 
+	protected $handler;
 	protected $id;
-	protected $meta;
-	protected $new_meta;
 	protected $post_id;
+	protected $meta;
+	protected $type;
+	protected $repeater_fields;
+
+	protected $new_meta;
 	protected $counter = 0;
 	protected $info;
-	protected $repeater_fields;
+
 
 	/**
 	 * Pngx__Repeater__Main constructor.
 	 */
-	public function __construct( $repeater_id, $meta, $post_id, $save = false ) {
+	public function __construct( $repeater_id, $meta, $post_id, $type ) {
 
 		$this->id                = $repeater_id;
 		$this->post_id           = $post_id;
 		$this->meta[ $this->id ] = is_array( $meta ) ? $meta : array();
 		$this->repeater_fields   = apply_filters( 'pngx_meta_repeater_fields', array() );
+		$this->type              = $type;
+		if ( 'admin' === $this->type ) {
+			$this->handler = new Pngx__Repeater__Handler__Admin();
+		} elseif ( 'save' === $this->type ) {
+			$this->handler = new Pngx__Repeater__Handler__Save();
+		} elseif ( 'front-end' === $this->type ) {
+			$this->handler = new Pngx__Repeater__Handler__Front_End();
+		}
 		$this->init_cycle();
 
 	}
@@ -101,7 +113,7 @@ class Pngx__Repeater__Main {
 					//log_me( $subkey ); //0
 					//log_me( $cycle[ $i ][ $subkey ] ); //0
 
-					echo '<br>opendiv class="' . $i . ' ' . $subkey . '" <br>';
+					echo $this->handler->display_repeater_open( $i, $subkey, $this->repeater_fields[ $i ]['repeater_type'] );
 
 					//todo add method to handle opening ( admin, saving, and front end )
 
@@ -112,7 +124,7 @@ class Pngx__Repeater__Main {
 
 					$builder[ $i ][ $subkey ] = $this->cycle_repeaters( $cycle[ $i ][ $subkey ], $send_input );
 
-					echo '/div class="' . $i . ' ' . $subkey . '" <br>';
+					echo $this->handler->display_repeater_close( $i, $subkey, $this->repeater_fields[ $i ]['repeater_type'] );
 					//todo add method to handle closing ( admin, saving, and front end )
 				}
 
@@ -124,7 +136,7 @@ class Pngx__Repeater__Main {
 
 					echo '<br>opendiv class="' . $i . '" <br>';
 					//todo add method to handle opening ( admin, saving, and front end )
-					echo 'name "' . $input . '[' . $i . ']" <br>';
+					//echo 'name "' . $input . '[' . $i . ']" <br>';
 					echo $cycle[ $i ] . ' value<br>';
 					echo '/div class="' . $i . '" <br>';
 					//todo add method to handle closing ( admin, saving, and front end )
@@ -150,7 +162,7 @@ class Pngx__Repeater__Main {
 
 			$sanitized = new Pngx__Sanitize( $this->repeater_fields[ $k ]['type'], $value, $this->repeater_fields[ $k ] );
 
-			echo 'name "' . $input . '[' . $k . '][]" <br>';
+			//echo 'name "' . $input . '[' . $k . '][]" <br>';
 			echo $value . ' value<br>';
 			$builder[] = $sanitized->result;
 

@@ -85,7 +85,7 @@ class Pngx__Admin__Field__Repeater {
 
 
 		if ( ! $repeat_obj ) {
-			$repeat_obj = new Pngx__Repeater__Main( $field['id'], $repeater_meta, $post->ID );
+			$repeat_obj = new Pngx__Repeater__Main( $field['id'], $repeater_meta, $post->ID, 'admin' );
 		}
 
 
