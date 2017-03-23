@@ -22,7 +22,7 @@ class Pngx__Admin__Field__Repeater {
 
 		global $post;
 
-       /* $repeater_meta[] = array(
+/*    $repeater_meta[] = array(
 
             'wpe_menu_column' => array(
 
@@ -39,7 +39,7 @@ class Pngx__Admin__Field__Repeater {
 
         );*/
 
-        $repeater_meta[] = array(
+       $repeater_meta[] = array(
 
             'wpe_menu_column' => array(
 
@@ -49,6 +49,14 @@ class Pngx__Admin__Field__Repeater {
                                          '0' => array(
                                             'wpe_menu_name' => 'Menu Item 1',
                                             'wpe_menu_description' => 'Menu Descrtion 1',
+                                             'wpe_menu_r_price' => array(
+                                                    '0' => array(
+                                                        'wpe_menu_price' => array (
+                                                                '0' => '14.00',
+                                                                '1' => '10.00',
+                                                        )
+                                                    )
+                                             )
                                    )
                             )
                  ),
@@ -56,8 +64,8 @@ class Pngx__Admin__Field__Repeater {
 
                           'wpe_menu_items' => array(
                                          '0' => array(
-                                             'wpe_menu_name' => 'Menu Item 2',
-                                             'wpe_menu_description' => 'Menu Descrtion 2',
+                                             'wpe_menu_name' => 'Col 2 Menu Item 2',
+                                             'wpe_menu_description' => 'Col 2 Menu Descrtion 2',
                                              'wpe_menu_r_price' => array(
                                                     '0' => array(
                                                         'wpe_menu_price' => array (

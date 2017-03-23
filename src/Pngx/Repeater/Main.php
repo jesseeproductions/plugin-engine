@@ -33,6 +33,18 @@ class Pngx__Repeater__Main {
 
 	}
 
+	//todo
+	/*
+	 * setup to handle 3 different types and make a class for each, so the object just focuses on one
+	 * admin - loading of fields to edit - repeaters
+	 * save - save and sanitize the values
+	 * frontend - display the values - need to be able to use templates
+	 *
+	 *
+	 * pro admin - drag and reorder all items
+	 * pro frontend - more templates
+	 */
+
 	public function init_cycle() {
 
 		// bail early if no $_POST
@@ -40,21 +52,19 @@ class Pngx__Repeater__Main {
 			return;
 		}
 
-		//echo '<pre>';
-		//( $this->meta );
-		//echo '</pre>';
+//		echo '<pre>';
+//		print_r( $this->meta );
+//		echo '</pre>';
+
 
 		$this->new_meta = $this->cycle_repeaters( $this->meta, null );
 
-		/*		echo '<pre>';
-				print_r( $this->meta );
-				print_r( $this->new_meta );
-				echo '</pre>';*/
+//		echo '<pre>';
+//		print_r( $this->new_meta );
+//		echo '</pre>';
 	}
 
-	public function cycle_repeaters( $array, $input ) {
-
-		//	echo '<br><br>' . key( $array ) . ' ' . ' start-cycle_repeaters<br>';
+	public function cycle_repeaters( $array, $input, $name = null ) {
 
 		$cycle = $array;
 
@@ -62,71 +72,126 @@ class Pngx__Repeater__Main {
 
 		$keys = array_keys( $cycle );
 
-		echo 'div class="' . key( $array ) . ' ' . $this->counter ++ . '" <br>';
+		//$is_numeric = $this->is_key_numeric( $keys );
 
+		//$key_count = 0;
+
+		//log_me( 'starts' );
+		//log_me( $keys );//[0] => wpe_menu_section
+		//name loop
 		foreach ( $keys as $i ) {
 
-			//	echo $i . ' array_keys<br>';
+			//log_me( $i );//wpe_menu_section
+			//log_me( $cycle[ $i ] ); //array
 
-			foreach ( $cycle as $k => $value ) {
+			if ( is_array( $cycle[ $i ] ) && ( isset( $this->repeater_fields[ $i ]['repeater_type'] ) && 'single-field' === $this->repeater_fields[ $i ]['repeater_type'] ) ) {
 
-				//echo $k . ' key<br>';
+				$builder[ $i ] = $this->field_repeater( $cycle[ $i ], $i, "{$input}[{$i}]" );
 
-				if ( is_array( $value ) && ( isset( $this->repeater_fields[ $k ]['repeater_type'] ) && 'single-field' === $this->repeater_fields[ $k ]['repeater_type'] ) ) {
-					//echo $k . ' key<br>';
+			} elseif ( is_array( $cycle[ $i ] ) ) {
 
-					$builder[ $k ] = $this->field_repeater( $value, $k );
+				$subkeys = array_keys( $cycle[ $i ] );
 
+				//log_me( $subkeys );// [0] => 0
 
-				} elseif ( is_array( $value ) ) {
+//https://www.google.com/search?q=php+multidimensial+array+runs+through+it+twice&ie=utf-8&oe=utf-8#q=php+multidimensional+array+runs+through+it+twice&*
+				//number loop
+				foreach ( $subkeys as $subkey ) {
 
-					//echo 'value is array<br>';
+					//log_me( $subkey ); //0
+					//log_me( $cycle[ $i ][ $subkey ] ); //0
 
-					/*					if ( isset( $this->repeater_fields[ $k ] ) ) {
-											//$builder[ $k ] = array();
-										}*/
+					echo '<br>opendiv class="' . $i . ' ' . $subkey . '" <br>';
 
-					$builder[ $k ] = $this->cycle_repeaters( $value, "{$input}[{$i}][{$k}]" );
+					//todo add method to handle opening ( admin, saving, and front end )
 
-				} else {
-
-					if ( ! is_numeric( $k ) && ! isset( $this->new_meta[ $k ] ) ) {
-						$sanitized     = new Pngx__Sanitize( $this->repeater_fields[ $k ]['type'], $value, $this->repeater_fields[ $k ] );
-						$builder[ $k ] = $sanitized->result;
-
+					$send_input = "{$input}[{$i}][{$subkey}]";
+					if ( ! $input ) {
+						$send_input = "{$i}[{$subkey}]";
 					}
 
+					$builder[ $i ][ $subkey ] = $this->cycle_repeaters( $cycle[ $i ][ $subkey ], $send_input );
 
-					echo $value . ' value<br>';
-
+					echo '/div class="' . $i . ' ' . $subkey . '" <br>';
+					//todo add method to handle closing ( admin, saving, and front end )
 				}
 
+			} else {
+
+				if ( ! is_numeric( $i ) && ! isset( $this->new_meta[ $i ] ) ) {
+					$sanitized     = new Pngx__Sanitize( $this->repeater_fields[ $i ]['type'], $cycle[ $i ], $this->repeater_fields[ $i ] );
+					$builder[ $i ] = $sanitized->result;
+
+					echo '<br>opendiv class="' . $i . '" <br>';
+					//todo add method to handle opening ( admin, saving, and front end )
+					echo 'name "' . $input . '[' . $i . ']" <br>';
+					echo $cycle[ $i ] . ' value<br>';
+					echo '/div class="' . $i . '" <br>';
+					//todo add method to handle closing ( admin, saving, and front end )
+				}
 			}
 
 		}
 
-		//echo '<br><br>' . key( $array ) . ' end-cycle_repeaters<br>';
-
-		echo '/div class="' . key( $array ) . '" <br>';
 
 		return $builder;
 
 	}
 
-	public function field_repeater( $array, $k ) {
+	public function field_repeater( $array, $k, $input ) {
 
 		$cycle = $array;
 
 		$builder = array();
 
+		echo '<br>opendiv class="' . $k . '" <br>';
+		//todo add method to handle opening ( admin, saving, and front end )
 		foreach ( $cycle as $value ) {
 
 			$sanitized = new Pngx__Sanitize( $this->repeater_fields[ $k ]['type'], $value, $this->repeater_fields[ $k ] );
+
+			echo 'name "' . $input . '[' . $k . '][]" <br>';
+			echo $value . ' value<br>';
 			$builder[] = $sanitized->result;
 
 		}
 
+		echo '/div class="' . $k . '" <br>';
+
+		//todo add method to handle closing ( admin, saving, and front end )
+
 		return $builder;
 
+	}
+
+	public function is_key_numeric( $array ) {
+
+		$numeric = 0;
+
+		foreach ( $array as $value ) {
+
+			if ( is_numeric( $value ) ) {
+
+				$numeric ++;
+
+			}
+
+		}
+
+		return $numeric;
+	}
+
+	public function is_repeater( $k ) {
+
+		if ( isset( $this->repeater_fields[ $k ]['repeater_type'] ) && in_array( $this->repeater_fields[ $k ]['repeater_type'], array(
+				'section',
+				'column'
+			) )
+		) {
+
+			return true;
+		}
+
+		return false;
 	}
 }
