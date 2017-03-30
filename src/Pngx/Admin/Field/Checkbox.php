@@ -46,10 +46,10 @@ class Pngx__Admin__Field__Checkbox {
 
 		echo '<input type="checkbox" class="checkbox ' . esc_attr( $class ) . '"  id="' . esc_attr( $field['id'] ) . '" name="' . esc_attr( $name . $repeating ) . '" placeholder="' . esc_attr( $std ) . '"  value="1" ' . checked( $selected, 1, false ) . ' />';
 
-		echo '<label for="' . esc_attr( $field['id'] ) . '">' . esc_html( $field['desc'] ) . '</label>';
+		echo '<label for="' . esc_attr( $field['id'] ) . '">' . esc_html( $field['label'] ) . '</label>';
 
 		if ( isset( $field['desc'] ) && ! empty( $field['desc'] ) ) {
-			echo '<span class="description">' . esc_html( $field['desc'] ) . '</span>';
+			echo '<span class="checkbox-description">' . esc_html( $field['desc'] ) . '</span>';
 		}
 	}
 

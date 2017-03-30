@@ -385,12 +385,6 @@ fieldset[disabled] .btn-primary.active {
     font-style: italic; }
 
 /**
-* Linked Style Fields
-***************************************************/
-.pngx-meta-field-styles {
-  margin: 10px 0; }
-
-/**
 * List Field
 ***************************************************/
 .pngx-list {
@@ -425,7 +419,7 @@ fieldset[disabled] .btn-primary.active {
     height: auto;
     line-height: 1.5em;
     margin: 0 0 10px;
-    padding: 15px 10px;
+    padding: 12px 8px;
     width: 100%;
     -webkit-appearance: none;
     -moz-appearance: none; }
@@ -440,8 +434,8 @@ fieldset[disabled] .btn-primary.active {
     cursor: pointer;
     height: 0;
     position: absolute;
-    right: 20px;
-    top: 27px;
+    right: 18px;
+    top: 22px;
     transition: all .1s ease;
     width: 0; }
   .pngx-default-select:hover:before {
@@ -452,23 +446,24 @@ fieldset[disabled] .btn-primary.active {
     content: '';
     height: 0;
     position: absolute;
-    right: 20px;
-    top: 27px;
+    right: 18px;
+    top: 22px;
     width: 0; }
 
-/**
+/*!**
 * Text Input
-***************************************************/
+***************************************************!
 .pngx-wrapper input.regular-text {
-  width: auto; }
+	width: auto;
+}
 
-/**
+!**
 * Textarea / Wysiwyg
-***************************************************/
+***************************************************!
 .pngx-meta-field textarea,
 .pngx-meta-field.field-wysiwyg {
-  width: 100%; }
-
+	width: 100%;
+}*/
 /**
 * Submit
 ***************************************************/
@@ -1339,7 +1334,7 @@ fieldset[disabled] .btn-primary.active {
    ========================================================================== */
 .postbox-container .pngx-meta-field-wrap {
   box-sizing: border-box;
-  margin: 15px 0;
+  margin: 25px 0;
   overflow: visible; }
 
 .postbox-container .pngx-meta-field {
@@ -1393,24 +1388,51 @@ fieldset[disabled] .btn-primary.active {
 					background: #6B9FFF;
 					color: #fff;
 				}*/ }
-  .postbox-container .pngx-meta-field.field-checkbox, .postbox-container .pngx-meta-field.field-color, .postbox-container .pngx-meta-field.field-date, .postbox-container .pngx-meta-field.field-image, .postbox-container .pngx-meta-field.field-select, .postbox-container .pngx-meta-field.field-text, .postbox-container .pngx-meta-field.field-url, .postbox-container .pngx-meta-field.field-variety, .postbox-container .pngx-meta-field.field-wysiwyg {
+  .postbox-container .pngx-meta-field.field-checkbox, .postbox-container .pngx-meta-field.field-color, .postbox-container .pngx-meta-field.field-date, .postbox-container .pngx-meta-field.field-image, .postbox-container .pngx-meta-field.field-number, .postbox-container .pngx-meta-field.field-select, .postbox-container .pngx-meta-field.field-text, .postbox-container .pngx-meta-field.field-url, .postbox-container .pngx-meta-field.field-variety, .postbox-container .pngx-meta-field.field-wysiwyg {
     border: 1px solid #ccc;
     border-radius: 3px;
     display: block;
-    padding: 9px;
-    width: 100%;
-    max-width: 500px; }
-    .postbox-container .pngx-meta-field.field-checkbox > label, .postbox-container .pngx-meta-field.field-color > label, .postbox-container .pngx-meta-field.field-date > label, .postbox-container .pngx-meta-field.field-image > label, .postbox-container .pngx-meta-field.field-select > label, .postbox-container .pngx-meta-field.field-text > label, .postbox-container .pngx-meta-field.field-url > label, .postbox-container .pngx-meta-field.field-variety > label, .postbox-container .pngx-meta-field.field-wysiwyg > label {
+    max-width: 500px;
+    padding: 19px 9px 9px;
+    width: 100%; }
+    .postbox-container .pngx-meta-field.field-checkbox > label, .postbox-container .pngx-meta-field.field-color > label, .postbox-container .pngx-meta-field.field-date > label, .postbox-container .pngx-meta-field.field-image > label, .postbox-container .pngx-meta-field.field-number > label, .postbox-container .pngx-meta-field.field-select > label, .postbox-container .pngx-meta-field.field-text > label, .postbox-container .pngx-meta-field.field-url > label, .postbox-container .pngx-meta-field.field-variety > label, .postbox-container .pngx-meta-field.field-wysiwyg > label {
       background: #fff;
-      color: #333;
+      color: #003ca9;
       display: block;
       float: left;
-      font-size: 14px;
+      font-size: 15px;
+      font-weight: bold;
       height: 14px;
-      margin: -19px 0 10px;
+      margin: -33px 0 0;
       overflow: hidden;
       padding: 2px 5px 4px 5px; }
-  .postbox-container .pngx-meta-field .description {
+    .postbox-container .pngx-meta-field.field-checkbox input[type="text"],
+    .postbox-container .pngx-meta-field.field-checkbox input[type="email"],
+    .postbox-container .pngx-meta-field.field-checkbox input[type="url"], .postbox-container .pngx-meta-field.field-color input[type="text"],
+    .postbox-container .pngx-meta-field.field-color input[type="email"],
+    .postbox-container .pngx-meta-field.field-color input[type="url"], .postbox-container .pngx-meta-field.field-date input[type="text"],
+    .postbox-container .pngx-meta-field.field-date input[type="email"],
+    .postbox-container .pngx-meta-field.field-date input[type="url"], .postbox-container .pngx-meta-field.field-image input[type="text"],
+    .postbox-container .pngx-meta-field.field-image input[type="email"],
+    .postbox-container .pngx-meta-field.field-image input[type="url"], .postbox-container .pngx-meta-field.field-number input[type="text"],
+    .postbox-container .pngx-meta-field.field-number input[type="email"],
+    .postbox-container .pngx-meta-field.field-number input[type="url"], .postbox-container .pngx-meta-field.field-select input[type="text"],
+    .postbox-container .pngx-meta-field.field-select input[type="email"],
+    .postbox-container .pngx-meta-field.field-select input[type="url"], .postbox-container .pngx-meta-field.field-text input[type="text"],
+    .postbox-container .pngx-meta-field.field-text input[type="email"],
+    .postbox-container .pngx-meta-field.field-text input[type="url"], .postbox-container .pngx-meta-field.field-url input[type="text"],
+    .postbox-container .pngx-meta-field.field-url input[type="email"],
+    .postbox-container .pngx-meta-field.field-url input[type="url"], .postbox-container .pngx-meta-field.field-variety input[type="text"],
+    .postbox-container .pngx-meta-field.field-variety input[type="email"],
+    .postbox-container .pngx-meta-field.field-variety input[type="url"], .postbox-container .pngx-meta-field.field-wysiwyg input[type="text"],
+    .postbox-container .pngx-meta-field.field-wysiwyg input[type="email"],
+    .postbox-container .pngx-meta-field.field-wysiwyg input[type="url"] {
+      padding: 12px 8px;
+      width: 100%; }
+    .postbox-container .pngx-meta-field.field-checkbox input[type="date"], .postbox-container .pngx-meta-field.field-color input[type="date"], .postbox-container .pngx-meta-field.field-date input[type="date"], .postbox-container .pngx-meta-field.field-image input[type="date"], .postbox-container .pngx-meta-field.field-number input[type="date"], .postbox-container .pngx-meta-field.field-select input[type="date"], .postbox-container .pngx-meta-field.field-text input[type="date"], .postbox-container .pngx-meta-field.field-url input[type="date"], .postbox-container .pngx-meta-field.field-variety input[type="date"], .postbox-container .pngx-meta-field.field-wysiwyg input[type="date"] {
+      padding: 12px 8px; }
+  .postbox-container .pngx-meta-field > .pngx-meta-field-styles,
+  .postbox-container .pngx-meta-field > .description {
     background: #F3F3F3;
     color: #777;
     display: block;
@@ -1418,6 +1440,20 @@ fieldset[disabled] .btn-primary.active {
     margin: 10px -9px -9px -9px;
     padding: 3px;
     text-align: center; }
+  .postbox-container .pngx-meta-field .checkbox-description {
+    color: #333;
+    font-size: 11px; }
+  .postbox-container .pngx-meta-field .pngx-variety-inputs {
+    display: flex; }
+    .postbox-container .pngx-meta-field .pngx-variety-inputs .pngx-field-align {
+      flex-shrink: 0;
+      flex-grow: 1;
+      width: auto;
+      flex-basis: 50%; }
+    .postbox-container .pngx-meta-field .pngx-variety-inputs .expiration-icon {
+      flex-shrink: 0;
+      flex-grow: 0;
+      flex-basis: 34px; }
 
 /* ==========================================================================
    Options CSS

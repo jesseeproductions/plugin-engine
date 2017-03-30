@@ -6,7 +6,7 @@
 
 	.pngx-meta-field-wrap {
 		box-sizing: border-box;
-		margin: 15px 0;
+		margin: 25px 0;
 		overflow: visible;
 
 		@include media($mobile) {
@@ -31,25 +31,38 @@
 			border: 1px solid $color__light_grey;
 			border-radius: 3px;
 			display: block;
-			padding: 9px;
-			width: 100%;
 			max-width: 500px;
+			padding: 19px 9px 9px;
+			width: 100%;
 
 			& > label {
 				background: $white;
-				color: $color__dark_grey;
+				color: $color__link;
 				display: block;
 				float: left;
-				font-size: 14px;
+				font-size: 15px;
+				font-weight: bold;
 				height: 14px;
-				margin: -19px 0 10px;
+				margin: -33px 0 0;
 				overflow: hidden;
 				padding: 2px 5px 4px 5px;
 			}
 
+			input[type="text"],
+			input[type="email"],
+			input[type="url"] {
+				padding: 12px 8px;
+				width: 100%;
+			}
+
+			input[type="date"] {
+				padding: 12px 8px;
+			}
+
 		}
 
-		.description {
+		> .pngx-meta-field-styles,
+		> .description {
 			background: #F3F3F3;
 			color: $color__grey;
 			display: block;
@@ -57,6 +70,32 @@
 			margin: 10px -9px -9px -9px;
 			padding: 3px;
 			text-align: center;
+		}
+
+		.checkbox-description {
+			color: $color__dark_grey;
+			font-size: 11px;
+		}
+
+		.pngx-meta-field-styles {
+
+		}
+
+		.pngx-variety-inputs {
+			display: flex;
+
+			.pngx-field-align {
+				flex-shrink: 0;
+				flex-grow: 1;
+				width: auto;
+				flex-basis: 50%;
+			}
+
+			.expiration-icon {
+				flex-shrink: 0;
+				flex-grow: 0;
+				flex-basis: 34px;
+			}
 		}
 		/*
 				input[type="text"],

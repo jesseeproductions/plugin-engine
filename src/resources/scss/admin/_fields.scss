@@ -113,13 +113,6 @@
 }
 
 /**
-* Linked Style Fields
-***************************************************/
-.pngx-meta-field-styles {
-	margin: 10px 0;
-}
-
-/**
 * List Field
 ***************************************************/
 .pngx-list {
@@ -163,7 +156,7 @@
 		height: auto;
 		line-height: 1.5em;
 		margin: 0 0 10px;
-		padding: 15px 10px;
+		padding: 12px 8px;
 		width: 100%;
 
 		&:focus {
@@ -183,8 +176,8 @@
 		cursor: pointer;
 		height: 0;
 		position: absolute;
-		right: 20px;
-		top: 35px;
+		right: 18px;
+		top: 22px;
 		transition: all .1s ease;
 		width: 0;
 	}
@@ -199,28 +192,28 @@
 			content: '';
 			height: 0;
 			position: absolute;
-			right: 20px;
-			top: 35px;
+			right: 18px;
+			top: 22px;
 			width: 0;
 		}
 	}
 
 }
 
-/**
+/*!**
 * Text Input
-***************************************************/
+***************************************************!
 .pngx-wrapper input.regular-text {
 	width: auto;
 }
 
-/**
+!**
 * Textarea / Wysiwyg
-***************************************************/
+***************************************************!
 .pngx-meta-field textarea,
 .pngx-meta-field.field-wysiwyg {
 	width: 100%;
-}
+}*/
 
 /**
 * Submit
