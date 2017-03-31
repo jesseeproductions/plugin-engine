@@ -139,21 +139,60 @@ class Pngx__Admin__Ajax {
 		if ( isset( $fields[ $_POST['field'] ]['variety_choices'][ $_POST['option'] ] ) ) {
 			foreach ( $fields[ $_POST['field'] ]['variety_choices'][ $_POST['option'] ] as $label ) {
 
+				if ( is_array( $label ) && isset( $label['open'] ) ) {
+					?>
+					<div class="<?php echo esc_html( $label['open'] ); ?>">
+					<?php
+					continue;
+				}
+
+				if ( is_array( $label ) && isset( $label['label'] ) ) {
+					?>
+					<label for="<?php echo esc_attr( $label['label'] ); ?>">
+						<?php echo esc_attr( $label['label'] ); ?>
+					</label>
+					<?php
+					continue;
+				}
+
+				if ( is_array( $label ) && isset( $label['description'] ) ) {
+					?>
+					<span class="description"><?php echo esc_html( $label['description'] ); ?></span>
+					<?php
+					continue;
+				}
+
+				if ( 'close' === $label ) {
+					?>
+					</div>
+					<?php
+					continue;
+				}
+
 				if ( ! isset( $fields[ $label ] ) ) {
 					continue;
 				}
+
 				$meta = '';
 				if ( isset( $_POST['post_id'] ) ) {
 					$meta = get_post_meta( $_POST['post_id'], $label, true );
 				}
 
-				if ( isset( $fields[ $label ]['label'] ) ) { ?>
-					<label for="<?php echo esc_attr( $fields[ $label ]['id'] ); ?>">
-						<?php echo esc_attr( $fields[ $label ]['label'] ); ?>
-					</label>
-				<?php }
+				?>
+				<div class="pngx-variety-field <?php echo isset( $fields[ $label ]['class'] ) ? esc_attr( $fields[ $label ]['class'] ) : ''; ?>">
+					<?php
 
-				Pngx__Admin__Fields::display_field( $fields[ $label ], false, false, $meta, null );
+					if ( isset( $fields[ $label ]['label'] ) ) { ?>
+						<label for="<?php echo esc_attr( $fields[ $label ]['id'] ); ?>">
+							<?php echo esc_attr( $fields[ $label ]['label'] ); ?>
+						</label>
+					<?php }
+
+					Pngx__Admin__Fields::display_field( $fields[ $label ], false, false, $meta, null );
+
+					?>
+				</div>
+				<?php
 
 			}
 		}

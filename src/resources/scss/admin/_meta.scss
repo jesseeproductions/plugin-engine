@@ -31,7 +31,7 @@
 			border: 1px solid $color__light_grey;
 			border-radius: 3px;
 			display: block;
-			max-width: 500px;
+			max-width: 600px;
 			padding: 19px 9px 9px;
 			width: 100%;
 
@@ -41,11 +41,11 @@
 				display: block;
 				float: left;
 				font-size: 15px;
-				font-weight: bold;
-				height: 14px;
-				margin: -33px 0 0;
+				font-weight: 700;
+				height: 18px;
+				margin: -31px 0 0;
 				overflow: hidden;
-				padding: 2px 5px 4px 5px;
+				padding: 0 5px;
 			}
 
 			input[type="text"],
@@ -61,6 +61,8 @@
 
 		}
 
+		.pngx-variety-field > .description,
+		.pngx-variety-selection > .description,
 		> .pngx-meta-field-styles,
 		> .description {
 			background: #F3F3F3;
@@ -72,6 +74,10 @@
 			text-align: center;
 		}
 
+		.pngx-variety-selection > .description {
+			margin: 0 -9px 0 -9px;
+		}
+
 		.checkbox-description {
 			color: $color__dark_grey;
 			font-size: 11px;
@@ -81,20 +87,49 @@
 
 		}
 
-		.pngx-variety-inputs {
-			display: flex;
+		.pngx-variety-fields-wrapper {
+			margin: 40px 0;
 
-			.pngx-field-align {
-				flex-shrink: 0;
-				flex-grow: 1;
+			> .pngx-variety-field {
+				border: 1px solid $color__grey;
+				border-radius: 4px;
+				display: block;
+				max-width: 100%;
+				padding: 19px 9px 9px;
 				width: auto;
-				flex-basis: 50%;
+
+				label {
+					color: $color__link;
+					font-size: 13px;
+				}
+
+				& > label {
+					background: $white;
+					color: $color__link;
+					display: block;
+					float: left;
+					font-size: 13px;
+					font-weight: 400;
+					height: 18px;
+					margin: -30px 0 0;
+					overflow: hidden;
+					padding: 0 3px;
+				}
 			}
 
-			.expiration-icon {
-				flex-shrink: 0;
-				flex-grow: 0;
-				flex-basis: 34px;
+			.pngx-variety-flex {
+				display: flex;
+
+				.expiration-icon {
+					flex-basis: 34px;
+					flex-grow: 0;
+					flex-shrink: 0;
+				}
+				.pngx-flex-fill {
+					flex-basis: 100%;
+					flex-grow: 1;
+					flex-shrink: 1;
+				}
 			}
 		}
 		/*

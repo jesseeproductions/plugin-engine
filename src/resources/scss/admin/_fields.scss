@@ -139,6 +139,15 @@
 }
 
 /**
+* List Field
+***************************************************/
+.pngx-message-field {
+	font-size: 14px;
+	font-style: italic;
+	margin: 10px;
+}
+
+/**
 * Select Input
 ***************************************************/
 .pngx-default-select {
@@ -215,6 +224,7 @@
 	width: 100%;
 }*/
 
+
 /**
 * Submit
 ***************************************************/
@@ -224,14 +234,6 @@
 
 .pngx-wrapper.wp-core-ui .button-primary {
 	float: right;
-}
-
-/**
-* Utility
-***************************************************/
-.pngx-js .javascript-conflict,
-#wp-pngx_description-media-buttons a:not(:first-child) {
-	display: none;
 }
 
 /**
@@ -252,4 +254,19 @@
 
 .pngx-system-info-copy .pngx-system-info-copy-btn {
 	padding: 6px;
+}
+
+/**
+* Utility
+***************************************************/
+.pngx-js .javascript-conflict,
+#wp-pngx_description-media-buttons a:not(:first-child) {
+	display: none;
+}
+
+/**
+* Variety
+***************************************************/
+.variety-full-width {
+	width: 100%;
 }
