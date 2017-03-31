@@ -21,6 +21,7 @@ class Pngx__Admin__Style__Linked {
 
 			?>
 			<div class="pngx-meta-field-styles field-<?php echo $field['type']; ?>-styles field-<?php echo $field['id']; ?>-styles">
+				<div class="inline-style-title"><?php echo esc_html__( 'Field Styles', 'coupon-creator-add-ons' ); ?></div>
 				<?php
 
 				foreach ( $field['styles'] as $type => $field_name ) {

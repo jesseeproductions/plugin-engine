@@ -48,7 +48,7 @@ class Pngx__Admin__Field__Variety {
 
 			?>
 			<div class="pngx-variety-selection">
-				<div class="pngx-default-select">
+				<div class="pngx-default-select pngx-default">
 					<select
 							id="<?php echo esc_attr( $field['id'] ); ?>"
 							class="select pngx-variety-select <?php echo esc_attr( $class ); ?>"

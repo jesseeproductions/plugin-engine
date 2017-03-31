@@ -32,14 +32,30 @@ class Pngx__Admin__Field__Color {
 		$alpha     = isset( $field['alpha'] ) && 'true' === $field['alpha'] ? true : false;
 		$repeating = isset( $field['repeating'] ) ? '[]' : '';
 
-		echo '<input type="text" class="pngx-color-picker ' . esc_attr( $class ) . '"  id="' . esc_attr( $field['id'] ) . '" name="' . esc_attr( $name ) . $repeating . '" placeholder="' . esc_attr( $std ) . '" value="' . esc_attr( $value ) . '" data-default-color="' . esc_attr( $std ) . '"" data-alpha="' . esc_attr( $alpha ) . '" />';
-
-		if ( isset( $field['inside_label'] ) && '' !== $field['inside_label'] ) {
-			echo '<label class="pngx-inside-label">' . esc_html( $field['inside_label'] ) . '</label>';
-		}
+		?><div class="pngx-color-picker-wrap">
+			<?php
+			if ( isset( $field['inside_label'] ) && '' !== $field['inside_label'] ) {
+				?>
+				<div class="pngx-inside-label"><?php echo esc_html( $field['inside_label'] ); ?></div>
+				<?php
+			}
+			?>
+			<input
+					type="text"
+					class="pngx-color-picker <?php echo esc_attr( $class ); ?>"
+					id="<?php echo esc_attr( $field['id'] ); ?>"
+					name="<?php echo esc_attr( $name . $repeating ); ?>"
+					placeholder="<?php echo esc_attr( $std ); ?>"
+					value="<?php echo esc_attr( $value ); ?>"
+					data-default-color="<?php echo esc_attr( $std ); ?>"
+					data-alpha="<?php echo esc_attr( $alpha ); ?>"
+			/>
+		</div><?php
 
 		if ( isset( $field['desc'] ) && ! empty( $field['desc'] ) ) {
-			echo '<span class="description">' . esc_html( $field['desc'] ) . '</span>';
+			?>
+			<span class="description"><?php echo esc_html( $field['desc'] ); ?></span>
+			<?php
 		}
 
 	}

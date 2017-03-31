@@ -39,3 +39,19 @@
 .wp-core-ui .pngx-wrapper .button-primary {
 	float: right;
 }
+
+.pngx-wrapper {
+
+	input[type="email"],
+	input[type="number"],
+	input[type="text"],
+	input[type="url"] {
+		padding: 12px 8px;
+		width: auto;
+	}
+
+	input[type="number"] {
+		height: auto;
+	}
+
+}
