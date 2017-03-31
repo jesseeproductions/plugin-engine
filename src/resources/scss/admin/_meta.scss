@@ -1,3 +1,150 @@
 /* ==========================================================================
    Meta Box
    ========================================================================== */
+
+.postbox-container {
+
+	.pngx-meta-field-wrap {
+		box-sizing: border-box;
+		margin: 25px 0;
+		overflow: visible;
+
+		@include media($mobile) {
+			//margin: 15px 0;
+		}
+	}
+
+	.pngx-meta-field {
+		float: none;
+		overflow: visible;
+
+		&.field-checkbox,
+		&.field-color,
+		&.field-date,
+		&.field-image,
+		&.field-number,
+		&.field-select,
+		&.field-text,
+		&.field-url,
+		&.field-variety,
+		&.field-wysiwyg {
+			border: 1px solid $color__light_grey;
+			border-radius: 3px;
+			display: block;
+			max-width: 500px;
+			padding: 19px 9px 9px;
+			width: 100%;
+
+			& > label {
+				background: $white;
+				color: $color__link;
+				display: block;
+				float: left;
+				font-size: 15px;
+				font-weight: bold;
+				height: 14px;
+				margin: -33px 0 0;
+				overflow: hidden;
+				padding: 2px 5px 4px 5px;
+			}
+
+			input[type="text"],
+			input[type="email"],
+			input[type="url"] {
+				padding: 12px 8px;
+				width: 100%;
+			}
+
+			input[type="date"] {
+				padding: 12px 8px;
+			}
+
+		}
+
+		> .pngx-meta-field-styles,
+		> .description {
+			background: #F3F3F3;
+			color: $color__grey;
+			display: block;
+			font-size: 11px;
+			margin: 10px -9px -9px -9px;
+			padding: 3px;
+			text-align: center;
+		}
+
+		.checkbox-description {
+			color: $color__dark_grey;
+			font-size: 11px;
+		}
+
+		.pngx-meta-field-styles {
+
+		}
+
+		.pngx-variety-inputs {
+			display: flex;
+
+			.pngx-field-align {
+				flex-shrink: 0;
+				flex-grow: 1;
+				width: auto;
+				flex-basis: 50%;
+			}
+
+			.expiration-icon {
+				flex-shrink: 0;
+				flex-grow: 0;
+				flex-basis: 34px;
+			}
+		}
+		/*
+				input[type="text"],
+				input[type="date"],
+				input[type="datetime"],
+				input[type="email"],
+				input[type="number"],
+				input[type="search"],
+				input[type="time"],
+				input[type="url"],
+				input[type="password"],
+				textarea,
+				select {
+					border: none;
+					display: block;
+					font-size: 16px;
+					height: 25px;
+					line-height: 25px;
+					outline: none;
+					padding: 0;
+					width: 100%;
+				}
+				input[type="text"]:focus,
+				input[type="date"]:focus,
+				input[type="datetime"]:focus,
+				input[type="email"]:focus,
+				input[type="number"]:focus,
+				input[type="search"]:focus,
+				input[type="time"]:focus,
+				input[type="url"]:focus,
+				input[type="password"]:focus,
+				textarea:focus,
+				select:focus {
+
+				}*/
+
+		/*		input[type="submit"],
+				input[type="button"] {
+					background: #2471FF;
+					border: none;
+					border-bottom: 3px solid #5994FF;
+					border-radius: 3px;
+					color: #D2E2FF;
+					padding: 10px 20px 10px 20px;
+				}
+				input[type="submit"]:hover,
+				input[type="button"]:hover {
+					background: #6B9FFF;
+					color: #fff;
+				}*/
+	}
+}

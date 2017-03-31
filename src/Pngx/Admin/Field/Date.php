@@ -28,10 +28,10 @@ class Pngx__Admin__Field__Date {
 		$class = isset( $field['class'] ) ? $field['class'] : '';
 		$repeating = isset( $field['repeating'] ) ? '[]' : '';
 
-		echo '<input type="text" class="pngx-datepicker ' . esc_attr( $class ) . '"  id="' . esc_attr( $field['id'] ) . '" name="' . esc_attr( $name ) . $repeating . '" value="' . esc_attr( $value ) . '" size="' . absint( $size ) . '" />';
+		echo '<input type="date" class="pngx-datepicker ' . esc_attr( $class ) . '"  id="' . esc_attr( $field['id'] ) . '" name="' . esc_attr( $name ) . $repeating . '" value="' . esc_attr( $value ) . '" size="' . absint( $size ) . '" />';
 
-		if ( '' != $field['desc'] ) {
-			echo '<br><span class="description">' . $field['desc'] . '</span>';
+		if ( isset( $field['desc'] ) && ! empty( $field['desc'] ) ) {
+			echo '<span class="description">' . esc_html( $field['desc'] ) . '</span>';
 		}
 
 		if ( isset( $field['condition'] ) && 'show_current_date' == $field['condition'] ) {
@@ -39,7 +39,7 @@ class Pngx__Admin__Field__Date {
 			$date = Pngx__Date::display_date( $field['format'] );
 
 			if ( $date ) {
-				echo '<br><span class="description">' . __( 'Today\'s Date is ', 'plugin-engine' ) . $date . '</span>';
+				echo '<span class="description">' . esc_html__( 'Today\'s Date is ', 'plugin-engine' ) . esc_html( $date ) . '</span>';
 			}
 
 		}

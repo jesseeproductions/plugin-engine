@@ -3,49 +3,6 @@
    ========================================================================== */
 
 /**
-* All Fields
-***************************************************/
-.pngx-meta-field-wrap {
-	margin: 10px 0;
-	overflow: hidden;
-	@include media($mobile) {
-		margin: 15px 0;
-	}
-}
-
-.pngx-meta-field,
-.pngx-meta-label {
-	float: left;
-	overflow: hidden;
-}
-
-.pngx-meta-label {
-	font-weight: 700;
-	width: 30%;
-}
-
-.pngx-meta-field {
-	width: 70%;
-
-	& input,
-	& textarea,
-	& input {
-		max-width: 99%;
-	}
-}
-
-.pngx-meta-field.field-help {
-	width: 100%;
-}
-
-@include media($mobile) {
-	.pngx-meta-field,
-	.pngx-meta-label {
-		width: 100%;
-	}
-}
-
-/**
 * Headings
 ***************************************************/
 .pro-heading,
@@ -74,6 +31,13 @@
 
 .pro-heading:before {
 	margin: 0 0 15px;
+}
+
+/**
+* Help Field
+***************************************************/
+.pngx-meta-field.field-help {
+	width: 100%;
 }
 
 /**
@@ -135,8 +99,8 @@
 	position: relative;
 
 	.pngx-list-license-button {
-		padding: 4px 10px;
 		display: inline;
+		padding: 4px 10px;
 	}
 
 	.pngx-license-field-result-msg {
@@ -146,13 +110,6 @@
 	.description {
 		font-style: italic;
 	}
-}
-
-/**
-* Linked Style Fields
-***************************************************/
-.pngx-meta-field-styles {
-	margin: 10px 0;
 }
 
 /**
@@ -182,19 +139,81 @@
 }
 
 /**
-* Text Input
+* Select Input
 ***************************************************/
+.pngx-default-select {
+	max-width: 300px;
+	position: relative;
+	width: 100%;
+
+	select {
+		background-color: white;
+		box-sizing: border-box;
+		color: black;
+		cursor: pointer;
+		display: inline-block;
+		font-size: 16px;
+		height: auto;
+		line-height: 1.5em;
+		margin: 0 0 10px;
+		padding: 12px 8px;
+		width: 100%;
+
+		&:focus {
+			outline: 0;
+		}
+		-webkit-appearance: none;
+
+		-moz-appearance: none;
+	}
+
+	&:before {
+		border: 0 solid transparent;
+		border-left-width: 7px;
+		border-right-width: 7px;
+		border-top: 7px solid $color__dark_grey;
+		content: '';
+		cursor: pointer;
+		height: 0;
+		position: absolute;
+		right: 18px;
+		top: 22px;
+		transition: all .1s ease;
+		width: 0;
+	}
+
+	&:hover {
+
+		&:before {
+			border: 0 solid transparent;
+			border-bottom: 7px solid $color__dark_grey;
+			border-left-width: 7px;
+			border-right-width: 7px;
+			content: '';
+			height: 0;
+			position: absolute;
+			right: 18px;
+			top: 22px;
+			width: 0;
+		}
+	}
+
+}
+
+/*!**
+* Text Input
+***************************************************!
 .pngx-wrapper input.regular-text {
 	width: auto;
 }
 
-/**
+!**
 * Textarea / Wysiwyg
-***************************************************/
+***************************************************!
 .pngx-meta-field textarea,
 .pngx-meta-field.field-wysiwyg {
 	width: 100%;
-}
+}*/
 
 /**
 * Submit

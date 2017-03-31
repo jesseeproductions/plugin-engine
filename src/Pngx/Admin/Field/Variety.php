@@ -47,7 +47,7 @@ class Pngx__Admin__Field__Variety {
 			$repeating = isset( $field['repeating'] ) ? '[]' : '';
 
 			?>
-			<div class="pngx-one-third pngx-first">
+			<div class="pngx-default-select">
 				<select
 						id="<?php echo esc_attr( $field['id'] ); ?>"
 						class="select pngx-variety-select <?php echo esc_attr( $class ); ?>"
@@ -65,7 +65,7 @@ class Pngx__Admin__Field__Variety {
 					?>
 				</select>
 			</div>
-			<div class="pngx-two-thirds">
+			<div class="pngx-variety-inputs">
 				<?php
 
 				/**
@@ -90,6 +90,13 @@ class Pngx__Admin__Field__Variety {
 						}
 
 						$meta = get_post_meta( $post_id, $label, true );
+
+						if ( isset( $fields[ $label ]['label'] ) ) { ?>
+							<label for="<?php echo esc_attr( $fields[ $label ]['id'] ); ?>">
+								<?php echo esc_attr( $fields[ $label ]['label'] ); ?>
+							</label>
+						<?php }
+
 						Pngx__Admin__Fields::display_field( $fields[ $label ], false, false, $meta, null );
 
 					}
@@ -98,8 +105,8 @@ class Pngx__Admin__Field__Variety {
 
 			</div>
 			<?php
-			if ( '' !== $field['desc'] ) {
-				echo '<br /><span class="description">' . esc_html( $field['desc'] ) . '</span>';
+			if ( isset( $field['desc'] ) && ! empty( $field['desc'] ) ) {
+				echo '<span class="description">' . esc_html( $field['desc'] ) . '</span>';
 			}
 
 		}

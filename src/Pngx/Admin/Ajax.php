@@ -146,6 +146,13 @@ class Pngx__Admin__Ajax {
 				if ( isset( $_POST['post_id'] ) ) {
 					$meta = get_post_meta( $_POST['post_id'], $label, true );
 				}
+
+				if ( isset( $fields[ $label ]['label'] ) ) { ?>
+					<label for="<?php echo esc_attr( $fields[ $label ]['id'] ); ?>">
+						<?php echo esc_attr( $fields[ $label ]['label'] ); ?>
+					</label>
+				<?php }
+
 				Pngx__Admin__Fields::display_field( $fields[ $label ], false, false, $meta, null );
 
 			}

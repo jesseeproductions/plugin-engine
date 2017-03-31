@@ -90,8 +90,8 @@ class Pngx__Admin__Fields {
 			$options_id = $options_id . '[' . $field['id'] . ']';
 		}
 
-		if ( isset( $field['before'] ) ) {
-			echo $field['before'];
+		if ( isset( $field['before'] ) && ! empty( $field['before'] ) ) {
+			echo '<span class="before">' . $field['before'] . '</span>';
 		}
 
 		switch ( $field['type'] ) {
@@ -241,8 +241,8 @@ class Pngx__Admin__Fields {
 			apply_filters( 'pngx_field_types', $field, $options, $options_id, $meta, $repeat_obj );
 		}
 
-		if ( isset( $field['after'] ) ) {
-			echo $field['after'];
+		if ( isset( $field['after'] ) && ! empty( $field['after'] ) ) {
+			echo '<span class="after description">' . $field['after'] . '</span>';
 		}
 
 	}

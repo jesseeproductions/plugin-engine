@@ -16,7 +16,7 @@ class Pngx__Admin__Field__Message {
 
 	public static function display( $field = array(), $options = array(), $options_id = null, $meta = null ) {
 
-		echo '<span class="description">' . $field['desc'] . '</span>';
+		echo '<span class="message">' . esc_html( $field['desc'] ) . '</span>';
 
 	}
 

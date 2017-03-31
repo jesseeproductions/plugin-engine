@@ -23,7 +23,7 @@ class Pngx__Admin__Field__Heading {
 				echo '</td></tr><tr valign="top"><td colspan="2"><h4 class="pngx-fields-heading">' . esc_html( $field['desc'] ) . '</h4>';
 			}
 		} else {
-			echo '<h4 class="pngx-fields-heading">' . $field["desc"] . '</h4>';
+			echo '<h4 class="pngx-fields-heading">' . esc_html( $field["desc"] ) . '</h4>';
 		}
 
 	}

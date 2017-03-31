@@ -8,7 +8,11 @@
 	border-radius: 3px;
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
-	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), /* The top layer shadow */ 0 8px 0 -5px #eee, /* The second layer */ 0 8px 1px -4px rgba(0, 0, 0, 0.15), /* The second layer shadow */ 0 14px 0 -8px #eee, /* The third layer */ 0 14px 1px -9px rgba(0, 0, 0, 0.15);
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), /* The top layer shadow */
+	0 8px 0 -5px #eee, /* The second layer */
+	0 8px 1px -4px rgba(0, 0, 0, 0.15), /* The second layer shadow */
+	0 14px 0 -8px #eee, /* The third layer */
+	0 14px 1px -9px rgba(0, 0, 0, 0.15);
 	height: 250px;
 	padding: 10px;
 	z-index: 101; /* The third layer shadow */
@@ -66,10 +70,10 @@
 
 .pngx-ui .ui-state-hover,
 .pngx-ui.ui-widget-content .ui-state-hover,
-.pngx-ui .ui-widget-header .ui-state-hover
-/*.pngx-ui .ui-state-focus,
+.pngx-ui .ui-widget-header .ui-state-hover /*.pngx-ui .ui-state-focus,
 .pngx-ui.ui-widget-content .ui-state-focus,
-.pngx-ui .ui-widget-header .ui-state-focus*/ {
+.pngx-ui .ui-widget-header .ui-state-focus*/
+{
 	filter: alpha(opacity=70);
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(opacity=70)"; /* for IE8 in IE7 mode; must be before filter below */
 	opacity: 0.7; /* IE6-IE8 */
