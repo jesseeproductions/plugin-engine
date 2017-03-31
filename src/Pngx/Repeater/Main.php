@@ -107,40 +107,42 @@ class Pngx__Repeater__Main {
 				//log_me( $subkeys );// [0] => 0
 
 //https://www.google.com/search?q=php+multidimensial+array+runs+through+it+twice&ie=utf-8&oe=utf-8#q=php+multidimensional+array+runs+through+it+twice&*
+				echo $this->handler->display_repeater_open( $i, $this->repeater_fields[ $i ]['repeater_type'] );
+
 				//number loop
 				foreach ( $subkeys as $subkey ) {
 
 					//log_me( $subkey ); //0
 					//log_me( $cycle[ $i ][ $subkey ] ); //0
 
-					echo $this->handler->display_repeater_open( $i, $subkey, $this->repeater_fields[ $i ]['repeater_type'] );
-
-					//todo add method to handle opening ( admin, saving, and front end )
-
 					$send_input = "{$input}[{$i}][{$subkey}]";
 					if ( ! $input ) {
 						$send_input = "{$i}[{$subkey}]";
 					}
 
+					echo $this->handler->display_repeater_item_open( $i, $this->repeater_fields[ $i ]['repeater_type'] );
+
 					$builder[ $i ][ $subkey ] = $this->cycle_repeaters( $cycle[ $i ][ $subkey ], $send_input );
 
-					echo $this->handler->display_repeater_close( $i, $subkey, $this->repeater_fields[ $i ]['repeater_type'] );
-					//todo add method to handle closing ( admin, saving, and front end )
+					echo $this->handler->display_repeater_item_close( $i, $this->repeater_fields[ $i ]['repeater_type'] );
+
 				}
+
+				echo $this->handler->display_repeater_close( $i );
+
 
 			} else {
 
 				if ( ! is_numeric( $i ) && ! isset( $this->new_meta[ $i ] ) ) {
+
 					$sanitized     = new Pngx__Sanitize( $this->repeater_fields[ $i ]['type'], $cycle[ $i ], $this->repeater_fields[ $i ] );
 					$builder[ $i ] = $sanitized->result;
 
-					echo '<br>opendiv class="' . $i . '" <br>';
-					//todo add method to handle opening ( admin, saving, and front end )
-					//echo 'name "' . $input . '[' . $i . ']" <br>';
-					echo $cycle[ $i ] . ' value<br>';
-					echo '/div class="' . $i . '" <br>';
-					//todo add method to handle closing ( admin, saving, and front end )
+					echo $this->handler->display_field( $this->repeater_fields[ $i ], $cycle[ $i ] );
+
+
 				}
+
 			}
 
 		}
