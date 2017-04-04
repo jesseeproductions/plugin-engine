@@ -47,12 +47,12 @@ class Pngx__Admin__Field__Select {
 		}
 
 		?>
-		<div class="pngx-default-select">
+		<div class="pngx-default-select pngx-default <?php echo esc_attr( $class ); ?>">
 			<select
 					id="<?php echo esc_attr( $field['id'] ); ?>"
-					class="select <?php echo esc_attr( $class ); ?>"
+					class="select"
 					name="<?php echo esc_attr( $name ); ?>"
-				<?php echo isset( $field['data'] ) ? Pngx__Admin__Fields::toggle( $field['data'], null ) : ''; ?>
+					<?php echo isset( $field['data'] ) ? Pngx__Admin__Fields::toggle( $field['data'], null ) : ''; ?>
 			>
 				<?php
 				foreach ( $field['choices'] as $value => $label ) {

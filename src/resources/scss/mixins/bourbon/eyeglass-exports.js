@@ -1,7 +1,7 @@
-var bourbon = require(".");
+var bourbon = require( "." );
 
-module.exports = function(eyeglass, sass) {
-  return {
-    sassDir: bourbon.includePaths[0]
-  };
+module.exports = function ( eyeglass, sass ) {
+	return {
+		sassDir: bourbon.includePaths[0]
+	};
 };

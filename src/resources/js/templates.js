@@ -14,7 +14,7 @@ jQuery( function ( $ ) {
 			return;
 		}
 
-		$( $ajax_field ).html( 'loading' );
+		$( $ajax_field ).html( '<div class="pngx-loading-svg"></div>' );
 
 		$.ajax( {
 			url: pngx_admin_ajax.ajaxurl,

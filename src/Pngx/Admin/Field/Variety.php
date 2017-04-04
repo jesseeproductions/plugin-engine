@@ -47,25 +47,32 @@ class Pngx__Admin__Field__Variety {
 			$repeating = isset( $field['repeating'] ) ? '[]' : '';
 
 			?>
-			<div class="pngx-default-select">
-				<select
-						id="<?php echo esc_attr( $field['id'] ); ?>"
-						class="select pngx-variety-select <?php echo esc_attr( $class ); ?>"
-						name="<?php echo esc_attr( $name ) . $repeating; ?>"
-					<?php echo isset( $field['data'] ) ? Pngx__Admin__Fields::toggle( $field['data'], null ) : ''; ?>
-				>
-					<?php
-					foreach ( $field['choices'] as $value => $label ) {
+			<div class="pngx-variety-selection">
+				<div class="pngx-default-select pngx-default">
+					<select
+							id="<?php echo esc_attr( $field['id'] ); ?>"
+							class="select pngx-variety-select <?php echo esc_attr( $class ); ?>"
+							name="<?php echo esc_attr( $name ) . $repeating; ?>"
+						<?php echo isset( $field['data'] ) ? Pngx__Admin__Fields::toggle( $field['data'], null ) : ''; ?>
+					>
+						<?php
+						foreach ( $field['choices'] as $value => $label ) {
 
-						$style = isset( $field['class'] ) && 'css-select' === $field['class'] ? 'style="' . esc_attr( $value ) . '"' : '';
+							$style = isset( $field['class'] ) && 'css-select' === $field['class'] ? 'style="' . esc_attr( $value ) . '"' : '';
 
-						echo '<option ' . $style . ' value="' . esc_attr( $value ) . '"' . selected( $selected, $value, false ) . '>' . esc_attr( $label ) . '</option>';
+							echo '<option ' . $style . ' value="' . esc_attr( $value ) . '"' . selected( $selected, $value, false ) . '>' . esc_attr( $label ) . '</option>';
 
-					}
-					?>
-				</select>
+						}
+						?>
+					</select>
+				</div>
+				<?php
+				if ( isset( $field['desc'] ) && ! empty( $field['desc'] ) ) {
+					echo '<span class="description">' . esc_html( $field['desc'] ) . '</span>';
+				}
+				?>
 			</div>
-			<div class="pngx-variety-inputs">
+			<div class="pngx-variety-fields-wrapper">
 				<?php
 
 				/**
@@ -77,6 +84,36 @@ class Pngx__Admin__Field__Variety {
 
 				if ( isset( $field['variety_choices'][ $selected ] ) ) {
 					foreach ( $field['variety_choices'][ $selected ] as $label ) {
+
+						if ( is_array( $label ) && isset( $label['open'] ) ) {
+							?>
+							<div class="<?php echo esc_html( $label['open'] ); ?>">
+							<?php
+							continue;
+						}
+
+						if ( is_array( $label ) && isset( $label['label'] ) ) {
+							?>
+							<label for="<?php echo esc_attr( $label['label'] ); ?>">
+								<?php echo esc_attr( $label['label'] ); ?>
+							</label>
+							<?php
+							continue;
+						}
+
+						if ( is_array( $label ) && isset( $label['description'] ) ) {
+							?>
+							<span class="description"><?php echo esc_html( $label['description'] ); ?></span>
+							<?php
+							continue;
+						}
+
+						if ( 'close' === $label ) {
+							?>
+							</div>
+							<?php
+							continue;
+						}
 
 						if ( ! isset( $fields[ $label ] ) ) {
 							continue;
@@ -91,13 +128,21 @@ class Pngx__Admin__Field__Variety {
 
 						$meta = get_post_meta( $post_id, $label, true );
 
-						if ( isset( $fields[ $label ]['label'] ) ) { ?>
-							<label for="<?php echo esc_attr( $fields[ $label ]['id'] ); ?>">
-								<?php echo esc_attr( $fields[ $label ]['label'] ); ?>
-							</label>
-						<?php }
+						?>
+						<div class="<?php echo isset( $fields[ $label ]['class'] ) ? esc_attr( $fields[ $label ]['class'] ) : ''; ?>">
+							<?php
 
-						Pngx__Admin__Fields::display_field( $fields[ $label ], false, false, $meta, null );
+							if ( isset( $fields[ $label ]['label'] ) ) { ?>
+								<label for="<?php echo esc_attr( $fields[ $label ]['id'] ); ?>">
+									<?php echo esc_attr( $fields[ $label ]['label'] ); ?>
+								</label>
+							<?php }
+
+							Pngx__Admin__Fields::display_field( $fields[ $label ], false, false, $meta, null );
+
+							?>
+						</div>
+						<?php
 
 					}
 				}
@@ -105,10 +150,6 @@ class Pngx__Admin__Field__Variety {
 
 			</div>
 			<?php
-			if ( isset( $field['desc'] ) && ! empty( $field['desc'] ) ) {
-				echo '<span class="description">' . esc_html( $field['desc'] ) . '</span>';
-			}
-
 		}
 
 	}

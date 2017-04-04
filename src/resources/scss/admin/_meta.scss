@@ -31,7 +31,7 @@
 			border: 1px solid $color__light_grey;
 			border-radius: 3px;
 			display: block;
-			max-width: 500px;
+			max-width: 600px;
 			padding: 19px 9px 9px;
 			width: 100%;
 
@@ -41,15 +41,16 @@
 				display: block;
 				float: left;
 				font-size: 15px;
-				font-weight: bold;
-				height: 14px;
-				margin: -33px 0 0;
+				font-weight: 700;
+				height: 18px;
+				margin: -31px 0 0;
 				overflow: hidden;
-				padding: 2px 5px 4px 5px;
+				padding: 0 5px;
 			}
 
-			input[type="text"],
 			input[type="email"],
+			input[type="number"],
+			input[type="text"],
 			input[type="url"] {
 				padding: 12px 8px;
 				width: 100%;
@@ -59,8 +60,15 @@
 				padding: 12px 8px;
 			}
 
+			input[type="number"] {
+				height: auto;
+			}
+
+
 		}
 
+		.pngx-variety-field > .description,
+		.pngx-variety-selection > .description,
 		> .pngx-meta-field-styles,
 		> .description {
 			background: #F3F3F3;
@@ -72,79 +80,88 @@
 			text-align: center;
 		}
 
+		.pngx-variety-selection > .description {
+			margin: 0 -9px 0 -9px;
+		}
+
 		.checkbox-description {
 			color: $color__dark_grey;
 			font-size: 11px;
 		}
 
 		.pngx-meta-field-styles {
+			padding: 8px 5px 0;
+			position: relative;
 
+			.inline-style-title {
+				color: $color__link;
+				font-size: 12px;
+				font-weight: 400;
+				left: 9px;
+				position: absolute;
+				top: 2px;
+			}
+
+			.pngx-color-picker-wrap {
+				display: inline-block;
+				vertical-align: top;
+				width: 50%;
+
+				.wp-picker-container {
+
+				}
+
+				.pngx-inside-label {
+
+				}
+
+			}
 		}
 
-		.pngx-variety-inputs {
-			display: flex;
+		.pngx-variety-fields-wrapper {
+			margin: 40px 0;
 
-			.pngx-field-align {
-				flex-shrink: 0;
-				flex-grow: 1;
+			> .pngx-variety-field {
+				border: 1px solid $color__grey;
+				border-radius: 4px;
+				display: block;
+				max-width: 100%;
+				padding: 19px 9px 9px;
 				width: auto;
-				flex-basis: 50%;
+
+				label {
+					color: $color__link;
+					font-size: 13px;
+				}
+
+				& > label {
+					background: $white;
+					color: $color__link;
+					display: block;
+					float: left;
+					font-size: 13px;
+					font-weight: 400;
+					height: 18px;
+					margin: -30px 0 0;
+					overflow: hidden;
+					padding: 0 3px;
+				}
 			}
 
-			.expiration-icon {
-				flex-shrink: 0;
-				flex-grow: 0;
-				flex-basis: 34px;
+			.pngx-variety-flex {
+				display: flex;
+
+				.expiration-icon {
+					flex-basis: 34px;
+					flex-grow: 0;
+					flex-shrink: 0;
+				}
+				.pngx-flex-fill {
+					flex-basis: 100%;
+					flex-grow: 1;
+					flex-shrink: 1;
+				}
 			}
 		}
-		/*
-				input[type="text"],
-				input[type="date"],
-				input[type="datetime"],
-				input[type="email"],
-				input[type="number"],
-				input[type="search"],
-				input[type="time"],
-				input[type="url"],
-				input[type="password"],
-				textarea,
-				select {
-					border: none;
-					display: block;
-					font-size: 16px;
-					height: 25px;
-					line-height: 25px;
-					outline: none;
-					padding: 0;
-					width: 100%;
-				}
-				input[type="text"]:focus,
-				input[type="date"]:focus,
-				input[type="datetime"]:focus,
-				input[type="email"]:focus,
-				input[type="number"]:focus,
-				input[type="search"]:focus,
-				input[type="time"]:focus,
-				input[type="url"]:focus,
-				input[type="password"]:focus,
-				textarea:focus,
-				select:focus {
-
-				}*/
-
-		/*		input[type="submit"],
-				input[type="button"] {
-					background: #2471FF;
-					border: none;
-					border-bottom: 3px solid #5994FF;
-					border-radius: 3px;
-					color: #D2E2FF;
-					padding: 10px 20px 10px 20px;
-				}
-				input[type="submit"]:hover,
-				input[type="button"]:hover {
-					background: #6B9FFF;
-					color: #fff;
-				}*/
 	}
 }

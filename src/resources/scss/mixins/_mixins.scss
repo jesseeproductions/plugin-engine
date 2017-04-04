@@ -5,14 +5,18 @@
 //@import "font-kit";
 
 @mixin omega-reset($nth) {
-  &:nth-child(#{$nth}) { margin-right: flex-gutter(); }
-  &:nth-child(#{$nth}+1) { clear: none }
+	&:nth-child(#{$nth}) {
+		margin-right: flex-gutter();
+	}
+	&:nth-child(#{$nth}+1) {
+		clear: none
+	}
 }
 
 @mixin inline_align {
-  display: inline-block;
-  *display: inline;
-  position: relative;
-  vertical-align: top;
-  zoom: 1;
+	display: inline-block;
+	*display: inline;
+	position: relative;
+	vertical-align: top;
+	zoom: 1;
 }

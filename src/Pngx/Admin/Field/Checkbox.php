@@ -44,12 +44,28 @@ class Pngx__Admin__Field__Checkbox {
 		$std       = isset( $field['std'] ) ? $field['std'] : '';
 		$repeating = isset( $field['repeating'] ) ? '[]' : '';
 
-		echo '<input type="checkbox" class="checkbox ' . esc_attr( $class ) . '"  id="' . esc_attr( $field['id'] ) . '" name="' . esc_attr( $name . $repeating ) . '" placeholder="' . esc_attr( $std ) . '"  value="1" ' . checked( $selected, 1, false ) . ' />';
+		?>
+		<input
+				type="checkbox"
+				class="checkbox <?php echo esc_attr( $class ); ?>"
+				id="<?php echo esc_attr( $field['id'] ); ?>"
+				name="<?php echo esc_attr( $name . $repeating ); ?>"
+				placeholder="<?php echo esc_attr( $std ); ?>"
+				value="1"
+				<?php echo checked( $selected, 1, false ); ?>
+		/>
 
-		echo '<label for="' . esc_attr( $field['id'] ) . '">' . esc_html( $field['label'] ) . '</label>';
+		<?php
+		if ( isset( $field['label'] ) ) {
+			?>
+			<label for="<?php echo esc_attr( $field['id'] ); ?>"><?php echo esc_html( $field['label'] ); ?></label>
+			<?php
+		}
 
 		if ( isset( $field['desc'] ) && ! empty( $field['desc'] ) ) {
-			echo '<span class="checkbox-description">' . esc_html( $field['desc'] ) . '</span>';
+			?>
+			<span class="checkbox-description"><?php echo esc_html( $field['desc'] ); ?></span>
+			<?php
 		}
 	}
 
