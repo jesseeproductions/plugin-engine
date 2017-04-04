@@ -487,6 +487,9 @@ fieldset[disabled] .btn-primary.active {
   line-height: 1.5em;
   padding: 12px 8px; }
 
+#wpbody .pngx-default-select.pngx-default select {
+  height: auto; }
+
 /**
 * Submit
 ***************************************************/
@@ -1147,7 +1150,7 @@ fieldset[disabled] .btn-primary.active {
 /* ==========================================================================
    Help CSS
    ========================================================================== */
-.pngx-section-help-container {
+.pngx-meta-field-wrap.pngx-section-help-container {
   background-color: #ccc;
   border-radius: 10px 10px 0;
   margin-bottom: 1em;
@@ -1371,8 +1374,7 @@ fieldset[disabled] .btn-primary.active {
    ========================================================================== */
 .postbox-container .pngx-meta-field-wrap {
   box-sizing: border-box;
-  margin: 25px 0;
-  overflow: visible; }
+  margin: 25px 0; }
 
 .postbox-container .pngx-meta-field {
   float: none;
@@ -1382,8 +1384,7 @@ fieldset[disabled] .btn-primary.active {
     border-radius: 3px;
     display: block;
     max-width: 600px;
-    padding: 19px 9px 9px;
-    width: 100%; }
+    padding: 19px 9px 9px; }
     .postbox-container .pngx-meta-field.field-checkbox > label, .postbox-container .pngx-meta-field.field-color > label, .postbox-container .pngx-meta-field.field-date > label, .postbox-container .pngx-meta-field.field-image > label, .postbox-container .pngx-meta-field.field-number > label, .postbox-container .pngx-meta-field.field-select > label, .postbox-container .pngx-meta-field.field-text > label, .postbox-container .pngx-meta-field.field-url > label, .postbox-container .pngx-meta-field.field-variety > label, .postbox-container .pngx-meta-field.field-wysiwyg > label {
       background: #fff;
       color: #003ca9;
@@ -1394,7 +1395,8 @@ fieldset[disabled] .btn-primary.active {
       height: 18px;
       margin: -31px 0 0;
       overflow: hidden;
-      padding: 0 5px; }
+      padding: 0 5px;
+      width: auto; }
     .postbox-container .pngx-meta-field.field-checkbox input[type="email"],
     .postbox-container .pngx-meta-field.field-checkbox input[type="number"],
     .postbox-container .pngx-meta-field.field-checkbox input[type="text"],
@@ -1442,14 +1444,15 @@ fieldset[disabled] .btn-primary.active {
     font-size: 11px;
     margin: 10px -9px -9px -9px;
     padding: 3px;
-    text-align: center; }
+    text-align: center;
+    width: auto; }
   .postbox-container .pngx-meta-field .pngx-variety-selection > .description {
     margin: 0 -9px 0 -9px; }
   .postbox-container .pngx-meta-field .checkbox-description {
     color: #333;
     font-size: 11px; }
   .postbox-container .pngx-meta-field .pngx-meta-field-styles {
-    padding: 8px 5px 0;
+    padding: 24px 5px 0;
     position: relative; }
     .postbox-container .pngx-meta-field .pngx-meta-field-styles .inline-style-title {
       color: #003ca9;
@@ -1484,7 +1487,8 @@ fieldset[disabled] .btn-primary.active {
         height: 18px;
         margin: -30px 0 0;
         overflow: hidden;
-        padding: 0 3px; }
+        padding: 0 3px;
+        width: auto; }
     .postbox-container .pngx-meta-field .pngx-variety-fields-wrapper .pngx-variety-flex {
       display: flex; }
       .postbox-container .pngx-meta-field .pngx-variety-fields-wrapper .pngx-variety-flex .expiration-icon {
@@ -1585,12 +1589,13 @@ fieldset[disabled] .btn-primary.active {
     background: none;
     border: none;
     height: 100%;
-    margin: 20px 0 -7px;
+    margin: 20px 0 0;
     padding: 0; }
   .pngx-tabs.ui-tabs .pngx-tabs-nav.ui-tabs-nav li.ui-state-default,
   .pngx-tabs.ui-tabs .pngx-tabs-nav.ui-tabs-nav li.ui-state-active {
     background: none;
-    border: none; }
+    border: none;
+    display: inline; }
   .pngx-tabs.ui-tabs .pngx-tabs-nav.ui-tabs-nav li a {
     border-color: #fff;
     border-radius: 8px 8px 0 0;
@@ -1611,6 +1616,8 @@ fieldset[disabled] .btn-primary.active {
     border-width: 1px 1px 0;
     box-shadow: 0 0 5px 0 #12446b;
     color: #2A5A8A; }
+  .pngx-tabs .form-table {
+    margin-top: 0; }
   .pngx-tabs .pngx-tabs-panel.ui-tabs-panel.ui-widget-content {
     background: #fff;
     box-shadow: 0 0 1px 0 rgba(50, 50, 50, 0.5);

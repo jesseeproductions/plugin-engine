@@ -13,7 +13,7 @@
 		background: none;
 		border: none;
 		height: 100%;
-		margin: 20px 0 -7px;
+		margin: 20px 0 0;
 		padding: 0;
 	}
 
@@ -21,6 +21,7 @@
 	&.ui-tabs .pngx-tabs-nav.ui-tabs-nav li.ui-state-active {
 		background: none;
 		border: none;
+		display: inline;
 	}
 
 	&.ui-tabs .pngx-tabs-nav.ui-tabs-nav li a {
@@ -45,6 +46,10 @@
 		border-width: 1px 1px 0;
 		box-shadow: 0 0 5px 0 rgba(18, 68, 107, 1.0);
 		color: #2A5A8A;
+	}
+
+	.form-table {
+		margin-top: 0;
 	}
 
 	.pngx-tabs-panel.ui-tabs-panel.ui-widget-content {

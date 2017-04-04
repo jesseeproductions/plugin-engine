@@ -119,7 +119,7 @@ var pngx_admin_fields_init = pngx_admin_fields_init || {};
 		if ( !$this ) {
 			return;
 		}
-		//console.log( 'add1' );
+
 		var $repeat_field = '#' + $this.data( 'repeater' );
 
 		//var $clone_info = $( $repeat_field ).data( 'clone' );
@@ -163,13 +163,12 @@ var pngx_admin_fields_init = pngx_admin_fields_init || {};
 				$( row ).insertAfter( $this.closest( '.repeatable-item' ) );
 
 				if ( $remove ) {
-					//	console.log( 'add4' );
 					$this.parent().remove();
 				}
 
 			}
 		} );
-		//console.log( 'add3' );
+
 	};
 
 
@@ -751,7 +750,7 @@ var pngx_fields_toggle = pngx_fields_toggle || {};
 
 	obj.toggle_change = function ( id ) {
 
-		$( obj.field[id] ).on( 'change', function () {
+		$( document ).on( 'change', obj.field[id], function () {
 			obj.priority_toggle(
 				id,
 				$( this ).val()
@@ -762,14 +761,14 @@ var pngx_fields_toggle = pngx_fields_toggle || {};
 
 	obj.img_change = function ( id ) {
 
-		$( obj.field[id] ).on( 'display', function () {
+		$( document ).on( 'display', obj.field[id], function () {
 			obj.toggle(
 				id,
 				$( this ).val()
 			);
 		} );
 
-		$( ".pngx-clear-image" ).on( "click", function () {
+		$( document ).on( "click", ".pngx-clear-image", function () {
 			obj.toggle(
 				id,
 				$( this ).val()
