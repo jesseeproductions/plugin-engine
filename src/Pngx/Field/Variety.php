@@ -29,7 +29,7 @@ class Pngx__Field__Variety {
 			<?php
 			foreach ( $field['variety_choices'][ $meta ] as $variety_fields ) {
 
-				if ( isset( $template_fields[ $variety_fields ] ) ) {
+				if ( ! is_array( $variety_fields ) && isset( $template_fields[ $variety_fields ] ) ) {
 
 					Pngx__Fields::display_field( $template_fields[ $variety_fields ], $post_id, $template_fields, $var );
 
