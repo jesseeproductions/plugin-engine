@@ -296,6 +296,7 @@ fieldset[disabled] .btn-primary.active {
 * Color Picker
 ***************************************************/
 .pngx-wrapper .wp-picker-container .wp-picker-input-wrap input.wp-color-picker[type="text"],
+.pngx-meta-field-styles .wp-picker-container .wp-picker-input-wrap input.wp-color-picker[type="text"],
 .pngx-meta-field .wp-picker-container .wp-picker-input-wrap input.wp-color-picker[type="text"] {
   font-family: monospace;
   font-size: 12px;
@@ -305,6 +306,7 @@ fieldset[disabled] .btn-primary.active {
   width: 65px; }
 
 .pngx-wrapper .wp-picker-container .wp-picker-holder,
+.pngx-meta-field-styles .wp-picker-container .wp-picker-holder,
 .pngx-meta-field .wp-picker-container .wp-picker-holder {
   position: absolute;
   z-index: 10000; }
@@ -1388,16 +1390,39 @@ fieldset[disabled] .btn-primary.active {
   box-sizing: border-box;
   margin: 25px 0; }
 
+.postbox-container .pngx-meta-fields-wrap,
 .postbox-container .pngx-meta-field {
   float: none;
   overflow: visible; }
-  .postbox-container .pngx-meta-field.field-checkbox, .postbox-container .pngx-meta-field.field-color, .postbox-container .pngx-meta-field.field-date, .postbox-container .pngx-meta-field.field-image, .postbox-container .pngx-meta-field.field-number, .postbox-container .pngx-meta-field.field-select, .postbox-container .pngx-meta-field.field-text, .postbox-container .pngx-meta-field.field-url, .postbox-container .pngx-meta-field.field-variety, .postbox-container .pngx-meta-field.field-wysiwyg {
+  .postbox-container .pngx-meta-fields-wrap.admin-field-wrap, .postbox-container .pngx-meta-fields-wrap.field-checkbox, .postbox-container .pngx-meta-fields-wrap.field-color, .postbox-container .pngx-meta-fields-wrap.field-date, .postbox-container .pngx-meta-fields-wrap.field-image, .postbox-container .pngx-meta-fields-wrap.field-number, .postbox-container .pngx-meta-fields-wrap.field-select, .postbox-container .pngx-meta-fields-wrap.field-text, .postbox-container .pngx-meta-fields-wrap.field-url, .postbox-container .pngx-meta-fields-wrap.field-variety, .postbox-container .pngx-meta-fields-wrap.field-wysiwyg,
+  .postbox-container .pngx-meta-field.admin-field-wrap,
+  .postbox-container .pngx-meta-field.field-checkbox,
+  .postbox-container .pngx-meta-field.field-color,
+  .postbox-container .pngx-meta-field.field-date,
+  .postbox-container .pngx-meta-field.field-image,
+  .postbox-container .pngx-meta-field.field-number,
+  .postbox-container .pngx-meta-field.field-select,
+  .postbox-container .pngx-meta-field.field-text,
+  .postbox-container .pngx-meta-field.field-url,
+  .postbox-container .pngx-meta-field.field-variety,
+  .postbox-container .pngx-meta-field.field-wysiwyg {
     border: 1px solid #ccc;
     border-radius: 3px;
     display: block;
     max-width: 600px;
     padding: 19px 9px 9px; }
-    .postbox-container .pngx-meta-field.field-checkbox > label, .postbox-container .pngx-meta-field.field-color > label, .postbox-container .pngx-meta-field.field-date > label, .postbox-container .pngx-meta-field.field-image > label, .postbox-container .pngx-meta-field.field-number > label, .postbox-container .pngx-meta-field.field-select > label, .postbox-container .pngx-meta-field.field-text > label, .postbox-container .pngx-meta-field.field-url > label, .postbox-container .pngx-meta-field.field-variety > label, .postbox-container .pngx-meta-field.field-wysiwyg > label {
+    .postbox-container .pngx-meta-fields-wrap.admin-field-wrap > label, .postbox-container .pngx-meta-fields-wrap.field-checkbox > label, .postbox-container .pngx-meta-fields-wrap.field-color > label, .postbox-container .pngx-meta-fields-wrap.field-date > label, .postbox-container .pngx-meta-fields-wrap.field-image > label, .postbox-container .pngx-meta-fields-wrap.field-number > label, .postbox-container .pngx-meta-fields-wrap.field-select > label, .postbox-container .pngx-meta-fields-wrap.field-text > label, .postbox-container .pngx-meta-fields-wrap.field-url > label, .postbox-container .pngx-meta-fields-wrap.field-variety > label, .postbox-container .pngx-meta-fields-wrap.field-wysiwyg > label,
+    .postbox-container .pngx-meta-field.admin-field-wrap > label,
+    .postbox-container .pngx-meta-field.field-checkbox > label,
+    .postbox-container .pngx-meta-field.field-color > label,
+    .postbox-container .pngx-meta-field.field-date > label,
+    .postbox-container .pngx-meta-field.field-image > label,
+    .postbox-container .pngx-meta-field.field-number > label,
+    .postbox-container .pngx-meta-field.field-select > label,
+    .postbox-container .pngx-meta-field.field-text > label,
+    .postbox-container .pngx-meta-field.field-url > label,
+    .postbox-container .pngx-meta-field.field-variety > label,
+    .postbox-container .pngx-meta-field.field-wysiwyg > label {
       background: #fff;
       color: #003ca9;
       display: block;
@@ -1409,43 +1434,116 @@ fieldset[disabled] .btn-primary.active {
       overflow: hidden;
       padding: 0 5px;
       width: auto; }
+    .postbox-container .pngx-meta-fields-wrap.admin-field-wrap input[type="email"],
+    .postbox-container .pngx-meta-fields-wrap.admin-field-wrap input[type="number"],
+    .postbox-container .pngx-meta-fields-wrap.admin-field-wrap input[type="text"],
+    .postbox-container .pngx-meta-fields-wrap.admin-field-wrap input[type="url"], .postbox-container .pngx-meta-fields-wrap.field-checkbox input[type="email"],
+    .postbox-container .pngx-meta-fields-wrap.field-checkbox input[type="number"],
+    .postbox-container .pngx-meta-fields-wrap.field-checkbox input[type="text"],
+    .postbox-container .pngx-meta-fields-wrap.field-checkbox input[type="url"], .postbox-container .pngx-meta-fields-wrap.field-color input[type="email"],
+    .postbox-container .pngx-meta-fields-wrap.field-color input[type="number"],
+    .postbox-container .pngx-meta-fields-wrap.field-color input[type="text"],
+    .postbox-container .pngx-meta-fields-wrap.field-color input[type="url"], .postbox-container .pngx-meta-fields-wrap.field-date input[type="email"],
+    .postbox-container .pngx-meta-fields-wrap.field-date input[type="number"],
+    .postbox-container .pngx-meta-fields-wrap.field-date input[type="text"],
+    .postbox-container .pngx-meta-fields-wrap.field-date input[type="url"], .postbox-container .pngx-meta-fields-wrap.field-image input[type="email"],
+    .postbox-container .pngx-meta-fields-wrap.field-image input[type="number"],
+    .postbox-container .pngx-meta-fields-wrap.field-image input[type="text"],
+    .postbox-container .pngx-meta-fields-wrap.field-image input[type="url"], .postbox-container .pngx-meta-fields-wrap.field-number input[type="email"],
+    .postbox-container .pngx-meta-fields-wrap.field-number input[type="number"],
+    .postbox-container .pngx-meta-fields-wrap.field-number input[type="text"],
+    .postbox-container .pngx-meta-fields-wrap.field-number input[type="url"], .postbox-container .pngx-meta-fields-wrap.field-select input[type="email"],
+    .postbox-container .pngx-meta-fields-wrap.field-select input[type="number"],
+    .postbox-container .pngx-meta-fields-wrap.field-select input[type="text"],
+    .postbox-container .pngx-meta-fields-wrap.field-select input[type="url"], .postbox-container .pngx-meta-fields-wrap.field-text input[type="email"],
+    .postbox-container .pngx-meta-fields-wrap.field-text input[type="number"],
+    .postbox-container .pngx-meta-fields-wrap.field-text input[type="text"],
+    .postbox-container .pngx-meta-fields-wrap.field-text input[type="url"], .postbox-container .pngx-meta-fields-wrap.field-url input[type="email"],
+    .postbox-container .pngx-meta-fields-wrap.field-url input[type="number"],
+    .postbox-container .pngx-meta-fields-wrap.field-url input[type="text"],
+    .postbox-container .pngx-meta-fields-wrap.field-url input[type="url"], .postbox-container .pngx-meta-fields-wrap.field-variety input[type="email"],
+    .postbox-container .pngx-meta-fields-wrap.field-variety input[type="number"],
+    .postbox-container .pngx-meta-fields-wrap.field-variety input[type="text"],
+    .postbox-container .pngx-meta-fields-wrap.field-variety input[type="url"], .postbox-container .pngx-meta-fields-wrap.field-wysiwyg input[type="email"],
+    .postbox-container .pngx-meta-fields-wrap.field-wysiwyg input[type="number"],
+    .postbox-container .pngx-meta-fields-wrap.field-wysiwyg input[type="text"],
+    .postbox-container .pngx-meta-fields-wrap.field-wysiwyg input[type="url"],
+    .postbox-container .pngx-meta-field.admin-field-wrap input[type="email"],
+    .postbox-container .pngx-meta-field.admin-field-wrap input[type="number"],
+    .postbox-container .pngx-meta-field.admin-field-wrap input[type="text"],
+    .postbox-container .pngx-meta-field.admin-field-wrap input[type="url"],
     .postbox-container .pngx-meta-field.field-checkbox input[type="email"],
     .postbox-container .pngx-meta-field.field-checkbox input[type="number"],
     .postbox-container .pngx-meta-field.field-checkbox input[type="text"],
-    .postbox-container .pngx-meta-field.field-checkbox input[type="url"], .postbox-container .pngx-meta-field.field-color input[type="email"],
+    .postbox-container .pngx-meta-field.field-checkbox input[type="url"],
+    .postbox-container .pngx-meta-field.field-color input[type="email"],
     .postbox-container .pngx-meta-field.field-color input[type="number"],
     .postbox-container .pngx-meta-field.field-color input[type="text"],
-    .postbox-container .pngx-meta-field.field-color input[type="url"], .postbox-container .pngx-meta-field.field-date input[type="email"],
+    .postbox-container .pngx-meta-field.field-color input[type="url"],
+    .postbox-container .pngx-meta-field.field-date input[type="email"],
     .postbox-container .pngx-meta-field.field-date input[type="number"],
     .postbox-container .pngx-meta-field.field-date input[type="text"],
-    .postbox-container .pngx-meta-field.field-date input[type="url"], .postbox-container .pngx-meta-field.field-image input[type="email"],
+    .postbox-container .pngx-meta-field.field-date input[type="url"],
+    .postbox-container .pngx-meta-field.field-image input[type="email"],
     .postbox-container .pngx-meta-field.field-image input[type="number"],
     .postbox-container .pngx-meta-field.field-image input[type="text"],
-    .postbox-container .pngx-meta-field.field-image input[type="url"], .postbox-container .pngx-meta-field.field-number input[type="email"],
+    .postbox-container .pngx-meta-field.field-image input[type="url"],
+    .postbox-container .pngx-meta-field.field-number input[type="email"],
     .postbox-container .pngx-meta-field.field-number input[type="number"],
     .postbox-container .pngx-meta-field.field-number input[type="text"],
-    .postbox-container .pngx-meta-field.field-number input[type="url"], .postbox-container .pngx-meta-field.field-select input[type="email"],
+    .postbox-container .pngx-meta-field.field-number input[type="url"],
+    .postbox-container .pngx-meta-field.field-select input[type="email"],
     .postbox-container .pngx-meta-field.field-select input[type="number"],
     .postbox-container .pngx-meta-field.field-select input[type="text"],
-    .postbox-container .pngx-meta-field.field-select input[type="url"], .postbox-container .pngx-meta-field.field-text input[type="email"],
+    .postbox-container .pngx-meta-field.field-select input[type="url"],
+    .postbox-container .pngx-meta-field.field-text input[type="email"],
     .postbox-container .pngx-meta-field.field-text input[type="number"],
     .postbox-container .pngx-meta-field.field-text input[type="text"],
-    .postbox-container .pngx-meta-field.field-text input[type="url"], .postbox-container .pngx-meta-field.field-url input[type="email"],
+    .postbox-container .pngx-meta-field.field-text input[type="url"],
+    .postbox-container .pngx-meta-field.field-url input[type="email"],
     .postbox-container .pngx-meta-field.field-url input[type="number"],
     .postbox-container .pngx-meta-field.field-url input[type="text"],
-    .postbox-container .pngx-meta-field.field-url input[type="url"], .postbox-container .pngx-meta-field.field-variety input[type="email"],
+    .postbox-container .pngx-meta-field.field-url input[type="url"],
+    .postbox-container .pngx-meta-field.field-variety input[type="email"],
     .postbox-container .pngx-meta-field.field-variety input[type="number"],
     .postbox-container .pngx-meta-field.field-variety input[type="text"],
-    .postbox-container .pngx-meta-field.field-variety input[type="url"], .postbox-container .pngx-meta-field.field-wysiwyg input[type="email"],
+    .postbox-container .pngx-meta-field.field-variety input[type="url"],
+    .postbox-container .pngx-meta-field.field-wysiwyg input[type="email"],
     .postbox-container .pngx-meta-field.field-wysiwyg input[type="number"],
     .postbox-container .pngx-meta-field.field-wysiwyg input[type="text"],
     .postbox-container .pngx-meta-field.field-wysiwyg input[type="url"] {
       padding: 12px 8px;
       width: 100%; }
-    .postbox-container .pngx-meta-field.field-checkbox input[type="date"], .postbox-container .pngx-meta-field.field-color input[type="date"], .postbox-container .pngx-meta-field.field-date input[type="date"], .postbox-container .pngx-meta-field.field-image input[type="date"], .postbox-container .pngx-meta-field.field-number input[type="date"], .postbox-container .pngx-meta-field.field-select input[type="date"], .postbox-container .pngx-meta-field.field-text input[type="date"], .postbox-container .pngx-meta-field.field-url input[type="date"], .postbox-container .pngx-meta-field.field-variety input[type="date"], .postbox-container .pngx-meta-field.field-wysiwyg input[type="date"] {
+    .postbox-container .pngx-meta-fields-wrap.admin-field-wrap input[type="date"], .postbox-container .pngx-meta-fields-wrap.field-checkbox input[type="date"], .postbox-container .pngx-meta-fields-wrap.field-color input[type="date"], .postbox-container .pngx-meta-fields-wrap.field-date input[type="date"], .postbox-container .pngx-meta-fields-wrap.field-image input[type="date"], .postbox-container .pngx-meta-fields-wrap.field-number input[type="date"], .postbox-container .pngx-meta-fields-wrap.field-select input[type="date"], .postbox-container .pngx-meta-fields-wrap.field-text input[type="date"], .postbox-container .pngx-meta-fields-wrap.field-url input[type="date"], .postbox-container .pngx-meta-fields-wrap.field-variety input[type="date"], .postbox-container .pngx-meta-fields-wrap.field-wysiwyg input[type="date"],
+    .postbox-container .pngx-meta-field.admin-field-wrap input[type="date"],
+    .postbox-container .pngx-meta-field.field-checkbox input[type="date"],
+    .postbox-container .pngx-meta-field.field-color input[type="date"],
+    .postbox-container .pngx-meta-field.field-date input[type="date"],
+    .postbox-container .pngx-meta-field.field-image input[type="date"],
+    .postbox-container .pngx-meta-field.field-number input[type="date"],
+    .postbox-container .pngx-meta-field.field-select input[type="date"],
+    .postbox-container .pngx-meta-field.field-text input[type="date"],
+    .postbox-container .pngx-meta-field.field-url input[type="date"],
+    .postbox-container .pngx-meta-field.field-variety input[type="date"],
+    .postbox-container .pngx-meta-field.field-wysiwyg input[type="date"] {
       padding: 12px 8px; }
-    .postbox-container .pngx-meta-field.field-checkbox input[type="number"], .postbox-container .pngx-meta-field.field-color input[type="number"], .postbox-container .pngx-meta-field.field-date input[type="number"], .postbox-container .pngx-meta-field.field-image input[type="number"], .postbox-container .pngx-meta-field.field-number input[type="number"], .postbox-container .pngx-meta-field.field-select input[type="number"], .postbox-container .pngx-meta-field.field-text input[type="number"], .postbox-container .pngx-meta-field.field-url input[type="number"], .postbox-container .pngx-meta-field.field-variety input[type="number"], .postbox-container .pngx-meta-field.field-wysiwyg input[type="number"] {
+    .postbox-container .pngx-meta-fields-wrap.admin-field-wrap input[type="number"], .postbox-container .pngx-meta-fields-wrap.field-checkbox input[type="number"], .postbox-container .pngx-meta-fields-wrap.field-color input[type="number"], .postbox-container .pngx-meta-fields-wrap.field-date input[type="number"], .postbox-container .pngx-meta-fields-wrap.field-image input[type="number"], .postbox-container .pngx-meta-fields-wrap.field-number input[type="number"], .postbox-container .pngx-meta-fields-wrap.field-select input[type="number"], .postbox-container .pngx-meta-fields-wrap.field-text input[type="number"], .postbox-container .pngx-meta-fields-wrap.field-url input[type="number"], .postbox-container .pngx-meta-fields-wrap.field-variety input[type="number"], .postbox-container .pngx-meta-fields-wrap.field-wysiwyg input[type="number"],
+    .postbox-container .pngx-meta-field.admin-field-wrap input[type="number"],
+    .postbox-container .pngx-meta-field.field-checkbox input[type="number"],
+    .postbox-container .pngx-meta-field.field-color input[type="number"],
+    .postbox-container .pngx-meta-field.field-date input[type="number"],
+    .postbox-container .pngx-meta-field.field-image input[type="number"],
+    .postbox-container .pngx-meta-field.field-number input[type="number"],
+    .postbox-container .pngx-meta-field.field-select input[type="number"],
+    .postbox-container .pngx-meta-field.field-text input[type="number"],
+    .postbox-container .pngx-meta-field.field-url input[type="number"],
+    .postbox-container .pngx-meta-field.field-variety input[type="number"],
+    .postbox-container .pngx-meta-field.field-wysiwyg input[type="number"] {
       height: auto; }
+  .postbox-container .pngx-meta-fields-wrap .pngx-variety-field > .description,
+  .postbox-container .pngx-meta-fields-wrap .pngx-variety-selection > .description,
+  .postbox-container .pngx-meta-fields-wrap > .pngx-meta-field-styles,
+  .postbox-container .pngx-meta-fields-wrap > .description,
   .postbox-container .pngx-meta-field .pngx-variety-field > .description,
   .postbox-container .pngx-meta-field .pngx-variety-selection > .description,
   .postbox-container .pngx-meta-field > .pngx-meta-field-styles,
@@ -1458,14 +1556,18 @@ fieldset[disabled] .btn-primary.active {
     padding: 3px;
     text-align: center;
     width: auto; }
+  .postbox-container .pngx-meta-fields-wrap .pngx-variety-selection > .description,
   .postbox-container .pngx-meta-field .pngx-variety-selection > .description {
     margin: 0 -9px 0 -9px; }
+  .postbox-container .pngx-meta-fields-wrap .checkbox-description,
   .postbox-container .pngx-meta-field .checkbox-description {
     color: #333;
     font-size: 11px; }
+  .postbox-container .pngx-meta-fields-wrap .pngx-meta-field-styles,
   .postbox-container .pngx-meta-field .pngx-meta-field-styles {
     padding: 24px 5px 0;
     position: relative; }
+    .postbox-container .pngx-meta-fields-wrap .pngx-meta-field-styles .inline-style-title,
     .postbox-container .pngx-meta-field .pngx-meta-field-styles .inline-style-title {
       color: #003ca9;
       font-size: 12px;
@@ -1473,12 +1575,15 @@ fieldset[disabled] .btn-primary.active {
       left: 9px;
       position: absolute;
       top: 2px; }
+    .postbox-container .pngx-meta-fields-wrap .pngx-meta-field-styles .pngx-color-picker-wrap,
     .postbox-container .pngx-meta-field .pngx-meta-field-styles .pngx-color-picker-wrap {
       display: inline-block;
       vertical-align: top;
       width: 50%; }
+  .postbox-container .pngx-meta-fields-wrap .pngx-variety-fields-wrapper,
   .postbox-container .pngx-meta-field .pngx-variety-fields-wrapper {
     margin: 40px 0; }
+    .postbox-container .pngx-meta-fields-wrap .pngx-variety-fields-wrapper > .pngx-variety-field,
     .postbox-container .pngx-meta-field .pngx-variety-fields-wrapper > .pngx-variety-field {
       border: 1px solid #777;
       border-radius: 4px;
@@ -1486,9 +1591,11 @@ fieldset[disabled] .btn-primary.active {
       max-width: 100%;
       padding: 19px 9px 9px;
       width: auto; }
+      .postbox-container .pngx-meta-fields-wrap .pngx-variety-fields-wrapper > .pngx-variety-field label,
       .postbox-container .pngx-meta-field .pngx-variety-fields-wrapper > .pngx-variety-field label {
         color: #003ca9;
         font-size: 13px; }
+      .postbox-container .pngx-meta-fields-wrap .pngx-variety-fields-wrapper > .pngx-variety-field > label,
       .postbox-container .pngx-meta-field .pngx-variety-fields-wrapper > .pngx-variety-field > label {
         background: #fff;
         color: #003ca9;
@@ -1501,12 +1608,15 @@ fieldset[disabled] .btn-primary.active {
         overflow: hidden;
         padding: 0 3px;
         width: auto; }
+    .postbox-container .pngx-meta-fields-wrap .pngx-variety-fields-wrapper .pngx-variety-flex,
     .postbox-container .pngx-meta-field .pngx-variety-fields-wrapper .pngx-variety-flex {
       display: flex; }
+      .postbox-container .pngx-meta-fields-wrap .pngx-variety-fields-wrapper .pngx-variety-flex .expiration-icon,
       .postbox-container .pngx-meta-field .pngx-variety-fields-wrapper .pngx-variety-flex .expiration-icon {
         flex-basis: 34px;
         flex-grow: 0;
         flex-shrink: 0; }
+      .postbox-container .pngx-meta-fields-wrap .pngx-variety-fields-wrapper .pngx-variety-flex .pngx-flex-fill,
       .postbox-container .pngx-meta-field .pngx-variety-fields-wrapper .pngx-variety-flex .pngx-flex-fill {
         flex-basis: 100%;
         flex-grow: 1;
@@ -1634,7 +1744,6 @@ fieldset[disabled] .btn-primary.active {
     background: #fff;
     box-shadow: 0 0 1px 0 rgba(50, 50, 50, 0.5);
     clear: both;
-    overflow: hidden;
     padding: 2%; }
   .pngx-tabs .pngx-tabs-panel.ui-tabs-panel.ui-widget-content h3 {
     color: #2A5A8A;

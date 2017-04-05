@@ -11,10 +11,12 @@
 
 	}
 
+	.pngx-meta-fields-wrap,
 	.pngx-meta-field {
 		float: none;
 		overflow: visible;
 
+		&.admin-field-wrap,
 		&.field-checkbox,
 		&.field-color,
 		&.field-date,

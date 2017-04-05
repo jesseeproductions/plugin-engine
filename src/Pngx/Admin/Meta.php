@@ -227,6 +227,26 @@ class Pngx__Admin__Meta {
 								continue;
 							}
 
+							if ( "wrap-start" === $field['type'] ) {
+								?>
+                                <div class="pngx-meta-fields-wrap admin-field-wrap <?php echo esc_html( $wrapclass ); ?>" >
+								<?php
+								continue;
+
+							} elseif ( "wrap-end" === $field['type'] ) {
+
+								if ( isset( $field['desc'] ) && ! empty( $field['desc'] ) ) {
+									echo '<span class="description">' . esc_html( $field['desc'] ) . '</span>';
+								}
+
+								// Display admin linked style fields
+								Pngx__Admin__Style__Linked::display_styles( $fields, $field, $post->ID );
+								?>
+                                </div>
+								<?php
+								continue;
+							}
+
 							//if in template area only get fields with the template value
 							if ( $template_area ) {
 								$field_template = isset( $field['template'] ) ? $field['template'] : array();
