@@ -21,7 +21,10 @@ class Pngx__Field__Variety {
 		}
 
 		$class = $field['display']['class'] ? $field['display']['class'] : '';
-		$style = Pngx__Style__Linked::get_styles( $field, $post_id );
+		$style = '';
+		if ( ! isset( $field['style-target'] ) ) {
+			$style = Pngx__Style__Linked::get_styles( $field, $post_id );
+		}
 
 		?>
 
