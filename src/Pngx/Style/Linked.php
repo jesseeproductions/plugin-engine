@@ -58,6 +58,14 @@ class Pngx__Style__Linked {
 					$style .= '.' . esc_attr( $target['wrap'] ) . absint( $post_id ) . ' .' . esc_attr( $target['selector'] ) . '{ background-color:' . esc_attr( $color ) . '; }';
 				}
 
+				//todo create a filter here and modify the output using that instead of adding specific styling
+				if ( 'background-color-fold' === $type && $color = get_post_meta( $post_id,  $field['styles']['background-color'], true ) ) {
+					$style .= '.' . esc_attr( $target['wrap'] ) . absint( $post_id ) . ' .' . esc_attr( $target['selector'] ) . ':after { 
+							border-left: solid 6px' . esc_attr( $color ) . '; 
+							border-top: solid 6px' . esc_attr( $color ) . '; 
+						}';
+				}
+
 				if ( 'background-color:hover' === $type && $color = get_post_meta( $post_id, $field_name, true ) ) {
 					$style .= '.' . esc_attr( $target['wrap'] ) . absint( $post_id ) . ' .' . esc_attr( $target['selector'] ) . ':hover' . '{ background-color:' . esc_attr( $color ) . '; }';
 				}
