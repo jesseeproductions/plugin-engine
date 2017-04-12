@@ -59,10 +59,16 @@ class Pngx__Style__Linked {
 				}
 
 				//todo create a filter here and modify the output using that instead of adding specific styling
-				if ( 'background-color-fold' === $type && $color = get_post_meta( $post_id,  $field['styles']['background-color'], true ) ) {
+				if ( 'background-color-fold' === $type && $color = get_post_meta( $post_id, $field['styles']['background-color'], true ) ) {
 					$style .= '.' . esc_attr( $target['wrap'] ) . absint( $post_id ) . ' .' . esc_attr( $target['selector'] ) . ':after { 
 							border-left: solid 6px' . esc_attr( $color ) . '; 
 							border-top: solid 6px' . esc_attr( $color ) . '; 
+						}';
+
+					$style .= '.' . esc_attr( $target['wrap'] ) . absint( $post_id ) . ' .' . esc_attr( $target['selector'] ) . '.revealed:after { 
+							background: none;
+							border: none;
+							box-shadow: none;
 						}';
 				}
 

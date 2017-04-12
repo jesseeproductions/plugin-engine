@@ -28,7 +28,7 @@ class Pngx__Allowed_Tags {
 	*/
 	public static function content() {
 
-		$terms_tags = '<h1><h2><h3><h4><h5><h6><p><blockquote><div><pre><code><span><br><b><strong><em><img><del><ins><sub><sup><ul><ol><li><hr><i><button><caption><cite><datalist><dd><dl><dt><figcaption><figure><a>';
+		$terms_tags = '<h1><h2><h3><h4><h5><h6><p><blockquote><div><pre><code><span><br><b><strong><em><img><del><ins><sub><sup><ul><ol><li><hr><i><button><caption><cite><datalist><dd><dl><dt><figcaption><figure><a><style>';
 
 		return $terms_tags;
 
@@ -39,7 +39,7 @@ class Pngx__Allowed_Tags {
 	*/
 	public static function content_no_link() {
 
-		$terms_tags = '<h1><h2><h3><h4><h5><h6><p><blockquote><div><pre><code><span><br><b><strong><em><img><del><ins><sub><sup><ul><ol><li><hr><i><button><caption><cite><datalist><dd><dl><dt><figcaption><figure>';
+		$terms_tags = '<h1><h2><h3><h4><h5><h6><p><blockquote><div><pre><code><span><br><b><strong><em><img><del><ins><sub><sup><ul><ol><li><hr><i><button><caption><cite><datalist><dd><dl><dt><figcaption><figure><style>';
 
 		return $terms_tags;
 
