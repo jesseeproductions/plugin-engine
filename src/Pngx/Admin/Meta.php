@@ -212,7 +212,11 @@ class Pngx__Admin__Meta {
 							if ( "template_start" === $field['type'] ) {
 								//Start Template Section Wrap and set value for templates
 								$template_select = get_post_meta( $post->ID, $wrapclass, true );
-								$template_area   = ! empty( $template_select ) ? $template_select : cctor_options( 'cctor_default_template' );
+								/**
+								 * Filter Default Template Name
+								 */
+								$default = apply_filters( 'pngx-default-template' );
+								$template_area   = ! empty( $template_select ) ? $template_select : $default;
 								?>
 								<div class="pngx-meta-template-wrap template-wrap-<?php echo esc_html( $wrapclass ); ?>" >
 								<?php
