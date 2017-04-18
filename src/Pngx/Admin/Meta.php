@@ -215,7 +215,7 @@ class Pngx__Admin__Meta {
 								/**
 								 * Filter Default Template Name
 								 */
-								$default = apply_filters( 'pngx-default-template' );
+								$default = apply_filters( 'pngx-default-template', 'default' );
 								$template_area   = ! empty( $template_select ) ? $template_select : $default;
 								?>
 								<div class="pngx-meta-template-wrap template-wrap-<?php echo esc_html( $wrapclass ); ?>" >
