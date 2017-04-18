@@ -7,17 +7,16 @@
 	.pngx-meta-field-wrap {
 		box-sizing: border-box;
 		margin: 25px 0;
-		overflow: visible;
+		//overflow: visible;
 
-		@include media($mobile) {
-			//margin: 15px 0;
-		}
 	}
 
+	.pngx-meta-fields-wrap,
 	.pngx-meta-field {
 		float: none;
 		overflow: visible;
 
+		&.admin-field-wrap,
 		&.field-checkbox,
 		&.field-color,
 		&.field-date,
@@ -33,7 +32,6 @@
 			display: block;
 			max-width: 600px;
 			padding: 19px 9px 9px;
-			width: 100%;
 
 			& > label {
 				background: $white;
@@ -46,6 +44,7 @@
 				margin: -31px 0 0;
 				overflow: hidden;
 				padding: 0 5px;
+				width: auto;
 			}
 
 			input[type="email"],
@@ -64,7 +63,6 @@
 				height: auto;
 			}
 
-
 		}
 
 		.pngx-variety-field > .description,
@@ -78,6 +76,7 @@
 			margin: 10px -9px -9px -9px;
 			padding: 3px;
 			text-align: center;
+			width: auto;
 		}
 
 		.pngx-variety-selection > .description {
@@ -90,7 +89,7 @@
 		}
 
 		.pngx-meta-field-styles {
-			padding: 8px 5px 0;
+			padding: 24px 5px 0;
 			position: relative;
 
 			.inline-style-title {
@@ -145,6 +144,7 @@
 					margin: -30px 0 0;
 					overflow: hidden;
 					padding: 0 3px;
+					width: auto;
 				}
 			}
 

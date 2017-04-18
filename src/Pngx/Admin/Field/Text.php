@@ -22,6 +22,9 @@ class Pngx__Admin__Field__Text {
 		} else {
 			$name  = $field['id'];
 			$value = $meta;
+			if ( ! $value && isset( $field['value'] ) ) {
+				$value = $field['value'];
+			}
 		}
 
 		$size      = isset( $field['size'] ) ? $field['size'] : 30;

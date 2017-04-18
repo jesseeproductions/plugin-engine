@@ -1,6 +1,6 @@
 jQuery( function ( $ ) {
 
-	$( document ).on( 'change', '.pngx-template-chooser, .pngx-variety-select', function ( e ) {
+	$( document ).on( 'change', '.pngx-template-chooser select, .pngx-variety-select', function ( e ) {
 
 		e.preventDefault();
 
