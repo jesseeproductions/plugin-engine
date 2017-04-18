@@ -6,6 +6,7 @@
 * Color Picker
 ***************************************************/
 .pngx-wrapper,
+.pngx-meta-field-styles,
 .pngx-meta-field {
 
 	.wp-picker-container {
@@ -259,6 +260,11 @@
 	}
 
 }
+
+#wpbody .pngx-default-select.pngx-default select {
+	height: auto;
+}
+
 /**
 * Submit
 ***************************************************/

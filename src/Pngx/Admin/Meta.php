@@ -166,16 +166,16 @@ class Pngx__Admin__Meta {
 
 		ob_start(); ?>
 
-        <div class="main pngx-tabs" <?php echo Pngx__Admin__Fields::toggle( $tab_data, null ); ?> >
+		<div class="main pngx-tabs" <?php echo Pngx__Admin__Fields::toggle( $tab_data, null ); ?> >
 
-            <ul class="main pngx-tabs-nav">
+			<ul class="main pngx-tabs-nav">
 
 				<?php //Create Tabs
 				foreach ( self::get_tabs() as $tab_slug => $tab ) {
-					echo '<li><a href="#' . esc_attr(  $tab_slug ) . '">' . esc_attr( $tab ) . '</a></li>';
+					echo '<li><a href="#' . esc_attr( $tab_slug ) . '">' . esc_attr( $tab ) . '</a></li>';
 				}
 				?>
-            </ul>
+			</ul>
 
 			<?php foreach ( self::get_tabs() as $tab_slug => $tab ) {
 
@@ -183,9 +183,9 @@ class Pngx__Admin__Meta {
 				$template_area = '';
 				?>
 
-                <div class="pngx-section-fields form-table">
+				<div class="pngx-section-fields form-table">
 
-                    <h2 class="pngx-tab-heading-<?php echo esc_attr( $tab_slug ); ?>"><?php echo esc_attr( $tab ); ?></h2>
+					<h2 class="pngx-tab-heading-<?php echo esc_attr( $tab_slug ); ?>"><?php echo esc_attr( $tab ); ?></h2>
 
 					<?php
 
@@ -212,9 +212,9 @@ class Pngx__Admin__Meta {
 							if ( "template_start" === $field['type'] ) {
 								//Start Template Section Wrap and set value for templates
 								$template_select = get_post_meta( $post->ID, $wrapclass, true );
-								$template_area   = ! empty( $template_select ) ? $template_select : 'default';
+								$template_area   = ! empty( $template_select ) ? $template_select : cctor_options( 'cctor_default_template' );
 								?>
-                                <div class="pngx-meta-template-wrap template-wrap-<?php echo esc_html( $wrapclass ); ?>" >
+								<div class="pngx-meta-template-wrap template-wrap-<?php echo esc_html( $wrapclass ); ?>" >
 								<?php
 								continue;
 
@@ -222,7 +222,7 @@ class Pngx__Admin__Meta {
 								//End Template Section Wrap
 								$template_area = '';
 								?>
-                                </div>
+								</div>
 								<?php
 								continue;
 							}
@@ -238,21 +238,40 @@ class Pngx__Admin__Meta {
 								//if not template area set, but there is a template then do not display the field
 								continue;
 							}
+
+							if ( "wrap-start" === $field['type'] ) {
+								?>
+								<div class="pngx-meta-fields-wrap admin-field-wrap <?php echo esc_html( $wrapclass ); ?>" >
+								<?php
+								continue;
+
+							} elseif ( "wrap-end" === $field['type'] ) {
+
+								if ( isset( $field['desc'] ) && ! empty( $field['desc'] ) ) {
+									echo '<span class="description">' . esc_html( $field['desc'] ) . '</span>';
+								}
+
+								// Display admin linked style fields
+								Pngx__Admin__Style__Linked::display_styles( $fields, $field, $post->ID );
+								?>
+								</div>
+								<?php
+								continue;
+							}
 							?>
 
-                            <div class="pngx-meta-field-wrap field-wrap-<?php echo esc_html( $field['type'] ); ?> field-wrap-<?php echo esc_html( $field['id'] ); ?> <?php echo esc_html( $wrapclass ); ?>"
+							<div class="pngx-meta-field-wrap field-wrap-<?php echo esc_html( $field['type'] ); ?> field-wrap-<?php echo esc_html( $field['id'] ); ?> <?php echo esc_html( $wrapclass ); ?>"
 								<?php echo isset( $field['toggle'] ) ? Pngx__Admin__Fields::toggle( $field['toggle'], esc_attr( $field['id'] ) ) : null; ?> >
 
-                                <div class="pngx-meta-field field-<?php echo esc_attr( $field['type'] ); ?> field-<?php echo esc_attr( $field['id'] ); ?>">
+								<div class="pngx-meta-field field-<?php echo esc_attr( $field['type'] ); ?> field-<?php echo esc_attr( $field['id'] ); ?>">
 
 									<?php if ( isset( $field['label'] ) ) { ?>
-	                                        <label for="<?php echo esc_attr( $field['id'] ); ?>">
-	                                        	<?php echo esc_attr( $field['label'] ); ?>
-	                                        </label>
+										<label for="<?php echo esc_attr( $field['id'] ); ?>">
+											<?php echo esc_attr( $field['label'] ); ?>
+										</label>
 									<?php } ?>
 
 									<?php
-									//todo do I need to change the null for repeater here?
 									Pngx__Admin__Fields::display_field( $field, false, false, $meta, null );
 
 									// Display admin linked style fields
@@ -260,22 +279,22 @@ class Pngx__Admin__Meta {
 
 									?>
 
-                                </div>
-                                <!-- end .pngx-meta-field.field-<?php echo esc_attr( $field['type'] ); ?>.field-<?php echo esc_attr( $field['id'] ); ?> -->
+								</div>
+								<!-- end .pngx-meta-field.field-<?php echo esc_attr( $field['type'] ); ?>.field-<?php echo esc_attr( $field['id'] ); ?> -->
 
-                            </div> <!-- end .pngx-meta-field-wrap.field-wrap-<?php echo esc_attr( $field['type'] ); ?>.field-wrap-<?php echo esc_attr(  $field['id'] ); ?>	-->
+							</div> <!-- end .pngx-meta-field-wrap.field-wrap-<?php echo esc_attr( $field['type'] ); ?>.field-wrap-<?php echo esc_attr( $field['id'] ); ?>	-->
 
 							<?php
 						}//end if in section check
 
 					} // end foreach fields?>
 
-                </div>    <!-- end .pngx-section-fields.form-table -->
+				</div>    <!-- end .pngx-section-fields.form-table -->
 
 			<?php } // end foreach tabs
 			?>
 
-        </div>    <!-- end .pngx-tabs -->
+		</div>    <!-- end .pngx-tabs -->
 
 		<?php echo ob_get_clean();
 	}
