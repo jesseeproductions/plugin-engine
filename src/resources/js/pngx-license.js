@@ -65,9 +65,15 @@ var pngx_update_license = pngx_update_license || {};
 
 					var plugin = $( '[data-slug=' + plugin_slug + ']' );
 
+					var $msg_class = 'pngx-success-msg';
+					if ( results.data.remote_error ) {
+						$msg_class = 'pngx-error-msg';
+					}
+
 					if ( 'deactivate_license' === action ) {
+
 						// License is Active
-						status = '<span class="pngx-success-msg">' + results.data.license_status + '</span>';
+						status = '<span class="' + $msg_class + '">' + results.data.license_status + '</span>';
 
 						//Remove Deactivate Button and Add Message
 						$( plugin ).find( '.row-actions .deactivate' ).text( deactivate_link_msg );
@@ -94,7 +100,7 @@ var pngx_update_license = pngx_update_license || {};
 
 					if ( results.success ) {
 
-						msg = '<span class="pngx-success-msg">' + results.data.message + '</span>';
+						msg = '<span class="' + $msg_class + '">' + results.data.message + '</span>';
 						$( field_wrap ).find( '.pngx-license-field-result-msg' ).html( msg ).fadeIn();
 
 					} else {

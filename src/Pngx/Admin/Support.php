@@ -382,7 +382,7 @@ if ( ! class_exists( 'Pngx__Admin__Support' ) ) {
 
 						foreach ( $v as $key => $value ) {
 
-							if ( isset( $fields[ $key ] ) ) {
+							if ( isset( $fields[ $key ]['title'] ) ) {
 								$settings[ $fields[ $key ]['title'] ] = esc_textarea( $value );
 							}
 

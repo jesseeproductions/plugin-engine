@@ -165,6 +165,12 @@ class Pngx__Admin__EDD_License {
 
 			// make sure the response came back okay
 			if ( is_wp_error( $response ) ) {
+				unset( $license_info['status'] );
+				unset( $license_info['expires'] );
+
+				//Update License Object
+				update_option( $license_option_name, $license_info );
+
 				return false;
 			}
 
@@ -301,8 +307,14 @@ class Pngx__Admin__EDD_License {
 
 			$data = array(
 				'message'        => $message,
+				'license_status' => esc_html( __( 'License status has not changed with the remote server.', 'plugin-engine' ) ),
 				'action'         => $license_fields['pngx_license_action'],
 			);
+
+			// On Error and Deactivating make sure to deactivate to prevent lock out
+			if ( 'deactivate_license' == $license_fields['pngx_license_action'] ) {
+				$this->deactivate( $license_fields, $license_info, $data );
+			}
 
 			wp_send_json_error( $data );
 
@@ -372,7 +384,7 @@ class Pngx__Admin__EDD_License {
 	* Deactivate
 	*
 	*/
-	public function deactivate( $license_fields, $license_info ) {
+	public function deactivate( $license_fields, $license_info, $error = array() ) {
 
 		unset( $license_info['status'] );
 		unset( $license_info['expires'] );
@@ -387,6 +399,12 @@ class Pngx__Admin__EDD_License {
 			'button'         => 'Activate License',
 			'action'         => 'activate_license',
 		);
+
+		if ( isset( $error['message'] ) && isset( $error['license_status'] ) ) {
+			$data['message']        = esc_html__( 'License Deactivated locally, it could not be deactivated with the server due to:', 'plugin-engine' ) . ' ' . $error['message'];
+			$data['license_status'] = $error['license_status'];
+			$data['remote_error']   = true;
+		}
 
 		wp_send_json_success( $data );
 
