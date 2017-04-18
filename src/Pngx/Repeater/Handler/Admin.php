@@ -59,6 +59,12 @@ class Pngx__Repeater__Handler__Admin {
 
 	}
 
+	public function display_repeater_close( $i ) {
+
+		return '</ul>';
+
+	}
+
 	public function display_repeater_item_open( $i, $field_type ) {
 
 		if ( 'section' === $field_type ) {
@@ -93,15 +99,15 @@ class Pngx__Repeater__Handler__Admin {
 
 	}
 
-	public function display_repeater_close( $i ) {
+	public function display_field( $field, $value, $name ) {
 
-		return  '</ul>';
+		Pngx__Admin__Fields::display_field( $field, false, false, $value, $name );
 
 	}
 
-	public function display_field( $field, $value ) {
+	public function display_repeater_field( $field, $value, $name ) {
 
-		Pngx__Admin__Fields::display_field( $field, false, false, $value, null );
+		return '<li class="repeating-field">' . Pngx__Admin__Fields::display_field( $field, false, false, $value, $name ) . '</li>';
 
 	}
 

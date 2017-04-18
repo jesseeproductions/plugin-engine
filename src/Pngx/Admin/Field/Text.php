@@ -14,7 +14,7 @@ if ( class_exists( 'Pngx__Admin__Field__Text' ) ) {
  */
 class Pngx__Admin__Field__Text {
 
-	public static function display( $field = array(), $options = array(), $options_id = null, $meta = null, $repeat_obj = null ) {
+	public static function display( $field = array(), $options = array(), $options_id = null, $meta = null, $repeat_name = null ) {
 
 		if ( isset( $options_id ) && ! empty( $options_id ) ) {
 			$name  = $options_id;
@@ -29,8 +29,8 @@ class Pngx__Admin__Field__Text {
 		$std       = isset( $field['std'] ) ? $field['std'] : '';
 		$condition = isset( $field['condition'] ) ? $field['condition'] : '';
 
-		if ( $repeat_obj ) {
-			$name = $repeat_obj->get_field_name( $name );
+		if ( $repeat_name ) {
+			$name = $repeat_name;
 		}
 
 		if ( isset( $field['alert'] ) && '' != $field['alert'] && 1 == $condition ) {

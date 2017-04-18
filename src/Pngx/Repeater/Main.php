@@ -45,18 +45,6 @@ class Pngx__Repeater__Main {
 
 	}
 
-	//todo
-	/*
-	 * setup to handle 3 different types and make a class for each, so the object just focuses on one
-	 * admin - loading of fields to edit - repeaters
-	 * save - save and sanitize the values
-	 * frontend - display the values - need to be able to use templates
-	 *
-	 *
-	 * pro admin - drag and reorder all items
-	 * pro frontend - more templates
-	 */
-
 	public function init_cycle() {
 
 		// bail early if no $_POST
@@ -68,8 +56,19 @@ class Pngx__Repeater__Main {
 //		print_r( $this->meta );
 //		echo '</pre>';
 
-
 		$this->new_meta = $this->cycle_repeaters( $this->meta, null );
+
+		if ( 'save' === $this->type ) {
+log_ME('here');
+			if ( ! is_null( $this->new_meta ) && $this->new_meta != $this->meta ) {
+				update_post_meta( $this->post_id, $this->id, $this->new_meta );
+			} elseif ( '' == $this->new_meta && $this->meta ) {
+				delete_post_meta( $this->post_id, $this->id, $this->meta );
+			}
+
+
+		}
+
 
 //		echo '<pre>';
 //		print_r( $this->new_meta );
@@ -83,10 +82,6 @@ class Pngx__Repeater__Main {
 		$builder = array();
 
 		$keys = array_keys( $cycle );
-
-		//$is_numeric = $this->is_key_numeric( $keys );
-
-		//$key_count = 0;
 
 		//log_me( 'starts' );
 		//log_me( $keys );//[0] => wpe_menu_section
@@ -138,7 +133,7 @@ class Pngx__Repeater__Main {
 					$sanitized     = new Pngx__Sanitize( $this->repeater_fields[ $i ]['type'], $cycle[ $i ], $this->repeater_fields[ $i ] );
 					$builder[ $i ] = $sanitized->result;
 
-					echo $this->handler->display_field( $this->repeater_fields[ $i ], $cycle[ $i ] );
+					echo $this->handler->display_field( $this->repeater_fields[ $i ], $cycle[ $i ], "{$input}[{$i}]" );
 
 
 				}
@@ -158,54 +153,21 @@ class Pngx__Repeater__Main {
 
 		$builder = array();
 
-		echo '<br>opendiv class="' . $k . '" <br>';
-		//todo add method to handle opening ( admin, saving, and front end )
 		foreach ( $cycle as $value ) {
 
 			$sanitized = new Pngx__Sanitize( $this->repeater_fields[ $k ]['type'], $value, $this->repeater_fields[ $k ] );
 
-			//echo 'name "' . $input . '[' . $k . '][]" <br>';
-			echo $value . ' value<br>';
 			$builder[] = $sanitized->result;
 
+			echo $this->handler->display_repeater_field( $this->repeater_fields[ $k ], $sanitized->result, "{$input}[]" );
+
+			//echo 'name "' . $input . '[' . $k . '][]" <br>';
+			//echo $value . ' value<br>';
+
 		}
-
-		echo '/div class="' . $k . '" <br>';
-
-		//todo add method to handle closing ( admin, saving, and front end )
 
 		return $builder;
 
 	}
 
-	public function is_key_numeric( $array ) {
-
-		$numeric = 0;
-
-		foreach ( $array as $value ) {
-
-			if ( is_numeric( $value ) ) {
-
-				$numeric ++;
-
-			}
-
-		}
-
-		return $numeric;
-	}
-
-	public function is_repeater( $k ) {
-
-		if ( isset( $this->repeater_fields[ $k ]['repeater_type'] ) && in_array( $this->repeater_fields[ $k ]['repeater_type'], array(
-				'section',
-				'column'
-			) )
-		) {
-
-			return true;
-		}
-
-		return false;
-	}
 }
