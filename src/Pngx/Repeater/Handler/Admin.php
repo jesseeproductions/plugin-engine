@@ -16,7 +16,7 @@ class Pngx__Repeater__Handler__Admin {
 	public function display_repeater_open( $i, $field_type ) {
 
 		if ( 'section' === $field_type ) {
-			return '<ul
+			echo '<ul
 				id="' . $i . '-repeater"
 				class="pngx-repeater repeating-section"
 				data-name_id="wpe_menu_section"
@@ -27,7 +27,7 @@ class Pngx__Repeater__Handler__Admin {
 		>';
 		} elseif ( 'column' === $field_type ) {
 
-			return '
+			echo '
 					<ul
 							id="' . $i . '"
 							class="pngx-repeater repeating-column"
@@ -40,7 +40,7 @@ class Pngx__Repeater__Handler__Admin {
 					>';
 		} elseif ( 'field' === $field_type ) {
 
-			return '
+			echo '
 					<ul
 							id="' . $i . '"
 							class="pngx-repeater repeating-field"
@@ -54,31 +54,33 @@ class Pngx__Repeater__Handler__Admin {
 		}
 
 
-		return false;
+		return;
 
 
 	}
 
 	public function display_repeater_close( $i ) {
 
-		return '</ul>';
+		echo '</ul>';
+
+		return;
 
 	}
 
 	public function display_repeater_item_open( $i, $field_type ) {
 
 		if ( 'section' === $field_type ) {
-			return '
+			echo '
 			<li class="repeater-item repeater-section">
 				<span class="sort hndle">|||</span>';
 		} elseif ( 'column' === $field_type ) {
-			return '
+			echo '
 			<li class="repeater-item repeater-column 0">
 				<span class="sort hndle">|||</span>';
 		}
 
 
-		return false;
+		return;
 
 
 	}
@@ -86,7 +88,7 @@ class Pngx__Repeater__Handler__Admin {
 
 	public function display_repeater_item_close( $i, $field_type ) {
 
-		return '
+		echo '
 			<a class="add-repeater button"
 			   data-repeater="' . $i . '>-repeater"
 			   href="#"
@@ -97,18 +99,29 @@ class Pngx__Repeater__Handler__Admin {
 			>X</a>
 		</li>';
 
+		return;
+
 	}
 
 	public function display_field( $field, $value, $name ) {
 
 		Pngx__Admin__Fields::display_field( $field, false, false, $value, $name );
 
+		return;
+
 	}
 
 	public function display_repeater_field( $field, $value, $name ) {
 
-		return '<li class="repeating-field">' . Pngx__Admin__Fields::display_field( $field, false, false, $value, $name ) . '</li>';
+		echo '<li class="repeating-field">' . Pngx__Admin__Fields::display_field( $field, false, false, $value, $name ) . '</li>';
 
+		return;
+
+	}
+
+	public function post_cycle( $post_id, $id, $new_meta ) {
+
+		return;
 	}
 
 }

@@ -39,7 +39,7 @@ class Pngx__Admin__Field__Repeater {
 
         );*/
 
-       $repeater_meta[] = array(
+      $repeater_meta[] = array(
 
             'wpe_menu_column' => array(
 
@@ -83,9 +83,9 @@ class Pngx__Admin__Field__Repeater {
 
         //log_me($repeater_meta);
 
-
+//log_me($meta);
 		if ( ! $repeat_obj ) {
-			$repeat_obj = new Pngx__Repeater__Main( $field['id'], $repeater_meta, $post->ID, 'admin' );
+			$repeat_obj = new Pngx__Repeater__Main( $field['id'], $meta, $post->ID, 'admin' );
 		}
 
 

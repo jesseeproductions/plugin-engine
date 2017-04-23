@@ -312,7 +312,7 @@ class Pngx__Admin__Meta {
 		if ( empty( $_POST ) || ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) ) {
 			return;
 		}
-        log_me( $_POST );
+        //log_me( $_POST );
 		//Check if on the right post type
 		if ( isset( $post->post_type ) && ! in_array( $post->post_type, self::get_post_types() ) ) {
 			return;
@@ -362,7 +362,7 @@ class Pngx__Admin__Meta {
 
 			//handle repeatable fields
 			if ( 'repeater' === $option['type'] && isset ( $_POST[ $option['id'] ] ) ) {
-log_me( $_POST[ $option['id'] ] );
+//log_me( $_POST[ $option['id'] ] );
 				if ( ! isset( ${'repeat_obj' . $option['id']} ) ) {
                     ${'repeat_obj' . $option['id']} = new Pngx__Repeater__Main ( $option['id'], $_POST[ $option['id'] ], $post_id, 'save' );
 				}

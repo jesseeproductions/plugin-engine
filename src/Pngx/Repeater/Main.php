@@ -58,17 +58,7 @@ class Pngx__Repeater__Main {
 
 		$this->new_meta = $this->cycle_repeaters( $this->meta, null );
 
-		if ( 'save' === $this->type ) {
-log_ME('here');
-			if ( ! is_null( $this->new_meta ) && $this->new_meta != $this->meta ) {
-				update_post_meta( $this->post_id, $this->id, $this->new_meta );
-			} elseif ( '' == $this->new_meta && $this->meta ) {
-				delete_post_meta( $this->post_id, $this->id, $this->meta );
-			}
-
-
-		}
-
+		$this->handler->post_cycle( $this->post_id, $this->id, $this->new_meta );
 
 //		echo '<pre>';
 //		print_r( $this->new_meta );
@@ -102,7 +92,7 @@ log_ME('here');
 				//log_me( $subkeys );// [0] => 0
 
 //https://www.google.com/search?q=php+multidimensial+array+runs+through+it+twice&ie=utf-8&oe=utf-8#q=php+multidimensional+array+runs+through+it+twice&*
-				echo $this->handler->display_repeater_open( $i, $this->repeater_fields[ $i ]['repeater_type'] );
+				$this->handler->display_repeater_open( $i, $this->repeater_fields[ $i ]['repeater_type'] );
 
 				//number loop
 				foreach ( $subkeys as $subkey ) {
@@ -115,15 +105,15 @@ log_ME('here');
 						$send_input = "{$i}[{$subkey}]";
 					}
 
-					echo $this->handler->display_repeater_item_open( $i, $this->repeater_fields[ $i ]['repeater_type'] );
+					$this->handler->display_repeater_item_open( $i, $this->repeater_fields[ $i ]['repeater_type'] );
 
 					$builder[ $i ][ $subkey ] = $this->cycle_repeaters( $cycle[ $i ][ $subkey ], $send_input );
 
-					echo $this->handler->display_repeater_item_close( $i, $this->repeater_fields[ $i ]['repeater_type'] );
+					$this->handler->display_repeater_item_close( $i, $this->repeater_fields[ $i ]['repeater_type'] );
 
 				}
 
-				echo $this->handler->display_repeater_close( $i );
+				$this->handler->display_repeater_close( $i );
 
 
 			} else {
@@ -133,7 +123,7 @@ log_ME('here');
 					$sanitized     = new Pngx__Sanitize( $this->repeater_fields[ $i ]['type'], $cycle[ $i ], $this->repeater_fields[ $i ] );
 					$builder[ $i ] = $sanitized->result;
 
-					echo $this->handler->display_field( $this->repeater_fields[ $i ], $cycle[ $i ], "{$input}[{$i}]" );
+					$this->handler->display_field( $this->repeater_fields[ $i ], $cycle[ $i ], "{$input}[{$i}]", $this->post_id  );
 
 
 				}
@@ -159,7 +149,7 @@ log_ME('here');
 
 			$builder[] = $sanitized->result;
 
-			echo $this->handler->display_repeater_field( $this->repeater_fields[ $k ], $sanitized->result, "{$input}[]" );
+			$this->handler->display_repeater_field( $this->repeater_fields[ $k ], $sanitized->result, "{$input}[]" );
 
 			//echo 'name "' . $input . '[' . $k . '][]" <br>';
 			//echo $value . ' value<br>';
@@ -170,4 +160,9 @@ log_ME('here');
 
 	}
 
+	public function get_field_display( ) {
+
+		return $this->new_meta;
+
+	}
 }

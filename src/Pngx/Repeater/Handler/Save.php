@@ -48,4 +48,16 @@ class Pngx__Repeater__Handler__Save {
 		return false;
 
 	}
+
+	public function post_cycle( $post_id, $id, $new_meta ) {
+
+		$old_meta = get_post_meta( $post_id, $id, true );
+
+		if ( ! is_null( $new_meta[ $id ] ) && $new_meta[ $id ] != $old_meta ) {
+			update_post_meta( $post_id, $id, $new_meta[ $id ] );
+		} elseif ( '' == $new_meta[ $id ] && $old_meta ) {
+			delete_post_meta( $post_id, $id, $old_meta );
+		}
+
+	}
 }
