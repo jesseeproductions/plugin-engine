@@ -113,7 +113,7 @@ class Pngx__Admin__Plugin_License_list {
 							placeholder="<?php echo esc_attr( $std ); ?>"
 							value="<?php echo esc_attr( $value ); ?>"
 							size="30"
-							<?php echo isset( $this->license_info['status'] ) && 'valid' === $this->license_info['status'] ? 'readonly' : ''; ?>
+						<?php echo isset( $this->license_info['status'] ) && 'valid' === $this->license_info['status'] ? 'readonly' : ''; ?>
 					/>
 
 					<?php
@@ -174,7 +174,7 @@ class Pngx__Admin__Plugin_License_list {
 
 					<?php
 
-					if ( isset( $this->license_info['status'] ) && false !== $this->license_info['status'] && 'valid' === $this->license_info['status'] ) {
+					if ( isset( $this->license_info['status'] ) && 'valid' == $this->license_info['status'] ) {
 
 						?>
 

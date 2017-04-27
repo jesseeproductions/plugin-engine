@@ -217,8 +217,15 @@ class Pngx__Admin__EDD_License {
 			wp_send_json_error( array( 'message' => __( 'Incorrect Capabilities!', 'plugin-engine' ) ) );
 		}
 
-		//update local license
+		// update local license key
 		$license_info = $this->update_local_license( $license_fields );
+
+		// Update status locally on deactivate
+		// Erroring on caution to do it here if for some reason there is a
+		// Server error at least it will enable plugin deactivation
+		if ( 'deactivate_license' == $license_fields['pngx_license_action'] ) {
+			$this->deactivate_local( $license_fields, $license_info );
+		}
 
 		// decode the license data
 		$license_data = $this->get_license_status( $license_fields, $license_info );
@@ -233,7 +240,7 @@ class Pngx__Admin__EDD_License {
 		// Deactived License
 		if ( 'deactivated' == $license_data->license || 'failed' == $license_data->license ) {
 
-			$this->deactivate( $license_fields, $license_info );
+			$this->deactivate();
 
 		}
 
@@ -296,8 +303,13 @@ class Pngx__Admin__EDD_License {
 			'sslverify' => false,
 		) );
 
+		$body_response = json_decode( wp_remote_retrieve_body( $response ) );
+
+		log_me( 'get_license_status' );
+		log_me( $body_response );
+
 		// make sure the response came back okay
-		if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
+		if ( is_wp_error( $response ) || ! $body_response || 200 !== wp_remote_retrieve_response_code( $response ) ) {
 
 			if ( is_wp_error( $response ) ) {
 				$message = $response->get_error_message();
@@ -307,13 +319,13 @@ class Pngx__Admin__EDD_License {
 
 			$data = array(
 				'message'        => $message,
-				'license_status' => esc_html( __( 'License status has not changed with the remote server.', 'plugin-engine' ) ),
+				'license_status' => esc_html( __( 'License status has not changed with the license server.', 'plugin-engine' ) ),
 				'action'         => $license_fields['pngx_license_action'],
 			);
 
 			// On Error and Deactivating make sure to deactivate to prevent lock out
 			if ( 'deactivate_license' == $license_fields['pngx_license_action'] ) {
-				$this->deactivate( $license_fields, $license_info, $data );
+				$this->deactivate( $data );
 			}
 
 			wp_send_json_error( $data );
@@ -379,18 +391,26 @@ class Pngx__Admin__EDD_License {
 
 	}
 
-
 	/*
-	* Deactivate
+	* Deactivate Local
 	*
 	*/
-	public function deactivate( $license_fields, $license_info, $error = array() ) {
+	public function deactivate_local( $license_fields, $license_info ) {
 
 		unset( $license_info['status'] );
 		unset( $license_info['expires'] );
 
 		//Update License Object
 		update_option( $license_fields['pngx_license_key'], $license_info );
+
+		return;
+	}
+
+	/*
+	* Deactivate
+	*
+	*/
+	public function deactivate( $error = array() ) {
 
 		$data = array(
 			'message'        => esc_html__( 'License Deactivated', 'plugin-engine' ),
@@ -416,45 +436,55 @@ class Pngx__Admin__EDD_License {
 	*/
 	public function invalid( $license_data, $license_fields ) {
 
-		switch ( $license_data->error ) {
+		$message = __( 'An error occurred, please try again.', 'plugin-engine' );
 
-			case 'expired' :
+		if ( isset( $license_data->error ) ) {
 
-				$expiration_date = strtotime( $license_data->expires );
-				$expiration_date = date( get_option( 'date_format' ), $expiration_date );
-				$message         = sprintf( __( 'License Expired on %s', 'plugin-engine' ), esc_attr( $expiration_date ) );
-				break;
+			switch ( $license_data->error ) {
 
-			case 'revoked' :
+				case 'expired' :
 
-				$message = __( 'Your license key has been disabled.', 'plugin-engine' );
-				break;
+					$expiration_date = strtotime( $license_data->expires );
+					$expiration_date = date( get_option( 'date_format' ), $expiration_date );
+					$message         = sprintf( __( 'License Expired on %s', 'plugin-engine' ), esc_attr( $expiration_date ) );
+					break;
 
-			case 'missing' :
+				case 'revoked' :
 
-				$message = __( 'Invalid license.', 'plugin-engine' );
-				break;
+					$message = __( 'Your license key has been disabled.', 'plugin-engine' );
+					break;
 
-			case 'invalid' :
-			case 'site_inactive' :
+				case 'missing' :
 
-				$message = __( 'Your license is not active for this URL.', 'plugin-engine' );
-				break;
+					$message = __( 'Invalid license.', 'plugin-engine' );
+					break;
 
-			case 'item_name_mismatch' :
+				case 'invalid' :
 
-				$message = sprintf( __( 'This appears to be an invalid license key for %s.', 'plugin-engine' ), $license_fields['pngx_license_name'] );
-				break;
+					$message = __( 'Your license is invalid.', 'plugin-engine' );
+					break;
 
-			case 'no_activations_left':
+				case 'site_inactive' :
 
-				$message = __( 'Your license key has reached its activation limit.', 'plugin-engine' );
-				break;
+					$message = __( 'Your license is not active for this URL.', 'plugin-engine' );
+					break;
 
-			default :
+				case 'item_name_mismatch' :
 
-				$message = __( 'An error occurred, please try again.', 'plugin-engine' );
-				break;
+					$message = sprintf( __( 'This appears to be an invalid license key for %s.', 'plugin-engine' ), $license_fields['pngx_license_name'] );
+					break;
+
+				case 'no_activations_left':
+
+					$message = __( 'Your license key has reached its activation limit.', 'plugin-engine' );
+					break;
+
+				case 'license_not_activable':
+
+					$message = __( 'Your license cannot be activated or deactivated, please confirm in your accoint it is active.', 'plugin-engine' );
+					break;
+			}
+
 		}
 
 		$status = 'expired' === $license_data->error ? $license_data->error : '';
