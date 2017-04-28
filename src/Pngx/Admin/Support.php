@@ -326,9 +326,9 @@ if ( ! class_exists( 'Pngx__Admin__Support' ) ) {
 					if ( isset( $license['key'] ) ) {
 						$license['key'] = preg_replace( '/^(.{4}).*(.{4})$/', '$1' . str_repeat( '#', 32 ) . '$2', $license['key'] );
 					}
-
-					$secure_keys[ $plugin ] = implode( ', ', $license );
-
+					if ( is_array( $license ) ) {
+						$secure_keys[ $plugin ] = implode( ', ', $license );
+					}
 				}
 
 				$keys = $secure_keys;
