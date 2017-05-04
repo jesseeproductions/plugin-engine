@@ -305,9 +305,6 @@ class Pngx__Admin__EDD_License {
 
 		$body_response = json_decode( wp_remote_retrieve_body( $response ) );
 
-		log_me( 'get_license_status' );
-		log_me( $body_response );
-
 		// make sure the response came back okay
 		if ( is_wp_error( $response ) || ! $body_response || 200 !== wp_remote_retrieve_response_code( $response ) ) {
 
