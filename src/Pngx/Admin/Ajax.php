@@ -65,36 +65,50 @@ class Pngx__Admin__Ajax {
 				//Wrap Class for Conditionals
 				$wrapclass = isset( $field['wrapclass'] ) ? $field['wrapclass'] : '';
 
+				if ( 'wrap-start' === $field['type'] ) {
+					?>
+					<div class="pngx-meta-fields-wrap admin-field-wrap <?php echo esc_html( $wrapclass ); ?>" >
+					<?php
+					continue;
+
+				} elseif ( "wrap-end" === $field['type'] ) {
+
+					if ( isset( $field['desc'] ) && ! empty( $field['desc'] ) ) {
+						echo '<span class="description">' . esc_html( $field['desc'] ) . '</span>';
+					}
+
+					// Display admin linked style fields
+					Pngx__Admin__Style__Linked::display_styles( $fields, $field, $post->ID );
+					?>
+					</div>
+					<?php
+					continue;
+				}
 				?>
 
 				<div class="pngx-meta-field-wrap field-wrap-<?php echo esc_html( $field['type'] ); ?> field-wrap-<?php echo esc_html( $field['id'] ); ?> <?php echo esc_html( $wrapclass ); ?>"
-					<?php echo isset( $field['toggle'] ) ? Pngx__Admin__Fields::toggle( $field['toggle'], $field['id'] ) : null; ?> >
+					<?php echo isset( $field['toggle'] ) ? Pngx__Admin__Fields::toggle( $field['toggle'], esc_attr( $field['id'] ) ) : null; ?> >
 
-					<?php if ( isset( $field['label'] ) ) { ?>
+					<div class="pngx-meta-field field-<?php echo esc_attr( $field['type'] ); ?> field-<?php echo esc_attr( $field['id'] ); ?>">
 
-						<div class="pngx-meta-label label-<?php echo $field['type']; ?> label-<?php echo $field['id']; ?>">
-							<label for="<?php echo $field['id']; ?>"><?php echo $field['label']; ?></label>
-						</div>
-
-					<?php } ?>
-
-					<div class="pngx-meta-field field-<?php echo $field['type']; ?> field-<?php echo $field['id']; ?>">
+						<?php if ( isset( $field['label'] ) ) { ?>
+							<label for="<?php echo esc_attr( $field['id'] ); ?>">
+								<?php echo esc_attr( $field['label'] ); ?>
+							</label>
+						<?php } ?>
 
 						<?php
-
-						Pngx__Admin__Fields::display_field( $field, false, false, $meta );
-
-						//Pngx__Admin__Fields::display_field( $field, false, false, $meta, $repeat_obj );
+						Pngx__Admin__Fields::display_field( $field, false, false, $meta, null );
 
 						// Display admin linked style fields
-						Pngx__Admin__Style__Linked::display_styles( $fields, $field, $_POST['post_id'] );
+						Pngx__Admin__Style__Linked::display_styles( $fields, $field, $post->ID );
 
 						?>
 
 					</div>
-					<!-- end .pngx-meta-field.field-<?php echo $field['type']; ?>.field-<?php echo $field['id']; ?> -->
+					<!-- end .pngx-meta-field.field-<?php echo esc_attr( $field['type'] ); ?>.field-<?php echo esc_attr( $field['id'] ); ?> -->
 
-				</div> <!-- end .pngx-meta-field-wrap.field-wrap-<?php echo $field['type']; ?>.field-wrap-<?php echo $field['id']; ?>	-->
+				</div> <!-- end .pngx-meta-field-wrap.field-wrap-<?php echo esc_attr( $field['type'] ); ?>.field-wrap-<?php echo esc_attr( $field['id'] ); ?>	-->
 
 				<?php
 			}

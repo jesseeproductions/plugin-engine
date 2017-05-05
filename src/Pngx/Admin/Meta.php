@@ -215,8 +215,8 @@ class Pngx__Admin__Meta {
 								/**
 								 * Filter Default Template Name
 								 */
-								$default = apply_filters( 'pngx-default-template', 'default' );
-								$template_area   = ! empty( $template_select ) ? $template_select : $default;
+								$default       = apply_filters( 'pngx-default-template', 'default' );
+								$template_area = ! empty( $template_select ) ? $template_select : $default;
 								?>
 								<div class="pngx-meta-template-wrap template-wrap-<?php echo esc_html( $wrapclass ); ?>" >
 								<?php
@@ -243,7 +243,7 @@ class Pngx__Admin__Meta {
 								continue;
 							}
 
-							if ( "wrap-start" === $field['type'] ) {
+							if ( 'wrap-start' === $field['type'] ) {
 								?>
 								<div class="pngx-meta-fields-wrap admin-field-wrap <?php echo esc_html( $wrapclass ); ?>" >
 								<?php
