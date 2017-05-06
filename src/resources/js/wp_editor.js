@@ -305,7 +305,7 @@
 				"preview_styles": "font-family font-size font-weight font-style text-decoration text-transform",
 				"wpeditimage_disable_captions": false,
 				"wpeditimage_html5_captions": false,
-				"plugins": "charmap,hr,media,paste,tabfocus,textcolor,fullscreen,wordpress,wpeditimage,wpgallery,wplink,wpdialogs,wpview,image",
+				"plugins": "charmap,hr,lists,media,paste,tabfocus,textcolor,fullscreen,wordpress,wpeditimage,wpgallery,wplink,wpdialogs,wpview,image",
 				"content_css": resource_url + "css/dashicons.css?ver=4.7," +
 				resource_url + "js/mediaelement/mediaelementplayer.min.css?ver=4.7," +
 				resource_url + "js/mediaelement/wp-mediaelement.css?ver=4.7," +
