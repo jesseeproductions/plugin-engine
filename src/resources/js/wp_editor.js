@@ -203,7 +203,7 @@
 		if ( $tool_bar_1 ) {
 			return $tool_bar_1;
 		} else if ( reduced ) {
-			return 'forecolor,bold,italic,underline,strikethrough,hr,charmap,hr,alignleft,aligncenter,alignright,link,unlink,spellchecker,pastetext,removeformat';
+			return 'forecolor,bold,italic,underline,strikethrough,hr,charmap,alignleft,aligncenter,alignright,link,unlink,spellchecker,pastetext,removeformat';
 		}
 		return 'formatselect,forecolor,bold,italic,underline,strikethrough,hr,bullist,numlist,alignleft,aligncenter,alignright,link,unlink,wp_adv';
 
