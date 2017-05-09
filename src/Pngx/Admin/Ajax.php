@@ -78,7 +78,7 @@ class Pngx__Admin__Ajax {
 					}
 
 					// Display admin linked style fields
-					Pngx__Admin__Style__Linked::display_styles( $fields, $field, $post->ID );
+					Pngx__Admin__Style__Linked::display_styles( $fields, $field, $_POST['post_id'] );
 					?>
 					</div>
 					<?php
@@ -101,7 +101,7 @@ class Pngx__Admin__Ajax {
 						Pngx__Admin__Fields::display_field( $field, false, false, $meta, null );
 
 						// Display admin linked style fields
-						Pngx__Admin__Style__Linked::display_styles( $fields, $field, $post->ID );
+						Pngx__Admin__Style__Linked::display_styles( $fields, $field, $_POST['post_id'] );
 
 						?>
 
