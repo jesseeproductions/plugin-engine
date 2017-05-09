@@ -269,7 +269,7 @@ class Pngx__Admin__Meta {
 
 								<div class="pngx-meta-field field-<?php echo esc_attr( $field['type'] ); ?> field-<?php echo esc_attr( $field['id'] ); ?>">
 
-									<?php if ( isset( $field['label'] ) ) { ?>
+									<?php if ( isset( $field['label'] ) && ! empty( $field['label'] ) ) { ?>
 										<label for="<?php echo esc_attr( $field['id'] ); ?>">
 											<?php echo esc_attr( $field['label'] ); ?>
 										</label>

@@ -91,7 +91,7 @@ class Pngx__Admin__Ajax {
 
 					<div class="pngx-meta-field field-<?php echo esc_attr( $field['type'] ); ?> field-<?php echo esc_attr( $field['id'] ); ?>">
 
-						<?php if ( isset( $field['label'] ) ) { ?>
+						<?php if ( isset( $field['label'] ) && ! empty( $field['label'] ) ) { ?>
 							<label for="<?php echo esc_attr( $field['id'] ); ?>">
 								<?php echo esc_attr( $field['label'] ); ?>
 							</label>
@@ -160,7 +160,7 @@ class Pngx__Admin__Ajax {
 					continue;
 				}
 
-				if ( is_array( $label ) && isset( $label['label'] ) ) {
+				if ( is_array( $label ) && isset( $label['label'] ) && ! empty( $field['label'] ) ) {
 					?>
 					<label for="<?php echo esc_attr( $label['label'] ); ?>">
 						<?php echo esc_attr( $label['label'] ); ?>
@@ -196,7 +196,7 @@ class Pngx__Admin__Ajax {
 				<div class="pngx-variety-field <?php echo isset( $fields[ $label ]['class'] ) ? esc_attr( $fields[ $label ]['class'] ) : ''; ?>">
 					<?php
 
-					if ( isset( $fields[ $label ]['label'] ) ) { ?>
+					if ( isset( $fields[ $label ]['label'] ) && ! empty( $fields[ $label ]['label'] ) ) { ?>
 						<label for="<?php echo esc_attr( $fields[ $label ]['id'] ); ?>">
 							<?php echo esc_attr( $fields[ $label ]['label'] ); ?>
 						</label>
