@@ -183,7 +183,7 @@ class Pngx__Admin__Ajax {
 					continue;
 				}
 
-				if ( ! isset( $fields[ $label ] ) ) {
+				if ( ! is_array( $label ) &&  ! isset( $fields[ $label ] ) ) {
 					continue;
 				}
 
