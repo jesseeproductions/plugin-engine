@@ -341,7 +341,7 @@ function Pngx_Admin_Tabs( $, obj ) {
 		//On Resize or Load check if Tabs will fit
 		$( window ).on( 'resize load', function ( e ) {
 			// 40px per tab for padding
-			obj.tab_total_length = obj.tab_text + ( obj.tab_count * 40 );
+			obj.tab_total_length = obj.tab_text + ( obj.tab_count * 35 );
 
 			if ( obj.tab_total_length > $( obj.tab_wrap ).width() ) {
 				$( obj.tab_wrap + '-nav' ).addClass( 'pngx-tabs-accordian' );
