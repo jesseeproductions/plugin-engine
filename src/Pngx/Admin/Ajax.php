@@ -176,6 +176,10 @@ class Pngx__Admin__Ajax {
 					continue;
 				}
 
+				if ( is_array( $label ) ) {
+					continue;
+				}
+
 				if ( 'close' === $label ) {
 					?>
 					</div>
@@ -183,7 +187,7 @@ class Pngx__Admin__Ajax {
 					continue;
 				}
 
-				if ( ! is_array( $label ) &&  ! isset( $fields[ $label ] ) ) {
+				if ( ! isset( $fields[ $label ] ) ) {
 					continue;
 				}
 

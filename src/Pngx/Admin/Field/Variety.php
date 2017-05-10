@@ -108,6 +108,10 @@ class Pngx__Admin__Field__Variety {
 							continue;
 						}
 
+						if ( is_array( $label ) ) {
+							continue;
+						}
+
 						if ( 'close' === $label ) {
 							?>
 							</div>
