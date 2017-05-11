@@ -20,11 +20,11 @@ class Pngx__Admin__Ajax {
 
 	protected function start() {
 
-		add_action( 'wp_ajax_pngx_templates', [ $this, 'load_templates' ] );
+		add_action( 'wp_ajax_pngx_templates', array( $this, 'load_templates' ) );
 
-		add_action( 'wp_ajax_pngx_variety', [ $this, 'load_variety' ] );
+		add_action( 'wp_ajax_pngx_variety',  array( $this, 'load_variety' ) );
 
-		add_action( 'wp_ajax_pngx_repeatable', [ $this, 'load_repeatable' ] );
+		add_action( 'wp_ajax_pngx_repeatable',  array( $this, 'load_repeatable' ) );
 
 	}
 
