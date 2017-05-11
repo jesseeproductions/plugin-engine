@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Plugin Version Validate License from Plugin Page
  *
  */
-class Pngx__Admin__Plugin_License_list {
+class Pngx__Admin__Plugin_License_List {
 
 	protected $file;
 	protected $plugin_name;
