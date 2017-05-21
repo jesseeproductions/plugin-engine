@@ -1551,6 +1551,20 @@ fieldset[disabled] .btn-primary.active {
     .postbox-container .pngx-meta-field.field-variety input[type="number"],
     .postbox-container .pngx-meta-field.field-wysiwyg input[type="number"] {
       height: auto; }
+    .postbox-container .pngx-meta-fields-wrap.admin-field-wrap textarea, .postbox-container .pngx-meta-fields-wrap.field-checkbox textarea, .postbox-container .pngx-meta-fields-wrap.field-color textarea, .postbox-container .pngx-meta-fields-wrap.field-date textarea, .postbox-container .pngx-meta-fields-wrap.field-image textarea, .postbox-container .pngx-meta-fields-wrap.field-number textarea, .postbox-container .pngx-meta-fields-wrap.field-select textarea, .postbox-container .pngx-meta-fields-wrap.field-text textarea, .postbox-container .pngx-meta-fields-wrap.field-textarea textarea, .postbox-container .pngx-meta-fields-wrap.field-url textarea, .postbox-container .pngx-meta-fields-wrap.field-variety textarea, .postbox-container .pngx-meta-fields-wrap.field-wysiwyg textarea,
+    .postbox-container .pngx-meta-field.admin-field-wrap textarea,
+    .postbox-container .pngx-meta-field.field-checkbox textarea,
+    .postbox-container .pngx-meta-field.field-color textarea,
+    .postbox-container .pngx-meta-field.field-date textarea,
+    .postbox-container .pngx-meta-field.field-image textarea,
+    .postbox-container .pngx-meta-field.field-number textarea,
+    .postbox-container .pngx-meta-field.field-select textarea,
+    .postbox-container .pngx-meta-field.field-text textarea,
+    .postbox-container .pngx-meta-field.field-textarea textarea,
+    .postbox-container .pngx-meta-field.field-url textarea,
+    .postbox-container .pngx-meta-field.field-variety textarea,
+    .postbox-container .pngx-meta-field.field-wysiwyg textarea {
+      width: 100%; }
   .postbox-container .pngx-meta-fields-wrap .pngx-variety-field > .description,
   .postbox-container .pngx-meta-fields-wrap .pngx-variety-selection > .description,
   .postbox-container .pngx-meta-fields-wrap > .pngx-meta-field-styles,

@@ -62,10 +62,19 @@
 		options = $.extend( true, pngx_options, options );
 
 		return this.each( function () {
+				console.log( pngx_editor_vars.rich_editing );
 
 				if ( !$( this ).is( 'textarea' ) ) {
+
 					console.warn( 'Element must be a textarea' );
-				} else {
+
+				} else if ( 'false' === pngx_editor_vars.rich_editing ) {
+
+					set_code_editor( uni_key );
+
+				}
+				if ( 'true' === pngx_editor_vars.rich_editing ) {
+
 					var current_id = $( this ).attr( 'id' );
 
 					$.each( options.mceInit, function ( key, value ) {
@@ -125,49 +134,7 @@
 					$( self ).remove();
 
 
-					new QTags( uni_key );
-					QTags._buttonsInit();
-
-					var $html_buttons = $( '#' + uni_key ).data( 'toggleHtml_buttons' );
-
-					if ( $html_buttons && pngx_editor_vars.html_editor_buttons ) {
-
-						$html_buttons = $html_buttons.split( ',' );
-
-						// Get Existing Buttons to Detect if to add or not to prevent duplicates
-						var existing_buttons = [];
-						if ( "undefined" != typeof edButtons ) {
-
-							edButtons.forEach( function ( element ) {
-								existing_buttons.push( element.id );
-							} );
-
-						}
-
-						// Setup HTML Buttons and do not add if already added
-						for ( i = 0; i < pngx_editor_vars.html_editor_buttons.length; i++ ) {
-
-							if ( jQuery.inArray( pngx_editor_vars.html_editor_buttons[i]['id'], existing_buttons ) >= 0 ) {
-								continue;
-							}
-
-							if ( jQuery.inArray( pngx_editor_vars.html_editor_buttons[i]['id'], $html_buttons ) >= 0 ) {
-
-								QTags.addButton(
-									pngx_editor_vars.html_editor_buttons[i]['id'],
-									pngx_editor_vars.html_editor_buttons[i]['display'],
-									pngx_editor_vars.html_editor_buttons[i]['arg1'],
-									pngx_editor_vars.html_editor_buttons[i]['arg2'],
-									pngx_editor_vars.html_editor_buttons[i]['access_key'],
-									pngx_editor_vars.html_editor_buttons[i]['title'],
-									pngx_editor_vars.html_editor_buttons[i]['priority'],
-									uni_key
-								);
-							}
-						}
-
-					}
-
+					set_code_editor( uni_key );
 
 					switchEditors.go( current_id, options.mode );
 
@@ -196,6 +163,53 @@
 			}
 		);
 	};
+
+	function set_code_editor( uni_key ) {
+
+		new QTags( uni_key );
+		QTags._buttonsInit();
+
+		var $html_buttons = $( '#' + uni_key ).data( 'toggleHtml_buttons' );
+
+		if ( $html_buttons && pngx_editor_vars.html_editor_buttons ) {
+
+			$html_buttons = $html_buttons.split( ',' );
+
+			// Get Existing Buttons to Detect if to add or not to prevent duplicates
+			var existing_buttons = [];
+			if ( "undefined" != typeof edButtons ) {
+
+				edButtons.forEach( function ( element ) {
+					existing_buttons.push( element.id );
+				} );
+
+			}
+
+			// Setup HTML Buttons and do not add if already added
+			for ( i = 0; i < pngx_editor_vars.html_editor_buttons.length; i++ ) {
+
+				if ( jQuery.inArray( pngx_editor_vars.html_editor_buttons[i]['id'], existing_buttons ) >= 0 ) {
+					continue;
+				}
+
+				if ( jQuery.inArray( pngx_editor_vars.html_editor_buttons[i]['id'], $html_buttons ) >= 0 ) {
+
+					QTags.addButton(
+						pngx_editor_vars.html_editor_buttons[i]['id'],
+						pngx_editor_vars.html_editor_buttons[i]['display'],
+						pngx_editor_vars.html_editor_buttons[i]['arg1'],
+						pngx_editor_vars.html_editor_buttons[i]['arg2'],
+						pngx_editor_vars.html_editor_buttons[i]['access_key'],
+						pngx_editor_vars.html_editor_buttons[i]['title'],
+						pngx_editor_vars.html_editor_buttons[i]['priority'],
+						uni_key
+					);
+				}
+			}
+
+		}
+
+	}
 
 	function get_toolbar_1( uni_key, reduced ) {
 
@@ -235,7 +249,7 @@
 
 	function get_defaults( resource_url, uni_key, editor_buttons, reduced ) {
 
-		var $data = $( '#' + uni_key ).data()
+		var $data = $( '#' + uni_key ).data();
 
 		var $content_css = $data.toggleContent_css;
 
