@@ -62,7 +62,6 @@
 		options = $.extend( true, pngx_options, options );
 
 		return this.each( function () {
-				console.log( pngx_editor_vars.rich_editing );
 
 				if ( !$( this ).is( 'textarea' ) ) {
 
