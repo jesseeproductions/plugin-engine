@@ -1,6 +1,6 @@
 {
   "name": "plugin-engine",
-  "version": "2.3.0",
+  "version": "2.5.0",
   "repository": "git@github.com:jesseeproductions/plugin-engine.git",
   "_resourcepath": "src/resources",
   "_domainPath": "languages",

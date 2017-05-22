@@ -78,6 +78,7 @@ class Pngx__Admin__Field__Wysiwyg {
 				'includes_url'          => includes_url(),
 				'visual_editor_buttons' => $pngx_visual_editor_buttons,
 				'html_editor_buttons'   => $pngx_html_editor_buttons,
+				'rich_editing'          => get_user_meta( get_current_user_id(), 'rich_editing', true ),
 			);
 			wp_localize_script( 'pngx-wp-editor', 'pngx_editor_vars', $pngx_editor_vars );
 
@@ -93,23 +94,21 @@ class Pngx__Admin__Field__Wysiwyg {
 
 		?>
 
-		<textarea
-				class="pngx-ajax-wp-editor <?php echo esc_attr( $class ); ?>"
-				id="<?php echo esc_attr( $field['id'] ); ?>"
-				name="<?php echo esc_attr( $name ) . $repeating; ?>"
-				placeholder="<?php echo esc_attr( $std ); ?>"
-				rows="<?php echo absint( $rows ); ?>"
-				cols="<?php echo absint( $cols ); ?>"
+        <textarea
+                class="pngx-ajax-wp-editor <?php echo esc_attr( $class ); ?>"
+                id="<?php echo esc_attr( $field['id'] ); ?>"
+                name="<?php echo esc_attr( $name ) . $repeating; ?>"
+                placeholder="<?php echo esc_attr( $std ); ?>"
+                rows="<?php echo absint( $rows ); ?>"
+                cols="<?php echo absint( $cols ); ?>"
 			<?php echo isset( $field['data'] ) ? Pngx__Admin__Fields::toggle( $field['data'], null ) : ''; ?>
-		>
-				<?php
-				if ( version_compare( $wp_version, '4.3', '<' ) ) {
-					echo wp_htmledit_pre( $value );
-				} else {
-					echo format_for_editor( $value );
-				}
-				?>
-		</textarea>
+        ><?php
+            if ( version_compare( $wp_version, '4.3', '<' ) ) {
+                echo wp_htmledit_pre( $value );
+            } else {
+                echo format_for_editor( $value );
+            }
+        ?></textarea>
 		<?php
 
 		if ( isset( $field['desc'] ) && ! empty( $field['desc'] ) ) {

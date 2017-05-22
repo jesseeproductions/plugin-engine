@@ -53,7 +53,7 @@ class Pngx__Admin__Options {
 
 		add_action( 'admin_menu', array( $this, 'options_page' ) );
 		add_action( 'admin_init', array( $this, 'register_options' ), 15 );
-		
+
 		if ( ! get_option( $this->options_id ) ) {
 			add_action( 'admin_init', array( $this, 'set_defaults' ), 10 );
 		}
@@ -198,7 +198,13 @@ class Pngx__Admin__Options {
 
 			foreach ( $this->checkboxes as $id ) {
 				if ( isset( $options[ $id ] ) && ! isset( $input[ $id ] ) ) {
+					// if permalinks should be flushed when deactivating option
+					if ( isset( $this->fields[$id]['class'] ) && 'flush' === $this->fields[$id]['class'] ) {
+						update_option( 'pngx_permalink_change', true );
+					}
 					unset( $options[ $id ] );
+
+
 				}
 			}
 
@@ -210,12 +216,17 @@ class Pngx__Admin__Options {
 					if ( 'permalink' == $option['class'] ) {
 						$input[ $id ] = str_replace( " ", "-", strtolower( trim( $input[ $id ] ) ) );
 						//if option is new then set to flush permalinks
-						if ( $options[ $id ] != $input[ $id ] ) {
-							$permalink_change = 'pngx_permalink_change';
-							update_option( $permalink_change, true );
+						if ( ! empty( $options[ $id ] ) && ( $options[ $id ] != $input[ $id ] ) ) {
+							update_option( 'pngx_permalink_change', true );
 						}
 					}
+
+					if ( 'flush' === $option['class'] && ( ! empty( $options[ $id ] ) != ! empty( $input[ $id ] ) ) ) {
+						update_option( 'pngx_permalink_change', true );
+					}
 				}
+
+
 				//Prevent Placeholder From Saving in Option for Text Areas
 				if ( "textarea" == $option['type'] ) {
 					if ( $input[ $id ] == $option['std'] ) {

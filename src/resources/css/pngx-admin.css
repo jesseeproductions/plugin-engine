@@ -479,7 +479,7 @@ fieldset[disabled] .btn-primary.active {
       padding: 12px 38px 12px 8px; }
 
 /* IE9: To hide select arrow we make the select overflow on the right side there is not another way :( */
-@media screen and (min-width: 0 \0 ) {
+@media screen and (min-width: 0 \0 ) {
   .pngx-default-select select {
     width: calc(100% + 58px); } }
 
@@ -1394,7 +1394,7 @@ fieldset[disabled] .btn-primary.active {
 .postbox-container .pngx-meta-field {
   float: none;
   overflow: visible; }
-  .postbox-container .pngx-meta-fields-wrap.admin-field-wrap, .postbox-container .pngx-meta-fields-wrap.field-checkbox, .postbox-container .pngx-meta-fields-wrap.field-color, .postbox-container .pngx-meta-fields-wrap.field-date, .postbox-container .pngx-meta-fields-wrap.field-image, .postbox-container .pngx-meta-fields-wrap.field-number, .postbox-container .pngx-meta-fields-wrap.field-select, .postbox-container .pngx-meta-fields-wrap.field-text, .postbox-container .pngx-meta-fields-wrap.field-url, .postbox-container .pngx-meta-fields-wrap.field-variety, .postbox-container .pngx-meta-fields-wrap.field-wysiwyg,
+  .postbox-container .pngx-meta-fields-wrap.admin-field-wrap, .postbox-container .pngx-meta-fields-wrap.field-checkbox, .postbox-container .pngx-meta-fields-wrap.field-color, .postbox-container .pngx-meta-fields-wrap.field-date, .postbox-container .pngx-meta-fields-wrap.field-image, .postbox-container .pngx-meta-fields-wrap.field-number, .postbox-container .pngx-meta-fields-wrap.field-select, .postbox-container .pngx-meta-fields-wrap.field-text, .postbox-container .pngx-meta-fields-wrap.field-textarea, .postbox-container .pngx-meta-fields-wrap.field-url, .postbox-container .pngx-meta-fields-wrap.field-variety, .postbox-container .pngx-meta-fields-wrap.field-wysiwyg,
   .postbox-container .pngx-meta-field.admin-field-wrap,
   .postbox-container .pngx-meta-field.field-checkbox,
   .postbox-container .pngx-meta-field.field-color,
@@ -1403,6 +1403,7 @@ fieldset[disabled] .btn-primary.active {
   .postbox-container .pngx-meta-field.field-number,
   .postbox-container .pngx-meta-field.field-select,
   .postbox-container .pngx-meta-field.field-text,
+  .postbox-container .pngx-meta-field.field-textarea,
   .postbox-container .pngx-meta-field.field-url,
   .postbox-container .pngx-meta-field.field-variety,
   .postbox-container .pngx-meta-field.field-wysiwyg {
@@ -1411,7 +1412,7 @@ fieldset[disabled] .btn-primary.active {
     display: block;
     max-width: 600px;
     padding: 19px 9px 9px; }
-    .postbox-container .pngx-meta-fields-wrap.admin-field-wrap > label, .postbox-container .pngx-meta-fields-wrap.field-checkbox > label, .postbox-container .pngx-meta-fields-wrap.field-color > label, .postbox-container .pngx-meta-fields-wrap.field-date > label, .postbox-container .pngx-meta-fields-wrap.field-image > label, .postbox-container .pngx-meta-fields-wrap.field-number > label, .postbox-container .pngx-meta-fields-wrap.field-select > label, .postbox-container .pngx-meta-fields-wrap.field-text > label, .postbox-container .pngx-meta-fields-wrap.field-url > label, .postbox-container .pngx-meta-fields-wrap.field-variety > label, .postbox-container .pngx-meta-fields-wrap.field-wysiwyg > label,
+    .postbox-container .pngx-meta-fields-wrap.admin-field-wrap > label, .postbox-container .pngx-meta-fields-wrap.field-checkbox > label, .postbox-container .pngx-meta-fields-wrap.field-color > label, .postbox-container .pngx-meta-fields-wrap.field-date > label, .postbox-container .pngx-meta-fields-wrap.field-image > label, .postbox-container .pngx-meta-fields-wrap.field-number > label, .postbox-container .pngx-meta-fields-wrap.field-select > label, .postbox-container .pngx-meta-fields-wrap.field-text > label, .postbox-container .pngx-meta-fields-wrap.field-textarea > label, .postbox-container .pngx-meta-fields-wrap.field-url > label, .postbox-container .pngx-meta-fields-wrap.field-variety > label, .postbox-container .pngx-meta-fields-wrap.field-wysiwyg > label,
     .postbox-container .pngx-meta-field.admin-field-wrap > label,
     .postbox-container .pngx-meta-field.field-checkbox > label,
     .postbox-container .pngx-meta-field.field-color > label,
@@ -1420,6 +1421,7 @@ fieldset[disabled] .btn-primary.active {
     .postbox-container .pngx-meta-field.field-number > label,
     .postbox-container .pngx-meta-field.field-select > label,
     .postbox-container .pngx-meta-field.field-text > label,
+    .postbox-container .pngx-meta-field.field-textarea > label,
     .postbox-container .pngx-meta-field.field-url > label,
     .postbox-container .pngx-meta-field.field-variety > label,
     .postbox-container .pngx-meta-field.field-wysiwyg > label {
@@ -1458,7 +1460,10 @@ fieldset[disabled] .btn-primary.active {
     .postbox-container .pngx-meta-fields-wrap.field-select input[type="url"], .postbox-container .pngx-meta-fields-wrap.field-text input[type="email"],
     .postbox-container .pngx-meta-fields-wrap.field-text input[type="number"],
     .postbox-container .pngx-meta-fields-wrap.field-text input[type="text"],
-    .postbox-container .pngx-meta-fields-wrap.field-text input[type="url"], .postbox-container .pngx-meta-fields-wrap.field-url input[type="email"],
+    .postbox-container .pngx-meta-fields-wrap.field-text input[type="url"], .postbox-container .pngx-meta-fields-wrap.field-textarea input[type="email"],
+    .postbox-container .pngx-meta-fields-wrap.field-textarea input[type="number"],
+    .postbox-container .pngx-meta-fields-wrap.field-textarea input[type="text"],
+    .postbox-container .pngx-meta-fields-wrap.field-textarea input[type="url"], .postbox-container .pngx-meta-fields-wrap.field-url input[type="email"],
     .postbox-container .pngx-meta-fields-wrap.field-url input[type="number"],
     .postbox-container .pngx-meta-fields-wrap.field-url input[type="text"],
     .postbox-container .pngx-meta-fields-wrap.field-url input[type="url"], .postbox-container .pngx-meta-fields-wrap.field-variety input[type="email"],
@@ -1500,6 +1505,10 @@ fieldset[disabled] .btn-primary.active {
     .postbox-container .pngx-meta-field.field-text input[type="number"],
     .postbox-container .pngx-meta-field.field-text input[type="text"],
     .postbox-container .pngx-meta-field.field-text input[type="url"],
+    .postbox-container .pngx-meta-field.field-textarea input[type="email"],
+    .postbox-container .pngx-meta-field.field-textarea input[type="number"],
+    .postbox-container .pngx-meta-field.field-textarea input[type="text"],
+    .postbox-container .pngx-meta-field.field-textarea input[type="url"],
     .postbox-container .pngx-meta-field.field-url input[type="email"],
     .postbox-container .pngx-meta-field.field-url input[type="number"],
     .postbox-container .pngx-meta-field.field-url input[type="text"],
@@ -1514,7 +1523,7 @@ fieldset[disabled] .btn-primary.active {
     .postbox-container .pngx-meta-field.field-wysiwyg input[type="url"] {
       padding: 12px 8px;
       width: 100%; }
-    .postbox-container .pngx-meta-fields-wrap.admin-field-wrap input[type="date"], .postbox-container .pngx-meta-fields-wrap.field-checkbox input[type="date"], .postbox-container .pngx-meta-fields-wrap.field-color input[type="date"], .postbox-container .pngx-meta-fields-wrap.field-date input[type="date"], .postbox-container .pngx-meta-fields-wrap.field-image input[type="date"], .postbox-container .pngx-meta-fields-wrap.field-number input[type="date"], .postbox-container .pngx-meta-fields-wrap.field-select input[type="date"], .postbox-container .pngx-meta-fields-wrap.field-text input[type="date"], .postbox-container .pngx-meta-fields-wrap.field-url input[type="date"], .postbox-container .pngx-meta-fields-wrap.field-variety input[type="date"], .postbox-container .pngx-meta-fields-wrap.field-wysiwyg input[type="date"],
+    .postbox-container .pngx-meta-fields-wrap.admin-field-wrap input[type="date"], .postbox-container .pngx-meta-fields-wrap.field-checkbox input[type="date"], .postbox-container .pngx-meta-fields-wrap.field-color input[type="date"], .postbox-container .pngx-meta-fields-wrap.field-date input[type="date"], .postbox-container .pngx-meta-fields-wrap.field-image input[type="date"], .postbox-container .pngx-meta-fields-wrap.field-number input[type="date"], .postbox-container .pngx-meta-fields-wrap.field-select input[type="date"], .postbox-container .pngx-meta-fields-wrap.field-text input[type="date"], .postbox-container .pngx-meta-fields-wrap.field-textarea input[type="date"], .postbox-container .pngx-meta-fields-wrap.field-url input[type="date"], .postbox-container .pngx-meta-fields-wrap.field-variety input[type="date"], .postbox-container .pngx-meta-fields-wrap.field-wysiwyg input[type="date"],
     .postbox-container .pngx-meta-field.admin-field-wrap input[type="date"],
     .postbox-container .pngx-meta-field.field-checkbox input[type="date"],
     .postbox-container .pngx-meta-field.field-color input[type="date"],
@@ -1523,11 +1532,12 @@ fieldset[disabled] .btn-primary.active {
     .postbox-container .pngx-meta-field.field-number input[type="date"],
     .postbox-container .pngx-meta-field.field-select input[type="date"],
     .postbox-container .pngx-meta-field.field-text input[type="date"],
+    .postbox-container .pngx-meta-field.field-textarea input[type="date"],
     .postbox-container .pngx-meta-field.field-url input[type="date"],
     .postbox-container .pngx-meta-field.field-variety input[type="date"],
     .postbox-container .pngx-meta-field.field-wysiwyg input[type="date"] {
       padding: 12px 8px; }
-    .postbox-container .pngx-meta-fields-wrap.admin-field-wrap input[type="number"], .postbox-container .pngx-meta-fields-wrap.field-checkbox input[type="number"], .postbox-container .pngx-meta-fields-wrap.field-color input[type="number"], .postbox-container .pngx-meta-fields-wrap.field-date input[type="number"], .postbox-container .pngx-meta-fields-wrap.field-image input[type="number"], .postbox-container .pngx-meta-fields-wrap.field-number input[type="number"], .postbox-container .pngx-meta-fields-wrap.field-select input[type="number"], .postbox-container .pngx-meta-fields-wrap.field-text input[type="number"], .postbox-container .pngx-meta-fields-wrap.field-url input[type="number"], .postbox-container .pngx-meta-fields-wrap.field-variety input[type="number"], .postbox-container .pngx-meta-fields-wrap.field-wysiwyg input[type="number"],
+    .postbox-container .pngx-meta-fields-wrap.admin-field-wrap input[type="number"], .postbox-container .pngx-meta-fields-wrap.field-checkbox input[type="number"], .postbox-container .pngx-meta-fields-wrap.field-color input[type="number"], .postbox-container .pngx-meta-fields-wrap.field-date input[type="number"], .postbox-container .pngx-meta-fields-wrap.field-image input[type="number"], .postbox-container .pngx-meta-fields-wrap.field-number input[type="number"], .postbox-container .pngx-meta-fields-wrap.field-select input[type="number"], .postbox-container .pngx-meta-fields-wrap.field-text input[type="number"], .postbox-container .pngx-meta-fields-wrap.field-textarea input[type="number"], .postbox-container .pngx-meta-fields-wrap.field-url input[type="number"], .postbox-container .pngx-meta-fields-wrap.field-variety input[type="number"], .postbox-container .pngx-meta-fields-wrap.field-wysiwyg input[type="number"],
     .postbox-container .pngx-meta-field.admin-field-wrap input[type="number"],
     .postbox-container .pngx-meta-field.field-checkbox input[type="number"],
     .postbox-container .pngx-meta-field.field-color input[type="number"],
@@ -1536,10 +1546,25 @@ fieldset[disabled] .btn-primary.active {
     .postbox-container .pngx-meta-field.field-number input[type="number"],
     .postbox-container .pngx-meta-field.field-select input[type="number"],
     .postbox-container .pngx-meta-field.field-text input[type="number"],
+    .postbox-container .pngx-meta-field.field-textarea input[type="number"],
     .postbox-container .pngx-meta-field.field-url input[type="number"],
     .postbox-container .pngx-meta-field.field-variety input[type="number"],
     .postbox-container .pngx-meta-field.field-wysiwyg input[type="number"] {
       height: auto; }
+    .postbox-container .pngx-meta-fields-wrap.admin-field-wrap textarea, .postbox-container .pngx-meta-fields-wrap.field-checkbox textarea, .postbox-container .pngx-meta-fields-wrap.field-color textarea, .postbox-container .pngx-meta-fields-wrap.field-date textarea, .postbox-container .pngx-meta-fields-wrap.field-image textarea, .postbox-container .pngx-meta-fields-wrap.field-number textarea, .postbox-container .pngx-meta-fields-wrap.field-select textarea, .postbox-container .pngx-meta-fields-wrap.field-text textarea, .postbox-container .pngx-meta-fields-wrap.field-textarea textarea, .postbox-container .pngx-meta-fields-wrap.field-url textarea, .postbox-container .pngx-meta-fields-wrap.field-variety textarea, .postbox-container .pngx-meta-fields-wrap.field-wysiwyg textarea,
+    .postbox-container .pngx-meta-field.admin-field-wrap textarea,
+    .postbox-container .pngx-meta-field.field-checkbox textarea,
+    .postbox-container .pngx-meta-field.field-color textarea,
+    .postbox-container .pngx-meta-field.field-date textarea,
+    .postbox-container .pngx-meta-field.field-image textarea,
+    .postbox-container .pngx-meta-field.field-number textarea,
+    .postbox-container .pngx-meta-field.field-select textarea,
+    .postbox-container .pngx-meta-field.field-text textarea,
+    .postbox-container .pngx-meta-field.field-textarea textarea,
+    .postbox-container .pngx-meta-field.field-url textarea,
+    .postbox-container .pngx-meta-field.field-variety textarea,
+    .postbox-container .pngx-meta-field.field-wysiwyg textarea {
+      width: 100%; }
   .postbox-container .pngx-meta-fields-wrap .pngx-variety-field > .description,
   .postbox-container .pngx-meta-fields-wrap .pngx-variety-selection > .description,
   .postbox-container .pngx-meta-fields-wrap > .pngx-meta-field-styles,
@@ -1723,7 +1748,7 @@ fieldset[disabled] .btn-primary.active {
     border-radius: 8px 8px 0 0;
     border-style: solid;
     border-width: 1px 1px 0;
-    box-shadow: 0 0 1px 0 rgba(50, 50, 50, 0.5);
+    box-shadow: 0 0 2px 0 rgba(50, 50, 50, 0.5);
     color: #5C5C5C;
     display: inline-block;
     font-size: 13px;

@@ -24,6 +24,7 @@
 		&.field-number,
 		&.field-select,
 		&.field-text,
+		&.field-textarea,
 		&.field-url,
 		&.field-variety,
 		&.field-wysiwyg {
@@ -63,6 +64,9 @@
 				height: auto;
 			}
 
+			textarea {
+				width: 100%;
+			}
 		}
 
 		.pngx-variety-field > .description,

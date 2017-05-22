@@ -243,7 +243,7 @@ class Pngx__Admin__Meta {
 								continue;
 							}
 
-							if ( "wrap-start" === $field['type'] ) {
+							if ( 'wrap-start' === $field['type'] ) {
 								?>
 								<div class="pngx-meta-fields-wrap admin-field-wrap <?php echo esc_html( $wrapclass ); ?>" >
 								<?php
@@ -269,7 +269,7 @@ class Pngx__Admin__Meta {
 
 								<div class="pngx-meta-field field-<?php echo esc_attr( $field['type'] ); ?> field-<?php echo esc_attr( $field['id'] ); ?>">
 
-									<?php if ( isset( $field['label'] ) ) { ?>
+									<?php if ( isset( $field['label'] ) && ! empty( $field['label'] ) ) { ?>
 										<label for="<?php echo esc_attr( $field['id'] ); ?>">
 											<?php echo esc_attr( $field['label'] ); ?>
 										</label>
@@ -312,7 +312,7 @@ class Pngx__Admin__Meta {
 		if ( empty( $_POST ) || ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) ) {
 			return;
 		}
-        //log_me( $_POST );
+
 		//Check if on the right post type
 		if ( isset( $post->post_type ) && ! in_array( $post->post_type, self::get_post_types() ) ) {
 			return;

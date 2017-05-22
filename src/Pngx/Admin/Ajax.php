@@ -20,11 +20,11 @@ class Pngx__Admin__Ajax {
 
 	protected function start() {
 
-		add_action( 'wp_ajax_pngx_templates', [ $this, 'load_templates' ] );
+		add_action( 'wp_ajax_pngx_templates', array( $this, 'load_templates' ) );
 
-		add_action( 'wp_ajax_pngx_variety', [ $this, 'load_variety' ] );
+		add_action( 'wp_ajax_pngx_variety',  array( $this, 'load_variety' ) );
 
-		add_action( 'wp_ajax_pngx_repeatable', [ $this, 'load_repeatable' ] );
+		add_action( 'wp_ajax_pngx_repeatable',  array( $this, 'load_repeatable' ) );
 
 	}
 
@@ -65,26 +65,40 @@ class Pngx__Admin__Ajax {
 				//Wrap Class for Conditionals
 				$wrapclass = isset( $field['wrapclass'] ) ? $field['wrapclass'] : '';
 
+				if ( 'wrap-start' === $field['type'] ) {
+					?>
+					<div class="pngx-meta-fields-wrap admin-field-wrap <?php echo esc_html( $wrapclass ); ?>" >
+					<?php
+					continue;
+
+				} elseif ( "wrap-end" === $field['type'] ) {
+
+					if ( isset( $field['desc'] ) && ! empty( $field['desc'] ) ) {
+						echo '<span class="description">' . esc_html( $field['desc'] ) . '</span>';
+					}
+
+					// Display admin linked style fields
+					Pngx__Admin__Style__Linked::display_styles( $fields, $field, $_POST['post_id'] );
+					?>
+					</div>
+					<?php
+					continue;
+				}
 				?>
 
 				<div class="pngx-meta-field-wrap field-wrap-<?php echo esc_html( $field['type'] ); ?> field-wrap-<?php echo esc_html( $field['id'] ); ?> <?php echo esc_html( $wrapclass ); ?>"
-					<?php echo isset( $field['toggle'] ) ? Pngx__Admin__Fields::toggle( $field['toggle'], $field['id'] ) : null; ?> >
+					<?php echo isset( $field['toggle'] ) ? Pngx__Admin__Fields::toggle( $field['toggle'], esc_attr( $field['id'] ) ) : null; ?> >
 
-					<?php if ( isset( $field['label'] ) ) { ?>
+					<div class="pngx-meta-field field-<?php echo esc_attr( $field['type'] ); ?> field-<?php echo esc_attr( $field['id'] ); ?>">
 
-						<div class="pngx-meta-label label-<?php echo $field['type']; ?> label-<?php echo $field['id']; ?>">
-							<label for="<?php echo $field['id']; ?>"><?php echo $field['label']; ?></label>
-						</div>
-
-					<?php } ?>
-
-					<div class="pngx-meta-field field-<?php echo $field['type']; ?> field-<?php echo $field['id']; ?>">
+						<?php if ( isset( $field['label'] ) && ! empty( $field['label'] ) ) { ?>
+							<label for="<?php echo esc_attr( $field['id'] ); ?>">
+								<?php echo esc_attr( $field['label'] ); ?>
+							</label>
+						<?php } ?>
 
 						<?php
-
-						Pngx__Admin__Fields::display_field( $field, false, false, $meta );
-
-						//Pngx__Admin__Fields::display_field( $field, false, false, $meta, $repeat_obj );
+						Pngx__Admin__Fields::display_field( $field, false, false, $meta, null );
 
 						// Display admin linked style fields
 						Pngx__Admin__Style__Linked::display_styles( $fields, $field, $_POST['post_id'] );
@@ -92,9 +106,9 @@ class Pngx__Admin__Ajax {
 						?>
 
 					</div>
-					<!-- end .pngx-meta-field.field-<?php echo $field['type']; ?>.field-<?php echo $field['id']; ?> -->
+					<!-- end .pngx-meta-field.field-<?php echo esc_attr( $field['type'] ); ?>.field-<?php echo esc_attr( $field['id'] ); ?> -->
 
-				</div> <!-- end .pngx-meta-field-wrap.field-wrap-<?php echo $field['type']; ?>.field-wrap-<?php echo $field['id']; ?>	-->
+				</div> <!-- end .pngx-meta-field-wrap.field-wrap-<?php echo esc_attr( $field['type'] ); ?>.field-wrap-<?php echo esc_attr( $field['id'] ); ?>	-->
 
 				<?php
 			}
@@ -146,7 +160,7 @@ class Pngx__Admin__Ajax {
 					continue;
 				}
 
-				if ( is_array( $label ) && isset( $label['label'] ) ) {
+				if ( is_array( $label ) && isset( $label['label'] ) && ! empty( $field['label'] ) ) {
 					?>
 					<label for="<?php echo esc_attr( $label['label'] ); ?>">
 						<?php echo esc_attr( $label['label'] ); ?>
@@ -159,6 +173,10 @@ class Pngx__Admin__Ajax {
 					?>
 					<span class="description"><?php echo esc_html( $label['description'] ); ?></span>
 					<?php
+					continue;
+				}
+
+				if ( is_array( $label ) ) {
 					continue;
 				}
 
@@ -182,7 +200,7 @@ class Pngx__Admin__Ajax {
 				<div class="pngx-variety-field <?php echo isset( $fields[ $label ]['class'] ) ? esc_attr( $fields[ $label ]['class'] ) : ''; ?>">
 					<?php
 
-					if ( isset( $fields[ $label ]['label'] ) ) { ?>
+					if ( isset( $fields[ $label ]['label'] ) && ! empty( $fields[ $label ]['label'] ) ) { ?>
 						<label for="<?php echo esc_attr( $fields[ $label ]['id'] ); ?>">
 							<?php echo esc_attr( $fields[ $label ]['label'] ); ?>
 						</label>

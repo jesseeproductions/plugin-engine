@@ -108,6 +108,10 @@ class Pngx__Admin__Field__Variety {
 							continue;
 						}
 
+						if ( is_array( $label ) ) {
+							continue;
+						}
+
 						if ( 'close' === $label ) {
 							?>
 							</div>
@@ -132,7 +136,7 @@ class Pngx__Admin__Field__Variety {
 						<div class="<?php echo isset( $fields[ $label ]['class'] ) ? esc_attr( $fields[ $label ]['class'] ) : ''; ?>">
 							<?php
 
-							if ( isset( $fields[ $label ]['label'] ) ) { ?>
+							if ( isset( $fields[ $label ]['label'] ) && ! empty( $fields[ $label ]['label'] ) ) { ?>
 								<label for="<?php echo esc_attr( $fields[ $label ]['id'] ); ?>">
 									<?php echo esc_attr( $fields[ $label ]['label'] ); ?>
 								</label>
