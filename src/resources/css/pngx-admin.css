@@ -403,6 +403,9 @@ fieldset[disabled] .btn-primary.active {
   .pngx-license-list-key-wrap .description {
     font-style: italic; }
 
+.row-actions.visible .deactivate {
+  color: #af0c0c !important; }
+
 /**
 * List Field
 ***************************************************/
