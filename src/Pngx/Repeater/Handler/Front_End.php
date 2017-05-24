@@ -12,6 +12,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Pngx__Repeater__Handler__Front_End {
 
+	/**
+	 * Front End Start HTML Wrap
+	 *
+	 * @param $i
+	 * @param $field_type
+	 */
 	public function display_repeater_open( $i, $field_type ) {
 
 		if ( 'section' === $field_type ) {
@@ -58,6 +64,12 @@ class Pngx__Repeater__Handler__Front_End {
 
 	}
 
+	/**
+	 * Front End End HTML Wrap
+	 *
+	 * @param $i
+	 * @param $field_type
+	 */
 	public function display_repeater_close( $i ) {
 
 		echo '</ul>';
@@ -66,6 +78,12 @@ class Pngx__Repeater__Handler__Front_End {
 
 	}
 
+	/**
+	 * Front End Repeater HTML Start Wrap
+	 *
+	 * @param $i
+	 * @param $field_type
+	 */
 	public function display_repeater_item_open( $i, $field_type ) {
 
 		if ( 'section' === $field_type ) {
@@ -82,7 +100,12 @@ class Pngx__Repeater__Handler__Front_End {
 
 	}
 
-
+	/**
+	 * Front End Repeater HTML End Wrap
+	 *
+	 * @param $i
+	 * @param $field_type
+	 */
 	public function display_repeater_item_close( $i, $field_type ) {
 
 		echo '</li>';
@@ -91,19 +114,46 @@ class Pngx__Repeater__Handler__Front_End {
 
 	}
 
+	/**
+	 * Display Field Value and Wrap on Front End
+	 *
+	 * @param $field
+	 * @param $value
+	 * @param $name
+	 * @param $post_id
+	 */
 	public function display_field( $field, $value, $name, $post_id ) {
 
-		//Pngx__Admin__Fields::display_field( $field, false, false, $value, $name );
+		$repeater_meta = array(
+			'repeating' => true,
+			'value' => $value,
+			'name' => $name,
+		);
 
-		Pngx__Fields::display_field( $field, $post_id, $fields, array() );
+		Pngx__Fields::display_field( $field, $post_id, false, $repeater_meta );
 
 		return;
 
 	}
 
-	public function display_repeater_field( $field, $value, $name ) {
 
-		echo '<li class="repeating-field">' . Pngx__Admin__Fields::display_field( $field, false, false, $value, $name ) . '</li>';
+	/**
+	 * Display Repeating Field Value and Wrap on Front End
+	 *
+	 * @param $field
+	 * @param $value
+	 * @param $name
+	 * @param $post_id
+	 */
+	public function display_repeater_field( $field, $value, $name, $post_id ) {
+
+		$repeater_meta = array(
+			'repeating' => true,
+			'value' => $value,
+			'name' => $name,
+		);
+
+		Pngx__Fields::display_field( $field, $post_id, false, $repeater_meta );
 
 		return;
 

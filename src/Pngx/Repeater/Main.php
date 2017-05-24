@@ -45,6 +45,9 @@ class Pngx__Repeater__Main {
 
 	}
 
+	/**
+	 * Start the Cycle and Parse through the fields for admin, saving, or front end
+	 */
 	public function init_cycle() {
 
 		// bail early if no $_POST
@@ -65,6 +68,15 @@ class Pngx__Repeater__Main {
 //		echo '</pre>';
 	}
 
+	/**
+	 * Cycle through the multidimensional array of fields
+	 *
+	 * @param      $array
+	 * @param      $input
+	 * @param null $name
+	 *
+	 * @return array
+	 */
 	public function cycle_repeaters( $array, $input, $name = null ) {
 
 		$cycle = $array;
@@ -137,6 +149,15 @@ class Pngx__Repeater__Main {
 
 	}
 
+	/**
+	 * Handle Repeating Value Fields
+	 *
+	 * @param $array
+	 * @param $k
+	 * @param $input
+	 *
+	 * @return array
+	 */
 	public function field_repeater( $array, $k, $input ) {
 
 		$cycle = $array;
@@ -149,7 +170,7 @@ class Pngx__Repeater__Main {
 
 			$builder[] = $sanitized->result;
 
-			$this->handler->display_repeater_field( $this->repeater_fields[ $k ], $sanitized->result, "{$input}[]" );
+			$this->handler->display_repeater_field( $this->repeater_fields[ $k ], $sanitized->result, "{$input}[]", $this->post_id );
 
 			//echo 'name "' . $input . '[' . $k . '][]" <br>';
 			//echo $value . ' value<br>';
@@ -160,9 +181,9 @@ class Pngx__Repeater__Main {
 
 	}
 
-	public function get_field_display( ) {
+/*	public function get_field_display( ) {
 
 		return $this->new_meta;
 
-	}
+	}*/
 }

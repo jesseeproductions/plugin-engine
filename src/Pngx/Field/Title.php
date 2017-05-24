@@ -21,6 +21,10 @@ class Pngx__Field__Title {
 		$tags  = isset( $field['display']['tags'] ) ? $field['display']['tags'] : 'title';
 		$wrap  = isset( $field['display']['wrap'] ) ? $field['display']['wrap'] : 'div';
 
+		if ( ! empty( $var['repeating'] ) && ! empty( $var['value'] ) ) {
+			$meta = $var['value'];
+		}
+
 		?>
 
 		<?php echo $wrap ? '<' . esc_attr( $wrap ) . ' class="' . esc_attr( $class ) . '" ' . sanitize_textarea_field( $style ) . '>' : ''; ?>

@@ -49,6 +49,13 @@ class Pngx__Repeater__Handler__Save {
 
 	}
 
+	/**
+	 * Update Post Meta on Save
+	 *
+	 * @param $post_id
+	 * @param $id
+	 * @param $new_meta
+	 */
 	public function post_cycle( $post_id, $id, $new_meta ) {
 
 		$old_meta = get_post_meta( $post_id, $id, true );

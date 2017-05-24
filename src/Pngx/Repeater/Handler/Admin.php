@@ -12,7 +12,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Pngx__Repeater__Handler__Admin {
 
-
+	/**
+	 * Display Opening HTML Wrap for Admin Fields
+	 *
+	 * @param $i
+	 * @param $field_type
+	 */
 	public function display_repeater_open( $i, $field_type ) {
 
 		if ( 'section' === $field_type ) {
@@ -59,6 +64,11 @@ class Pngx__Repeater__Handler__Admin {
 
 	}
 
+	/**
+	 * Display Closing HTML Wrap for Admin Fields
+	 *
+	 * @param $i
+	 */
 	public function display_repeater_close( $i ) {
 
 		echo '</ul>';
@@ -67,6 +77,12 @@ class Pngx__Repeater__Handler__Admin {
 
 	}
 
+	/**
+	 * Display Open Item HTML Wrap and Sort Handler
+	 *
+	 * @param $i
+	 * @param $field_type
+	 */
 	public function display_repeater_item_open( $i, $field_type ) {
 
 		if ( 'section' === $field_type ) {
@@ -86,6 +102,12 @@ class Pngx__Repeater__Handler__Admin {
 	}
 
 
+	/**
+	 * Display Closing Item HTML Wrap
+	 *
+	 * @param $i
+	 * @param $field_type
+	 */
 	public function display_repeater_item_close( $i, $field_type ) {
 
 		echo '
@@ -103,6 +125,13 @@ class Pngx__Repeater__Handler__Admin {
 
 	}
 
+	/**
+	 * Display Admin Field
+	 *
+	 * @param $field
+	 * @param $value
+	 * @param $name
+	 */
 	public function display_field( $field, $value, $name ) {
 
 		Pngx__Admin__Fields::display_field( $field, false, false, $value, $name );
@@ -111,7 +140,14 @@ class Pngx__Repeater__Handler__Admin {
 
 	}
 
-	public function display_repeater_field( $field, $value, $name ) {
+	/**
+	 * Display Admin Repeating Value Field
+	 *
+	 * @param $field
+	 * @param $value
+	 * @param $name
+	 */
+	public function display_repeater_field( $field, $value, $name, $post_id ) {
 
 		echo '<li class="repeating-field">' . Pngx__Admin__Fields::display_field( $field, false, false, $value, $name ) . '</li>';
 
@@ -119,6 +155,13 @@ class Pngx__Repeater__Handler__Admin {
 
 	}
 
+	/**
+	 * Handler used for Saving
+	 *
+	 * @param $post_id
+	 * @param $id
+	 * @param $new_meta
+	 */
 	public function post_cycle( $post_id, $id, $new_meta ) {
 
 		return;
