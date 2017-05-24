@@ -473,7 +473,7 @@ class Pngx__Admin__EDD_License {
 
 				case 'item_name_mismatch' :
 
-					$message = sprintf( __( 'This appears to be an invalid license key for %s.', 'plugin-engine' ), $license_fields['pngx_license_name'] );
+					$message = sprintf( __( 'This appears to be for another plugin and invalid license key for %s.', 'plugin-engine' ), $license_fields['pngx_license_name'] );
 					break;
 
 				case 'no_activations_left':
