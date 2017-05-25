@@ -50,6 +50,14 @@ class Pngx__Admin__Assets {
 			filemtime( Pngx__Main::instance()->vendor_path . 'clipboard/clipboard.js' ),
 			true
 		);
+
+		wp_register_script(
+			'pngx-jquery-repeater',
+			Pngx__Main::instance()->vendor_url . 'jquery.repeater/jquery.repeater.js',
+			array(),
+			filemtime( Pngx__Main::instance()->vendor_path . 'jquery.repeater/jquery.repeater.js' ),
+			true
+		);
 		wp_register_script(
 			'pngx-bootstrap',
 			Pngx__Main::instance()->vendor_url . 'bootstrap-iconpicker/bootstrap-3.2.0/js/bootstrap.min.js',
@@ -105,7 +113,7 @@ class Pngx__Admin__Assets {
 		wp_register_script(
 			'pngx-admin',
 			Pngx__Main::instance()->resource_url . 'js/pngx-admin.js',
-			array( 'pngx-clipboard', 'pngx-colorbox', 'pngx-wp-editor', 'pngx-load-template-ajax', 'pngx-color-picker-alpha', 'pngx-bootstrap', 'pngx-bootstrap-iconpicker-fontawesome', 'pngx-bootstrap-iconpicker', 'jquery-ui-tabs' ),
+			array( 'pngx-jquery-repeater', 'pngx-clipboard', 'pngx-colorbox', 'pngx-wp-editor', 'pngx-load-template-ajax', 'pngx-color-picker-alpha', 'pngx-bootstrap', 'pngx-bootstrap-iconpicker-fontawesome', 'pngx-bootstrap-iconpicker', 'jquery-ui-tabs' ),
 			filemtime( Pngx__Main::instance()->resource_path . 'js/pngx-admin.js' ),
 			true
 		);

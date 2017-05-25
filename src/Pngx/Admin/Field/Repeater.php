@@ -83,7 +83,6 @@ class Pngx__Admin__Field__Repeater {
 			$repeat_obj = new Pngx__Repeater__Main( $field['id'], $meta, $post->ID, 'admin' );
 		}
 
-
 	}
 
 	/**

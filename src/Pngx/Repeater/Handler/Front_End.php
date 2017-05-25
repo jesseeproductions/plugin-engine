@@ -87,11 +87,9 @@ class Pngx__Repeater__Handler__Front_End {
 	public function display_repeater_item_open( $i, $field_type ) {
 
 		if ( 'section' === $field_type ) {
-			echo '
-			<li class="repeater-item repeater-section">';
+			echo '<li class="repeater-item repeater-section">';
 		} elseif ( 'column' === $field_type ) {
-			echo '
-			<li class="repeater-item repeater-column 0">';
+			echo '<li class="repeater-item repeater-column 0">';
 		}
 
 
