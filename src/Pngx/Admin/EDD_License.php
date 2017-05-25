@@ -11,11 +11,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Pngx__Admin__EDD_License {
 
-	protected $update_url = '';
-	protected $options_id = Pngx__Main::OPTIONS_ID;
-	protected $license    = '';
+	protected $update_url  = '';
+	protected $options_id  = Pngx__Main::OPTIONS_ID;
+	protected $license     = '';
+	protected $plugin_name = '';
 
-	public function __construct( $shop_url, $options_id, $license ) {
+	public function __construct( $shop_url, $options_id, $license, $plugin_name = null ) {
 
 		$this->update_url = trailingslashit( $shop_url );
 
@@ -23,8 +24,12 @@ class Pngx__Admin__EDD_License {
 
 		$this->license = $license;
 
+		$this->plugin_name = $plugin_name;
+
 		//Ajax Save License
 		add_action( 'wp_ajax_pngx_license_update', array( $this, 'license_update' ) );
+
+		add_filter( 'pre_set_site_transient_update_plugins', array( $this, 'check_update' ) );
 
 	}
 
@@ -97,24 +102,24 @@ class Pngx__Admin__EDD_License {
 			$license_info['status'] = 'nostatus';
 
 			//Get Status of Key
-			$license_info['status'] = esc_html( $license_data->license );
+			$license_info['status'] = esc_attr( $license_data->license );
 
 			//Remove Current Expiration
 			unset( $license_info['expires'] );
 
 			//Set Expiration Date  for This License
-			$license_info['expires'] = esc_html( $license_data->expires );
+			$license_info['expires'] = esc_attr( $license_data->expires );
 
 			//if Expired Add that to the option.
 			if ( isset( $license_data->error ) && 'expired' == $license_data->error ) {
-				$license_info['expired'] = esc_html( $license_data->error );
+				$license_info['expired'] = esc_attr( $license_data->error );
 			}
 
 			//if Expired Add that to the option.
 			if ( isset( $license_data->error ) && 'missing' == $license_data->error ) {
 				unset( $license_info['expires'] );
 				unset( $license_info['expired'] );
-				$license_info['status'] = esc_html( $license_data->error );
+				$license_info['status'] = esc_attr( $license_data->error );
 			}
 
 			//Update License Object
@@ -468,7 +473,7 @@ class Pngx__Admin__EDD_License {
 
 				case 'item_name_mismatch' :
 
-					$message = sprintf( __( 'This appears to be an invalid license key for %s.', 'plugin-engine' ), $license_fields['pngx_license_name'] );
+					$message = sprintf( __( 'This appears to be for another plugin and invalid license key for %s.', 'plugin-engine' ), $license_fields['pngx_license_name'] );
 					break;
 
 				case 'no_activations_left':
@@ -498,5 +503,77 @@ class Pngx__Admin__EDD_License {
 
 	}
 
+	/**
+	 * Check Plugin Engine Plugin License and Update Status and Expiration Date
+	 *
+	 * @param $_transient_data
+	 *
+	 * @return mixed
+	 */
+	public function check_update( $_transient_data ) {
+
+		if ( $this->plugin_name && false === ( $license = get_transient( 'pngx_plugin_check_' . $this->license ) ) ) {
+
+			$license_info = get_option( $this->license );
+
+			if ( empty( $license_info ) || empty( $license_info['key'] ) || empty( $license_info['status'] ) || empty( $license_info['expires'] ) ) {
+				return $_transient_data;
+			}
+
+
+			$api_params = array(
+				'edd_action' => 'check_license',
+				'license'    => esc_attr( trim( $license_info['key'] ) ),
+				'item_name'  => urlencode( esc_attr( $this->plugin_name ) ), // the name of our product in EDD
+				'url'        => home_url(),
+			);
+
+			// Call the custom API.
+			$response = wp_remote_get( esc_url_raw( add_query_arg( $api_params, $this->update_url ) ), array(
+				'timeout'   => 15,
+				'sslverify' => false,
+			) );
+
+			// make sure the response came back okay
+			if ( is_wp_error( $response ) ) {
+				return $_transient_data;
+			}
+
+			$license_data = json_decode( wp_remote_retrieve_body( $response ) );
+
+			if ( empty( $license_data->license ) || empty( $license_data->expires ) ) {
+				return $_transient_data;
+			}
+			//Get Status of Key
+			$license_info['status'] = esc_html( $license_data->license );
+
+			//Remove Current Expiration
+			unset( $license_info['expires'] );
+
+			//Set Expiration Date  for This License
+			$license_info['expires'] = esc_attr( $license_data->expires );
+
+			//if Expired Add that to the option.
+			if ( 'expired' == $license_data->license ) {
+				$license_info['expired'] = esc_attr( $license_data->license );
+			}
+
+			//if Expired Add that to the option.
+			if ( 'missing' == $license_data->license ) {
+				unset( $license_info['expires'] );
+				unset( $license_info['expired'] );
+				$license_info['status'] = esc_attr( $license_data->license );
+			}
+
+			//Update License Object
+			update_option( $this->license, $license_info );
+
+			set_transient( 'pngx_plugin_check_' . $this->license, $license_data, 24 * HOUR_IN_SECONDS );
+
+		}
+
+
+		return $_transient_data;
+	}
 
 }

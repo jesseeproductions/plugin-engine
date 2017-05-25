@@ -59,7 +59,7 @@ class Pngx__Admin__Plugin_License_List {
 
 		}
 
-		if ( isset( $this->license_info['status'] ) && ( 'valid' === $this->license_info['status'] || $this->license_info['expired'] ) ) {
+		if ( isset( $this->license_info['status'] ) && ( 'valid' === $this->license_info['status'] ) ) {
 			$links['deactivate'] = $this->deactivate_msg;
 		}
 
