@@ -20,7 +20,7 @@ class Pngx__Field__Wrap {
 		$style = Pngx__Style__Linked::get_styles( $field, $post_id );
 
 		?>
-		<div class="pngx-content-wrap <?php echo esc_attr( $class ); ?>" <?php echo sanitize_textarea_field( $style ); ?>>
+		<div class="pngx-content-wrap <?php echo esc_attr( $class ); ?>" <?php echo wp_strip_all_tags( $style ); ?>>
 		<?php
 
 	}

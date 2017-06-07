@@ -28,7 +28,7 @@ class Pngx__Field__Variety {
 
 		?>
 
-		<div class="pngx-variety <?php echo esc_attr( $class ); ?>" <?php echo sanitize_textarea_field( $style ); ?>>
+		<div class="pngx-variety <?php echo esc_attr( $class ); ?>" <?php echo wp_strip_all_tags( $style ); ?>>
 			<?php
 			foreach ( $field['variety_choices'][ $meta ] as $variety_fields ) {
 
