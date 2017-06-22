@@ -16,6 +16,8 @@ class Pngx__Field__Content {
 
 	public static function display( $field = array(), $post_id = null, $meta = null, $template_fields = array(), $var = array() ) {
 
+		global $wp_version;
+
 		$class = $field['display']['class'] ? $field['display']['class'] : '';
 		$style = Pngx__Style__Linked::get_styles( $field, $post_id );
 		$tags  = isset( $field['display']['tags'] ) ? $field['display']['tags'] : 'title';
@@ -53,7 +55,7 @@ class Pngx__Field__Content {
 		$meta = apply_filters( 'pngx_filter_content_field_output', $meta, $post_id, $field );
 
 		?>
-		<div class="pngx-content <?php echo esc_attr( $class ); ?>" <?php echo sanitize_textarea_field( $style ); ?>>
+		<div class="pngx-content <?php echo esc_attr( $class ); ?>" <?php echo wp_strip_all_tags( $style ); ?>>
 			<?php echo strip_tags( $meta, Pngx__Allowed_Tags::$tags() ); ?>
 		</div>
 		<?php

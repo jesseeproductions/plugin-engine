@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Plugin Engine\n"
-"POT-Creation-Date: 2017-05-10 18:05-0400\n"
-"PO-Revision-Date: 2017-05-10 18:05-0400\n"
+"POT-Creation-Date: 2017-06-14 16:13-0400\n"
+"PO-Revision-Date: 2017-06-14 16:13-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_BR\n"
@@ -59,112 +59,112 @@ msgstr ""
 msgid "No Field Exists."
 msgstr ""
 
-#: src/Pngx/Admin/Assets.php:123 src/Pngx/Admin/Support.php:28
+#: src/Pngx/Admin/Assets.php:116 src/Pngx/Admin/Support.php:28
 msgid "Copy to clipboard"
 msgstr ""
 
-#: src/Pngx/Admin/Assets.php:124
+#: src/Pngx/Admin/Assets.php:117
 msgid "System info copied"
 msgstr ""
 
-#: src/Pngx/Admin/Assets.php:125
+#: src/Pngx/Admin/Assets.php:118
 msgid "Press \"Cmd + C\" to copy"
 msgstr ""
 
-#: src/Pngx/Admin/EDD_License.php:203
+#: src/Pngx/Admin/EDD_License.php:208
 msgid "Incorrect Permissions!"
 msgstr ""
 
-#: src/Pngx/Admin/EDD_License.php:207
+#: src/Pngx/Admin/EDD_License.php:212
 msgid "No Data!"
 msgstr ""
 
-#: src/Pngx/Admin/EDD_License.php:213
+#: src/Pngx/Admin/EDD_License.php:218
 msgid "Missing Required Fields"
 msgstr ""
 
-#: src/Pngx/Admin/EDD_License.php:217
+#: src/Pngx/Admin/EDD_License.php:222
 msgid "Incorrect Capabilities!"
 msgstr ""
 
-#: src/Pngx/Admin/EDD_License.php:314 src/Pngx/Admin/EDD_License.php:436
+#: src/Pngx/Admin/EDD_License.php:319 src/Pngx/Admin/EDD_License.php:441
 msgid "An error occurred, please try again."
 msgstr ""
 
-#: src/Pngx/Admin/EDD_License.php:319
+#: src/Pngx/Admin/EDD_License.php:324
 msgid "License status has not changed with the license server."
 msgstr ""
 
-#: src/Pngx/Admin/EDD_License.php:375
+#: src/Pngx/Admin/EDD_License.php:380
 #: src/Pngx/Admin/Field/License_Status.php:35
 #: src/Pngx/Admin/Plugin_License_List.php:127
 #, php-format
 msgid " and Expires on %s"
 msgstr "e expira em %s"
 
-#: src/Pngx/Admin/EDD_License.php:379
+#: src/Pngx/Admin/EDD_License.php:384
 msgid "License Saved and Valid"
 msgstr ""
 
-#: src/Pngx/Admin/EDD_License.php:382
+#: src/Pngx/Admin/EDD_License.php:387
 #: src/Pngx/Admin/Field/License_Status.php:43
 #: src/Pngx/Admin/Plugin_License_List.php:194
 msgid "License is Active"
 msgstr "A Chave de Licença está Ativa."
 
-#: src/Pngx/Admin/EDD_License.php:413
+#: src/Pngx/Admin/EDD_License.php:418
 msgid "License Deactivated"
 msgstr ""
 
-#: src/Pngx/Admin/EDD_License.php:415
+#: src/Pngx/Admin/EDD_License.php:420
 msgid "Click Activate License to enable automatic updates."
 msgstr ""
 
-#: src/Pngx/Admin/EDD_License.php:421
+#: src/Pngx/Admin/EDD_License.php:426
 msgid ""
 "License Deactivated locally, it could not be deactivated with the server due "
 "to:"
 msgstr ""
 
-#: src/Pngx/Admin/EDD_License.php:446
+#: src/Pngx/Admin/EDD_License.php:451
 #: src/Pngx/Admin/Field/License_Status.php:54
 #: src/Pngx/Admin/Plugin_License_List.php:205
 #, php-format
 msgid "License Expired on %s"
 msgstr "Licença expirou em %s"
 
-#: src/Pngx/Admin/EDD_License.php:451
+#: src/Pngx/Admin/EDD_License.php:456
 msgid "Your license key has been disabled."
 msgstr ""
 
-#: src/Pngx/Admin/EDD_License.php:456
+#: src/Pngx/Admin/EDD_License.php:461
 msgid "Invalid license."
 msgstr ""
 
-#: src/Pngx/Admin/EDD_License.php:461
+#: src/Pngx/Admin/EDD_License.php:466
 msgid "Your license is invalid."
 msgstr ""
 
-#: src/Pngx/Admin/EDD_License.php:466
+#: src/Pngx/Admin/EDD_License.php:471
 msgid "Your license is not active for this URL."
 msgstr ""
 
-#: src/Pngx/Admin/EDD_License.php:471
-#, php-format
-msgid "This appears to be an invalid license key for %s."
-msgstr ""
-
 #: src/Pngx/Admin/EDD_License.php:476
-msgid "Your license key has reached its activation limit."
+#, php-format
+msgid "This appears to be for another plugin and invalid license key for %s."
 msgstr ""
 
 #: src/Pngx/Admin/EDD_License.php:481
+msgid "Your license key has reached its activation limit."
+msgstr ""
+
+#: src/Pngx/Admin/EDD_License.php:486
 msgid ""
 "Your license cannot be activated or deactivated, please confirm in your "
 "accoint it is active."
 msgstr ""
 
-#: src/Pngx/Admin/EDD_License.php:490
+#: src/Pngx/Admin/EDD_License.php:495
 #: src/Pngx/Admin/Field/License_Status.php:56
 #: src/Pngx/Admin/Plugin_License_List.php:207
 msgid "License is Not Active"
@@ -249,7 +249,7 @@ msgstr ""
 msgid "Content"
 msgstr "Conteudo"
 
-#: src/Pngx/Admin/Options.php:336
+#: src/Pngx/Admin/Options.php:347
 msgid "Save Changes"
 msgstr "Salvar alerações"
 

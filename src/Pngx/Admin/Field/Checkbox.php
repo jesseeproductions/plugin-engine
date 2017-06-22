@@ -64,7 +64,7 @@ class Pngx__Admin__Field__Checkbox {
 
 		if ( isset( $field['desc'] ) && ! empty( $field['desc'] ) ) {
 			?>
-			<span class="checkbox-description"><?php echo esc_html( $field['desc'] ); ?></span>
+			<span class="checkbox-description"><?php echo wp_kses_post( $field['desc'] ); ?></span>
 			<?php
 		}
 	}

@@ -31,7 +31,7 @@ class Pngx__Field__Image {
 
 		if ( $image_src ) {
 			?>
-			<div class="pngx-image <?php echo esc_attr( $class ); ?>" <?php echo sanitize_textarea_field( $style ); ?>>
+			<div class="pngx-image <?php echo esc_attr( $class ); ?>" <?php echo wp_strip_all_tags( $style ); ?>>
 				<img src='<?php echo esc_url( $image_src ); ?>' alt='<?php echo get_the_title(); ?>' title='<?php echo get_the_title(); ?>'>
 			</div>
 			<?php
