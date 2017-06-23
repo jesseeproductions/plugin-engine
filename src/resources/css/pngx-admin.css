@@ -1703,21 +1703,23 @@ fieldset[disabled] .btn-primary.active {
   position: relative;
   width: 100%; }
 
-.sort {
-  left: 2px;
-  position: absolute;
-  top: 0; }
+/*.sort {
+	left: 2px;
+	position: absolute;
+	top: 0;
+}
 
 .add-repeater {
-  bottom: 0;
-  position: absolute;
-  right: 35px; }
+	bottom: 0;
+	position: absolute;
+	right: 35px;
+}
 
 .remove-repeater {
-  bottom: 0;
-  position: absolute;
-  right: 2px; }
-
+	bottom: 0;
+	position: absolute;
+	right: 2px;
+}*/
 .menu-chooser {
   margin: 20px; }
 

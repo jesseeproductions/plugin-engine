@@ -835,7 +835,13 @@ var pngx_admin_repeater_scripts = pngx_admin_repeater_scripts || {};
 	 */
 	obj.repeatable_fields = function () {
 
-		$( document ).on( 'click', '.add-repeatable', function ( e ) {
+		console.log('repeater');
+		$( '.field-repeater' ).each( function () {
+			console.log('repeater2', this );
+			$( this ).repeatable_fields();
+		} );
+
+/*		$( document ).on( 'click', '.add-repeatable', function ( e ) {
 
 			e.preventDefault();
 
@@ -867,7 +873,7 @@ var pngx_admin_repeater_scripts = pngx_admin_repeater_scripts || {};
 			revert: true,
 			cursor: 'move',
 			handle: '.sort'
-		} );
+		} );*/
 
 
 	};

@@ -20,42 +20,47 @@ class Pngx__Repeater__Handler__Admin {
 	 */
 	public function display_repeater_open( $i, $field_type ) {
 
+		echo '
+			<div class="pngx-wrapper">
+			<span class="add-repeater button"
+			   data-repeater="' . $i . '>-repeater"
+			>+</span>';
+
 		if ( 'section' === $field_type ) {
-			echo '<ul
-				id="' . $i . '-repeater"
-				class="pngx-repeater repeating-section"
-				data-name_id="wpe_menu_section"
-				data-ajax_field_id="' . $i . '"
-				data-ajax_action="pngx_repeater"
-				data-repeat-type="section"
-				data-column=0
-		>';
+			echo '
+				<ul
+					id="' . $i . '-repeater"
+					class="pngx-repeater pngx-repeater-container repeating-section"
+					data-name_id="wpe_menu_section"
+					data-ajax_field_id="' . $i . '"
+					data-ajax_action="pngx_repeater"
+					data-repeat-type="section"
+					data-column=0
+				>';
 		} elseif ( 'column' === $field_type ) {
-
 			echo '
-					<ul
-							id="' . $i . '"
-							class="pngx-repeater repeating-column"
-							data-name_id="wpe_menu_section[wpe_menu_column][0]"
-							data-ajax_field_id="' . $i . '"
-							data-ajax_action="pngx_repeater"
-							data-repeat-type="column"
-							data-section=0
-							data-column=0
-					>';
+				<ul
+					id="' . $i . '"
+					class="pngx-repeater pngx-repeater-container repeating-column"
+					data-name_id="wpe_menu_section[wpe_menu_column][0]"
+					data-ajax_field_id="' . $i . '"
+					data-ajax_action="pngx_repeater"
+					data-repeat-type="column"
+					data-section=0
+					data-column=0
+				>';
 		} elseif ( 'field' === $field_type ) {
-
 			echo '
-					<ul
-							id="' . $i . '"
-							class="pngx-repeater repeating-field"
-							data-name_id="wpe_menu_section[wpe_menu_column][0]"
-							data-ajax_field_id="' . $i . '"
-							data-ajax_action="pngx_repeater"
-							data-repeat-type="column"
-							data-section=0
-							data-column=0
-					>';
+				<ul
+					id="' . $i . '"
+					class="pngx-repeater pngx-repeater-container repeating-field"
+					data-name_id="wpe_menu_section[wpe_menu_column][0]"
+					data-ajax_field_id="' . $i . '"
+					data-ajax_action="pngx_repeater"
+					data-repeat-type="column"
+					data-section=0
+					data-column=0
+				>';
 		}
 
 
@@ -71,7 +76,10 @@ class Pngx__Repeater__Handler__Admin {
 	 */
 	public function display_repeater_close( $i ) {
 
-		echo '</ul>';
+		echo '
+				</ul>
+			</div>
+			';
 
 		return;
 
@@ -88,11 +96,11 @@ class Pngx__Repeater__Handler__Admin {
 		if ( 'section' === $field_type ) {
 			echo '
 			<li class="repeater-item repeater-section">
-				<span class="sort hndle">|||</span>';
+				<span class="repeater-sort">|||</span>';
 		} elseif ( 'column' === $field_type ) {
 			echo '
-			<li class="repeater-item repeater-column 0">
-				<span class="sort hndle">|||</span>';
+			<li class="repeater-item repeater-column">
+				<span class="repeater-sort">|||</span>';
 		}
 
 
@@ -111,14 +119,9 @@ class Pngx__Repeater__Handler__Admin {
 	public function display_repeater_item_close( $i, $field_type ) {
 
 		echo '
-			<a class="add-repeater button"
-			   data-repeater="' . $i . '>-repeater"
-			   href="#"
-			>+</a>
-			<a class="remove-repeater button"
+			<span class="remove-repeater button"
 			   data-repeater="' . $i . '-repeater"
-			   href="#"
-			>X</a>
+			>X</span>
 		</li>';
 
 		return;
