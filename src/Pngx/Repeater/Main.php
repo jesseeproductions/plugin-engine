@@ -18,6 +18,7 @@ class Pngx__Repeater__Main {
 	protected $meta;
 	protected $type;
 	protected $repeater_fields;
+	protected $field_template;
 
 	protected $new_meta;
 	protected $counter = 0;
@@ -33,6 +34,7 @@ class Pngx__Repeater__Main {
 		$this->post_id           = $post_id;
 		$this->meta[ $this->id ] = is_array( $meta ) ? $meta : array();
 		$this->repeater_fields   = apply_filters( 'pngx_meta_repeater_fields', array() );
+		$this->field_template          = $this->get_levels_per_field( $this->repeater_fields, null );
 		$this->type              = $type;
 		if ( 'admin' === $this->type ) {
 			$this->handler = new Pngx__Repeater__Handler__Admin();
@@ -41,6 +43,7 @@ class Pngx__Repeater__Main {
 		} elseif ( 'front-end' === $this->type ) {
 			$this->handler = new Pngx__Repeater__Handler__Front_End();
 		}
+
 		$this->init_cycle();
 
 	}
@@ -117,6 +120,18 @@ class Pngx__Repeater__Main {
 						$send_input = "{$i}[{$subkey}]";
 					}
 
+					if ( 0 === $subkey ) {
+						log_me('here');
+						log_me($this->field_template[$i]);
+
+						//$this->handler->display_repeater_item_open( $i, $this->repeater_fields[ $i ]['repeater_type'] );
+
+						//$this->cycle_repeaters( $this->field_template[$i], $send_input );
+
+						//$this->handler->display_repeater_item_close( $i, $this->repeater_fields[ $i ]['repeater_type'] );
+
+					}
+
 					$this->handler->display_repeater_item_open( $i, $this->repeater_fields[ $i ]['repeater_type'] );
 
 					$builder[ $i ][ $subkey ] = $this->cycle_repeaters( $cycle[ $i ][ $subkey ], $send_input );
@@ -181,6 +196,50 @@ class Pngx__Repeater__Main {
 
 	}
 
+
+	/**
+	 * Cycle through the multidimensional array of fields
+	 *
+	 * @param      $array
+	 * @param      $input
+	 *
+	 * @return array
+	 */
+	public function get_levels_per_field( $array, $input ) {
+
+		$cycle = $array;
+
+		$builder = array();
+
+		$keys = array_keys( $cycle );
+
+		foreach ( $keys as $key ) {
+			if ( ! empty( $this->repeater_fields[ $key ]['repeater_fields'] ) ) {
+				$builder[ $key ][0] = $this->recurse_repeater( $this->repeater_fields[ $key ]['repeater_fields'] );
+			} else {
+				$builder[ $key ] = '';
+			}
+		}
+
+
+		return $builder;
+
+	}
+
+	public function recurse_repeater( $repeater_fields ) {
+		$builder = array();
+
+		foreach ( $repeater_fields as $field ) {
+			if ( ! empty( $this->repeater_fields[ $field['id'] ]['repeater_fields'] ) ) {
+				$builder[ $field['id'] ][0] = $this->recurse_repeater( $this->repeater_fields[ $field['id'] ]['repeater_fields'] );
+			} else {
+				$builder[ $field['id'] ] = '';
+			}
+
+		}
+
+		return $builder;
+	}
 /*	public function get_field_display( ) {
 
 		return $this->new_meta;
