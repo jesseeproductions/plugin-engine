@@ -20,6 +20,7 @@ class Pngx__Repeater__Main {
 	protected $repeater_fields;
 
 	protected $new_meta;
+	protected $clone;
 	protected $counter = 0;
 	protected $info;
 
@@ -58,6 +59,11 @@ class Pngx__Repeater__Main {
 //		echo '<pre>';
 //		print_r( $this->meta );
 //		echo '</pre>';
+
+		$this->cycle_templates( Pngx__Admin__Field__Repeater::get_empty_fields(),null );
+
+		log_me('clone');
+		log_me($this->clone);
 
 		$this->new_meta = $this->cycle_repeaters( $this->meta, null );
 
@@ -101,6 +107,7 @@ class Pngx__Repeater__Main {
 
 				$subkeys = array_keys( $cycle[ $i ] );
 
+				//log_me( $cycle[ $i ] );// [0] => 0
 				//log_me( $subkeys );// [0] => 0
 
 //https://www.google.com/search?q=php+multidimensial+array+runs+through+it+twice&ie=utf-8&oe=utf-8#q=php+multidimensional+array+runs+through+it+twice&*
@@ -108,6 +115,15 @@ class Pngx__Repeater__Main {
 
 				//number loop
 				foreach ( $subkeys as $subkey ) {
+
+					// todo need to create a new cycle that build the empty templates at each level and saves to an array
+					// todo the $i is the key $this->clone[$i]
+					if ( $subkey === 0 ) {
+						//log_me( 'here1' );
+						//log_me( $subkey );
+						//log_me( $i );
+						//log_me( $cycle[ $i ] );
+					}
 
 					//log_me( $subkey ); //0
 					//log_me( $cycle[ $i ][ $subkey ] ); //0
@@ -181,9 +197,100 @@ class Pngx__Repeater__Main {
 
 	}
 
-/*	public function get_field_display( ) {
+	/**
+	 * Cycle through the multidimensional array of fields
+	 *
+	 * @param      $array
+	 * @param      $input
+	 * @param null $name
+	 *
+	 * @return array
+	 */
+	public function cycle_templates( $array, $input, $name = null ) {
 
-		return $this->new_meta;
+		$cycle = $array;
 
-	}*/
+		$builder = array();
+
+		$keys = array_keys( $cycle );
+
+		//log_me( 'starts' );
+		//log_me( $keys );//[0] => wpe_menu_section
+		//name loop
+		foreach ( $keys as $i ) {
+
+			$this->clone[$i] = '';
+			//log_me( $i );
+			//log_me( $i );//wpe_menu_section
+			//log_me( $cycle[ $i ] ); //array
+
+			if ( is_array( $cycle[ $i ] ) && ( isset( $this->repeater_fields[ $i ]['repeater_type'] ) && 'single-field' === $this->repeater_fields[ $i ]['repeater_type'] ) ) {
+
+				//$builder[ $i ] = $this->field_repeater( $cycle[ $i ], $i, "{$input}[{$i}]" );
+
+			} elseif ( is_array( $cycle[ $i ] ) ) {
+
+				$subkeys = array_keys( $cycle[ $i ] );
+
+				//log_me( $cycle[ $i ] );// [0] => 0
+				//log_me( $subkeys );// [0] => 0
+
+//https://www.google.com/search?q=php+multidimensial+array+runs+through+it+twice&ie=utf-8&oe=utf-8#q=php+multidimensional+array+runs+through+it+twice&*
+				//$this->handler->display_repeater_open( $i, $this->repeater_fields[ $i ]['repeater_type'] );
+
+				//number loop
+				foreach ( $subkeys as $subkey ) {
+
+					// todo need to create a new cycle that build the empty templates at each level and saves to an array
+					// todo the $i is the key $this->clone[$i]
+					//log_me( 'subkey' );
+					//log_me( $subkey );
+					if ( 0 === $subkey ) {
+						//log_me( 'here1' );
+						//log_me( $subkey );
+						//log_me( $i );
+						//log_me( $cycle[ $i ] );
+
+						$send_input = "{$input}[{$i}][{$subkey}]";
+						if ( ! $input ) {
+							$send_input = "{$i}[{$subkey}]";
+						}
+
+						$this->clone[$i] .= $this->handler->display_repeater_item_clone_open( $i, $this->repeater_fields[ $i ]['repeater_type'] );
+
+						//log_me( $this->cycle_templates( $cycle[ $i ][ $subkey ], $send_input ) );
+						$this->clone[$i] .= $this->cycle_templates( $cycle[ $i ][ $subkey ], $send_input );
+
+						$this->clone[$i] .= $this->handler->display_repeater_item_clone_close( $i, $this->repeater_fields[ $i ]['repeater_type'] );
+
+					}
+
+					//log_me( $subkey ); //0
+					//log_me( $cycle[ $i ][ $subkey ] ); //0
+
+				}
+
+				//$this->handler->display_repeater_close( $i );
+
+
+			} else {
+
+				if ( ! is_numeric( $i ) && ! isset( $this->new_meta[ $i ] ) ) {
+
+					//$sanitized     = new Pngx__Sanitize( $this->repeater_fields[ $i ]['type'], $cycle[ $i ], $this->repeater_fields[ $i ] );
+					//$builder[ $i ] = $sanitized->result;
+
+					//$this->handler->display_field( $this->repeater_fields[ $i ], $cycle[ $i ], "{$input}[{$i}]", $this->post_id  );
+
+
+				}
+
+			}
+
+		}
+
+
+		return $builder;
+
+	}
 }

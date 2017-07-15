@@ -91,32 +91,34 @@ class Pngx__Admin__Field__Repeater {
 	 *
 	 * @return array
 	 */
-	public function get_empty_fields() {
+	public static function get_empty_fields() {
 
-		$repeater_meta[] = array(
+		$repeater_meta['wpe_menu_section'] = array(
 
-			'wpe_menu_column' => array(
+			'0' => array(
 
-				'0' => array(
+				'wpe_menu_column' => array(
 
-					'wpe_menu_items' => array(
+					'0' => array(
 
-						'0' => array(
-							'wpe_menu_name'        => '',
-							'wpe_menu_description' => '',
-							'wpe_menu_r_price'     => array(
-								'0' => array(
-									'wpe_menu_price' => array(
-										'0' => '',
+						'wpe_menu_items' => array(
+
+							'0' => array(
+								'wpe_menu_name'        => '',
+								'wpe_menu_description' => '',
+								'wpe_menu_r_price'     => array(
+									'0' => array(
+										'wpe_menu_price' => array(
+											'0' => '',
+										),
 									),
 								),
 							),
-						),
 
+						),
 					),
 				),
 			),
-
 		);
 
 		return $repeater_meta;
