@@ -124,4 +124,33 @@ class Pngx__Admin__Field__Repeater {
 		return $repeater_meta;
 	}
 
+	public function get_empty_fields_2nd() {
+
+		$repeater_meta['wpe_menu_section'] = array(
+			'0' => array(
+				'wpe_menu_column' => array(
+					'0' => array(
+						'wpe_menu_items' => array(
+							'0' => array(
+								'wpe_menu_name'        => '',
+								'wpe_menu_description' => '',
+								'wpe_menu_r_price'     => array(
+									'0' => array(
+										'wpe_menu_price' => array(
+											'0' => '',
+										),
+									),
+								),
+							),
+
+						),
+					),
+				),
+			),
+
+		);
+
+		return $repeater_meta;
+	}
+
 }

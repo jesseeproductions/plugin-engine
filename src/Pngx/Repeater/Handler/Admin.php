@@ -91,7 +91,7 @@ class Pngx__Repeater__Handler__Admin {
 	 * @param $i
 	 * @param $field_type
 	 */
-	public function display_repeater_item_open( $i, $field_type ) {
+	public function display_repeater_item_open( $i, $field_type, $class = null ) {
 
 		if ( 'section' === $field_type ) {
 			echo '
