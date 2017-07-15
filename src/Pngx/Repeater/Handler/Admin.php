@@ -110,26 +110,6 @@ class Pngx__Repeater__Handler__Admin {
 	}
 
 	/**
-	 * Display Open Item HTML Wrap and Sort Handler
-	 *
-	 * @param $i
-	 * @param $field_type
-	 */
-	public function display_repeater_item_clone_open( $i, $field_type ) {
-
-		if ( 'section' === $field_type ) {
-			return '
-			<li class="repeater-item repeater-section repeater-template">
-				<span class="repeater-sort">|||</span>';
-		} elseif ( 'column' === $field_type ) {
-			return '
-			<li class="repeater-item repeater-column repeater-template">
-				<span class="repeater-sort">|||</span>';
-		}
-
-	}
-
-	/**
 	 * Display Closing Item HTML Wrap
 	 *
 	 * @param $i
