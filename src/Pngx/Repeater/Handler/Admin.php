@@ -95,11 +95,11 @@ class Pngx__Repeater__Handler__Admin {
 
 		if ( 'section' === $field_type ) {
 			echo '
-			<li class="repeater-item repeater-section">
+			<li class="repeater-item repeater-section ' . esc_attr( $class ) . '">
 				<span class="repeater-sort">|||</span>';
 		} elseif ( 'column' === $field_type ) {
 			echo '
-			<li class="repeater-item repeater-column">
+			<li class="repeater-item repeater-column ' . esc_attr( $class ) . '">
 				<span class="repeater-sort">|||</span>';
 		}
 
@@ -143,6 +143,7 @@ class Pngx__Repeater__Handler__Admin {
 		</li>';
 
 	}
+
 	/**
 	 * Display Admin Field
 	 *

@@ -24,7 +24,7 @@ class Pngx__Repeater__Handler__Save {
 
 	}
 
-	public function display_repeater_item_open( $i, $field_type ) {
+	public function display_repeater_item_open( $i, $field_type, $class = null ) {
 
 		return false;
 

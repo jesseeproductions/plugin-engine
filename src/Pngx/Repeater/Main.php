@@ -80,7 +80,7 @@ class Pngx__Repeater__Main {
 	 *
 	 * @return array
 	 */
-	public function cycle_repeaters( $array, $input, $name = null ) {
+	public function cycle_repeaters( $array, $input, $name = null, $is_template = false ) {
 
 		$cycle = $array;
 
@@ -107,6 +107,9 @@ class Pngx__Repeater__Main {
 				//log_me( $subkeys );// [0] => 0
 
 //https://www.google.com/search?q=php+multidimensial+array+runs+through+it+twice&ie=utf-8&oe=utf-8#q=php+multidimensional+array+runs+through+it+twice&*
+				//log_me( $i );
+				//log_me( $this->repeater_fields[ $i ]['repeater_type'] );
+
 				$this->handler->display_repeater_open( $i, $this->repeater_fields[ $i ]['repeater_type'] );
 
 				//number loop
@@ -114,21 +117,23 @@ class Pngx__Repeater__Main {
 
 					//log_me( $subkey ); //0
 					//log_me( $cycle[ $i ][ $subkey ] ); //0
-
+					$template_input = "{$input}[{$i}][{{row-count-placeholder}}]";
 					$send_input = "{$input}[{$i}][{$subkey}]";
 					if ( ! $input ) {
 						$send_input = "{$i}[{$subkey}]";
+						$template_input = "{$i}[{$subkey}]";
 					}
 
-					if ( 0 === $subkey ) {
-						log_me('here');
-						log_me($this->field_template[$i]);
 
-						//$this->handler->display_repeater_item_open( $i, $this->repeater_fields[ $i ]['repeater_type'] );
+					if ( 0 === $subkey && is_array( $this->field_template[$i]) ) {
+						//log_me('here');
+						//log_me($this->field_template[$i]);
 
-						//$this->cycle_repeaters( $this->field_template[$i], $send_input );
+						$this->handler->display_repeater_item_open( $i, $this->repeater_fields[ $i ]['repeater_type'], 'repeater-template' );
+						//log_me('cycle');
+						$this->cycle_repeaters( $this->field_template[$i][0], $template_input, false, true );
 
-						//$this->handler->display_repeater_item_close( $i, $this->repeater_fields[ $i ]['repeater_type'] );
+						$this->handler->display_repeater_item_close( $i, $this->repeater_fields[ $i ]['repeater_type'] );
 
 					}
 
@@ -149,6 +154,11 @@ class Pngx__Repeater__Main {
 
 					$sanitized     = new Pngx__Sanitize( $this->repeater_fields[ $i ]['type'], $cycle[ $i ], $this->repeater_fields[ $i ] );
 					$builder[ $i ] = $sanitized->result;
+
+					log_me("here1");
+					log_me($is_template);
+					log_me("{$input}");
+					log_me("{$i}");
 
 					$this->handler->display_field( $this->repeater_fields[ $i ], $cycle[ $i ], "{$input}[{$i}]", $this->post_id  );
 
