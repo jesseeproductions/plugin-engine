@@ -112,6 +112,12 @@ class Pngx__Repeater__Handler__Front_End {
 
 	}
 
+	public function display_repeater_field_open( $class = null ) {
+
+		return false;
+
+	}
+
 	/**
 	 * Display Field Value and Wrap on Front End
 	 *

@@ -49,6 +49,12 @@ class Pngx__Repeater__Handler__Save {
 
 	}
 
+	public function display_repeater_field_open( $class = null ) {
+
+		return false;
+
+	}
+
 	/**
 	 * Update Post Meta on Save
 	 *

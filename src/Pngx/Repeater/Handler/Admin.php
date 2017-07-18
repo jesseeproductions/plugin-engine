@@ -94,13 +94,14 @@ class Pngx__Repeater__Handler__Admin {
 	public function display_repeater_item_open( $i, $field_type, $class = null ) {
 
 		if ( 'section' === $field_type ) {
-			echo '
-			<li class="repeater-item repeater-section ' . esc_attr( $class ) . '">
-				<span class="repeater-sort">|||</span>';
+			echo '<li class="repeater-item repeater-section ' . esc_attr( $class ) . '">
+					<span class="repeater-sort">|||</span>';
 		} elseif ( 'column' === $field_type ) {
-			echo '
-			<li class="repeater-item repeater-column ' . esc_attr( $class ) . '">
-				<span class="repeater-sort">|||</span>';
+			echo '<li class="repeater-item repeater-column ' . esc_attr( $class ) . '">
+					<span class="repeater-sort">|||</span>';
+		} elseif ( 'field' === $field_type && 'repeater-template' === $class ) {
+			echo '<li class="repeating-field ' . esc_attr( $class ) . '">
+					<span class="repeater-sort">|||</span>';
 		}
 
 
@@ -159,6 +160,15 @@ class Pngx__Repeater__Handler__Admin {
 
 	}
 
+	public function display_repeater_field_open( $class = null ) {
+
+		echo '<li class="repeating-field ' . esc_attr( $class ) . '">
+				<span class="repeater-sort">|||</span>';
+
+		return;
+
+	}
+
 	/**
 	 * Display Admin Repeating Value Field
 	 *
@@ -168,7 +178,7 @@ class Pngx__Repeater__Handler__Admin {
 	 */
 	public function display_repeater_field( $field, $value, $name, $post_id ) {
 
-		echo '<li class="repeating-field">' . Pngx__Admin__Fields::display_field( $field, false, false, $value, $name ) . '</li>';
+		echo Pngx__Admin__Fields::display_field( $field, false, false, $value, $name );
 
 		return;
 

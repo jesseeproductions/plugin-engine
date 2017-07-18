@@ -34,7 +34,7 @@ class Pngx__Repeater__Main {
 		$this->post_id           = $post_id;
 		$this->meta[ $this->id ] = is_array( $meta ) ? $meta : array();
 		$this->repeater_fields   = apply_filters( 'pngx_meta_repeater_fields', array() );
-		$this->field_template          = $this->get_levels_per_field( $this->repeater_fields, null );
+		$this->field_template    = $this->get_levels_per_field( $this->repeater_fields, null );
 		$this->type              = $type;
 		if ( 'admin' === $this->type ) {
 			$this->handler = new Pngx__Repeater__Handler__Admin();
@@ -58,17 +58,17 @@ class Pngx__Repeater__Main {
 			return;
 		}
 
-//		echo '<pre>';
-//		print_r( $this->meta );
-//		echo '</pre>';
+		//		echo '<pre>';
+		//		print_r( $this->meta );
+		//		echo '</pre>';
 
 		$this->new_meta = $this->cycle_repeaters( $this->meta, null );
 
 		$this->handler->post_cycle( $this->post_id, $this->id, $this->new_meta );
 
-//		echo '<pre>';
-//		print_r( $this->new_meta );
-//		echo '</pre>';
+		//		echo '<pre>';
+		//		print_r( $this->new_meta );
+		//		echo '</pre>';
 	}
 
 	/**
@@ -106,7 +106,7 @@ class Pngx__Repeater__Main {
 
 				//log_me( $subkeys );// [0] => 0
 
-//https://www.google.com/search?q=php+multidimensial+array+runs+through+it+twice&ie=utf-8&oe=utf-8#q=php+multidimensional+array+runs+through+it+twice&*
+				//https://www.google.com/search?q=php+multidimensial+array+runs+through+it+twice&ie=utf-8&oe=utf-8#q=php+multidimensional+array+runs+through+it+twice&*
 				//log_me( $i );
 				//log_me( $this->repeater_fields[ $i ]['repeater_type'] );
 
@@ -118,20 +118,18 @@ class Pngx__Repeater__Main {
 					//log_me( $subkey ); //0
 					//log_me( $cycle[ $i ][ $subkey ] ); //0
 					$template_input = "{$input}[{$i}][{{row-count-placeholder}}]";
-					$send_input = "{$input}[{$i}][{$subkey}]";
+					$send_input     = "{$input}[{$i}][{$subkey}]";
 					if ( ! $input ) {
-						$send_input = "{$i}[{$subkey}]";
+						$send_input     = "{$i}[{$subkey}]";
 						$template_input = "{$i}[{$subkey}]";
 					}
 
 
-					if ( 0 === $subkey && is_array( $this->field_template[$i]) ) {
-						//log_me('here');
-						//log_me($this->field_template[$i]);
+					if ( 0 === $subkey && is_array( $this->field_template[ $i ] ) ) {
 
 						$this->handler->display_repeater_item_open( $i, $this->repeater_fields[ $i ]['repeater_type'], 'repeater-template' );
-						//log_me('cycle');
-						$this->cycle_repeaters( $this->field_template[$i][0], $template_input, false, true );
+
+						$this->cycle_repeaters( $this->field_template[ $i ][0], $template_input, false, true );
 
 						$this->handler->display_repeater_item_close( $i, $this->repeater_fields[ $i ]['repeater_type'] );
 
@@ -155,13 +153,9 @@ class Pngx__Repeater__Main {
 					$sanitized     = new Pngx__Sanitize( $this->repeater_fields[ $i ]['type'], $cycle[ $i ], $this->repeater_fields[ $i ] );
 					$builder[ $i ] = $sanitized->result;
 
-					log_me("here1");
-					log_me($is_template);
-					log_me("{$input}");
-					log_me("{$i}");
+					//todo add brackets for the template name on repeating fields (price) clone []
 
-					$this->handler->display_field( $this->repeater_fields[ $i ], $cycle[ $i ], "{$input}[{$i}]", $this->post_id  );
-
+					$this->handler->display_field( $this->repeater_fields[ $i ], $cycle[ $i ], "{$input}[{$i}]", $this->post_id );
 
 				}
 
@@ -195,7 +189,11 @@ class Pngx__Repeater__Main {
 
 			$builder[] = $sanitized->result;
 
+			$this->handler->display_repeater_field_open( false );
+
 			$this->handler->display_repeater_field( $this->repeater_fields[ $k ], $sanitized->result, "{$input}[]", $this->post_id );
+
+			$this->handler->display_repeater_item_close( $this->repeater_fields[ $k ]['id'], $this->repeater_fields[ $k ]['type'] );
 
 			//echo 'name "' . $input . '[' . $k . '][]" <br>';
 			//echo $value . ' value<br>';
@@ -250,9 +248,9 @@ class Pngx__Repeater__Main {
 
 		return $builder;
 	}
-/*	public function get_field_display( ) {
+	/*	public function get_field_display( ) {
 
-		return $this->new_meta;
+			return $this->new_meta;
 
-	}*/
+		}*/
 }
