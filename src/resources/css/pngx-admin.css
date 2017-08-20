@@ -482,7 +482,8 @@ fieldset[disabled] .btn-primary.active {
       padding: 12px 38px 12px 8px; }
 
 /* IE9: To hide select arrow we make the select overflow on the right side there is not another way :( */
-@media screen and (min-width: 0 \0 ) {
+@media screen and (min-width: 0 \0
+ ) {
   .pngx-default-select select {
     width: calc(100% + 58px); } }
 
@@ -1940,3 +1941,58 @@ fieldset[disabled] .btn-primary.active {
 
 .pngx-field-two-thirds {
   width: 65.66667%; }
+
+
+.repeater-item {
+	padding: 50px 3%;
+}
+.pngx-wrapper.field {
+	border: 1px solid #999999;
+  position: relative;
+  padding: 30px 3%;
+}
+
+.repeating-field {
+  position: relative;
+  padding: 3% 20px;
+}
+
+.repeater-sort {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.repeating-field .repeater-sort {
+  left: -10px;
+}
+
+.add-repeater {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.repeating-field .add-repeater {
+  right: -20px;
+}
+
+.remove-repeater {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+.repeating-field .remove-repeater {
+  bottom: 5px;
+  right: -20px;
+}
+.pngx-wrapper.field .remove-repeater.field  {
+  bottom: -25px;
+  right: 0;
+}
+.repeater-item input,
+.repeater-item textarea {
+	max-width:100%;
+}
+

@@ -21,7 +21,7 @@ class Pngx__Repeater__Handler__Admin {
 	public function display_repeater_open( $i, $field_type ) {
 
 		echo '
-			<div class="pngx-wrapper">
+			<div class="pngx-wrapper ' . esc_attr( $field_type ) . '">
 			<span class="add-repeater button"
 			   data-repeater="' . $i . '>-repeater"
 			>+</span>';
@@ -119,7 +119,7 @@ class Pngx__Repeater__Handler__Admin {
 	public function display_repeater_item_close( $i, $field_type ) {
 
 		echo '
-			<span class="remove-repeater button"
+			<span class="remove-repeater button ' . esc_attr( $field_type ) . '"
 			   data-repeater="' . $i . '-repeater"
 			>X</span>
 		</li>';

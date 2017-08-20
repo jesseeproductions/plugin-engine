@@ -1,20 +1,71 @@
 .pngx-meta-field.field-repeater {
-	width: 100%;
+  width: 100%;
 }
 
 .pngx-meta-field.field-repeater * {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .repeater-item {
-	background: #eee;
-	//box-shadow: 0 1px 2px #c7c7c7;
-	border: 1px solid #999999;
-	margin: 20px 0;
-	min-height: 100px;
-	padding: 2%;
-	position: relative;
-	width: 100%;
+  background: #eee;
+  //box-shadow: 0 1px 2px #c7c7c7;
+  border: 1px solid #999999;
+  margin: 20px 0;
+  min-height: 100px;
+  padding: 50px 3%;
+  position: relative;
+  width: 100%;
+}
+
+.pngx-wrapper.field {
+  border: 1px solid #999999;
+  position: relative;
+  padding: 30px 3%;
+}
+
+.repeating-field {
+  position: relative;
+  padding: 3% 20px;
+}
+
+.repeater-sort {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.repeating-field .repeater-sort {
+  left: -10px;
+}
+
+.add-repeater {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.repeating-field .add-repeater {
+  right: -20px;
+}
+
+.remove-repeater {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+.repeating-field .remove-repeater {
+  bottom: 5px;
+  right: -20px;
+}
+.pngx-wrapper.field .remove-repeater.field  {
+  bottom: -25px;
+  right: 0;
+}
+
+.repeater-item input,
+.repeater-item textarea {
+  max-width: 100%;
 }
 
 /*.sort {
@@ -36,11 +87,11 @@
 }*/
 
 .menu-chooser {
-	margin: 20px;
+  margin: 20px;
 }
 
 .repeater-column {
-	display: inline-block;
-	vertical-align: top;
-	width: 45.5%;
+  display: inline-block;
+  vertical-align: top;
+  width: 45.5%;
 }
