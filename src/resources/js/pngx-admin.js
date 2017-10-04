@@ -941,6 +941,20 @@ var pngx_admin_repeater_scripts = pngx_admin_repeater_scripts || {};
 		obj.init();
 	} );
 
+	$( document ).ready( function () {
+		$( '.cycle' ).click( function ( e ) {
+
+			e.preventDefault();
+
+			var $repeater = $('.pngx-wrapper');
+
+			$( $repeater ).find( ':input' ).each( function () {
+				console.log(this);
+			} );
+
+		} );
+	} );
+
 	$.fn.pngx_repeater = function () {
 
 

@@ -20,7 +20,7 @@ class Pngx__Repeater__Handler__Admin {
 	 */
 	public function display_repeater_open( $i, $field_type ) {
 
-		echo '
+		echo '<a href="#" class="cycle">Cycle</a>
 			<div class="pngx-wrapper">
 			<span class="add-repeater button"
 			   data-repeater="' . $i . '>-repeater"

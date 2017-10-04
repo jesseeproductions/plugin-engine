@@ -95,8 +95,7 @@ class Pngx__Repeater__Main {
 
 			//log_me( $i );//wpe_menu_section
 			//log_me( $cycle[ $i ] ); //array
-
-			if ( is_array( $cycle[ $i ] ) && ( isset( $this->repeater_fields[ $i ]['repeater_type'] ) && 'single-field' === $this->repeater_fields[ $i ]['repeater_type'] ) ) {
+			if ( isset( $this->repeater_fields[ $i ]['repeater_type'] ) && 'single-field' === $this->repeater_fields[ $i ]['repeater_type'] ) {
 
 				$builder[ $i ] = $this->field_repeater( $cycle[ $i ], $i, "{$input}[{$i}]" );
 
@@ -154,7 +153,6 @@ class Pngx__Repeater__Main {
 					$builder[ $i ] = $sanitized->result;
 
 					//todo add brackets for the template name on repeating fields (price) clone []
-
 					$this->handler->display_field( $this->repeater_fields[ $i ], $cycle[ $i ], "{$input}[{$i}]", $this->post_id );
 
 				}
@@ -171,15 +169,19 @@ class Pngx__Repeater__Main {
 	/**
 	 * Handle Repeating Value Fields
 	 *
-	 * @param $array
+	 * @param $values
 	 * @param $k
 	 * @param $input
 	 *
 	 * @return array
 	 */
-	public function field_repeater( $array, $k, $input ) {
+	public function field_repeater( $values, $k, $input ) {
 
-		$cycle = $array;
+		$cycle = $values;
+		if ( ! is_array( $values ) ) {
+			$cycle = array();
+			$cycle[] = $values;
+		}
 
 		$builder = array();
 
