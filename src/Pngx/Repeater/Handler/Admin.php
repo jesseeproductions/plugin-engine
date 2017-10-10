@@ -20,8 +20,13 @@ class Pngx__Repeater__Handler__Admin {
 	 */
 	public function display_repeater_open( $i, $field_type ) {
 
-		echo '<a href="#" class="cycle">Cycle</a>
+/*		echo '<a href="#" class="cycle">Cycle</a>
 			<div class="pngx-wrapper">
+			<span class="add-repeater button"
+			   data-repeater="' . $i . '>-repeater"
+			>+</span>';		*/
+
+		echo '<div class="pngx-wrapper ' . esc_attr( $field_type ) . '">
 			<span class="add-repeater button"
 			   data-repeater="' . $i . '>-repeater"
 			>+</span>';
@@ -118,14 +123,16 @@ class Pngx__Repeater__Handler__Admin {
 	 */
 	public function display_repeater_item_close( $i, $field_type ) {
 
+		if ( 'field' === $field_type ) {
+			echo '</li>';
+			return;
+		}
+
 		echo '
 			<span class="remove-repeater button"
 			   data-repeater="' . $i . '-repeater"
 			>X</span>
 		</li>';
-
-		return;
-
 	}
 
 

@@ -1699,27 +1699,60 @@ fieldset[disabled] .btn-primary.active {
   border: 1px solid #999999;
   margin: 20px 0;
   min-height: 100px;
-  padding: 2%;
+  padding: 40px 2% 2%;
   position: relative;
   width: 100%; }
+  .repeater-item .pngx-wrapper textarea,
+  .repeater-item .pngx-wrapper input[type="email"],
+  .repeater-item .pngx-wrapper input[type="number"],
+  .repeater-item .pngx-wrapper input[type="text"],
+  .repeater-item .pngx-wrapper input[type="url"] {
+    max-width: 100%; }
+  .repeater-item .repeater-sort {
+    left: 5px;
+    position: absolute;
+    top: 5px; }
+  .repeater-item .add-repeater {
+    position: absolute;
+    right: 5px;
+    top: 5px; }
+  .repeater-item .remove-repeater {
+    bottom: 0;
+    position: absolute;
+    right: 2px; }
 
-/*.sort {
-	left: 2px;
-	position: absolute;
-	top: 0;
-}
+.pngx-wrapper.field {
+  padding: 40px 2%;
+  position: relative; }
+  .pngx-wrapper.field .repeater-sort {
+    left: 5px;
+    position: absolute;
+    top: 16px; }
+  .pngx-wrapper.field .add-repeater {
+    position: absolute;
+    right: 5px;
+    top: 5px; }
+  .pngx-wrapper.field .remove-repeater {
+    position: absolute;
+    right: 2px;
+    top: 16px; }
 
-.add-repeater {
-	bottom: 0;
-	position: absolute;
-	right: 35px;
-}
+li.repeating-field {
+  padding: 2% 30px;
+  position: relative; }
+  li.repeating-field .repeater-sort {
+    left: 5px;
+    position: absolute;
+    top: 16px; }
+  li.repeating-field .add-repeater {
+    position: absolute;
+    right: 5px;
+    top: 5px; }
+  li.repeating-field .remove-repeater {
+    position: absolute;
+    right: 2px;
+    top: 16px; }
 
-.remove-repeater {
-	bottom: 0;
-	position: absolute;
-	right: 2px;
-}*/
 .menu-chooser {
   margin: 20px; }
 

@@ -97,7 +97,7 @@ class Pngx__Repeater__Main {
 			//log_me( $cycle[ $i ] ); //array
 			if ( isset( $this->repeater_fields[ $i ]['repeater_type'] ) && 'single-field' === $this->repeater_fields[ $i ]['repeater_type'] ) {
 
-				$builder[ $i ] = $this->field_repeater( $cycle[ $i ], $i, "{$input}[{$i}]" );
+				$builder[ $i ] = $this->field_repeater( $cycle[ $i ], $i, "{$input}[{$i}]", $is_template );
 
 			} elseif ( is_array( $cycle[ $i ] ) ) {
 
@@ -134,7 +134,7 @@ class Pngx__Repeater__Main {
 
 					}
 
-					$this->handler->display_repeater_item_open( $i, $this->repeater_fields[ $i ]['repeater_type'] );
+					$this->handler->display_repeater_item_open( $i, $this->repeater_fields[ $i ]['repeater_type'],  $this->repeater_fields[ $i ]['id'] );
 
 					$builder[ $i ][ $subkey ] = $this->cycle_repeaters( $cycle[ $i ][ $subkey ], $send_input );
 
@@ -175,7 +175,7 @@ class Pngx__Repeater__Main {
 	 *
 	 * @return array
 	 */
-	public function field_repeater( $values, $k, $input ) {
+	public function field_repeater( $values, $k, $input, $is_template = false ) {
 
 		$cycle = $values;
 		if ( ! is_array( $values ) ) {
@@ -191,14 +191,15 @@ class Pngx__Repeater__Main {
 
 			$builder[] = $sanitized->result;
 
-			$this->handler->display_repeater_field_open( false );
+			if ( ! $is_template ) {
+				$this->handler->display_repeater_field_open( $this->repeater_fields[ $k ]['id'] );
+			}
 
 			$this->handler->display_repeater_field( $this->repeater_fields[ $k ], $sanitized->result, "{$input}[]", $this->post_id );
 
-			$this->handler->display_repeater_item_close( $this->repeater_fields[ $k ]['id'], $this->repeater_fields[ $k ]['type'] );
-
-			//echo 'name "' . $input . '[' . $k . '][]" <br>';
-			//echo $value . ' value<br>';
+			if ( ! $is_template ) {
+				$this->handler->display_repeater_item_close( $this->repeater_fields[ $k ]['id'], $this->repeater_fields[ $k ]['type'] );
+			}
 
 		}
 
@@ -250,9 +251,5 @@ class Pngx__Repeater__Main {
 
 		return $builder;
 	}
-	/*	public function get_field_display( ) {
 
-			return $this->new_meta;
-
-		}*/
 }
