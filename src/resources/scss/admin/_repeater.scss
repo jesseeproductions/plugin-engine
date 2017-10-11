@@ -69,6 +69,11 @@
 li.repeating-field {
 	padding: 2% 35px 2% 20px;
 	position: relative;
+	background: none;
+	border: none;
+	margin: 5px 0;
+	min-height: 0;
+	width: 100%;
 
 	.repeater-sort {
 		left: 0;

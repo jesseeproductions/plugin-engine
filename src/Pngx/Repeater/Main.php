@@ -58,6 +58,10 @@ class Pngx__Repeater__Main {
 			return;
 		}
 
+		// reorder fields based on current display in admin
+		if ( 'save' === $this->type ) {
+			$this->meta = $this->fix_keys( $this->meta );
+		}
 		//		echo '<pre>';
 		//		print_r( $this->meta );
 		//		echo '</pre>';
@@ -124,13 +128,13 @@ class Pngx__Repeater__Main {
 					}
 
 
-					if ( 0 === $subkey && is_array( $this->field_template[ $i ] ) ) {
+					if ( 0 === $subkey && is_array( $this->field_template[ $i ] ) && 'admin' === $this->type ) {
 
-						$this->handler->display_repeater_item_open( $i, $this->repeater_fields[ $i ]['repeater_type'], 'repeater-template' );
+						$this->handler->display_repeater_item_open( $i, $this->repeater_fields[ $i ]['repeater_type'], 'repeater-template', true );
 
 						$this->cycle_repeaters( $this->field_template[ $i ][0], $template_input, false, true );
 
-						$this->handler->display_repeater_item_close( $i, $this->repeater_fields[ $i ]['repeater_type'] );
+						$this->handler->display_repeater_item_close( $i, $this->repeater_fields[ $i ]['repeater_type'], true );
 
 					}
 
@@ -152,7 +156,6 @@ class Pngx__Repeater__Main {
 					$sanitized     = new Pngx__Sanitize( $this->repeater_fields[ $i ]['type'], $cycle[ $i ], $this->repeater_fields[ $i ] );
 					$builder[ $i ] = $sanitized->result;
 
-					//todo add brackets for the template name on repeating fields (price) clone []
 					$this->handler->display_field( $this->repeater_fields[ $i ], $cycle[ $i ], "{$input}[{$i}]", $this->post_id );
 
 				}
@@ -191,15 +194,11 @@ class Pngx__Repeater__Main {
 
 			$builder[] = $sanitized->result;
 
-			if ( ! $is_template ) {
-				$this->handler->display_repeater_field_open( $this->repeater_fields[ $k ]['id'] );
-			}
+			$this->handler->display_repeater_field_open( $this->repeater_fields[ $k ]['id'], $is_template );
 
 			$this->handler->display_repeater_field( $this->repeater_fields[ $k ], $sanitized->result, "{$input}[]", $this->post_id );
 
-			if ( ! $is_template ) {
-				$this->handler->display_repeater_item_close( $this->repeater_fields[ $k ]['id'], $this->repeater_fields[ $k ]['type'] );
-			}
+			$this->handler->display_repeater_item_close( $this->repeater_fields[ $k ]['id'], $this->repeater_fields[ $k ]['type'], $is_template );
 
 		}
 
@@ -250,6 +249,38 @@ class Pngx__Repeater__Main {
 		}
 
 		return $builder;
+	}
+
+
+	/**
+	 * Fix
+	 * https://stackoverflow.com/a/12399408
+	 *
+	 * @param $array
+	 *
+	 * @return array
+	 */
+	public function fix_keys( $array ) {
+		$numberCheck = false;
+
+		foreach ( $array as $k => $val ) {
+
+			if ( is_array( $val ) ) {
+				$array[ $k ] = $this->fix_keys( $val );
+			}
+
+			if ( is_numeric( $k ) ) {
+				$numberCheck = true;
+			}
+
+		}
+
+		if ( $numberCheck === true ) {
+			return array_values( $array );
+		}
+
+		return $array;
+
 	}
 
 }

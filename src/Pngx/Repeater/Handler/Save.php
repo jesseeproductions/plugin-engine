@@ -24,7 +24,7 @@ class Pngx__Repeater__Handler__Save {
 
 	}
 
-	public function display_repeater_item_open( $i, $field_type, $class = null ) {
+	public function display_repeater_item_open( $i, $field_type, $class = null, $is_template = false ) {
 
 		return false;
 
@@ -37,7 +37,7 @@ class Pngx__Repeater__Handler__Save {
 
 	}
 
-	public function display_field( $field, $value ) {
+	public function display_field( $field, $value, $name, $post_id ) {
 
 		return false;
 
@@ -49,7 +49,7 @@ class Pngx__Repeater__Handler__Save {
 
 	}
 
-	public function display_repeater_field_open( $class = null ) {
+	public function display_repeater_field_open( $class = null, $is_template = false ) {
 
 		return false;
 
