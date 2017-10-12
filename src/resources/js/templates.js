@@ -38,10 +38,10 @@ jQuery( function ( $ ) {
 					pngx_admin_fields_init.visual_editor();
 
 					// Init Image Fields
-					var image_upload = $( $ajax_field + ' .pngx-meta-field.field-image' );
+					var image_upload = $( $ajax_field + ' .pngx-upload-image' );
 					var selector_img;
 					for ( i = 0; i < image_upload.length; i++ ) {
-						selector_img = $( image_upload[i] ).find( 'input' ).attr( 'id' );
+						selector_img = $( image_upload[i] ).attr( 'id' );
 						new PNGX__Media( $, selector_img );
 					}
 

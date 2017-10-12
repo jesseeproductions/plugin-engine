@@ -188,7 +188,7 @@ class Pngx__Admin__Options {
 	*/
 	public function validate_options( $input ) {
 
-		$clean = '';
+		$clean = array();
 
 		//if Reset is Checked then delete all options
 		if ( ! isset( $input['reset_theme'] ) ) {
@@ -203,8 +203,6 @@ class Pngx__Admin__Options {
 						update_option( 'pngx_permalink_change', true );
 					}
 					unset( $options[ $id ] );
-
-
 				}
 			}
 
