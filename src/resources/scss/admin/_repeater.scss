@@ -6,15 +6,112 @@
 	box-sizing: border-box;
 }
 
-.repeater-item {
-	background: #eee;
-	//box-shadow: 0 1px 2px #c7c7c7;
-	border: 1px solid #999999;
-	margin: 20px 0;
-	min-height: 100px;
-	padding: 40px 2% 2%;
+.pngx-btn {
+	border: 1px solid transparent;
+	border-radius: 4px;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 14px;
+	font-weight: normal;
+	line-height: 1.428571429;
+	margin-bottom: 0;
+	padding: 6px 12px;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+}
+
+.pngx-round-btn {
+	border-radius: 50%;
+	font-size: 12px;
+	height: 25px;
+	line-height: 12px;
+	padding: 6px 0;
+	text-align: center;
+	width: 25px;
+
+}
+
+.add-repeater {
+	background-color: #5bc0de;
+	border-color: #46b8da;
+	color: #fff;
+
+	&:hover, &:focus, &:active {
+		background-color: #39b3d7;
+		border-color: #269abc;
+		color: #fff;
+	}
+}
+
+.remove-repeater {
+	background-color: #d9534f;
+	border-color: #d43f3a;
+	color: #fff;
+
+	&:hover, &:focus, &:active {
+		background-color: #d2322d;
+		border-color: #ac2925;
+		color: #fff;
+	}
+}
+
+.pngx-wrapper.section {
+	display: block;
+	padding: 19px 0 19px;
 	position: relative;
-	width: 100%;
+
+	.add-repeater {
+		position: absolute;
+		right: 5px;
+		top: 5px;
+	}
+
+	.pngx-column-label {
+		@include meta-label();
+		margin: 0;
+		position: absolute;
+		top: -13px;
+		left: 20px;
+	}
+
+	.pngx-section-label {
+		@include meta-label();
+		margin: 0;
+		position: absolute;
+		top: -38px;
+		left: 20px;
+	}
+
+	.repeater-section {
+		border: 1px solid #ccc;
+		border-radius: 3px;
+		margin: 20px 0;
+		padding: 40px 0 2%;
+
+		.repeater-column {
+			margin: 0 1%;
+			padding: 30px 1% 2%;
+			background: #ebebeb;
+			border-radius: 3px;
+
+			.repeater-section {
+				border: 1px solid $color__grey;
+				border-radius: 3px;
+				margin: 20px 0;
+				padding: 40px 2% 2%;
+			}
+		}
+	}
+}
+
+.repeater-item {
+	position: relative;
 
 	.pngx-wrapper textarea,
 	.pngx-wrapper input[type="email"],
@@ -37,9 +134,9 @@
 	}
 
 	.remove-repeater {
-		bottom: 0;
+		bottom: -13px;
 		position: absolute;
-		right: 2px;
+		right: -13px;
 	}
 }
 
@@ -67,12 +164,12 @@
 }
 
 li.repeating-field {
-	padding: 2% 35px 2% 20px;
-	position: relative;
 	background: none;
 	border: none;
 	margin: 5px 0;
 	min-height: 0;
+	padding: 2% 35px 2% 20px;
+	position: relative;
 	width: 100%;
 
 	.repeater-sort {

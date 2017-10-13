@@ -18,29 +18,36 @@ class Pngx__Repeater__Handler__Admin {
 	 * @param $i
 	 * @param $field_type
 	 */
-	public function display_repeater_open( $i, $field_type ) {
+	public function display_repeater_open( $i, $field_type, $field ) {
+
+		$add_text = ! empty( $field['add_button'] ) ? $field['add_button'] : $field_type;
 
 		echo '<div class="pngx-wrapper ' . esc_attr( $field_type ) . '">
-			<span class="add-repeater button"
+			<span class="add-repeater pngx-btn"
 			   data-repeater="' . $i . '>-repeater"
-			>+</span>';
+			>' . esc_attr( $add_text ) . '<i class="fa fa-plus"></i></span>';
 
+		if ( ! empty( $field['label'] ) ) {
+			echo '<label for="' . esc_attr( $field['id'] ) . '" class="pngx-' . esc_attr( $field_type ) . '-label">
+					' . esc_attr( $field['label'] ) . '
+				</label>';
+		}
 		if ( 'section' === $field_type ) {
 			echo '
 				<ul
-					id="' . $i . '-repeater"
+					id="' . esc_attr( $i ) . '-repeater"
 					class="pngx-repeater pngx-repeater-container repeating-section"
 				>';
 		} elseif ( 'column' === $field_type ) {
 			echo '
 				<ul
-					id="' . $i . '"
+					id="' . esc_attr( $i ) . '"
 					class="pngx-repeater pngx-repeater-container repeating-column"
 				>';
 		} elseif ( 'field' === $field_type ) {
 			echo '
 				<ul
-					id="' . $i . '"
+					id="' . esc_attr( $i ) . '"
 					class="pngx-repeater pngx-repeater-container repeating-field"
 				>';
 		}
@@ -73,13 +80,13 @@ class Pngx__Repeater__Handler__Admin {
 			return;
 		} elseif ( 'section' === $field_type ) {
 			echo '<li class="repeater-item repeater-section ' . esc_attr( $class ) . '">
-					<span class="repeater-sort">|||</span>';
+					<span class="repeater-sort"><i class="fa fa-arrows"></i></span>';
 		} elseif ( 'column' === $field_type ) {
 			echo '<li class="repeater-item repeater-column ' . esc_attr( $class ) . '">
-					<span class="repeater-sort">|||</span>';
+					<span class="repeater-sort"><i class="fa fa-arrows"></i></span>';
 		} elseif ( 'field' === $field_type && 'repeater-template' === $class ) {
 			echo '<li class="repeater-item repeating-field ' . esc_attr( $class ) . '">
-					<span class="repeater-sort">|||</span>';
+					<span class="repeater-sort"><i class="fa fa-arrows"></i></span>';
 		}
 
 	}
@@ -98,13 +105,14 @@ class Pngx__Repeater__Handler__Admin {
 
 		if ( 'field' === $field_type && ! $is_template ) {
 			echo '</li>';
+
 			return;
 		}
 
 		echo '
-			<span class="remove-repeater button"
+			<span class="remove-repeater pngx-btn pngx-round-btn"
 			   data-repeater="' . $i . '-repeater"
-			>X</span>
+			><i class="fa fa-times"></i></span>
 		</li>';
 	}
 
@@ -118,9 +126,9 @@ class Pngx__Repeater__Handler__Admin {
 	public function display_repeater_item_clone_close( $i, $field_type ) {
 
 		return '
-			<span class="remove-repeater button"
+			<span class="remove-repeater pngx-btn pngx-round-btn"
 			   data-repeater="' . $i . '-repeater"
-			>X</span>
+			><i class="fa fa-times"></i></span>
 		</li>';
 
 	}
@@ -145,7 +153,7 @@ class Pngx__Repeater__Handler__Admin {
 		}
 
 		echo '<li class="repeating-field repeater-item ' . esc_attr( $class ) . '">
-				<span class="repeater-sort">|||</span>';
+				<span class="repeater-sort"><i class="fa fa-arrows"></i></span>';
 
 	}
 

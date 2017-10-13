@@ -62,17 +62,11 @@ class Pngx__Repeater__Main {
 		if ( 'save' === $this->type ) {
 			$this->meta = $this->fix_keys( $this->meta );
 		}
-		//		echo '<pre>';
-		//		print_r( $this->meta );
-		//		echo '</pre>';
 
 		$this->new_meta = $this->cycle_repeaters( $this->meta, null );
 
 		$this->handler->post_cycle( $this->post_id, $this->id, $this->new_meta );
 
-		//		echo '<pre>';
-		//		print_r( $this->new_meta );
-		//		echo '</pre>';
 	}
 
 	/**
@@ -84,7 +78,7 @@ class Pngx__Repeater__Main {
 	 *
 	 * @return array
 	 */
-	public function cycle_repeaters( $array, $input, $name = null, $is_template = false ) {
+	public function cycle_repeaters( $array, $input, $is_template = false ) {
 
 		$cycle = $array;
 
@@ -92,13 +86,9 @@ class Pngx__Repeater__Main {
 
 		$keys = array_keys( $cycle );
 
-		//log_me( 'starts' );
-		//log_me( $keys );//[0] => wpe_menu_section
 		//name loop
 		foreach ( $keys as $i ) {
 
-			//log_me( $i );//wpe_menu_section
-			//log_me( $cycle[ $i ] ); //array
 			if ( isset( $this->repeater_fields[ $i ]['repeater_type'] ) && 'single-field' === $this->repeater_fields[ $i ]['repeater_type'] ) {
 
 				$builder[ $i ] = $this->field_repeater( $cycle[ $i ], $i, "{$input}[{$i}]", $is_template );
@@ -107,24 +97,16 @@ class Pngx__Repeater__Main {
 
 				$subkeys = array_keys( $cycle[ $i ] );
 
-				//log_me( $subkeys );// [0] => 0
-
-				//https://www.google.com/search?q=php+multidimensial+array+runs+through+it+twice&ie=utf-8&oe=utf-8#q=php+multidimensional+array+runs+through+it+twice&*
-				//log_me( $i );
-				//log_me( $this->repeater_fields[ $i ]['repeater_type'] );
-
-				$this->handler->display_repeater_open( $i, $this->repeater_fields[ $i ]['repeater_type'] );
+				$this->handler->display_repeater_open( $i, $this->repeater_fields[ $i ]['repeater_type'], $this->repeater_fields[ $i ] );
 
 				//number loop
 				foreach ( $subkeys as $subkey ) {
 
-					//log_me( $subkey ); //0
-					//log_me( $cycle[ $i ][ $subkey ] ); //0
 					$template_input = "{$input}[{$i}][{{row-count-placeholder}}]";
 					$send_input     = "{$input}[{$i}][{$subkey}]";
 					if ( ! $input ) {
 						$send_input     = "{$i}[{$subkey}]";
-						$template_input = "{$i}[{$subkey}]";
+						$template_input = "{$i}[{{row-count-placeholder}}]";
 					}
 
 
@@ -132,7 +114,7 @@ class Pngx__Repeater__Main {
 
 						$this->handler->display_repeater_item_open( $i, $this->repeater_fields[ $i ]['repeater_type'], 'repeater-template', true );
 
-						$this->cycle_repeaters( $this->field_template[ $i ][0], $template_input, false, true );
+						$this->cycle_repeaters( $this->field_template[ $i ][0], $template_input, true );
 
 						$this->handler->display_repeater_item_close( $i, $this->repeater_fields[ $i ]['repeater_type'], true );
 
@@ -253,7 +235,8 @@ class Pngx__Repeater__Main {
 
 
 	/**
-	 * Fix
+	 * Reset Numeric Array Keys on Multidimensional Array
+	 *
 	 * https://stackoverflow.com/a/12399408
 	 *
 	 * @param $array
