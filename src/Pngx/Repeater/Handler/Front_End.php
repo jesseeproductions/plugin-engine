@@ -24,37 +24,18 @@ class Pngx__Repeater__Handler__Front_End {
 			echo '<ul
 				id="' . $i . '-repeater"
 				class="pngx-repeater repeating-section"
-				data-name_id="wpe_menu_section"
-				data-ajax_field_id="' . $i . '"
-				data-ajax_action="pngx_repeater"
-				data-repeat-type="section"
-				data-column=0
 		>';
 		} elseif ( 'column' === $field_type ) {
 
-			echo '
-					<ul
+			echo '<ul
 							id="' . $i . '"
 							class="pngx-repeater repeating-column"
-							data-name_id="wpe_menu_section[wpe_menu_column][0]"
-							data-ajax_field_id="' . $i . '"
-							data-ajax_action="pngx_repeater"
-							data-repeat-type="column"
-							data-section=0
-							data-column=0
 					>';
 		} elseif ( 'field' === $field_type ) {
 
-			echo '
-					<ul
+			echo '<ul
 							id="' . $i . '"
 							class="pngx-repeater repeating-field"
-							data-name_id="wpe_menu_section[wpe_menu_column][0]"
-							data-ajax_field_id="' . $i . '"
-							data-ajax_action="pngx_repeater"
-							data-repeat-type="column"
-							data-section=0
-							data-column=0
 					>';
 		}
 
@@ -130,8 +111,8 @@ class Pngx__Repeater__Handler__Front_End {
 
 		$repeater_meta = array(
 			'repeating' => true,
-			'value' => $value,
-			'name' => $name,
+			'value'     => $value,
+			'name'      => $name,
 		);
 
 		Pngx__Fields::display_field( $field, $post_id, false, $repeater_meta );
@@ -153,8 +134,8 @@ class Pngx__Repeater__Handler__Front_End {
 
 		$repeater_meta = array(
 			'repeating' => true,
-			'value' => $value,
-			'name' => $name,
+			'value'     => $value,
+			'name'      => $name,
 		);
 
 		Pngx__Fields::display_field( $field, $post_id, false, $repeater_meta );
