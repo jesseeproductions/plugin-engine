@@ -482,7 +482,7 @@ fieldset[disabled] .btn-primary.active {
       padding: 12px 38px 12px 8px; }
 
 /* IE9: To hide select arrow we make the select overflow on the right side there is not another way :( */
-@media screen and (min-width: 0 \0 ) {
+@media screen and (min-width: 0 \0 ) {
   .pngx-default-select select {
     width: calc(100% + 58px); } }
 
@@ -1699,11 +1699,11 @@ fieldset[disabled] .btn-primary.active {
   border-radius: 4px;
   cursor: pointer;
   display: inline-block;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: normal;
   line-height: 1.428571429;
   margin-bottom: 0;
-  padding: 6px 12px;
+  padding: 4px 8px;
   text-align: center;
   vertical-align: middle;
   white-space: nowrap;
@@ -1712,6 +1712,10 @@ fieldset[disabled] .btn-primary.active {
   -ms-user-select: none;
   -o-user-select: none;
   user-select: none; }
+  .pngx-btn .btn-icon-right {
+    margin-left: 8px; }
+  .pngx-btn .btn-icon-left {
+    margin-right: 8px; }
 
 .pngx-round-btn {
   border-radius: 50%;
@@ -1779,7 +1783,8 @@ fieldset[disabled] .btn-primary.active {
     margin: 0;
     position: absolute;
     top: -38px;
-    left: 20px; }
+    left: 20px;
+    background: none; }
   .pngx-wrapper.section .repeater-section {
     border: 1px solid #ccc;
     border-radius: 3px;
@@ -1804,6 +1809,8 @@ fieldset[disabled] .btn-primary.active {
   .repeater-item .pngx-wrapper input[type="text"],
   .repeater-item .pngx-wrapper input[type="url"] {
     max-width: 100%; }
+  .repeater-item .pngx-wrapper textarea {
+    padding: 8px 6px; }
   .repeater-item .repeater-sort {
     left: 5px;
     position: absolute;
@@ -1817,18 +1824,18 @@ fieldset[disabled] .btn-primary.active {
     position: absolute;
     right: -13px; }
 
-.pngx-wrapper.field {
-  padding: 40px 2%;
+.pngx-wrapper.simple-repater {
+  padding: 7px 2%;
   position: relative; }
-  .pngx-wrapper.field .repeater-sort {
+  .pngx-wrapper.simple-repater .repeater-sort {
     left: 5px;
     position: absolute;
     top: 16px; }
-  .pngx-wrapper.field .add-repeater {
+  .pngx-wrapper.simple-repater .add-repeater {
     position: absolute;
     right: 5px;
     top: 5px; }
-  .pngx-wrapper.field .remove-repeater {
+  .pngx-wrapper.simple-repater .remove-repeater {
     position: absolute;
     right: 2px;
     top: 16px; }

@@ -21,11 +21,12 @@ class Pngx__Repeater__Handler__Admin {
 	public function display_repeater_open( $i, $field_type, $field ) {
 
 		$add_text = ! empty( $field['add_button'] ) ? $field['add_button'] : $field_type;
+		$wrap_class = ! empty( $field['class'] ) ? ' ' . $field['class'] : '';
 
-		echo '<div class="pngx-wrapper ' . esc_attr( $field_type ) . '">
+		echo '<div class="pngx-wrapper ' . esc_attr( $field_type ) . esc_attr( $wrap_class ) . '">
 			<span class="add-repeater pngx-btn"
 			   data-repeater="' . $i . '>-repeater"
-			>' . esc_attr( $add_text ) . '<i class="fa fa-plus"></i></span>';
+			>' . esc_attr( $add_text ) . '<i class="fa fa-plus btn-icon-right"></i></span>';
 
 		if ( ! empty( $field['label'] ) ) {
 			echo '<label for="' . esc_attr( $field['id'] ) . '" class="pngx-' . esc_attr( $field_type ) . '-label">

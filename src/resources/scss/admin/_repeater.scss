@@ -11,11 +11,13 @@
 	border-radius: 4px;
 	cursor: pointer;
 	display: inline-block;
-	font-size: 14px;
-	font-weight: normal;
+	font: {
+		size: 12px;
+		weight: normal;
+	}
 	line-height: 1.428571429;
 	margin-bottom: 0;
-	padding: 6px 12px;
+	padding: 4px 8px;
 	text-align: center;
 	vertical-align: middle;
 	white-space: nowrap;
@@ -24,6 +26,14 @@
 	-ms-user-select: none;
 	-o-user-select: none;
 	user-select: none;
+
+	.btn-icon-right {
+		margin-left: 8px;
+	}
+
+	.btn-icon-left {
+		margin-right: 8px;
+	}
 }
 
 .pngx-round-btn {
@@ -86,6 +96,7 @@
 		position: absolute;
 		top: -38px;
 		left: 20px;
+		background: none;
 	}
 
 	.repeater-section {
@@ -121,6 +132,10 @@
 		max-width: 100%;
 	}
 
+	.pngx-wrapper textarea {
+		padding: 8px 6px;
+	}
+
 	.repeater-sort {
 		left: 5px;
 		position: absolute;
@@ -140,8 +155,8 @@
 	}
 }
 
-.pngx-wrapper.field {
-	padding: 40px 2%;
+.pngx-wrapper.simple-repater {
+	padding: 7px 2%;
 	position: relative;
 
 	.repeater-sort {
