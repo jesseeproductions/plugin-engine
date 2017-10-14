@@ -482,8 +482,7 @@ fieldset[disabled] .btn-primary.active {
       padding: 12px 38px 12px 8px; }
 
 /* IE9: To hide select arrow we make the select overflow on the right side there is not another way :( */
-@media screen and (min-width: 0 \0
- ) {
+@media screen and (min-width: 0 \0 ) {
   .pngx-default-select select {
     width: calc(100% + 58px); } }
 
@@ -1695,32 +1694,162 @@ fieldset[disabled] .btn-primary.active {
 .pngx-meta-field.field-repeater * {
   box-sizing: border-box; }
 
-.repeater-item {
-  background: #eee;
-  border: 1px solid #999999;
-  margin: 20px 0;
-  min-height: 100px;
-  padding: 2%;
-  position: relative;
-  width: 100%; }
+.pngx-btn {
+  border: 1px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.428571429;
+  margin-bottom: 0;
+  padding: 6px 12px;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none; }
 
-/*.sort {
-	left: 2px;
-	position: absolute;
-	top: 0;
-}
+.pngx-round-btn {
+  border-radius: 50%;
+  font-size: 12px;
+  height: 25px;
+  line-height: 12px;
+  padding: 6px 0;
+  text-align: center;
+  width: 25px; }
 
 .add-repeater {
-	bottom: 0;
-	position: absolute;
-	right: 35px;
-}
+  background-color: #5bc0de;
+  border-color: #46b8da;
+  color: #fff; }
+  .add-repeater:hover, .add-repeater:focus, .add-repeater:active {
+    background-color: #39b3d7;
+    border-color: #269abc;
+    color: #fff; }
 
 .remove-repeater {
-	bottom: 0;
-	position: absolute;
-	right: 2px;
-}*/
+  background-color: #d9534f;
+  border-color: #d43f3a;
+  color: #fff; }
+  .remove-repeater:hover, .remove-repeater:focus, .remove-repeater:active {
+    background-color: #d2322d;
+    border-color: #ac2925;
+    color: #fff; }
+
+.pngx-wrapper.section {
+  display: block;
+  padding: 19px 0 19px;
+  position: relative; }
+  .pngx-wrapper.section .add-repeater {
+    position: absolute;
+    right: 5px;
+    top: 5px; }
+  .pngx-wrapper.section .pngx-column-label {
+    background: #fff;
+    color: #003ca9;
+    display: block;
+    float: left;
+    font-size: 15px;
+    font-weight: 700;
+    height: 18px;
+    margin: -31px 0 0;
+    overflow: hidden;
+    padding: 0 5px;
+    width: auto;
+    margin: 0;
+    position: absolute;
+    top: -13px;
+    left: 20px; }
+  .pngx-wrapper.section .pngx-section-label {
+    background: #fff;
+    color: #003ca9;
+    display: block;
+    float: left;
+    font-size: 15px;
+    font-weight: 700;
+    height: 18px;
+    margin: -31px 0 0;
+    overflow: hidden;
+    padding: 0 5px;
+    width: auto;
+    margin: 0;
+    position: absolute;
+    top: -38px;
+    left: 20px; }
+  .pngx-wrapper.section .repeater-section {
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin: 20px 0;
+    padding: 40px 0 2%; }
+    .pngx-wrapper.section .repeater-section .repeater-column {
+      margin: 0 1%;
+      padding: 30px 1% 2%;
+      background: #ebebeb;
+      border-radius: 3px; }
+      .pngx-wrapper.section .repeater-section .repeater-column .repeater-section {
+        border: 1px solid #777;
+        border-radius: 3px;
+        margin: 20px 0;
+        padding: 40px 2% 2%; }
+
+.repeater-item {
+  position: relative; }
+  .repeater-item .pngx-wrapper textarea,
+  .repeater-item .pngx-wrapper input[type="email"],
+  .repeater-item .pngx-wrapper input[type="number"],
+  .repeater-item .pngx-wrapper input[type="text"],
+  .repeater-item .pngx-wrapper input[type="url"] {
+    max-width: 100%; }
+  .repeater-item .repeater-sort {
+    left: 5px;
+    position: absolute;
+    top: 5px; }
+  .repeater-item .add-repeater {
+    position: absolute;
+    right: 5px;
+    top: 5px; }
+  .repeater-item .remove-repeater {
+    bottom: -13px;
+    position: absolute;
+    right: -13px; }
+
+.pngx-wrapper.field {
+  padding: 40px 2%;
+  position: relative; }
+  .pngx-wrapper.field .repeater-sort {
+    left: 5px;
+    position: absolute;
+    top: 16px; }
+  .pngx-wrapper.field .add-repeater {
+    position: absolute;
+    right: 5px;
+    top: 5px; }
+  .pngx-wrapper.field .remove-repeater {
+    position: absolute;
+    right: 2px;
+    top: 16px; }
+
+li.repeating-field {
+  background: none;
+  border: none;
+  margin: 5px 0;
+  min-height: 0;
+  padding: 2% 35px 2% 20px;
+  position: relative;
+  width: 100%; }
+  li.repeating-field .repeater-sort {
+    left: 0;
+    position: absolute;
+    top: 16px; }
+  li.repeating-field .remove-repeater {
+    position: absolute;
+    right: 0;
+    top: 12px; }
+
 .menu-chooser {
   margin: 20px; }
 
@@ -1941,58 +2070,3 @@ fieldset[disabled] .btn-primary.active {
 
 .pngx-field-two-thirds {
   width: 65.66667%; }
-
-
-.repeater-item {
-	padding: 50px 3%;
-}
-.pngx-wrapper.field {
-	border: 1px solid #999999;
-  position: relative;
-  padding: 30px 3%;
-}
-
-.repeating-field {
-  position: relative;
-  padding: 3% 20px;
-}
-
-.repeater-sort {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-}
-
-.repeating-field .repeater-sort {
-  left: -10px;
-}
-
-.add-repeater {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-}
-
-.repeating-field .add-repeater {
-  right: -20px;
-}
-
-.remove-repeater {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-}
-
-.repeating-field .remove-repeater {
-  bottom: 5px;
-  right: -20px;
-}
-.pngx-wrapper.field .remove-repeater.field  {
-  bottom: -25px;
-  right: 0;
-}
-.repeater-item input,
-.repeater-item textarea {
-	max-width:100%;
-}
-

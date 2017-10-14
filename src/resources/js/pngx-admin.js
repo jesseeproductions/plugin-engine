@@ -836,104 +836,8 @@ var pngx_admin_repeater_scripts = pngx_admin_repeater_scripts || {};
 	 */
 	obj.repeatable_fields = function () {
 
-		console.log('repeater');
 		$( '.field-repeater' ).each( function () {
-			console.log('repeater2', this );
 			$( this ).repeatable_fields();
-		} );
-
-/*		$( document ).on( 'click', '.add-repeatable', function ( e ) {
-
-			e.preventDefault();
-
-			//obj.repeatable_loader( $( this ) );
-
-		} );
-
-		$( document ).on( 'click', '.remove-repeatable', function ( e ) {
-
-			e.preventDefault();
-
-			var $this = $( this );
-			var $repeat_field = '#' + $this.data( 'repeater' );
-
-			if ( 1 === $( $repeat_field ).children().length ) {
-				//console.log( $( $repeat_field ).children().length );
-				obj.repeatable_loader( $this, true );
-				return false;
-			}
-
-			$this.parent().remove();
-
-			return false;
-
-		} );
-
-		$( '.pngx-repeatable' ).sortable( {
-			opacity: 0.6,
-			revert: true,
-			cursor: 'move',
-			handle: '.sort'
-		} );*/
-
-
-	};
-	/*
-	 * Repeatable Loader
-	 */
-	obj.repeatable_loader = function ( $this, $remove ) {
-
-		if ( !$this ) {
-			return;
-		}
-
-		var $repeat_field = '#' + $this.data( 'repeater' );
-
-		//var $clone_info = $( $repeat_field ).data( 'clone' );
-		var $name_id = $( $repeat_field ).data( 'name_id' );
-		var $ajax_field_id = $( $repeat_field ).data( 'ajax_field_id' );
-		var $ajax_action = $( $repeat_field ).data( 'ajax_action' );
-		var $ajax_repeat_type = $( $repeat_field ).data( 'repeat-type' );
-		var $ajax_section = $( $repeat_field ).data( 'section' );
-		var $ajax_column = $( $repeat_field ).data( 'column' );
-
-		if ( 'section' === $ajax_repeat_type ) {
-			$ajax_section++;
-		} else if ( 'column' === $ajax_repeat_type ) {
-			//$ajax_column++;
-		}
-
-		$.ajax( {
-			url: pngx_admin_ajax.ajaxurl,
-			type: 'post',
-			cache: false,
-			dataType: 'json',
-			data: {
-				nonce: pngx_admin_repeatable_ajax.nonce,
-				post_id: pngx_admin_repeatable_ajax.post_id,
-				field: $ajax_field_id,
-				repeat_type: $ajax_repeat_type,
-				name_id: $name_id,
-				section: $ajax_section,
-				column: $ajax_column,
-				action: $ajax_action
-			},
-			success: function ( results ) {
-
-				if ( results.success ) {
-					var row = JSON.parse( results.data );
-
-				} else {
-					var row = '<h1>' + results.data + '</h1>';
-				}
-
-				$( row ).insertAfter( $this.closest( '.repeatable-item' ) );
-
-				if ( $remove ) {
-					$this.parent().remove();
-				}
-
-			}
 		} );
 
 	};
@@ -942,11 +846,6 @@ var pngx_admin_repeater_scripts = pngx_admin_repeater_scripts || {};
 		obj.init();
 	} );
 
-	$.fn.pngx_repeater = function () {
-
-
-
-	};
 
 })( jQuery, pngx_admin_repeater_scripts );
 

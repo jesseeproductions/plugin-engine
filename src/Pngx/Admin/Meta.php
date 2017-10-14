@@ -362,7 +362,7 @@ class Pngx__Admin__Meta {
 
 			//handle repeatable fields
 			if ( 'repeater' === $option['type'] && isset ( $_POST[ $option['id'] ] ) ) {
-//log_me( $_POST[ $option['id'] ] );
+
 				if ( ! isset( ${'repeat_obj' . $option['id']} ) ) {
                     ${'repeat_obj' . $option['id']} = new Pngx__Repeater__Main ( $option['id'], $_POST[ $option['id'] ], $post_id, 'save' );
 				}

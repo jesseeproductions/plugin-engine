@@ -58,17 +58,15 @@ class Pngx__Repeater__Main {
 			return;
 		}
 
-		//		echo '<pre>';
-		//		print_r( $this->meta );
-		//		echo '</pre>';
+		// reorder fields based on current display in admin
+		if ( 'save' === $this->type ) {
+			$this->meta = $this->fix_keys( $this->meta );
+		}
 
 		$this->new_meta = $this->cycle_repeaters( $this->meta, null );
 
 		$this->handler->post_cycle( $this->post_id, $this->id, $this->new_meta );
 
-		//		echo '<pre>';
-		//		print_r( $this->new_meta );
-		//		echo '</pre>';
 	}
 
 	/**
@@ -80,7 +78,7 @@ class Pngx__Repeater__Main {
 	 *
 	 * @return array
 	 */
-	public function cycle_repeaters( $array, $input, $name = null, $is_template = false ) {
+	public function cycle_repeaters( $array, $input, $is_template = false ) {
 
 		$cycle = $array;
 
@@ -88,54 +86,41 @@ class Pngx__Repeater__Main {
 
 		$keys = array_keys( $cycle );
 
-		//log_me( 'starts' );
-		//log_me( $keys );//[0] => wpe_menu_section
 		//name loop
 		foreach ( $keys as $i ) {
 
-			//log_me( $i );//wpe_menu_section
-			//log_me( $cycle[ $i ] ); //array
+			if ( isset( $this->repeater_fields[ $i ]['repeater_type'] ) && 'single-field' === $this->repeater_fields[ $i ]['repeater_type'] ) {
 
-			if ( is_array( $cycle[ $i ] ) && ( isset( $this->repeater_fields[ $i ]['repeater_type'] ) && 'single-field' === $this->repeater_fields[ $i ]['repeater_type'] ) ) {
-
-				$builder[ $i ] = $this->field_repeater( $cycle[ $i ], $i, "{$input}[{$i}]" );
+				$builder[ $i ] = $this->field_repeater( $cycle[ $i ], $i, "{$input}[{$i}]", $is_template );
 
 			} elseif ( is_array( $cycle[ $i ] ) ) {
 
 				$subkeys = array_keys( $cycle[ $i ] );
 
-				//log_me( $subkeys );// [0] => 0
-
-				//https://www.google.com/search?q=php+multidimensial+array+runs+through+it+twice&ie=utf-8&oe=utf-8#q=php+multidimensional+array+runs+through+it+twice&*
-				//log_me( $i );
-				//log_me( $this->repeater_fields[ $i ]['repeater_type'] );
-
-				$this->handler->display_repeater_open( $i, $this->repeater_fields[ $i ]['repeater_type'] );
+				$this->handler->display_repeater_open( $i, $this->repeater_fields[ $i ]['repeater_type'], $this->repeater_fields[ $i ] );
 
 				//number loop
 				foreach ( $subkeys as $subkey ) {
 
-					//log_me( $subkey ); //0
-					//log_me( $cycle[ $i ][ $subkey ] ); //0
 					$template_input = "{$input}[{$i}][{{row-count-placeholder}}]";
 					$send_input     = "{$input}[{$i}][{$subkey}]";
 					if ( ! $input ) {
 						$send_input     = "{$i}[{$subkey}]";
-						$template_input = "{$i}[{$subkey}]";
+						$template_input = "{$i}[{{row-count-placeholder}}]";
 					}
 
 
-					if ( 0 === $subkey && is_array( $this->field_template[ $i ] ) ) {
+					if ( 0 === $subkey && is_array( $this->field_template[ $i ] ) && 'admin' === $this->type ) {
 
-						$this->handler->display_repeater_item_open( $i, $this->repeater_fields[ $i ]['repeater_type'], 'repeater-template' );
+						$this->handler->display_repeater_item_open( $i, $this->repeater_fields[ $i ]['repeater_type'], 'repeater-template', true );
 
-						$this->cycle_repeaters( $this->field_template[ $i ][0], $template_input, false, true );
+						$this->cycle_repeaters( $this->field_template[ $i ][0], $template_input, true );
 
-						$this->handler->display_repeater_item_close( $i, $this->repeater_fields[ $i ]['repeater_type'] );
+						$this->handler->display_repeater_item_close( $i, $this->repeater_fields[ $i ]['repeater_type'], true );
 
 					}
 
-					$this->handler->display_repeater_item_open( $i, $this->repeater_fields[ $i ]['repeater_type'] );
+					$this->handler->display_repeater_item_open( $i, $this->repeater_fields[ $i ]['repeater_type'],  $this->repeater_fields[ $i ]['id'] );
 
 					$builder[ $i ][ $subkey ] = $this->cycle_repeaters( $cycle[ $i ][ $subkey ], $send_input );
 
@@ -153,8 +138,6 @@ class Pngx__Repeater__Main {
 					$sanitized     = new Pngx__Sanitize( $this->repeater_fields[ $i ]['type'], $cycle[ $i ], $this->repeater_fields[ $i ] );
 					$builder[ $i ] = $sanitized->result;
 
-					//todo add brackets for the template name on repeating fields (price) clone []
-
 					$this->handler->display_field( $this->repeater_fields[ $i ], $cycle[ $i ], "{$input}[{$i}]", $this->post_id );
 
 				}
@@ -171,15 +154,19 @@ class Pngx__Repeater__Main {
 	/**
 	 * Handle Repeating Value Fields
 	 *
-	 * @param $array
+	 * @param $values
 	 * @param $k
 	 * @param $input
 	 *
 	 * @return array
 	 */
-	public function field_repeater( $array, $k, $input ) {
+	public function field_repeater( $values, $k, $input, $is_template = false ) {
 
-		$cycle = $array;
+		$cycle = $values;
+		if ( ! is_array( $values ) ) {
+			$cycle = array();
+			$cycle[] = $values;
+		}
 
 		$builder = array();
 
@@ -189,14 +176,11 @@ class Pngx__Repeater__Main {
 
 			$builder[] = $sanitized->result;
 
-			$this->handler->display_repeater_field_open( false );
+			$this->handler->display_repeater_field_open( $this->repeater_fields[ $k ]['id'], $is_template );
 
 			$this->handler->display_repeater_field( $this->repeater_fields[ $k ], $sanitized->result, "{$input}[]", $this->post_id );
 
-			$this->handler->display_repeater_item_close( $this->repeater_fields[ $k ]['id'], $this->repeater_fields[ $k ]['type'] );
-
-			//echo 'name "' . $input . '[' . $k . '][]" <br>';
-			//echo $value . ' value<br>';
+			$this->handler->display_repeater_item_close( $this->repeater_fields[ $k ]['id'], $this->repeater_fields[ $k ]['type'], $is_template );
 
 		}
 
@@ -248,9 +232,38 @@ class Pngx__Repeater__Main {
 
 		return $builder;
 	}
-	/*	public function get_field_display( ) {
 
-			return $this->new_meta;
 
-		}*/
+	/**
+	 * Reset Numeric Array Keys on Multidimensional Array
+	 *
+	 * https://stackoverflow.com/a/12399408
+	 *
+	 * @param $array
+	 *
+	 * @return array
+	 */
+	public function fix_keys( $array ) {
+		$numberCheck = false;
+
+		foreach ( $array as $k => $val ) {
+
+			if ( is_array( $val ) ) {
+				$array[ $k ] = $this->fix_keys( $val );
+			}
+
+			if ( is_numeric( $k ) ) {
+				$numberCheck = true;
+			}
+
+		}
+
+		if ( $numberCheck === true ) {
+			return array_values( $array );
+		}
+
+		return $array;
+
+	}
+
 }

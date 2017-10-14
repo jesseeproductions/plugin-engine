@@ -1,6 +1,19 @@
 /* ==========================================================================
    Meta Box
    ========================================================================== */
+@mixin meta-label() {
+	background: $white;
+	color: $color__link;
+	display: block;
+	float: left;
+	font-size: 15px;
+	font-weight: 700;
+	height: 18px;
+	margin: -31px 0 0;
+	overflow: hidden;
+	padding: 0 5px;
+	width: auto;
+}
 
 .postbox-container {
 
@@ -35,17 +48,7 @@
 			padding: 19px 9px 9px;
 
 			& > label {
-				background: $white;
-				color: $color__link;
-				display: block;
-				float: left;
-				font-size: 15px;
-				font-weight: 700;
-				height: 18px;
-				margin: -31px 0 0;
-				overflow: hidden;
-				padding: 0 5px;
-				width: auto;
+				@include meta-label();
 			}
 
 			input[type="email"],
