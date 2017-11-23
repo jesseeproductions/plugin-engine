@@ -241,7 +241,6 @@ function PNGX__Media( $, field_id ) {
  */
 (function ( $ ) {
 	var image_upload = $( ".pngx-upload-image" );
-	console.log('regular',image_upload);
 	var selector_img;
 	for ( i = 0; i < image_upload.length; i++ ) {
 		selector_img = $( image_upload[i] ).attr( 'id' );
