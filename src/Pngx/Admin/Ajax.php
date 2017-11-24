@@ -225,12 +225,12 @@ class Pngx__Admin__Ajax {
 	public function load_repeatable() {
 
 		//End if not the correct action
-		if ( ! isset( $_POST['action'] ) || 'pngx_repeatable' != $_POST['action'] ) {
+		if ( ! isset( $_POST['action'] ) || 'pngx_repeatable' !== $_POST['action'] ) {
 			wp_send_json_error( __( 'Permission Error has occurred. Please save, reload, and try again.', 'plugin-engine' ) );
 		}
 
 		//End if not correct nonce
-		if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'pngx_admin_rep_' . $_POST['post_id'] ) ) {
+		if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'pngx_repeatable_nonce' ) ) {
 			wp_send_json_error( __( 'Permission Error has occurred. Please save, reload, and try again.', 'plugin-engine' ) );
 		}
 
@@ -238,49 +238,11 @@ class Pngx__Admin__Ajax {
 			wp_send_json_error( __( 'No Field ID. Please save, reload, and try again.', 'plugin-engine' ) );
 		}
 
-		if ( ! isset( $_POST['repeat_type'] ) ) {
-			//wp_send_json_error( __( 'No Repeat Type Provided Provided.', 'plugin-engine' ) );
-		}
-
-		if ( ! isset( $_POST['section'] ) ) {
-			wp_send_json_error( __( 'No Section Number Provided.', 'plugin-engine' ) );
-		}
-
-		if ( ! isset( $_POST['column'] ) ) {
-			wp_send_json_error( __( 'No Column Number Provided.', 'plugin-engine' ) );
-		}
 
 		Pngx__Main::instance()->doing_ajax = defined( 'DOING_AJAX' ) && DOING_AJAX;
 
-		ob_start();
 
-		/**
-		 * Filter to Add All Fields for a Plugin
-		 */
-		$fields = apply_filters( 'pngx_meta_fields', array() );
-
-		if ( ! isset( $fields[ $_POST['field'] ] ) ) {
-			wp_send_json_error( __( 'No Field Exists.', 'plugin-engine' ) );
-		}
-
-		$field = $fields[ $_POST['field'] ];
-
-		//foreach ( $fields as $field ) {
-
-		if ( ! isset( $repeat_obj ) ) {
-			$repeat_obj = new Pngx__Repeater__Main( $_POST['name_id'], false, absint( $_POST['section'] ), absint( $_POST['column'] ) );
-		}
-
-		Pngx__Admin__Field__Repeatable::display_repeat_fields( $field['repeatable_fields'], $field, null, $repeat_obj, null );
-
-		//}
-		//} // end foreach fields
-
-		$template_fields = ob_get_contents();
-
-		ob_end_clean();
-
-		wp_send_json_success( json_encode( $template_fields ) );
+		wp_send_json_success( 'Saved' );
 
 	}
 

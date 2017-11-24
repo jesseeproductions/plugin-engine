@@ -35,19 +35,19 @@ class Pngx__Repeater__Handler__Admin {
 		}
 		if ( 'section' === $field_type ) {
 			echo '
-				<ul
+				<div
 					id="' . esc_attr( $i ) . '-repeater"
 					class="pngx-repeater pngx-repeater-container repeating-section"
 				>';
 		} elseif ( 'column' === $field_type ) {
 			echo '
-				<ul
+				<div
 					id="' . esc_attr( $i ) . '"
 					class="pngx-repeater pngx-repeater-container repeating-column"
 				>';
 		} elseif ( 'field' === $field_type ) {
 			echo '
-				<ul
+				<div
 					id="' . esc_attr( $i ) . '"
 					class="pngx-repeater pngx-repeater-container repeating-field"
 				>';
@@ -63,7 +63,7 @@ class Pngx__Repeater__Handler__Admin {
 	public function display_repeater_close( $i ) {
 
 		echo '
-				</ul>
+				</div>
 			</div>
 			';
 
@@ -80,13 +80,13 @@ class Pngx__Repeater__Handler__Admin {
 		if ( 'field' === $field_type && $is_template ) {
 			return;
 		} elseif ( 'section' === $field_type ) {
-			echo '<li class="repeater-item repeater-section ' . esc_attr( $class ) . '">
+			echo '<div class="repeater-item repeater-section ' . esc_attr( $class ) . '">
 					<span class="repeater-sort"><i class="fa fa-arrows"></i></span>';
 		} elseif ( 'column' === $field_type ) {
-			echo '<li class="repeater-item repeater-column ' . esc_attr( $class ) . '">
+			echo '<div class="repeater-item repeater-column ' . esc_attr( $class ) . '">
 					<span class="repeater-sort"><i class="fa fa-arrows"></i></span>';
 		} elseif ( 'field' === $field_type && 'repeater-template' === $class ) {
-			echo '<li class="repeater-item repeating-field ' . esc_attr( $class ) . '">
+			echo '<div class="repeater-item repeating-field ' . esc_attr( $class ) . '">
 					<span class="repeater-sort"><i class="fa fa-arrows"></i></span>';
 		}
 
@@ -114,7 +114,7 @@ class Pngx__Repeater__Handler__Admin {
 			<span class="remove-repeater pngx-btn pngx-round-btn"
 			   data-repeater="' . $i . '-repeater"
 			><i class="fa fa-times"></i></span>
-		</li>';
+		</div>';
 	}
 
 
@@ -130,7 +130,7 @@ class Pngx__Repeater__Handler__Admin {
 			<span class="remove-repeater pngx-btn pngx-round-btn"
 			   data-repeater="' . $i . '-repeater"
 			><i class="fa fa-times"></i></span>
-		</li>';
+		</div>';
 
 	}
 
@@ -153,7 +153,7 @@ class Pngx__Repeater__Handler__Admin {
 			$class = $class . ' repeater-template';
 		}
 
-		echo '<li class="repeating-field repeater-item ' . esc_attr( $class ) . '">
+		echo '<div class="repeating-field repeater-item ' . esc_attr( $class ) . '">
 				<span class="repeater-sort"><i class="fa fa-arrows"></i></span>';
 
 	}

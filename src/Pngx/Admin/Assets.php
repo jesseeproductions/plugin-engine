@@ -58,6 +58,11 @@ class Pngx__Admin__Assets {
 			filemtime( Pngx__Main::instance()->resource_path . 'js/repeatable-fields.js' ),
 			true
 		);
+		wp_localize_script( 'pngx-repeatable', 'pngx_repeatable', array(
+			'ajaxurl'    => admin_url( 'admin-ajax.php', ( is_ssl() ? 'https' : 'http' ) ),
+			'nonce'   => wp_create_nonce( 'pngx_repeatable_nonce' ),
+		) );
+
 		wp_register_script(
 			'pngx-bootstrap',
 			Pngx__Main::instance()->vendor_url . 'bootstrap-iconpicker/bootstrap-3.2.0/js/bootstrap.min.js',

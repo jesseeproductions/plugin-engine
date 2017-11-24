@@ -168,6 +168,12 @@ class Pngx__Admin__Fields {
 
 				break;
 
+			case 'post_id':
+
+				Pngx__Admin__Field__Post_ID::display( $field, $options, $options_id, $meta, $repeat_obj );
+
+				break;
+
 			case 'radio':
 
 				Pngx__Admin__Field__Radio::display( $field, $options, $options_id, $meta, $repeat_obj );

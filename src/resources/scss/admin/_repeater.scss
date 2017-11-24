@@ -103,19 +103,26 @@
 		border: 1px solid #ccc;
 		border-radius: 3px;
 		margin: 20px 0;
-		padding: 40px 0 2%;
+		padding: 40px 1% 2%;
 
-		.repeater-column {
-			margin: 0 1%;
-			padding: 30px 1% 2%;
-			background: #ebebeb;
-			border-radius: 3px;
+		.repeating-column {
+			display: grid;
+			grid-gap: 15px;
+			grid-template-columns: 1fr 1fr;
 
-			.repeater-section {
-				border: 1px solid $color__grey;
+			.repeater-column {
+				margin: 0;
+				padding: 30px 1% 2%;
+				background: #ebebeb;
 				border-radius: 3px;
-				margin: 20px 0;
-				padding: 40px 2% 2%;
+				width: 100%;
+
+				.repeater-section {
+					border: 1px solid $color__grey;
+					border-radius: 3px;
+					margin: 18px 0;
+					padding: 40px 2% 2%;
+				}
 			}
 		}
 	}
@@ -178,7 +185,7 @@
 	}
 }
 
-li.repeating-field {
+div.repeating-field {
 	background: none;
 	border: none;
 	margin: 5px 0;

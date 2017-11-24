@@ -1789,17 +1789,22 @@ fieldset[disabled] .btn-primary.active {
     border: 1px solid #ccc;
     border-radius: 3px;
     margin: 20px 0;
-    padding: 40px 0 2%; }
-    .pngx-wrapper.section .repeater-section .repeater-column {
-      margin: 0 1%;
-      padding: 30px 1% 2%;
-      background: #ebebeb;
-      border-radius: 3px; }
-      .pngx-wrapper.section .repeater-section .repeater-column .repeater-section {
-        border: 1px solid #777;
+    padding: 40px 1% 2%; }
+    .pngx-wrapper.section .repeater-section .repeating-column {
+      display: grid;
+      grid-gap: 15px;
+      grid-template-columns: 1fr 1fr; }
+      .pngx-wrapper.section .repeater-section .repeating-column .repeater-column {
+        margin: 0;
+        padding: 30px 1% 2%;
+        background: #ebebeb;
         border-radius: 3px;
-        margin: 20px 0;
-        padding: 40px 2% 2%; }
+        width: 100%; }
+        .pngx-wrapper.section .repeater-section .repeating-column .repeater-column .repeater-section {
+          border: 1px solid #777;
+          border-radius: 3px;
+          margin: 18px 0;
+          padding: 40px 2% 2%; }
 
 .repeater-item {
   position: relative; }
@@ -1840,7 +1845,7 @@ fieldset[disabled] .btn-primary.active {
     right: 2px;
     top: 16px; }
 
-li.repeating-field {
+div.repeating-field {
   background: none;
   border: none;
   margin: 5px 0;
@@ -1848,11 +1853,11 @@ li.repeating-field {
   padding: 2% 35px 2% 20px;
   position: relative;
   width: 100%; }
-  li.repeating-field .repeater-sort {
+  div.repeating-field .repeater-sort {
     left: 0;
     position: absolute;
     top: 16px; }
-  li.repeating-field .remove-repeater {
+  div.repeating-field .remove-repeater {
     position: absolute;
     right: 0;
     top: 12px; }
