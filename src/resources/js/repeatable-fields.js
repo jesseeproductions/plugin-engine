@@ -116,20 +116,30 @@ var pngx_repeatable = pngx_repeatable || {};
 
 	obj.init = function () {
 
-		// on change look for post id
-		// if post id save meta to that id
-		// if no id create post and then save meta
+		// set title field and change title if that is saved
+		// save meta
+
+		// select field to choose existing menu items
+		// default to new, but always show the
 
 		$( document ).on( 'change', '.repeater-item select, .repeater-item input, .repeater-item textarea', function ( e ) {
 
-			console.log( 'change', this );
+			console.log( 'change2', $( this ).parent( '.repeater-item' ).find( '.pngx-post-id' ).data( 'postType' ) );
 
+			var post_id = $( this ).parent( '.repeater-item' ).find( '.pngx-post-id' ).val();
+			var post_type = $( this ).parent( '.repeater-item' ).find( '.pngx-post-id' ).data( 'postType' );
+			var post_title_default = $( this ).parent( '.repeater-item' ).find( '.pngx-post-id' ).data( 'postTitle' );
+			var value = $( this ).val();
+			var field = $( this ).attr( 'id' );
+			var title_field = $( this ).data( 'postTitle' );
+
+			obj.ajax_menu_item( post_id, post_type, post_title_default, value, field );
 
 		} );
 
 	};
 
-	obj.ajax_menu_item = function () {
+	obj.ajax_menu_item = function ( post_id, post_type, post_title_default, value, field, title_field ) {
 
 		$.ajax( {
 			url: pngx_repeatable.ajaxurl,
@@ -138,9 +148,17 @@ var pngx_repeatable = pngx_repeatable || {};
 			dataType: 'json',
 			data: {
 				nonce: pngx_repeatable.nonce,
+				post_id: post_id,
+				post_type: post_type,
+				post_title_default: post_title_default,
+				field_value: value,
+				field_name: field,
+				title_field: title_field,
 				action: 'pngx_repeatable'
 			},
 			success: function ( results ) {
+
+				console.log( 'save', results );
 
 				if ( results.success ) {
 

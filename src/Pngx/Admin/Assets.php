@@ -58,7 +58,7 @@ class Pngx__Admin__Assets {
 			filemtime( Pngx__Main::instance()->resource_path . 'js/repeatable-fields.js' ),
 			true
 		);
-		wp_localize_script( 'pngx-repeatable', 'pngx_repeatable', array(
+		wp_localize_script( 'pngx-repeatable-fields', 'pngx_repeatable', array(
 			'ajaxurl'    => admin_url( 'admin-ajax.php', ( is_ssl() ? 'https' : 'http' ) ),
 			'nonce'   => wp_create_nonce( 'pngx_repeatable_nonce' ),
 		) );

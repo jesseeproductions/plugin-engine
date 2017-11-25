@@ -22,9 +22,9 @@ class Pngx__Admin__Ajax {
 
 		add_action( 'wp_ajax_pngx_templates', array( $this, 'load_templates' ) );
 
-		add_action( 'wp_ajax_pngx_variety',  array( $this, 'load_variety' ) );
+		add_action( 'wp_ajax_pngx_variety', array( $this, 'load_variety' ) );
 
-		add_action( 'wp_ajax_pngx_repeatable',  array( $this, 'load_repeatable' ) );
+		add_action( 'wp_ajax_pngx_repeatable', array( $this, 'save_repeating_items' ) );
 
 	}
 
@@ -67,7 +67,7 @@ class Pngx__Admin__Ajax {
 
 				if ( 'wrap-start' === $field['type'] ) {
 					?>
-					<div class="pngx-meta-fields-wrap admin-field-wrap <?php echo esc_html( $wrapclass ); ?>" >
+                    <div class="pngx-meta-fields-wrap admin-field-wrap <?php echo esc_html( $wrapclass ); ?>" >
 					<?php
 					continue;
 
@@ -80,21 +80,21 @@ class Pngx__Admin__Ajax {
 					// Display admin linked style fields
 					Pngx__Admin__Style__Linked::display_styles( $fields, $field, $_POST['post_id'] );
 					?>
-					</div>
+                    </div>
 					<?php
 					continue;
 				}
 				?>
 
-				<div class="pngx-meta-field-wrap field-wrap-<?php echo esc_html( $field['type'] ); ?> field-wrap-<?php echo esc_html( $field['id'] ); ?> <?php echo esc_html( $wrapclass ); ?>"
+                <div class="pngx-meta-field-wrap field-wrap-<?php echo esc_html( $field['type'] ); ?> field-wrap-<?php echo esc_html( $field['id'] ); ?> <?php echo esc_html( $wrapclass ); ?>"
 					<?php echo isset( $field['toggle'] ) ? Pngx__Admin__Fields::toggle( $field['toggle'], esc_attr( $field['id'] ) ) : null; ?> >
 
-					<div class="pngx-meta-field field-<?php echo esc_attr( $field['type'] ); ?> field-<?php echo esc_attr( $field['id'] ); ?>">
+                    <div class="pngx-meta-field field-<?php echo esc_attr( $field['type'] ); ?> field-<?php echo esc_attr( $field['id'] ); ?>">
 
 						<?php if ( isset( $field['label'] ) && ! empty( $field['label'] ) ) { ?>
-							<label for="<?php echo esc_attr( $field['id'] ); ?>">
+                            <label for="<?php echo esc_attr( $field['id'] ); ?>">
 								<?php echo esc_attr( $field['label'] ); ?>
-							</label>
+                            </label>
 						<?php } ?>
 
 						<?php
@@ -105,10 +105,10 @@ class Pngx__Admin__Ajax {
 
 						?>
 
-					</div>
-					<!-- end .pngx-meta-field.field-<?php echo esc_attr( $field['type'] ); ?>.field-<?php echo esc_attr( $field['id'] ); ?> -->
+                    </div>
+                    <!-- end .pngx-meta-field.field-<?php echo esc_attr( $field['type'] ); ?>.field-<?php echo esc_attr( $field['id'] ); ?> -->
 
-				</div> <!-- end .pngx-meta-field-wrap.field-wrap-<?php echo esc_attr( $field['type'] ); ?>.field-wrap-<?php echo esc_attr( $field['id'] ); ?>	-->
+                </div> <!-- end .pngx-meta-field-wrap.field-wrap-<?php echo esc_attr( $field['type'] ); ?>.field-wrap-<?php echo esc_attr( $field['id'] ); ?>	-->
 
 				<?php
 			}
@@ -155,23 +155,23 @@ class Pngx__Admin__Ajax {
 
 				if ( is_array( $label ) && isset( $label['open'] ) ) {
 					?>
-					<div class="<?php echo esc_html( $label['open'] ); ?>">
+                    <div class="<?php echo esc_html( $label['open'] ); ?>">
 					<?php
 					continue;
 				}
 
 				if ( is_array( $label ) && isset( $label['label'] ) && ! empty( $field['label'] ) ) {
 					?>
-					<label for="<?php echo esc_attr( $label['label'] ); ?>">
+                    <label for="<?php echo esc_attr( $label['label'] ); ?>">
 						<?php echo esc_attr( $label['label'] ); ?>
-					</label>
+                    </label>
 					<?php
 					continue;
 				}
 
 				if ( is_array( $label ) && isset( $label['description'] ) ) {
 					?>
-					<span class="description"><?php echo esc_html( $label['description'] ); ?></span>
+                    <span class="description"><?php echo esc_html( $label['description'] ); ?></span>
 					<?php
 					continue;
 				}
@@ -182,7 +182,7 @@ class Pngx__Admin__Ajax {
 
 				if ( 'close' === $label ) {
 					?>
-					</div>
+                    </div>
 					<?php
 					continue;
 				}
@@ -197,19 +197,19 @@ class Pngx__Admin__Ajax {
 				}
 
 				?>
-				<div class="pngx-variety-field <?php echo isset( $fields[ $label ]['class'] ) ? esc_attr( $fields[ $label ]['class'] ) : ''; ?>">
+                <div class="pngx-variety-field <?php echo isset( $fields[ $label ]['class'] ) ? esc_attr( $fields[ $label ]['class'] ) : ''; ?>">
 					<?php
 
 					if ( isset( $fields[ $label ]['label'] ) && ! empty( $fields[ $label ]['label'] ) ) { ?>
-						<label for="<?php echo esc_attr( $fields[ $label ]['id'] ); ?>">
+                        <label for="<?php echo esc_attr( $fields[ $label ]['id'] ); ?>">
 							<?php echo esc_attr( $fields[ $label ]['label'] ); ?>
-						</label>
+                        </label>
 					<?php }
 
 					Pngx__Admin__Fields::display_field( $fields[ $label ], false, false, $meta, null );
 
 					?>
-				</div>
+                </div>
 				<?php
 
 			}
@@ -222,7 +222,7 @@ class Pngx__Admin__Ajax {
 		wp_send_json_success( json_encode( $field ) );
 	}
 
-	public function load_repeatable() {
+	public function save_repeating_items() {
 
 		//End if not the correct action
 		if ( ! isset( $_POST['action'] ) || 'pngx_repeatable' !== $_POST['action'] ) {
@@ -234,13 +234,58 @@ class Pngx__Admin__Ajax {
 			wp_send_json_error( __( 'Permission Error has occurred. Please save, reload, and try again.', 'plugin-engine' ) );
 		}
 
-		if ( ! isset( $_POST['field'] ) ) {
-			wp_send_json_error( __( 'No Field ID. Please save, reload, and try again.', 'plugin-engine' ) );
+		if ( ! isset( $_POST['field_value'], $_POST['field_name'] ) ) {
+			wp_send_json_error( __( 'No Field to Save. Please try again.', 'plugin-engine' ) );
 		}
 
+		if ( ! isset( $_POST['post_id'], $_POST['post_type'] ) ) {
+			wp_send_json_error( __( 'No POST ID. Please save, reload, and try again.', 'plugin-engine' ) );
+		}
 
 		Pngx__Main::instance()->doing_ajax = defined( 'DOING_AJAX' ) && DOING_AJAX;
 
+		$post_id = absint( $_POST['post_id'] );
+
+		if ( empty( $post_id ) ) {
+
+			$menu_item = array(
+				'post_title'  => ! empty ( $_POST['title_field'] ) ? wp_strip_all_tags( $_POST['field_value'] ) : esc_attr( $_POST['post_title_default'] ),
+				'post_status' => 'publish',
+				'post_type'   => esc_attr( $_POST['post_type'] ),
+				'meta_input'  => array(
+					$_POST['field_name'] => $_POST['field_value'],
+				)
+			);
+
+			// Insert the post into the database
+			//$post_id = wp_insert_post( $menu_item );
+
+			if ( is_wp_error( $post_id ) ) {
+				wp_send_json_error( $post_id->get_error_message() );
+			}
+
+
+		}
+
+		if ( empty( $post_id ) ) {
+			wp_send_json_error( __( 'No POST ID. Please save, reload, and try again.', 'plugin-engine' ) );
+		}
+
+		$menu_item = array(
+			'ID'          => $post_id,
+			'post_title'  => ! empty ( $_POST['title_field'] ) ? wp_strip_all_tags( $_POST['field_value'] ) : esc_attr( $_POST['post_title_default'] ),
+			'post_status' => 'publish',
+			'post_type'   => esc_attr( $_POST['post_type'] ),
+			'meta_input'  => array(
+				$_POST['field_name'] => $_POST['field_value'],
+			)
+		);
+
+		// Update the post into the database
+		wp_update_post( $menu_item );
+
+
+		update_post_meta( $post_id, esc_attr( $_POST['field_name'] ), esc_attr( $_POST['field_value'] ) );
 
 		wp_send_json_success( 'Saved' );
 

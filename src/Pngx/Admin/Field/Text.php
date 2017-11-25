@@ -40,7 +40,16 @@ class Pngx__Admin__Field__Text {
 			echo '<div class="pngx-error">&nbsp;&nbsp;' . esc_html( $field['alert'] ) . '</div>';
 		}
 
-		echo '<input type="text" id="' . esc_attr( $field['id'] ) . '" class="regular-text ' . esc_attr( $class ) . '"  name="' . esc_attr( $name ) . '" placeholder="' . esc_attr( $std ) . '" value="' . esc_attr( $value ) . '" size="' . absint( $size ) . '" />';
+		echo '<input 
+				type="text" 
+				id="' . esc_attr( $field['id'] ) . '" 
+				class="regular-text ' . esc_attr( $class ) . '"  
+				name="' . esc_attr( $name ) . '" 
+				placeholder="' . esc_attr( $std ) . '" 
+				value="' . esc_attr( $value ) . '" 
+				size="' . absint( $size ) . '" 
+				' . ! empty( $field['post_title'] ) ? esc_attr( 'date-post-title="' . $field['post_title'] ) .'"' : '' .
+			'/>';
 
 		if ( isset( $field['desc'] ) && ! empty( $field['desc'] ) ) {
 			echo '<span class="description">' . esc_html( $field['desc'] ) . '</span>';
