@@ -36,8 +36,8 @@ class Pngx__Admin__Field__Post_ID {
 				class="pngx-post-id hidden-field"  
 				name="' . esc_attr( $name ) . '"  
 				value="' . esc_attr( $value ) . '" 
-				data-post-type="' . ! empty( $field['post_type'] ) ? esc_attr( $field['post_type'] ) : '' . '" 
-				data-default-title="' . ! empty( $field['post_title'] ) ? esc_attr( $field['post_title'] ) : '' . '" 
+				data-post-type="' . ( ! empty( $field['post_type'] ) ? esc_attr( $field['post_type'] ) : '' ) . '" 
+				data-default-title="' . ( ! empty( $field['post_title_default'] ) ? esc_attr( $field['post_title_default'] ) : '' ) . '" 
 			/>';
 
 	}

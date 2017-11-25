@@ -116,30 +116,34 @@ var pngx_repeatable = pngx_repeatable || {};
 
 	obj.init = function () {
 
-		// set title field and change title if that is saved
-		// save meta
 
-		// select field to choose existing menu items
-		// default to new, but always show the
+		// save the repeating price field
+		// load meta values from post id and not from page meta
+		// add loading indicator on saving field
+
+
+		// pro - select field to choose existing menu items - use ajax to load, cache result on page and add to it as new items are created
+		// pro - default to new, but always show the select
 
 		$( document ).on( 'change', '.repeater-item select, .repeater-item input, .repeater-item textarea', function ( e ) {
 
-			console.log( 'change2', $( this ).parent( '.repeater-item' ).find( '.pngx-post-id' ).data( 'postType' ) );
+			console.log( 'change2', $( this ).parent( '.repeater-item' ).find( '.pngx-post-id' ).data() );
 
+			var $parent = $( this ).parent( '.repeater-item' );
 			var post_id = $( this ).parent( '.repeater-item' ).find( '.pngx-post-id' ).val();
 			var post_type = $( this ).parent( '.repeater-item' ).find( '.pngx-post-id' ).data( 'postType' );
-			var post_title_default = $( this ).parent( '.repeater-item' ).find( '.pngx-post-id' ).data( 'postTitle' );
+			var post_title_default = $( this ).parent( '.repeater-item' ).find( '.pngx-post-id' ).data( 'defaultTitle' );
 			var value = $( this ).val();
 			var field = $( this ).attr( 'id' );
 			var title_field = $( this ).data( 'postTitle' );
 
-			obj.ajax_menu_item( post_id, post_type, post_title_default, value, field );
+			obj.ajax_menu_item( $parent, post_id, post_type, post_title_default, value, field, title_field );
 
 		} );
 
 	};
 
-	obj.ajax_menu_item = function ( post_id, post_type, post_title_default, value, field, title_field ) {
+	obj.ajax_menu_item = function ( $parent, post_id, post_type, post_title_default, value, field, title_field ) {
 
 		$.ajax( {
 			url: pngx_repeatable.ajaxurl,
@@ -158,10 +162,16 @@ var pngx_repeatable = pngx_repeatable || {};
 			},
 			success: function ( results ) {
 
-				console.log( 'save', results );
-
 				if ( results.success ) {
 
+					if ( 'post' === results.data.type && results.data.ID ) {
+						console.log( 'post', results.data.type, results.data.ID );
+						$parent.find( '.pngx-post-id' ).val( results.data.ID )
+					}
+
+					if ( 'meta' === results.data.type ) {
+						console.log( 'meta', results.data.type, results.data.ID );
+					}
 
 				} else {
 

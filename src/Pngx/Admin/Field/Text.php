@@ -48,7 +48,7 @@ class Pngx__Admin__Field__Text {
 				placeholder="' . esc_attr( $std ) . '" 
 				value="' . esc_attr( $value ) . '" 
 				size="' . absint( $size ) . '" 
-				' . ! empty( $field['post_title'] ) ? esc_attr( 'date-post-title="' . $field['post_title'] ) .'"' : '' .
+				' . ( ! empty( $field['post_title'] ) ? 'data-post-title="' . esc_attr( $field['post_title'] ) . '"' : '' ) .
 			'/>';
 
 		if ( isset( $field['desc'] ) && ! empty( $field['desc'] ) ) {

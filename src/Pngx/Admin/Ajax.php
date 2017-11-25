@@ -246,9 +246,12 @@ class Pngx__Admin__Ajax {
 
 		$post_id = absint( $_POST['post_id'] );
 
-		if ( empty( $post_id ) ) {
+		log_me($_POST);
+
+		if ( empty( $post_id ) || ! empty( $_POST['title_field'] ) ) {
 
 			$menu_item = array(
+				'ID'          => absint( $_POST['post_id'] ),
 				'post_title'  => ! empty ( $_POST['title_field'] ) ? wp_strip_all_tags( $_POST['field_value'] ) : esc_attr( $_POST['post_title_default'] ),
 				'post_status' => 'publish',
 				'post_type'   => esc_attr( $_POST['post_type'] ),
@@ -257,13 +260,19 @@ class Pngx__Admin__Ajax {
 				)
 			);
 
-			// Insert the post into the database
-			//$post_id = wp_insert_post( $menu_item );
+            $repository = Pngx__Repository__Main::init();
+            $post_id = $repository->save( $menu_item );
 
 			if ( is_wp_error( $post_id ) ) {
 				wp_send_json_error( $post_id->get_error_message() );
 			}
 
+            $saved = array (
+                'type' => 'post',
+                'ID' => $post_id,
+            );
+
+            wp_send_json_success( $saved );
 
 		}
 
@@ -271,23 +280,14 @@ class Pngx__Admin__Ajax {
 			wp_send_json_error( __( 'No POST ID. Please save, reload, and try again.', 'plugin-engine' ) );
 		}
 
-		$menu_item = array(
-			'ID'          => $post_id,
-			'post_title'  => ! empty ( $_POST['title_field'] ) ? wp_strip_all_tags( $_POST['field_value'] ) : esc_attr( $_POST['post_title_default'] ),
-			'post_status' => 'publish',
-			'post_type'   => esc_attr( $_POST['post_type'] ),
-			'meta_input'  => array(
-				$_POST['field_name'] => $_POST['field_value'],
-			)
-		);
-
-		// Update the post into the database
-		wp_update_post( $menu_item );
-
-
 		update_post_meta( $post_id, esc_attr( $_POST['field_name'] ), esc_attr( $_POST['field_value'] ) );
 
-		wp_send_json_success( 'Saved' );
+        $saved = array (
+            'type' => 'meta',
+            'ID' => $post_id,
+        );
+
+        wp_send_json_success( $saved );
 
 	}
 
