@@ -18,7 +18,7 @@ class Pngx__Admin__Field__List {
 
 		$class = isset( $field['class'] ) ? $field['class'] : '';
 
-		if ( isset( $options_id ) && ! empty( $options_id ) ) {
+		if ( ! empty( $options_id ) ) {
 			echo '</td></tr><tr valign="top"><td colspan="2">';
 		}
 

@@ -18,7 +18,7 @@ class Pngx__Admin__Field__Image {
 
 		global $pagenow;
 
-		if ( isset( $options_id ) && ! empty( $options_id ) ) {
+		if ( ! empty( $options_id ) ) {
 			$name  = $options_id;
 			$value = $options[ $field['id'] ];
 		} else {

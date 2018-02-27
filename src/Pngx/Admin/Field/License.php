@@ -16,7 +16,7 @@ class Pngx__Admin__Field__License {
 
 	public static function display( $field = array(), $options_id = null ) {
 
-		if ( isset( $options_id ) && ! empty( $options_id ) ) {
+		if ( ! empty( $options_id ) ) {
 			$name    = $options_id;
 			$license = isset( $field['license_key'] ) ? $field['license_key'] : '';
 

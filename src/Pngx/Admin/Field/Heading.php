@@ -16,7 +16,7 @@ class Pngx__Admin__Field__Heading {
 
 	public static function display( $field = array(), $options_id = null ) {
 
-		if ( isset( $options_id ) && ! empty( $options_id ) ) {
+		if ( ! empty( $options_id ) ) {
 			if ( isset( $field['alert'] ) && ! empty( $field['alert'] ) ) {
 				echo '</td></tr><tr valign="top"><td colspan="2"><span class="description">' . esc_html( $field['alert'] ) . '</span>';
 			} else {

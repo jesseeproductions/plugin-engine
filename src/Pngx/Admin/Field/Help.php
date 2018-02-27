@@ -16,7 +16,7 @@ class Pngx__Admin__Field__Help {
 
 	public static function display( $field = array(), $options = array(), $options_id = null, $meta = null ) {
 
-		if ( isset( $options_id ) && ! empty( $options_id ) ) {
+		if ( ! empty( $options_id ) ) {
 			$tab       = $field['section'];
 			$screen_id = 'plugin_engine_options_plugin-engine-options';
 		} else {

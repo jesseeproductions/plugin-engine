@@ -19,7 +19,7 @@ class Pngx__Admin__Field__Variety {
 		global $pagenow;
 		$selected = '';
 
-		if ( isset( $options_id ) && ! empty( $options_id ) ) {
+		if ( ! empty( $options_id ) ) {
 			$name     = $options_id;
 			$selected = $options[ $field['id'] ] ? $options[ $field['id'] ] : $field['std'];
 		} else {
