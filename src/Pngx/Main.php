@@ -84,6 +84,8 @@ class Pngx__Main {
 		$autoloader = Pngx__Autoloader::instance();
 		$autoloader->register_prefixes( $prefixes );
 		$autoloader->register_autoloader();
+
+		require $this->vendor_path  . 'HTMLPurifier/library/HTMLPurifier.path.php';
 	}
 
 	/**
