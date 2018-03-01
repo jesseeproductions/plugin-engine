@@ -150,7 +150,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  *
  */
 
-class Browser {
+class PNGX_Browser {
 	public $_agent = '';
 	public $_browser_name = '';
 	public $_version = '';
