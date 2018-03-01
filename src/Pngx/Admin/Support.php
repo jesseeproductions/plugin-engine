@@ -260,11 +260,11 @@ if ( ! class_exists( 'Pngx__Admin__Support' ) ) {
 		 */
 		public function get_user_info() {
 
-			if ( ! class_exists( 'PNGX_Browser' ) ) {
+			if ( ! class_exists( 'Pngx_Browser' ) ) {
 				require_once Pngx__Main::instance()->vendor_path . 'browser/browser.php';
 			}
 
-			$browser = new PNGX_Browser();
+			$browser = new Pngx_Browser();
 
 			$user                           = wp_get_current_user();
 			$user_info                      = array();
