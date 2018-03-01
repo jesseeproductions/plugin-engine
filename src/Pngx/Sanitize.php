@@ -123,6 +123,20 @@ class Pngx__Sanitize {
 	 *
 	 * @return string
 	 */
+	private function sanitize_titles() {
+
+		$terms_tags = '<span><br><b><strong><em><sub><sup><i>';
+
+		$input = strip_tags( $this->input, $terms_tags );
+
+		return $input;
+	}
+
+	/**
+	 * Sanitize Textarea
+	 *
+	 * @return string
+	 */
 	private function sanitize_textarea() {
 
 		if ( isset( $this->option['class'] ) && "code" != $this->option['class'] ) {
