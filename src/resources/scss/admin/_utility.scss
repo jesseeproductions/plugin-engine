@@ -63,7 +63,7 @@
 	margin-left: 0;
 }
 
-@include media($mobile) {
+@include breakpoint_max('sm') {
 	.pngx-one-fourth,
 	.pngx-one-half,
 	.pngx-one-third,

@@ -75,7 +75,7 @@
 	color: $color__grey;
 }
 
-@include media($mobile) {
+@include breakpoint_max('sm') {
 	.pngx-meta-field-content,
 	.pngx-meta-field-content.text {
 		margin: 0;

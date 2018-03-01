@@ -320,7 +320,7 @@ fieldset[disabled] .btn-primary.active {
   font-size: 15px;
   font-weight: bold;
   margin: 0 0 10px; }
-  @media screen and (max-width: 639px) {
+  @media (max-width: 640px) {
     .pro-heading,
     .postbox h4.pngx-fields-heading {
       margin: 0; } }
@@ -1217,7 +1217,7 @@ fieldset[disabled] .btn-primary.active {
 .promote-sup {
   color: #777; }
 
-@media screen and (max-width: 639px) {
+@media (max-width: 640px) {
   .pngx-meta-field-content,
   .pngx-meta-field-content.text {
     margin: 0;
@@ -1656,7 +1656,7 @@ fieldset[disabled] .btn-primary.active {
 .pngx-wrapper * {
   box-sizing: border-box; }
 
-@media screen and (max-width: 639px) {
+@media (max-width: 640px) {
   .pngx-wrapper * .form-table {
     table-layout: fixed; } }
 
@@ -1668,7 +1668,7 @@ fieldset[disabled] .btn-primary.active {
 .pngx-wrapper .pngx-tabs-panel.ui-tabs-panel.ui-widget-content h4 {
   margin: 0 0 0 -10px; }
 
-@media screen and (max-width: 768px) {
+@media (max-width: 768px) {
   .pngx-wrapper .pngx-tabs-panel.ui-tabs-panel.ui-widget-content h4 {
     margin: 0 0 0 0px; } }
 
@@ -1916,7 +1916,7 @@ fieldset[disabled] .btn-primary.active {
   clear: both;
   margin-left: 0; }
 
-@media screen and (max-width: 639px) {
+@media (max-width: 640px) {
   .pngx-one-fourth,
   .pngx-one-half,
   .pngx-one-third,
