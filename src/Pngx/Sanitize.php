@@ -56,7 +56,16 @@ class Pngx__Sanitize {
 		$this->option = $option;
 
 		//Return Sanitized Input only if a method exists to sanitize the field type
-		if ( method_exists( $this, 'sanitize_' . $this->type ) && is_callable( array(
+		if ( !empty( $this->option['sanitize'] ) && method_exists( $this, 'sanitize_' . $this->option['sanitize'] ) && is_callable( array(
+				$this,
+				'sanitize_' . $this->option['sanitize']
+			) )
+		) {
+
+			//result
+			$this->result = $this->{'sanitize_' . $this->option['sanitize']}();
+
+		} elseif ( method_exists( $this, 'sanitize_' . $this->type ) && is_callable( array(
 				$this,
 				'sanitize_' . $this->type
 			) )
@@ -70,8 +79,6 @@ class Pngx__Sanitize {
 			$this->result = false;
 		}
 
-		// return the result
-		return $this->result;
 	}
 
 	/**
@@ -119,15 +126,24 @@ class Pngx__Sanitize {
 	}
 
 	/**
-	 * Sanitize Textarea
+	 * Sanitize Titles with some html
 	 *
 	 * @return string
 	 */
 	private function sanitize_titles() {
 
-		$terms_tags = '<span><br><b><strong><em><sub><sup><i>';
+		$terms_tags = array(
+			'b'      => array(),
+			'br'     => array(),
+			'em'     => array(),
+			'i'      => array(),
+			'span'   => array(),
+			'strong' => array(),
+			'sub'    => array(),
+			'sup'    => array(),
+		);
 
-		$input = strip_tags( $this->input, $terms_tags );
+		$input = wp_kses( $this->input, $terms_tags );
 
 		return $input;
 	}

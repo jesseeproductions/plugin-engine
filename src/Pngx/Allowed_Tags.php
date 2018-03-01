@@ -17,7 +17,7 @@ class Pngx__Allowed_Tags {
 	*/
 	public static function title() {
 
-		$terms_tags = '<span><br><b><strong><em><sub><sup><i>';
+		$terms_tags = '<b><br><em><i><span><strong><sub><sup>';
 
 		return $terms_tags;
 
