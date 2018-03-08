@@ -1,0 +1,37 @@
+{
+  "name": "jeseeproductions/plugin-engine",
+  "description": "Common classes and functions for plugin engine",
+  "type": "wordpress-plugin",
+  "keywords": [
+    "wordpress",
+    "coupons",
+    "menu"
+  ],
+  "homepage": "http://jesseeproductions.com/",
+  "license": "GPL-2.0",
+  "require-dev": {
+    "lucatume/wp-browser": "1.22.6.1",
+    "vlucas/phpdotenv": "^2.4",
+    "lucatume/function-mocker-le": "^1.0",
+    "wp-cli/checksum-command": "1.0.5"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "config": {
+    "preferred-install": "dist"
+  },
+  "require": {
+    "lucatume/di52": "~2.0"
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "xrstf\\Composer52\\Generator::onPostInstallCmd"
+    ],
+    "post-update-cmd": [
+      "xrstf\\Composer52\\Generator::onPostInstallCmd"
+    ],
+    "post-autoload-dump": [
+      "xrstf\\Composer52\\Generator::onPostInstallCmd"
+    ]
+  }
+}

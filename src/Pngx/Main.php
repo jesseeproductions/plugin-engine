@@ -30,9 +30,29 @@ class Pngx__Main {
 	public $vendor_url;
 
 	/**
+	 * Static Singleton Holder
+	 * @var self
+	 */
+	protected static $instance;
+
+	/**
 	 * constructor
 	 */
 	public function __construct( $context = null ) {
+
+		if ( self::$instance ) {
+			return;
+		}
+
+		// the 5.2 compatible autoload file
+		if ( version_compare( PHP_VERSION, '5.2.17', '<=' ) ) {
+			require_once realpath( dirname( dirname( dirname( __FILE__ ) ) ) . '/vendor/autoload_52.php' );
+		} else {
+			require_once realpath( dirname( dirname( dirname( __FILE__ ) ) ) . '/vendor/autoload.php' );
+		}
+
+		// the DI container class
+		require_once dirname( __FILE__ ) . '/Container.php';
 
 		if ( is_object( $context ) ) {
 			$this->plugin_context       = $context;
