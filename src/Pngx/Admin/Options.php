@@ -58,8 +58,8 @@ class Pngx__Admin__Options {
 			add_action( 'admin_init', array( $this, 'set_defaults' ), 10 );
 		}
 
-		add_action( 'pngx_before_option_form', array( __CLASS__, 'display_options_header' ), 5 );
-		add_action( 'pngx_after_option_form', array( __CLASS__, 'display_options_footer' ), 5 );
+		add_action( 'pngx_before_option_form', array( $this, 'display_options_header' ), 5 );
+		add_action( 'pngx_after_option_form', array( $this, 'display_options_footer' ), 5 );
 
 	}
 
@@ -362,7 +362,7 @@ class Pngx__Admin__Options {
 	 * Options Header
 	 *
 	 */
-	public static function display_options_header( $slug ) {
+	public function display_options_header( $slug ) {
 
 		if ( 'plugin-engine-options' == $slug ) {
 			echo '<h1>Plugin Engine Options</h1>';
@@ -374,7 +374,7 @@ class Pngx__Admin__Options {
 	 * Option Footer Fields
 	 *
 	 */
-	public static function display_options_footer() {
+	public function display_options_footer() {
 
 		echo '<p style="text-align:right;">&copy; ' . date( "Y" ) . ' Jessee Productions, LLC</p>';
 
@@ -433,17 +433,18 @@ class Pngx__Admin__Options {
 	}
 
 	/**
-	 * Static Singleton Factory Method
+	 * Singleton Factory Method
 	 *
 	 * @return Pngx__Admin__Options
 	 */
-	public static function instance() {
-		if ( ! isset( self::$instance ) ) {
-			$className      = __CLASS__;
-			self::$instance = new $className;
+	public function instance() {
+		if ( ! isset( $this->instance ) ) {
+			$className      = $this;
+			$this->instance = new $className;
 		}
 
-		return self::$instance;
+		return $this->instance;
 	}
+
 
 }
