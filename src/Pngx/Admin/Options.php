@@ -199,7 +199,7 @@ class Pngx__Admin__Options {
 			foreach ( $this->checkboxes as $id ) {
 				if ( isset( $options[ $id ] ) && ! isset( $input[ $id ] ) ) {
 					// if permalinks should be flushed when deactivating option
-					if ( isset( $this->fields[$id]['class'] ) && 'flush' === $this->fields[$id]['class'] ) {
+					if ( isset( $this->fields[ $id ]['class'] ) && 'flush' === $this->fields[ $id ]['class'] ) {
 						update_option( 'pngx_permalink_change', true );
 					}
 					unset( $options[ $id ] );
