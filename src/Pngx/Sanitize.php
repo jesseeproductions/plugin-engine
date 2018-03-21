@@ -192,7 +192,7 @@ class Pngx__Sanitize {
 	 */
 	private function sanitize_url() {
 
-		return esc_url( $this->input );
+		return esc_url_raw( $this->input );
 
 	}
 

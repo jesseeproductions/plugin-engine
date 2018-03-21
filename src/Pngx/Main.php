@@ -14,7 +14,7 @@ if ( class_exists( 'Pngx__Main' ) ) {
  */
 class Pngx__Main {
 
-	const VERSION    = '2.5.3';
+	const VERSION    = '2.5.4.1';
 	const OPTIONS_ID = 'plugin_engine_options';
 
 	protected $plugin_context;
@@ -234,8 +234,20 @@ class Pngx__Main {
 		 *
 		 */
 		do_action( 'pngx_plugins_loaded' );
+
+		$this->loadLibraries();
 	}
 
+
+	/**
+	 * Load all the required library files.
+	 */
+	protected function loadLibraries() {
+
+		//Core Functions
+		require_once $this->plugin_path . 'src/functions/template-tags/general.php';
+
+	}
 	/**
 	 * Static Singleton Factory Method
 	 *
