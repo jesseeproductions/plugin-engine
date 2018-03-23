@@ -131,9 +131,8 @@ class Pngx__Admin__Field__Variety {
 						}
 
 						$meta = get_post_meta( $post_id, $label, true );
-
 						?>
-						<div class="<?php echo isset( $fields[ $label ]['class'] ) ? esc_attr( $fields[ $label ]['class'] ) : ''; ?>">
+						<div class="classme <?php echo isset( $fields[ $label ]['variety_class'] ) ? esc_attr( $fields[ $label ]['variety_class'] ) : ''; ?>">
 							<?php
 
 							if ( isset( $fields[ $label ]['label'] ) && ! empty( $fields[ $label ]['label'] ) ) { ?>

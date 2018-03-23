@@ -197,7 +197,7 @@ class Pngx__Admin__Ajax {
 				}
 
 				?>
-				<div class="pngx-variety-field <?php echo isset( $fields[ $label ]['class'] ) ? esc_attr( $fields[ $label ]['class'] ) : ''; ?>">
+				<div class="pngx-variety-field <?php echo isset( $fields[ $label ]['variety_class'] ) ? esc_attr( $fields[ $label ]['variety_class'] ) : ''; ?>">
 					<?php
 
 					if ( isset( $fields[ $label ]['label'] ) && ! empty( $fields[ $label ]['label'] ) ) { ?>
