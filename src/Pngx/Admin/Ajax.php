@@ -160,7 +160,7 @@ class Pngx__Admin__Ajax {
 					continue;
 				}
 
-				if ( is_array( $label ) && isset( $label['label'] ) && ! empty( $field['label'] ) ) {
+				if ( is_array( $label ) && ! empty( $label['label'] ) ) {
 					?>
 					<label for="<?php echo esc_attr( $label['label'] ); ?>">
 						<?php echo esc_attr( $label['label'] ); ?>

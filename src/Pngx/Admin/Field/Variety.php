@@ -125,14 +125,14 @@ class Pngx__Admin__Field__Variety {
 
 						$post_id = '';
 						if ( is_object( $post ) ) {
-							$post_id = $post->ID;
+							$post_id = empty( $post->ID ) ? null : $post->ID;
 						} elseif ( Pngx__Main::instance()->doing_ajax && isset( $_POST['post_id'] ) ) {
 							$post_id = absint( $_POST['post_id'] );
 						}
 
-						$meta = get_post_meta( $post_id, $label, true );
+						$meta = empty( $post_id ) ? null : get_post_meta( $post_id, $label, true );
 						?>
-						<div class="classme <?php echo isset( $fields[ $label ]['variety_class'] ) ? esc_attr( $fields[ $label ]['variety_class'] ) : ''; ?>">
+						<div class="pngx-variety-field <?php echo isset( $fields[ $label ]['variety_class'] ) ? esc_attr( $fields[ $label ]['variety_class'] ) : ''; ?>">
 							<?php
 
 							if ( isset( $fields[ $label ]['label'] ) && ! empty( $fields[ $label ]['label'] ) ) { ?>

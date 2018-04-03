@@ -82,8 +82,9 @@ class Pngx__Admin__Field__Wysiwyg {
 			);
 			wp_localize_script( 'pngx-wp-editor', 'pngx_editor_vars', $pngx_editor_vars );
 
-
-			$post->load_scripts = true;
+			if ( is_object( $post ) ) {
+				$post->load_scripts = true;
+			}
 		}
 
 		$std       = isset( $field['std'] ) ? $field['std'] : '';
