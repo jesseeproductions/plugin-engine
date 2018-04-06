@@ -58,9 +58,24 @@ class Pngx__Admin__Field__Variety {
 						<?php
 						foreach ( $field['choices'] as $value => $label ) {
 
+							$disabled = '';
+							if( is_array( $label ) ) {
+								$disabled  = empty( $label['disabled'] ) ? '' : 'disabled';
+								$label = $label['text'];
+							}
+
 							$style = isset( $field['class'] ) && 'css-select' === $field['class'] ? 'style="' . esc_attr( $value ) . '"' : '';
 
-							echo '<option ' . $style . ' value="' . esc_attr( $value ) . '"' . selected( $selected, $value, false ) . '>' . esc_attr( $label ) . '</option>';
+							echo '<option ' .
+							$style .
+							' value="' .
+							esc_attr( $value ) .
+							'"' .
+							selected( $selected, $value, false ) .
+							$disabled .
+							'>' .
+							esc_attr( $label ) .
+							'</option>';
 
 						}
 						?>

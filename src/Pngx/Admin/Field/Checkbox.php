@@ -43,6 +43,7 @@ class Pngx__Admin__Field__Checkbox {
 		$class     = isset( $field['class'] ) ? $field['class'] : '';
 		$std       = isset( $field['std'] ) ? $field['std'] : '';
 		$repeating = isset( $field['repeating'] ) ? '[]' : '';
+		$disabled  = empty( $field['disabled'] ) ? '' : 'disabled';
 
 		?>
 		<input
@@ -52,7 +53,8 @@ class Pngx__Admin__Field__Checkbox {
 				name="<?php echo esc_attr( $name . $repeating ); ?>"
 				placeholder="<?php echo esc_attr( $std ); ?>"
 				value="1"
-				<?php echo checked( $selected, 1, false ); ?>
+			<?php echo checked( $selected, 1, false ); ?>
+			<?php echo $disabled; ?>
 		/>
 
 		<?php
