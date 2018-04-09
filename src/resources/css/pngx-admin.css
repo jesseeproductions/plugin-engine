@@ -348,6 +348,21 @@ fieldset[disabled] .btn-primary.active {
   .pngx-bumpdown-arrow {
     margin-left: -15px; } }
 
+/* Dependency CSS */
+.pngx-dependent {
+  display: none; }
+  .pngx-dependent.pngx-active {
+    display: inline-block; }
+    .pngx-dependent.pngx-active div {
+      display: block; }
+      .pngx-dependent.pngx-active div.select2-container {
+        display: inline-block; }
+    .pngx-dependent.pngx-active td,
+    .pngx-dependent.pngx-active th {
+      display: table-cell; }
+    .pngx-dependent.pngx-active tr {
+      display: table-row; }
+
 /* ==========================================================================
    Fields CSS
    ========================================================================== */

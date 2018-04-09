@@ -87,7 +87,13 @@ class Pngx__Admin__Assets {
 			filemtime( Pngx__Main::instance()->resource_path . 'js/bumpdown.js' ),
 			true
 		);
-
+		wp_register_script(
+			'pngx-dependency',
+			Pngx__Main::instance()->resource_url . 'js/dependency.js',
+			array(),
+			filemtime( Pngx__Main::instance()->resource_path . 'js/dependency.js' ),
+			true
+		);
 		wp_register_script(
 			'pngx-wp-editor',
 			Pngx__Main::instance()->resource_url . 'js/wp_editor.js',
@@ -113,7 +119,7 @@ class Pngx__Admin__Assets {
 		wp_register_script(
 			'pngx-admin',
 			Pngx__Main::instance()->resource_url . 'js/pngx-admin.js',
-			array( 'pngx-bumpdown', 'pngx-clipboard', 'pngx-colorbox', 'pngx-wp-editor', 'pngx-load-template-ajax', 'pngx-color-picker-alpha', 'pngx-bootstrap', 'pngx-bootstrap-iconpicker-fontawesome', 'pngx-bootstrap-iconpicker', 'jquery-ui-tabs' ),
+			array( 'pngx-bumpdown', 'pngx-dependency', 'pngx-clipboard', 'pngx-colorbox', 'pngx-wp-editor', 'pngx-load-template-ajax', 'pngx-color-picker-alpha', 'pngx-bootstrap', 'pngx-bootstrap-iconpicker-fontawesome', 'pngx-bootstrap-iconpicker', 'jquery-ui-tabs' ),
 			filemtime( Pngx__Main::instance()->resource_path . 'js/pngx-admin.js' ),
 			true
 		);
