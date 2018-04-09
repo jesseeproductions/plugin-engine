@@ -27,10 +27,12 @@ class Pngx__Admin__Field__Text {
 			}
 		}
 
-		$size      = isset( $field['size'] ) ? $field['size'] : 30;
-		$class     = isset( $field['class'] ) ? $field['class'] : '';
-		$std       = isset( $field['std'] ) ? $field['std'] : '';
-		$condition = isset( $field['condition'] ) ? $field['condition'] : '';
+		$size       = isset( $field['size'] ) ? $field['size'] : 30;
+		$class      = isset( $field['class'] ) ? $field['class'] : '';
+		$std        = isset( $field['std'] ) ? $field['std'] : '';
+		$condition  = isset( $field['condition'] ) ? $field['condition'] : '';
+		$attributes = empty( $field['field_attributes'] ) ? '' : Pngx__Admin__Field_Methods::instance()->set_field_attributes( $field['field_attributes'] );
+		$bumpdown   = empty( $field['bumpdown'] ) ? '' : Pngx__Admin__Field_Methods::instance()->set_bumpdown( $field['bumpdown'] );
 
 		if ( $repeat_obj ) {
 			$name = $repeat_obj->get_field_name( $name );
@@ -48,7 +50,10 @@ class Pngx__Admin__Field__Text {
 			placeholder="' . esc_attr( $std ) . '" 
 			value="' . esc_attr( $value ) . '" 
 			size="' . absint( $size ) . '" 
+			' . $attributes . '
 		/>';
+
+		echo $bumpdown;
 
 		if ( isset( $field['desc'] ) && ! empty( $field['desc'] ) ) {
 			echo '<span class="description">' . esc_html( $field['desc'] ) . '</span>';

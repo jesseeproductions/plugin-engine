@@ -210,6 +210,7 @@
         }, selectors.dependency );
 
     obj.run = function ( event ) {
+
         // Fetch all dependents
         var $dependents = $( selectors.dependent );
 
@@ -235,7 +236,7 @@
      *
      * @since 4.7.7
      */
-    $document.on( 'tribe.dependencies-run', obj.run );
+    $document.on( 'pngx.dependencies-run', obj.run );
 
     // Configure on Window Load again
     $window.on( 'load', obj.run );

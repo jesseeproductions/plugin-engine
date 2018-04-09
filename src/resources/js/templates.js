@@ -4,6 +4,8 @@ jQuery( function ( $ ) {
 
 		e.preventDefault();
 
+		var $document = $( document );
+
 		var $option = $( this ).find( 'option:selected' ).val();
 
 		var $ajax_field = $( this ).data( 'toggleAjax_field' );
@@ -56,6 +58,8 @@ jQuery( function ( $ ) {
 					$( $ajax_field ).html( '<h1>' + results.data + '</h1>' );
 
 				}
+
+				$document.trigger( 'pngx.dependencies-run' );
 			}
 		} );
 
