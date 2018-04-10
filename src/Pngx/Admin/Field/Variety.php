@@ -45,6 +45,8 @@ class Pngx__Admin__Field__Variety {
 
 			$class     = isset( $field['class'] ) ? $field['class'] : '';
 			$repeating = isset( $field['repeating'] ) ? '[]' : '';
+			$attributes = empty( $field['field_attributes'] ) ? '' : Pngx__Admin__Field_Methods::instance()->set_field_attributes( $field['field_attributes'] );
+			$bumpdown   = empty( $field['bumpdown'] ) ? '' : Pngx__Admin__Field_Methods::instance()->set_bumpdown( $field['bumpdown'] );
 
 			?>
 			<div class="pngx-variety-selection">
@@ -54,6 +56,7 @@ class Pngx__Admin__Field__Variety {
 							class="select pngx-variety-select <?php echo esc_attr( $class ); ?>"
 							name="<?php echo esc_attr( $name ) . $repeating; ?>"
 						<?php echo isset( $field['data'] ) ? Pngx__Admin__Fields::toggle( $field['data'], null ) : ''; ?>
+						<?php echo $attributes; ?>
 					>
 						<?php
 						foreach ( $field['choices'] as $value => $label ) {
@@ -81,6 +84,7 @@ class Pngx__Admin__Field__Variety {
 						?>
 					</select>
 				</div>
+				<?php echo $bumpdown; ?>
 				<?php
 				if ( isset( $field['desc'] ) && ! empty( $field['desc'] ) ) {
 					echo '<span class="description">' . esc_html( $field['desc'] ) . '</span>';
