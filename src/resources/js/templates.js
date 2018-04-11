@@ -60,6 +60,7 @@ jQuery( function ( $ ) {
 				}
 
 				$document.trigger( 'pngx.dependencies-run' );
+				$document.trigger( 'pngx.bumpdown-run' );
 			}
 		} );
 

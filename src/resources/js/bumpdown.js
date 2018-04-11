@@ -2,12 +2,10 @@
  * Based of Modern Tribe's Bumpdown find in Common
  */
 
-(function( $, _ ) {
+(function( $, _, obj ) {
 	'use strict';
-	// Configure on Document ready for the default trigger
-	$( document ).ready( function() {
-		$( '.pngx-bumpdown-trigger' ).bumpdown();
-	} );
+
+	var $document = $( document );
 
 	$.fn.bumpdown = function() {
 		var $document = $( document ),
@@ -277,4 +275,21 @@
 			}
 		});
 	};
-}( jQuery, window.underscore || window._ ) );
+
+	obj.run = function ( event ) {
+
+     $( '.pngx-bumpdown-trigger' ).bumpdown();
+
+    };
+
+    // Configure on Document ready for the default trigger
+    $document.ready( obj.run );
+
+	/**
+	* Listen on async recurent elements.
+	*
+	* @since TBD
+	*/
+	$document.on( 'pngx.bumpdown-run', obj.run );
+
+}( jQuery, window.underscore || window._, {} ) );
