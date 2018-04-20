@@ -288,7 +288,7 @@
 	/**
 	* Listen on async recurent elements.
 	*
-	* @since TBD
+	* @since 2.5.5
 	*/
 	$document.on( 'pngx.bumpdown-run', obj.run );
 

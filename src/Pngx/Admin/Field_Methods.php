@@ -40,7 +40,7 @@ class Pngx__Admin__Field_Methods {
 	/**
 	 * Generate String of Attributes
 	 *
-	 * @since TBD
+	 * @since 2.5.5
 	 *
 	 * @return mixed|void
 	 */
@@ -62,7 +62,7 @@ class Pngx__Admin__Field_Methods {
 		/**
 		 * Filter the Field Attributes
 		 *
-		 * @since TBD
+		 * @since 2.5.5
 		 *
 		 * @param $return           string|void a string of attributes
 		 * @param $field_attributes array an array of attributes
@@ -73,7 +73,7 @@ class Pngx__Admin__Field_Methods {
 	/**
 	 * Generate Bumpdown
 	 *
-	 * @since TBD
+	 * @since 2.5.5
 	 *
 	 * @return mixed|void
 	 *
@@ -91,7 +91,7 @@ class Pngx__Admin__Field_Methods {
 		/**
 		 * Filter the Bumpdown HTML
 		 *
-		 * @since TBD
+		 * @since 2.5.5
 		 *
 		 * @param $return   string|void a string of bumpdown
 		 * @param $bumpdown array an array of bumpdown attributes
