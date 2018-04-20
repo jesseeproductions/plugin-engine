@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Plugin Engine\n"
-"POT-Creation-Date: 2017-06-14 16:11-0400\n"
+"POT-Creation-Date: 2018-04-20 15:57-0400\n"
 "PO-Revision-Date: 2016-08-29 11:16-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -59,15 +59,15 @@ msgstr ""
 msgid "No Field Exists."
 msgstr ""
 
-#: src/Pngx/Admin/Assets.php:116 src/Pngx/Admin/Support.php:28
+#: src/Pngx/Admin/Assets.php:130 src/Pngx/Admin/Support.php:28
 msgid "Copy to clipboard"
 msgstr ""
 
-#: src/Pngx/Admin/Assets.php:117
+#: src/Pngx/Admin/Assets.php:131
 msgid "System info copied"
 msgstr ""
 
-#: src/Pngx/Admin/Assets.php:118
+#: src/Pngx/Admin/Assets.php:132
 msgid "Press \"Cmd + C\" to copy"
 msgstr ""
 
@@ -170,24 +170,24 @@ msgstr ""
 msgid "License is Not Active"
 msgstr ""
 
-#: src/Pngx/Admin/EDD_Plugin_Updater.php:199
+#: src/Pngx/Admin/EDD_Plugin_Updater.php:201
 #, php-format
 msgid ""
 "There is a new version of %1$s available. %2$sView version %3$s details%4$s."
 msgstr ""
 
-#: src/Pngx/Admin/EDD_Plugin_Updater.php:201
+#: src/Pngx/Admin/EDD_Plugin_Updater.php:209
 #, php-format
 msgid ""
 "There is a new version of %1$s available. %2$sView version %3$s details%4$s "
 "or %5$supdate now%6$s."
 msgstr ""
 
-#: src/Pngx/Admin/EDD_Plugin_Updater.php:385
+#: src/Pngx/Admin/EDD_Plugin_Updater.php:399
 msgid "You do not have permission to install plugin updates"
 msgstr ""
 
-#: src/Pngx/Admin/EDD_Plugin_Updater.php:385
+#: src/Pngx/Admin/EDD_Plugin_Updater.php:399
 msgid "Error"
 msgstr ""
 
@@ -246,7 +246,7 @@ msgstr ""
 msgid "Content"
 msgstr ""
 
-#: src/Pngx/Admin/Options.php:347
+#: src/Pngx/Admin/Options.php:345
 msgid "Save Changes"
 msgstr ""
 
