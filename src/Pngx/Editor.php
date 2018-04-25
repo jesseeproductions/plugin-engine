@@ -100,7 +100,7 @@ class Pngx__Editor {
 		$template[] = array(
 			'core/paragraph',
 			array(
-				'placeholder' => __( 'Add Description...', 'menu-crafter' ),
+				'placeholder' => __( 'Add Description...', 'jp-block' ),
 			),
 		);
 
