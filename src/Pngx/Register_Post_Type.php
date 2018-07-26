@@ -188,6 +188,14 @@ class Pngx__Register_Post_Type {
 			'rewrite'             => array( 'slug' => $slug ),
 		), $updates );
 
+		/**
+		 * Filter Plugin Engine Registered Post Type Arguements
+		 *
+		 * @since TBD
+		 *
+		 */
+		$args = apply_filters( 'pngx_register_' . $post_type . '_type_args', $args );
+
 		register_post_type( $post_type, $args );
 
 	}

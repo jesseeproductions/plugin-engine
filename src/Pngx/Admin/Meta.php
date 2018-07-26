@@ -19,13 +19,13 @@ if ( class_exists( 'Pngx__Admin__Meta' ) ) {
  */
 class Pngx__Admin__Meta {
 
-	protected static $instance;
+	protected $instance;
 
 	//tabs key and label
-	protected static $tabs = array();
+	protected $tabs = array();
 
 	//fields
-	protected static $fields = array();
+	protected $fields = array();
 
 	//post type
 	protected $post_type = array( 'pngx' );
@@ -39,10 +39,10 @@ class Pngx__Admin__Meta {
 	public function __construct() {
 
 		//Save Meta
-		add_action( 'save_post', array( __CLASS__, 'save_meta' ), 10, 2 );
+		add_action( 'save_post', array( $this, 'save_meta' ), 10, 2 );
 
 		//JS Error Check
-		add_action( 'pngx_meta_message', array( __CLASS__, 'get_js_error_check_msg' ) );
+		add_action( 'pngx_meta_message', array( $this, 'get_js_error_check_msg' ) );
 	}
 
 	/**
@@ -50,7 +50,7 @@ class Pngx__Admin__Meta {
 	 *
 	 * @return string
 	 */
-	public static function get_js_error_check_msg() {
+	public function get_js_error_check_msg() {
 
 		$js_troubleshoot_url = 'http://cctor.link/R7KRa';
 
@@ -63,7 +63,7 @@ class Pngx__Admin__Meta {
 	/*
 	* Set Current Screen Variables
 	*/
-	public static function get_screen_variables() {
+	public function get_screen_variables() {
 
 		global $pagenow, $typenow;
 		$current_screen['pagenow'] = $pagenow;
@@ -82,18 +82,18 @@ class Pngx__Admin__Meta {
 	/*
 	* Get Post Type
 	*/
-	public static function get_post_types() {
+	public function get_post_types() {
 
-		return self::instance()->post_type;
+		return $this->instance()->post_type;
 
 	}
 
 	/*
 	* Get User Capability
 	*/
-	public static function get_user_capability() {
+	public function get_user_capability() {
 
-		return self::instance()->user_capability;
+		return $this->instance()->user_capability;
 
 	}
 
@@ -112,9 +112,9 @@ class Pngx__Admin__Meta {
 	/*
 	* Get Tabs
 	*/
-	public static function get_tabs() {
+	public function get_tabs() {
 
-		return self::$tabs;
+		return $this->tabs;
 
 	}
 
@@ -129,9 +129,9 @@ class Pngx__Admin__Meta {
 	/*
 	* Get Fields
 	*/
-	public static function get_fields() {
+	public function get_fields() {
 
-		return self::$fields;
+		return $this->fields;
 
 	}
 
@@ -141,7 +141,7 @@ class Pngx__Admin__Meta {
 	 * @param $post
 	 * @param $metabox
 	 */
-	public static function display_fields( $post, $metabox ) {
+	public function display_fields( $post, $metabox ) {
 
 		global $wp_version;
 
@@ -150,7 +150,7 @@ class Pngx__Admin__Meta {
 		//Create Array of Tabs and Localize to Meta Script
 		$tabs_array = array();
 
-		foreach ( self::get_tabs() as $tab_slug => $tab ) {
+		foreach ( $this->get_tabs() as $tab_slug => $tab ) {
 			$tabs_array[ $tab ] = $tab_slug;
 		}
 
@@ -171,13 +171,13 @@ class Pngx__Admin__Meta {
 			<ul class="main pngx-tabs-nav">
 
 				<?php //Create Tabs
-				foreach ( self::get_tabs() as $tab_slug => $tab ) {
+				foreach ( $this->get_tabs() as $tab_slug => $tab ) {
 					echo '<li><a href="#' . esc_attr( $tab_slug ) . '">' . esc_attr( $tab ) . '</a></li>';
 				}
 				?>
 			</ul>
 
-			<?php foreach ( self::get_tabs() as $tab_slug => $tab ) {
+			<?php foreach ( $this->get_tabs() as $tab_slug => $tab ) {
 
 				//set variable for template area
 				$template_area = '';
@@ -196,7 +196,7 @@ class Pngx__Admin__Meta {
 					 */
 					do_action( 'pngx_per_tab_help', $tab_slug );
 
-					$fields = self::get_fields();
+					$fields = $this->get_fields();
 
 					foreach ( $fields as $field ) {
 
@@ -306,7 +306,7 @@ class Pngx__Admin__Meta {
 	/*
 	* Save Meta Fields
 	*/
-	public static function save_meta( $post_id, $post ) {
+	public function save_meta( $post_id, $post ) {
 
 		//Autosave or no past variable then kick out
 		if ( empty( $_POST ) || ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) ) {
@@ -314,12 +314,12 @@ class Pngx__Admin__Meta {
 		}
 
 		//Check if on the right post type
-		if ( isset( $post->post_type ) && ! in_array( $post->post_type, self::get_post_types() ) ) {
+		if ( isset( $post->post_type ) && ! in_array( $post->post_type, $this->get_post_types() ) ) {
 			return;
 		}
 
 		//Check if the user can make edits
-		if ( ! current_user_can( self::get_user_capability(), $post->ID ) ) {
+		if ( ! current_user_can( $this->get_user_capability(), $post->ID ) ) {
 			return;
 		}
 
@@ -337,7 +337,7 @@ class Pngx__Admin__Meta {
 		do_action( 'pngx_before_save_meta_fields', $_POST );
 
 		//Save Date for each file
-		foreach ( self::get_fields() as $option ) {
+		foreach ( $this->get_fields() as $option ) {
 
 			/**
 			 * Save Meta Fields
@@ -388,17 +388,13 @@ class Pngx__Admin__Meta {
 
 	}
 
-	/**
-	 * Static Singleton Factory Method
-	 *
-	 * @return Pngx__Admin__Meta
-	 */
-	public static function instance() {
-		if ( ! isset( self::$instance ) ) {
+	public function instance() {
+		if ( ! isset( $this->instance ) ) {
 			$className      = __CLASS__;
-			self::$instance = new $className;
+			$this->instance = new $className;
 		}
 
-		return self::$instance;
+		return $this->instance;
 	}
+
 }

@@ -9,7 +9,7 @@ Text Domain: plugin-engine
 License: GPLv2 or later
 */
 /*
-Copyright 2009-2017 by Jessee Productions, LLC and the contributors
+Copyright 2009-2018 by Jessee Productions, LLC and the contributors
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 2
@@ -24,4 +24,5 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 // the main plugin class
 require_once dirname( __FILE__ ) . '/src/Pngx/Main.php';
+
 Pngx__Main::instance();
