@@ -388,13 +388,13 @@ class Pngx__Admin__Meta {
 
 	}
 
-	public function instance() {
-		if ( ! isset( $this->instance ) ) {
+	public static function instance() {
+		if ( ! isset( self::$instance ) ) {
 			$className      = __CLASS__;
-			$this->instance = new $className;
+			self::$instance = new $className;
 		}
 
-		return $this->instance;
+		return self::$instance;
 	}
 
 }
