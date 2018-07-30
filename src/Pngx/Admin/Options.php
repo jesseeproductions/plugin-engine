@@ -14,7 +14,7 @@ if ( class_exists( 'Pngx__Admin__Options' ) ) {
  */
 class Pngx__Admin__Options {
 
-	protected static $instance;
+	protected $instance;
 	/*
 	* Tab Sections
 	*/
@@ -362,7 +362,7 @@ class Pngx__Admin__Options {
 	 * Options Header
 	 *
 	 */
-	public static function display_options_header( $slug ) {
+	public function display_options_header( $slug ) {
 
 		if ( 'plugin-engine-options' == $slug ) {
 			echo '<h1>Plugin Engine Options</h1>';
@@ -437,13 +437,13 @@ class Pngx__Admin__Options {
 	 *
 	 * @return Pngx__Admin__Options
 	 */
-	public static function instance() {
-		if ( ! isset( self::$instance ) ) {
+	public function instance() {
+		if ( ! isset( $this->instance ) ) {
 			$className      = __CLASS__;
-			self::$instance = new $className;
+			$this->instance = new $className;
 		}
 
-		return self::$instance;
+		return $this->instance;
 	}
 
 
