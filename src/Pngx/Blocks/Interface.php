@@ -22,6 +22,15 @@ interface Pngx__Blocks__Interface {
 	public function name();
 
 	/**
+	 * What are the default attributes for this block
+	 *
+	 * @since  TBD
+	 *
+	 * @return array
+	 */
+	public function default_attributes();
+
+	/**
 	 * Since we are dealing with a Dynamic type of Block we need a PHP method to render it
 	 *
 	 * @since  TBD
@@ -59,4 +68,13 @@ interface Pngx__Blocks__Interface {
 	 * @return mixed
 	 */
 	public function plugin();
+
+	/**
+	 * Attach any specific hook to the current block.
+	 *
+	 * @since TBD
+	 *
+	 * @return mixed
+	 */
+	public function hook();
 }

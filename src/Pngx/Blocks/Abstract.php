@@ -1,7 +1,7 @@
 <?php
 
-abstract class Pngx__Blocks__Abstract
-implements Pngx__Blocks__Interface {
+
+abstract class Pngx__Blocks__Abstract implements Pngx__Blocks__Interface {
 
 	/**
 	 * Namespace for Blocks from pngx
@@ -23,6 +23,58 @@ implements Pngx__Blocks__Interface {
 		return $this->namespace . '/' . $this->slug();
 	}
 
+	/*
+	 * Return the block attributes
+	 *
+	 * @since  TBD
+	 *
+	 * @param  array $attributes
+	 *
+	 * @return array
+	*/
+	public function attributes( $params = array() ) {
+
+		// get the default attributes
+		$default_attributes = $this->default_attributes();
+
+		// parse the attributes with the default ones
+		$attributes = wp_parse_args( $params, $default_attributes );
+
+		/**
+		 * Filters the default attributes for the block
+		 *
+		 * @param array  $attributes The attributes
+		 * @param object $this       The current object
+		 */
+		$attributes = apply_filters( 'pngx_block_attributes_defaults_' . $this->slug(), $attributes, $this );
+
+		return $attributes;
+	}
+
+	/*
+	 * Return the block default attributes
+	 *
+	 * @since  TBD
+	 *
+	 * @param  array $attributes
+	 *
+	 * @return array
+	*/
+	public function default_attributes() {
+
+		$attributes = array();
+
+		/**
+		 * Filters the default attributes
+		 *
+		 * @param array  $params The attributes
+		 * @param object $this   The current object
+		 */
+		$attributes = apply_filters( 'pngx_block_attributes_defaults', $attributes, $this );
+
+		return $attributes;
+	}
+
 	/**
 	 * Since we are dealing with a Dynamic type of Block we need a PHP method to render it
 	 *
@@ -39,11 +91,7 @@ implements Pngx__Blocks__Interface {
 			$json_string = json_encode( $attributes );
 		}
 
-		return
-		'<pre class="pngx-placeholder-text-' . $this->name() . '">' .
-			'Block Name: ' . $this->name() . "\n" .
-			'Block Attributes: ' . "\n" . $json_string .
-		'</pre>';
+		return '<pre class="pngx-placeholder-text-' . $this->name() . '">' . 'Block Name: ' . $this->name() . "\n" . 'Block Attributes: ' . "\n" . $json_string . '</pre>';
 	}
 
 	/**
@@ -109,6 +157,14 @@ implements Pngx__Blocks__Interface {
 	 */
 	public function assets() {
 
+	}
+
+	/**
+	 * Attach any particular hook for the specif block.
+	 *
+	 * @since TBD
+	 */
+	public function hook() {
 	}
 }
 
