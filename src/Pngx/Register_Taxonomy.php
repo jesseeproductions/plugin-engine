@@ -61,16 +61,27 @@ class Pngx__Register_Taxonomy {
 	public static function register_taxonomy( $taxonomy, $post_types, $labels, $slug, $updates ) {
 
 		$args = Pngx__Main::merge_defaults( array(
-			'labels'            => $labels,
-			'public'            => true,
-			'show_in_nav_menus' => false,
-			'show_ui'           => true,
-			'show_tagcloud'     => false,
-			'show_admin_column' => false,
-			'hierarchical'      => true,
-			'rewrite'           => array( 'slug' => $slug, 'with_front' => true ),
-			'query_var'         => true
+			'labels'                => $labels,
+			'public'                => true,
+			'show_in_nav_menus'     => false,
+			'show_ui'               => true,
+			'show_tagcloud'         => false,
+			'show_admin_column'     => false,
+			'hierarchical'          => true,
+			'rewrite'               => array( 'slug' => $slug, 'with_front' => true ),
+			'query_var'             => true,
+			'show_in_rest'          => true,
+			'rest_base'             => $taxonomy,
+			'rest_controller_class' => 'WP_REST_Terms_Controller',
 		), $updates );
+
+		/**
+		 * Filter Plugin Engine Registered Taxonomy Arguements
+		 *
+		 * @since TBD
+		 *
+		 */
+		$args = apply_filters( 'pngx_register_' . $taxonomy . '_taxonomy_args', $args );
 
 		register_taxonomy( $taxonomy, array( $post_types ), $args );
 

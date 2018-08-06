@@ -148,24 +148,24 @@ class Pngx__Register_Post_Type {
 	public static function register_post_types( $post_type, $capability_type, $singular_name, $labels, $slug, $text_domain, $updates ) {
 
 		$args = Pngx__Main::merge_defaults( array(
-			'label'               => sprintf( esc_html__( '%s', $text_domain ), $singular_name ),
-			'description'         => sprintf( esc_html__( 'Creates a %s Custom Post Type', $text_domain ), $singular_name ),
-			'labels'              => $labels,
-			'supports'            => '',
-			'hierarchical'        => false,
-			'public'              => true,
-			'show_ui'             => true,
-			'show_in_menu'        => true,
-			'menu_icon'           => '',
-			'show_in_admin_bar'   => true,
-			'show_in_nav_menus'   => false,
-			'can_export'          => true,
-			'has_archive'         => false,
-			'map_meta_cap'        => true,
-			'exclude_from_search' => false,
-			'publicly_queryable'  => true,
-			'capability_type'     => array( $post_type, "{$capability_type}s" ),
-			'capabilities'        => array(
+			'label'                 => sprintf( esc_html__( '%s', $text_domain ), $singular_name ),
+			'description'           => sprintf( esc_html__( 'Creates a %s Custom Post Type', $text_domain ), $singular_name ),
+			'labels'                => $labels,
+			'supports'              => '',
+			'hierarchical'          => false,
+			'public'                => true,
+			'show_ui'               => true,
+			'show_in_menu'          => true,
+			'menu_icon'             => '',
+			'show_in_admin_bar'     => true,
+			'show_in_nav_menus'     => false,
+			'can_export'            => true,
+			'has_archive'           => false,
+			'map_meta_cap'          => true,
+			'exclude_from_search'   => false,
+			'publicly_queryable'    => true,
+			'capability_type'       => array( $post_type, "{$capability_type}s" ),
+			'capabilities'          => array(
 				// Meta capabilities
 				'edit_post'               => "edit_{$capability_type}",
 				'read_post'               => "read_{$capability_type}",
@@ -185,7 +185,10 @@ class Pngx__Register_Post_Type {
 				'edit_published_posts '   => "edit_published_{$capability_type}s",
 				'create_posts '           => "edit_{$capability_type}s",
 			),
-			'rewrite'             => array( 'slug' => $slug ),
+			'rewrite'               => array( 'slug' => $slug ),
+			'show_in_rest'          => true,
+			'rest_base'             => $post_type,
+			'rest_controller_class' => 'WP_REST_Posts_Controller',
 		), $updates );
 
 		/**
