@@ -82,7 +82,7 @@ class Pngx__Editor {
 	}
 
 	/**
-	 * Adds the required blocks into the Events Post Type
+	 * Adds the required blocks
 	 *
 	 * @since  tbd
 	 *
@@ -96,7 +96,7 @@ class Pngx__Editor {
 		/**
 		 * @todo Have a good method from the block class to em here
 		 */
-		$template[] = array( 'pngx/menu-items' );
+		$template[] = array( 'pngx/blocks' );
 		$template[] = array(
 			'core/paragraph',
 			array(
