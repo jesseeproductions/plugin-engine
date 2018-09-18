@@ -45,6 +45,7 @@ return array(
     'Shell_Command' => $vendorDir . '/wp-cli/shell-command/src/Shell_Command.php', 
     'Sidebar_Command' => $vendorDir . '/wp-cli/widget-command/src/Sidebar_Command.php', 
     'Site_Command' => $vendorDir . '/wp-cli/entity-command/src/Site_Command.php', 
+    'Site_Meta_Command' => $vendorDir . '/wp-cli/entity-command/src/Site_Meta_Command.php', 
     'Site_Option_Command' => $vendorDir . '/wp-cli/entity-command/src/Site_Option_Command.php', 
     'Super_Admin_Command' => $vendorDir . '/wp-cli/super-admin-command/src/Super_Admin_Command.php', 
     'Taxonomy_Command' => $vendorDir . '/wp-cli/entity-command/src/Taxonomy_Command.php', 
