@@ -1,13 +1,11 @@
 <?php
 
-namespace Research\Project\REST\Headers;
-
 /**
- * Class Tribe__REST__Headers__Headers_Interface
+ * Class Pngx__REST__Headers__Headers_Interface
  *
  * Handles headers and header equivalent to be printed/sent in responses.
  */
-interface Tribe__REST__Headers__Headers_Interface {
+interface Pngx__REST__Headers__Headers_Interface {
 	/**
 	 * Prints the REST API related meta on the site.
 	 */

@@ -1,10 +1,6 @@
 <?php
 
-namespace Research\Project\REST;
-
-
-
-interface Post_Repository_Interface {
+interface Pngx__REST__Post_Repository_Interface {
 
 	/**
 	 * Retrieves an array representation of the post.

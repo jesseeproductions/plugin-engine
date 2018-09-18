@@ -1,7 +1,5 @@
 <?php
 
-namespace Research\Project\REST;
-
 /**
  * Class Main
  *
@@ -9,7 +7,7 @@ namespace Research\Project\REST;
  *
  * This class should not contain business logic and merely set up and start the REST API support.
  */
-abstract class Main {
+abstract class Pngx__REST__Main {
 
 	/**
 	 * Research REST APIs URL namespace.
@@ -45,7 +43,7 @@ abstract class Main {
 		$prefix = rtrim( $prefix, '/' ) . '/' . trim( $default_tec_prefix, '/' );
 
 		/**
-		 * Filters the TEC REST API URL prefix
+		 * Filters the PNGX REST API URL prefix
 		 *
 		 * @param string $prefix             The complete URL prefix.
 		 * @param string $default_tec_prefix The default URL prefix appended to the REST URL by The Events Calendar.
@@ -54,13 +52,13 @@ abstract class Main {
 	}
 
 	/**
-	 * Retrieves the URL to a TEC REST endpoint on a site.
+	 * Retrieves the URL to a PNGX REST endpoint on a site.
 	 *
 	 * Note: The returned URL is NOT escaped.
 	 *
 	 * @global WP_Rewrite $wp_rewrite
 	 *
-	 * @param string      $path    Optional. TEC REST route. Default '/'.
+	 * @param string      $path    Optional. PNGX REST route. Default '/'.
 	 * @param string      $scheme  Optional. Sanitization scheme. Default 'rest'.
 	 * @param int         $blog_id Optional. Blog ID. Default of null returns URL for current blog.
 	 *
@@ -103,7 +101,7 @@ abstract class Main {
 		/**
 		 * Filters The Events Calendar REST URL.
 		 *
-		 * @param string $url     TEC REST URL.
+		 * @param string $url     PNGX REST URL.
 		 * @param string $path    REST route.
 		 * @param int    $blog_id Blog ID.
 		 * @param string $scheme  Sanitization scheme.

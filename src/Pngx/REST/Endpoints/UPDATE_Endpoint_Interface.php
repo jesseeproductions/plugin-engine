@@ -1,8 +1,6 @@
 <?php
 
-namespace Research\Project\REST\Endpoints;
-
-interface UPDATE_Endpoint_Interface {
+interface Pngx__REST__UPDATE_Endpoint_Interface {
 	/**
 	 * Handles UPDATE requests on the endpoint.
 	 *

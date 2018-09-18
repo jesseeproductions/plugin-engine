@@ -42,37 +42,37 @@ if ( ! function_exists( 'pngx_singleton' ) ) {
 	 *
 	 * Example use:
 	 *
-	 *      pngx_singleton( 'tec.admin.class', 'Pngx__Admin__Class' );
+	 *      pngx_singleton( 'pngx.admin.class', 'Pngx__Admin__Class' );
 	 *
 	 *      // some code later...
 	 *
 	 *      // class is built here
-	 *      pngx( 'tec.admin.class' )->doSomething();
+	 *      pngx( 'pngx.admin.class' )->doSomething();
 	 *
 	 * Need the class built immediately? Build it and register it:
 	 *
-	 *      pngx_singleton( 'tec.admin.class', new Pngx__Admin__Class() );
+	 *      pngx_singleton( 'pngx.admin.class', new Pngx__Admin__Class() );
 	 *
 	 *      // some code later...
 	 *
-	 *      pngx( 'tec.admin.class' )->doSomething();
+	 *      pngx( 'pngx.admin.class' )->doSomething();
 	 *
 	 * Need a very custom way to build the class? Register a callback:
 	 *
-	 *      pngx_singleton( 'tec.admin.class', array( Pngx__Admin__Class__Factory, 'make' ) );
+	 *      pngx_singleton( 'pngx.admin.class', array( Pngx__Admin__Class__Factory, 'make' ) );
 	 *
 	 *      // some code later...
 	 *
-	 *      pngx( 'tec.admin.class' )->doSomething();
+	 *      pngx( 'pngx.admin.class' )->doSomething();
 	 *
 	 * Or register the methods that should be called on the object after its construction:
 	 *
-	 *      pngx_singleton( 'tec.admin.class', 'Pngx__Admin__Class', array( 'hook', 'register' ) );
+	 *      pngx_singleton( 'pngx.admin.class', 'Pngx__Admin__Class', array( 'hook', 'register' ) );
 	 *
 	 *      // some code later...
 	 *
 	 *      // the `hook` and `register` methods will be called on the built instance.
-	 *      pngx( 'tec.admin.class' )->doSomething();
+	 *      pngx( 'pngx.admin.class' )->doSomething();
 	 *
 	 * The class will be built only once (if passing the class name or a callback function), stored
 	 * and the same instance will be returned from that moment on.
@@ -102,45 +102,45 @@ if ( ! function_exists( 'pngx_register' ) ) {
 	 *
 	 * Example use:
 	 *
-	 *      pngx_register( 'tec.some', 'Pngx__Some' );
+	 *      pngx_register( 'pngx.some', 'Pngx__Some' );
 	 *
 	 *      // some code later...
 	 *
 	 *      // class is built here
-	 *      $some_one = pngx( 'tec.some' )->doSomething();
+	 *      $some_one = pngx( 'pngx.some' )->doSomething();
 	 *
 	 *      // $some_two !== $some_one
-	 *      $some_two = pngx( 'tec.some' )->doSomething();
+	 *      $some_two = pngx( 'pngx.some' )->doSomething();
 	 *
 	 * Need the class built immediately? Build it and register it:
 	 *
-	 *      pngx_register( 'tec.admin.class', new Pngx__Admin__Class() );
+	 *      pngx_register( 'pngx.admin.class', new Pngx__Admin__Class() );
 	 *
 	 *      // some code later...
 	 *
 	 *      // $some_two === $some_one
 	 *      // acts like a singleton
-	 *      $some_one = pngx( 'tec.some' )->doSomething();
-	 *      $some_two = pngx( 'tec.some' )->doSomething();
+	 *      $some_one = pngx( 'pngx.some' )->doSomething();
+	 *      $some_two = pngx( 'pngx.some' )->doSomething();
 	 *
 	 * Need a very custom way to build the class? Register a callback:
 	 *
-	 *      pngx_register( 'tec.some', array( Pngx__Some__Factory, 'make' ) );
+	 *      pngx_register( 'pngx.some', array( Pngx__Some__Factory, 'make' ) );
 	 *
 	 *      // some code later...
 	 *
 	 *      // $some_two !== $some_one
-	 *      $some_one = pngx( 'tec.some' )->doSomething();
-	 *      $some_two = pngx( 'tec.some' )->doSomething();
+	 *      $some_one = pngx( 'pngx.some' )->doSomething();
+	 *      $some_two = pngx( 'pngx.some' )->doSomething();
 	 *
 	 * Or register the methods that should be called on the object after its construction:
 	 *
-	 *      pngx_singleton( 'tec.admin.class', 'Pngx__Admin__Class', array( 'hook', 'register' ) );
+	 *      pngx_singleton( 'pngx.admin.class', 'Pngx__Admin__Class', array( 'hook', 'register' ) );
 	 *
 	 *      // some code later...
 	 *
 	 *      // the `hook` and `register` methods will be called on the built instance.
-	 *      pngx( 'tec.admin.class' )->doSomething();
+	 *      pngx( 'pngx.admin.class' )->doSomething();
 	 *
 	 * @param string                 $slug                The human-readable and catchy name of the class.
 	 * @param string|object|callable $class               The full class name or an instance of the class
@@ -188,7 +188,7 @@ if ( ! function_exists( 'pngx_set_var' ) ) {
 	 *
 	 * Example use:
 	 *
-	 *      pngx_set_var( 'tec.url', 'http://example.com' );
+	 *      pngx_set_var( 'pngx.url', 'http://example.com' );
 	 *
 	 * @param string $slug  The human-readable and catchy name of the var.
 	 * @param mixed  $value The variable value.
@@ -205,9 +205,9 @@ if ( ! function_exists( 'pngx_get_var' ) ) {
 	 *
 	 * Example use:
 	 *
-	 *      pngx_set_var( 'tec.url', 'http://example.com' );
+	 *      pngx_set_var( 'pngx.url', 'http://example.com' );
 	 *
-	 *      $url = pngx_get_var( 'tec.url' );
+	 *      $url = pngx_get_var( 'pngx.url' );
 	 *
 	 * @param string $slug    The slug of the variable registered using `pngx_set_var`.
 	 * @param null   $default The value that should be returned if the variable slug

@@ -1,9 +1,6 @@
 <?php
 
-namespace Research\Project\REST;
-
-
-interface Messages_Interface {
+interface Pngx__REST__Messages_Interface {
 
 	/**
 	 * Returns the localized message associated with the slug.

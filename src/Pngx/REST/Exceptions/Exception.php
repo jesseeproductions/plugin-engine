@@ -1,10 +1,9 @@
 <?php
 
-namespace Research\Project\REST\Exceptions;
 /**
- * Class Tribe__REST__Exceptions__Exception
+ * Class Pngx__REST__Exceptions__Exception
  */
-class Exception extends \Exception {
+class Pngx__REST__Exceptions__Exception extends Exception {
 	/**
 	 * @var int
 	 */

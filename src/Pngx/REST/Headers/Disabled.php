@@ -1,19 +1,17 @@
 <?php
 
-namespace Research\Project\REST\Headers;
 
-
-class Headers__Disabled extends Base_Header implements Headers_Interface {
+class Pngx__REST__Headers__Disabled extends Pngx__REST__Base_Header implements Pngx__REST__Headers_Interface {
 
 	/**
-	 * Prints TEC REST API related meta on the site.
+	 * Prints PNGX REST API related meta on the site.
 	 */
 	public function add_header() {
 		// no-op
 	}
 
 	/**
-	 * Sends TEC REST API related headers.
+	 * Sends PNGX REST API related headers.
 	 */
 	public function send_header() {
 		if ( headers_sent() ) {

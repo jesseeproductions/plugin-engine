@@ -1,8 +1,6 @@
 <?php
 
-namespace Research\Project\REST;
-
-class Post_Repository {
+class Pngx__REST__Post_Repository {
 
 	/**
 	 * Returns the data representing an image object.

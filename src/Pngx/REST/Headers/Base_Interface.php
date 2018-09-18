@@ -1,14 +1,11 @@
 <?php
 
-namespace Research\Project\REST\Headers;
-
-
 /**
- * Interface Tribe__REST__Headers__Base_Interface
+ * Interface Pngx__REST__Headers__Base_Interface
  *
  * Provides basic information for the
  */
-interface Base_Interface {
+interface Pngx__REST__Base_Interface {
 	/**
 	 * Returns the header that the REST API will print on the page head to report
 	 * its version.

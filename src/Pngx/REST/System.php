@@ -1,9 +1,7 @@
 <?php
 
-namespace Research\Project\REST;
 
-
-class System {
+class Pngx__REST__System {
 
 	/**
 	 * Whether the WP installation supports WP REST API or not.

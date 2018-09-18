@@ -1,8 +1,6 @@
 <?php
 
-namespace Research\Project\REST\Endpoints;
-
-interface READ_Endpoint_Interface {
+interface Pngx__REST__READ_Endpoint_Interface {
 
 	/**
 	 * Handles GET requests on the endpoint.
