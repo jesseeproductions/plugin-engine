@@ -4,7 +4,7 @@
 class Pngx__REST__Headers__Unsupported extends Pngx__REST__Headers__Base_Header implements Pngx__REST__Headers__Headers_Interface {
 
 	/**
-	 * @var Pngx__REST__Main
+	 * @var PNGX__REST__Main
 	 */
 	protected $main;
 

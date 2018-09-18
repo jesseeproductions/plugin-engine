@@ -1,6 +1,6 @@
 <?php
 
-abstract class Pngx__REST__Base_Header {
+abstract class Pngx__REST__Headers__Base_Header {
 
 	/**
 	 * @var Pngx__REST__Headers__Base_Interface

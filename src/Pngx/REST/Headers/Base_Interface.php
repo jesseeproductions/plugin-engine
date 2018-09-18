@@ -5,7 +5,7 @@
  *
  * Provides basic information for the
  */
-interface Pngx__REST__Base_Interface {
+interface Pngx__REST__Headers__Base_Interface {
 	/**
 	 * Returns the header that the REST API will print on the page head to report
 	 * its version.

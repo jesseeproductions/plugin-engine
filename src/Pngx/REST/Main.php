@@ -48,7 +48,7 @@ abstract class Pngx__REST__Main {
 		 * @param string $prefix             The complete URL prefix.
 		 * @param string $default_tec_prefix The default URL prefix appended to the REST URL by The Events Calendar.
 		 */
-		return apply_filters( 'jp_research_rest_url_prefix', $prefix, $default_tec_prefix );
+		return apply_filters( 'pngx_rest_url_prefix', $prefix, $default_tec_prefix );
 	}
 
 	/**
@@ -106,7 +106,7 @@ abstract class Pngx__REST__Main {
 		 * @param int    $blog_id Blog ID.
 		 * @param string $scheme  Sanitization scheme.
 		 */
-		return apply_filters( 'tribe_rest_url', $url, $path, $blog_id, $scheme );
+		return apply_filters( 'pngx_rest_url', $url, $path, $blog_id, $scheme );
 	}
 
 	/**
@@ -118,7 +118,7 @@ abstract class Pngx__REST__Main {
 		/**
 		 * Filters whether builtin WordPress REST API functions should be used or not if available.
 		 */
-		$use_builtin = apply_filters( 'jp_research_rest_use_builtin', true );
+		$use_builtin = apply_filters( 'pngx_rest_use_builtin', true );
 
 		return $use_builtin && function_exists( 'get_rest_url' );
 	}
