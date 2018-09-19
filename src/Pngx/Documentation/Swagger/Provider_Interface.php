@@ -1,6 +1,6 @@
 <?php
 
-interface PNGX__Documentation__Swagger__Provider_Interface {
+interface Pngx__Documentation__Swagger__Provider_Interface {
 	/**
 	 * Returns an array in the format used by Swagger 2.0.
 	 *

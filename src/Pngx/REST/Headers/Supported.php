@@ -3,7 +3,7 @@
 class Pngx__REST__Headers__Supported extends Pngx__REST__Headers__Base_Header implements Pngx__REST__Headers__Headers_Interface {
 
 	/**
-	 * @var PNGX__REST__Main
+	 * @var Pngx__REST__Main
 	 */
 	protected $main;
 

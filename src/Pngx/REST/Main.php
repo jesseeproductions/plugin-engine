@@ -14,7 +14,7 @@ abstract class Pngx__REST__Main {
 	 *
 	 * @var string
 	 */
-	protected $namespace = 'research';
+	protected $namespace = 'pngx';
 
 	/**
 	 * Returns the namespace of Research REST APIs.

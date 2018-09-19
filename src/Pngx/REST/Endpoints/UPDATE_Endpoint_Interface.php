@@ -1,6 +1,6 @@
 <?php
 
-interface Pngx__REST__UPDATE_Endpoint_Interface {
+interface Pngx__REST__Endpoints__UPDATE_Endpoint_Interface {
 	/**
 	 * Handles UPDATE requests on the endpoint.
 	 *

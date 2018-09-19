@@ -1,7 +1,7 @@
 <?php
 
-class PNGX__Documentation__Swagger__Term_Definition_Provider
-	implements PNGX__Documentation__Swagger__Provider_Interface {
+class Pngx__Documentation__Swagger__Term_Definition_Provider
+	implements Pngx__Documentation__Swagger__Provider_Interface {
 
 	/**
 	 * Returns an array in the format used by Swagger 2.0.

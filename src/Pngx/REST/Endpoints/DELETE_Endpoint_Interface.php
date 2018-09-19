@@ -1,6 +1,6 @@
 <?php
 
-interface Pngx__REST__DELETE_Endpoint_Interface {
+interface Pngx__REST__Endpoints__DELETE_Endpoint_Interface {
 	/**
 	 * Handles DELETE requests on the endpoint.
 	 *

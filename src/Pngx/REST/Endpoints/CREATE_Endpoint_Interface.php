@@ -1,6 +1,6 @@
 <?php
 
-interface Pngx__REST__CREATE_Endpoint_Interface {
+interface Pngx__REST__Endpoints__CREATE_Endpoint_Interface {
 	/**
 	 * Handles POST requests on the endpoint.
 	 *

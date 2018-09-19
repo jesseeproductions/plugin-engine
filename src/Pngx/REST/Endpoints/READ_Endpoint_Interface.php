@@ -1,6 +1,6 @@
 <?php
 
-interface Pngx__REST__READ_Endpoint_Interface {
+interface Pngx__REST__Endpoints__READ_Endpoint_Interface {
 
 	/**
 	 * Handles GET requests on the endpoint.
