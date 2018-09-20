@@ -6,6 +6,8 @@
  * The main entry point for a Research REST API implementation.
  *
  * This class should not contain business logic and merely set up and start the REST API support.
+ *
+ * based off Modern Tribe's REST API - https://github.com/moderntribe/tribe-common/blob/master/src/Tribe/REST/Main.php
  */
 abstract class Pngx__REST__Main {
 
