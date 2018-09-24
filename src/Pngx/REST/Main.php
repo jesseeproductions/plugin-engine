@@ -71,10 +71,10 @@ abstract class Pngx__REST__Main {
 			$path = '/';
 		}
 
-		$tec_path = '/' . trim( $this->namespace, '/' ) . $this->url_prefix() . '/' . ltrim( $path, '/' );
+		$pngx_path = '/' . trim( $this->namespace, '/' ) . $this->url_prefix() . '/' . ltrim( $path, '/' );
 
 		if ( $this->use_builtin() ) {
-			$url = get_rest_url( $blog_id, $tec_path, $scheme );
+			$url = get_rest_url( $blog_id, $pngx_path, $scheme );
 		} else {
 			if ( ( is_multisite() && get_blog_option( $blog_id, 'permalink_structure' ) ) || get_option( 'permalink_structure' ) ) {
 				global $wp_rewrite;
@@ -89,7 +89,7 @@ abstract class Pngx__REST__Main {
 			} else {
 				$url = get_home_url( $blog_id, 'index.php', $scheme );
 
-				$url = add_query_arg( 'rest_route', $tec_path, $url );
+				$url = add_query_arg( 'rest_route', $pngx_path, $url );
 			}
 
 			if ( is_ssl() ) {
