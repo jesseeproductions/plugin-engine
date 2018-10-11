@@ -24,7 +24,7 @@ class Pngx__Register_Taxonomy {
 	 *
 	 * @return array
 	 */
-	public static function generate_taxonomy_labels( $singular_tax_name, $lc_singular_tax_name, $plural_tax_name, $lc_plural_tax_name, $text_domain ) {
+	public function generate_taxonomy_labels( $singular_tax_name, $lc_singular_tax_name, $plural_tax_name, $lc_plural_tax_name, $text_domain ) {
 
 		$labels = array(
 			'name'                       => sprintf( esc_html__( '%s', $text_domain ), $singular_tax_name ),
@@ -58,18 +58,18 @@ class Pngx__Register_Taxonomy {
 	 * @param $slug
 	 * @param $updates
 	 */
-	public static function register_taxonomy( $taxonomy, $post_types, $labels, $slug, $updates ) {
+	public function register_taxonomy( $taxonomy, $post_types, $labels, $slug, $updates ) {
 
 		$args = Pngx__Main::merge_defaults( array(
-			'labels'                => $labels,
-			'public'                => true,
-			'show_in_nav_menus'     => false,
-			'show_ui'               => true,
-			'show_tagcloud'         => false,
-			'show_admin_column'     => false,
-			'hierarchical'          => true,
-			'rewrite'               => array( 'slug' => $slug, 'with_front' => true ),
-			'query_var'             => true,
+			'labels'            => $labels,
+			'public'            => true,
+			'show_in_nav_menus' => false,
+			'show_ui'           => true,
+			'show_tagcloud'     => false,
+			'show_admin_column' => false,
+			'hierarchical'      => true,
+			'rewrite'           => array( 'slug' => $slug, 'with_front' => true ),
+			'query_var'         => true,
 			'show_in_rest'          => true,
 			'rest_base'             => $taxonomy,
 			'rest_controller_class' => 'WP_REST_Terms_Controller',
@@ -83,7 +83,7 @@ class Pngx__Register_Taxonomy {
 		 */
 		$args = apply_filters( 'pngx_register_' . $taxonomy . '_taxonomy_args', $args );
 
-		register_taxonomy( $taxonomy, array( $post_types ), $args );
+		register_taxonomy( $taxonomy, $post_types, $args );
 
 	}
 

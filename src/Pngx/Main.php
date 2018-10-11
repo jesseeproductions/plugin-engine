@@ -73,6 +73,8 @@ class Pngx__Main {
 
 		$this->init_autoloading();
 
+		$this->bind_implementations();
+
 		$this->add_hooks();
 
 		$this->doing_ajax = defined( 'DOING_AJAX' ) && DOING_AJAX;
@@ -105,6 +107,14 @@ class Pngx__Main {
 		$autoloader->register_prefixes( $prefixes );
 		$autoloader->register_autoloader();
 
+	}
+
+	/**
+	 * Registers the slug bound to the implementations in the container.
+	 */
+	public function bind_implementations() {
+		pngx_register( 'pngx.register.cpt', new Pngx__Register_Post_Type() );
+		pngx_register( 'pngx.register.tax', new Pngx__Register_Taxonomy() );
 	}
 
 	/**

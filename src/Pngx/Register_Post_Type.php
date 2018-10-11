@@ -103,7 +103,7 @@ class Pngx__Register_Post_Type {
 	 *
 	 * @return array
 	 */
-	public static function generate_post_type_labels( $singular_name, $plural_name, $lc_singular_name, $lc_plural_name, $text_domain ) {
+	public function generate_post_type_labels( $singular_name, $plural_name, $lc_singular_name, $lc_plural_name, $text_domain ) {
 
 		$labels = array(
 			'name'                  => sprintf( esc_html__( '%s', $text_domain ), $plural_name ),
@@ -145,7 +145,7 @@ class Pngx__Register_Post_Type {
 	 * @param $text_domain
 	 * @param $updates
 	 */
-	public static function register_post_types( $post_type, $capability_type, $singular_name, $labels, $slug, $text_domain, $updates ) {
+	public function register_post_types( $post_type, $capability_type, $singular_name, $labels, $slug, $text_domain, $updates ) {
 
 		$args = Pngx__Main::merge_defaults( array(
 			'label'                 => sprintf( esc_html__( '%s', $text_domain ), $singular_name ),
