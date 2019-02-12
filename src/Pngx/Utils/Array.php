@@ -276,4 +276,15 @@ class Pngx__Utils__Array {
 
 		return $found ? $mapped[0] : false;
 	}
+
+	/**
+	 * Check if an array already has a value
+	 *
+	 * @param $items array a flat array of values
+	 *
+	 * @return bool
+	 */
+	public function array_has_value( $items ) {
+		return count( $items ) > count( array_unique( $items ) );
+	}
 }
