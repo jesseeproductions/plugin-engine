@@ -115,6 +115,7 @@ class Pngx__Main {
 	public function bind_implementations() {
 		pngx_register( 'pngx.register.cpt', new Pngx__Register_Post_Type() );
 		pngx_register( 'pngx.register.tax', new Pngx__Register_Taxonomy() );
+		pngx_singleton( 'cache', 'Pngx__Cache' );
 	}
 
 	/**
