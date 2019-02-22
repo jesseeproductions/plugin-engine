@@ -8,7 +8,7 @@
  *
  * When used in its ArrayAccess API the cache will provide non persistent storage.
  *
- * - using Tribe__Cache from The Events Calendar as the basis
+ * - using Pngx__Cache from The Events Calendar as the basis
  */
 class Pngx__Cache implements ArrayAccess {
 	const NO_EXPIRATION  = 0;

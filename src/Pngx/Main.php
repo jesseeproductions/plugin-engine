@@ -183,7 +183,7 @@ class Pngx__Main {
 	/**
 	 * Returns the post types registered with plugin engine
 	 */
-	public static function get_post_types() {
+	public function get_post_types() {
 		// we default the post type array to empty in plugin engine. Plugins like PNGX add to it
 		return apply_filters( 'pngx_post_types', array() );
 
