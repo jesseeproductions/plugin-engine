@@ -93,3 +93,41 @@ if ( ! function_exists( 'pngx_wp_strtotime' ) ) {
 		return $datetime->format( 'U' );
 	}
 }
+
+if ( ! function_exists( 'pngx_register_plugin' ) ) {
+	/**
+	 * Checks if this plugin has permission to run, if not it notifies the admin
+	 *
+	 * @param string $file_path    Full file path to the base plugin file
+	 * @param string $main_class   The Main/base class for this plugin
+	 * @param string $version      The version
+	 * @param array  $classes_req  Any Main class files/pngx plugins required for this to run
+	 * @param array  $dependencies an array of dependencies to check
+	 *
+	 * @return bool Indicates if plugin should continue initialization
+	 */
+	function pngx_register_plugin( $file_path, $main_class, $version, $classes_req = array(), $dependencies = array() ) {
+
+		$pngx_dependency  = Pngx__Dependency::instance();
+		$pngx_dependency->register_plugin( $file_path, $main_class, $version, $classes_req, $dependencies );
+
+	}
+}
+
+if ( ! function_exists( 'pngx_check_plugin' ) ) {
+	/**
+	 * Checks if this plugin has permission to run, if not it notifies the admin
+	 *
+	 * @since 4.9
+	 *
+	 * @param string $main_class   The Main/base class for this plugin
+	 *
+	 * @return bool Indicates if plugin should continue initialization
+	 */
+	function pngx_check_plugin( $main_class ) {
+
+		$pngx_dependency    = Pngx__Dependency::instance();
+		return $pngx_dependency->check_plugin( $main_class );
+
+	}
+}

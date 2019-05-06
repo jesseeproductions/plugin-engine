@@ -69,20 +69,42 @@ class Pngx__Main {
 		$this->vendor_path   = $this->plugin_path . 'vendor/';
 		$this->vendor_url    = $this->plugin_url . 'vendor/';
 
+		add_action( 'plugins_loaded', array( $this, 'plugins_loaded' ), 1 );
+		add_action( 'tribe_common_loaded', array( $this, 'tribe_common_app_store' ), 10 );
+	}
+
+	/**
+	 *
+	 */
+	public function plugins_loaded() {
+
 		$this->load_text_domain( 'plugin-engine', basename( dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) ) . '/plugin-engine/languages/' );
 
 		$this->init_autoloading();
 
 		$this->add_hooks();
 
-		$this->doing_ajax = defined( 'DOING_AJAX' ) && DOING_AJAX;
+		$this->loadLibraries();
 
 		/**
-		 * Runs once all pngx libs are loaded and initial hooks are in place.
+		 * Runs once all common libs are loaded and initial hooks are in place.
+		 *
+		 * @since 2.6
+		 */
+		do_action( 'pngx_common_loaded' );
+
+		/**
+		 * Runs to register loaded plugins
 		 *
 		 */
-		do_action( 'plugin_engine_loaded' );
+		do_action( 'pngx_plugins_loaded' );
 
+		/**
+		 * Use pngx_plugins_loaded instead
+		 *
+		 * @deprecated 2.6
+		 */
+		do_action( 'plugin_engine_loaded' );
 	}
 
 	/**
@@ -244,20 +266,6 @@ class Pngx__Main {
 		return $out;
 
 	}
-
-	/**
-	 * Runs pngx_plugins_loaded action, should be hooked to the end of plugins_loaded
-	 */
-	public function pngx_plugins_loaded() {
-		/**
-		 * Runs after all plugins including Plugin Engine ones have loaded
-		 *
-		 */
-		do_action( 'pngx_plugins_loaded' );
-
-		$this->loadLibraries();
-	}
-
 
 	/**
 	 * Load all the required library files.
