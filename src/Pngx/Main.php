@@ -82,9 +82,9 @@ class Pngx__Main {
 
 		$this->init_autoloading();
 
-		$this->add_hooks();
-
+		$this->bind_implementations();
 		$this->loadLibraries();
+		$this->add_hooks();
 
 		/**
 		 * Runs once all common libs are loaded and initial hooks are in place.
@@ -138,6 +138,14 @@ class Pngx__Main {
 	}
 
 	/**
+	 * Registers the slug bound to the implementations in the container.
+	 */
+	public function bind_implementations() {
+		pngx_singleton( 'assets', 'Pngx__Assets' );
+		pngx_singleton( 'context', 'Pngx__Context' );
+	}
+
+	/**
 	 * Adds core hooks
 	 */
 	public function add_hooks() {
@@ -147,8 +155,7 @@ class Pngx__Main {
 			new Pngx__Admin__Main();
 		}
 
-		add_action( 'plugins_loaded', array( $this, 'pngx_plugins_loaded' ), PHP_INT_MAX );
-
+		add_action( 'plugins_loaded', array( 'Pngx__Admin__Notices', 'instance' ), 1 );
 	}
 
 	/**

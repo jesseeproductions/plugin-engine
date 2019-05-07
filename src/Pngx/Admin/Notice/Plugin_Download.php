@@ -2,6 +2,10 @@
 
 /**
  * Shows an admin notice telling users which requisite plugins they need to download
+ *
+ * Based off Modern Tribe's Tribe__Admin__Notice__Plugin_Download
+ *
+ * @since 2.6
  */
 class Pngx__Admin__Notice__Plugin_Download {
 
