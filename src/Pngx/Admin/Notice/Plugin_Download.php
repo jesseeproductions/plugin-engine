@@ -68,7 +68,7 @@ class Pngx__Admin__Notice__Plugin_Download {
 
 			if ( ! empty( $req_plugin['thickbox_url'] ) ) {
 				$item = sprintf(
-					'<a href="%1$s" class="thickbox" title="%2$s">%3$s%4$s</a>',
+					'<a href="%1$s" class="thickbox" title="%2$s" target="_blank">%3$s%4$s</a>',
 					esc_attr( $req_plugin['thickbox_url'] ),
 					esc_attr( $req_plugin['name'] ),
 					esc_html( $item ),
@@ -97,12 +97,12 @@ class Pngx__Admin__Notice__Plugin_Download {
 
 		$allowed_html = array(
 			'strong' => array(),
-			'a'      => array( 'href' => array() ),
+			'a'      => array( 'href' => array(), 'target' => array() ),
 		);
 
 		printf(
 			'<div class="error pngx-notice pngx-dependency-error" data-plugin="%1$s"><p>'
-			. esc_html__( 'To begin using %2$s, please install and activate the latest version of %3$s.', 'pngx-common' )
+			. esc_html__( 'To begin using %2$s, please install and activate at least the following version(s) of %3$s.', 'plugin-engine' )
 			. '</p></div>',
 			esc_attr( sanitize_title( $plugin_data['Name'] ) ),
 			wp_kses( $this->implode_with_grammar( $plugin_name ), $allowed_html ),
@@ -118,8 +118,8 @@ class Pngx__Admin__Notice__Plugin_Download {
 	 * @return string String of items
 	 */
 	public function implode_with_grammar( $items ) {
-		$separator   = _x( ', ', 'separator used in a list of items', 'pngx-common' );
-		$conjunction = _x( ' and ', 'the final separator in a list of two or more items', 'pngx-common' );
+		$separator   = _x( ', ', 'separator used in a list of items', 'plugin-engine' );
+		$conjunction = _x( ' and ', 'the final separator in a list of two or more items', 'plugin-engine' );
 		$output      = $last_item = array_pop( $items );
 
 		if ( $items ) {

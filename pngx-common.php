@@ -2,7 +2,7 @@
 /*
 Plugin Name: Plugin Engine
 Description: A plugin framework to be embeded in the core plugin
-Version: 2.5.6
+Version: 2.6
 Author: Jessee Productions, LLC
 Author URI: https://jesseeproductions.com/
 Text Domain: plugin-engine

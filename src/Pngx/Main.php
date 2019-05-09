@@ -14,7 +14,7 @@ if ( class_exists( 'Pngx__Main' ) ) {
  */
 class Pngx__Main {
 
-	const VERSION    = '2.5.6';
+	const VERSION    = '2.6';
 	const OPTIONS_ID = 'plugin_engine_options';
 
 	protected $plugin_context;
