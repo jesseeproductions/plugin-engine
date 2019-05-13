@@ -401,7 +401,7 @@ fieldset[disabled] .btn-primary.active {
 
 .pro-heading:before,
 .postbox h4.pngx-fields-heading:after {
-  background: linear-gradient(to right, black 1%, #9b9b9b 28%, white 85%) repeat scroll 0 0 transparent;
+  background: linear-gradient(to right, black 1%, #9b9b9b 28%, white 85%) repeat scroll 0 0 rgba(0, 0, 0, 0);
   content: "";
   display: block;
   height: 1px;
@@ -1768,6 +1768,9 @@ fieldset[disabled] .btn-primary.active {
 
 .pngx-wrapper input[type="number"] {
   height: auto; }
+
+.pngx-wrapper span.description {
+  display: block; }
 
 .pngx-meta-field.field-repeater {
   width: 100%; }

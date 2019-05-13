@@ -211,7 +211,7 @@ class Pngx__Admin__Options {
 
 				if ( isset( $option['class'] ) ) {
 					// Change Permalink Class Options to Lowercase
-					if ( 'permalink' == $option['class'] ) {
+					if ( 'permalink' === $option['class'] ) {
 						$input[ $id ] = str_replace( " ", "-", strtolower( trim( $input[ $id ] ) ) );
 						//if option is new then set to flush permalinks
 						if ( ! empty( $options[ $id ] ) && ( $options[ $id ] != $input[ $id ] ) ) {
