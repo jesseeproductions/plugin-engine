@@ -146,7 +146,7 @@ class Pngx__Admin__Fields {
 
 			case 'license_status':
 
-				Pngx__Admin__Field__License_Status::display( $field, $options, $options_id, $meta, $repeat_obj );
+				Pngx__Admin__Field__License_Status::display( $field, $options, $options_id, $meta );
 
 				break;
 
@@ -158,7 +158,7 @@ class Pngx__Admin__Fields {
 
 			case 'message':
 
-				Pngx__Admin__Field__Message::display( $field, $options, $options_id, $meta, $repeat_obj );
+				Pngx__Admin__Field__Message::display( $field, $options, $options_id, $meta );
 
 				break;
 
