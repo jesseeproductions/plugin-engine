@@ -92,7 +92,7 @@ class Pngx__Assets {
 	 *
 	 * @since   2.6
 	 *
-	 * @uses    self::enqueue
+	 * @uses    $this->enqueue
 	 *
 	 * @param   string|array $groups Which groups will be enqueued
 	 *

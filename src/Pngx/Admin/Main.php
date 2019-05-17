@@ -24,14 +24,14 @@ class Pngx__Admin__Main {
 		new Pngx__Admin__Ajax();
 
 		//Setup Admin
-		add_action( 'admin_init', array( __CLASS__, 'admin_init' ) );
+		add_action( 'admin_init', array( $this, 'admin_init' ) );
 
 	}
 
 	/**
 	 * Admin Init
 	 */
-	public static function admin_init() {
+	public function admin_init() {
 
 		//Register Admin Assets
 		add_action( 'admin_enqueue_scripts', array( 'Pngx__Admin__Assets', 'register_assets' ), 0 );

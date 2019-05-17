@@ -14,7 +14,7 @@ if ( class_exists( 'Pngx__Admin__Options' ) ) {
  */
 class Pngx__Admin__Options {
 
-	protected $instance;
+	protected static $instance;
 	/*
 	* Tab Sections
 	*/
@@ -433,17 +433,16 @@ class Pngx__Admin__Options {
 	}
 
 	/**
-	 * Singleton Factory Method
+	 * Static Singleton Factory Method
 	 *
-	 * @return Pngx__Admin__Options
+	 * @return self
 	 */
-	public function instance() {
-		if ( ! isset( $this->instance ) ) {
-			$className      = __CLASS__;
-			$this->instance = new $className;
+	public static function instance() {
+		if ( ! self::$instance ) {
+			self::$instance = new self;
 		}
 
-		return $this->instance;
+		return self::$instance;
 	}
 
 

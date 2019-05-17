@@ -86,7 +86,7 @@ class Pngx__Admin__EDD_License {
 			);
 
 			// Call the custom API.
-			$response = wp_remote_get( esc_url_raw( add_query_arg( $api_params, self::get_update_url() ) ), array(
+			$response = wp_remote_get( esc_url_raw( add_query_arg( $api_params, $this->get_update_url() ) ), array(
 				'timeout'   => 15,
 				'sslverify' => false,
 			) );

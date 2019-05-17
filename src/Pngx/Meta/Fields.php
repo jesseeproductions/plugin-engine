@@ -11,13 +11,13 @@ if ( class_exists( 'Pngx__Meta__Fields' ) ) {
 class Pngx__Meta__Fields {
 
 	//fields id prefix
-	public static $fields_prefix = 'pngx_';
+	public $fields_prefix = 'pngx_';
 
 	/*
 	* Get Fields ID Prefix
 	*/
-	public static function get_fields_prefix() {
-		return self::$fields_prefix;
+	public function get_fields_prefix() {
+		return $this->$fields_prefix;
 	}
 
 	/**
@@ -25,10 +25,10 @@ class Pngx__Meta__Fields {
 	 *
 	 * @return mixed
 	 */
-	public static function get_fields() {
+	public function get_fields() {
 
 		//Prefix for fields id
-		$prefix = self::get_fields_prefix();
+		$prefix = $this->get_fields_prefix();
 
 		//Sample Field Array
 		$fields[ $prefix . 'heading_deal' ] = array(

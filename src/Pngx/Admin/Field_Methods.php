@@ -19,12 +19,11 @@ class Pngx__Admin__Field_Methods {
 	/**
 	 * Static Singleton Factory Method
 	 *
-	 * @return Cctor__Coupon__Addons__Main
+	 * @return self
 	 */
 	public static function instance() {
-		if ( ! isset( self::$instance ) ) {
-			$className      = __CLASS__;
-			self::$instance = new $className;
+		if ( ! self::$instance ) {
+			self::$instance = new self;
 		}
 
 		return self::$instance;

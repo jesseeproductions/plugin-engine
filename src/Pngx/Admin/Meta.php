@@ -19,7 +19,7 @@ if ( class_exists( 'Pngx__Admin__Meta' ) ) {
  */
 class Pngx__Admin__Meta {
 
-	protected $instance;
+	protected static $instance;
 
 	//tabs key and label
 	protected $tabs = array();
@@ -84,7 +84,7 @@ class Pngx__Admin__Meta {
 	*/
 	public function get_post_types() {
 
-		return $this->instance()->post_type;
+		return $this->post_type;
 
 	}
 
@@ -93,7 +93,7 @@ class Pngx__Admin__Meta {
 	*/
 	public function get_user_capability() {
 
-		return $this->instance()->user_capability;
+		return $this->user_capability;
 
 	}
 
@@ -200,8 +200,14 @@ class Pngx__Admin__Meta {
 
 					foreach ( $fields as $field ) {
 
-						if ( isset( $field['section'] ) && $field['type'] && $field['section'] === $metabox['id'] && ( isset( $field['tab'] ) && $tab_slug === $field['tab'] ) ) {
-
+						if (
+							isset( $field['section'] ) &&
+							$field['type'] && $field['section'] === $metabox['id'] &&
+							(
+								isset( $field['tab'] ) &&
+								$tab_slug === $field['tab']
+							)
+						) {
 							// get value of this field if it exists for this post
 							$meta = get_post_meta( $post->ID, $field['id'], true );
 
@@ -262,6 +268,7 @@ class Pngx__Admin__Meta {
 								<?php
 								continue;
 							}
+
 							?>
 
 							<div class="pngx-meta-field-wrap field-wrap-<?php echo esc_html( $field['type'] ); ?> field-wrap-<?php echo esc_html( $field['id'] ); ?> <?php echo esc_html( $wrapclass ); ?>"
@@ -276,6 +283,7 @@ class Pngx__Admin__Meta {
 									<?php } ?>
 
 									<?php
+
 									Pngx__Admin__Fields::display_field( $field, false, false, $meta, null );
 
 									// Display admin linked style fields
@@ -388,13 +396,17 @@ class Pngx__Admin__Meta {
 
 	}
 
-	public function instance() {
-		if ( ! isset( $this->instance ) ) {
-			$className      = __CLASS__;
-			$this->instance = new $className;
+	/**
+	 * Static Singleton Factory Method
+	 *
+	 * @return self
+	 */
+	public static function instance() {
+		if ( ! self::$instance ) {
+			self::$instance = new self;
 		}
 
-		return $this->instance;
+		return self::$instance;
 	}
 
 }

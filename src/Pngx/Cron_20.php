@@ -17,8 +17,8 @@ class Pngx__Cron_20 {
 	 *
 	 * @return void
 	 */
-	public static function filter_cron_schedules() {
-		add_filter( 'cron_schedules', array( __CLASS__, 'register_20min_interval' ) );
+	public function filter_cron_schedules() {
+		add_filter( 'cron_schedules', array( $this, 'register_20min_interval' ) );
 	}
 
 	/**
@@ -28,7 +28,7 @@ class Pngx__Cron_20 {
 	 *
 	 * @return array
 	 */
-	public static function register_20min_interval( $schedules ) {
+	public function register_20min_interval( $schedules ) {
 
 		$schedules['every_20mins'] = array(
 			'interval' => 20 * MINUTE_IN_SECONDS,
