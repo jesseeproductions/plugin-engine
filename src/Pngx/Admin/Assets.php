@@ -15,7 +15,7 @@ class Pngx__Admin__Assets {
 	/*
 	* Register Assets
 	*/
-	public static function register_assets() {
+	public function register_assets() {
 
 		// @formatter:off
 		wp_register_style(
@@ -143,15 +143,9 @@ class Pngx__Admin__Assets {
 	/*
 		* Register Assets
 		*/
-		public static function register_plugin_list_assets() {
+		public function register_plugin_list_assets() {
 
 			// @formatter:off
-		/*	wp_register_style(
-				'pngx-bootstrap-iconpicker',
-				Pngx__Main::instance()->vendor_url . 'bootstrap-iconpicker/bootstrap-iconpicker/css/bootstrap-iconpicker.min.css',
-				false,
-				filemtime( Pngx__Main::instance()->vendor_path . 'bootstrap-iconpicker/bootstrap-iconpicker/css/bootstrap-iconpicker.min.css' )
-			);*/
 			wp_register_script(
 				'pngx-license',
 				Pngx__Main::instance()->resource_url . 'js/pngx-license.js',
@@ -176,14 +170,14 @@ class Pngx__Admin__Assets {
 	/*
 	* Enqueue Plugin Engine Assets
 	*/
-	public static function load_assets() {
+	public function load_assets() {
 
 	}
 
 	/*
 	* Detect if External Asset is Available
 	*/
-	public static function detect_external_asset( $file ) {
+	public function detect_external_asset( $file ) {
 
 		$file_headers = @get_headers( $file );
 		if ( false === $file_headers || 'HTTP/1.0 404 Not Found' == $file_headers[0] ) {

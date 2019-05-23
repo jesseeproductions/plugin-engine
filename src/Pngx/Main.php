@@ -143,6 +143,18 @@ class Pngx__Main {
 	public function bind_implementations() {
 		pngx_singleton( 'assets', 'Pngx__Assets' );
 		pngx_singleton( 'context', 'Pngx__Context' );
+
+		pngx_singleton( 'admin.assets', 'Pngx__Admin__Assets' );
+	}
+
+	/**
+	 * Load all the required library files.
+	 */
+	protected function loadLibraries() {
+
+		//Core Functions
+		require_once $this->plugin_path . 'src/functions/template-tags/general.php';
+
 	}
 
 	/**
@@ -274,15 +286,6 @@ class Pngx__Main {
 
 	}
 
-	/**
-	 * Load all the required library files.
-	 */
-	protected function loadLibraries() {
-
-		//Core Functions
-		require_once $this->plugin_path . 'src/functions/template-tags/general.php';
-
-	}
 	/**
 	 * Static Singleton Factory Method
 	 *
