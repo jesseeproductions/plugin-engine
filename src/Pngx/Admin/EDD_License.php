@@ -108,7 +108,7 @@ class Pngx__Admin__EDD_License {
 			unset( $license_info['expires'] );
 
 			//Set Expiration Date  for This License
-			$license_info['expires'] = esc_attr( $license_data->expires );
+			$license_info['expires'] = isset( $license_data->expires ) ? esc_attr( $license_data->expires ) : null;
 
 			//if Expired Add that to the option.
 			if ( isset( $license_data->error ) && 'expired' == $license_data->error ) {

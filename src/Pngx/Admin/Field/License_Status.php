@@ -48,9 +48,22 @@ class Pngx__Admin__Field__License_Status {
 
 		} else {
 
-			if ( isset( $license_info['status'] ) && ( 'invalid' == $license_info['status'] || 'missing' == $license_info['status'] ) && ! $license_info['expired'] ) {
+			if (
+				isset( $license_info['status'] ) &&
+				(
+					'invalid' == $license_info['status'] ||
+					'missing' == $license_info['status']
+				) &&
+				! empty( $license_info['expired'] )
+			) {
 				$license_info_valid = __( 'License is Invalid', 'plugin-engine' );
-			} elseif ( isset( $license_info['expired'] ) && 'expired' == $license_info['expired'] ) {
+			} elseif (
+				isset( $license_info['expired'] ) &&
+				(
+					! empty( $license_info['expired'] ) &&
+					'expired' == $license_info['expired']
+				)
+			) {
 				$license_info_valid = sprintf( __( 'License Expired on %s', 'plugin-engine' ), esc_attr( $expiration_date ) );
 			} else {
 				$license_info_valid = __( 'License is Not Active', 'plugin-engine' );
