@@ -27,7 +27,7 @@ class Pngx__Field__Image {
 
 		$image_id  = get_post_meta( $post_id, $field['id'], true );
 		$image_id  = wp_get_attachment_image_src( $image_id, $img_size );
-		$image_src = $image_id[0];
+		$image_src = isset( $image_id[0] ) ? wp_normalize_path( $image_id[0] ) : '';
 
 		if ( $image_src ) {
 			?>
