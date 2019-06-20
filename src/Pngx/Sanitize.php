@@ -291,9 +291,10 @@ class Pngx__Sanitize {
 		// If string does not start with 'rgba', then treat as hex
 		// sanitize the hex color and finally convert hex to rgba
 		if ( false === strpos( $this->input, 'rgba' ) ) {
-			$this->validate_hex( $this->input );
 
-			return $this->input;
+			$valid = $this->validate_hex( $this->input );
+
+			return $valid ? $this->input : false;
 		}
 
 		if ( $this->validate_rgba( $this->input ) ) {
