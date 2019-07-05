@@ -5,7 +5,7 @@
  *
  * Based off Modern Tribe's Tribe__Admin__Notice__Plugin_Download
  *
- * @since 2.6
+ * @since 3.0
  */
 class Pngx__Admin__Notice__Plugin_Download {
 

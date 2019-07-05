@@ -194,7 +194,7 @@ class Pngx__Register_Post_Type {
 		/**
 		 * Filter Plugin Engine Registered Post Type Arguements
 		 *
-		 * @since TBD
+		 * @since 3.0
 		 *
 		 */
 		$args = apply_filters( 'pngx_register_' . $post_type . '_type_args', $args );

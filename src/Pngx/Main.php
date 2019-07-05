@@ -70,7 +70,6 @@ class Pngx__Main {
 		$this->vendor_url    = $this->plugin_url . 'vendor/';
 
 		add_action( 'plugins_loaded', array( $this, 'plugins_loaded' ), 1 );
-		add_action( 'tribe_common_loaded', array( $this, 'tribe_common_app_store' ), 10 );
 	}
 
 	/**
@@ -89,9 +88,9 @@ class Pngx__Main {
 		/**
 		 * Runs once all common libs are loaded and initial hooks are in place.
 		 *
-		 * @since 2.6
+		 * @since 3.0
 		 */
-		do_action( 'pngx_common_loaded' );
+		do_action( 'pngx_engine_loaded' );
 
 		/**
 		 * Runs to register loaded plugins
@@ -220,49 +219,6 @@ class Pngx__Main {
 	}
 
 	/**
-	 * Insert an array after a specified key within another array.
-	 *
-	 * @param $key
-	 * @param $source_array
-	 * @param $insert_array
-	 *
-	 * @return array
-	 *
-	 */
-	public static function array_insert_after_key( $key, $source_array, $insert_array ) {
-		if ( array_key_exists( $key, $source_array ) ) {
-			$position     = array_search( $key, array_keys( $source_array ) ) + 1;
-			$source_array = array_slice( $source_array, 0, $position, true ) + $insert_array + array_slice( $source_array, $position, null, true );
-		} else {
-			// If no key is found, then add it to the end of the array.
-			$source_array += $insert_array;
-		}
-
-		return $source_array;
-	}
-
-	/**
-	 * Insert an array immediately before a specified key within another array.
-	 *
-	 * @param $key
-	 * @param $source_array
-	 * @param $insert_array
-	 *
-	 * @return array
-	 */
-	public static function array_insert_before_key( $key, $source_array, $insert_array ) {
-		if ( array_key_exists( $key, $source_array ) ) {
-			$position     = array_search( $key, array_keys( $source_array ) );
-			$source_array = array_slice( $source_array, 0, $position, true ) + $insert_array + array_slice( $source_array, $position, null, true );
-		} else {
-			// If no key is found, then add it to the end of the array.
-			$source_array += $insert_array;
-		}
-
-		return $source_array;
-	}
-
-	/**
 	 * Merge the Defaults with new values
 	 *
 	 * @param $defaults
@@ -299,5 +255,56 @@ class Pngx__Main {
 		}
 
 		return $instance;
+	}
+
+	/**
+	 * Insert an array after a specified key within another array.
+	 *
+	 * @deprecated 3.0
+	 *
+	 * @param $key
+	 * @param $source_array
+	 * @param $insert_array
+	 *
+	 * @return array
+	 *
+	 */
+	public static function array_insert_after_key( $key, $source_array, $insert_array ) {
+		_deprecated_function( __METHOD__, '3.0' );
+
+		if ( array_key_exists( $key, $source_array ) ) {
+			$position     = array_search( $key, array_keys( $source_array ) ) + 1;
+			$source_array = array_slice( $source_array, 0, $position, true ) + $insert_array + array_slice( $source_array, $position, null, true );
+		} else {
+			// If no key is found, then add it to the end of the array.
+			$source_array += $insert_array;
+		}
+
+		return $source_array;
+	}
+
+	/**
+	 * Insert an array immediately before a specified key within another array.
+	 *
+	 * @deprecated 3.0
+	 *
+	 * @param $key
+	 * @param $source_array
+	 * @param $insert_array
+	 *
+	 * @return array
+	 */
+	public static function array_insert_before_key( $key, $source_array, $insert_array ) {
+		_deprecated_function( __METHOD__, '3.0' );
+
+		if ( array_key_exists( $key, $source_array ) ) {
+			$position     = array_search( $key, array_keys( $source_array ) );
+			$source_array = array_slice( $source_array, 0, $position, true ) + $insert_array + array_slice( $source_array, $position, null, true );
+		} else {
+			// If no key is found, then add it to the end of the array.
+			$source_array += $insert_array;
+		}
+
+		return $source_array;
 	}
 }

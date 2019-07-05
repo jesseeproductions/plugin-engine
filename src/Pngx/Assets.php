@@ -4,7 +4,7 @@
  *
  * Based off Modern Tribee's Tribee__Assets
  *
- * @since 2.6
+ * @since 3.0
  */
 class Pngx__Assets {
 	/**
@@ -24,7 +24,7 @@ class Pngx__Assets {
 	/**
 	 * Static Singleton Factory Method
 	 *
-	 * @since 2.6
+	 * @since 3.0
 	 *
 	 * @return self
 	 */
@@ -35,7 +35,7 @@ class Pngx__Assets {
 	/**
 	 * Register the Methods in the correct places
 	 *
-	 * @since 2.6
+	 * @since 3.0
 	 */
 	public function __construct() {
 		// Hook the actual registering of
@@ -45,7 +45,7 @@ class Pngx__Assets {
 	/**
 	 * Register the Assets on the correct hooks
 	 *
-	 * @since 2.6
+	 * @since 3.0
 	 *
 	 * @return void
 	 */
@@ -128,7 +128,7 @@ class Pngx__Assets {
 	 * useful where an asset is required in a situation not anticipated when it was originally
 	 * registered.
 	 *
-	 * @since 2.6
+	 * @since 3.0
 	 *
 	 * @param string|array $forcibly_enqueue
 	 */
@@ -188,7 +188,7 @@ class Pngx__Assets {
 			/**
 			 * Allows developers to hook-in and prevent an asset from been loaded
 			 *
-			 * @since 2.6
+			 * @since 3.0
 			 *
 			 * @param bool   $enqueue If we should enqueue or not a given asset
 			 * @param object $asset   Which asset we are dealing with
@@ -198,7 +198,7 @@ class Pngx__Assets {
 			/**
 			 * Allows developers to hook-in and prevent an asset from been loaded
 			 *
-			 * @since 2.6
+			 * @since 3.0
 			 *
 			 * @param bool   $enqueue If we should enqueue or not a given asset
 			 * @param object $asset   Which asset we are dealing with
@@ -251,7 +251,7 @@ class Pngx__Assets {
 	 * Returns the path to a minified version of a js or css file, if it exists.
 	 * If the file does not exist, returns false.
 	 *
-	 * @since 2.6
+	 * @since 3.0
 	 *
 	 * @param string $url The absolute URL to the un-minified file.
 	 *
@@ -318,7 +318,7 @@ class Pngx__Assets {
 	/**
 	 * Register an Asset and attach a callback to the required action to display it correctly
 	 *
-	 * @since 2.6
+	 * @since 3.0
 	 *
 	 * @param  object       $origin    The main Object for the plugin you are enqueueing the script/style for
 	 * @param  string       $slug      Slug to save the asset
@@ -508,7 +508,7 @@ class Pngx__Assets {
 	/**
 	 * Removes an Asset from been registered and enqueue
 	 *
-	 * @since 2.6
+	 * @since 3.0
 	 *
 	 * @param  string $slug Slug of the Asset
 	 *
@@ -526,7 +526,7 @@ class Pngx__Assets {
 	/**
 	 * Get the Asset Object configuration
 	 *
-	 * @since 2.6
+	 * @since 3.0
 	 *
 	 * @param  string $slug Slug of the Asset
 	 *

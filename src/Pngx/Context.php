@@ -5,7 +5,7 @@
  *
  * Based off Modern Tribe's Tribe__Context
  *
- * @since 2.6
+ * @since 3.0
  *
  */
 class Pngx__Context {
@@ -27,7 +27,7 @@ class Pngx__Context {
 	/**
 	 * Whether we are currently creating a new post, a post of post type(s) or not.
 	 *
-	 * @since 2.6
+	 * @since 3.0
 	 *
 	 * @param null $post_type The optional post type to check.
 	 *
@@ -43,7 +43,7 @@ class Pngx__Context {
 	/**
 	 * Whether we are currently editing a post(s), post type(s) or not.
 	 *
-	 * @since 2.6
+	 * @since 3.0
 	 *
 	 * @param null|array|string|int $post_or_type A post ID, post type, an array of post types or post IDs, `null`
 	 *                                            to just make sure we are currently editing a post.

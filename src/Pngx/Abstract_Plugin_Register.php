@@ -6,7 +6,7 @@
  * Register all plugins to Dependency Class
  *
  * @package Pngx
- * @since 2.6
+ * @since 3.0
  *
  */
 abstract class Pngx__Abstract_Plugin_Register {

@@ -5,7 +5,7 @@
  *
  * Based off Modern Tribe's Tribe__Service_Providers__Processes
  *
- * @since 2.6
+ * @since 3.0
  *
  * Handles the registration and creation of our async process handlers.
  */
@@ -65,7 +65,7 @@ class Pngx__Service_Providers__Processes extends tad_DI52_ServiceProvider {
 	/**
 	 * Hooks the correct handler for the action.
 	 *
-	 * @since 2.6
+	 * @since 3.0
 	 *
 	 * @param string $action
 	 */
@@ -106,7 +106,7 @@ class Pngx__Service_Providers__Processes extends tad_DI52_ServiceProvider {
 	/**
 	 * Hooks the correct queue for the action.
 	 *
-	 * @since 2.6
+	 * @since 3.0
 	 *
 	 * @param string $action
 	 */
@@ -121,7 +121,7 @@ class Pngx__Service_Providers__Processes extends tad_DI52_ServiceProvider {
 			 *
 			 * All queues should extend the `Pngx__Process__Queue` base class.
 			 *
-			 * @since 2.6
+			 * @since 3.0
 			 *
 			 * @param array $queues An array of class names, each extending the `Pngx__Process__Queue` base class.
 			 */
@@ -146,7 +146,7 @@ class Pngx__Service_Providers__Processes extends tad_DI52_ServiceProvider {
 	/**
 	 * Returns the action for the handler.
 	 *
-	 * @since 2.6
+	 * @since 3.0
 	 *
 	 * @param string $handler_class
 	 *
@@ -160,7 +160,7 @@ class Pngx__Service_Providers__Processes extends tad_DI52_ServiceProvider {
 	/**
 	 * Returns the action for the queue.
 	 *
-	 * @since 2.6
+	 * @since 3.0
 	 *
 	 * @param string $queue_class
 	 *
@@ -175,7 +175,7 @@ class Pngx__Service_Providers__Processes extends tad_DI52_ServiceProvider {
 	 * Dispatches the request, if in AJAX context of a valid queue processing request,
 	 *  to the correct handler.
 	 *
-	 * @since 2.6
+	 * @since 3.0
 	 */
 	protected function dispatch_async() {
 		if ( ! (
@@ -192,7 +192,7 @@ class Pngx__Service_Providers__Processes extends tad_DI52_ServiceProvider {
 	 * Start the process handlers if in the context of a cron process and
 	 * if any is registered.
 	 *
-	 * @since 2.6
+	 * @since 3.0
 	 */
 	protected function dispatch_cron() {
 		if ( ! $this->context->doing_cron() ) {
@@ -222,7 +222,7 @@ class Pngx__Service_Providers__Processes extends tad_DI52_ServiceProvider {
 	/**
 	 * Hooks the correct queue or process handler for an action if any.
 	 *
-	 * @since 2.6
+	 * @since 3.0
 	 *
 	 * @param string $action The action to hook the handler, or queue, for.
 	 */
@@ -244,7 +244,7 @@ class Pngx__Service_Providers__Processes extends tad_DI52_ServiceProvider {
 	/**
 	 * Parses the `cron` array to return the hook names starting with a pattern.
 	 *
-	 * @since 2.6
+	 * @since 3.0
 	 *
 	 * @param string|array $needles A pattern to look for or an array of patterns; if
 	 *                              this is an array then a match will be an hook that

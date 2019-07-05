@@ -72,7 +72,7 @@ interface Pngx__Blocks__Interface {
 	/**
 	 * Attach any specific hook to the current block.
 	 *
-	 * @since TBD
+	 * @since 3.0
 	 *
 	 * @return mixed
 	 */

@@ -3,14 +3,14 @@
 defined( 'WPINC' ) or die;
 
 /**
- * @since 2.6
+ * @since 3.0
  */
 class Pngx__Admin__Notices {
 
 	/**
 	 * The name of the transient that will store transient notices.
 	 *
-	 * @since 2.6
+	 * @since 3.0
 	 *
 	 * @var string
 	 */
@@ -19,7 +19,7 @@ class Pngx__Admin__Notices {
 	/**
 	 * Whether, in this request, transient notices have been pruned already or not.
 	 *
-	 * @since 2.6
+	 * @since 3.0
 	 *
 	 * @var bool
 	 */
@@ -28,7 +28,7 @@ class Pngx__Admin__Notices {
 	/**
 	 * Static singleton variable
 	 *
-	 * @since 2.6
+	 * @since 3.0
 	 *
 	 * @var self
 	 */
@@ -37,7 +37,7 @@ class Pngx__Admin__Notices {
 	/**
 	 * Static Singleton Factory Method
 	 *
-	 * @since 2.6
+	 * @since 3.0
 	 *
 	 * @return self
 	 */
@@ -52,7 +52,7 @@ class Pngx__Admin__Notices {
 	/**
 	 * User Meta Key that stores which notices have been dimissed
 	 *
-	 * @since 2.6
+	 * @since 3.0
 	 *
 	 * @var string
 	 */
@@ -61,7 +61,7 @@ class Pngx__Admin__Notices {
 	/**
 	 * Stores all the Notices and it's configurations
 	 *
-	 * @since 2.6
+	 * @since 3.0
 	 *
 	 * @var array
 	 */
@@ -70,7 +70,7 @@ class Pngx__Admin__Notices {
 	/**
 	 * Register the Methods in the correct places
 	 *
-	 * @since 2.6
+	 * @since 3.0
 	 *
 	 */
 	private function __construct() {
@@ -103,7 +103,7 @@ class Pngx__Admin__Notices {
 	/**
 	 * This will happen on the `current_screen` and will hook to the correct actions and display the notices
 	 *
-	 * @since 2.6
+	 * @since 3.0
 	 *
 	 * @return void
 	 */
@@ -142,7 +142,7 @@ class Pngx__Admin__Notices {
 	 * registered (via a call to exists()) for the reason that, during a dismiss
 	 * ajax request, some valid notices may not have been registered yet.
 	 *
-	 * @since 2.6
+	 * @since 3.0
 	 *
 	 * @return void
 	 */
@@ -160,7 +160,7 @@ class Pngx__Admin__Notices {
 	/**
 	 * Allows a Magic to remove the Requirement of creating a callback
 	 *
-	 * @since 2.6
+	 * @since 3.0
 	 *
 	 * @param  string $name       Name of the Method used to create the Slug of the Notice
 	 * @param  array  $arguments  Which arguments were used, normally empty
@@ -201,7 +201,7 @@ class Pngx__Admin__Notices {
 	/**
 	 * This is a helper to actually print the Message
 	 *
-	 * @since 2.6
+	 * @since 3.0
 	 *
 	 * @param  string      $slug    The Name of the Notice
 	 * @param  string      $content The content of the notice
@@ -256,7 +256,7 @@ class Pngx__Admin__Notices {
 	/**
 	 * This is a helper to print the message surrounded by `p` tags.
 	 *
-	 * @since 2.6
+	 * @since 3.0
 	 *
 	 * @param  string  $slug    The Name of the Notice
 	 * @param  string  $content The content of the notice
@@ -310,7 +310,7 @@ class Pngx__Admin__Notices {
 	/**
 	 * Checks if a given user has dimissed a given notice.
 	 *
-	 * @since 2.6
+	 * @since 3.0
 	 *
 	 * @param  string    $slug    The Name of the Notice
 	 * @param  int|null  $user_id The user ID
@@ -339,7 +339,7 @@ class Pngx__Admin__Notices {
 	/**
 	 * A Method to actually add the Meta value telling that this notice has been dismissed
 	 *
-	 * @since 2.6
+	 * @since 3.0
 	 *
 	 * @param  string    $slug    The Name of the Notice
 	 * @param  int|null  $user_id The user ID
@@ -383,7 +383,7 @@ class Pngx__Admin__Notices {
 	/**
 	 * Undismisses the specified notice for all users.
 	 *
-	 * @since 2.6
+	 * @since 3.0
 	 *
 	 * @param string $slug
 	 *
@@ -409,7 +409,7 @@ class Pngx__Admin__Notices {
 	/**
 	 * Register a Notice and attach a callback to the required action to display it correctly
 	 *
-	 * @since 2.6
+	 * @since 3.0
 	 *
 	 * @param  string          $slug      Slug to save the notice
 	 * @param  callable|string $callback  A callable Method/Fuction to actually display the notice
@@ -497,7 +497,7 @@ class Pngx__Admin__Notices {
 	/**
 	 * Removes a notice based on its slug.
 	 *
-	 * @since 2.6
+	 * @since 3.0
 	 *
 	 * @param string $slug
 	 *
@@ -515,7 +515,7 @@ class Pngx__Admin__Notices {
 	/**
 	 * Gets the configuration for the Notices
 	 *
-	 * @since 2.6
+	 * @since 3.0
 	 *
 	 * @param string $slug
 	 *
@@ -539,7 +539,7 @@ class Pngx__Admin__Notices {
 	/**
 	 * Checks if a given notice exists
 	 *
-	 * @since 2.6
+	 * @since 3.0
 	 *
 	 * @param string $slug
 	 *

@@ -88,7 +88,7 @@ class Pngx__Plugins {
 		 *
 		 * @param array Contains a list of all pngx plugins
 		 *
-		 * @since 2.6
+		 * @since 3.0
 		 *
 		 */
 		return apply_filters( 'pngx_plugins_get_list', $this->pngx_plugins );

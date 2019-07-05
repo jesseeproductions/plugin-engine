@@ -78,7 +78,7 @@ class Pngx__Register_Taxonomy {
 		/**
 		 * Filter Plugin Engine Registered Taxonomy Arguements
 		 *
-		 * @since TBD
+		 * @since 3.0
 		 *
 		 */
 		$args = apply_filters( 'pngx_register_' . $taxonomy . '_taxonomy_args', $args );

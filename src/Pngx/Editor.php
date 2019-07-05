@@ -3,7 +3,7 @@
 /**
  * Initialize Gutenberg editor blocks and styles
  *
- * @since TBD
+ * @since 3.0
  */
 class Pngx__Editor {
 

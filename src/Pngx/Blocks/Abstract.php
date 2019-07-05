@@ -162,7 +162,7 @@ abstract class Pngx__Blocks__Abstract implements Pngx__Blocks__Interface {
 	/**
 	 * Attach any particular hook for the specif block.
 	 *
-	 * @since TBD
+	 * @since 3.0
 	 */
 	public function hook() {
 	}

@@ -4,7 +4,8 @@
  *
  * Based off Modern Tribe's Tribe__Utils__Array
  *
- * @since 2.6
+ * @since 3.0
+ *
  */
 class Pngx__Utilities__Array {
 
@@ -12,6 +13,8 @@ class Pngx__Utilities__Array {
 	 * Set key/value within an array, can set a key nested inside of a multidimensional array.
 	 *
 	 * Example: set( $a, [ 0, 1, 2 ], 'hi' ) sets $a[0][1][2] = 'hi' and returns $a.
+	 *
+	 * @since 3.0
 	 *
 	 * @param mixed        $array  The array containing the key this sets.
 	 * @param string|array $key    To set a key nested multiple levels deep pass an array
@@ -62,6 +65,8 @@ class Pngx__Utilities__Array {
 	 *
 	 * Example: get( $a, [ 0, 1, 2 ] ) returns the value of $a[0][1][2] or the default.
 	 *
+	 * @since 3.0
+	 *
 	 * @param  array        $variable Array or object to search within.
 	 * @param  array|string $indexes  Specify each nested index in order.
 	 *                                Example: array( 'lvl1', 'lvl2' );
@@ -93,7 +98,7 @@ class Pngx__Utilities__Array {
 	/**
 	 * Find a value inside a list of array or objects, including one nested a few levels deep.
 	 *
-	 * @since 2.6
+	 * @since 3.0
 	 *
 	 * Example: get( [$a, $b, $c], [ 0, 1, 2 ] ) returns the value of $a[0][1][2] found in $a, $b or $c
 	 * or the default.
@@ -119,6 +124,8 @@ class Pngx__Utilities__Array {
 	/**
 	 * Behaves exactly like the native strpos(), but accepts an array of needles.
 	 *
+	 * @since 3.0
+	 *
 	 * @see strpos()
 	 *
 	 * @param string       $haystack String to search in.
@@ -143,6 +150,8 @@ class Pngx__Utilities__Array {
 
 	/**
 	 * Converts a list to an array filtering out empty string elements.
+	 *
+	 * @since 3.0
 	 *
 	 * @param     mixed   $value A string representing a list of values separated by the specified separator
 	 *                           or an array. If the list is a string (e.g. a CSV list) then it will urldecoded
@@ -179,7 +188,7 @@ class Pngx__Utilities__Array {
 	/**
 	 * Returns a list separated by the specified separator.
 	 *
-	 * @since 2.6
+	 * @since 3.0
 	 *
 	 * @param mixed  $list
 	 * @param string $sep
@@ -201,7 +210,7 @@ class Pngx__Utilities__Array {
 	/**
 	 * Sanitize a multidimensional array.
 	 *
-	 * @since 2.6
+	 * @since 3.0
 	 *
 	 * @param array $data The array to sanitize.
 	 *
@@ -234,7 +243,7 @@ class Pngx__Utilities__Array {
 	 * To discriminate from not found results and legitimately `false`
 	 * values from the map the `$found` parameter will be set by reference.
 	 *
-	 * @since 2.6
+	 * @since 3.0
 	 *
 	 * @param      string|array $keys  One or more keys that should be used to get
 	 *                                 the new values
@@ -274,7 +283,7 @@ class Pngx__Utilities__Array {
 	 *
 	 * The un-prefixing and duplication is recursive.
 	 *
-	 * @since 2.6
+	 * @since 3.0
 	 *
 	 * @param mixed $array     The array whose keys should be duplicated.
 	 * @param bool  $recursive Whether the un-prefixing and duplication should be
@@ -309,7 +318,7 @@ class Pngx__Utilities__Array {
 	 * Filters an associative array non-recursively, keeping only the values attached
 	 * to keys starting with the specified prefix.
 	 *
-	 * @since 2.6
+	 * @since 3.0
 	 *
 	 * @param array $array The array to filter.
 	 * @param string $prefix The prefix, or prefixes, of the keys to keep.
@@ -337,7 +346,7 @@ class Pngx__Utilities__Array {
 	 * Typical use case is to flatten arrays like those returned by `get_post_meta( $id )`.
 	 * Empty arrays are replaced with an empty string.
 	 *
-	 * @since 2.6
+	 * @since 3.0
 	 *
 	 * @param array $array The array to flatten.
 	 *
@@ -371,7 +380,7 @@ class Pngx__Utilities__Array {
 	 *
 	 * The prefixing and duplication is recursive.
 	 *
-	 * @since 2.6
+	 * @since 3.0
 	 *
 	 * @param mixed $array     The array whose keys should be duplicated.
 	 * @param bool  $recursive Whether the prefixing and duplication should be
@@ -406,7 +415,7 @@ class Pngx__Utilities__Array {
 	/**
 	 * Recursively key-sort an array.
 	 *
-	 * @since 2.6
+	 * @since 3.0
 	 *
 	 * @param array $array The array to sort, modified by reference.
 	 *
@@ -420,5 +429,52 @@ class Pngx__Utilities__Array {
 		}
 
 		return ksort( $array );
+	}
+
+	/**
+	 * Insert an array after a specified key within another array.
+	 *
+	 * @since 3.0
+	 *
+	 * @param $key
+	 * @param $source_array
+	 * @param $insert_array
+	 *
+	 * @return array
+	 *
+	 */
+	public static function array_insert_after_key( $key, $source_array, $insert_array ) {
+		if ( array_key_exists( $key, $source_array ) ) {
+			$position     = array_search( $key, array_keys( $source_array ) ) + 1;
+			$source_array = array_slice( $source_array, 0, $position, true ) + $insert_array + array_slice( $source_array, $position, null, true );
+		} else {
+			// If no key is found, then add it to the end of the array.
+			$source_array += $insert_array;
+		}
+
+		return $source_array;
+	}
+
+	/**
+	 * Insert an array immediately before a specified key within another array.
+	 *
+	 * @since 3.0
+	 *
+	 * @param $key
+	 * @param $source_array
+	 * @param $insert_array
+	 *
+	 * @return array
+	 */
+	public static function array_insert_before_key( $key, $source_array, $insert_array ) {
+		if ( array_key_exists( $key, $source_array ) ) {
+			$position     = array_search( $key, array_keys( $source_array ) );
+			$source_array = array_slice( $source_array, 0, $position, true ) + $insert_array + array_slice( $source_array, $position, null, true );
+		} else {
+			// If no key is found, then add it to the end of the array.
+			$source_array += $insert_array;
+		}
+
+		return $source_array;
 	}
 }

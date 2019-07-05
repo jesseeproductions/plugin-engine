@@ -100,7 +100,7 @@ if ( ! function_exists( 'pngx_register_plugin' ) ) {
 	 *
 	 * Based off Modern Tribe's tribe_register_plugin
 	 *
-	 * @since 2.6
+	 * @since 3.0
 	 *
 	 * @param string $file_path    Full file path to the base plugin file
 	 * @param string $main_class   The Main/base class for this plugin
@@ -123,7 +123,7 @@ if ( ! function_exists( 'pngx_check_plugin' ) ) {
 	 *
 	 * Based off Modern Tribe's tribe_check_plugin
 	 *
-	 * @since 2.6
+	 * @since 3.0
 	 *
 	 * @param string $main_class   The Main/base class for this plugin
 	 *
@@ -143,7 +143,7 @@ if ( ! function_exists( 'pngx_notice' ) ) {
 	 *
 	 * Based off Modern Tribe's tribe_notice
 	 *
-	 * @since 2.6
+	 * @since 3.0
 	 *
 	 * @param string          $slug             Slug to save the notice
 	 * @param callable|string $callback         A callable Method/Fuction to actually display the notice
@@ -165,7 +165,7 @@ if ( ! function_exists( 'pngx_get_request_var' ) ) {
 	 *
 	 * Based off Modern Tribe's tribe_get_request_var
 	 *
-	 * @since 2.6
+	 * @since 3.0
 	 *
 	 * Post data takes priority over fields passed in the URL query. If the field is not
 	 * set then $default (null unless a different value is specified) will be returned.
@@ -190,7 +190,7 @@ if ( ! function_exists( 'pngx_asset' ) ) {
 	 *
 	 * Based off Modern Tribe's tribe_asset
 	 *
-	 * @since 2.6
+	 * @since 3.0
 	 *
 	 * @param object $origin    The main Object for the plugin you are enqueueing the script/style for
 	 * @param string $slug      Slug to save the asset
@@ -212,7 +212,7 @@ if ( ! function_exists( 'pngx_resource_url' ) ) {
 	 *
 	 * Based off Modern Tribe's tribe_resource_url
 	 *
-	 * @since 2.6
+	 * @since 3.0
 	 *
 	 * @param string $resource the filename of the resource
 	 * @param bool   $echo     whether or not to echo the url
@@ -259,7 +259,7 @@ if ( ! function_exists( 'pngx_resource_url' ) ) {
 		/**
 		 * Filters the resource URL
 		 *
-		 * @since 2.6
+		 * @since 3.0
 		 *
 		 * @param $url
 		 * @param $resource
