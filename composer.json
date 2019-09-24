@@ -10,11 +10,12 @@
   "homepage": "http://jesseeproductions.com/",
   "license": "GPL-2.0",
   "require-dev": {
-    "lucatume/wp-browser": "^2.2.9",
+    "lucatume/wp-browser": "2.2.15",
     "codeception/codeception": "^2.5.6",
     "phpunit/phpunit": "6.5.14",
-    "lucatume/function-mocker-le": "^1.0",
-    "wp-cli/checksum-command": "1.0.5"
+    "facebook/webdriver": "1.6.0",
+    "lucatume/function-mocker": "^1.3.8",
+    "lucatume/function-mocker-le": "^1.0.1"
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
@@ -22,8 +23,23 @@
     "preferred-install": "dist"
   },
   "require": {
-    "lucatume/di52": "~2.0"
+    "lucatume/di52": "~2.0",
+    "faction23/a11y-dialog": "~5.0.0"
   },
+  "repositories": [
+    {
+      "type": "package",
+      "package": {
+        "name": "faction23/a11y-dialog",
+        "version": "5.0.4",
+        "source": {
+          "url": "https://github.com/faction23/a11y-dialog",
+          "type": "git",
+          "reference": "master"
+        }
+      }
+    }
+  ],
   "scripts": {
     "post-install-cmd": [
       "xrstf\\Composer52\\Generator::onPostInstallCmd"
@@ -34,5 +50,10 @@
     "post-autoload-dump": [
       "xrstf\\Composer52\\Generator::onPostInstallCmd"
     ]
+  },
+  "autoload": {
+    "psr-4": {
+      "Pngx\\": "src/Pngx/"
+    }
   }
 }

@@ -158,32 +158,6 @@ if ( ! function_exists( 'pngx_notice' ) ) {
 	}
 }
 
-if ( ! function_exists( 'pngx_get_request_var' ) ) {
-	/**
-	 * Tests to see if the requested variable is set either as a post field or as a URL
-	 * param and returns the value if so.
-	 *
-	 * Based off Modern Tribe's tribe_get_request_var
-	 *
-	 * @since 3.0
-	 *
-	 * Post data takes priority over fields passed in the URL query. If the field is not
-	 * set then $default (null unless a different value is specified) will be returned.
-	 *
-	 * The variable being tested for can be an array if you wish to find a nested value.
-	 *
-	 * @see Tribe__Utils__Array::get()
-	 *
-	 * @param string|array $var
-	 * @param mixed        $default
-	 *
-	 * @return mixed
-	 */
-	function pngx_get_request_var( $var, $default = null ) {
-		return Pngx__Utilities__Array::get_in_any( array( $_GET, $_POST ), $var, $default );
-	}
-}
-
 if ( ! function_exists( 'pngx_asset' ) ) {
 	/**
 	 * Shortcut for Pngx__Assets::register(), include a single asset
