@@ -120,7 +120,7 @@ abstract class Pngx__Process__Queue extends Pngx__Process__Handler {
 	public function __construct() {
 		$class        = get_class( $this );
 		$this->action = call_user_func( [ $class, 'action' ] );
-		$this->feature_detection = pngx( 'feature-detection' );
+		$this->feature_detection = pngx( 'pngx.feature-detection' );
 
 		parent::__construct();
 
@@ -464,7 +464,7 @@ abstract class Pngx__Process__Queue extends Pngx__Process__Handler {
 			return $this->max_frag_size;
 		}
 
-		return pngx( 'db' )->get_max_allowed_packet_size();
+		return pngx( 'pngx.db' )->get_max_allowed_packet_size();
 	}
 
 	/**
@@ -562,7 +562,7 @@ abstract class Pngx__Process__Queue extends Pngx__Process__Handler {
 
 			if ( false === $scheduled ) {
 				/** @var Pngx__Log__Logger $logger */
-				$logger = pngx( 'logger' );
+				$logger = pngx( 'pngx.logger' );
 				$class  = get_class( $this );
 				$src    = call_user_func( [ $class, 'action' ] );
 				$logger->log( 'Could not schedule event for cron-based processing', Pngx__Log::ERROR, $src );

@@ -83,7 +83,7 @@ class Pngx__Admin__Notices {
 		add_action( 'wp_ajax_pngx_notice_dismiss', array( $this, 'maybe_dismiss' ) );
 
 		// Doing AJAX? bail.
-		if ( pngx( 'context' )->doing_ajax() ) {
+		if ( pngx( 'pngx.context' )->doing_ajax() ) {
 			return;
 		}
 

@@ -40,7 +40,7 @@ class Pngx__Service_Providers__Processes extends tad_DI52_ServiceProvider {
 	 * Hooks the filters and binds the implementations needed to handle processes.
 	 */
 	public function register() {
-		$this->context = pngx( 'context' );
+		$this->context = pngx( 'pngx.context' );
 
 		// If the context of this request is neither AJAX or Cron bail.
 		if ( ! ( $this->context->doing_ajax() || $this->context->doing_cron() ) ) {
@@ -48,7 +48,7 @@ class Pngx__Service_Providers__Processes extends tad_DI52_ServiceProvider {
 		}
 
 		/** @var Pngx__Feature_Detection $feature_detection */
-		$feature_detection         = pngx( 'feature-detection' );
+		$feature_detection         = pngx( 'pngx.feature-detection' );
 		$action                    = pngx_get_request_var( 'action', false );
 		$testing_for_async_support = $action === $this->get_handler_action( 'Pngx__Process__Tester' );
 

@@ -103,7 +103,7 @@ abstract class Pngx__Process__Handler {
 		}
 
 		$this->healthcheck_cron_hook_id = $this->identifier;
-		$this->feature_detection        = pngx( 'feature-detection' );
+		$this->feature_detection        = pngx( 'pngx.feature-detection' );
 
 		/*
 		 * This object might have been built while processing crons so
@@ -223,7 +223,7 @@ abstract class Pngx__Process__Handler {
 
 			if ( false === $scheduled ) {
 				/** @var Pngx__Log__Logger $logger */
-				$logger = pngx( 'logger' );
+				$logger = pngx( 'pngx.logger' );
 				$class  = get_class( $this );
 				$src    = call_user_func( [ $class, 'action' ] );
 				$logger->log( 'Could not schedule event for cron-based handling', Pngx__Log::ERROR, $src );

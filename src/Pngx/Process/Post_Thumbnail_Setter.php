@@ -100,7 +100,7 @@ class Pngx__Process__Post_Thumbnail_Setter extends Pngx__Process__Handler {
 	 */
 	public function sync_handle( array $data_source = null ) {
 		/** @var Pngx__Log $logger */
-		$logger  = pngx( 'logger' );
+		$logger  = pngx( 'pngx.logger' );
 		$log_src = 'Featured image setter';
 
 		$logger->log_debug( "(ID: {$this->identifier}) - handling request.", $log_src );

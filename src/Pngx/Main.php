@@ -146,15 +146,14 @@ class Pngx__Main {
 	 * Registers the slug bound to the implementations in the container.
 	 */
 	public function bind_implementations() {
-		pngx_singleton( 'assets', 'Pngx__Assets' );
-		pngx_singleton( 'context', 'Pngx__Context' );
-		pngx_singleton( 'admin.assets', 'Pngx__Admin__Assets' );
-		pngx_singleton( 'logger', 'Pngx__Log' );
+		pngx_singleton( 'pngx.assets', 'Pngx__Assets' );
+		pngx_singleton( 'pngx.context', 'Pngx__Context' );
+		pngx_singleton( 'pngx.admin.assets', 'Pngx__Admin__Assets' );
+		pngx_singleton( 'pngx.logger', 'Pngx__Log' );
+		pngx_singleton( 'pngx.allowed_tags', 'Pngx__Allowed_Tags' );
 
-		//pngx_register_provider( Pngx\Service_Providers\Tooltip::class );
-		//log_me( 'class_exists( Pngx\Service_Providers\Dialog )' );
-		//pngx_register_provider( Pngx\Service_Providers\Dialog::class );
-
+		pngx_register_provider( Pngx\Service_Providers\Tooltip::class );
+		pngx_register_provider( Pngx\Service_Providers\Dialog::class );
 	}
 
 	/**
@@ -188,7 +187,7 @@ class Pngx__Main {
 	 */
 	public function pngx_plugins_loaded() {
 
-		pngx_singleton( 'feature-detection', 'Pngx__Feature_Detection' );
+		pngx_singleton( 'pngx.feature-detection', 'Pngx__Feature_Detection' );
 		pngx_register_provider( 'Pngx__Service_Providers__Processes' );
 
 		/**

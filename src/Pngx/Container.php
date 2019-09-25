@@ -47,7 +47,7 @@ if ( ! function_exists( 'pngx_singleton' ) ) {
 	 *      // some code later...
 	 *
 	 *      // class is built here
-	 *      pngx( 'tec.admin.class' )->doSomething();
+	 *      pngx( 'pngx.admin.class' )->doSomething();
 	 *
 	 * Need the class built immediately? Build it and register it:
 	 *
@@ -55,7 +55,7 @@ if ( ! function_exists( 'pngx_singleton' ) ) {
 	 *
 	 *      // some code later...
 	 *
-	 *      pngx( 'tec.admin.class' )->doSomething();
+	 *      pngx( 'pngx.admin.class' )->doSomething();
 	 *
 	 * Need a very custom way to build the class? Register a callback:
 	 *
@@ -63,7 +63,7 @@ if ( ! function_exists( 'pngx_singleton' ) ) {
 	 *
 	 *      // some code later...
 	 *
-	 *      pngx( 'tec.admin.class' )->doSomething();
+	 *      pngx( 'pngx.admin.class' )->doSomething();
 	 *
 	 * Or register the methods that should be called on the object after its construction:
 	 *
@@ -72,7 +72,7 @@ if ( ! function_exists( 'pngx_singleton' ) ) {
 	 *      // some code later...
 	 *
 	 *      // the `hook` and `register` methods will be called on the built instance.
-	 *      pngx( 'tec.admin.class' )->doSomething();
+	 *      pngx( 'pngx.admin.class' )->doSomething();
 	 *
 	 * The class will be built only once (if passing the class name or a callback function), stored
 	 * and the same instance will be returned from that moment on.
@@ -107,10 +107,10 @@ if ( ! function_exists( 'pngx_register' ) ) {
 	 *      // some code later...
 	 *
 	 *      // class is built here
-	 *      $some_one = pngx( 'tec.some' )->doSomething();
+	 *      $some_one = pngx( 'pngx.some' )->doSomething();
 	 *
 	 *      // $some_two !== $some_one
-	 *      $some_two = pngx( 'tec.some' )->doSomething();
+	 *      $some_two = pngx( 'pngx.some' )->doSomething();
 	 *
 	 * Need the class built immediately? Build it and register it:
 	 *
@@ -120,8 +120,8 @@ if ( ! function_exists( 'pngx_register' ) ) {
 	 *
 	 *      // $some_two === $some_one
 	 *      // acts like a singleton
-	 *      $some_one = pngx( 'tec.some' )->doSomething();
-	 *      $some_two = pngx( 'tec.some' )->doSomething();
+	 *      $some_one = pngx( 'pngx.some' )->doSomething();
+	 *      $some_two = pngx( 'pngx.some' )->doSomething();
 	 *
 	 * Need a very custom way to build the class? Register a callback:
 	 *
@@ -130,8 +130,8 @@ if ( ! function_exists( 'pngx_register' ) ) {
 	 *      // some code later...
 	 *
 	 *      // $some_two !== $some_one
-	 *      $some_one = pngx( 'tec.some' )->doSomething();
-	 *      $some_two = pngx( 'tec.some' )->doSomething();
+	 *      $some_one = pngx( 'pngx.some' )->doSomething();
+	 *      $some_two = pngx( 'pngx.some' )->doSomething();
 	 *
 	 * Or register the methods that should be called on the object after its construction:
 	 *
@@ -140,7 +140,7 @@ if ( ! function_exists( 'pngx_register' ) ) {
 	 *      // some code later...
 	 *
 	 *      // the `hook` and `register` methods will be called on the built instance.
-	 *      pngx( 'tec.admin.class' )->doSomething();
+	 *      pngx( 'pngx.admin.class' )->doSomething();
 	 *
 	 * @param string                 $slug                The human-readable and catchy name of the class.
 	 * @param string|object|callable $class               The full class name or an instance of the class

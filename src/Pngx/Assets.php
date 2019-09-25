@@ -29,7 +29,7 @@ class Pngx__Assets {
 	 * @return self
 	 */
 	public static function instance() {
-		return pngx( 'assets' );
+		return pngx( 'pngx.assets' );
 	}
 
 	/**
