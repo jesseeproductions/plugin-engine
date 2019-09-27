@@ -28,14 +28,14 @@ pngx.dialogs = pngx.dialogs || {};
 						event.preventDefault();
 						event.stopPropagation();
 
-						jQuery( pngx_ev.events ).trigger( dialog.showEvent, [dialogEl, event] );
+						//jQuery( pngx_ev.events ).trigger( dialog.showEvent, [dialogEl, event] );
 					});
 
 					window[objName].on('hide', function (dialogEl, event) {
 						event.preventDefault();
 						event.stopPropagation();
 
-						jQuery( pngx_ev.events ).trigger( dialog.closeEvent, [dialogEl, event] );
+						//jQuery( pngx_ev.events ).trigger( dialog.closeEvent, [dialogEl, event] );
 					});
 				});
 			}

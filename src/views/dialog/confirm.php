@@ -12,7 +12,7 @@
  */
 
 /** @var \Pngx\Dialog\View $dialog_view */
-$dialog_view = pngx( 'dialog.view' );
+$dialog_view = pngx( 'pngx.dialog.view' );
 // grab allthevars!
 $vars        = get_defined_vars();
 ?>

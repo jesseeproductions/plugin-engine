@@ -152,8 +152,9 @@ class Pngx__Main {
 		pngx_singleton( 'pngx.logger', 'Pngx__Log' );
 		pngx_singleton( 'pngx.allowed_tags', 'Pngx__Allowed_Tags' );
 
-		pngx_register_provider( Pngx\Service_Providers\Tooltip::class );
+		//pngx_register_provider( Pngx\Service_Providers\Tooltip::class );
 		pngx_register_provider( Pngx\Service_Providers\Dialog::class );
+		pngx_register_provider( Pngx\Service_Providers\Carousel::class );
 	}
 
 	/**

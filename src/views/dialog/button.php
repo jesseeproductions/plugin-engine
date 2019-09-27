@@ -29,4 +29,4 @@ $classes = implode( ' ' , (array) $classes );
 	<?php if ( ! empty( $button_value ) && 0 !== absint( $button_value ) ) : ?>
 		value="<?php echo esc_attr( $button_value ); ?>"
 	<?php endif; ?>
-><?php echo esc_html( $button_text ); ?></button>
+><?php echo $button_text; ?></button>

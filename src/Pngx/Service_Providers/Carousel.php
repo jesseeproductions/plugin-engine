@@ -3,15 +3,15 @@
 namespace Pngx\Service_Providers;
 
 /**
- * Class Dialog
+ * Class Carousel
  *
- * Based off Modern Tribe's Tribe\Service_Providers\Dialog
+ * Based off Modern Tribe's Tribe\Service_Providers\Carousel
  *
  * @since TBD
  *
  * Handles the registration and creation of our async process handlers.
  */
-class Dialog extends \tad_DI52_ServiceProvider {
+class Carousel extends \tad_DI52_ServiceProvider {
 
 	/**
 	 * Binds and sets up implementations.
@@ -19,16 +19,16 @@ class Dialog extends \tad_DI52_ServiceProvider {
 	 * @since TBD
 	 */
 	public function register() {
-		pngx_singleton( 'pngx.dialog.view', '\Pngx\Dialog\View' );
+		pngx_singleton( 'pngx.carousel.view', '\Pngx\Carousel\View' );
 
 		/**
 		 * Allows plugins to hook into the register action to register views, etc
 		 *
 		 * @since TBD
 		 *
-		 * @param Pngx\Service_Providers\Dialog $dialog
+		 * @param Pngx\Service_Providers\Carousel $carousel
 		 */
-		do_action( 'pngx_dialog_register', $this );
+		do_action( 'pngx_carousel_register', $this );
 
 		$this->hooks();
 	}
@@ -39,7 +39,7 @@ class Dialog extends \tad_DI52_ServiceProvider {
 	 * @since TBD
 	 */
 	private function hooks() {
-		add_action( 'pngx_engine_loaded', [ $this, 'register_dialog_assets' ] );
+		add_action( 'pngx_engine_loaded', [ $this, 'register_carousel_assets' ] );
 		add_filter( 'pngx_template_public_namespace', [ $this, 'template_public_namespace' ], 10, 2 );
 
 		/**
@@ -47,9 +47,9 @@ class Dialog extends \tad_DI52_ServiceProvider {
 		 *
 		 * @since TBD
 		 *
-		 * @param Pngx\Service_Providers\Dialog $dialog
+		 * @param Pngx\Service_Providers\Carousel $carousel
 		 */
-		do_action( 'pngx_dialog_hooks', $this );
+		do_action( 'pngx_carousel_hooks', $this );
 	}
 
 	/**
@@ -58,55 +58,55 @@ class Dialog extends \tad_DI52_ServiceProvider {
 	 * @since  TBD
 	 */
 	public function template_public_namespace( $namespace, $obj ) {
-		if ( ! empty( $obj->template_namespace ) && 'dialog' === $obj->template_namespace ) {
-			array_push( $namespace, 'dialog' );
+		if ( ! empty( $obj->template_namespace ) && 'carousel' === $obj->template_namespace ) {
+			array_push( $namespace, 'carousel' );
 		}
 
 		return $namespace;
 	}
 
 	/**
-	 * Register assets associated with dialog
+	 * Register assets associated with carousel
 	 *
 	 * @since TBD
 	 */
-	public function register_dialog_assets() {
+	public function register_carousel_assets() {
 		$main = \Pngx__Main::instance();
 
-		pngx_asset(
+/*		pngx_asset(
 			$main,
-			'pngx-dialog',
-			'dialog.css',
+			'pngx-carousel',
+			'carousel.css',
 			[],
 			[],
-			[ 'groups' => 'pngx-dialog' ]
+			[ 'groups' => 'pngx-carousel' ]
 		);
 
 		pngx_asset(
 			$main,
-			'mt-a11y-dialog',
-			'vendor/faction23/a11y-dialog/a11y-dialog.js',
+			'mt-a11y-carousel',
+			'vendor/faction23/a11y-carousel/a11y-carousel.js',
 			[],
 			[],
-			[ 'groups' => 'pngx-dialog' ]
+			[ 'groups' => 'pngx-carousel' ]
 		);
 
 		pngx_asset(
 			$main,
-			'pngx-dialog-js',
-			'dialog.js',
-			[ 'mt-a11y-dialog' ],
+			'pngx-carousel-js',
+			'carousel.js',
+			[ 'mt-a11y-carousel' ],
 			[],
-			[ 'groups' => 'pngx-dialog' ]
-		);
+			[ 'groups' => 'pngx-carousel' ]
+		);*/
 
 		/**
 		 * Allows plugins to hook into the assets action to register their own assets
 		 *
 		 * @since TBD
 		 *
-		 * @param Pngx\Service_Providers\Dialog $dialog
+		 * @param Pngx\Service_Providers\Carousel $carousel
 		 */
-		do_action( 'pngx_dialog_assets_registered', $this );
+		do_action( 'pngx_carousel_assets_registered', $this );
 	}
 }

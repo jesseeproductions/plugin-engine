@@ -557,8 +557,7 @@ fieldset[disabled] .btn-primary.active {
       padding: 12px 38px 12px 8px; }
 
 /* IE9: To hide select arrow we make the select overflow on the right side there is not another way :( */
-@media screen and (min-width: 0 \0
- ) {
+@media screen and (min-width: 0 \0 ) {
   .pngx-default-select select {
     width: calc(100% + 58px); } }
 

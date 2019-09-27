@@ -7,7 +7,7 @@ namespace Pngx\Dialog;
  *
  * @since TBD
  */
-class View extends \Tribe__Template {
+class View extends \Pngx__Template {
 	/**
 	 * Where in the themes we will look for templates.
 	 *
@@ -23,7 +23,7 @@ class View extends \Tribe__Template {
 	 * @since TBD
 	 */
 	public function __construct() {
-		$this->set_template_origin( \Tribe__Main::instance() );
+		$this->set_template_origin( \Pngx__Main::instance() );
 		$this->set_template_folder( 'src/views/dialog' );
 
 		// Configures this templating class to extract variables.
@@ -48,28 +48,28 @@ class View extends \Tribe__Template {
 	 *     @type string  $button_text             The text for the dialog trigger button ("Open the dialog window").
 	 *     @type string  $button_type             The type for the trigger button (optinoal).
 	 *     @type string  $button_value            The value for the trigger button (optional).
-	 *     @type string  $close_event             The dialog close event hook name (`tribe_dialog_close_dialog`).
-	 *     @type string  $content_classes         The dialog content classes ("tribe-dialog__content").
+	 *     @type string  $close_event             The dialog close event hook name (`pngx_dialog_close_dialog`).
+	 *     @type string  $content_classes         The dialog content classes ("pngx-dialog__content").
 	 *     @type array   $context                 Any additional context data you need to expose to this file (optional).
 	 *     @type string  $id                      The unique ID for this dialog (`uniqid()`).
-	 *     @type string  $show_event              The dialog event show hook name (`tribe_dialog_show_dialog`).
+	 *     @type string  $show_event              The dialog event show hook name (`pngx_dialog_show_dialog`).
 	 *     @type string  $template                The dialog template name (dialog).
 	 *     @type string  $title                   The dialog title (optional).
-	 *     @type string  $trigger_classes         Classes for the dialog trigger ("tribe_dialog_trigger").
+	 *     @type string  $trigger_classes         Classes for the dialog trigger ("pngx_dialog_trigger").
 	 *
 	 *     Dialog script option overrides.
 	 *
 	 *     @type string  $append_target           The dialog will be inserted after the button, you could supply a selector string here to override (optional).
 	 *     @type boolean $body_lock               Whether to lock the body while dialog open (false).
 	 *     @type string  $close_button_aria_label Aria label for the close button ("Close this dialog window").
-	 *     @type string  $close_button_classes    Classes for the close button ("tribe-dialog__close-button").
-	 *     @type string  $content_wrapper_classes Dialog content wrapper classes. This wrapper includes the close button ("tribe-dialog__wrapper").
+	 *     @type string  $close_button_classes    Classes for the close button ("pngx-dialog__close-button").
+	 *     @type string  $content_wrapper_classes Dialog content wrapper classes. This wrapper includes the close button ("pngx-dialog__wrapper").
 	 *     @type string  $effect                  CSS effect on open. none or fade (optional).
 	 *     @type string  $effect_easing           A css easing string to apply ("ease-in-out").
 	 *     @type int     $effect_speed            CSS effect speed in milliseconds (optional).
-	 *     @type string  $overlay_classes         The dialog overlay classes ("tribe-dialog__overlay").
+	 *     @type string  $overlay_classes         The dialog overlay classes ("pngx-dialog__overlay").
 	 *     @type boolean $overlay_click_closes    If clicking the overlay closes the dialog (false).
-	 *     @type string  $wrapper_classes         The wrapper class for the dialog ("tribe-dialog").
+	 *     @type string  $wrapper_classes         The wrapper class for the dialog ("pngx-dialog").
 	 * }
 	 * @param string  $id      The unique ID for this dialog. Gets prepended to the data attributes. Generated if not passed (`uniqid()`).
 	 * @param boolean $echo    Whether to echo the script or to return it (default: true).
@@ -87,9 +87,9 @@ class View extends \Tribe__Template {
 			$id = \uniqid();
 		}
 
-		/** @var \Tribe__Assets $assets */
-		$assets = tribe( 'assets' );
-		$assets->enqueue_group( 'tribe-dialog' );
+		/** @var \Pngx__Assets $assets */
+		$assets = pngx( 'pngx.assets' );
+		$assets->enqueue_group( 'pngx-dialog' );
 
 		$html = $this->build_dialog( $content, $id, $args );
 
@@ -115,29 +115,29 @@ class View extends \Tribe__Template {
 	 *     @type string  $button_text             The text for the dialog trigger button ("Open the modal window").
 	 *     @type string  $button_type             The type for the trigger button (optional).
 	 *     @type string  $button_value            The value for the trigger button (optional).
-	 *     @type string  $close_event             The dialog close event hook name (`tribe_dialog_close_modal`).
-	 *     @type string  $content_classes         The dialog content classes ("tribe-dialog__content tribe-modal__content").
-	 *     @type string  $title_classes           The dialog title classes ("tribe-dialog__title tribe-modal__title").
+	 *     @type string  $close_event             The dialog close event hook name (`pngx_dialog_close_modal`).
+	 *     @type string  $content_classes         The dialog content classes ("pngx-dialog__content pngx-modal__content").
+	 *     @type string  $title_classes           The dialog title classes ("pngx-dialog__title pngx-modal__title").
 	 *     @type array   $context                 Any additional context data you need to expose to this file (optional).
 	 *     @type string  $id                      The unique ID for this dialog (`uniqid()`).
-	 *     @type string  $show_event              The dialog event hook name (`tribe_dialog_show_modal`).
+	 *     @type string  $show_event              The dialog event hook name (`pngx_dialog_show_modal`).
 	 *     @type string  $template                The dialog template name (modal).
 	 *     @type string  $title                   The dialog title (optional).
-	 *     @type string  $trigger_classes         Classes for the dialog trigger ("tribe_dialog_trigger").
+	 *     @type string  $trigger_classes         Classes for the dialog trigger ("pngx_dialog_trigger").
 	 *
 	 *     Dialog script option overrides.
 	 *
 	 *     @type string  $append_target           The dialog will be inserted after the button, you could supply a selector string here to override ("body").
 	 *     @type boolean $body_lock               Whether to lock the body while dialog open (true).
 	 *     @type string  $close_button_aria_label Aria label for the close button ("Close this modal window").
-	 *     @type string  $close_button_classes    Classes for the close button ("tribe-dialog__close-button tribe-modal__close-button").
-	 *     @type string  $content_wrapper_classes Dialog content wrapper classes. This wrapper includes the close button ("tribe-dialog__wrapper tribe-modal__wrapper").
+	 *     @type string  $close_button_classes    Classes for the close button ("pngx-dialog__close-button pngx-modal__close-button").
+	 *     @type string  $content_wrapper_classes Dialog content wrapper classes. This wrapper includes the close button ("pngx-dialog__wrapper pngx-modal__wrapper").
 	 *     @type string  $effect                  CSS effect on open. none or fade ("fade").
 	 *     @type string  $effect_easing           A css easing string to apply ("ease-in-out").
 	 *     @type int     $effect_speed            CSS effect speed in milliseconds (300).
-	 *     @type string  $overlay_classes         The dialog overlay classes ("tribe-dialog__overlay tribe-modal__overlay").
+	 *     @type string  $overlay_classes         The dialog overlay classes ("pngx-dialog__overlay pngx-modal__overlay").
 	 *     @type boolean $overlay_click_closes    If clicking the overlay closes the dialog (true).
-	 *     @type string  $wrapper_classes         The wrapper class for the dialog ("tribe-dialog").
+	 *     @type string  $wrapper_classes         The wrapper class for the dialog ("pngx-dialog").
 	 * }
 	 * @param string  $id      The unique ID for this dialog. Gets prepended to the data attributes. Generated if not passed (`uniqid()`).
 	 * @param boolean $echo    Whether to echo the script or to return it (default: true).
@@ -148,19 +148,19 @@ class View extends \Tribe__Template {
 		$default_args = [
 			'append_target'           => '',
 			'body_lock'               => true,
-			'button_text'             => __( 'Open the modal window', 'tribe-common' ),
-			'close_button_aria_label' => __( 'Close this modal window', 'tribe-common' ),
-			'close_button_classes'    => 'tribe-dialog__close-button tribe-modal__close-button',
-			'close_event'             => 'tribe_dialog_close_modal',
-			'content_classes'         => 'tribe-dialog__content tribe-modal__content',
-			'content_wrapper_classes' => 'tribe-dialog__wrapper tribe-modal__wrapper',
+			'button_text'             => __( 'Open the modal window', 'pngx-common' ),
+			'close_button_aria_label' => __( 'Close this modal window', 'pngx-common' ),
+			'close_button_classes'    => 'pngx-dialog__close-button pngx-modal__close-button',
+			'close_event'             => 'pngx_dialog_close_modal',
+			'content_classes'         => 'pngx-dialog__content pngx-modal__content',
+			'content_wrapper_classes' => 'pngx-dialog__wrapper pngx-modal__wrapper',
 			'effect'                  => 'fade',
 			'effect_speed'            => 300,
-			'overlay_classes'         => 'tribe-dialog__overlay tribe-modal__overlay',
+			'overlay_classes'         => 'pngx-dialog__overlay pngx-modal__overlay',
 			'overlay_click_closes'    => true,
-			'show_event'              => 'tribe_dialog_show_modal',
+			'show_event'              => 'pngx_dialog_show_modal',
 			'template'                => 'modal',
-			'title_classes'           => [ 'tribe-dialog__title', 'tribe-modal__title' ],
+			'title_classes'           => [ 'pngx-dialog__title', 'pngx-modal__title' ],
 		];
 
 		$args = wp_parse_args( $args, $default_args );
@@ -184,29 +184,29 @@ class View extends \Tribe__Template {
 	 *     @type string  $button_type             The type for the trigger button (optional).
 	 *     @type string  $button_value            The value for the trigger button (optional).
 	 *     @type string  $cancel_button_text      Text for the "Cancel" button ("Cancel").
-	 *     @type string  $content_classes         The dialog content classes ("tribe-dialog__content tribe-confirm__content").
+	 *     @type string  $content_classes         The dialog content classes ("pngx-dialog__content pngx-confirm__content").
 	 *     @type string  $continue_button_text    Text for the "Continue" button ("Confirm").
 	 *     @type array   $context                 Any additional context data you need to expose to this file (optional).
 	 *     @type string  $id                      The unique ID for this dialog (`uniqid()`).
 	 *     @type string  $template                The dialog template name (confirm).
 	 *     @type string  $title                   The dialog title (optional).
-	 *     @type string  $trigger_classes         Classes for the dialog trigger ("tribe_dialog_trigger").
+	 *     @type string  $trigger_classes         Classes for the dialog trigger ("pngx_dialog_trigger").
 	 *
 	 *     Dialog script option overrides.
 	 *
 	 *     @type string  $append_target           The dialog will be inserted after the button, you could supply a selector string here to override (optional).
 	 *     @type boolean $body_lock               Whether to lock the body while dialog open (true).
 	 *     @type string  $close_button_aria_label Aria label for the close button (optional).
-	 *     @type string  $close_button_classes    Classes for the close button ("tribe-dialog__close-button--hidden").
-	 *     @type string  $close_event             The dialog close event hook name (`tribe_dialog_close_confirm`).
-	 *     @type string  $content_wrapper_classes Dialog content wrapper classes. This wrapper includes the close button ("tribe-dialog__wrapper tribe-confirm__wrapper").
+	 *     @type string  $close_button_classes    Classes for the close button ("pngx-dialog__close-button--hidden").
+	 *     @type string  $close_event             The dialog close event hook name (`pngx_dialog_close_confirm`).
+	 *     @type string  $content_wrapper_classes Dialog content wrapper classes. This wrapper includes the close button ("pngx-dialog__wrapper pngx-confirm__wrapper").
 	 *     @type string  $effect                  CSS effect on open. none or fade (optional).
 	 *     @type string  $effect_easing           A css easing string to apply ("ease-in-out").
 	 *     @type int     $effect_speed            CSS effect speed in milliseconds (optional).
-	 *     @type string  $overlay_classes         The dialog overlay classes ("tribe-dialog__overlay tribe-confirm__overlay").
+	 *     @type string  $overlay_classes         The dialog overlay classes ("pngx-dialog__overlay pngx-confirm__overlay").
 	 *     @type boolean $overlay_click_closes    If clicking the overlay closes the dialog (false).
-	 *     @type string  $show_event              The dialog event hook name (`tribe_dialog_show_confirm`).
-	 *     @type string  $wrapper_classes         The wrapper class for the dialog ("tribe-dialog").
+	 *     @type string  $show_event              The dialog event hook name (`pngx_dialog_show_confirm`).
+	 *     @type string  $wrapper_classes         The wrapper class for the dialog ("pngx-dialog").
 	 * }
 	 * @param string  $id      The unique ID for this dialog. Gets prepended to the data attributes. Generated if not passed (`uniqid()`).
 	 * @param boolean $echo    Whether to echo the script or to return it (default: true).
@@ -216,17 +216,17 @@ class View extends \Tribe__Template {
 	public function render_confirm( $content, $args = [], $id = null, $echo = true ) {
 		$default_args = [
 			'body_lock'               => true,
-			'cancel_button_text'      => __( 'Cancel', 'tribe-common' ),
-			'continue_button_text'    => __( 'Confirm', 'tribe-common' ),
+			'cancel_button_text'      => __( 'Cancel', 'pngx-common' ),
+			'continue_button_text'    => __( 'Confirm', 'pngx-common' ),
 			'close_button_aria_label' => '',
-			'close_button_classes'    => 'tribe-dialog__close-button--hidden',
-			'close_event'             => 'tribe_dialog_close_confirm',
-			'content_classes'         => 'tribe-dialog__content tribe-confirm__content',
-			'content_wrapper_classes' => 'tribe-dialog__wrapper tribe-confirm__wrapper',
-			'overlay_classes'         => 'tribe-dialog__overlay tribe-confirm__overlay',
-			'show_event'              => 'tribe_dialog_show_confirm',
+			'close_button_classes'    => 'pngx-dialog__close-button--hidden',
+			'close_event'             => 'pngx_dialog_close_confirm',
+			'content_classes'         => 'pngx-dialog__content pngx-confirm__content',
+			'content_wrapper_classes' => 'pngx-dialog__wrapper pngx-confirm__wrapper',
+			'overlay_classes'         => 'pngx-dialog__overlay pngx-confirm__overlay',
+			'show_event'              => 'pngx_dialog_show_confirm',
 			'template'                => 'confirm',
-			'title_classes'           => [ 'tribe-dialog__title', 'tribe-confirm__title' ],
+			'title_classes'           => [ 'pngx-dialog__title', 'pngx-confirm__title' ],
 		];
 
 		$args = wp_parse_args( $args, $default_args );
@@ -250,29 +250,29 @@ class View extends \Tribe__Template {
 	 *     @type string  $button_text             The text for the dialog trigger button ("Open the dialog window").
 	 *     @type string  $button_type             The type for the trigger button (optional).
 	 *     @type string  $button_value            The value for the trigger button (optional).
-	 *     @type string  $content_classes         The dialog content classes ("tribe-dialog__content tribe-alert__content").
-	 *     @type string  $title_classes           The dialog title classes ("tribe-dialog__title tribe-alert__title").
+	 *     @type string  $content_classes         The dialog content classes ("pngx-dialog__content pngx-alert__content").
+	 *     @type string  $title_classes           The dialog title classes ("pngx-dialog__title pngx-alert__title").
 	 *     @type array   $context                 Any additional context data you need to expose to this file (optional).
 	 *     @type string  $id                      The unique ID for this dialog (`uniqid()`).
 	 *     @type string  $template                The dialog template name (alert).
 	 *     @type string  $title                   The dialog title (optional).
-	 *     @type string  $trigger_classes         Classes for the dialog trigger ("tribe_dialog_trigger").
+	 *     @type string  $trigger_classes         Classes for the dialog trigger ("pngx_dialog_trigger").
 	 *
 	 *     Dialog script option overrides.
 	 *
 	 *     @type string  $append_target           The dialog will be inserted after the button, you could supply a selector string here to override (optional).
 	 *     @type boolean $body_lock               Whether to lock the body while dialog open (true).
 	 *     @type string  $close_button_aria_label Aria label for the close button (optional).
-	 *     @type string  $close_button_classes    Classes for the close button ("tribe-dialog__close-button--hidden").
-	 *     @type string  $close_event             The dialog close event hook name (`tribe_dialog_close_alert`).
-	 *     @type string  $content_wrapper_classes Dialog content wrapper classes. This wrapper includes the close button ("tribe-dialog__wrapper tribe-alert__wrapper").
+	 *     @type string  $close_button_classes    Classes for the close button ("pngx-dialog__close-button--hidden").
+	 *     @type string  $close_event             The dialog close event hook name (`pngx_dialog_close_alert`).
+	 *     @type string  $content_wrapper_classes Dialog content wrapper classes. This wrapper includes the close button ("pngx-dialog__wrapper pngx-alert__wrapper").
 	 *     @type string  $effect                  CSS effect on open. none or fade (optional).
 	 *     @type string  $effect_easing           A css easing string to apply ("ease-in-out").
 	 *     @type int     $effect_speed            CSS effect speed in milliseconds (optional).
-	 *     @type string  $overlay_classes         The dialog overlay classes ("tribe-dialog__overlay tribe-alert__overlay").
+	 *     @type string  $overlay_classes         The dialog overlay classes ("pngx-dialog__overlay pngx-alert__overlay").
 	 *     @type boolean $overlay_click_closes    If clicking the overlay closes the dialog (false).
-	 *     @type string  $show_event              The dialog event hook name (`tribe_dialog_show_alert`).
-	 *     @type string  $wrapper_classes         The wrapper class for the dialog ("tribe-dialog").
+	 *     @type string  $show_event              The dialog event hook name (`pngx_dialog_show_alert`).
+	 *     @type string  $wrapper_classes         The wrapper class for the dialog ("pngx-dialog").
 	 * }
 	 * @param string  $id      The unique ID for this dialog. Gets prepended to the data attributes. Generated if not passed (`uniqid()`).
 	 * @param boolean $echo    Whether to echo the script or to return it (default: true).
@@ -281,17 +281,17 @@ class View extends \Tribe__Template {
 	 */
 	public function render_alert( $content, $args = [], $id = null, $echo = true ) {
 		$default_args = [
-			'alert_button_text'       => __( 'OK', 'tribe-common' ),
+			'alert_button_text'       => __( 'OK', 'pngx-common' ),
 			'body_lock'               => true,
 			'close_button_aria_label' => '',
-			'close_button_classes'    => 'tribe-dialog__close-button--hidden',
-			'close_event'             => 'tribe_dialog_close_alert',
-			'content_classes'         => 'tribe-dialog__content tribe-alert__content',
-			'content_wrapper_classes' => 'tribe-dialog__wrapper tribe-alert__wrapper',
-			'overlay_classes'         => 'tribe-dialog__overlay tribe-alert__overlay',
-			'show_event'              => 'tribe_dialog_show_alert',
+			'close_button_classes'    => 'pngx-dialog__close-button--hidden',
+			'close_event'             => 'pngx_dialog_close_alert',
+			'content_classes'         => 'pngx-dialog__content pngx-alert__content',
+			'content_wrapper_classes' => 'pngx-dialog__wrapper pngx-alert__wrapper',
+			'overlay_classes'         => 'pngx-dialog__overlay pngx-alert__overlay',
+			'show_event'              => 'pngx_dialog_show_alert',
 			'template'                => 'alert',
-			'title_classes'           => [ 'tribe-dialog__title', 'tribe-alert__title' ],
+			'title_classes'           => [ 'pngx-dialog__title', 'pngx-alert__title' ],
 		];
 
 		$args = wp_parse_args( $args, $default_args );
@@ -314,29 +314,29 @@ class View extends \Tribe__Template {
 	 *     @type string  $button_text             The text for the dialog trigger button ("Open the dialog window").
 	 *     @type string  $button_type             The type for the trigger button (optional).
 	 *     @type string  $button_value            The value for the trigger button (optional).
-	 *     @type string  $close_event             The dialog event hook name (`tribe_dialog_close_dialog`).
-	 *     @type string  $content_classes         The dialog content classes ("tribe-dialog__content").
-	 *     @type string  $title_classes           The dialog title classes ("tribe-dialog__title").
+	 *     @type string  $close_event             The dialog event hook name (`pngx_dialog_close_dialog`).
+	 *     @type string  $content_classes         The dialog content classes ("pngx-dialog__content").
+	 *     @type string  $title_classes           The dialog title classes ("pngx-dialog__title").
 	 *     @type array   $context                 Any additional context data you need to expose to this file (optional).
 	 *     @type string  $id                      The unique ID for this dialog (`uniqid()`).
-	 *     @type string  $show_event              The dialog event hook name (`tribe_dialog_show_dialog`).
+	 *     @type string  $show_event              The dialog event hook name (`pngx_dialog_show_dialog`).
 	 *     @type string  $template                The dialog template name (dialog).
 	 *     @type string  $title                   The dialog title (optional).
-	 *     @type string  $trigger_classes         Classes for the dialog trigger ("tribe_dialog_trigger").
+	 *     @type string  $trigger_classes         Classes for the dialog trigger ("pngx_dialog_trigger").
 	 *
 	 *     Dialog script option overrides.
 	 *
 	 *     @type string  $append_target           The dialog will be inserted after the button, you could supply a selector string here to override (optional).
 	 *     @type boolean $body_lock               Whether to lock the body while dialog open (false).
 	 *     @type string  $close_button_aria_label Aria label for the close button ("Close this dialog window").
-	 *     @type string  $close_button_classes    Classes for the close button ("tribe-dialog__close-button").
-	 *     @type string  $content_wrapper_classes Dialog content wrapper classes. This wrapper includes the close button ("tribe-dialog__wrapper").
+	 *     @type string  $close_button_classes    Classes for the close button ("pngx-dialog__close-button").
+	 *     @type string  $content_wrapper_classes Dialog content wrapper classes. This wrapper includes the close button ("pngx-dialog__wrapper").
 	 *     @type string  $effect                  CSS effect on open. none or fade (optional).
 	 *     @type string  $effect_easing           A css easing string to apply ("ease-in-out").
 	 *     @type int     $effect_speed            CSS effect speed in milliseconds (optional).
-	 *     @type string  $overlay_classes         The dialog overlay classes ("tribe-dialog__overlay").
+	 *     @type string  $overlay_classes         The dialog overlay classes ("pngx-dialog__overlay").
 	 *     @type boolean $overlay_click_closes    If clicking the overlay closes the dialog (false).
-	 *     @type string  $wrapper_classes         The wrapper class for the dialog ("tribe-dialog").
+	 *     @type string  $wrapper_classes         The wrapper class for the dialog ("pngx-dialog").
 	 * }
 	 *
 	 * @return string An HTML string of the dialog.
@@ -346,29 +346,29 @@ class View extends \Tribe__Template {
 			'button_classes'          => '',
 			'button_id'               => '',
 			'button_name'             => '',
-			'button_text'             => __( 'Open the dialog window', 'tribe-common' ),
+			'button_text'             => __( 'Open the dialog window', 'pngx-common' ),
 			'button_type'             => '',
 			'button_value'            => '',
-			'close_event'             => 'tribe_dialog_close_dialog',
-			'content_classes'         => 'tribe-dialog__content',
+			'close_event'             => 'pngx_dialog_close_dialog',
+			'content_classes'         => 'pngx-dialog__content',
 			'context'                 => '',
-			'show_event'              => 'tribe_dialog_show_dialog',
+			'show_event'              => 'pngx_dialog_show_dialog',
 			'template'                => 'dialog',
-			'title_classes'           => 'tribe-dialog__title',
+			'title_classes'           => 'pngx-dialog__title',
 			'title'                   => '',
-			'trigger_classes'         => 'tribe_dialog_trigger',
+			'trigger_classes'         => 'pngx_dialog_trigger',
 			// Dialog script options.
 			'append_target'           => '', // The dialog will be inserted after the button, you could supply a selector string here to override.
 			'body_lock'               => false, // Lock the body while dialog open?
-			'close_button_aria_label' => __( 'Close this dialog window', 'tribe-common' ), // Aria label for close button.
-			'close_button_classes'    => 'tribe-dialog__close-button', // Classes for close button.
-			'content_wrapper_classes' => 'tribe-dialog__wrapper', // Dialog content classes.
+			'close_button_aria_label' => __( 'Close this dialog window', 'pngx-common' ), // Aria label for close button.
+			'close_button_classes'    => 'pngx-dialog__close-button', // Classes for close button.
+			'content_wrapper_classes' => 'pngx-dialog__wrapper', // Dialog content classes.
 			'effect'                  => 'none', // None or fade (for now).
 			'effect_speed'            => 0, // Effect speed in milliseconds.
 			'effect_easing'           => 'ease-in-out', // A css easing string.
-			'overlay_classes'         => 'tribe-dialog__overlay', // Overlay classes.
+			'overlay_classes'         => 'pngx-dialog__overlay', // Overlay classes.
 			'overlay_click_closes'    => false, // Clicking overlay closes dialog.
-			'wrapper_classes'         => 'tribe-dialog', // The wrapper class for the dialog.
+			'wrapper_classes'         => 'pngx-dialog', // The wrapper class for the dialog.
 		];
 
 		$args = wp_parse_args( $args, $default_args );
@@ -384,7 +384,7 @@ class View extends \Tribe__Template {
 		 * @param array $args The dialog arguments.
 		 * @param string $content HTML content string.
 		 */
-		$args = apply_filters( 'tribe_dialog_args', $args, $content );
+		$args = apply_filters( 'pngx_dialog_args', $args, $content );
 
 		$template = $args[ 'template' ];
 		/**
@@ -395,7 +395,7 @@ class View extends \Tribe__Template {
 		 * @param string $template The dialog template name.
 		 * @param array $args The dialog arguments.
 		 */
-		$template_name = apply_filters( 'tribe_dialog_template', $template, $args );
+		$template_name = apply_filters( 'pngx_dialog_template', $template, $args );
 
 		ob_start();
 
@@ -413,7 +413,7 @@ class View extends \Tribe__Template {
 		 * @param string $html The dialog HTML string.
 		 * @param array $args The dialog arguments.
 		 */
-		return apply_filters( 'tribe_dialog_html', $html, $args );
+		return apply_filters( 'pngx_dialog_html', $html, $args );
 	}
 
 	/**
@@ -421,7 +421,7 @@ class View extends \Tribe__Template {
 	 *
 	 * @since TBD
 	 *
-	 * @param array   $args List of arguments for the dialog script. See \Tribe\Dialog\View->build_dialog().
+	 * @param array   $args List of arguments for the dialog script. See \Pngx\Dialog\View->build_dialog().
 	 * @param boolean $echo Whether to echo the script or to return it (default: true).
 	 *
 	 * @return string|void The dialog <script> HTML or nothing if $echo is true.
@@ -451,9 +451,9 @@ class View extends \Tribe__Template {
 		 *
 		 * @since TBD
 		 *
-		 * @param array $args List of arguments to override dialog script. See \Tribe\Dialog\View->build_dialog().
+		 * @param array $args List of arguments to override dialog script. See \Pngx\Dialog\View->build_dialog().
 		 */
-		$args = apply_filters( 'tribe_dialog_script_args', $args );
+		$args = apply_filters( 'pngx_dialog_script_args', $args );
 
 		// Escape all argument values.
 		$args = array_map( 'esc_html', $args );
@@ -463,10 +463,10 @@ class View extends \Tribe__Template {
 		ob_start();
 		?>
 		<script>
-			var tribe = tribe || {};
-			tribe.dialogs = tribe.dialogs || [];
+			var pngx = pngx || {};
+			pngx.dialogs = pngx.dialogs || [];
 
-			tribe.dialogs.push( <?php echo json_encode( $args ); ?> );
+			pngx.dialogs.push( <?php echo json_encode( $args ); ?> );
 
 			<?php
 			/**
@@ -474,27 +474,27 @@ class View extends \Tribe__Template {
 			 *
 			 * @since TBD
 			 *
-			 * @param array $args List of arguments to override dialog script. See \Tribe\Dialog\View->build_dialog().
+			 * @param array $args List of arguments to override dialog script. See \Pngx\Dialog\View->build_dialog().
 			 */
-			do_action( 'tribe_dialog_additional_scripts', $args );
+			do_action( 'pngx_dialog_additional_scripts', $args );
 
 			/**
 			 * Allows for injecting additional scripts (button actions, etc) by template.
 			 *
 			 * @since TBD
 			 *
-			 * @param array $args List of arguments to override dialog script. See \Tribe\Dialog\View->build_dialog().
+			 * @param array $args List of arguments to override dialog script. See \Pngx\Dialog\View->build_dialog().
 			 */
-			do_action( 'tribe_dialog_additional_scripts_'  . $args[ 'template' ], $args );
+			do_action( 'pngx_dialog_additional_scripts_'  . $args[ 'template' ], $args );
 
 			/**
 			 * Allows for injecting additional scripts (button actions, etc) by dialog ID.
 			 *
 			 * @since TBD
 			 *
-			 * @param array $args List of arguments to override dialog script. See \Tribe\Dialog\View->build_dialog().
+			 * @param array $args List of arguments to override dialog script. See \Pngx\Dialog\View->build_dialog().
 			 */
-			do_action( 'tribe_dialog_additional_scripts_' . $args[ 'id' ], $args );
+			do_action( 'pngx_dialog_additional_scripts_' . $args[ 'id' ], $args );
 			?>
 		</script>
 		<?php
@@ -505,9 +505,9 @@ class View extends \Tribe__Template {
 		 *
 		 * @since TBD
 		 *
-		 * @param array $args List of arguments to override dialog script. See \Tribe\Dialog\View->build_dialog().
+		 * @param array $args List of arguments to override dialog script. See \Pngx\Dialog\View->build_dialog().
 		 */
-		$html = apply_filters( 'tribe_dialog_script_html', $html );
+		$html = apply_filters( 'pngx_dialog_script_html', $html );
 
 		if ( $echo ) {
 			echo $html;
