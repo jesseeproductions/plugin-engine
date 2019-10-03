@@ -90,15 +90,16 @@ class Carousel extends \tad_DI52_ServiceProvider {
 			[],
 			[ 'groups' => 'pngx-carousel' ]
 		);
+		*/
 
 		pngx_asset(
 			$main,
 			'pngx-carousel-js',
 			'carousel.js',
-			[ 'mt-a11y-carousel' ],
+			[],
 			[],
 			[ 'groups' => 'pngx-carousel' ]
-		);*/
+		);
 
 		/**
 		 * Allows plugins to hook into the assets action to register their own assets

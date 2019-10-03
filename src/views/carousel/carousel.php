@@ -11,9 +11,9 @@
  * @version TBD
  */
 
-/** @var \Pngx\Carousel\View $carousel_view */
-//$carousel_view = pngx( 'pngx.carousel.view' );
 // grab allthevars!
 $vars        = get_defined_vars();
 ?>
-<?php //$carousel_view->template( 'button', $vars, true ); ?>
+<div id="carousel_obj_<?php echo esc_html( $vars['id'] ) ?>" <?php pngx_classes(  $wrapper_classes ) ?>>
+	<?php echo $content; ?>
+</div>
