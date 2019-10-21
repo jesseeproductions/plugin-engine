@@ -120,8 +120,8 @@ class View extends \Pngx__Template {
 			'autoplay'        => true,
 			'autoplaySpeed'   => 4000,
 			'arrows'          => true,
-			'prevArrow'       => '<a class="slick-prev" href="#"><span class="screen-reader-text">Previous</span><i class="fa fa-chevron-left"></i></a>',
-			'nextArrow'       => '<a class="slick-next" href="#"><span class="screen-reader-text">Next</span><i class="fa fa-chevron-right"></i></a>',
+			'prevArrow'       => '<button class="slick-prev"><span class="screen-reader-text">Previous</span><i class="fa fa-chevron-left"></i></button>',
+			'nextArrow'       => '<button class="slick-next"><span class="screen-reader-text">Next</span><i class="fa fa-chevron-right"></i></button>',
 			'draggable'       => true,
 			'focusOnSelect'   => true,
 			'infinite'        => true,
@@ -236,6 +236,8 @@ class View extends \Pngx__Template {
 		$args = apply_filters( 'pngx_carousel_script_args', $args );
 
 		// Escape all argument values.
+		//todo add back escaping
+		// use the multi demnsion escaper?
 		//$args = array_map( 'esc_html', $args );
 
 		ob_start();
