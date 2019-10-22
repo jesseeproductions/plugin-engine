@@ -118,7 +118,7 @@ class View extends \Pngx__Template {
 			// Carousel script options.
 			'accessibility'   => true,
 			'autoplay'        => true,
-			'autoplaySpeed'   => 4000,
+			'autoplaySpeed'   => (integer) 4000,
 			'arrows'          => true,
 			'prevArrow'       => '<button class="slick-prev"><span class="screen-reader-text">Previous</span><i class="fa fa-chevron-left"></i></button>',
 			'nextArrow'       => '<button class="slick-next"><span class="screen-reader-text">Next</span><i class="fa fa-chevron-right"></i></button>',
@@ -129,24 +129,24 @@ class View extends \Pngx__Template {
 			'pauseOnHover'    => true,
 			'responsive'      => [
 				[
-					'breakpoint' => 768,
+					'breakpoint' => (integer) 768,
 					'settings'   => [
-						'slidesToShow'   => 3,
-						'slidesToScroll' => 3,
+						'slidesToShow'   => (integer) 3,
+						'slidesToScroll' => (integer) 3,
 
 					],
 				],
 				[
-					'breakpoint' => 480,
+					'breakpoint' => (integer) 480,
 					'settings'   => [
-						'slidesToShow'   => 2,
-						'slidesToScroll' => 2,
+						'slidesToShow'   => (integer) 2,
+						'slidesToScroll' => (integer) 2,
 
 					],
 				],
 			],
-			'slidesToShow'    => 4,
-			'slidesToScroll'  => 4,
+			'slidesToShow'    => (integer) 4,
+			'slidesToScroll'  => (integer) 4,
 		];
 
 		$args = wp_parse_args( $args, $default_args );
@@ -211,20 +211,20 @@ class View extends \Pngx__Template {
 			'wrapperClasses' => $args['wrapper_classes'],
 
 			// Carousel script options.
-			'accessibility'   => $args['accessibility'],
-			'autoplay'        => $args['autoplay'],
-			'autoplaySpeed'   => $args['autoplaySpeed'],
-			'arrows'          => $args['arrows'],
-			'prevArrow'       => $args['prevArrow'],
-			'nextArrow'       => $args['nextArrow'],
-			'draggable'       => $args['draggable'],
-			'focusOnSelect'   => $args['focusOnSelect'],
-			'infinite'        => $args['infinite'],
-			'pauseOnFocus'    => $args['pauseOnFocus'],
-			'pauseOnHover'    => $args['pauseOnHover'],
-			'responsive'      => $args['responsive'],
-			'slidesToShow'    => $args['slidesToShow'],
-			'slidesToScroll'  => $args['slidesToScroll'],
+			'accessibility'  => (boolean) $args['accessibility'],
+			'autoplay'       => (boolean) $args['autoplay'],
+			'autoplaySpeed'  => (integer) $args['autoplaySpeed'],
+			'arrows'         => (boolean) $args['arrows'],
+			'prevArrow'      => strip_tags( $args['prevArrow'], '<button><span><i>' ),
+			'nextArrow'      => strip_tags( $args['nextArrow'], '<button><span><i>' ),
+			'draggable'      => (boolean) $args['draggable'],
+			'focusOnSelect'  => (boolean) $args['focusOnSelect'],
+			'infinite'       => (boolean) $args['infinite'],
+			'pauseOnFocus'   => (boolean) $args['pauseOnFocus'],
+			'pauseOnHover'   => (boolean) $args['pauseOnHover'],
+			'responsive'     => $this->setup_responsive_breakpoints( $args['responsive'] ),
+			'slidesToShow'   => (integer) $args['slidesToShow'],
+			'slidesToScroll' => (integer) $args['slidesToScroll'],
 		];
 		/**
 		 * Allows for modifying the arguments before they are passed to the carousel script.
@@ -234,11 +234,6 @@ class View extends \Pngx__Template {
 		 * @param array $args List of arguments to override carousel script. See \Pngx\Carousel\View->build_carousel().
 		 */
 		$args = apply_filters( 'pngx_carousel_script_args', $args );
-
-		// Escape all argument values.
-		//todo add back escaping
-		// use the multi demnsion escaper?
-		//$args = array_map( 'esc_html', $args );
 
 		ob_start();
 		?>
@@ -296,5 +291,36 @@ class View extends \Pngx__Template {
 		}
 
 		return $html;
+	}
+
+	/**
+	 * Setup Responsive Breakpoint Array for Script
+	 *
+	 * @since TBD
+	 *
+	 * @param $responsive
+	 *
+	 * @return array|bool
+	 */
+	public function setup_responsive_breakpoints( $responsive ) {
+
+		if ( ! is_array( $responsive ) ) {
+			return false;
+		}
+
+		$breakpoints = [];
+
+		foreach ( $responsive as $break ) {
+			$breakpoints[] = [
+				'breakpoint' => (integer) $break['breakpoint'],
+				'settings'   => [
+					'slidesToShow'   => (integer) $break['slidesToShow'],
+					'slidesToScroll' => (integer) $break['slidesToScroll'],
+
+				],
+			];
+		}
+
+		return $breakpoints;
 	}
 }

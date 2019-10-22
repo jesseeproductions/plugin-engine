@@ -11,12 +11,10 @@ pngx.carousels = pngx.carousels || {};
 			pngx.carousels.forEach( function ( carousel ) {
 				var objName = '#carousel_obj_' + carousel.id;
 
-				console.log(objName, carousel);
-
 				$( objName ).slick( {
 					accessibility: carousel.accessibility,
 					autoplay: carousel.autoplay,
-					autoplaySpeed: carousel.autoplaySpeed,
+					autoplaySpeed: Number( carousel.autoplaySpeed ),
 					arrows: carousel.arrows,
 					prevArrow: carousel.prevArrow,
 					nextArrow: carousel.nextArrow,
@@ -26,8 +24,8 @@ pngx.carousels = pngx.carousels || {};
 					pauseOnFocus: carousel.pauseOnFocus,
 					pauseOnHover: carousel.pauseOnHover,
 					responsive: carousel.responsive,
-					slidesToShow: carousel.slidesToShow,
-					slidesToScroll: carousel.slidesToScroll
+					slidesToShow: Number( carousel.slidesToShow ),
+					slidesToScroll: Number( carousel.slidesToScroll )
 				} );
 			} );
 		}
