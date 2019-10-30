@@ -84,6 +84,7 @@ class View extends \Pngx__Template {
 	public function render_slider( $content, $args = [], $id = null, $echo = true ) {
 		$default_args = [
 			'template' => 'slider',
+			'responsive'      => [],
 		];
 
 		$args = wp_parse_args( $args, $default_args );
