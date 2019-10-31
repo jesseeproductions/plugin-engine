@@ -1,15 +1,11 @@
 /* = Dialogs
 This can include modals, toasters, confirms. alerts.
 ============================ */
-/*
-Adding these here for now until common-styles are live
-@TODO: remove when that happens.
-*/
-@svg-load close url('utilities/icons/close.svg') {
+@svg-load close url('images/close.svg') {
   path {
     stroke: var(--color-icon-secondary); } }
 
-@svg-load close-secondary url('utilities/icons/close.svg') {
+@svg-load close-secondary url('images/close.svg') {
   path {
     stroke: var(--color-icon-primary); } }
 
@@ -80,7 +76,7 @@ Adding these here for now until common-styles are live
 /* The "close" button */
 .pngx-dialog__close-button {
   background-color: var(--pngx-dialog-close-background);
-  background-image: svg-inline("close");
+  background-image: url("../images/close.svg");
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
@@ -98,8 +94,9 @@ Adding these here for now until common-styles are live
       line-height: var(--pngx-dialog-close-height-desktop);
       width: var(--pngx-dialog-close-height-desktop); } }
   .pngx-dialog__close-button:focus, .pngx-dialog__close-button:hover {
-    background-image: svg-inline("close-secondary");
-    background-size: contain; }
+    background-image: url("../images/close-secondary.svg");
+    background-size: contain;
+    background-color: var(--pngx-dialog-close-background); }
 
 .pngx-dialog__close-button--hidden {
   display: none; }
