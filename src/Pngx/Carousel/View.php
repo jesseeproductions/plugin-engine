@@ -12,7 +12,7 @@ class View extends \Pngx__Template {
 	/**
 	 * Where in the themes we will look for templates.
 	 *
-	 * @since TBD
+	 * @since 1.0
 	 *
 	 * @var string
 	 */
@@ -21,7 +21,7 @@ class View extends \Pngx__Template {
 	/**
 	 * View constructor
 	 *
-	 * @since TBD
+	 * @since 1.0
 	 */
 	public function __construct() {
 		$this->set_template_origin( \Pngx__Main::instance() );
@@ -38,7 +38,7 @@ class View extends \Pngx__Template {
 	 * Public wrapper for build method.
 	 * Contains all the logic/validation checks.
 	 *
-	 * @since TBD
+	 * @since 1.0
 	 *
 	 * @param string  $content       Content as an HTML string.
 	 * @param array   $args          {
@@ -80,7 +80,16 @@ class View extends \Pngx__Template {
 		echo $html;
 	}
 
-
+	/**
+	 * Render the Slider
+	 *
+	 * @since 1.0
+	 *
+	 * @param       $content
+	 * @param array $args
+	 * @param null  $id
+	 * @param bool  $echo
+	 */
 	public function render_slider( $content, $args = [], $id = null, $echo = true ) {
 		$default_args = [
 			'template' => 'slider',
@@ -95,7 +104,7 @@ class View extends \Pngx__Template {
 	/**
 	 * Factory method for carousel HTML
 	 *
-	 * @since TBD
+	 * @since 1.0
 	 *
 	 * @param string $content       HTML carousel content.
 	 * @param string $id            The unique ID for this carousel (`uniqid()`) Gets prepended to the data attributes.
@@ -123,6 +132,7 @@ class View extends \Pngx__Template {
 			'arrows'          => true,
 			'prevArrow'       => '<button class="slick-prev"><span class="screen-reader-text">Previous</span><i class="fa fa-chevron-left"></i></button>',
 			'nextArrow'       => '<button class="slick-next"><span class="screen-reader-text">Next</span><i class="fa fa-chevron-right"></i></button>',
+			'arrow_color'     => '',
 			'draggable'       => true,
 			'focusOnSelect'   => true,
 			'infinite'        => true,
@@ -150,6 +160,12 @@ class View extends \Pngx__Template {
 			'slidesToScroll'  => (integer) 4,
 		];
 
+		$arrow_color = '';
+		if ( ! empty( $args[ 'arrow_color' ] ) ) {
+			$arrow_color = $args[ 'arrow_color' ];
+		}
+		unset( $args[ 'arrow_color' ] );
+
 		$args = wp_parse_args( $args, $default_args );
 
 		$args['content'] = $content;
@@ -158,7 +174,7 @@ class View extends \Pngx__Template {
 		/**
 		 * Allow us to filter the carousel arguments.
 		 *
-		 * @since  TBD
+		 * @since 1.0
 		 *
 		 * @param array  $args    The carousel arguments.
 		 * @param string $content HTML content string.
@@ -169,7 +185,7 @@ class View extends \Pngx__Template {
 		/**
 		 * Allow us to filter the carousel template name.
 		 *
-		 * @since  TBD
+		 * @since 1.0
 		 *
 		 * @param string $template The carousel template name.
 		 * @param array  $args     The carousel arguments.
@@ -182,12 +198,14 @@ class View extends \Pngx__Template {
 
 		$this->get_carousel_script( $args );
 
+		$this->get_styling( $id, $arrow_color );
+
 		$html = ob_get_clean();
 
 		/**
 		 * Allow us to filter the carousel output (HTML string).
 		 *
-		 * @since  TBD
+		 * @since 1.0
 		 *
 		 * @param string $html The carousel HTML string.
 		 * @param array  $args The carousel arguments.
@@ -198,7 +216,7 @@ class View extends \Pngx__Template {
 	/**
 	 * Get carousel <script> to be rendered.
 	 *
-	 * @since TBD
+	 * @since 1.0
 	 *
 	 * @param array   $args List of arguments for the carousel script. See \Pngx\Carousel\View->build_carousel().
 	 * @param boolean $echo Whether to echo the script or to return it (default: true).
@@ -227,10 +245,11 @@ class View extends \Pngx__Template {
 			'slidesToShow'   => (integer) $args['slidesToShow'],
 			'slidesToScroll' => (integer) $args['slidesToScroll'],
 		];
+
 		/**
 		 * Allows for modifying the arguments before they are passed to the carousel script.
 		 *
-		 * @since TBD
+		 * @since 1.0
 		 *
 		 * @param array $args List of arguments to override carousel script. See \Pngx\Carousel\View->build_carousel().
 		 */
@@ -248,7 +267,7 @@ class View extends \Pngx__Template {
 			/**
 			 * Allows for injecting additional scripts (button actions, etc).
 			 *
-			 * @since TBD
+			 * @since 1.0
 			 *
 			 * @param array $args List of arguments to override carousel script. See \Pngx\Carousel\View->build_carousel().
 			 */
@@ -257,7 +276,7 @@ class View extends \Pngx__Template {
 			/**
 			 * Allows for injecting additional scripts (button actions, etc) by template.
 			 *
-			 * @since TBD
+			 * @since 1.0
 			 *
 			 * @param array $args List of arguments to override carousel script. See \Pngx\Carousel\View->build_carousel().
 			 */
@@ -266,7 +285,7 @@ class View extends \Pngx__Template {
 			/**
 			 * Allows for injecting additional scripts (button actions, etc) by carousel ID.
 			 *
-			 * @since TBD
+			 * @since 1.0
 			 *
 			 * @param array $args List of arguments to override carousel script. See \Pngx\Carousel\View->build_carousel().
 			 */
@@ -279,7 +298,7 @@ class View extends \Pngx__Template {
 		/**
 		 * Allows for modifying the HTML before it is echoed or returned.
 		 *
-		 * @since TBD
+		 * @since 1.0
 		 *
 		 * @param array $args List of arguments to override carousel script. See \Pngx\Carousel\View->build_carousel().
 		 */
@@ -295,9 +314,58 @@ class View extends \Pngx__Template {
 	}
 
 	/**
+	 * Get carousel <style> to be rendered.
+	 *
+	 * @since 1.0
+	 *
+	 * @param string  $id         The id of the carousel.
+	 * @param string  $text_color The hex string of color for the arrows
+	 * @param boolean $echo       Whether to echo the script or to return it (default: true).
+	 *
+	 * @return string|void The carousel <style> HTML or nothing if $echo is true.
+	 */
+	public function get_styling( $id, $text_color, $echo = true ) {
+
+		ob_start();
+
+		if ( $text_color ) { ?>
+
+			<style>
+				.pngx-block #carousel_obj_<?php echo esc_attr( $id ); ?> .slick-arrow svg {
+					color: <?php echo esc_attr( $text_color ); ?>;
+				}
+
+				.pngx-block #carousel_obj_<?php echo esc_attr( $id ); ?> .slick-arrow:hover svg{
+					opacity: .5;
+				}
+			</style>
+
+		<?php }
+
+		$html = ob_get_clean();
+
+		/**
+		 * Allows for modifying the HTML before it is echoed or returned.
+		 *
+		 * @since TBD
+		 *
+		 * @param array $args List of arguments to override carousel style. See \Pngx\Carousel\View->build_carousel().
+		 */
+		$html = apply_filters( 'pngx_carousel_style_html', $html );
+
+		if ( $echo ) {
+			echo $html;
+
+			return;
+		}
+
+		return $html;
+	}
+
+	/**
 	 * Setup Responsive Breakpoint Array for Script
 	 *
-	 * @since TBD
+	 * @since 1.0
 	 *
 	 * @param $responsive
 	 *
