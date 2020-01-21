@@ -121,7 +121,7 @@ class Pngx__Main {
 			require_once dirname( __FILE__ ) . '/Autoloader.php';
 		}
 
-		$autoloader = Tribe__Autoloader::instance();
+		$autoloader = Pngx__Autoloader::instance();
 
 		$prefixes = array( 'Pngx__' => dirname( __FILE__ ) );
 		$autoloader->register_prefixes( $prefixes );
