@@ -2,7 +2,7 @@
 /**
  * Array utilities
  *
- * Based off Modern Tribe's Tribe__Utils__Array
+ * Based off Modern Tribe's Pngx__Utils__Array
  *
  * @since 3.0
  *

@@ -98,7 +98,7 @@ if ( ! function_exists( 'pngx_register_plugin' ) ) {
 	/**
 	 * Checks if this plugin has permission to run, if not it notifies the admin
 	 *
-	 * Based off Modern Tribe's tribe_register_plugin
+	 * Based off Modern Tribe's pngx_register_plugin
 	 *
 	 * @since 3.0
 	 *
@@ -121,7 +121,7 @@ if ( ! function_exists( 'pngx_check_plugin' ) ) {
 	/**
 	 * Checks if this plugin has permission to run, if not it notifies the admin
 	 *
-	 * Based off Modern Tribe's tribe_check_plugin
+	 * Based off Modern Tribe's pngx_check_plugin
 	 *
 	 * @since 3.0
 	 *
@@ -141,7 +141,7 @@ if ( ! function_exists( 'pngx_notice' ) ) {
 	/**
 	 * Shortcut for Pngx__Admin__Notices::register(), create a Admin Notice easily
 	 *
-	 * Based off Modern Tribe's tribe_notice
+	 * Based off Modern Tribe's pngx_notice
 	 *
 	 * @since 3.0
 	 *
@@ -162,7 +162,7 @@ if ( ! function_exists( 'pngx_asset' ) ) {
 	/**
 	 * Shortcut for Pngx__Assets::register(), include a single asset
 	 *
-	 * Based off Modern Tribe's tribe_asset
+	 * Based off Modern Tribe's pngx_asset
 	 *
 	 * @since 3.0
 	 *
@@ -184,7 +184,7 @@ if ( ! function_exists( 'pngx_resource_url' ) ) {
 	/**
 	 * Returns or echoes a url to a file in the Events Calendar plugin resources directory
 	 *
-	 * Based off Modern Tribe's tribe_resource_url
+	 * Based off Modern Tribe's pngx_resource_url
 	 *
 	 * @since 3.0
 	 *
