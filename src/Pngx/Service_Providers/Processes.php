@@ -3,7 +3,7 @@
 /**
  * Class Pngx__Service_Providers__Processes
  *
- * Based off Modern Tribe's Tribe__Service_Providers__Processes
+ * Based off Modern Tribe's Pngx__Service_Providers__Processes
  *
  * @since 3.0
  *

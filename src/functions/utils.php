@@ -655,11 +655,11 @@ if ( ! function_exists( 'tribe_get_class_instance' ) ) {
 	 * @since TBD
 	 *
 	 * @see   \tad_DI52_Container::isBound()
-	 * @see   \tribe()
+	 * @see   \pngx()
 	 *
 	 * @param string|object $class The plugin class' singleton name, class name, or instance.
 	 *
-	 * @return mixed|object|Tribe__Container|null Null if not found, else the result from tribe().
+	 * @return mixed|object|Pngx__Container|null Null if not found, else the result from pngx().
 	 */
 	function tribe_get_class_instance( $class ) {
 		if ( is_object( $class ) ) {
@@ -682,7 +682,7 @@ if ( ! function_exists( 'tribe_get_class_instance' ) ) {
 		}
 
 		try {
-			return tribe( $class );
+			return pngx( $class );
 		} catch ( \RuntimeException $exception ) {
 			return null;
 		}
@@ -711,7 +711,7 @@ if ( ! function_exists( 'tribe_get_least_version_ever_installed' ) ) {
 		if ( $instance ) {
 			// Try for the version history first.
 			if ( ! empty( $instance->version_history_slug ) ) {
-				$history = (array) Tribe__Settings_Manager::get_option( $instance->version_history_slug );
+				$history = (array) Pngx__Settings_Manager::get_option( $instance->version_history_slug );
 
 				// '0' may be logged as a version number, which isn't useful, so we remove it
 				$history = array_filter( $history );
@@ -760,7 +760,7 @@ if ( ! function_exists( 'tribe_get_greatest_version_ever_installed' ) ) {
 		if ( $instance ) {
 			// Try for the version history first.
 			if ( ! empty( $instance->version_history_slug ) ) {
-				$history = (array) Tribe__Settings_Manager::get_option( $instance->version_history_slug );
+				$history = (array) Pngx__Settings_Manager::get_option( $instance->version_history_slug );
 
 				// '0' may be logged as a version number, which isn't useful, so we remove it
 				$history = array_filter( $history );
@@ -807,7 +807,7 @@ if ( ! function_exists( 'tribe_get_first_ever_installed_version' ) ) {
 		if ( $instance ) {
 			// Try for the version history first.
 			if ( ! empty( $instance->version_history_slug ) ) {
-				$history = (array) Tribe__Settings_Manager::get_option( $instance->version_history_slug );
+				$history = (array) Pngx__Settings_Manager::get_option( $instance->version_history_slug );
 
 				// '0' may be logged as a version number, which isn't useful, so we remove it
 				while (
