@@ -6,7 +6,7 @@ defined( 'WPINC' ) or die;
 /**
  * Class Pngx__Plugins
  *
- * Basedd of Modern Tribe's Tribe__Plugin Class
+ * Basedd of Modern Tribe's Pngx__Plugin Class
  */
 class Pngx__Plugins {
 

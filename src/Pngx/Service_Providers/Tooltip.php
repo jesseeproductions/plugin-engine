@@ -18,7 +18,7 @@ class Tooltip extends \tad_DI52_ServiceProvider {
 	 * @since TBD
 	 */
 	public function register() {
-		tribe_singleton( 'tooltip.view', '\Tribe\Tooltip\View' );
+		pngx_singleton( 'tooltip.view', '\Tribe\Tooltip\View' );
 
 		$this->hook();
 	}
@@ -29,7 +29,7 @@ class Tooltip extends \tad_DI52_ServiceProvider {
 	 * @since TBD
 	 */
 	private function hook() {
-		add_action( 'tribe_common_loaded', [ $this, 'add_tooltip_assets' ] );
+		add_action( 'pngx_common_loaded', [ $this, 'add_tooltip_assets' ] );
 	}
 
 	/**
@@ -38,9 +38,9 @@ class Tooltip extends \tad_DI52_ServiceProvider {
 	 * @since TBD
 	 */
 	public function add_tooltip_assets() {
-		$main = \Tribe__Main::instance();
+		$main = \Pngx__Main::instance();
 
-		tribe_asset(
+		pngx_asset(
 			$main,
 			'tribe-tooltip',
 			'tooltip.css',
@@ -49,7 +49,7 @@ class Tooltip extends \tad_DI52_ServiceProvider {
 			[ 'groups' => 'tribe-tooltip' ]
 		);
 
-		tribe_asset(
+		pngx_asset(
 			$main,
 			'tribe-tooltip-js',
 			'tooltip.js',
