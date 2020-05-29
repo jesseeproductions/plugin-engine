@@ -89,6 +89,15 @@ class Pngx__Admin__Options {
 		$this->fields = $this->get_option_fields();
 		$this->set_sections();
 
+		/**
+		 * Before Validate Settings
+		 *
+		 * @since TBD
+		 *
+		 * @param array $input An array of inputs being validated and saved
+		 */
+		do_action( 'pngx_options_before_validate_options' );
+
 		register_setting( $this->options_id, $this->options_id, array( $this, 'validate_options' ) );
 
 		foreach ( $this->sections as $slug => $title ) {
@@ -152,10 +161,17 @@ class Pngx__Admin__Options {
 			$this->checkboxes[] = $field_args['id'];
 		}
 
-		add_settings_field( $field_args['id'], $field_args['title'], array(
-			$this,
-			'display_field'
-		), $this->options_slug, $field_args['section'], $field_args );
+		add_settings_field(
+			$field_args['id'],
+			$field_args['title'],
+			array(
+				$this,
+				'display_field'
+			),
+			$this->options_slug,
+			$field_args['section'],
+			$field_args
+		);
 	}
 
 	/*
@@ -205,6 +221,8 @@ class Pngx__Admin__Options {
 					unset( $options[ $id ] );
 				}
 			}
+
+			log_me($input);
 
 			//$id is option name - $option is array of values from $this->fields
 			foreach ( $this->fields as $id => $option ) {
@@ -266,7 +284,7 @@ class Pngx__Admin__Options {
 				}
 
 				// Handle License Status
-				if ( $option['type'] == 'license_status' ) {
+				if ( $option['type'] === 'license_status' ) {
 					// Remove to not save with Option Array
 					$input[ $id ] = "";
 				}
@@ -281,6 +299,19 @@ class Pngx__Admin__Options {
 					$clean[ $id ] = $sanitize->result;
 
 				}
+
+				/**
+				 * Filter the Validation Input for Each Field Option.
+				 *
+				 * @since TBD
+				 *
+				 * @param array  $input  An array of inputs being saved.
+				 * @param string $id     The ID for the option field.
+				 * @param array  $option An array of attributes for an option field.
+				 *
+				 * @return array $input An array of inputs being saved.
+				 */
+				$input = apply_filters( 'pngx_validate_option', $input, $id, $option );
 
 			}
 

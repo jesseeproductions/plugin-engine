@@ -7,7 +7,7 @@ namespace Pngx\Tooltip;
  *
  * @since TBD
  */
-class View extends \Tribe__Template {
+class View extends \Pngx__Template {
 
 	/**
 	 * Where in the themes we will look for templates
@@ -24,7 +24,7 @@ class View extends \Tribe__Template {
 	 * @since TBD
 	 */
 	public function __construct() {
-		$this->set_template_origin( \Tribe__Main::instance() );
+		$this->set_template_origin( \Pngx__Main::instance() );
 		$this->set_template_folder( 'src/views/tooltip' );
 
 		// Configures this templating class to extract variables
@@ -56,8 +56,8 @@ class View extends \Tribe__Template {
 			return;
 		}
 
-		/** @var \Tribe__Assets $assets */
-		$assets = tribe( 'assets' );
+		/** @var \Pngx__Assets $assets */
+		$assets = pngx( 'assets' );
 		$assets->enqueue_group( 'tribe-tooltip' );
 
 		$html = $this->build_tooltip( $message, $args );
@@ -113,7 +113,7 @@ class View extends \Tribe__Template {
 		 * @param string $template The tooltip template name.
 		 * @param array $args Extra arguments, defaults include icon, classes, direction, and context.
 		 */
-		$template_name = apply_filters( 'tribe_tooltip_template', 'tooltip', $args );
+		$template_name = apply_filters( 'pngx_tooltip_template', 'tooltip', $args );
 
 		$template = $this->template( $template_name, $args, false );
 
@@ -132,7 +132,7 @@ class View extends \Tribe__Template {
 		 * @param array $messages An array of message strings.
 		 * @param array $args Extra arguments, defaults include icon, classes, direction, and context.
 		 */
-		return apply_filters( 'tribe_tooltip_html', $html, $messages, $args );
+		return apply_filters( 'pngx_tooltip_html', $html, $messages, $args );
 	}
 
 }
