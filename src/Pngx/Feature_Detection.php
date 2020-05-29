@@ -7,7 +7,7 @@
  */
 
 /**
- * Class Tribe__Feature_Detection
+ * Class Pngx__Feature_Detection
  *
  * @since 4.7.23
  */
@@ -18,7 +18,7 @@ class Pngx__Feature_Detection {
 	 *
 	 * @var string
 	 */
-	public static $transient = 'tribe_feature_detection';
+	public static $transient = 'pngx_feature_detection';
 
 	/**
 	 * The name of the option that will be used to indicate a feature detection is running.
@@ -31,7 +31,7 @@ class Pngx__Feature_Detection {
 	 * Checks whether async, AJAX-based, background processing is supported or not.
 	 *
 	 * To avoid making this costly check on each load the result of this check is cached
-	 * in the `tribe_feature_detection` transient, under the `supports_async_process` key.
+	 * in the `pngx_feature_detection` transient, under the `supports_async_process` key.
 	 *
 	 * @since 4.7.23
 	 *
@@ -53,14 +53,14 @@ class Pngx__Feature_Detection {
 		 * @param bool $force                  Whether the check is forcing the cached value to be refreshed
 		 *                                     or not.
 		 */
-		$supports_async_process = apply_filters( 'tribe_supports_async_process', null, $force );
+		$supports_async_process = apply_filters( 'pngx_supports_async_process', null, $force );
 		if ( null !== $supports_async_process ) {
 			return (bool) $supports_async_process;
 		}
 
 		$cached = get_transient( self::$transient );
 
-		$this->lock_option_name = 'tribe_feature_support_check_lock';
+		$this->lock_option_name = 'pngx_feature_support_check_lock';
 		if (
 			$force
 			|| false === $cached
@@ -75,19 +75,19 @@ class Pngx__Feature_Detection {
 			$this->lock();
 
 			// Log that we're checking for AJAX-based async process support using the tester.
-			tribe( 'logger' )->log( 'Checking for AJAX-based async processing support triggering a test request.', Tribe__Log::DEBUG );
+			pngx( 'logger' )->log( 'Checking for AJAX-based async processing support triggering a test request.', Pngx__Log::DEBUG );
 
 			/*
 			 * Build and dispatch the tester: if it works a transient should be set.
 			 */
-			$tester = new Tribe__Process__Tester();
-			tribe( 'logger' )->log( 'Dispatching AJAX-based async processing support test request.', Tribe__Log::DEBUG );
+			$tester = new Pngx__Process__Tester();
+			pngx( 'logger' )->log( 'Dispatching AJAX-based async processing support test request.', Pngx__Log::DEBUG );
 			$tester->dispatch();
 
 			$wait_up_to             = 10;
 			$start                  = time();
 			$supports_async_process = false;
-			$transient_name         = Tribe__Process__Tester::TRANSIENT_NAME;
+			$transient_name         = Pngx__Process__Tester::TRANSIENT_NAME;
 
 			while ( time() <= $start + $wait_up_to ) {
 				// We want to force a refetch from the database on each check.
@@ -108,9 +108,9 @@ class Pngx__Feature_Detection {
 			$cached['supports_async_process'] = $supports_async_process;
 
 			if ( $supports_async_process ) {
-				tribe( 'logger' )->log( 'AJAX-based async processing is supported.', Tribe__Log::DEBUG );
+				pngx( 'logger' )->log( 'AJAX-based async processing is supported.', Pngx__Log::DEBUG );
 			} else {
-				tribe( 'logger' )->log( 'AJAX-based async processing is not supported; background processing will rely on WP Cron.', Tribe__Log::DEBUG );
+				pngx( 'logger' )->log( 'AJAX-based async processing is not supported; background processing will rely on WP Cron.', Pngx__Log::DEBUG );
 			}
 
 			set_transient( self::$transient, $cached, WEEK_IN_SECONDS );
