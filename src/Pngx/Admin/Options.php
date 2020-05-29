@@ -222,8 +222,6 @@ class Pngx__Admin__Options {
 				}
 			}
 
-			log_me($input);
-
 			//$id is option name - $option is array of values from $this->fields
 			foreach ( $this->fields as $id => $option ) {
 
