@@ -20,7 +20,7 @@ This can include modals, toasters, confirms. alerts.
   --pngx-dialog-close-height-desktop: 36px;
   --pngx-dialog-overlay-color: transparent;
   --pngx-modal-overlay-color: rgba(255,255,255,0.9);
-  --pngx-dialog-border-radius: .25rem;
+  --pngx-dialog-border-radius: 0;
   --pngx-dialog-padding: 1rem;
   --pngx-dialog-padding-top: 1.5rem;
   --pngx-dialog-padding-side: 1.75rem; }
