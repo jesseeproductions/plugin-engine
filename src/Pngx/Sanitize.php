@@ -197,6 +197,17 @@ class Pngx__Sanitize {
 	}
 
 	/**
+	 * File Sanitize
+	 *
+	 * @return interger
+	 */
+	private function sanitize_file() {
+
+		return $this->sanitize_absint();
+
+	}
+
+	/**
 	 * Select Sanitize
 	 *
 	 * @return mixed|string
@@ -353,7 +364,7 @@ class Pngx__Sanitize {
 	/**
 	 * Image ID Sanitize
 	 *
-	 * @return string
+	 * @return interger
 	 */
 	private function sanitize_image() {
 
