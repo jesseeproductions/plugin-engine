@@ -3,14 +3,14 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Plugin Engine\n"
-"POT-Creation-Date: 2018-04-20 15:57-0400\n"
+"POT-Creation-Date: 2020-08-11 07:21-0400\n"
 "PO-Revision-Date: 2016-08-29 11:16-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.12\n"
+"X-Generator: Poedit 2.4.1\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-WPHeader: pngx-common.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -71,6 +71,30 @@ msgstr ""
 msgid "Press \"Cmd + C\" to copy"
 msgstr ""
 
+#: src/Pngx/Admin/Assets.php:155
+msgid "Clear"
+msgstr ""
+
+#: src/Pngx/Admin/Assets.php:156
+msgid "Clear color"
+msgstr ""
+
+#: src/Pngx/Admin/Assets.php:157
+msgid "Default"
+msgstr ""
+
+#: src/Pngx/Admin/Assets.php:158
+msgid "Select default color"
+msgstr ""
+
+#: src/Pngx/Admin/Assets.php:159
+msgid "Select Color"
+msgstr ""
+
+#: src/Pngx/Admin/Assets.php:160
+msgid "Color value"
+msgstr ""
+
 #: src/Pngx/Admin/EDD_License.php:208
 msgid "Incorrect Permissions!"
 msgstr ""
@@ -127,7 +151,7 @@ msgid ""
 msgstr ""
 
 #: src/Pngx/Admin/EDD_License.php:451
-#: src/Pngx/Admin/Field/License_Status.php:54
+#: src/Pngx/Admin/Field/License_Status.php:67
 #: src/Pngx/Admin/Plugin_License_List.php:205
 #, php-format
 msgid "License Expired on %s"
@@ -165,29 +189,29 @@ msgid ""
 msgstr ""
 
 #: src/Pngx/Admin/EDD_License.php:495
-#: src/Pngx/Admin/Field/License_Status.php:56
+#: src/Pngx/Admin/Field/License_Status.php:69
 #: src/Pngx/Admin/Plugin_License_List.php:207
 msgid "License is Not Active"
 msgstr ""
 
-#: src/Pngx/Admin/EDD_Plugin_Updater.php:201
+#: src/Pngx/Admin/EDD_Plugin_Updater.php:210
 #, php-format
 msgid ""
 "There is a new version of %1$s available. %2$sView version %3$s details%4$s."
 msgstr ""
 
-#: src/Pngx/Admin/EDD_Plugin_Updater.php:209
+#: src/Pngx/Admin/EDD_Plugin_Updater.php:218
 #, php-format
 msgid ""
 "There is a new version of %1$s available. %2$sView version %3$s details%4$s "
 "or %5$supdate now%6$s."
 msgstr ""
 
-#: src/Pngx/Admin/EDD_Plugin_Updater.php:399
+#: src/Pngx/Admin/EDD_Plugin_Updater.php:408
 msgid "You do not have permission to install plugin updates"
 msgstr ""
 
-#: src/Pngx/Admin/EDD_Plugin_Updater.php:399
+#: src/Pngx/Admin/EDD_Plugin_Updater.php:408
 msgid "Error"
 msgstr ""
 
@@ -216,12 +240,12 @@ msgstr ""
 msgid "Deactivate License"
 msgstr ""
 
-#: src/Pngx/Admin/Field/License_Status.php:52
+#: src/Pngx/Admin/Field/License_Status.php:59
 #: src/Pngx/Admin/Plugin_License_List.php:203
 msgid "License is Invalid"
 msgstr ""
 
-#: src/Pngx/Admin/Field/License_Status.php:63
+#: src/Pngx/Admin/Field/License_Status.php:76
 #: src/Pngx/Admin/Plugin_License_List.php:220
 msgid "Activate License"
 msgstr ""
@@ -244,6 +268,23 @@ msgstr ""
 
 #: src/Pngx/Admin/Meta.php:106
 msgid "Content"
+msgstr ""
+
+#: src/Pngx/Admin/Notice/Plugin_Download.php:105
+#, php-format
+msgid ""
+"To begin using %2$s, please install and activate at least the following "
+"version(s) of %3$s."
+msgstr ""
+
+#: src/Pngx/Admin/Notice/Plugin_Download.php:121
+msgctxt "separator used in a list of items"
+msgid ", "
+msgstr ""
+
+#: src/Pngx/Admin/Notice/Plugin_Download.php:122
+msgctxt "the final separator in a list of two or more items"
+msgid " and "
 msgstr ""
 
 #: src/Pngx/Admin/Options.php:345
@@ -282,8 +323,16 @@ msgstr ""
 msgid "Not Found"
 msgstr ""
 
+#: src/Pngx/Blocks/Abstract.php:105
+msgid "Problem loading the block, please remove this block to restart."
+msgstr ""
+
 #: src/Pngx/Cron_20.php:35
 msgid "Once Every 20 Mins"
+msgstr ""
+
+#: src/Pngx/Editor.php:103
+msgid "Add Description..."
 msgstr ""
 
 #: src/Pngx/Register_Post_Type.php:55
