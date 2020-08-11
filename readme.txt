@@ -2,6 +2,12 @@
 
 == Changelog ==
 
+= [3.1.0] August 11th, 2020 =
+
+* Feature - Add Duplicate Class to duplicate post types and all content, taxonimies, and custom fields.
+* Tweak - Update wp-color-picker-alpha to 2.1.4.
+* Tweak - Extended support for namespaced classes in the Autoloader.
+
 = 3.0.1 January 28th, 2020 =
 * Tweak - Update lucatume/di52 to 2.0.12 to prevent conflicts with The Events Calendar 5.0
 

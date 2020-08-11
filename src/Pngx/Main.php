@@ -1,9 +1,4 @@
 <?php
-// Don't load directly
-if ( ! defined( 'ABSPATH' ) ) {
-	die( '-1' );
-}
-
 if ( class_exists( 'Pngx__Main' ) ) {
 	return;
 }
@@ -14,7 +9,7 @@ if ( class_exists( 'Pngx__Main' ) ) {
  */
 class Pngx__Main {
 
-	const VERSION    = '3.0.1';
+	const VERSION    = '3.1.0';
 	const OPTIONS_ID = 'plugin_engine_options';
 
 	protected $plugin_context;
@@ -142,8 +137,8 @@ class Pngx__Main {
 	public function bind_implementations() {
 		pngx_singleton( 'assets', 'Pngx__Assets' );
 		pngx_singleton( 'context', 'Pngx__Context' );
-
 		pngx_singleton( 'admin.assets', 'Pngx__Admin__Assets' );
+		pngx_register_provider( Pngx\Duplicate\Post_Types::class );
 	}
 
 	/**
