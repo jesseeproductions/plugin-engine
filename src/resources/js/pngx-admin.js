@@ -436,9 +436,6 @@ function Pngx_Admin_Tabs( $, obj ) {
 
 		$( obj.tab_wrap + ' h3, ' + obj.tab_wrap + 'table' ).show();
 
-		if ( $.browser.mozilla ) {
-			$( "form" ).attr( "autocomplete", "off" );
-		}
 	};
 
 	/*

@@ -156,17 +156,31 @@ class Pngx__Autoloader {
 
 	protected function get_prefixed_path( $class ) {
 		foreach ( $this->prefixes as $prefix => $dirs ) {
+			$is_namespaced = false !== strpos( $prefix, '\\' );
+
+			if ( $is_namespaced ) {
+				// If the prefix is a namespace, then normalize it.
+				$prefix = trim( $prefix, '\\' ) . '\\';
+			}
+
 			if ( strpos( $class, $prefix ) !== 0 ) {
 				continue;
 			}
-			$class_name      = str_replace( $prefix, '', $class );
-			$class_path_frag = implode( '/', explode( $this->dir_separator, $class_name ) ) . '.php';
+
+			$class_name = str_replace( $prefix, '', $class );
+
+			if ( ! $is_namespaced ) {
+				$class_path_frag = implode( '/', explode( $this->dir_separator, $class_name ) ) . '.php';
+			} else {
+				$class_path_frag = implode( '/', explode( '\\', $class_name ) ) . '.php';
+			}
+
 			foreach ( $dirs as $dir ) {
 				$path = $dir . '/' . $class_path_frag;
 				if ( ! file_exists( $path ) ) {
 					// check if the file exists in lowercase
 					$class_path_frag = strtolower( $class_path_frag );
-					$path            = $dir . '/' . $class_path_frag;
+					$path = $dir . '/' . $class_path_frag;
 				}
 				if ( ! file_exists( $path ) ) {
 					continue;
@@ -175,7 +189,6 @@ class Pngx__Autoloader {
 				return $path;
 			}
 		}
-
 		return false;
 	}
 
