@@ -2,6 +2,10 @@
 
 == Changelog ==
 
+= 3.1.1 August 25th, 2020 =
+
+* Fix - Modify the security check on saving meta fields.
+
 = [3.1.0] August 11th, 2020 =
 
 * Feature - Add Duplicate Class to duplicate post types and all content, taxonimies, and custom fields.
