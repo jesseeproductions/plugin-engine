@@ -1,26 +1,29 @@
 <?php
 /**
- * Array utilities
+ * Array Utilities
  *
- * Based off Modern Tribe's Pngx__Utils__Array
- *
- * @since 3.0
- *
+ * @since   3.5
+ * @package Pngx\Utils
  */
-class Pngx__Utilities__Array {
+
+namespace Pngx\Utilities;
+
+
+/**
+ * Arr utilities
+ */
+class Arr {
 
 	/**
 	 * Set key/value within an array, can set a key nested inside of a multidimensional array.
 	 *
 	 * Example: set( $a, [ 0, 1, 2 ], 'hi' ) sets $a[0][1][2] = 'hi' and returns $a.
 	 *
-	 * @since 3.0
-	 *
 	 * @param mixed        $array  The array containing the key this sets.
 	 * @param string|array $key    To set a key nested multiple levels deep pass an array
 	 *                             specifying each key in order as a value.
 	 *                             Example: array( 'lvl1', 'lvl2', 'lvl3' );
-	 * @param mixed         $value The value.
+	 * @param mixed        $value  The value.
 	 *
 	 * @return array Full array with the key set to the specified value.
 	 */
@@ -38,16 +41,12 @@ class Pngx__Utilities__Array {
 			if ( ! is_array( $key_pointer ) ) {
 				// $key_pointer is set but is not an array. Converting it to an array
 				// would likely lead to unexpected problems for whatever first set it.
-				$error = sprintf(
-					'Attempted to set $array[%1$s] but %2$s is already set and is not an array.',
-					implode( $key, '][' ),
-					$i
-				);
+				$error = sprintf( 'Attempted to set $array[%1$s] but %2$s is already set and is not an array.', implode( $key, '][' ), $i );
 
 				_doing_it_wrong( __FUNCTION__, esc_html( $error ), '4.3' );
 				break;
 			} elseif ( ! isset( $key_pointer[ $i ] ) ) {
-				$key_pointer[ $i ] = array();
+				$key_pointer[ $i ] = [];
 			}
 
 			// Dive one level deeper into the nested array.
@@ -65,12 +64,10 @@ class Pngx__Utilities__Array {
 	 *
 	 * Example: get( $a, [ 0, 1, 2 ] ) returns the value of $a[0][1][2] or the default.
 	 *
-	 * @since 3.0
-	 *
-	 * @param  array        $variable Array or object to search within.
-	 * @param  array|string $indexes  Specify each nested index in order.
+	 * @param array        $variable  Array or object to search within.
+	 * @param array|string $indexes   Specify each nested index in order.
 	 *                                Example: array( 'lvl1', 'lvl2' );
-	 * @param  mixed        $default  Default value if the search finds nothing.
+	 * @param mixed        $default   Default value if the search finds nothing.
 	 *
 	 * @return mixed The value of the specified index or the default if not found.
 	 */
@@ -98,15 +95,15 @@ class Pngx__Utilities__Array {
 	/**
 	 * Find a value inside a list of array or objects, including one nested a few levels deep.
 	 *
-	 * @since 3.0
+	 * @since 4.7.7
 	 *
 	 * Example: get( [$a, $b, $c], [ 0, 1, 2 ] ) returns the value of $a[0][1][2] found in $a, $b or $c
 	 * or the default.
 	 *
-	 * @param  array        $variables Array of arrays or objects to search within.
-	 * @param  array|string $indexes   Specify each nested index in order.
+	 * @param array        $variables  Array of arrays or objects to search within.
+	 * @param array|string $indexes    Specify each nested index in order.
 	 *                                 Example: array( 'lvl1', 'lvl2' );
-	 * @param  mixed        $default   Default value if the search finds nothing.
+	 * @param mixed        $default    Default value if the search finds nothing.
 	 *
 	 * @return mixed The value of the specified index or the default if not found.
 	 */
@@ -124,15 +121,13 @@ class Pngx__Utilities__Array {
 	/**
 	 * Behaves exactly like the native strpos(), but accepts an array of needles.
 	 *
-	 * @since 3.0
-	 *
-	 * @see strpos()
-	 *
 	 * @param string       $haystack String to search in.
 	 * @param array|string $needles  Strings to search for.
 	 * @param int          $offset   Starting position of search.
 	 *
 	 * @return false|int Integer position of first needle occurrence.
+	 * @see strpos()
+	 *
 	 */
 	public static function strpos( $haystack, $needles, $offset = 0 ) {
 		$needles = (array) $needles;
@@ -151,12 +146,10 @@ class Pngx__Utilities__Array {
 	/**
 	 * Converts a list to an array filtering out empty string elements.
 	 *
-	 * @since 3.0
-	 *
-	 * @param     mixed   $value A string representing a list of values separated by the specified separator
+	 * @param mixed  $value      A string representing a list of values separated by the specified separator
 	 *                           or an array. If the list is a string (e.g. a CSV list) then it will urldecoded
 	 *                           before processing.
-	 * @param string $sep The char(s) separating the list elements; will be ignored if the list is an array.
+	 * @param string $sep        The char(s) separating the list elements; will be ignored if the list is an array.
 	 *
 	 * @return array An array of list elements.
 	 */
@@ -167,14 +160,14 @@ class Pngx__Utilities__Array {
 		$sep = is_string( $sep ) ? $sep : ',';
 
 		if ( $value === null || $value === '' ) {
-			return array();
+			return [];
 		}
 
 		if ( ! is_array( $value ) ) {
 			$value = preg_split( '/\\s*' . preg_quote( $sep ) . '\\s*/', $value );
 		}
 
-		$filtered = array();
+		$filtered = [];
 		foreach ( $value as $v ) {
 			if ( '' === $v ) {
 				continue;
@@ -188,7 +181,7 @@ class Pngx__Utilities__Array {
 	/**
 	 * Returns a list separated by the specified separator.
 	 *
-	 * @since 3.0
+	 * @since 4.6
 	 *
 	 * @param mixed  $list
 	 * @param string $sep
@@ -210,18 +203,18 @@ class Pngx__Utilities__Array {
 	/**
 	 * Sanitize a multidimensional array.
 	 *
-	 * @since 3.0
+	 * @since   4.7.18
 	 *
 	 * @param array $data The array to sanitize.
 	 *
 	 * @return array The sanitized array
 	 *
-	 * @link https://gist.github.com/esthezia/5804445
+	 * @link    https://gist.github.com/esthezia/5804445
 	 */
-	public static function escape_multidimensional_array( $data = array() ) {
+	public static function escape_multidimensional_array( $data = [] ) {
 
 		if ( ! is_array( $data ) || ! count( $data ) ) {
-			return array();
+			return [];
 		}
 
 		foreach ( $data as $key => $value ) {
@@ -243,13 +236,13 @@ class Pngx__Utilities__Array {
 	 * To discriminate from not found results and legitimately `false`
 	 * values from the map the `$found` parameter will be set by reference.
 	 *
-	 * @since 3.0
+	 * @since 4.7.19
 	 *
-	 * @param      string|array $keys  One or more keys that should be used to get
+	 * @param string|array $keys       One or more keys that should be used to get
 	 *                                 the new values
-	 * @param array             $map   An associative array relating the keys to the new
+	 * @param array        $map        An associative array relating the keys to the new
 	 *                                 values.
-	 * @param bool              $found When using a single key this argument will be
+	 * @param bool         $found      When using a single key this argument will be
 	 *                                 set to indicate whether the mapping was successful
 	 *                                 or not.
 	 *
@@ -259,10 +252,10 @@ class Pngx__Utilities__Array {
 	 */
 	public static function map_or_discard( $keys, array $map, &$found = true ) {
 		$hash   = md5( time() );
-		$mapped = array();
+		$mapped = [];
 
 		foreach ( (array) $keys as $key ) {
-			$meta_key = Pngx__Utilities__Array::get( $map, $key, $hash );
+			$meta_key = Arr::get( $map, $key, $hash );
 			if ( $hash === $meta_key ) {
 				continue;
 			}
@@ -283,7 +276,7 @@ class Pngx__Utilities__Array {
 	 *
 	 * The un-prefixing and duplication is recursive.
 	 *
-	 * @since 3.0
+	 * @since 4.9.5
 	 *
 	 * @param mixed $array     The array whose keys should be duplicated.
 	 * @param bool  $recursive Whether the un-prefixing and duplication should be
@@ -297,7 +290,7 @@ class Pngx__Utilities__Array {
 			return $array;
 		}
 
-		$unprefixed = array();
+		$unprefixed = [];
 		foreach ( $array as $key => $value ) {
 			if ( $recursive && is_array( $value ) ) {
 				$value = self::add_unprefixed_keys_to( $value, true );
@@ -318,9 +311,9 @@ class Pngx__Utilities__Array {
 	 * Filters an associative array non-recursively, keeping only the values attached
 	 * to keys starting with the specified prefix.
 	 *
-	 * @since 3.0
+	 * @since 4.9.5
 	 *
-	 * @param array $array The array to filter.
+	 * @param array  $array  The array to filter.
 	 * @param string $prefix The prefix, or prefixes, of the keys to keep.
 	 *
 	 * @return array The filtered array.
@@ -328,7 +321,7 @@ class Pngx__Utilities__Array {
 	public static function filter_prefixed( array $array, $prefix ) {
 		$prefixes = implode( '|', array_map( 'preg_quote', (array) $prefix ) );
 		$pattern  = '/^(' . $prefixes . ')/';
-		$filtered = array();
+		$filtered = [];
 		foreach ( $array as $key => $value ) {
 			if ( ! preg_match( $pattern, $key ) ) {
 				continue;
@@ -346,7 +339,7 @@ class Pngx__Utilities__Array {
 	 * Typical use case is to flatten arrays like those returned by `get_post_meta( $id )`.
 	 * Empty arrays are replaced with an empty string.
 	 *
-	 * @since 3.0
+	 * @since 4.9.5
 	 *
 	 * @param array $array The array to flatten.
 	 *
@@ -380,7 +373,7 @@ class Pngx__Utilities__Array {
 	 *
 	 * The prefixing and duplication is recursive.
 	 *
-	 * @since 3.0
+	 * @since 4.9.5
 	 *
 	 * @param mixed $array     The array whose keys should be duplicated.
 	 * @param bool  $recursive Whether the prefixing and duplication should be
@@ -394,7 +387,7 @@ class Pngx__Utilities__Array {
 			return $array;
 		}
 
-		$prefixed = array();
+		$prefixed = [];
 		foreach ( $array as $key => $value ) {
 			if ( $recursive && is_array( $value ) ) {
 				$value = self::add_prefixed_keys_to( $value, true );
@@ -415,7 +408,7 @@ class Pngx__Utilities__Array {
 	/**
 	 * Recursively key-sort an array.
 	 *
-	 * @since 3.0
+	 * @since 4.9.5
 	 *
 	 * @param array $array The array to sort, modified by reference.
 	 *
@@ -432,49 +425,104 @@ class Pngx__Utilities__Array {
 	}
 
 	/**
-	 * Insert an array after a specified key within another array.
+	 * Returns the value associated with the first index, among the indexes, that is set in the array..
 	 *
-	 * @since 3.0
+	 * @since 4.9.11
 	 *
-	 * @param $key
-	 * @param $source_array
-	 * @param $insert_array
+	 * @param array $array   The array to search.
+	 * @param array $indexes The indexes to search; in order the function will look from the first to the last.
+	 * @param null  $default The value that will be returned if the array does not have any of the indexes set.
 	 *
-	 * @return array
-	 *
+	 * @return mixed|null The set value or the default value.
 	 */
-	public static function array_insert_after_key( $key, $source_array, $insert_array ) {
-		if ( array_key_exists( $key, $source_array ) ) {
-			$position     = array_search( $key, array_keys( $source_array ) ) + 1;
-			$source_array = array_slice( $source_array, 0, $position, true ) + $insert_array + array_slice( $source_array, $position, null, true );
-		} else {
-			// If no key is found, then add it to the end of the array.
-			$source_array += $insert_array;
+	public static function get_first_set( array $array, array $indexes, $default = null ) {
+		foreach ( $indexes as $index ) {
+			if ( ! isset( $array[ $index ] ) ) {
+				continue;
+			}
+
+			return $array[ $index ];
 		}
 
-		return $source_array;
+		return $default;
 	}
 
 	/**
-	 * Insert an array immediately before a specified key within another array.
+	 * Discards everything other than array values having string keys and scalar values, ensuring a
+	 * one-dimensional, associative array result.
 	 *
-	 * @since 3.0
+	 * @link  https://www.php.net/manual/language.types.array.php Keys cast to non-strings will be discarded.
 	 *
-	 * @param $key
-	 * @param $source_array
-	 * @param $insert_array
+	 * @since 4.12.2
+	 *
+	 * @param array $array
+	 *
+	 * @return array Associative or empty array.
+	 */
+	public static function filter_to_flat_scalar_associative_array( array $array ) {
+		$result = [];
+
+		if ( ! is_array( $array ) ) {
+			return $result;
+		}
+
+		foreach ( $array as $k => $v ) {
+			if ( ! is_string( $k ) ) {
+				continue;
+			}
+
+			if ( ! is_scalar( $v ) ) {
+				continue;
+			}
+
+			$result[ $k ] = $v;
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Build an array from migrating aliased key values to their canonical key values, removing all alias keys.
+	 *
+	 * If the original array has values for both the alias and its canonical, keep the canonical's value and
+	 * discard the alias' value.
+	 *
+	 * @since 4.12.2
+	 *
+	 * @param array $original  An associative array of values, such as passed shortcode arguments.
+	 * @param array $alias_map An associative array of aliases: key as alias, value as mapped canonical.
+	 *                         Example: [ 'alias' => 'canonical', 'from' => 'to', 'that' => 'becomes_this' ]
 	 *
 	 * @return array
 	 */
-	public static function array_insert_before_key( $key, $source_array, $insert_array ) {
-		if ( array_key_exists( $key, $source_array ) ) {
-			$position     = array_search( $key, array_keys( $source_array ) );
-			$source_array = array_slice( $source_array, 0, $position, true ) + $insert_array + array_slice( $source_array, $position, null, true );
-		} else {
-			// If no key is found, then add it to the end of the array.
-			$source_array += $insert_array;
+	public static function parse_associative_array_alias( array $original, array $alias_map ) {
+		// Ensure array values.
+		$original  = (array) $original;
+		$alias_map = static::filter_to_flat_scalar_associative_array( (array) $alias_map );
+
+		// Fail gracefully if alias array wasn't setup as [ 'from' => 'to' ].
+		if ( empty( $alias_map ) ) {
+			return $original;
 		}
 
-		return $source_array;
+		$result = $original;
+
+		// Parse aliases.
+		foreach ( $alias_map as $from => $to ) {
+			// If this alias isn't in use, go onto the next.
+			if ( ! isset( $result[ $from ] ) ) {
+				continue;
+			}
+
+			// Only allow setting alias value if canonical value is not already present.
+			if ( ! isset( $result[ $to ] ) ) {
+				$result[ $to ] = $result[ $from ];
+			}
+
+			// Always remove the alias key.
+			unset( $result[ $from ] );
+		}
+
+		return $result;
 	}
 }

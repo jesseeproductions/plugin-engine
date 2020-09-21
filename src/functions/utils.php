@@ -650,7 +650,7 @@ if ( ! function_exists( 'pngx_register_rest_route' ) ) {
 
 if ( ! function_exists( 'pngx_get_class_instance' ) ) {
 	/**
-	 * Gets the class instance / Tribe Container from the passed object or string.
+	 * Gets the class instance / Pngx Container from the passed object or string.
 	 *
 	 * @since TBD
 	 *
