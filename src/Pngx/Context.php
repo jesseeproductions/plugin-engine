@@ -1,4 +1,5 @@
 <?php
+Use Pngx\Utilities\Arr;
 
 /**
  * Class Pngx__Context
@@ -63,7 +64,7 @@ class Pngx__Context {
 		if ( null !== $post_or_type ) {
 			$lookup = array( $_GET, $_POST, $_REQUEST );
 
-			$current_post = Pngx__Utilities__Array::get_in_any( $lookup, 'post', get_post() );
+			$current_post = Arr::get_in_any( $lookup, 'post', get_post() );
 
 			if ( is_numeric( $post_or_type ) ) {
 
@@ -83,7 +84,7 @@ class Pngx__Context {
 			if ( $is_post && $post instanceof WP_Post ) {
 				$post_type = $post->post_type;
 			} else {
-				$post_type = Pngx__Utilities__Array::get_in_any( $lookup, 'post_type', 'post' );
+				$post_type = Arr::get_in_any( $lookup, 'post_type', 'post' );
 			}
 
 			return (bool) count( array_intersect( $post_types, array( $post_type ) ) );

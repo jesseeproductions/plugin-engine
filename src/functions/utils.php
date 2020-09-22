@@ -1,4 +1,5 @@
 <?php
+use Pngx\Utilities\Arr;
 
 if ( ! function_exists( 'pngx_array_merge_recursive' ) ) {
 	/**
@@ -144,7 +145,7 @@ if ( ! function_exists( 'pngx_get_request_var' ) ) {
 	 * @return mixed
 	 */
 	function pngx_get_request_var( $var, $default = null ) {
-		return Pngx__Utilities__Array::get_in_any( [ $_GET, $_POST, $_REQUEST ], $var, $default );
+		return Arr::get_in_any( [ $_GET, $_POST, $_REQUEST ], $var, $default );
 	}
 }
 
