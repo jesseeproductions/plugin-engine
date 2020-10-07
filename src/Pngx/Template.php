@@ -1307,7 +1307,7 @@ class Template {
 	 */
 	protected function get_template_common_path() {
 		// As base path use the current location of Common, remove the trailing slash.
-		$common_abs_path = untrailingslashit( Pngx__Main::instance()->plugin_path );
+		$common_abs_path = untrailingslashit( \Pngx__Main::instance()->plugin_path );
 		$path            = array_merge( (array) $common_abs_path, $this->folder );
 
 		// Implode to avoid problems on Windows hosts.

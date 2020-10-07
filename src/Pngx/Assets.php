@@ -4,7 +4,7 @@ Use Pngx\Utilities\Arr;
 /**
  * Class used to register and enqueue assets across our plugins
  *
- * Based off Modern Tribee's Tribee__Assets
+ * Based off Modern Tribe's Tribe__Assets
  *
  * @since 3.0
  */

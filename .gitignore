@@ -23,3 +23,5 @@ vendor/*
 !vendor/colorbox/*
 !vendor/wp-color-picker-alpha
 !vendor/wp-color-picker-alpha/*
+!vendor/selectWoo
+!vendor/selectWoo/*
