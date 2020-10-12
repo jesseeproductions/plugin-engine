@@ -373,6 +373,17 @@ class Pngx__Sanitize {
 	}
 
 	/**
+	 * Post ID
+	 *
+	 * @return string
+	 */
+	private function sanitize_post_id() {
+
+		return $this->sanitize_absint();
+
+	}
+
+	/**
 	 * Numbers ID Sanitize
 	 *
 	 * @return string

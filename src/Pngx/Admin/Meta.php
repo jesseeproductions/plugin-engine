@@ -221,8 +221,8 @@ class Pngx__Admin__Meta {
 								/**
 								 * Filter Default Template Name
 								 */
-								$default       = apply_filters( 'pngx-default-template', 'default' );
-								$template_area = ! empty( $template_select ) ? $template_select : $default;
+								$default = apply_filters( 'pngx-default-template', 'default' );
+								$template_area   = ! empty( $template_select ) ? $template_select : $default;
 								?>
 								<div class="pngx-meta-template-wrap template-wrap-<?php echo esc_html( $wrapclass ); ?>" >
 								<?php
@@ -365,6 +365,17 @@ class Pngx__Admin__Meta {
 				if ( $checkbox && ! isset( $_POST[ $option['id'] ] ) ) {
 					delete_post_meta( $post_id, $option['id'] );
 				}
+
+			}
+
+			//handle repeatable fields
+			if ( 'repeater' === $option['type'] && isset ( $_POST[ $option['id'] ] ) ) {
+
+				if ( ! isset( ${'repeat_obj' . $option['id']} ) ) {
+                    ${'repeat_obj' . $option['id']} = new Pngx__Repeater__Main ( $option['id'], $_POST[ $option['id'] ], $post_id, 'save' );
+				}
+
+				continue;
 
 			}
 
