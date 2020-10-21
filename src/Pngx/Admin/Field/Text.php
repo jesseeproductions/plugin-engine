@@ -14,7 +14,7 @@ if ( class_exists( 'Pngx__Admin__Field__Text' ) ) {
  */
 class Pngx__Admin__Field__Text {
 
-	public static function display( $field = array(), $options = array(), $options_id = null, $meta = null, $repeat_name = null ) {
+	public static function display( $field = array(), $options = array(), $options_id = null, $meta = null, $var = null ) {
 
 		if ( ! empty( $options_id ) ) {
 			$name  = $options_id;
@@ -34,8 +34,8 @@ class Pngx__Admin__Field__Text {
 		$attributes = empty( $field['field_attributes'] ) ? '' : Pngx__Admin__Field_Methods::instance()->set_field_attributes( $field['field_attributes'] );
 		$bumpdown   = empty( $field['bumpdown'] ) ? '' : Pngx__Admin__Field_Methods::instance()->set_bumpdown( $field['bumpdown'] );
 
-		if ( $repeat_name ) {
-			$name = $repeat_name;
+		if ( ! empty( $var['name'] ) ) {
+			$name = $var['name'];
 		}
 
 		if ( isset( $field['alert'] ) && '' != $field['alert'] && 1 == $condition ) {

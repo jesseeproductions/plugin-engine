@@ -14,7 +14,7 @@ if ( class_exists( 'Pngx__Admin__Field__Textarea' ) ) {
  */
 class Pngx__Admin__Field__Textarea {
 
-	public static function display( $field = array(), $options = array(), $options_id = null, $meta = null, $repeat_name = null ) {
+	public static function display( $field = array(), $options = array(), $options_id = null, $meta = null, $var = null ) {
 
 		if ( ! empty( $options_id ) ) {
 			$name  = $options_id;
@@ -30,8 +30,8 @@ class Pngx__Admin__Field__Textarea {
 		$class     = isset( $field['class'] ) ? $field['class'] : '';
 		$std       = isset( $field['std'] ) ? $field['std'] : '';
 
-		if ( $repeat_name ) {
-			$name = $repeat_name;
+		if ( ! empty( $var['name'] ) ) {
+			$name = $var['name'];
 		}
 
 		if ( version_compare( $wp_version, '4.3', '<' ) ) {

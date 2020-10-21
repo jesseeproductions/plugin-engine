@@ -13,7 +13,7 @@ if ( class_exists( 'Pngx__Admin__Field__Post_ID' ) ) {
  */
 class Pngx__Admin__Field__Post_ID {
 
-	public static function display( $field = array(), $options = array(), $options_id = null, $meta = null, $repeat_name = null ) {
+	public static function display( $field = array(), $options = array(), $options_id = null, $meta = null, $var = null ) {
 
 		if ( isset( $options_id ) && ! empty( $options_id ) ) {
 			$name  = $options_id;
@@ -26,8 +26,8 @@ class Pngx__Admin__Field__Post_ID {
 			}
 		}
 
-		if ( $repeat_name ) {
-			$name = $repeat_name;
+		if ( ! empty( $var['name'] ) ) {
+			$name = $var['name'];
 		}
 
 		echo '<input 

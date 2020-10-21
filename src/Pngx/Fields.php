@@ -38,6 +38,12 @@ class Pngx__Fields {
 
 				break;
 
+			case 'dropdown':
+
+				Pngx__Field__Dropdown::display( $field, $post_id, $meta, $template_fields, $var );
+
+				break;
+
 			case 'icon':
 
 				Pngx__Field__Icon::display( $field, $post_id, $meta, $template_fields, $var );

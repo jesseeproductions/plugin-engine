@@ -10,7 +10,7 @@ if ( class_exists( 'Pngx__Field__Content' ) ) {
 
 /**
  * Class Pngx__Field__Content
- * Title
+ * Content
  */
 class Pngx__Field__Content {
 
