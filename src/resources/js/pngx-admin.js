@@ -768,7 +768,7 @@ var pngx_loadScript = pngx_loadScript || {};
 	obj.init = function ( url, arg1, arg2 ) {
 		var cache = false, callback = null;
 		//arg1 and arg2 can be interchangable as either the callback function or the cache bool
-		if ( $.isFunction( arg1 ) ) {
+		if ( typeof arg1 === "function" ) {
 			callback = arg1;
 			cache = arg2 || cache;
 		} else {
@@ -793,7 +793,7 @@ var pngx_loadScript = pngx_loadScript || {};
 			} );
 		} else {
 			//already loaded so just call the callback
-			if ( $.isFunction( callback ) ) {
+			if ( typeof callback === "function" ) {
 				callback.call( this );
 			}
 		}
