@@ -2,6 +2,10 @@
 
 == Changelog ==
 
+= 3.2 TBD =
+
+* Fix - Updates to support jQuery change in WordPress 5.7.
+
 = 3.1.1 August 25th, 2020 =
 
 * Fix - Modify the security check on saving meta fields.
