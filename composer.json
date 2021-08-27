@@ -18,7 +18,8 @@
     }
   },
   "require": {
-    "lucatume/di52": "~2.0.12"
+    "lucatume/di52": "~2.0.12",
+    "faction23/a11y-dialog": "~5.0.0"
   },
   "require-dev": {
     "dealerdirect/phpcodesniffer-composer-installer": "^0.4.4",
@@ -34,7 +35,8 @@
     "spatie/phpunit-snapshot-assertions": "^1.4.2",
     "fzaninotto/faker": "^1.8",
     "lucatume/wp-snaphot-assertions": "^1.0",
-    "moderntribe/tribe-testing-facilities": "dev-master"
+    "moderntribe/tribe-testing-facilities": "dev-master",
+    "wp-cli/checksum-command": "1.0.5"
   },
   "repositories": [
     {
@@ -48,6 +50,18 @@
       "type": "github",
       "url": "https://github.com/moderntribe/TribalScents",
       "no-api": true
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "faction23/a11y-dialog",
+        "version": "5.0.4",
+        "source": {
+          "url": "https://github.com/faction23/a11y-dialog",
+          "type": "git",
+          "reference": "master"
+        }
+      }
     }
   ],
   "scripts": {
@@ -63,7 +77,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Pngx\\": "src/Pngx"
+      "Pngx\\": "src/Pngx/"
     }
   }
 }

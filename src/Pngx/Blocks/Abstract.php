@@ -113,7 +113,7 @@ abstract class Pngx__Blocks__Abstract implements Pngx__Blocks__Interface {
 	 * @return mixed
 	 */
 	public function plugin() {
-		return pngx( 'gutenberg' );
+		return pngx( 'pngx.gutenberg' );
 	}
 
 	/**

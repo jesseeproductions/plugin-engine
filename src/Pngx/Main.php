@@ -3,7 +3,6 @@ if ( class_exists( 'Pngx__Main' ) ) {
 	return;
 }
 
-
 /**
  * Main Plugin Engine class.
  */
@@ -114,15 +113,22 @@ class Pngx__Main {
 	 * Setup the autoloader for common files
 	 */
 	protected function init_autoloading() {
+
 		if ( ! class_exists( 'Pngx__Autoloader' ) ) {
 			require_once dirname( __FILE__ ) . '/Autoloader.php';
 		}
 
-		$prefixes   = array( 'Pngx__' => dirname( __FILE__ ) );
 		$autoloader = Pngx__Autoloader::instance();
-		$autoloader->register_prefixes( $prefixes );
-		$autoloader->register_autoloader();
 
+		$prefixes = array( 'Pngx__' => dirname( __FILE__ ) );
+		$autoloader->register_prefixes( $prefixes );
+
+		foreach ( glob( $this->plugin_path . 'src/deprecated/*.php' ) as $file ) {
+			$class_name = str_replace( '.php', '', basename( $file ) );
+			$autoloader->register_class( $class_name, $file );
+		}
+
+		$autoloader->register_autoloader();
 	}
 
 	/**
@@ -137,12 +143,18 @@ class Pngx__Main {
 	 * Registers the slug bound to the implementations in the container.
 	 */
 	public function bind_implementations() {
+		pngx_singleton( 'pngx.assets', 'Pngx__Assets' );
+		pngx_singleton( 'pngx.context', 'Pngx__Context' );
+		pngx_singleton( 'pngx.admin.assets', 'Pngx__Admin__Assets' );
+		pngx_singleton( 'pngx.logger', 'Pngx__Log' );
+		pngx_singleton( 'pngx.allowed_tags', 'Pngx__Allowed_Tags' );
 		pngx_register( 'pngx.register.cpt', new Pngx__Register_Post_Type() );
 		pngx_register( 'pngx.register.tax', new Pngx__Register_Taxonomy() );
 		pngx_singleton( 'cache', 'Pngx__Cache' );
-		pngx_singleton( 'assets', 'Pngx__Assets' );
-		pngx_singleton( 'context', 'Pngx__Context' );
-		pngx_singleton( 'admin.assets', 'Pngx__Admin__Assets' );
+
+		//pngx_register_provider( Pngx\Service_Providers\Tooltip::class );
+		pngx_register_provider( Pngx\Service_Providers\Dialog::class );
+		pngx_register_provider( Pngx\Service_Providers\Carousel::class );
 		pngx_register_provider( Pngx\Duplicate\Post_Types::class );
 	}
 
@@ -153,6 +165,8 @@ class Pngx__Main {
 
 		//Core Functions
 		require_once $this->plugin_path . 'src/functions/template-tags/general.php';
+		require_once $this->plugin_path . 'src/functions/template-tags/html.php';
+		require_once $this->plugin_path . 'src/functions/utils.php';
 
 	}
 
@@ -167,6 +181,23 @@ class Pngx__Main {
 		}
 
 		add_action( 'plugins_loaded', array( 'Pngx__Admin__Notices', 'instance' ), 1 );
+		add_action( 'plugins_loaded', array( $this, 'pngx_plugins_loaded' ), PHP_INT_MAX );
+	}
+
+	/**
+	 * Runs pngx_after_plugins_loaded action, should be hooked to the end of plugins_loaded
+	 */
+	public function pngx_plugins_loaded() {
+
+		pngx_singleton( 'pngx.feature-detection', 'Pngx__Feature_Detection' );
+		pngx_register_provider( 'Pngx__Service_Providers__Processes' );
+
+		/**
+		 * Runs after all plugins including Pngx ones have loaded
+		 *
+		 * @since TBD
+		 */
+		do_action( 'pngx_after_plugins_loaded' );
 	}
 
 	/**

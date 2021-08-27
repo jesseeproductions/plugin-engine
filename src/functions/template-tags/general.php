@@ -98,7 +98,7 @@ if ( ! function_exists( 'pngx_register_plugin' ) ) {
 	/**
 	 * Checks if this plugin has permission to run, if not it notifies the admin
 	 *
-	 * Based off Modern Tribe's tribe_register_plugin
+	 * Based off Modern Tribe's pngx_register_plugin
 	 *
 	 * @since 3.0
 	 *
@@ -121,7 +121,7 @@ if ( ! function_exists( 'pngx_check_plugin' ) ) {
 	/**
 	 * Checks if this plugin has permission to run, if not it notifies the admin
 	 *
-	 * Based off Modern Tribe's tribe_check_plugin
+	 * Based off Modern Tribe's pngx_check_plugin
 	 *
 	 * @since 3.0
 	 *
@@ -141,7 +141,7 @@ if ( ! function_exists( 'pngx_notice' ) ) {
 	/**
 	 * Shortcut for Pngx__Admin__Notices::register(), create a Admin Notice easily
 	 *
-	 * Based off Modern Tribe's tribe_notice
+	 * Based off Modern Tribe's pngx_notice
 	 *
 	 * @since 3.0
 	 *
@@ -158,37 +158,11 @@ if ( ! function_exists( 'pngx_notice' ) ) {
 	}
 }
 
-if ( ! function_exists( 'pngx_get_request_var' ) ) {
-	/**
-	 * Tests to see if the requested variable is set either as a post field or as a URL
-	 * param and returns the value if so.
-	 *
-	 * Based off Modern Tribe's tribe_get_request_var
-	 *
-	 * @since 3.0
-	 *
-	 * Post data takes priority over fields passed in the URL query. If the field is not
-	 * set then $default (null unless a different value is specified) will be returned.
-	 *
-	 * The variable being tested for can be an array if you wish to find a nested value.
-	 *
-	 * @see Tribe__Utils__Array::get()
-	 *
-	 * @param string|array $var
-	 * @param mixed        $default
-	 *
-	 * @return mixed
-	 */
-	function pngx_get_request_var( $var, $default = null ) {
-		return Pngx__Utilities__Array::get_in_any( array( $_GET, $_POST ), $var, $default );
-	}
-}
-
 if ( ! function_exists( 'pngx_asset' ) ) {
 	/**
 	 * Shortcut for Pngx__Assets::register(), include a single asset
 	 *
-	 * Based off Modern Tribe's tribe_asset
+	 * Based off Modern Tribe's pngx_asset
 	 *
 	 * @since 3.0
 	 *
@@ -202,7 +176,7 @@ if ( ! function_exists( 'pngx_asset' ) ) {
 	 * @return array             Which Assets was registered
 	 */
 	function pngx_asset( $origin, $slug, $file, $deps = array(), $action = null, $arguments = array() ) {
-		return pngx( 'assets' )->register( $origin, $slug, $file, $deps, $action, $arguments );
+		return pngx( 'pngx.assets' )->register( $origin, $slug, $file, $deps, $action, $arguments );
 	}
 }
 
@@ -210,7 +184,7 @@ if ( ! function_exists( 'pngx_resource_url' ) ) {
 	/**
 	 * Returns or echoes a url to a file in the Events Calendar plugin resources directory
 	 *
-	 * Based off Modern Tribe's tribe_resource_url
+	 * Based off Modern Tribe's pngx_resource_url
 	 *
 	 * @since 3.0
 	 *
