@@ -77,7 +77,9 @@ class Pngx__Main {
 		$this->init_autoloading();
 
 		$this->bind_implementations();
+
 		$this->loadLibraries();
+
 		$this->add_hooks();
 
 		/**
@@ -135,6 +137,9 @@ class Pngx__Main {
 	 * Registers the slug bound to the implementations in the container.
 	 */
 	public function bind_implementations() {
+		pngx_register( 'pngx.register.cpt', new Pngx__Register_Post_Type() );
+		pngx_register( 'pngx.register.tax', new Pngx__Register_Taxonomy() );
+		pngx_singleton( 'cache', 'Pngx__Cache' );
 		pngx_singleton( 'assets', 'Pngx__Assets' );
 		pngx_singleton( 'context', 'Pngx__Context' );
 		pngx_singleton( 'admin.assets', 'Pngx__Admin__Assets' );
@@ -207,8 +212,8 @@ class Pngx__Main {
 	/**
 	 * Returns the post types registered with plugin engine
 	 */
-	public static function get_post_types() {
-		// we default the post type array to empty in plugin engine. Plugins like TEC add to it
+	public function get_post_types() {
+		// we default the post type array to empty in plugin engine. Plugins like PNGX add to it
 		return apply_filters( 'pngx_post_types', array() );
 
 	}

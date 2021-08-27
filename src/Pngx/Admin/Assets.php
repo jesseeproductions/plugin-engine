@@ -127,9 +127,9 @@ class Pngx__Admin__Assets {
 		wp_localize_script( 'pngx-admin', 'pngx_admin', array(
 			'ajaxurl'    => admin_url( 'admin-ajax.php', ( is_ssl() ? 'https' : 'http' ) ),
 			'sysinfo_optin_nonce'   => wp_create_nonce( 'sysinfo_optin_nonce' ),
-			'clipboard_btn_text'    => __( 'Copy to clipboard', 'tribe-common' ),
-			'clipboard_copied_text' => __( 'System info copied', 'tribe-common' ),
-			'clipboard_fail_text'   => __( 'Press "Cmd + C" to copy', 'tribe-common' ),
+			'clipboard_btn_text'    => __( 'Copy to clipboard', 'plugin-engine' ),
+			'clipboard_copied_text' => __( 'System info copied', 'plugin-engine' ),
+			'clipboard_fail_text'   => __( 'Press "Cmd + C" to copy', 'plugin-engine' ),
 		) );
 
 		global $wp_version;
