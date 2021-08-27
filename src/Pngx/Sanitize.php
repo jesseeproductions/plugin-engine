@@ -219,6 +219,17 @@ class Pngx__Sanitize {
 	}
 
 	/**
+	 * Dropdown Sanitize
+	 *
+	 * @return mixed|string
+	 */
+	private function sanitize_dropdown() {
+
+		return $this->sanitize_enum();
+
+	}
+
+	/**
 	 * Select Variety Select
 	 *
 	 * @return mixed|string
@@ -258,11 +269,26 @@ class Pngx__Sanitize {
 	 */
 	private function sanitize_enum() {
 
-		if ( array_key_exists( $this->input, $this->option['choices'] ) ) {
-			$this->input = sanitize_text_field( $this->input );
+		if (
+			isset( $this->option['choices'] ) &&
+			is_array( $this->option['choices'] ) &&
+			array_key_exists( $this->input, $this->option['choices'] )
+		) {
+			return sanitize_text_field( $this->input );
 		}
 
-		return $this->input;
+		$option = wp_filter_object_list(
+			$this->option['options'] ,
+			[ 'value' =>  $this->input ],
+			'and',
+			'value'
+		);
+
+		if ( in_array( $this->input, $option ) ) {
+			return sanitize_text_field( $this->input );
+		}
+
+		return false;
 	}
 
 	/**
@@ -378,6 +404,17 @@ class Pngx__Sanitize {
 	 * @return string
 	 */
 	private function sanitize_proimage() {
+
+		return $this->sanitize_absint();
+
+	}
+
+	/**
+	 * Post ID
+	 *
+	 * @return string
+	 */
+	private function sanitize_post_id() {
 
 		return $this->sanitize_absint();
 
