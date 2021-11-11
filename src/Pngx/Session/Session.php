@@ -131,12 +131,114 @@ abstract class Session {
 	}
 
 	/**
+	 * Get the unique id of the session.
+	 *
+	 * @since TBD
+	 *
+	 * @return int
+	 */
+	public function get_id() {
+		return $this->unique_id;
+	}
+
+	/**
 	 * Hooks and sets up the session.
 	 *
 	 * @since TBD
 	 *
 	 */
-	protected function init() {
+	public function init() {
+	}
 
+	/**
+	 * Cleanup session data.
+	 *
+	 * @since TBD
+	 *
+	 */
+	public function cleanup_sessions() {
+	}
+
+	/**
+	 * Magic get method.
+	 *
+	 * @since TBD
+	 *
+	 * @param mixed $key Key to get.
+	 *
+	 * @return mixed
+	 */
+	public function __get( $key ) {
+		return $this->get( $key );
+	}
+
+	/**
+	 * Magic set method.
+	 *
+	 * @since TBD
+	 *
+	 * @param mixed $key   Key to set.
+	 * @param mixed $value Value to set.
+	 */
+	public function __set( $key, $value ) {
+		$this->set( $key, $value );
+	}
+
+	/**
+	 * Magic isset method.
+	 *
+	 * @since TBD
+	 *
+	 * @param mixed $key Name of the key to check.
+	 *
+	 * @return bool Whether the key is set or not.
+	 */
+	public function __isset( $key ) {
+		return isset( $this->data[ sanitize_title( $key ) ] );
+	}
+
+	/**
+	 * Magic unset method.
+	 *
+	 * @since TBD
+	 *
+	 * @param mixed $key Name of the key to unset.
+	 */
+	public function __unset( $key ) {
+		if ( isset( $this->data[ $key ] ) ) {
+			unset( $this->data[ $key ] );
+			$this->unsaved = true;
+		}
+	}
+
+	/**
+	 * Get a session variable.
+	 *
+	 * @since TBD
+	 *
+	 * @param string $key     Name of the key to get.
+	 * @param mixed  $default Optional default variable if it is not set.
+	 *
+	 * @return array<string|mixed> The requested value of the session data or maybe a default.
+	 */
+	public function get( $key, $default = null ) {
+		$key = sanitize_key( $key );
+
+		return isset( $this->data[ $key ] ) ? maybe_unserialize( $this->data[ $key ] ) : $default;
+	}
+
+	/**
+	 * Set a session variable.
+	 *
+	 * @since TBD
+	 *
+	 * @param string $key   Name of the key to set.
+	 * @param mixed  $value Value to set.
+	 */
+	public function set( $key, $value ) {
+		if ( $value !== $this->get( $key ) ) {
+			$this->data[ sanitize_key( $key ) ] = maybe_serialize( $value );
+			$this->unsaved                      = true;
+		}
 	}
 }
