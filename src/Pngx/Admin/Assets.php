@@ -147,7 +147,7 @@ class Pngx__Admin__Assets {
 		 * @since 3.1
 		 */
 		if ( version_compare( $wp_version, '5.4.99', '>=' ) ) {
-\
+
 			wp_localize_script(
 				'wp-color-picker',
 				'wpColorPickerL10n',

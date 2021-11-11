@@ -2,19 +2,19 @@
 /**
  * Extends DateTime and includes translation capabilities.
  *
- * @package Tribe\Utils
+ * @package Pngx\Utils\Dates
  * @since   4.11.0
  */
-namespace Tribe\Utils;
+namespace Pngx\Utilities\Dates;
 
-use Tribe__Date_Utils as Dates;
+use Pngx__Date_Utils as Dates;
 use DateTime;
 use DateTimeImmutable;
 
 /**
  * Class Date i18n
  *
- * @package Tribe\Utils
+ * @package Pngx\Utils\Dates
  * @since   4.11.0
  */
 class Date_I18n extends DateTime {

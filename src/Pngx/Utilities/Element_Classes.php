@@ -6,7 +6,7 @@ namespace Pngx\Utilities;
  *
  * @since  YBD
  *
- * @package Tribe\Utils
+ * @package Pngx\Utils\Dates
  */
 class Element_Classes {
 	/**

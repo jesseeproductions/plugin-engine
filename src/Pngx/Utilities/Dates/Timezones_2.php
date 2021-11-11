@@ -1,12 +1,15 @@
 <?php
-
+/**
+ * Date utility functions
+ */
+namespace Pngx\Utilities\Dates;
 /**
  * Helpers for handling timezone based event datetimes.
  *
  * In our timezone logic, the term "local" refers to the locality of an event
  * rather than the local WordPress timezone.
  */
-class Tribe__Events__Timezones extends Tribe__Timezones {
+class Timezones_2 extends Timezones {
 	public static function init() {
 		self::display_timezones();
 		parent::init();
@@ -17,9 +20,9 @@ class Tribe__Events__Timezones extends Tribe__Timezones {
 	 * event date/times.
 	 */
 	protected static function display_timezones() {
-		if ( tribe_get_option( 'tribe_events_timezones_show_zone' ) ) {
-			add_filter( 'tribe_events_event_schedule_details_inner', [ __CLASS__, 'append_timezone' ], 10, 2 );
-			add_filter( 'tribe_events_event_short_schedule_details_inner', [ __CLASS__, 'append_timezone' ], 10, 2 );
+		if ( pngx_get_option( 'pngx_events_timezones_show_zone' ) ) {
+			add_filter( 'pngx_events_event_schedule_details_inner', [ __CLASS__, 'append_timezone' ], 10, 2 );
+			add_filter( 'pngx_events_event_short_schedule_details_inner', [ __CLASS__, 'append_timezone' ], 10, 2 );
 		}
 	}
 
@@ -35,15 +38,15 @@ class Tribe__Events__Timezones extends Tribe__Timezones {
 		static $hide_for_all_day;
 
 		if ( ! isset( $hide_for_all_day ) ) {
-			$hide_for_all_day = apply_filters( 'tribe_events_hide_timezone_for_all_day_events', true );
+			$hide_for_all_day = apply_filters( 'pngx_events_hide_timezone_for_all_day_events', true );
 		}
 
-		if ( tribe_event_is_all_day( $event_id ) && $hide_for_all_day ) {
+		if ( pngx_event_is_all_day( $event_id ) && $hide_for_all_day ) {
 			return $schedule_text;
 		}
 
 		$timezone = self::is_mode( 'site' )
-			? self::wp_timezone_abbr( tribe_get_start_date( $event_id, true, Tribe__Date_Utils::DBDATETIMEFORMAT ) )
+			? self::wp_timezone_abbr( pngx_get_start_date( $event_id, true, Pngx__Date_Utils::DBDATETIMEFORMAT ) )
 			: self::get_event_timezone_abbr( $event_id );
 
 		if ( ! empty( $timezone ) ) {
@@ -66,7 +69,7 @@ class Tribe__Events__Timezones extends Tribe__Timezones {
 	 * @return string
 	 */
 	public static function get_event_timezone_string( $event_id = null ) {
-		$event_id = Tribe__Events__Main::postIdHelper( $event_id );
+		$event_id = Pngx__Events__Main::postIdHelper( $event_id );
 		$tzstring = get_post_meta( $event_id, '_EventTimezone', true );
 		return $tzstring ? $tzstring : self::wp_timezone_string();
 	}
@@ -85,7 +88,7 @@ class Tribe__Events__Timezones extends Tribe__Timezones {
 
 		if ( empty( $abbr ) ) {
 			$timezone_string = self::get_event_timezone_string( $event_id );
-			$date = tribe_get_start_date( $event_id, true, Tribe__Date_Utils::DBDATETIMEFORMAT );
+			$date = pngx_get_start_date( $event_id, true, Pngx__Date_Utils::DBDATETIMEFORMAT );
 			$abbr = self::abbr( $date, $timezone_string );
 		}
 
@@ -96,7 +99,7 @@ class Tribe__Events__Timezones extends Tribe__Timezones {
 
 
 	/**
-	 * Returns a timestamp for the event start date that can be passed to tribe_format_date()
+	 * Returns a timestamp for the event start date that can be passed to pngx_format_date()
 	 * in order to produce the time in the correct timezone.
 	 *
 	 * @param int    $event_id
@@ -109,7 +112,7 @@ class Tribe__Events__Timezones extends Tribe__Timezones {
 	}
 
 	/**
-	 * Returns a timestamp for the event end date that can be passed to tribe_format_date()
+	 * Returns a timestamp for the event end date that can be passed to pngx_format_date()
 	 * in order to produce the time in the correct timezone.
 	 *
 	 * @param int    $event_id
@@ -122,7 +125,7 @@ class Tribe__Events__Timezones extends Tribe__Timezones {
 	}
 
 	/**
-	 * Returns a timestamp for the event date that can be passed to tribe_format_date()
+	 * Returns a timestamp for the event date that can be passed to pngx_format_date()
 	 * in order to produce the time in the correct timezone.
 	 *
 	 * @param int    $event_id
@@ -134,7 +137,7 @@ class Tribe__Events__Timezones extends Tribe__Timezones {
 	protected static function get_event_timestamp( $event_id, $type = 'Start', $timezone = null ) {
 		static $cache_var_name = __METHOD__;
 
-		$timestamps = tribe_get_var( $cache_var_name, [] );
+		$timestamps = pngx_get_var( $cache_var_name, [] );
 
 		$cache_key = "{$event_id}:{$type}:{$timezone}";
 
@@ -142,7 +145,7 @@ class Tribe__Events__Timezones extends Tribe__Timezones {
 			return $timestamps[ $cache_key ];
 		}
 
-		$event    = get_post( Tribe__Events__Main::postIdHelper( $event_id ) );
+		$event    = get_post( Pngx__Events__Main::postIdHelper( $event_id ) );
 		$event_tz = get_post_meta( $event->ID, '_EventTimezone', true );
 		$site_tz  = self::wp_timezone_string();
 
@@ -177,7 +180,7 @@ class Tribe__Events__Timezones extends Tribe__Timezones {
 		$localized = self::to_tz( $datetime, $tzstring );
 		$timestamps[ $cache_key ] = strtotime( $localized );
 
-		tribe_set_var( $cache_var_name, $timestamps );
+		pngx_set_var( $cache_var_name, $timestamps );
 
 		return $timestamps[ $cache_key ];
 	}
@@ -192,11 +195,11 @@ class Tribe__Events__Timezones extends Tribe__Timezones {
 	public static function mode() {
 		$mode = self::EVENT_TIMEZONE;
 
-		if ( 'site' === tribe_get_option( 'tribe_events_timezone_mode' ) ) {
+		if ( 'site' === pngx_get_option( 'pngx_events_timezone_mode' ) ) {
 			$mode = self::SITE_TIMEZONE;
 		}
 
-		return apply_filters( 'tribe_events_current_display_timezone', $mode );
+		return apply_filters( 'pngx_events_current_display_timezone', $mode );
 	}
 
 	/**

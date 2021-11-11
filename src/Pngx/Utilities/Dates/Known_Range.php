@@ -1,7 +1,10 @@
 <?php
+/**
+ * Date utility functions
+ */
+namespace Pngx\Utilities\Dates;
 
-
-class Tribe__Events__Dates__Known_Range {
+class Known_Range {
 
 	/**
 	 * @var static
@@ -11,7 +14,7 @@ class Tribe__Events__Dates__Known_Range {
 	/**
 	 * The class singleton constructor.
 	 *
-	 * @return Tribe__Events__Dates__Known_Range
+	 * @return Known_Range
 	 */
 	public static function instance() {
 		if ( empty( self::$instance ) ) {
@@ -35,7 +38,7 @@ class Tribe__Events__Dates__Known_Range {
 		 * @param bool $rebuilt Whether the known range was rebuilt or not; defaults to `false`
 		 *                      to let the method proceed to the update.
 		 */
-		$rebuilt = apply_filters( 'tribe_events_rebuild_known_range', false );
+		$rebuilt = apply_filters( 'pngx_events_rebuild_known_range', false );
 		if ( true === $rebuilt ) {
 			return;
 		}
@@ -44,7 +47,7 @@ class Tribe__Events__Dates__Known_Range {
 		remove_action( 'deleted_post', [ $this, 'rebuild_known_range' ] );
 
 		$_stati = [ 'publish', 'private', 'protected' ];
-		$_stati = apply_filters( 'tribe_events_known_range_stati', $_stati );
+		$_stati = apply_filters( 'pngx_events_known_range_stati', $_stati );
 		$stati  = "('" . implode( "','", $_stati ) . "')";
 
 		$earliest = strtotime( $wpdb->get_var( $wpdb->prepare( "
@@ -54,7 +57,7 @@ class Tribe__Events__Dates__Known_Range {
 				AND post_type = '%s'
 				AND post_status IN $stati
 			",
-			Tribe__Events__Main::POSTTYPE ) ) );
+			Pngx__Events__Main::POSTTYPE ) ) );
 
 		$latest = strtotime( $wpdb->get_var( $wpdb->prepare( "
 				SELECT MAX(meta_value) FROM $wpdb->postmeta
@@ -63,11 +66,11 @@ class Tribe__Events__Dates__Known_Range {
 				AND post_type = '%s'
 				AND post_status IN $stati
 			",
-			Tribe__Events__Main::POSTTYPE ) ) );
+			Pngx__Events__Main::POSTTYPE ) ) );
 
 		if ( $earliest ) {
-			$earliest_date = date( Tribe__Date_Utils::DBDATETIMEFORMAT, $earliest );
-			tribe_update_option( 'earliest_date', $earliest_date );
+			$earliest_date = date( Pngx__Date_Utils::DBDATETIMEFORMAT, $earliest );
+			pngx_update_option( 'earliest_date', $earliest_date );
 			// get all posts that have a start date equal to the earliest date
 			$earliest_ids = $wpdb->get_col( $wpdb->prepare( "
 				SELECT pm.post_id FROM $wpdb->postmeta pm
@@ -76,14 +79,14 @@ class Tribe__Events__Dates__Known_Range {
 				AND pm.meta_key = '_EventStartDate'
 				AND pm.meta_value = %s
 			",
-				Tribe__Events__Main::POSTTYPE,
+				Pngx__Events__Main::POSTTYPE,
 				$earliest_date ) );
 			// save those post ids as new earliest date markers
-			tribe_update_option( 'earliest_date_markers', $earliest_ids );
+			pngx_update_option( 'earliest_date_markers', $earliest_ids );
 		}
 		if ( $latest ) {
-			$latest_date = date( Tribe__Date_Utils::DBDATETIMEFORMAT, $latest );
-			tribe_update_option( 'latest_date', $latest_date );
+			$latest_date = date( Pngx__Date_Utils::DBDATETIMEFORMAT, $latest );
+			pngx_update_option( 'latest_date', $latest_date );
 			// get all posts that have an end date equal to the latest date
 			$latest_ids = $wpdb->get_col( $wpdb->prepare( "
 				SELECT pm.post_id FROM $wpdb->postmeta pm
@@ -92,10 +95,10 @@ class Tribe__Events__Dates__Known_Range {
 				AND pm.meta_key = '_EventEndDate'
 				AND pm.meta_value = %s
 			",
-				Tribe__Events__Main::POSTTYPE,
+				Pngx__Events__Main::POSTTYPE,
 				$latest_date ) );
 			// save those post ids as new latest date markers
-			tribe_update_option( 'latest_date_markers', $latest_ids );
+			pngx_update_option( 'latest_date_markers', $latest_ids );
 		}
 	}
 
@@ -104,39 +107,39 @@ class Tribe__Events__Dates__Known_Range {
 	 * the system. If the existing earliest/latest values have not been superseded by the new post's
 	 * start/end date then no update takes place.
 	 *
-	 * This is deliberately hooked into save_post, rather than save_post_tribe_events, to avoid issues
+	 * This is deliberately hooked into save_post, rather than save_post_pngx_events, to avoid issues
 	 * where the removal/restoration of hooks within addEventMeta() etc might stop this method from
 	 * actually being called (relates to a core WP bug).
 	 *
 	 * @param int $event_id
 	 */
 	public function update_known_range( $event_id ) {
-		$is_earliest_date_marker = in_array( $event_id, tribe_get_option( 'earliest_date_markers', [] ) );
-		$is_latest_date_marker   = in_array( $event_id, tribe_get_option( 'latest_date_markers', [] ) );
+		$is_earliest_date_marker = in_array( $event_id, pngx_get_option( 'earliest_date_markers', [] ) );
+		$is_latest_date_marker   = in_array( $event_id, pngx_get_option( 'latest_date_markers', [] ) );
 		if ( $is_earliest_date_marker || $is_latest_date_marker ) {
 			$this->rebuild_known_range();
 
 			return;
 		}
-		$current_min = tribe_events_earliest_date();
-		$current_max = tribe_events_latest_date();
+		$current_min = pngx_events_earliest_date();
+		$current_max = pngx_events_latest_date();
 
-		$event_start = tribe_get_start_date( $event_id, false, Tribe__Date_Utils::DBDATETIMEFORMAT );
-		$event_end   = tribe_get_end_date( $event_id, false, Tribe__Date_Utils::DBDATETIMEFORMAT );
+		$event_start = pngx_get_start_date( $event_id, false, Pngx__Date_Utils::DBDATETIMEFORMAT );
+		$event_end   = pngx_get_end_date( $event_id, false, Pngx__Date_Utils::DBDATETIMEFORMAT );
 
 
 		if ( $current_min > $event_start ) {
 			$this->rebuild_known_range();
-			tribe_update_option( 'earliest_date', $event_start );
+			pngx_update_option( 'earliest_date', $event_start );
 		}
 		if ( $current_max < $event_end ) {
 			$this->rebuild_known_range();
-			tribe_update_option( 'latest_date', $event_end );
+			pngx_update_option( 'latest_date', $event_end );
 		}
 	}
 
 	/**
-	 * Intended to run when the save_post_tribe_events action is fired.
+	 * Intended to run when the save_post_pngx_events action is fired.
 	 *
 	 * At this point we know an event is being updated or created and, if the post is going to
 	 * be visible, we can set up a further action to handle updating our record of the
@@ -151,7 +154,7 @@ class Tribe__Events__Dates__Known_Range {
 			return;
 		}
 
-		add_action( 'tribe_events_update_meta', [ $this, 'update_known_range' ] );
+		add_action( 'pngx_events_update_meta', [ $this, 'update_known_range' ] );
 	}
 
 	/**
@@ -162,7 +165,7 @@ class Tribe__Events__Dates__Known_Range {
 	 * @param $post_id
 	 */
 	public function maybe_rebuild_known_range( $post_id ) {
-		if ( Tribe__Events__Main::POSTTYPE === get_post_type( $post_id ) ) {
+		if ( Pngx__Events__Main::POSTTYPE === get_post_type( $post_id ) ) {
 			add_action( 'deleted_post', [ $this, 'rebuild_known_range' ] );
 		}
 	}

@@ -3,10 +3,10 @@
  * Extends DateTimeImmutable and includes translation capabilities.
  *
  * @since   4.11.0
- * @package Tribe\Utils
+ * @package Pngx\Utils\Dates
  */
 
-namespace Tribe\Utils;
+namespace Pngx\Utilities\Dates;
 
 use DateTimeImmutable;
 
@@ -14,7 +14,7 @@ use DateTimeImmutable;
  * Class Date i18n Immutable
  *
  * @since   4.11.0
- * @package Tribe\Utils
+ * @package Pngx\Utils\Dates
  */
 class Date_I18n_Immutable extends DateTimeImmutable {
 	/**

@@ -1,12 +1,15 @@
 <?php
-
+/**
+ * Timezone utility functions
+ */
+namespace Pngx\Utilities\Dates;
 /**
  * Helpers for handling timezone based event datetimes.
  *
  * In our timezone logic, the term "local" refers to the locality of an event
  * rather than the local WordPress timezone.
  */
-class Tribe__Timezones {
+class Timezones {
 	const SITE_TIMEZONE  = 'site';
 	const EVENT_TIMEZONE = 'event';
 
@@ -39,7 +42,7 @@ class Tribe__Timezones {
 	 * @return mixed
 	 */
 	public static function clear_site_timezone_abbr( $option_val ) {
-		delete_transient( 'tribe_events_wp_timezone_abbr' );
+		delete_transient( 'pngx_events_wp_timezone_abbr' );
 		return $option_val;
 	}
 
@@ -101,7 +104,7 @@ class Tribe__Timezones {
 			$date_time = $date instanceof DateTime
 			             || ( class_exists( 'DateTimeImmutable' ) && $date instanceof DateTimeImmutable )
 				? $date
-				: Tribe__Date_Utils::build_date_object( $date, $timezone_object );
+				: Pngx__Date_Utils::build_date_object( $date, $timezone_object );
 
 			$abbr = $date_time->format( 'T' );
 
@@ -236,11 +239,11 @@ class Tribe__Timezones {
 	public static function mode() {
 		$mode = self::EVENT_TIMEZONE;
 
-		if ( 'site' === tribe_get_option( 'tribe_events_timezone_mode' ) ) {
+		if ( 'site' === pngx_get_option( 'pngx_events_timezone_mode' ) ) {
 			$mode = self::SITE_TIMEZONE;
 		}
 
-		return apply_filters( 'tribe_events_current_display_timezone', $mode );
+		return apply_filters( 'pngx_events_current_display_timezone', $mode );
 	}
 
 	/**
@@ -256,7 +259,7 @@ class Tribe__Timezones {
 	 * @param string $datetime
 	 * @param string $tzstring
 	 * @param string $format The optional format of the resulting date, defaults to
-	 *                      `Tribe__Date_Utils::DBDATETIMEFORMAT`.
+	 *                      `Pngx__Date_Utils::DBDATETIMEFORMAT`.
 	 *
 	 * @return string
 	 */
@@ -272,7 +275,7 @@ class Tribe__Timezones {
 
 		if ( $new_datetime ) {
 			$new_datetime->setTimezone( $utc );
-			$format = ! empty( $format ) ? $format : Tribe__Date_Utils::DBDATETIMEFORMAT;
+			$format = ! empty( $format ) ? $format : Pngx__Date_Utils::DBDATETIMEFORMAT;
 
 			return $new_datetime->format( $format );
 		}
@@ -305,7 +308,7 @@ class Tribe__Timezones {
 		$new_datetime = date_create( $datetime, $utc );
 
 		if ( $new_datetime && $new_datetime->setTimezone( $local ) ) {
-			return $new_datetime->format( Tribe__Date_Utils::DBDATETIMEFORMAT );
+			return $new_datetime->format( Pngx__Date_Utils::DBDATETIMEFORMAT );
 		}
 
 		// Fallback to the unmodified datetime if there was a failure during conversion
@@ -335,7 +338,7 @@ class Tribe__Timezones {
 		try {
 			$timezone_object = new DateTimeZone( $timezone );
 
-			if ( Tribe__Date_Utils::is_timestamp( $date ) ) {
+			if ( Pngx__Date_Utils::is_timestamp( $date ) ) {
 				$date = new DateTime( "@{$date}" );
 			} else {
 				$date = new DateTime( $date );
@@ -360,7 +363,7 @@ class Tribe__Timezones {
 	 * @return string The formatted and converted date.
 	 */
 	public static function convert_date_from_timezone( $date, $from_timezone, $to_timezone, $format ) {
-		if ( ! Tribe__Date_Utils::is_timestamp( $date ) ) {
+		if ( ! Pngx__Date_Utils::is_timestamp( $date ) ) {
 			$from_date = new DateTime( $date, new DateTimeZone( $from_timezone ) );
 			$timestamp = $from_date->format( 'U' );
 		} else {
@@ -486,7 +489,7 @@ class Tribe__Timezones {
 		$offset_datetime = date_create( $datetime );
 
 		if ( $offset_datetime && $offset_datetime->modify( $offset ) ) {
-			return $offset_datetime->format( Tribe__Date_Utils::DBDATETIMEFORMAT );
+			return $offset_datetime->format( Pngx__Date_Utils::DBDATETIMEFORMAT );
 		}
 
 		return $datetime;
@@ -553,7 +556,7 @@ class Tribe__Timezones {
 		try {
 			$local = self::get_timezone( $tzstring );
 
-			$datetime = date_create_from_format( 'U', $unix_timestamp )->format( Tribe__Date_Utils::DBDATETIMEFORMAT );
+			$datetime = date_create_from_format( 'U', $unix_timestamp )->format( Pngx__Date_Utils::DBDATETIMEFORMAT );
 
 			// We prefer format('U') to getTimestamp() here due to our requirement for compatibility with PHP 5.2
 			return date_create_from_format( 'Y-m-d H:i:s', $datetime, $local )->format( 'U' );
@@ -579,8 +582,8 @@ class Tribe__Timezones {
 			return $timezone;
 		}
 
-		/** @var Tribe__Cache $cache */
-		$cache = tribe('cache');
+		/** @var Pngx__Cache $cache */
+		$cache = pngx('cache');
 
 		if ( is_string( $timezone ) && $cached = $cache[ __METHOD__ . $timezone ] ) {
 			return clone $cached;
