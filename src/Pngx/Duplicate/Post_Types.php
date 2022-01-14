@@ -72,20 +72,10 @@ class Post_Types extends \tad_DI52_ServiceProvider {
 			wp_set_object_terms( $new_post_id, $post_terms, $taxonomy, false );
 		}
 
-		// Duplicate Custom Fields
-		$post_meta_infos = $wpdb->get_results( "SELECT meta_key, meta_value FROM $wpdb->postmeta WHERE post_id=$post_id" );
-		if ( count( $post_meta_infos ) != 0 ) {
-			$sql_query = "INSERT INTO $wpdb->postmeta (post_id, meta_key, meta_value) ";
-			foreach ( $post_meta_infos as $meta_info ) {
-				$meta_key = $meta_info->meta_key;
-				if ( $meta_key == '_wp_old_slug' ) {
-					continue;
-				}
-				$meta_value      = addslashes( $meta_info->meta_value );
-				$sql_query_sel[] = "SELECT $new_post_id, '$meta_key', '$meta_value'";
-			}
-			$sql_query .= implode( " UNION ALL ", $sql_query_sel );
-			$wpdb->query( $sql_query );
+		$coupon_post_field_keys = get_post_custom_keys( $post_id );
+		foreach ( $coupon_post_field_keys as $meta_name ) {
+			$meta_value = get_post_meta( $post_id, $meta_name, true );
+			update_post_meta( $new_post_id, $meta_name, $meta_value );
 		}
 
 		/**

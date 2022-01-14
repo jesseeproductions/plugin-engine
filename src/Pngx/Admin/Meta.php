@@ -317,12 +317,29 @@ class Pngx__Admin__Meta {
 	public function save_meta( $post_id, $post ) {
 
 		//Autosave or no past variable then kick out
-		if ( empty( $_POST ) || ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) ) {
+		if (
+			empty( $_POST ) ||
+			(
+				defined( 'DOING_AUTOSAVE' ) &&
+				DOING_AUTOSAVE
+			)
+		) {
+			return;
+		}
+
+		// If no nonce set, then return.
+		if (
+			! isset( $_POST['_inline_edit'] ) &&
+			! isset( $_POST['pngx_nonce'] )
+		) {
 			return;
 		}
 
 		//Check if on the right post type
-		if ( isset( $post->post_type ) && ! in_array( $post->post_type, $this->get_post_types() ) ) {
+		if (
+			isset( $post->post_type ) &&
+			! in_array( $post->post_type, $this->get_post_types() )
+		) {
 			return;
 		}
 
@@ -331,8 +348,20 @@ class Pngx__Admin__Meta {
 			return;
 		}
 
-		//Verify Nonce
-		if ( isset( $_POST['pngx_nonce'] ) && ! wp_verify_nonce( $_POST['pngx_nonce'], 'pngx_save_fields' ) && ( isset( $_POST['_inline_edit'] ) && ! wp_verify_nonce( $_POST['_inline_edit'], 'inlineeditnonce' ) ) ) {
+		// Verify Plugin Nonce.
+		if (
+			! isset( $_POST['_inline_edit'] ) &&
+			isset( $_POST['pngx_nonce'] ) &&
+			! wp_verify_nonce( $_POST['pngx_nonce'], 'pngx_save_fields' )
+		) {
+			return;
+		}
+
+		// Verify Inline Edit Nonce.
+		if (
+			isset( $_POST['_inline_edit'] ) &&
+			! wp_verify_nonce( $_POST['_inline_edit'], 'inlineeditnonce' )
+		) {
 			return;
 		}
 
