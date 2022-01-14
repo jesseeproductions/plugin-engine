@@ -99,7 +99,7 @@ var pngx_admin_fields_init = pngx_admin_fields_init || {};
 		var button_text = pngx_admin.clipboard_btn_text;
 
 		//Prevent Button From Doing Anything Else
-		$( ".pngx-system-info-copy-btn" ).click( function ( e ) {
+		$( ".pngx-system-info-copy-btn" ).on( 'click', function ( e ) {
 			e.preventDefault();
 		} );
 
@@ -158,7 +158,7 @@ function PNGX__Media( $, field_id ) {
 		 * Media Manager 3.5
 		 */
 
-		$( 'button#' + this.field_id ).click( function ( e ) {
+		$( 'button#' + this.field_id ).on( 'click', function ( e ) {
 
 			//Create Media Manager On Click to allow multiple on one Page
 			var img_uploader, attachment;
@@ -219,7 +219,7 @@ function PNGX__Media( $, field_id ) {
 		/*
 		 * Remove Image and replace with default and Erase Image ID
 		 */
-		$( '.pngx-clear-image' ).click( function ( e ) {
+		$( '.pngx-clear-image' ).on( 'click', function ( e ) {
 			e.preventDefault();
 			var remove_input_id = 'input#' + this.id + '.pngx-upload-image';
 			var img_src = 'img#' + this.id + '.pngx-image';
@@ -768,7 +768,7 @@ var pngx_loadScript = pngx_loadScript || {};
 	obj.init = function ( url, arg1, arg2 ) {
 		var cache = false, callback = null;
 		//arg1 and arg2 can be interchangable as either the callback function or the cache bool
-		if ( $.isFunction( arg1 ) ) {
+		if ( typeof arg1 === "function" ) {
 			callback = arg1;
 			cache = arg2 || cache;
 		} else {
@@ -793,7 +793,7 @@ var pngx_loadScript = pngx_loadScript || {};
 			} );
 		} else {
 			//already loaded so just call the callback
-			if ( $.isFunction( callback ) ) {
+			if ( typeof callback === "function" ) {
 				callback.call( this );
 			}
 		}
