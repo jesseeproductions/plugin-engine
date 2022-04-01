@@ -3,6 +3,10 @@
 == Changelog ==
 = 4.0.0 TBD =
 
+= 3.2.2 April 4th, 2022 =
+
+* Fix - Update Di52 to prevent fatal errors with other plugins using it.
+
 = 3.2.1 January 14th, 2021 =
 
 * Fix - Change duplicate feature's meta field copy to improve security.
