@@ -19,6 +19,8 @@ vendor/*
 !vendor/bootstrap-iconpicker/bootstrap-iconpicker/css/*
 !vendor/bootstrap-iconpicker/bootstrap-iconpicker/js/*
 !vendor/bootstrap-iconpicker/bootstrap-iconpicker/js/iconset/*
+!vendor/bootstrap-iconpicker/icon-fonts/font-awesome-4.3.0/css/*
+!vendor/bootstrap-iconpicker/icon-fonts/font-awesome-4.3.0/fonts/*
 !vendor/browser
 !vendor/browser/*
 !vendor/clipboard
