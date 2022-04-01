@@ -11,6 +11,24 @@ class Pngx__Main {
 	const VERSION    = '3.2';
 	const OPTIONS_ID = 'plugin_engine_options';
 
+	/**
+	 * PNGX Schema version key.
+	 *
+	 * @since TBD
+	 *
+	 * @var string
+	 */
+	public static $db_version_key = 'pngx_schema_version';
+
+	/**
+	 * PNGX Schema version.
+	 *
+	 * @since TBD
+	 *
+	 * @var string
+	 */
+	public static $db_version = '320';
+
 	protected $plugin_context;
 	protected $plugin_context_class;
 	public    $doing_ajax = false;
@@ -150,7 +168,7 @@ class Pngx__Main {
 		pngx_singleton( 'pngx.allowed_tags', 'Pngx__Allowed_Tags' );
 		pngx_register( 'pngx.register.cpt', new Pngx__Register_Post_Type() );
 		pngx_register( 'pngx.register.tax', new Pngx__Register_Taxonomy() );
-		pngx_singleton( 'cache', 'Pngx__Cache' );
+		pngx_singleton( 'cache', 'Pngx__Cache', [ 'hook' ] );
 
 		//pngx_register_provider( Pngx\Service_Providers\Tooltip::class );
 		pngx_register_provider( Pngx\Service_Providers\Dialog::class );
@@ -165,6 +183,7 @@ class Pngx__Main {
 
 		//Core Functions
 		require_once $this->plugin_path . 'src/functions/template-tags/general.php';
+		require_once $this->plugin_path . 'src/functions/template-tags/strings.php';
 		require_once $this->plugin_path . 'src/functions/template-tags/html.php';
 		require_once $this->plugin_path . 'src/functions/utils.php';
 
@@ -188,7 +207,7 @@ class Pngx__Main {
 	 * Runs pngx_after_plugins_loaded action, should be hooked to the end of plugins_loaded
 	 */
 	public function pngx_plugins_loaded() {
-
+		pngx( 'cache' );
 		pngx_singleton( 'pngx.feature-detection', 'Pngx__Feature_Detection' );
 		pngx_register_provider( 'Pngx__Service_Providers__Processes' );
 

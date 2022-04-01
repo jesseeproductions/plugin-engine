@@ -937,3 +937,19 @@ if ( ! function_exists( 'pngx_installed_on' ) ) {
 		return 0 === version_compare( $install_version, $version );
 	}
 }
+
+if ( ! function_exists( 'pngx_maybe_define_constant' ) ) {
+	/**
+	 * Define a constant if not defined.
+	 *
+	 * @since TBD
+	 *
+	 * @param string $name  Name of the constant.
+	 * @param mixed  $value A value for the constant.
+	 */
+	function pngx_maybe_define_constant( $name, $value ) {
+		if ( ! defined( $name ) ) {
+			define( $name, $value );
+		}
+	}
+}

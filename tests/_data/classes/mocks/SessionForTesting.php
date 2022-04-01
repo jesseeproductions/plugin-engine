@@ -15,6 +15,26 @@ namespace Pngx\Session;
  *
  * @package Pngx\Session
  */
-class SessionForTesting extends Session {
+class SessionForTesting extends Session_Cookie_Abstract {
 
+	/**
+	 * Hooks and sets up the session.
+	 *
+	 * @since TBD
+	 */
+	public function init() {}
+
+	/**
+	 * Cleanup session data.
+	 *
+	 * @since TBD
+	 */
+	public function cleanup_sessions() {}
+
+	/**
+	 * Return if there is an active session.
+	 *
+	 * @since TBD
+	 */
+	public function has_session() {}
 }
