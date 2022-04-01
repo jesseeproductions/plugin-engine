@@ -15,6 +15,10 @@ tests/_support/_generated
 vendor/*
 !vendor/bootstrap-iconpicker
 !vendor/bootstrap-iconpicker/*
+!vendor/bootstrap-iconpicker/bootstrap-3.2.0/js/*
+!vendor/bootstrap-iconpicker/bootstrap-iconpicker/css/*
+!vendor/bootstrap-iconpicker/bootstrap-iconpicker/js/*
+!vendor/bootstrap-iconpicker/bootstrap-iconpicker/js/iconset/*
 !vendor/browser
 !vendor/browser/*
 !vendor/clipboard
