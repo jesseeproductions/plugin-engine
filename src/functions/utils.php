@@ -613,7 +613,7 @@ if ( ! function_exists( 'pngx_register_rest_route' ) ) {
 	 *
 	 * @return bool True on success, false on error.
 	 */
-	function tribe_register_rest_route( $namespace, $route, $args = [], $override = false ) {
+	function pngx_register_rest_route( $namespace, $route, $args = [], $override = false ) {
 		/**
 		 * Allow plugins to customize REST API arguments and callbacks.
 		 *
@@ -627,7 +627,7 @@ if ( ! function_exists( 'pngx_register_rest_route' ) ) {
 		 * @param array  $args      Either an array of options for the endpoint, or an array of arrays for
 		 *                          multiple methods. Default empty array.
 		 */
-		$args = apply_filters( 'tribe_register_rest_route_args_' . $namespace . $route, $args, $namespace, $route, $override );
+		$args = apply_filters( 'pngx_register_rest_route_args_' . $namespace . $route, $args, $namespace, $route, $override );
 
 		/**
 		 * Allow plugins to customize REST API arguments and callbacks.
@@ -642,26 +642,26 @@ if ( ! function_exists( 'pngx_register_rest_route' ) ) {
 		 * @param array  $args      Either an array of options for the endpoint, or an array of arrays for
 		 *                          multiple methods. Default empty array.
 		 */
-		$args = apply_filters( 'tribe_register_rest_route_args', $args, $namespace, $route, $override );
+		$args = apply_filters( 'pngx_register_rest_route_args', $args, $namespace, $route, $override );
 
 		return register_rest_route( $namespace, $route, $args, $override );
 	}
 }
 
-if ( ! function_exists( 'tribe_get_class_instance' ) ) {
+if ( ! function_exists( 'pngx_get_class_instance' ) ) {
 	/**
 	 * Gets the class instance / Tribe Container from the passed object or string.
 	 *
 	 * @since TBD
 	 *
 	 * @see   \tad_DI52_Container::isBound()
-	 * @see   \tribe()
+	 * @see   \pngx()
 	 *
 	 * @param string|object $class The plugin class' singleton name, class name, or instance.
 	 *
-	 * @return mixed|object|Tribe__Container|null Null if not found, else the result from tribe().
+	 * @return mixed|object|Pngx__Container|null Null if not found, else the result from pngx().
 	 */
-	function tribe_get_class_instance( $class ) {
+	function pngx_get_class_instance( $class ) {
 		if ( is_object( $class ) ) {
 			return $class;
 		}
@@ -682,14 +682,14 @@ if ( ! function_exists( 'tribe_get_class_instance' ) ) {
 		}
 
 		try {
-			return tribe( $class );
+			return pngx( $class );
 		} catch ( \RuntimeException $exception ) {
 			return null;
 		}
 	}
 }
 
-if ( ! function_exists( 'tribe_get_least_version_ever_installed' ) ) {
+if ( ! function_exists( 'pngx_get_least_version_ever_installed' ) ) {
 	/**
 	 * Gets the lowest version number ever installed for the specified class of a plugin having a
 	 * `version_history_slug` property or a `VERSION` constant (i.e. Main classes).
@@ -705,13 +705,13 @@ if ( ! function_exists( 'tribe_get_least_version_ever_installed' ) ) {
 	 *
 	 * @return string|boolean The SemVer version string or false if no info found.
 	 */
-	function tribe_get_least_version_ever_installed( $class ) {
-		$instance = tribe_get_class_instance( $class );
+	function pngx_get_least_version_ever_installed( $class ) {
+		$instance = pngx_get_class_instance( $class );
 
 		if ( $instance ) {
 			// Try for the version history first.
 			if ( ! empty( $instance->version_history_slug ) ) {
-				$history = (array) Tribe__Settings_Manager::get_option( $instance->version_history_slug );
+				$history = (array) Pngx__Settings_Manager::get_option( $instance->version_history_slug );
 
 				// '0' may be logged as a version number, which isn't useful, so we remove it
 				$history = array_filter( $history );
@@ -736,7 +736,7 @@ if ( ! function_exists( 'tribe_get_least_version_ever_installed' ) ) {
 	}
 }
 
-if ( ! function_exists( 'tribe_get_greatest_version_ever_installed' ) ) {
+if ( ! function_exists( 'pngx_get_greatest_version_ever_installed' ) ) {
 	/**
 	 * Gets the highest version number ever installed for the specified class of a plugin having a
 	 * `version_history_slug` property or a `VERSION` constant (i.e. Main classes).
@@ -748,19 +748,19 @@ if ( ! function_exists( 'tribe_get_greatest_version_ever_installed' ) ) {
 	 *
 	 * @since TBD
 	 *
-	 * @see \tribe_get_currently_installed_version() To get the current version, even if it's not the greatest.
+	 * @see \pngx_get_currently_installed_version() To get the current version, even if it's not the greatest.
 	 *
 	 * @param string|object $class The plugin class' singleton name, class name, or instance.
 	 *
 	 * @return string|boolean The SemVer version string or false if no info found.
 	 */
-	function tribe_get_greatest_version_ever_installed( $class ) {
-		$instance = tribe_get_class_instance( $class );
+	function pngx_get_greatest_version_ever_installed( $class ) {
+		$instance = pngx_get_class_instance( $class );
 
 		if ( $instance ) {
 			// Try for the version history first.
 			if ( ! empty( $instance->version_history_slug ) ) {
-				$history = (array) Tribe__Settings_Manager::get_option( $instance->version_history_slug );
+				$history = (array) Pngx__Settings_Manager::get_option( $instance->version_history_slug );
 
 				// '0' may be logged as a version number, which isn't useful, so we remove it
 				$history = array_filter( $history );
@@ -785,7 +785,7 @@ if ( ! function_exists( 'tribe_get_greatest_version_ever_installed' ) ) {
 	}
 }
 
-if ( ! function_exists( 'tribe_get_first_ever_installed_version' ) ) {
+if ( ! function_exists( 'pngx_get_first_ever_installed_version' ) ) {
 	/**
 	 * Gets the initially-recorded version number installed for the specified class of a plugin having a
 	 * `version_history_slug` property or a `VERSION` constant (i.e. Main classes).
@@ -801,13 +801,13 @@ if ( ! function_exists( 'tribe_get_first_ever_installed_version' ) ) {
 	 *
 	 * @return string|boolean The SemVer version string or false if no info found.
 	 */
-	function tribe_get_first_ever_installed_version( $class ) {
-		$instance = tribe_get_class_instance( $class );
+	function pngx_get_first_ever_installed_version( $class ) {
+		$instance = pngx_get_class_instance( $class );
 
 		if ( $instance ) {
 			// Try for the version history first.
 			if ( ! empty( $instance->version_history_slug ) ) {
-				$history = (array) Tribe__Settings_Manager::get_option( $instance->version_history_slug );
+				$history = (array) Pngx__Settings_Manager::get_option( $instance->version_history_slug );
 
 				// '0' may be logged as a version number, which isn't useful, so we remove it
 				while (
@@ -834,7 +834,7 @@ if ( ! function_exists( 'tribe_get_first_ever_installed_version' ) ) {
 	}
 }
 
-if ( ! function_exists( 'tribe_get_currently_installed_version' ) ) {
+if ( ! function_exists( 'pngx_get_currently_installed_version' ) ) {
 	/**
 	 * Gets the current version number installed for the specified class of a plugin having a
 	 * `VERSION` constant (i.e. Main classes)--different logic than related functions.
@@ -844,14 +844,14 @@ if ( ! function_exists( 'tribe_get_currently_installed_version' ) ) {
 	 *
 	 * @since TBD
 	 *
-	 * @see \tribe_get_greatest_version_ever_installed() To get the greatest ever installed, even if not the current.
+	 * @see \pngx_get_greatest_version_ever_installed() To get the greatest ever installed, even if not the current.
 	 *
 	 * @param string|object $class The plugin class' singleton name, class name, or instance.
 	 *
 	 * @return string|boolean The SemVer version string or false if no info found.
 	 */
-	function tribe_get_currently_installed_version( $class ) {
-		$instance = tribe_get_class_instance( $class );
+	function pngx_get_currently_installed_version( $class ) {
+		$instance = pngx_get_class_instance( $class );
 
 		if ( $instance ) {
 			// First try for class constant (different logic from the other similar functions).
@@ -865,7 +865,7 @@ if ( ! function_exists( 'tribe_get_currently_installed_version' ) ) {
 	}
 }
 
-if ( ! function_exists( 'tribe_installed_before' ) ) {
+if ( ! function_exists( 'pngx_installed_before' ) ) {
 	/**
 	 * Checks if a plugin's initially-installed version was prior to the passed version.
 	 * If no info found, it will assume the plugin is old and return true.
@@ -877,8 +877,8 @@ if ( ! function_exists( 'tribe_installed_before' ) ) {
 	 *
 	 * @return boolean Whether the plugin was installed prior to the passed version.
 	 */
-	function tribe_installed_before( $class, $version ) {
-		$install_version = tribe_get_first_ever_installed_version( $class );
+	function pngx_installed_before( $class, $version ) {
+		$install_version = pngx_get_first_ever_installed_version( $class );
 
 		// If no install version, let's assume it's been here a while.
 		if ( empty( $install_version ) ) {
@@ -889,7 +889,7 @@ if ( ! function_exists( 'tribe_installed_before' ) ) {
 	}
 }
 
-if ( ! function_exists( 'tribe_installed_after' ) ) {
+if ( ! function_exists( 'pngx_installed_after' ) ) {
 	/**
 	 * Checks if a plugin's initially-installed version was after the passed version.
 	 * If no info found, it will assume the plugin is old and return false.
@@ -901,8 +901,8 @@ if ( ! function_exists( 'tribe_installed_after' ) ) {
 	 *
 	 * @return boolean Whether the plugin was installed after the passed version.
 	 */
-	function tribe_installed_after( $class, $version ) {
-		$install_version = tribe_get_first_ever_installed_version( $class );
+	function pngx_installed_after( $class, $version ) {
+		$install_version = pngx_get_first_ever_installed_version( $class );
 
 		// If no install version, let's assume it's been here a while.
 		if ( empty( $install_version ) ) {
@@ -913,7 +913,7 @@ if ( ! function_exists( 'tribe_installed_after' ) ) {
 	}
 }
 
-if ( ! function_exists( 'tribe_installed_on' ) ) {
+if ( ! function_exists( 'pngx_installed_on' ) ) {
 	/**
 	 * Checks if a plugin was installed at/on the passed version.
 	 * If no info found, it will assume the plugin is old and return false.
@@ -925,8 +925,8 @@ if ( ! function_exists( 'tribe_installed_on' ) ) {
 	 *
 	 * @return boolean Whether the plugin was installed at/on the passed version.
 	 */
-	function tribe_installed_on( $class, $version ) {
-		$install_version = tribe_get_first_ever_installed_version( $class );
+	function pngx_installed_on( $class, $version ) {
+		$install_version = pngx_get_first_ever_installed_version( $class );
 
 		// If no install version, let's assume it's been here a while.
 		if ( empty( $install_version ) ) {

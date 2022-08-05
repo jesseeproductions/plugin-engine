@@ -3,7 +3,7 @@
 /**
  * Class Pngx__Context
  *
- * Based off Modern Tribe's Tribe__Context
+ * Based off Modern Tribe's Pngx__Context
  *
  * @since 3.0
  *

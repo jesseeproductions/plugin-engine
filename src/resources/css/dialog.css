@@ -12,15 +12,15 @@ This can include modals, toasters, confirms. alerts.
 /* vars */
 .pngx-dialog {
   --pngx-dialog-background-color: #FFF;
-  --pngx-dialog-close-background: #FFF;
-  --pngx-dialog-close-border-color: #BABABA;
-  --pngx-dialog-close-border-width: 1px;
-  --pngx-dialog-close-color: #BABABA;
-  --pngx-dialog-close-height: .75rem;
-  --pngx-dialog-close-height-desktop: 1rem;
+  --pngx-dialog-close-background: none;
+  --pngx-dialog-close-border-color: none;
+  --pngx-dialog-close-border-width: 0px;
+  --pngx-dialog-close-color: #000;
+  --pngx-dialog-close-height: 36px;
+  --pngx-dialog-close-height-desktop: 36px;
   --pngx-dialog-overlay-color: transparent;
-  --pngx-modal-overlay-color: rgba(20,24,39,0.9);
-  --pngx-dialog-border-radius: .25rem;
+  --pngx-modal-overlay-color: rgba(255,255,255,0.9);
+  --pngx-dialog-border-radius: 0;
   --pngx-dialog-padding: 1rem;
   --pngx-dialog-padding-top: 1.5rem;
   --pngx-dialog-padding-side: 1.75rem; }
@@ -117,7 +117,7 @@ This can include modals, toasters, confirms. alerts.
   color: #141827;
   font-size: 14px;
   line-height: 1.64em;
-  padding-right: calc(var(--pngx-dialog-close-height) + 0.5em);
+  padding-right: 0;
   padding-top: calc(var(--pngx-dialog-close-height) + 0.5em);
   width: 100%; }
 
