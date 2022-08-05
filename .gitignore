@@ -13,6 +13,8 @@ tests/_support/_generated
 
 # by default ignore all, need a vendor dep in the repo? use !vendor/acme
 vendor/*
+!vendor/A11yTabInterface
+!vendor/A11yTabInterface/*
 !vendor/bootstrap-iconpicker
 !vendor/bootstrap-iconpicker/*
 !vendor/browser
