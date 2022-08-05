@@ -155,6 +155,7 @@ class Pngx__Main {
 		//pngx_register_provider( Pngx\Service_Providers\Tooltip::class );
 		pngx_register_provider( Pngx\Service_Providers\Dialog::class );
 		pngx_register_provider( Pngx\Service_Providers\Carousel::class );
+		pngx_register_provider( Pngx\Service_Providers\Tabs::class );
 	}
 
 	/**
