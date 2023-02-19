@@ -66,9 +66,9 @@ class Pngx__Register_Taxonomy {
 			'show_in_nav_menus'     => false,
 			'show_ui'               => true,
 			'show_tagcloud'         => false,
-			'show_admin_column'     => false,
+			'show_admin_column'     => true,
 			'hierarchical'          => true,
-			'rewrite'               => array( 'slug' => $slug, 'with_front' => true ),
+			'rewrite'               => [ 'slug' => $slug, 'with_front' => true ],
 			'query_var'             => true,
 			'show_in_rest'          => true,
 			'rest_base'             => $taxonomy,
@@ -83,8 +83,7 @@ class Pngx__Register_Taxonomy {
 		 */
 		$args = apply_filters( 'pngx_register_' . $taxonomy . '_taxonomy_args', $args );
 
-		register_taxonomy( $taxonomy, array( $post_types ), $args );
-
+		register_taxonomy( $taxonomy, $post_types, $args );
 	}
 
 }

@@ -151,6 +151,9 @@ class Pngx__Main {
 		pngx_singleton( 'pngx.admin.assets', 'Pngx__Admin__Assets' );
 		pngx_singleton( 'pngx.logger', 'Pngx__Log' );
 		pngx_singleton( 'pngx.allowed_tags', 'Pngx__Allowed_Tags' );
+		pngx_register( 'pngx.register.cpt', new Pngx__Register_Post_Type() );
+		pngx_register( 'pngx.register.tax', new Pngx__Register_Taxonomy() );
+		pngx_singleton( 'cache', 'Pngx__Cache' );
 
 		//pngx_register_provider( Pngx\Service_Providers\Tooltip::class );
 		pngx_register_provider( Pngx\Service_Providers\Dialog::class );

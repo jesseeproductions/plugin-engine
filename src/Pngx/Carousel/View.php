@@ -2,12 +2,14 @@
 
 namespace Pngx\Carousel;
 
+use Pngx\Template;
+
 /**
  * Class View
  *
  * @since TBD
  */
-class View extends \Pngx__Template {
+class View extends Template {
 
 	/**
 	 * Where in the themes we will look for templates.
