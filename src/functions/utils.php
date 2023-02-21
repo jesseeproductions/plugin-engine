@@ -940,3 +940,20 @@ if ( ! function_exists( 'pngx_installed_on' ) ) {
 		return 0 === version_compare( $install_version, $version );
 	}
 }
+
+if ( ! function_exists( 'pngx_maybe_get' ) ) {
+	/*
+	*  Maybe get a var if it exists in an array.
+	 * Based on acf_maybe_get - advanced-custom-fields-pro/includes/api/api-helpers.php
+	*
+	*  @since   3.1.0
+	*
+	*  @param   $array (array) the array to look within
+	*  @param   $key (key) the array key to look for. Nested values may be found using '/'
+	*  @param   $default (mixed) the value returned if not found
+	*  @return  $post_id (int)
+	*/
+	function pngx_maybe_get( $array = [], $key = 0, $default = null ) {
+		return isset( $array[ $key ] ) ? $array[ $key ] : $default;
+	}
+}
