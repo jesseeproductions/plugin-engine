@@ -100,7 +100,7 @@ class View extends Template {
 
 		$args = wp_parse_args( $args, $default_args );
 
-		$this->render_carousel( $content, $args, $id, $echo );
+		return $this->render_carousel( $content, $args, $id, $echo );
 	}
 
 	/**

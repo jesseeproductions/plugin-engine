@@ -185,6 +185,8 @@ class Pngx__Main {
 
 		add_action( 'plugins_loaded', array( 'Pngx__Admin__Notices', 'instance' ), 1 );
 		add_action( 'plugins_loaded', array( $this, 'pngx_plugins_loaded' ), PHP_INT_MAX );
+		add_action( 'plugins_loaded', [ 'Pngx__Cache_Listener', 'instance' ] );
+		add_action( 'plugins_loaded', [ 'Pngx__Cache', 'setup' ] );
 	}
 
 	/**
@@ -248,7 +250,7 @@ class Pngx__Main {
 	 */
 	public static function get_post_types() {
 		// we default the post type array to empty in plugin engine. Plugins like TEC add to it
-		return apply_filters( 'pngx_post_types', array() );
+		return apply_filters( 'pngx_post_types', [] );
 
 	}
 
