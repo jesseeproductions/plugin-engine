@@ -124,7 +124,7 @@ class View extends Template {
 	 */
 	private function build_carousel( $content, $id, $args ) {
 		$default_args = [
-			'template'        => 'carousel',
+			'template'        => 'carousel-slider',
 			'wrapper_classes' => 'carousel',
 
 			// Carousel script options.
