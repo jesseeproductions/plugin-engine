@@ -816,3 +816,120 @@ String.prototype.className = function () {
 
 	return this.replace( '.', '' );
 };
+
+/**
+ * File Upload Object
+ * @type {{}}
+ */
+/**
+ *
+ * @param $
+ * @param field_id
+ * @param upload_title
+ * @param button_text
+ * @constructor
+ */
+function PNGX__File( $, field_id ) {
+
+	this.field_id = field_id;
+	upload_title = 'Choose CSV';
+	button_text = 'Use CSV';
+
+	this.init = function() {
+		this.upload();
+		this.clear();
+	};
+
+
+	this.upload = function() {
+
+		/*
+		 * Media Manager 3.5
+		 */
+		$( 'button#' + this.field_id ).on( 'click', function( e ) {
+
+			//Create Media Manager On Click to allow multiple on one Page
+			var file_uploader, attachment;
+
+			e.preventDefault();
+
+			field_data = $( this ).data();
+
+			if ( "undefined" !== typeof field_data ) {
+				upload_title = field_data.toggleUpload_title;
+				button_text = field_data.toggleButton_text;
+			}
+
+			//Setup the Variables based on the Button Clicked to enable multiple
+			var file_input_id = '#' + this.id + '.pngx-upload-file';
+			var file_name = 'div#' + this.id + '.pngx-file-upload-name';
+
+			//If the uploader object has already been created, reopen the dialog
+			if ( file_uploader ) {
+				file_uploader.open();
+				return;
+			}
+
+			//Extend the wp.media object
+			file_uploader = wp.media.frames.file_frame = wp.media( {
+				title: upload_title,
+				button: {
+					text: button_text
+				},
+				multiple: false,
+				library: {
+					type: 'text/csv',
+				},
+			} );
+
+			//When a file is selected, grab the URL and set it as the text field's value
+			file_uploader.on( 'select', function() {
+				attachment = file_uploader.state().get( 'selection' ).first().toJSON();
+				//Set the Field with the file id.
+				$( file_input_id ).val( attachment.id );
+				//Set the file name.
+				$( file_name ).find( 'span' ).text( attachment.filename );
+				//Trigger New File Uploaded
+				$( 'input#' + this.field_id ).trigger( 'display' );
+			} );
+
+			//Open the uploader dialog
+			file_uploader.open();
+
+		} );
+
+	};
+
+	this.clear = function() {
+
+		/*
+		 * Remove File and replace with default and Erase Image ID
+		 */
+		$( '.pngx-clear-file' ).on( 'click', function( e ) {
+			e.preventDefault();
+			var remove_input_id = 'input#' + this.id + '.pngx-upload-image';
+			var file_name = $( 'div#' + this.id + '.pngx-file-upload-name' );
+
+			$( remove_input_id ).val( '' );
+			file_name.find( 'span' ).text( '' );
+			$( 'input#' + this.field_id ).trigger( 'display' );
+		} );
+
+	};
+
+
+	this.init()
+
+}
+
+/**
+ * Scan for File Upload Fields and Setup Upload Script
+ */
+(function( $ ) {
+	var file_upload = $( ".pngx-upload-file" );
+	var selector_file;
+	for ( i = 0; i < file_upload.length; i++ ) {
+		selector_file = $( file_upload[i] ).attr( 'id' );
+		new PNGX__File( $, selector_file );
+	}
+})( jQuery );

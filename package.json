@@ -12,7 +12,7 @@
   "devDependencies": {
     "archiver": "^0.10.1",
     "glob": "~4.0.5",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.2",
     "product-taskmaster": "git+https://github.com/jesseeproductions/coupon-product-taskmaster.git",
     "require-dir": "^0.3.0"
   }

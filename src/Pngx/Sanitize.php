@@ -351,6 +351,17 @@ class Pngx__Sanitize {
 	}
 
 	/**
+	 * File ID Sanitize
+	 *
+	 * @return string
+	 */
+	private function sanitize_file() {
+
+		return $this->sanitize_absint();
+
+	}
+
+	/**
 	 * Image ID Sanitize
 	 *
 	 * @return string
