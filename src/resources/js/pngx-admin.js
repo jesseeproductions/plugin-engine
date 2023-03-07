@@ -509,6 +509,10 @@ var pngx_fields_toggle = pngx_fields_toggle || {};
 		if ( 'image' == obj.type[id] ) {
 			obj.img_change( id );
 		}
+
+		if ( 'file' == obj.type[id] ) {
+			obj.file_change( id );
+		}
 	};
 
 	obj.toggle = function ( id, field_value ) {
@@ -650,6 +654,24 @@ var pngx_fields_toggle = pngx_fields_toggle || {};
 		} );
 
 		$( document ).on( "click", ".pngx-clear-image", function () {
+			obj.toggle(
+				id,
+				$( this ).val()
+			);
+		} );
+
+	};
+
+	obj.file_change = function ( id ) {
+
+		$( document ).on( 'display', obj.field[id], function () {
+			obj.toggle(
+				id,
+				$( this ).val()
+			);
+		} );
+
+		$( document ).on( "click", ".pngx-clear-file", function () {
 			obj.toggle(
 				id,
 				$( this ).val()
@@ -903,11 +925,11 @@ function PNGX__File( $, field_id ) {
 	this.clear = function() {
 
 		/*
-		 * Remove File and replace with default and Erase Image ID
+		 * Remove File and replace with default and Erase File ID
 		 */
 		$( '.pngx-clear-file' ).on( 'click', function( e ) {
 			e.preventDefault();
-			var remove_input_id = 'input#' + this.id + '.pngx-upload-image';
+			var remove_input_id = 'input#' + this.id + '.pngx-upload-file';
 			var file_name = $( 'div#' + this.id + '.pngx-file-upload-name' );
 
 			$( remove_input_id ).val( '' );

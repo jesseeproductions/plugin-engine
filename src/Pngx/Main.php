@@ -145,17 +145,16 @@ class Pngx__Main {
 	 * Load all the required library files.
 	 */
 	protected function loadLibraries() {
-
 		//Core Functions
 		require_once $this->plugin_path . 'src/functions/template-tags/general.php';
-
+		require_once $this->plugin_path . 'src/functions/template-tags/html.php';
+		require_once $this->plugin_path . 'src/functions/utils.php';
 	}
 
 	/**
 	 * Adds core hooks
 	 */
 	public function add_hooks() {
-
 		//Load Admin Class if in Admin Section
 		if ( is_admin() ) {
 			new Pngx__Admin__Main();

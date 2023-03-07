@@ -1,4 +1,5 @@
 <?php
+
 namespace Pngx\Iterator;
 
 use Iterator;
@@ -39,14 +40,37 @@ class Lazy_CSV_Iterator implements Iterator {
 	 */
 	private $file;
 
+	/**
+	 * The csv file path.
+	 *
+	 * @since 3.3.0
+	 *
+	 * @var string
+	 */
+	public $file_path;
+
 	/*
 	 * Constructor of Lazy_CSV_Iterator.
 	 *
 	 * @since 3.3.0
 	 *
+	 * @param string $filePath The file path string.
+	 * @param string $delimiter The delimited of the csv file.
+	 * @param string $enclosure The enclosure of a field.
+	 * @param string $escape The escaping of data.
 	 */
-	public function __construct( string $filePath ) {
-		$this->file = new SplFileObject( $filePath );
+	public function __construct( $file_path, $delimiter = ',', $enclosure = '"', $escape = '\\' ) {
+		$this->file_path = $file_path;
+
+		$this->file = new \SplFileObject( $this->file_path, 'r' );
+		$this->file->setFlags(
+		      \SplFileObject::READ_CSV
+		      | \SplFileObject::READ_AHEAD
+		      | \SplFileObject::SKIP_EMPTY
+		      | \SplFileObject::DROP_NEW_LINE
+	    );
+
+		$this->file->setCsvControl($delimiter, $enclosure, $escape);
 	}
 
 	/**
@@ -66,7 +90,7 @@ class Lazy_CSV_Iterator implements Iterator {
 	 * @since 3.3.0
 	 */
 	public function next() {
-		$this->line = $this->file->fgets();
+		$this->line = $this->file->fgetcsv();
 		$this->pointer ++;
 	}
 
@@ -93,6 +117,6 @@ class Lazy_CSV_Iterator implements Iterator {
 	public function rewind() {
 		$this->pointer = 0;
 		$this->file->seek( 0 );
-		$this->line = $this->file->fgets();
+		$this->line = $this->file->fgetcsv();
 	}
 }

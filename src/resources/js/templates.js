@@ -47,6 +47,14 @@ jQuery( function ( $ ) {
 						new PNGX__Media( $, selector_img );
 					}
 
+					// Init File Fields
+					var file_upload = $( $ajax_field + ' .pngx-upload-file' );
+					var selector_file;
+					for ( i = 0; i < file_upload.length; i++ ) {
+						selector_file = $( file_upload[i] ).attr( 'id' );
+						new PNGX__File( $, selector_file );
+					}
+
 					// Init Color Pickers
 					$( $ajax_field + ' .pngx-color-picker' ).wpColorPicker();
 
