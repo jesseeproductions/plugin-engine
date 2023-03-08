@@ -59,18 +59,13 @@ var pngx_admin_fields_init = pngx_admin_fields_init || {};
 	/*
 	 * Visual Editor
 	 */
-	obj.visual_editor = function () {
-
+	obj.visual_editor = function ( context ) {
 		var editors = document.getElementsByClassName( "pngx-ajax-wp-editor" );
 		var selector;
 		for ( var i = 0; i < editors.length; i++ ) {
-
 			selector = '#' + editors[i].id;
-
-			$( selector ).wp_editor( false, editors[i].id, false );
-
+			$( selector ).wp_editor( false, editors[i].id, false, context );
 		}
-
 	};
 
 	/*

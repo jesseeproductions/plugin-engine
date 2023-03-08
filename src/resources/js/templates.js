@@ -37,7 +37,7 @@ jQuery( function ( $ ) {
 					$( $ajax_field ).html( JSON.parse( results.data ) );
 
 					// Init Visual Editors
-					pngx_admin_fields_init.visual_editor();
+					pngx_admin_fields_init.visual_editor( 'ajax' );
 
 					// Init Image Fields
 					var image_upload = $( $ajax_field + ' .pngx-upload-image' );

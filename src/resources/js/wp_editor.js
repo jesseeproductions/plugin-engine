@@ -33,8 +33,7 @@
 
 (function ( $, window ) {
 
-	$.fn.wp_editor = function ( options, uni_key, reduced ) {
-
+	$.fn.wp_editor = function ( options, uni_key, reduced, context ) {
 		if ( !$( this ).is( 'textarea' ) ) {
 			console.warn( 'Element must be a textarea' );
 		}
@@ -50,9 +49,7 @@
 		// Set Variables
 		var default_options = {};
 		var pngx_options = get_defaults( pngx_editor_vars.includes_url, uni_key, pngx_editor_vars.visual_editor_buttons, reduced );
-
 		id_regexp = new RegExp( uni_key, 'g' );
-
 		if ( tinyMCEPreInit.mceInit[uni_key] ) {
 			default_options.mceInit = tinyMCEPreInit.mceInit[uni_key];
 		}
@@ -77,13 +74,14 @@
 					var current_id = $( this ).attr( 'id' );
 
 					$.each( options.mceInit, function ( key, value ) {
-						if ( $.type( value ) == 'string' )
+						if ( typeof value === 'string' )
 							options.mceInit[key] = value.replace( id_regexp, current_id );
 					} );
 					options.mode = options.mode == 'tmce' ? 'tmce' : 'html';
 
 					//if tiny mce exists for id, remove it to reinit
-					if ( typeof tinyMCEPreInit.mceInit[current_id] !== 'undefined' ) {
+					// Only run on ajax getting of templates as initial load causes the first editor to have no buttons.
+					if ( typeof tinyMCEPreInit.mceInit[current_id] !== 'undefined' && context === 'ajax' ) {
 						tinyMCE.remove( tinymce.editors[current_id] );
 					}
 
@@ -131,7 +129,6 @@
 
 					$( self ).before( wrap );
 					$( self ).remove();
-
 
 					set_code_editor( uni_key );
 
