@@ -67,11 +67,11 @@ jQuery( function ( $ ) {
 
 				}
 
-				$document.trigger( 'pngx.dependencies-run' );
-				$document.trigger( 'pngx.bumpdown-run' );
+				setTimeout(function(){
+					$document.trigger( 'pngx.dependencies-run' );
+					$document.trigger( 'pngx.bumpdown-run' );
+				}, 100);
 			}
 		} );
-
 	} );
-
 } );

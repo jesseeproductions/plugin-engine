@@ -228,14 +228,34 @@
         }
     };
 
+	/**
+	 * Clear the dependencies on loading of the templates.
+	 *
+	 * @since 3.3.0
+	 *
+	 * @param event
+	 */
+	obj.clear_dependencies = function ( event ) {
+
+     // Fetch all dependents
+     var $dependents = $( selectors.dependencyVerified );
+
+     if ( $dependents.length ) {
+	     $dependents.each( function( k, dependent ) {
+		     $dependents.removeClass( selectors.dependencyVerified.className() );
+	     });
+     }
+    };
+
     // Configure on Document ready for the default trigger
     $document.ready( obj.run );
 
     /**
      * Listen on async recurent elements.
      *
-     * @since 4.7.7
+     * @since 3.3.0
      */
+    $document.on( 'pngx.dependencies-run', obj.clear_dependencies );
     $document.on( 'pngx.dependencies-run', obj.run );
 
     // Configure on Window Load again
