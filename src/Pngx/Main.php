@@ -24,6 +24,16 @@ class Pngx__Main {
 	public $vendor_path;
 	public $vendor_url;
 
+
+	/**
+	 * The slug that will be used to identify HTTP requests common should handle.
+	 *
+	 * @since 3.3.0
+	 *
+	 * @var string
+	 */
+	public static $request_slug = 'pngx_request';
+
 	/**
 	 * Static Singleton Holder
 	 * @var self
