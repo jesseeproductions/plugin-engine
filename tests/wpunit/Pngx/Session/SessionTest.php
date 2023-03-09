@@ -13,7 +13,7 @@ if ( ! class_exists( '\\SessionForTesting' ) ) {
  *
  * @group   core
  *
- * @package Cctor__Coupon__Main
+ * @package Pngx\Session
  */
 class SessionTest extends \Codeception\TestCase\WPTestCase {
 
@@ -155,9 +155,8 @@ class SessionTest extends \Codeception\TestCase\WPTestCase {
 		}
 	}
 
-	//todo - setup uninstall scripts
-
 	// todo add install checks for database
+	//todo - setup uninstall scripts
 	// todo test get_cache_prefix - cache system needs to be setup does woocommerce have caching tests?
 	// todo test get_user_id
 	// todo test saving dnd get_session_data
