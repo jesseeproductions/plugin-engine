@@ -155,8 +155,6 @@ class SessionTest extends \Codeception\TestCase\WPTestCase {
 		}
 	}
 
-	//todo - setup uninstall scripts
-
 	// todo add install checks for database
 	// todo test get_cache_prefix - cache system needs to be setup does woocommerce have caching tests?
 	// todo test get_user_id
