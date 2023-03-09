@@ -254,7 +254,7 @@ if ( ! function_exists( 'pngx_setcookie' ) ) {
 	 *
 	 * Based off WooCommerce's wc_setcookie();
 	 *
-	 * @since TBD
+	 * @since 3.2.0
 	 *
 	 * @param string  $name     Name of the cookie being set.
 	 * @param string  $value    Value of the cookie.

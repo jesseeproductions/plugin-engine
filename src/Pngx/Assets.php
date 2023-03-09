@@ -407,12 +407,11 @@ class Pngx__Assets {
 		$asset->file        = $file;
 		$asset->deps        = $deps;
 		$asset->action      = $action;
-		$asset->origin_path = trailingslashit( ! empty( $origin->plugin_path ) ? $origin->plugin_path : $origin->pluginPath );
+		$asset->origin_path = trailingslashit( $origin->plugin_path );
 		$asset->origin_name = $origin_name;
 
 		// Origin URL might throw notices so we double check
 		$asset->origin_url  = ! empty( $origin->plugin_url ) ? $origin->plugin_url : null;
-		$asset->origin_url  = ! empty( $origin->pluginUrl ) ? $origin->pluginUrl : null;
 		if ( ! empty( $asset->origin_url ) ) {
 			$asset->origin_url = trailingslashit( $asset->origin_url );
 		}

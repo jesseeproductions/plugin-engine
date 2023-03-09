@@ -6,7 +6,7 @@ namespace Pngx\Service_Providers;
  *
  * Based off Modern Tribe's Tribe\Service_Providers\Tooltip
  *
- * @since TBD
+ * @since 3.2.0
  *
  * Handles the registration and creation of our async process handlers.
  */
@@ -15,7 +15,7 @@ class Tooltip extends \tad_DI52_ServiceProvider {
 	/**
 	 * Binds and sets up implementations.
 	 *
-	 * @since TBD
+	 * @since 3.2.0
 	 */
 	public function register() {
 		pngx_singleton( 'tooltip.view', '\Tribe\Tooltip\View' );
@@ -26,7 +26,7 @@ class Tooltip extends \tad_DI52_ServiceProvider {
 	/**
 	 * Setup hooks for classes.
 	 *
-	 * @since TBD
+	 * @since 3.2.0
 	 */
 	private function hook() {
 		add_action( 'pngx_common_loaded', [ $this, 'add_tooltip_assets' ] );
@@ -35,7 +35,7 @@ class Tooltip extends \tad_DI52_ServiceProvider {
 	/**
 	 * Register assets associated with tooltip
 	 *
-	 * @since TBD
+	 * @since 3.2.0
 	 */
 	public function add_tooltip_assets() {
 		$main = \Pngx__Main::instance();

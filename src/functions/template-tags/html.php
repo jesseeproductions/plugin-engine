@@ -8,7 +8,7 @@ use Pngx\Utils\Element_Attributes;
 /**
  * Parse input values into a valid array of classes to be used in the templates.
  *
- * @since TBD
+ * @since 3.2.0
  *
  * @param  mixed $classes,... unlimited Any amount of params to be rendered as classes.
  *
@@ -22,7 +22,7 @@ function pngx_get_classes() {
 /**
  * Parse input values into a valid array of attributes to be used in the templates.
  *
- * @since  TBD
+ * @since  3.2.0
  *
  * @param  mixed $attributes,... unlimited Any amount of params to be rendered as attributes.
  *
@@ -36,7 +36,7 @@ function pngx_get_attributes() {
 /**
  * Parse input values into a valid html attributes to be used in the templates.
  *
- * @since  TBD
+ * @since  3.2.0
  *
  * @param  mixed $attributes,... unlimited Any amount of params to be rendered as attributes.
  *
@@ -50,7 +50,7 @@ function pngx_attributes() {
 /**
  * Parses input values into a valid class html attribute to be used in the templates.
  *
- * @since TBD
+ * @since 3.2.0
  *
  * @param  mixed $classes,... unlimited Any amount of params to be rendered as classes.
  *
@@ -64,7 +64,7 @@ function pngx_classes() {
 /**
  * Get attributes for required fields.
  *
- * @since TBD
+ * @since 3.2.0
  *
  * @param boolean $required If the field is required.
  * @param boolean $echo     Whether to echo the string or return it.
@@ -86,7 +86,7 @@ function pngx_required( $required, $echo = true ) {
 /**
  * Get string for required field labels.
  *
- * @since TBD
+ * @since 3.2.0
  *
  * @param boolean $required If the field is required.
  * @param boolean $echo     Whether to echo the string or return it.
@@ -110,7 +110,7 @@ function pngx_required_label( $required, $echo = true ) {
 /**
  * Get attributes for disabled fields.
  *
- * @since TBD
+ * @since 3.2.0
  *
  * @param boolean $disabled If the field is disabled.
  * @param boolean $echo     Whether to echo the string or return it.

@@ -92,7 +92,7 @@ class Pngx__Admin__Options {
 		/**
 		 * Before Validate Settings
 		 *
-		 * @since TBD
+		 * @since 3.2.0
 		 *
 		 * @param array $input An array of inputs being validated and saved
 		 */
@@ -301,7 +301,7 @@ class Pngx__Admin__Options {
 				/**
 				 * Filter the Validation Input for Each Field Option.
 				 *
-				 * @since TBD
+				 * @since 3.2.0
 				 *
 				 * @param array  $input  An array of inputs being saved.
 				 * @param string $id     The ID for the option field.

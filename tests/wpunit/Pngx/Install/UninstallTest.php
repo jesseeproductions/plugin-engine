@@ -11,7 +11,7 @@ use Pngx\Tests\Traits\With_Uopz;
  *
  * @package Pngx\Install
  */
-class SetupTest extends \Codeception\TestCase\WPTestCase {
+class UninstallTest extends \Codeception\TestCase\WPTestCase {
 
 	use With_Uopz;
 

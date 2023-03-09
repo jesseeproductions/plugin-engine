@@ -44,7 +44,7 @@ class Pngx__Cron_20 {
 	/**
 	 * Register every 5 minute cron.
 	 *
-	 * @since TBD
+	 * @since 3.2.0
 	 *
 	 * @param $schedules
 	 *

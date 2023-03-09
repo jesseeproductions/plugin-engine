@@ -6,7 +6,7 @@ abstract class Pngx__Blocks__Abstract implements Pngx__Blocks__Interface {
 	/**
 	 * Namespace for Blocks from pngx
 	 *
-	 * @since  TBD
+	 * @since  3.2.0
 	 *
 	 * @var string
 	 */
@@ -15,7 +15,7 @@ abstract class Pngx__Blocks__Abstract implements Pngx__Blocks__Interface {
 	/**
 	 * Builds the name of the Block
 	 *
-	 * @since  TBD
+	 * @since  3.2.0
 	 *
 	 * @return string
 	 */
@@ -26,7 +26,7 @@ abstract class Pngx__Blocks__Abstract implements Pngx__Blocks__Interface {
 	/*
 	 * Return the block attributes
 	 *
-	 * @since  TBD
+	 * @since  3.2.0
 	 *
 	 * @param  array $attributes
 	 *
@@ -54,7 +54,7 @@ abstract class Pngx__Blocks__Abstract implements Pngx__Blocks__Interface {
 	/*
 	 * Return the block default attributes
 	 *
-	 * @since  TBD
+	 * @since  3.2.0
 	 *
 	 * @param  array $attributes
 	 *
@@ -78,7 +78,7 @@ abstract class Pngx__Blocks__Abstract implements Pngx__Blocks__Interface {
 	/**
 	 * Since we are dealing with a Dynamic type of Block we need a PHP method to render it
 	 *
-	 * @since  TBD
+	 * @since  3.2.0
 	 *
 	 * @param  array $attributes
 	 *
@@ -97,7 +97,7 @@ abstract class Pngx__Blocks__Abstract implements Pngx__Blocks__Interface {
 	/**
 	 * Sends a valid JSON response to the AJAX request for the block contents
 	 *
-	 * @since  TBD
+	 * @since  3.2.0
 	 *
 	 * @return void
 	 */
@@ -108,7 +108,7 @@ abstract class Pngx__Blocks__Abstract implements Pngx__Blocks__Interface {
 	/**
 	 * Fetches which ever is the plugin we are dealing with
 	 *
-	 * @since  TBD
+	 * @since  3.2.0
 	 *
 	 * @return mixed
 	 */
@@ -120,7 +120,7 @@ abstract class Pngx__Blocks__Abstract implements Pngx__Blocks__Interface {
 	 * Does the registration for PHP rendering for the Block, important due to been
 	 * an dynamic Block
 	 *
-	 * @since  TBD
+	 * @since  3.2.0
 	 *
 	 * @return void
 	 */
@@ -140,7 +140,7 @@ abstract class Pngx__Blocks__Abstract implements Pngx__Blocks__Interface {
 	 * Fetches the name for the block we are working with and converts it to the
 	 * correct `wp_ajax_{$action}` string for us to Hook
 	 *
-	 * @since  TBD
+	 * @since  3.2.0
 	 *
 	 * @return string
 	 */
@@ -151,7 +151,7 @@ abstract class Pngx__Blocks__Abstract implements Pngx__Blocks__Interface {
 	/**
 	 * Used to include any Assets for the Block we are registering
 	 *
-	 * @since  TBD
+	 * @since  3.2.0
 	 *
 	 * @return void
 	 */

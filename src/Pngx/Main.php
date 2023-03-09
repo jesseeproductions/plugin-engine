@@ -1,9 +1,4 @@
 <?php
-if ( class_exists( 'Pngx__Main' ) ) {
-	return;
-}
-
-
 /**
  * Main Plugin Engine class.
  */
@@ -15,7 +10,7 @@ class Pngx__Main {
 	/**
 	 * PNGX Schema version key.
 	 *
-	 * @since TBD
+	 * @since 3.2.0
 	 *
 	 * @var string
 	 */
@@ -24,11 +19,11 @@ class Pngx__Main {
 	/**
 	 * PNGX Schema version.
 	 *
-	 * @since TBD
+	 * @since 3.2.0
 	 *
 	 * @var string
 	 */
-	public static $db_version = '320';
+	public static $db_version = '400';
 
 	protected $plugin_context;
 	protected $plugin_context_class;
@@ -62,7 +57,6 @@ class Pngx__Main {
 	 * constructor
 	 */
 	public function __construct( $context = null ) {
-
 		if ( self::$instance ) {
 			return;
 		}
@@ -194,6 +188,7 @@ class Pngx__Main {
 		pngx_register_provider( Pngx\Service_Providers\Dialog::class );
 		pngx_register_provider( Pngx\Service_Providers\Carousel::class );
 		pngx_register_provider( Pngx\Duplicate\Post_Types::class );
+		pngx_register_provider( Pngx\Service_Providers\Updates::class );
 	}
 
 	/**
@@ -232,7 +227,7 @@ class Pngx__Main {
 		/**
 		 * Runs after all plugins including Pngx ones have loaded
 		 *
-		 * @since TBD
+		 * @since 3.2.0
 		 */
 		do_action( 'pngx_after_plugins_loaded' );
 	}

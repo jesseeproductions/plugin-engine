@@ -2,7 +2,7 @@
 /**
  * Class Session
  *
- * @since   TBD
+ * @since   4.0.0
  *
  * @package Pngx\Session
  */
@@ -17,7 +17,7 @@ use Pngx__Cache;
  * Based off WooCommerce's WC_Session_Handler.
  *
  *
- * @since   TBD
+ * @since   4.0.0
  *
  * @package Pngx\Session
  */
@@ -26,7 +26,7 @@ abstract class Session_Abstract implements Session_Interface {
 	/**
 	 * Cache Name
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 *
 	 * @var string The cache name.
 	 */
@@ -35,7 +35,7 @@ abstract class Session_Abstract implements Session_Interface {
 	/**
 	 * Session Data.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 *
 	 * @var array<mixed|mixed> The associative data array for the session.
 	 */
@@ -44,7 +44,7 @@ abstract class Session_Abstract implements Session_Interface {
 	/**
 	 * Expiration Date.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 *
 	 * @var string The expiration timestamp.
 	 */
@@ -53,7 +53,7 @@ abstract class Session_Abstract implements Session_Interface {
 	/**
 	 * Expiring Soon Date.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 *
 	 * @var string The expiring soon timestamp.
 	 */
@@ -62,7 +62,7 @@ abstract class Session_Abstract implements Session_Interface {
 	/**
 	 * Prefix for the nonce.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 *
 	 * @var string The prefix name of the nonce.
 	 */
@@ -71,7 +71,7 @@ abstract class Session_Abstract implements Session_Interface {
 	/**
 	 * Name of table for the session data.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 *
 	 * @var string Table name for session data.
 	 */
@@ -80,7 +80,7 @@ abstract class Session_Abstract implements Session_Interface {
 	/**
 	 * User ID.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 *
 	 * @var int The user id for the session.
 	 */
@@ -89,7 +89,7 @@ abstract class Session_Abstract implements Session_Interface {
 	/**
 	 * Unique ID.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 *
 	 * @var int The unique id for the session.
 	 */
@@ -98,7 +98,7 @@ abstract class Session_Abstract implements Session_Interface {
 	/**
 	 * When the session as data unsaved.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 *
 	 * @var boolean Whether there is data unsaved.
 	 */
@@ -107,7 +107,7 @@ abstract class Session_Abstract implements Session_Interface {
 	/**
 	 * Pngx cache
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 *
 	 * @var boolean Pngx__Cache The class handler for pngx cache.
 	 */
@@ -116,7 +116,7 @@ abstract class Session_Abstract implements Session_Interface {
 	/**
 	 * Constructor for the abstract session class.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 *
 	 * @param Pngx__Cache|null $cache The class handler for pngx cache.
 	 */
@@ -239,7 +239,7 @@ abstract class Session_Abstract implements Session_Interface {
 	 * Update nonce for logged out to ensure they have a unique nonce to manage a cart and more using the unique ID.
 	 * Runs on 'wp_verify_nonce()' and 'wp_create_nonce()'.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 *
 	 * @param int    $uid    User ID.
 	 * @param string $action The nonce action.
@@ -295,8 +295,8 @@ abstract class Session_Abstract implements Session_Interface {
 
 		if ( false === $value ) {
 			$query = $wpdb->prepare( "
-				SELECT session_value 
-				FROM {$this->get_table_name()} 
+				SELECT session_value
+				FROM {$this->get_table_name()}
 				WHERE session_key = %s",
 				$user_id
 			);
@@ -328,9 +328,9 @@ abstract class Session_Abstract implements Session_Interface {
 
 		// Prepare session data for saving.
 		$session_query = $wpdb->prepare( "
-			INSERT INTO {$this->get_table_name()} (`session_key`, `session_value`, `session_expiry`) 
+			INSERT INTO {$this->get_table_name()} (`session_key`, `session_value`, `session_expiry`)
 			VALUES (%s, %s, %d)
-            ON DUPLICATE KEY 
+            ON DUPLICATE KEY
             UPDATE `session_value` = VALUES(`session_value`), `session_expiry` = VALUES(`session_expiry`)
             ",
 			$this->user_id,
@@ -356,7 +356,7 @@ abstract class Session_Abstract implements Session_Interface {
 		/**
 		 * Filter the Session Expiration Date.
 		 *
-		 * @since TBD
+		 * @since 4.0.0
 		 *
 		 * @param int The time in seconds to set the expiring soon date, default 48 hours.
 		 */
@@ -366,7 +366,7 @@ abstract class Session_Abstract implements Session_Interface {
 		/**
 		 * Filter the Session Expiring Soon Date.
 		 *
-		 * @since TBD
+		 * @since 4.0.0
 		 *
 		 * @param int The time in seconds to set the expiring soon date, default 47 hours.
 		 */
@@ -409,7 +409,7 @@ abstract class Session_Abstract implements Session_Interface {
 		global $wpdb;
 
 		$query = $wpdb->prepare( "
-			DELETE FROM {$this->get_table_name()} 
+			DELETE FROM {$this->get_table_name()}
 			WHERE session_expiry < %d",
 			time()
 		);

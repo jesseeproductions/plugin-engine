@@ -13,7 +13,7 @@ class Post_Types extends \tad_DI52_ServiceProvider {
 	/**
 	 * Binds and sets up implementations and registers the required filters.
 	 *
-	 * @since TBD
+	 * @since 3.2.0
 	 */
 	public function register() {
 		$this->container->singleton( 'pngx.duplicate.post_types', $this );

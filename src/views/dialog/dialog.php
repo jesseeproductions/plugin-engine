@@ -5,10 +5,10 @@
  *
  * Override this template in your own theme by creating a file at [your-theme]/pngx/dialogs/dialog.php
  *
- * @since TBD
+ * @since 3.2.0
  *
  * @package Pngx
- * @version TBD
+ * @version 3.2.0
  */
 
 /** @var \Pngx\Dialog\View $dialog_view */

@@ -2,7 +2,7 @@
 /**
  * Custom Database Setup.
  *
- * @since   TBD
+ * @since   4.0.0
  *
  * @package Pngx\Session
  */
@@ -14,7 +14,7 @@ use Pngx__Main;
 /**
  * Class Database
  *
- * @since   TBD
+ * @since   4.0.0
  *
  * @package Pngx\Install
  */
@@ -23,7 +23,7 @@ class Database  {
 	/**
 	 * Create custom tables for Plugin Engine.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 *
 	 */
 	public static function create_tables() {
@@ -41,7 +41,7 @@ class Database  {
 	/**
 	 * Get custom table schema.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 *
 	 * Add or remove the table from Install::get_tables().
 	 *
@@ -73,7 +73,7 @@ class Database  {
 	/**
 	 * Get a list of Plugin Engine table names.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 *
 	 * @return array<int|string> $tables An array of Plugin Engine table names.
 	 */
@@ -87,7 +87,7 @@ class Database  {
 		/**
 		 * Filter the list of Plugin Engine table names.
 		 *
-		 * @since TBD
+		 * @since 4.0.0
 		 *
 		 * @param array<int|string> $tables An array of Plugin Engine table names.
 		 */
@@ -141,7 +141,7 @@ class Database  {
 	/**
 	 * Drop tables.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 */
 	public static function drop_tables() {
 		global $wpdb;
@@ -168,7 +168,7 @@ class Database  {
 		/**
 		 * Filter the base url for missing tables notice to be able to reinstall.
 		 *
-		 * @since TBD
+		 * @since 4.0.0
 		 *
 		 * @param array<int|string> $tables An array of Plugin Engine table names.
 		 */
@@ -182,5 +182,16 @@ class Database  {
 			get_option( 'pngx_schema_missing_tables' ),
 			pngx_sanitize_url( $base_tables_link )
 		);
+	}
+
+	/**
+	 * Update DB version to current.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @param string|null $version New Plugin Engine DB version or null.
+	 */
+	public static function update_db_version( $version = null ) {
+		update_option( 'pngx_db_version', is_null( $version ) ? Pngx__Main::$db_version : $version );
 	}
 }

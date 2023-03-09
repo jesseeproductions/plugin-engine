@@ -2,7 +2,7 @@
 /**
  * Class Session
  *
- * @since   TBD
+ * @since   4.0.0
  *
  * @package Pngx\Session
  */
@@ -14,7 +14,7 @@ namespace Pngx\Session;
  *
  * Based off WooCommerce's WC_Session_Handler.
  *
- * @since   TBD
+ * @since   4.0.0
  *
  * @package Pngx\Session
  */
@@ -23,7 +23,7 @@ abstract class Session_Cookie_Abstract extends Session_Abstract implements Sessi
 	/**
 	 * Cookie name for the session.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 *
 	 * @var string Name of the cookie.
 	 */
@@ -32,7 +32,7 @@ abstract class Session_Cookie_Abstract extends Session_Abstract implements Sessi
 	/**
 	 * Whether the session has a cookie.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 *
 	 * @var boolean True or false if a cookie for the session exists, defaults to false.
 	 */
@@ -41,7 +41,7 @@ abstract class Session_Cookie_Abstract extends Session_Abstract implements Sessi
 	/**
 	 * Constructor for the abstract session class.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 *
 	 */
 	public function __construct() {
@@ -62,7 +62,7 @@ abstract class Session_Cookie_Abstract extends Session_Abstract implements Sessi
 	/**
 	 * Check if cookie session should be secure.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 *
 	 * @return bool Whether to use a secure cookie.
 	 */
@@ -107,7 +107,7 @@ abstract class Session_Cookie_Abstract extends Session_Abstract implements Sessi
 	/**
 	 * Set the cookie name with a filter to be able to modify it.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 */
 	protected function set_cookie_name() {
 
@@ -116,7 +116,7 @@ abstract class Session_Cookie_Abstract extends Session_Abstract implements Sessi
 		 *
 		 * The cookie name is prepended with wp, cache systems like batcache will not cache pages when set.
 		 *
-		 * @since TBD
+		 * @since 4.0.0
 		 *
 		 * @param string The default cooke name session.
 		 * @param Session $this The current session object.

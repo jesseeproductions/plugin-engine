@@ -5,7 +5,7 @@ namespace Pngx\Carousel;
 /**
  * Class View
  *
- * @since TBD
+ * @since 3.2.0
  */
 class View extends \Pngx__Template {
 
@@ -347,7 +347,7 @@ class View extends \Pngx__Template {
 		/**
 		 * Allows for modifying the HTML before it is echoed or returned.
 		 *
-		 * @since TBD
+		 * @since 3.2.0
 		 *
 		 * @param array $args List of arguments to override carousel style. See \Pngx\Carousel\View->build_carousel().
 		 */

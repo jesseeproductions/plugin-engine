@@ -3,7 +3,7 @@
  * An abstraction layer to handle feature detection queries the plugin components
  * might need.
  *
- * @since TBD
+ * @since 3.2.0
  */
 
 use Pngx__Utils__Array as Arr;
@@ -11,7 +11,7 @@ use Pngx__Utils__Array as Arr;
 /**
  * Class Pngx__Feature_Detection
  *
- * @since TBD
+ * @since 3.2.0
  */
 class Pngx__Feature_Detection {
 
@@ -25,7 +25,7 @@ class Pngx__Feature_Detection {
 	/**
 	 * A set of example byte sizes of result sets.
 	 *
-	 * @since TBD
+	 * @since 3.2.0
 	 *
 	 * @var array
 	 */
@@ -46,7 +46,7 @@ class Pngx__Feature_Detection {
 	 * To avoid making this costly check on each load the result of this check is cached
 	 * in the `pngx_feature_detection` transient, under the `supports_async_process` key.
 	 *
-	 * @since TBD
+	 * @since 3.2.0
 	 *
 	 * @param bool $force Whether to use the cache value, if available, or force the check
 	 *                    to be made again.
@@ -60,7 +60,7 @@ class Pngx__Feature_Detection {
 		 * Returning a non `null` value here will make this method bail and
 		 * return the filtered value immediately.
 		 *
-		 * @since TBD
+		 * @since 3.2.0
 		 *
 		 * @param bool $supports_async_process Whether async, AJAX-based, processing is supported or not.
 		 * @param bool $force                  Whether the check is forcing the cached value to be refreshed
@@ -135,7 +135,7 @@ class Pngx__Feature_Detection {
 	/**
 	 * Sets the lock option to `1` to indicate a feature detection is running.
 	 *
-	 * @since TBD
+	 * @since 3.2.0
 	 */
 	protected function lock() {
 		update_option( $this->lock_option_name, '1' );
@@ -144,7 +144,7 @@ class Pngx__Feature_Detection {
 	/**
 	 * Deletes the lock option to indicate the current feature detection process is done.
 	 *
-	 * @since TBD
+	 * @since 3.2.0
 	 */
 	protected function unlock() {
 		delete_option( $this->lock_option_name );
@@ -153,7 +153,7 @@ class Pngx__Feature_Detection {
 	/**
 	 * Checks whether a feature detection lock is currently in place or not.
 	 *
-	 * @since TBD
+	 * @since 3.2.0
 	 *
 	 * @return bool Whether a feature detection lock is currently in place or not.
 	 */
@@ -166,7 +166,7 @@ class Pngx__Feature_Detection {
 	/**
 	 * Returns the value of the `max_allowed_packet`  MYSQL variable, if set, or a default value.
 	 *
-	 * @since TBD
+	 * @since 3.2.0
 	 *
 	 * @return int The byte size of the `max_allowed_packet`  MYSQL variable.
 	 */
@@ -176,7 +176,7 @@ class Pngx__Feature_Detection {
 		 *
 		 * If the value returned from this filter is not `null`, then it will be assumed to be the value.
 		 *
-		 * @since TBD
+		 * @since 3.2.0
 		 *
 		 * @param int $mysql_max_packet_size The value of the `max_allowed_packet` variable, initially `null`.
 		 */
@@ -211,7 +211,7 @@ class Pngx__Feature_Detection {
 	 * This is useful to size "reasonable" LIMITs when dealing with either very long queries or potentially long
 	 * result sets.
 	 *
-	 * @since TBD
+	 * @since 3.2.0
 	 *
 	 * @param string $example_string The example string.
 	 *
@@ -228,7 +228,7 @@ class Pngx__Feature_Detection {
 	/**
 	 * Returns the SQL LIMIT for a byte size, in relation to the `max_allowed_packet` value.
 	 *
-	 * @since TBD
+	 * @since 3.2.0
 	 *
 	 * @param int $byte_size The byte size to check.
 	 *
@@ -243,7 +243,7 @@ class Pngx__Feature_Detection {
 	 *
 	 * Defaults to the complete post result example string if the example is not found.
 	 *
-	 * @since TBD
+	 * @since 3.2.0
 	 *
 	 * @param string $example The name of the example to return. See the `Pngx__Feature_Detection::$example_sizes`
 	 *                        prop for the available examples. Defaults to the `post_result` one.

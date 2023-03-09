@@ -2,7 +2,7 @@
 /**
  * Session Provider
  *
- * @since   TBD
+ * @since   4.0.0
  *
  * @package Pngx\Session
  */
@@ -12,7 +12,7 @@ namespace Pngx\Session;
 /**
  * Class Session_Provider
  *
- * @since   TBD
+ * @since   4.0.0
  *
  * @package Tribe\Events\Event_Status
  */
@@ -21,7 +21,7 @@ class Session_Provider extends \tad_DI52_ServiceProvider {
 	/**
 	 * Binds and sets up implementations.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 */
 	public function register() {
 		if ( ! self::is_active() ) {
@@ -38,7 +38,7 @@ class Session_Provider extends \tad_DI52_ServiceProvider {
 	/**
 	 * Adds the actions required for event status.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 */
 	protected function add_actions() {
 
@@ -57,7 +57,7 @@ class Session_Provider extends \tad_DI52_ServiceProvider {
 	/**
 	 * Adds the filters required by the plugin.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 */
 	protected function add_filters() {
 
@@ -86,7 +86,7 @@ class Session_Provider extends \tad_DI52_ServiceProvider {
 	 * Cleans up session data - cron callback.
 	 * //todo add this on install of upgrade.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 */
 	public function cleanup_session_data() {
 		$session_class = apply_filters( 'pngx_session_handler', 'Pngx_Sessions' );

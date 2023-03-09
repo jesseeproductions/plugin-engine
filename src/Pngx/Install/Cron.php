@@ -2,7 +2,7 @@
 /**
  * Cron Setup.
  *
- * @since   TBD
+ * @since   4.0.0
  *
  * @package Pngx\Session
  */
@@ -12,7 +12,7 @@ namespace Pngx\Install;
 /**
  * Class Cron
  *
- * @since   TBD
+ * @since   4.0.0
  *
  * @package Pngx\Install
  */
@@ -21,7 +21,7 @@ class Cron  {
 	/**
 	 * Create crons for Plugin Engine.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 */
 	public static function create_crons() {
 		// Clear cron jobs to reduce conflict.

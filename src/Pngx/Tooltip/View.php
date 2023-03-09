@@ -5,14 +5,14 @@ namespace Pngx\Tooltip;
 /**
  * Class View
  *
- * @since TBD
+ * @since 3.2.0
  */
 class View extends \Pngx__Template {
 
 	/**
 	 * Where in the themes we will look for templates
 	 *
-	 * @since TBD
+	 * @since 3.2.0
 	 *
 	 * @var string
 	 */
@@ -21,7 +21,7 @@ class View extends \Pngx__Template {
 	/**
 	 * View constructor.
 	 *
-	 * @since TBD
+	 * @since 3.2.0
 	 */
 	public function __construct() {
 		$this->set_template_origin( \Pngx__Main::instance() );
@@ -37,7 +37,7 @@ class View extends \Pngx__Template {
 	/**
 	 * Public wrapper for build method
 	 *
-	 * @since TBD
+	 * @since 3.2.0
 	 *
 	 * @param array|string $message Array of messages or single message as string.
 	 * @param array $args {
@@ -68,7 +68,7 @@ class View extends \Pngx__Template {
 	/**
 	 * Factory method for tooltip HTML
 	 *
-	 * @since TBD
+	 * @since 3.2.0
 	 *
 	 * @param array|string $message array of messages or single message as string.
 	 * @param array $args {
@@ -108,7 +108,7 @@ class View extends \Pngx__Template {
 		/**
 		 * Allow us to filter the tooltip template
 		 *
-		 * @since  TBD
+		 * @since  3.2.0
 		 *
 		 * @param string $template The tooltip template name.
 		 * @param array $args Extra arguments, defaults include icon, classes, direction, and context.
@@ -126,7 +126,7 @@ class View extends \Pngx__Template {
 		/**
 		 * Allow us to filter the tooltip output
 		 *
-		 * @since  TBD
+		 * @since  3.2.0
 		 *
 		 * @param string $html The tooltip HTML.
 		 * @param array $messages An array of message strings.

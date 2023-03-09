@@ -24,7 +24,7 @@ class Array_Helpers {
 	 *
 	 * Example: set( $a, [ 0, 1, 2 ], 'hi' ) sets $a[0][1][2] = 'hi' and returns $a.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 *
 	 * @param mixed        $array  The array containing the key this sets.
 	 * @param string|array $key    To set a key nested multiple levels deep pass an array
@@ -75,7 +75,7 @@ class Array_Helpers {
 	 *
 	 * Example: get( $a, [ 0, 1, 2 ] ) returns the value of $a[0][1][2] or the default.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 *
 	 * @param  array        $variable Array or object to search within.
 	 * @param  array|string $indexes  Specify each nested index in order.
@@ -108,7 +108,7 @@ class Array_Helpers {
 	/**
 	 * Find a value inside a list of array or objects, including one nested a few levels deep.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 *
 	 * Example: get( [$a, $b, $c], [ 0, 1, 2 ] ) returns the value of $a[0][1][2] found in $a, $b or $c
 	 * or the default.
@@ -134,7 +134,7 @@ class Array_Helpers {
 	/**
 	 * Behaves exactly like the native strpos(), but accepts an array of needles.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 *
 	 * @see strpos()
 	 *
@@ -161,7 +161,7 @@ class Array_Helpers {
 	/**
 	 * Converts a list to an array filtering out empty string elements.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 *
 	 * @param     mixed   $value A string representing a list of values separated by the specified separator
 	 *                           or an array. If the list is a string (e.g. a CSV list) then it will urldecoded
@@ -198,7 +198,7 @@ class Array_Helpers {
 	/**
 	 * Returns a list separated by the specified separator.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 *
 	 * @param mixed  $list
 	 * @param string $sep
@@ -220,7 +220,7 @@ class Array_Helpers {
 	/**
 	 * Sanitize a multidimensional array.
 	 *
-	 * @since   TBD
+	 * @since   4.0.0
 	 *
 	 * @param array $data The array to sanitize.
 	 *
@@ -253,7 +253,7 @@ class Array_Helpers {
 	 * To discriminate from not found results and legitimately `false`
 	 * values from the map the `$found` parameter will be set by reference.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 *
 	 * @param      string|array $keys  One or more keys that should be used to get
 	 *                                 the new values

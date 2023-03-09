@@ -2,7 +2,7 @@
 /**
  * Interface Session
  *
- * @since   TBD
+ * @since   4.0.0
  *
  * @package Pngx\Session
  */
@@ -12,7 +12,7 @@ namespace Pngx\Session;
 /**
  * Interface Session_Interface
  *
- * @since   TBD
+ * @since   4.0.0
  *
  * @package Tribe\Widget
  *
@@ -22,14 +22,14 @@ interface Session_Cookie_Interface {
 	/**
 	 * Initialize the Session Cookie.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 */
 	public function init_session_cookie();
 
 	/**
 	 * Sets the session cookie on-demand.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 *
 	 * @param bool $set Should the session cookie be set.
 	 */
@@ -38,7 +38,7 @@ interface Session_Cookie_Interface {
 	/**
 	 * Get the cookie name for the session.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 *
 	 * @return string The cookie name.
 	 */
@@ -47,7 +47,7 @@ interface Session_Cookie_Interface {
 	/**
 	 * Get the session cookie when set or return false.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 *
 	 * A unique ID is required for cookie to be valid.
 	 *
@@ -58,7 +58,7 @@ interface Session_Cookie_Interface {
 	/**
 	 * Forget all cookie data.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 */
 	public function forget_cookie();
 }

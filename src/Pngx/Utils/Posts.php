@@ -4,7 +4,7 @@
 /**
  * Post Utilities
  *
- * @since TBD
+ * @since 4.0.0
  *
  */
 class Pngx__Utils__Posts {
@@ -12,7 +12,7 @@ class Pngx__Utils__Posts {
 	/**
 	 * Helper function for getting Post Id. Accepts null or a post id. If no $post object exists, returns false to avoid a PHP NOTICE
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 *
 	 * @param int $post (optional)
 	 *

@@ -2,7 +2,7 @@
 /**
  * Interface Session
  *
- * @since   TBD
+ * @since   4.0.0
  *
  * @package Pngx\Session
  */
@@ -12,7 +12,7 @@ namespace Pngx\Session;
 /**
  * Interface Session_Interface
  *
- * @since   TBD
+ * @since   4.0.0
  *
  * @package Tribe\Widget
  *
@@ -22,7 +22,7 @@ interface Session_Interface {
 	/**
 	 * Magic get method.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 *
 	 * @param mixed $key Name of the key to get.
 	 *
@@ -33,7 +33,7 @@ interface Session_Interface {
 	/**
 	 * Magic set method.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 *
 	 * @param mixed $key   Name of the key to set.
 	 * @param mixed $value Value to set.
@@ -43,7 +43,7 @@ interface Session_Interface {
 	/**
 	 * Magic isset method.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 *
 	 * @param mixed $key Name of the key to check.
 	 *
@@ -54,7 +54,7 @@ interface Session_Interface {
 	/**
 	 * Magic unset method.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 *
 	 * @param mixed $key Name of the key to unset.
 	 */
@@ -63,7 +63,7 @@ interface Session_Interface {
 	/**
 	 * Get a session variable.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 *
 	 * @param string $key     Name of the key to get.
 	 * @param mixed  $default Optional default variable if it is not set.
@@ -75,7 +75,7 @@ interface Session_Interface {
 	/**
 	 * Set a session variable.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 *
 	 * @param string $key   Name of the key to set.
 	 * @param mixed  $value Value to set.
@@ -85,7 +85,7 @@ interface Session_Interface {
 	/**
 	 * Get the table name where sessions are stored.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 *
 	 * @return string The table name.
 	 */
@@ -94,7 +94,7 @@ interface Session_Interface {
 	/**
 	 * Get the unique id of the session.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 *
 	 * @return int The unique session for the user|visitor session,
 	 */
@@ -103,14 +103,14 @@ interface Session_Interface {
 	/**
 	 * Hooks and sets up the session.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 */
 	public function init();
 
 	/**
 	 * Return if there is an active session.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 */
 	public function has_session();
 
@@ -119,7 +119,7 @@ interface Session_Interface {
 	 *
 	 * Utilizes Portable PHP password hashing framework to generate unique hash.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 *
 	 * @return string The current id of the user or a hashed string.
 	 */
@@ -128,7 +128,7 @@ interface Session_Interface {
 	/**
 	 * Get the unique id of the session.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 *
 	 * @return string The current id of the user or a hashed string.
 	 */
@@ -137,7 +137,7 @@ interface Session_Interface {
 	/**
 	 * Get session data.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 *
 	 * @return array An array of session data.
 	 */
@@ -146,7 +146,7 @@ interface Session_Interface {
 	/**
 	 * Get the session for a user.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 *
 	 * @param string $user_id The user id to get the session for.
 	 * @param mixed  $default Default session value.
@@ -158,7 +158,7 @@ interface Session_Interface {
 	/**
 	 * Save Data
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 *
 	 * @param int $logged_out_key The session ID if user was previously logged out.
 	 */
@@ -167,7 +167,7 @@ interface Session_Interface {
 	/**
 	 * Set session expiration.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 *
 	 */
 	public function set_session_expiration();
@@ -175,7 +175,7 @@ interface Session_Interface {
 	/**
 	 * Get the expiration timestamp for session.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 *
 	 * @return string The expiration timestamp for the session.
 	 */
@@ -184,7 +184,7 @@ interface Session_Interface {
 	/**
 	 * Get the expiring soon timestamp for session.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 *
 	 * @return string The expiring soon timestamp for the session.
 	 */
@@ -193,7 +193,7 @@ interface Session_Interface {
 	/**
 	 * Update the session expiry timestamp.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 *
 	 * @param string $user_id User ID.
 	 * @param int    $timestamp Timestamp to expire the session.
@@ -203,14 +203,14 @@ interface Session_Interface {
 	/**
 	 * Cleanup from database and cache the session data.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 */
 	public function cleanup_sessions();
 
 	/**
 	 * Delete a session from the cache and database.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 *
 	 * @param int $user_id The user to delete the session for.
 	 */
@@ -219,14 +219,14 @@ interface Session_Interface {
 	/**
 	 * Forget all session data without destroying it.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 */
 	public function forget_session();
 
 	/**
 	 * Destroy all session data.
 	 *
-	 * @since TBD
+	 * @since 4.0.0
 	 */
 	public function destroy_session();
 }

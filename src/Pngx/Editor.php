@@ -13,7 +13,7 @@ class Pngx__Editor {
 	 *
 	 * @todo   Revise when Gutenberg is merged into core
 	 *
-	 * @since  TBD
+	 * @since  3.2.0
 	 *
 	 * @return boolean
 	 */
@@ -24,7 +24,7 @@ class Pngx__Editor {
 	/**
 	 * Checks if we have Editor Block active
 	 *
-	 * @since  tbd
+	 * @since  3.2.0
 	 *
 	 * @return boolean
 	 */
@@ -35,7 +35,7 @@ class Pngx__Editor {
 	/**
 	 * Adds the required fields into the Events Post Type so that we can use Block Editor
 	 *
-	 * @since  tbd
+	 * @since  3.2.0
 	 *
 	 * @param  array $args Arguments used to setup the Post Type
 	 *
@@ -58,7 +58,7 @@ class Pngx__Editor {
 	/**
 	 * Adds the required fields into the Post Type so that we can the Rest API to update it
 	 *
-	 * @since  tbd
+	 * @since  3.2.0
 	 *
 	 * @param  array $args Arguments used to setup the Post Type
 	 *
@@ -84,7 +84,7 @@ class Pngx__Editor {
 	/**
 	 * Adds the required blocks
 	 *
-	 * @since  tbd
+	 * @since  3.2.0
 	 *
 	 * @param  array $args Arguments used to setup the CPT template
 	 *
@@ -114,7 +114,7 @@ class Pngx__Editor {
 	 * Prevents us from using `init` to register our own blocks, allows us to move
 	 * it when the proper place shows up
 	 *
-	 * @since  tbd
+	 * @since  3.2.0
 	 *
 	 * @return void
 	 */

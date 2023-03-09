@@ -25,7 +25,7 @@ class Pngx__Cache implements ArrayAccess {
 	/**
 	 * Bootstrap hook
 	 *
-	 * @since TBD
+	 * @since 3.2.0
 	 */
 	public function hook() {
 		if ( ! wp_next_scheduled( self::SCHEDULED_EVENT_DELETE_TRANSIENT ) ) {
@@ -45,7 +45,7 @@ class Pngx__Cache implements ArrayAccess {
 	/**
 	 * Set cache.
 	 *
-	 * @since TBD
+	 * @since 3.2.0
 	 *
 	 * @param string $id
 	 * @param mixed        $value
@@ -61,7 +61,7 @@ class Pngx__Cache implements ArrayAccess {
 		 * Filters the expiration for cache objects to provide the ability
 		 * to make non-persistent objects be treated as persistent.
 		 *
-		 * @since TBD
+		 * @since 3.2.0
 		 *
 		 * @param int          $expiration         Cache expiration time.
 		 * @param string       $id                 Cache ID.
@@ -86,8 +86,8 @@ class Pngx__Cache implements ArrayAccess {
 
 	/**
 	 * Set a transient.
-	 * 
-	 * @since TBD
+	 *
+	 * @since 3.2.0
 	 *
 	 * @param              $id
 	 * @param              $value
@@ -107,8 +107,8 @@ class Pngx__Cache implements ArrayAccess {
 	/**
 	 * Get cached data. Optionally set data if not previously set.
 	 *
-	 * @since TBD
-	 * 
+	 * @since 3.2.0
+	 *
 	 * Note: When a default value or callback is specified, this value gets set in the cache.
 	 *
 	 * @param string       $id                 The key for the cached value.
@@ -146,8 +146,8 @@ class Pngx__Cache implements ArrayAccess {
 
 	/**
 	 * Get transient by id.
-	 * 
-	 * @since TBD
+	 *
+	 * @since 3.2.0
 	 *
 	 * @param string $id
 	 * @param string|array $expiration_trigger
@@ -160,9 +160,9 @@ class Pngx__Cache implements ArrayAccess {
 
 	/**
 	 * Delete a cache by id.
-	 * 
-	 * @sicne TBD
-	 * 
+	 *
+	 * @sicne 3.2.0
+	 *
 	 * @param string $id
 	 * @param string|array $expiration_trigger
 	 *
@@ -194,7 +194,7 @@ class Pngx__Cache implements ArrayAccess {
 	 *
 	 * This uses a modification of the the query from https://core.trac.wordpress.org/ticket/20316
 	 *
-	 * @since TBD
+	 * @since 3.2.0
 	 *
 	 * @return void Just execute the database SQL no return required.
 	 */
@@ -224,7 +224,7 @@ class Pngx__Cache implements ArrayAccess {
 		/**
 		 * Allow third party filtering of the SQL used for deleting expired transients.
 		 *
-		 * @since TBD
+		 * @since 3.2.0
 		 *
 		 * @param string $sql   The SQL we execute to delete all the expired transients.
 		 * @param int    $time  Time we are using to determine what is expired.
@@ -244,7 +244,7 @@ class Pngx__Cache implements ArrayAccess {
 	/**
 	 * Flag if we should delete
 	 *
-	 * @since TBD
+	 * @since 3.2.0
 	 *
 	 * @param boolean $value If we should delete transients or not on shutdown.
 	 *
@@ -257,7 +257,7 @@ class Pngx__Cache implements ArrayAccess {
 	/**
 	 * Runs on hook `shutdown` and will delete transients on the end of the request.
 	 *
-	 * @since TBD
+	 * @since 3.2.0
 	 *
 	 * @return void No return for action hook method.
 	 */
@@ -271,8 +271,8 @@ class Pngx__Cache implements ArrayAccess {
 
 	/**
 	 * Get the Cache ID.
-	 * 
-	 * @since TBD
+	 *
+	 * @since 3.2.0
 	 *
 	 * @param string $key
 	 * @param string|array $expiration_trigger
@@ -312,7 +312,7 @@ class Pngx__Cache implements ArrayAccess {
 	/**
 	 * Returns the time of an action last occurrence.
 	 *
-	 * @since TBD
+	 * @since 3.2.0
 	 *
 	 * @param string $action The action to return the time for.
 	 *
@@ -344,7 +344,7 @@ class Pngx__Cache implements ArrayAccess {
 	/**
 	 * Sets the time (microtime) for an action last occurrence.
 	 *
-	 * @since TBD
+	 * @since 3.2.0
 	 *
 	 * @param string    $action    The action to record the last occurrence of.
 	 * @param int|float $timestamp The timestamp to assign to the action last occurrence or the current time (microtime).
@@ -396,7 +396,7 @@ class Pngx__Cache implements ArrayAccess {
 	/**
 	 * Whether a offset exists.
 	 *
-	 * @since TBD
+	 * @since 3.2.0
 	 *
 	 * @link  http://php.net/manual/en/arrayaccess.offsetexists.php
 	 *
@@ -414,7 +414,7 @@ class Pngx__Cache implements ArrayAccess {
 	 *
 	 * @link  http://php.net/manual/en/arrayaccess.offsetget.php
 	 *
-	 * @since TBD
+	 * @since 3.2.0
 	 *
 	 * @param mixed $offset The offset to retrieve.
 	 *
@@ -428,7 +428,7 @@ class Pngx__Cache implements ArrayAccess {
 	/**
 	 * Offset to set.
 	 *
-	 * @since TBD
+	 * @since 3.2.0
 	 *
 	 * @link  http://php.net/manual/en/arrayaccess.offsetset.php
 	 *
@@ -445,7 +445,7 @@ class Pngx__Cache implements ArrayAccess {
 	/**
 	 * Offset to unset.
 	 *
-	 * @since TBD
+	 * @since 3.2.0
 	 *
 	 * @link  http://php.net/manual/en/arrayaccess.offsetunset.php
 	 *
@@ -461,7 +461,7 @@ class Pngx__Cache implements ArrayAccess {
 	/**
 	 * Warms up the caches for a collection of posts.
 	 *
-	 * @since TBD
+	 * @since 3.2.0
 	 *
 	 * @param array|int $post_ids               A post ID, or a collection of post IDs.
 	 * @param bool      $update_post_meta_cache Whether to warm-up the post meta cache for the posts or not.
@@ -499,7 +499,7 @@ class Pngx__Cache implements ArrayAccess {
 		 * Lower this value on less powerful hosts. Return `0` to disable the warm-up completely, and `-1` to remove the
 		 * limit (not recommended).
 		 *
-		 * @since TBD
+		 * @since 3.2.0
 		 *
 		 * @param int $limit The number of posts whose caches will be warmed up, per query.
 		 */
@@ -537,7 +537,7 @@ class Pngx__Cache implements ArrayAccess {
 	 * If NOT using an external object caching system, then check if the size, in bytes, of the data
 	 * to write to the database would fit into the `max_allowed_packet` setting or not.
 	 *
-	 * @since TBD
+	 * @since 3.2.0
 	 *
 	 * @param string|array|object $value The value to check.
 	 *
@@ -568,7 +568,7 @@ class Pngx__Cache implements ArrayAccess {
 	/**
 	 * Returns a transient that might have been stored, due ot its size, in chunks.
 	 *
-	 * @since TBD
+	 * @since 3.2.0
 	 *
 	 * @param string               $id                 The name of the transients to return.
 	 * @param string|array<string> $expiration_trigger The transient expiration trigger(s).
@@ -621,7 +621,7 @@ class Pngx__Cache implements ArrayAccess {
 	 * The method will redirect to the `set_transient` function if the site is using object caching.
 	 *
 	 *
-	 * @since TBD
+	 * @since 3.2.0
 	 *
 	 * @param string               $id                 The transient ID.
 	 * @param mixed                $value              The value to store, that could be chunked.
@@ -664,7 +664,7 @@ class Pngx__Cache implements ArrayAccess {
 	 * Get prefix for use with wp_cache_set. Allows all cache in a group to be invalidated at once.
 	 * Based off Woocommerce's  WC_Cache_Helper::get_cache_prefix( $group )
 	 *
-	 * @since TBD
+	 * @since 3.2.0
 	 *
 	 * @param  string $group Group of cache to get.
 	 *
@@ -686,7 +686,7 @@ class Pngx__Cache implements ArrayAccess {
 	 * Invalidate cache group.
 	 * Based off Woocommerce's  WC_Cache_Helper::invalidate_cache_group( $group )
 	 *
-	 * @since TBD
+	 * @since 3.2.0
 	 *
 	 * @param string $group Group of cache to clear.
 	 */
