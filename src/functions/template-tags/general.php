@@ -50,7 +50,7 @@ if ( ! function_exists( 'pngx_detect_change' ) ) {
 	function pngx_detect_change( $_POST_arr, $post_id, $meta_key, $post_key ) {
 
 		$current_val = get_post_meta( $post_id, $meta_key, true );
-		$updated_val = ! empty( $_POST_arr[$post_key] ) ? esc_attr( $_POST_arr[$post_key] ) : null;
+		$updated_val = ! empty( $_POST_arr[$post_key] ) ? esc_attr( $_POST_arr[$post_key] ) : '';
 
 		if ( $current_val !== $updated_val ) {
 			return true;

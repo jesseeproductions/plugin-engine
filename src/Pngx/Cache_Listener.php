@@ -6,6 +6,11 @@
  */
 class Pngx__Cache_Listener {
 
+	/**
+	 * The name of the trigger that will be fired when a post is saved.
+	 */
+	const TRIGGER_SAVE_POST = 'save_post';
+
 	private static $instance = null;
 	private        $cache    = null;
 

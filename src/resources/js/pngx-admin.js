@@ -59,18 +59,13 @@ var pngx_admin_fields_init = pngx_admin_fields_init || {};
 	/*
 	 * Visual Editor
 	 */
-	obj.visual_editor = function () {
-
+	obj.visual_editor = function ( context ) {
 		var editors = document.getElementsByClassName( "pngx-ajax-wp-editor" );
 		var selector;
 		for ( var i = 0; i < editors.length; i++ ) {
-
 			selector = '#' + editors[i].id;
-
-			$( selector ).wp_editor( false, editors[i].id, false );
-
+			$( selector ).wp_editor( false, editors[i].id, false, context );
 		}
-
 	};
 
 	/*
@@ -509,6 +504,10 @@ var pngx_fields_toggle = pngx_fields_toggle || {};
 		if ( 'image' == obj.type[id] ) {
 			obj.img_change( id );
 		}
+
+		if ( 'file' == obj.type[id] ) {
+			obj.file_change( id );
+		}
 	};
 
 	obj.toggle = function ( id, field_value ) {
@@ -650,6 +649,24 @@ var pngx_fields_toggle = pngx_fields_toggle || {};
 		} );
 
 		$( document ).on( "click", ".pngx-clear-image", function () {
+			obj.toggle(
+				id,
+				$( this ).val()
+			);
+		} );
+
+	};
+
+	obj.file_change = function ( id ) {
+
+		$( document ).on( 'display', obj.field[id], function () {
+			obj.toggle(
+				id,
+				$( this ).val()
+			);
+		} );
+
+		$( document ).on( "click", ".pngx-clear-file", function () {
 			obj.toggle(
 				id,
 				$( this ).val()
@@ -816,6 +833,7 @@ String.prototype.className = function () {
 
 	return this.replace( '.', '' );
 };
+
 /**
  * File Upload Object
  * @type {{}}
@@ -831,24 +849,23 @@ String.prototype.className = function () {
 function PNGX__File( $, field_id ) {
 
 	this.field_id = field_id;
-	upload_title = 'Choose File';
-	button_text = 'Use File';
+	upload_title = 'Choose CSV';
+	button_text = 'Use CSV';
 
-	this.init = function () {
+	this.init = function() {
 		this.upload();
 		this.clear();
 	};
 
 
-	this.upload = function () {
+	this.upload = function() {
 
 		/*
 		 * Media Manager 3.5
 		 */
+		$( 'button#' + this.field_id ).on( 'click', function( e ) {
 
-		$( 'button#' + this.field_id ).click( function ( e ) {
-
-			//Create File Manager On Click to allow multiple on one Page
+			//Create Media Manager On Click to allow multiple on one Page
 			var file_uploader, attachment;
 
 			e.preventDefault();
@@ -862,7 +879,7 @@ function PNGX__File( $, field_id ) {
 
 			//Setup the Variables based on the Button Clicked to enable multiple
 			var file_input_id = '#' + this.id + '.pngx-upload-file';
-			var file_msg = '.' + this.id + '.pngx-file-url';
+			var file_name = 'div#' + this.id + '.pngx-file-upload-name';
 
 			//If the uploader object has already been created, reopen the dialog
 			if ( file_uploader ) {
@@ -876,15 +893,21 @@ function PNGX__File( $, field_id ) {
 				button: {
 					text: button_text
 				},
-				multiple: false
+				multiple: false,
+				library: {
+					type: 'text/csv',
+				},
 			} );
 
 			//When a file is selected, grab the URL and set it as the text field's value
-			file_uploader.on( 'select', function () {
+			file_uploader.on( 'select', function() {
 				attachment = file_uploader.state().get( 'selection' ).first().toJSON();
-				//Set the Field with the File ID
+				//Set the Field with the file id.
 				$( file_input_id ).val( attachment.id );
-				$( file_msg ).text( $( file_msg ).data('prefix') + attachment.url );
+				//Set the file name.
+				$( file_name ).find( 'span' ).text( attachment.filename );
+				//Trigger New File Uploaded
+				$( 'input#' + this.field_id ).trigger( 'display' );
 			} );
 
 			//Open the uploader dialog
@@ -894,19 +917,19 @@ function PNGX__File( $, field_id ) {
 
 	};
 
-	this.clear = function () {
+	this.clear = function() {
 
 		/*
 		 * Remove File and replace with default and Erase File ID
 		 */
-		$( '.pngx-clear-file' ).click( function ( e ) {
+		$( '.pngx-clear-file' ).on( 'click', function( e ) {
 			e.preventDefault();
 			var remove_input_id = 'input#' + this.id + '.pngx-upload-file';
-			var file_msg = '.' + this.id + '.pngx-file-url';
-			var file_action = '.' + this.id + '.pngx-file-action';
+			var file_name = $( 'div#' + this.id + '.pngx-file-upload-name' );
+
 			$( remove_input_id ).val( '' );
-			$( file_msg ).text( $( file_msg ).data('defaultMsg') );
-			$( file_action ).hide();
+			file_name.find( 'span' ).text( '' );
+			$( 'input#' + this.field_id ).trigger( 'display' );
 		} );
 
 	};
@@ -915,10 +938,11 @@ function PNGX__File( $, field_id ) {
 	this.init()
 
 }
+
 /**
  * Scan for File Upload Fields and Setup Upload Script
  */
-(function ( $ ) {
+(function( $ ) {
 	var file_upload = $( ".pngx-upload-file" );
 	var selector_file;
 	for ( i = 0; i < file_upload.length; i++ ) {

@@ -3,6 +3,7 @@ if ( class_exists( 'Pngx__Main' ) ) {
 	return;
 }
 
+
 /**
  * Main Plugin Engine class.
  */
@@ -40,6 +41,16 @@ class Pngx__Main {
 	public $resource_url;
 	public $vendor_path;
 	public $vendor_url;
+
+
+	/**
+	 * The slug that will be used to identify HTTP requests common should handle.
+	 *
+	 * @since 3.3.0
+	 *
+	 * @var string
+	 */
+	public static $request_slug = 'pngx_request';
 
 	/**
 	 * Static Singleton Holder
@@ -180,7 +191,6 @@ class Pngx__Main {
 	 * Load all the required library files.
 	 */
 	protected function loadLibraries() {
-
 		//Core Functions
 		require_once $this->plugin_path . 'src/functions/template-tags/general.php';
 		require_once $this->plugin_path . 'src/functions/template-tags/strings.php';
@@ -193,7 +203,6 @@ class Pngx__Main {
 	 * Adds core hooks
 	 */
 	public function add_hooks() {
-
 		//Load Admin Class if in Admin Section
 		if ( is_admin() ) {
 			new Pngx__Admin__Main();
@@ -265,7 +274,6 @@ class Pngx__Main {
 	public function get_post_types() {
 		// we default the post type array to empty in plugin engine. Plugins like PNGX add to it
 		return apply_filters( 'pngx_post_types', array() );
-
 	}
 
 	/**
@@ -289,7 +297,6 @@ class Pngx__Main {
 		}
 
 		return $out;
-
 	}
 
 	/**
@@ -305,56 +312,5 @@ class Pngx__Main {
 		}
 
 		return $instance;
-	}
-
-	/**
-	 * Insert an array after a specified key within another array.
-	 *
-	 * @deprecated 3.0
-	 *
-	 * @param $key
-	 * @param $source_array
-	 * @param $insert_array
-	 *
-	 * @return array
-	 *
-	 */
-	public static function array_insert_after_key( $key, $source_array, $insert_array ) {
-		_deprecated_function( __METHOD__, '3.0' );
-
-		if ( array_key_exists( $key, $source_array ) ) {
-			$position     = array_search( $key, array_keys( $source_array ) ) + 1;
-			$source_array = array_slice( $source_array, 0, $position, true ) + $insert_array + array_slice( $source_array, $position, null, true );
-		} else {
-			// If no key is found, then add it to the end of the array.
-			$source_array += $insert_array;
-		}
-
-		return $source_array;
-	}
-
-	/**
-	 * Insert an array immediately before a specified key within another array.
-	 *
-	 * @deprecated 3.0
-	 *
-	 * @param $key
-	 * @param $source_array
-	 * @param $insert_array
-	 *
-	 * @return array
-	 */
-	public static function array_insert_before_key( $key, $source_array, $insert_array ) {
-		_deprecated_function( __METHOD__, '3.0' );
-
-		if ( array_key_exists( $key, $source_array ) ) {
-			$position     = array_search( $key, array_keys( $source_array ) );
-			$source_array = array_slice( $source_array, 0, $position, true ) + $insert_array + array_slice( $source_array, $position, null, true );
-		} else {
-			// If no key is found, then add it to the end of the array.
-			$source_array += $insert_array;
-		}
-
-		return $source_array;
 	}
 }

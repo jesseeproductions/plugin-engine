@@ -7,7 +7,6 @@ if ( class_exists( 'Pngx__Field__Content' ) ) {
 	return;
 }
 
-
 /**
  * Class Pngx__Field__Content
  * Content
@@ -15,9 +14,6 @@ if ( class_exists( 'Pngx__Field__Content' ) ) {
 class Pngx__Field__Content {
 
 	public static function display( $field = array(), $post_id = null, $meta = null, $template_fields = array(), $var = array() ) {
-
-		global $wp_version;
-
 		$class = $field['display']['class'] ? $field['display']['class'] : '';
 		$style = Pngx__Style__Linked::get_styles( $field, $post_id );
 		$tags  = isset( $field['display']['tags'] ) ? $field['display']['tags'] : 'title';
@@ -59,7 +55,5 @@ class Pngx__Field__Content {
 			<?php echo strip_tags( $meta,  apply_filters( 'pngx_filter_content_allowed_tags', Pngx__Allowed_Tags::$tags() ) ); ?>
 		</div>
 		<?php
-
 	}
-
 }

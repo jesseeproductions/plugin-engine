@@ -3,6 +3,11 @@
 == Changelog ==
 = 4.0.0 TBD =
 
+= 3.3.0 March 9th, 2023 =
+
+* Feature - Add template and cache classes to more feature support.
+* Fix - Update Di52 to latest version to prevent conflicts.
+
 = 3.2.2 April 4th, 2022 =
 
 * Fix - Update Di52 to prevent fatal errors with other plugins using it.

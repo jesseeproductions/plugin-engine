@@ -113,6 +113,12 @@ class Pngx__Admin__Fields {
 
 				break;
 
+			case 'file':
+
+				Pngx__Admin__Field__File::display( $field, $options, $options_id, $meta, $repeat_obj );
+
+				break;
+
 			case 'heading':
 
 				Pngx__Admin__Field__Heading::display( $field, $options_id );

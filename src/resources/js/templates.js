@@ -37,7 +37,7 @@ jQuery( function ( $ ) {
 					$( $ajax_field ).html( JSON.parse( results.data ) );
 
 					// Init Visual Editors
-					pngx_admin_fields_init.visual_editor();
+					pngx_admin_fields_init.visual_editor( 'ajax' );
 
 					// Init Image Fields
 					var image_upload = $( $ajax_field + ' .pngx-upload-image' );
@@ -45,6 +45,14 @@ jQuery( function ( $ ) {
 					for ( i = 0; i < image_upload.length; i++ ) {
 						selector_img = $( image_upload[i] ).attr( 'id' );
 						new PNGX__Media( $, selector_img );
+					}
+
+					// Init File Fields
+					var file_upload = $( $ajax_field + ' .pngx-upload-file' );
+					var selector_file;
+					for ( i = 0; i < file_upload.length; i++ ) {
+						selector_file = $( file_upload[i] ).attr( 'id' );
+						new PNGX__File( $, selector_file );
 					}
 
 					// Init Color Pickers
@@ -59,11 +67,11 @@ jQuery( function ( $ ) {
 
 				}
 
-				$document.trigger( 'pngx.dependencies-run' );
-				$document.trigger( 'pngx.bumpdown-run' );
+				setTimeout(function(){
+					$document.trigger( 'pngx.dependencies-run' );
+					$document.trigger( 'pngx.bumpdown-run' );
+				}, 100);
 			}
 		} );
-
 	} );
-
 } );
