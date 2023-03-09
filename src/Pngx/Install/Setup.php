@@ -37,6 +37,8 @@ class Setup  {
 		pngx( Database::class )::verify_base_tables();
 		pngx( Cron::class )::create_cron_jobs();
 
+		//todo
+
 		do_action( 'pngx_installing' );
 
 		delete_transient( 'pngx_setup_active' );

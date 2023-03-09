@@ -93,6 +93,15 @@ class Pngx__Main {
 		$this->vendor_url    = $this->plugin_url . 'vendor/';
 
 		add_action( 'plugins_loaded', array( $this, 'plugins_loaded' ), 1 );
+
+		if ( did_action( 'plugins_loaded' ) && ! doing_action( 'plugins_loaded' ) ) {
+			/*
+			 * This might happen in the context of a plugin activation.
+			 * Complete the loading now and set the singleton instance to avoid infinite loops.
+			 */
+			self::$instance = $this;
+			$this->plugins_loaded();
+		}
 	}
 
 	/**

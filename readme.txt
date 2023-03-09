@@ -3,6 +3,9 @@
 == Changelog ==
 = 4.0.0 TBD =
 
+* Fix - Update bootstrap logic to make sure Common will correctly load completely in the context of plugin activations requests, thanks Lucatume for the fix in Tribe Common!
+- TODO add automated tests from https://github.com/the-events-calendar/tribe-common/pull/1734/files
+
 = 3.3.0 March 9th, 2023 =
 
 * Feature - Add template and cache classes to more feature support.
