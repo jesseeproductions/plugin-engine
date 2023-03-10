@@ -10,6 +10,7 @@
 namespace Pngx\Install;
 
 use Pngx__Main;
+use TEC\Event_Automator\Plugin;
 
 /**
  * Class Database
@@ -161,9 +162,12 @@ class Database  {
 			return;
 		}
 
-		// Set to Coupon Creator Options.
-		// todo change this to be the pngx options and use the fitler to change for coupon creator and send to the install tab.
-		$base_tables_link = esc_url( get_admin_url() ) . 'edit.php?post_type=cctor_coupon&page=coupon-options';
+		// Set to Plugin Engine Options.
+		$query_args       = [
+			'post_type' => 'pngx',
+			'page'      => 'pngx-options',
+		];
+		$base_tables_link = add_query_arg( $query_args, admin_url( 'edit.php' ) );
 
 		/**
 		 * Filter the base url for missing tables notice to be able to reinstall.

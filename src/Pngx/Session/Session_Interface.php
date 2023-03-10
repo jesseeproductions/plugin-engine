@@ -101,13 +101,6 @@ interface Session_Interface {
 	public function get_user_id();
 
 	/**
-	 * Hooks and sets up the session.
-	 *
-	 * @since 4.0.0
-	 */
-	public function init();
-
-	/**
 	 * Return if there is an active session.
 	 *
 	 * @since 4.0.0
@@ -170,7 +163,7 @@ interface Session_Interface {
 	 * @since 4.0.0
 	 *
 	 */
-	public function set_session_expiration();
+	public function set_expiration_timestamp();
 
 	/**
 	 * Get the expiration timestamp for session.

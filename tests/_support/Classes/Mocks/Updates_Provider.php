@@ -1,6 +1,15 @@
 <?php
+/**
+ * Mock Updates Provider
+ *
+ * By Default Plugin Engine Does not run code controlled by this provider, this is for testing it and can be used as the base in a plugin that uses this feature.
+ *
+ * @since   4.0.0
+ *
+ * @package Pngx\Session
+ */
 
-namespace Pngx\Service_Providers;
+namespace Pngx\Tests\Classes\Mocks;
 
 use Pngx\Install\Setup;
 

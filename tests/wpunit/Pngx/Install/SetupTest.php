@@ -30,9 +30,7 @@ class SetupTest extends \Codeception\TestCase\WPTestCase {
 	}
 
 	/**
-	 * Integration test for database table creation.
-	 *
-	 * @group database
+	 * @test
 	 */
 	public function test_install_on_db_change() {
 		global $wpdb;
@@ -56,6 +54,9 @@ class SetupTest extends \Codeception\TestCase\WPTestCase {
 		$pngx_saved_db_version = get_option( 'pngx_db_version' );
 		$this->assertEmpty( $pngx_saved_db_version );
 
+		$session_cron = wp_get_scheduled_event( Cron::$session_cron_hook );
+		$this->assertFalse( $session_cron );
+
 		$setup->check_version();
 
 		$result = $wpdb->get_col( "SHOW TABLES LIKE '{$wpdb->prefix}%'" );
@@ -67,5 +68,10 @@ class SetupTest extends \Codeception\TestCase\WPTestCase {
 		$pngx_saved_db_version = get_option( 'pngx_db_version' );
 		$pngx_db_version       = \Pngx__Main::$db_version;
 		$this->assertEquals( $pngx_saved_db_version, $pngx_db_version );
+
+		$session_cron = wp_get_scheduled_event( Cron::$session_cron_hook );
+		$this->assertEquals( $session_cron->hook, Cron::$session_cron_hook  );
+
+		delete_transient( 'pngx_setup_active' );
 	}
 }

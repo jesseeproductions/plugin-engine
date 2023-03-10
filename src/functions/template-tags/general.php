@@ -220,7 +220,7 @@ if ( ! function_exists( 'pngx_resource_url' ) ) {
 		$path = $resource_path . $resource;
 
 		if ( is_object( $origin ) ) {
-			$plugin_path = trailingslashit( ! empty( $origin->plugin_path ) ? $origin->plugin_path : $origin->pluginPath );
+			$plugin_path = trailingslashit( ! empty( $origin->plugin_path ) ? $origin->plugin_path : '' );
 		} else {
 			$plugin_path = trailingslashit( dirname( dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) ) );
 		}

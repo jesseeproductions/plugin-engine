@@ -39,24 +39,10 @@ abstract class Session_Cookie_Abstract extends Session_Abstract implements Sessi
 	protected $has_cookie = false;
 
 	/**
-	 * Constructor for the abstract session class.
-	 *
-	 * @since 4.0.0
-	 *
-	 */
-	public function __construct() {
-		$this->set_cookie_name();
-		parent::__construct();
-	}
-
-	/**
 	 * {@inheritDoc}
 	 */
 	public function has_session() {
-		return
-			isset( $_COOKIE[ $this->cookie ] ) ||
-			$this->has_cookie ||
-			is_user_logged_in();
+		return isset( $_COOKIE[ $this->cookie ] ) || $this->has_cookie || is_user_logged_in();
 	}
 
 	/**
@@ -77,30 +63,35 @@ abstract class Session_Cookie_Abstract extends Session_Abstract implements Sessi
 		$cookie = $this->get_session_cookie();
 
 		if ( $cookie ) {
-			$this->user_id        = $cookie[0];
-			$this->session_expiration = $cookie[1];
-			$this->session_expiring   = $cookie[2];
-			$this->has_cookie         = true;
-			$this->data               = $this->get_session_data();
+			$this->user_id                 = $cookie[0];
+			$this->expiration_timestamp    = $cookie[1];
+			$this->expiring_soon_timestamp = $cookie[2];
+			$this->has_cookie              = true;
+			$this->data                    = $this->get_session_data();
+
+			if ( ! $this->is_session_cookie_valid() ) {
+				$this->destroy_session();
+				$this->set_expiration_timestamp();
+			}
 
 			// If the user logs in, update session.
 			if ( is_user_logged_in() && strval( get_current_user_id() ) !== $this->user_id ) {
-				$guest_session_id   = $this->user_id;
-				$this->user_id = strval( get_current_user_id() );
-				$this->unsaved       = true;
+				$guest_session_id = $this->user_id;
+				$this->user_id    = strval( get_current_user_id() );
+				$this->unsaved    = true;
 				$this->save_data( $guest_session_id );
 				$this->set_customer_session_cookie( true );
 			}
 
 			// Update session if its close to expiring.
-			if ( time() > $this->session_expiring ) {
-				$this->set_session_expiration();
-				$this->update_session_timestamp( $this->user_id, $this->session_expiration );
+			if ( time() > $this->expiring_soon_timestamp ) {
+				$this->set_expiration_timestamp();
+				$this->update_session_timestamp( $this->user_id, $this->expiration_timestamp );
 			}
 		} else {
-			$this->set_session_expiration();
+			$this->set_expiration_timestamp();
 			$this->user_id = $this->generate_unique_id();
-			$this->data        = $this->get_session_data();
+			$this->data    = $this->get_session_data();
 		}
 	}
 
@@ -129,14 +120,14 @@ abstract class Session_Cookie_Abstract extends Session_Abstract implements Sessi
 	 */
 	public function set_customer_session_cookie( $set ) {
 		if ( $set ) {
-			$to_hash           = $this->user_id . '|' . $this->session_expiration;
-			$cookie_hash       = hash_hmac( 'md5', $to_hash, wp_hash( $to_hash ) );
-			$cookie_value      = $this->user_id . '||' . $this->session_expiration . '||' . $this->session_expiring . '||' . $cookie_hash;
+			$to_hash          = $this->user_id . '|' . $this->expiration_timestamp;
+			$cookie_hash      = hash_hmac( 'md5', $to_hash, wp_hash( $to_hash ) );
+			$cookie_value     = $this->user_id . '||' . $this->expiration_timestamp . '||' . $this->expiring_soon_timestamp . '||' . $cookie_hash;
 			$this->has_cookie = true;
 
 			// Cookies set only if called before headers are sent.
 			if ( ! isset( $_COOKIE[ $this->cookie ] ) || $_COOKIE[ $this->cookie ] !== $cookie_value ) {
-				pngx_setcookie( $this->cookie, $cookie_value, $this->session_expiration, $this->use_secure_cookie(), true );
+				pngx_setcookie( $this->cookie, $cookie_value, $this->expiration_timestamp, $this->use_secure_cookie(), true );
 			}
 		}
 	}
@@ -152,32 +143,27 @@ abstract class Session_Cookie_Abstract extends Session_Abstract implements Sessi
 	 * {@inheritDoc}
 	 */
 	public function get_session_cookie() {
-		$cookie_value = isset( $_COOKIE[ $this->cookie ] ) ?
-			wp_unslash( $_COOKIE[ $this->cookie ] ) :
-			false;
+		$cookie_value = isset( $_COOKIE[ $this->cookie ] ) ? wp_unslash( $_COOKIE[ $this->cookie ] ) : false;
 
-		if (
-			empty( $cookie_value ) ||
-			! is_string( $cookie_value )
-		) {
+		if ( empty( $cookie_value ) || ! is_string( $cookie_value ) ) {
 			return false;
 		}
 
-		list( $unique_id, $session_expiration, $session_expiring, $cookie_hash ) = explode( '||', $cookie_value );
+		list( $unique_id, $expiration_timestamp, $expiring_soon_timestamp, $cookie_hash ) = explode( '||', $cookie_value );
 
 		if ( empty( $unique_id ) ) {
 			return false;
 		}
 
 		// Validate hash.
-		$to_hash = $unique_id . '|' . $session_expiration;
+		$to_hash = $unique_id . '|' . $expiration_timestamp;
 		$hash    = hash_hmac( 'md5', $to_hash, wp_hash( $to_hash ) );
 
 		if ( empty( $cookie_hash ) || ! hash_equals( $hash, $cookie_hash ) ) {
 			return false;
 		}
 
-		return [ $unique_id, $session_expiration, $session_expiring, $cookie_hash ];
+		return [ $unique_id, $expiration_timestamp, $expiring_soon_timestamp, $cookie_hash ];
 	}
 
 	/**
@@ -185,5 +171,29 @@ abstract class Session_Cookie_Abstract extends Session_Abstract implements Sessi
 	 */
 	public function forget_cookie() {
 		pngx_setcookie( $this->cookie, '', time() - YEAR_IN_SECONDS, $this->use_secure_cookie(), true );
+	}
+
+	/**
+	 * Checks if session cookie is expired, or belongs to a logged out user.
+	 *
+	 * @return bool Whether session cookie is valid.
+	 */
+	private function is_session_cookie_valid() {
+		// If session is expired, session cookie is invalid.
+		if ( time() > $this->expiration_timestamp ) {
+			return false;
+		}
+
+		// If user has logged out, session cookie is invalid.
+		if ( ! is_user_logged_in() && ! $this->is_user_guest( $this->user_id ) ) {
+			return false;
+		}
+
+		// Session from a different user is not valid. (Although from a guest user will be valid)
+		if ( is_user_logged_in() && ! $this->is_user_guest( $this->user_id ) && strval( get_current_user_id() ) !== $this->user_id ) {
+			return false;
+		}
+
+		return true;
 	}
 }

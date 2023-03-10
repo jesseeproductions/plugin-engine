@@ -9,8 +9,6 @@
 
 namespace Pngx\Session;
 
-use Pngx__Cache;
-
 /**
  * Class Session
  *
@@ -31,6 +29,15 @@ abstract class Session_Abstract implements Session_Interface {
 	 * @var string The cache name.
 	 */
 	protected static $cache_name = 'pngx_session';
+
+	/**
+	 * Cache Group Name
+	 *
+	 * @since 4.0.0
+	 *
+	 * @var string The cache name.
+	 */
+	protected static $cache_group_name = 'pngx_sessions_group';
 
 	/**
 	 * Session Data.
@@ -109,26 +116,9 @@ abstract class Session_Abstract implements Session_Interface {
 	 *
 	 * @since 4.0.0
 	 *
-	 * @var boolean Pngx__Cache The class handler for pngx cache.
+	 * @var Pngx__Cache $cache The class handler for pngx cache.
 	 */
 	protected $cache;
-
-	/**
-	 * Constructor for the abstract session class.
-	 *
-	 * @since 4.0.0
-	 *
-	 * @param Pngx__Cache|null $cache The class handler for pngx cache.
-	 */
-	public function __construct( Pngx__Cache $cache = null ) {
-		$this->set_table_name();
-		$this->cache = null !== $cache ? $cache : pngx( 'cache' );
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	public abstract function init();
 
 	/**
 	 * {@inheritDoc}
@@ -190,7 +180,7 @@ abstract class Session_Abstract implements Session_Interface {
 	 * {@inheritDoc}
 	 */
 	protected function set_table_name() {
-		$this->table_name = $GLOBALS['wpdb']->prefix . 'pngx_sessions';
+		static::$table_name = $GLOBALS['wpdb']->prefix . 'pngx_sessions';
 	}
 
 	/**
@@ -205,8 +195,17 @@ abstract class Session_Abstract implements Session_Interface {
 	 *
 	 * @return string The cache prefix set in the class.
 	 */
-	protected function get_cache_prefix() {
+	public function get_cache_prefix() {
 		return $this->cache->get_cache_prefix( static::$cache_name );
+	}
+
+	/**
+	 * Gets the cache prefix.
+	 *
+	 * @return string The cache prefix set in the class.
+	 */
+	public function get_cache_group() {
+		return static::$cache_group_name;
 	}
 
 	/**
@@ -233,6 +232,42 @@ abstract class Session_Abstract implements Session_Interface {
 	 */
 	public function get_user_id() {
 		return $this->user_id;
+	}
+
+	/**
+	 * Checks if this is an auto-generated user ID.
+	 *
+	 * @param string|int $customer_id user ID to check.
+	 *
+	 * @return bool Whether customer ID is randomly generated.
+	 */
+	protected function is_user_guest( $user_id ) {
+		$user_id = strval( $user_id );
+
+		if ( empty( $user_id ) ) {
+			return true;
+		}
+
+		if ( 't_' === substr( $user_id, 0, 2 ) ) {
+			return true;
+		}
+
+		/**
+		 * Legacy checks. This is to handle sessions that were created from a previous release.
+		 * Maybe we can get rid of them after a few releases.
+		 */
+
+		// Almost all random $user_ids will have some letters in it, while all actual ids will be integers.
+		if ( strval( (int) $user_id ) !== $user_id ) {
+			return true;
+		}
+
+		// Performance hack to potentially save a DB query, when same user as $user_id is logged in.
+		if ( is_user_logged_in() && strval( get_current_user_id() ) === $user_id ) {
+			return false;
+		}
+
+		return false;
 	}
 
 	/**
@@ -291,7 +326,7 @@ abstract class Session_Abstract implements Session_Interface {
 		}
 
 		// Use cache class to attempt to get session.
-		$value = $this->cache->get( $this->get_cache_prefix() . $user_id, static::$cache_name );
+		$value = $this->cache->get( $this->get_cache_prefix() . $user_id, static::$cache_group_name );
 
 		if ( false === $value ) {
 			$query = $wpdb->prepare( "
@@ -306,9 +341,9 @@ abstract class Session_Abstract implements Session_Interface {
 				$value = $default;
 			}
 
-			$cache_duration = $this->session_expiration - time();
+			$cache_duration = $this->expiration_timestamp - time();
 			if ( 0 < $cache_duration ) {
-				$this->cache->get( $this->get_cache_prefix() . $user_id, $value, static::$cache_name, $cache_duration );
+				$this->cache->get( $this->get_cache_prefix() . $user_id, static::$cache_group_name );
 			}
 		}
 
@@ -335,12 +370,12 @@ abstract class Session_Abstract implements Session_Interface {
             ",
 			$this->user_id,
 			maybe_serialize( $this->data ),
-			$this->session_expiration
+			$this->expiration_timestamp
 		);
 
 		$wpdb->query( $session_query );
 
-		$this->cache->set( $this->get_cache_prefix() . $this->user_id, $this->data, static::$cache_name, $this->session_expiration - time() );
+		$this->cache->set( $this->get_cache_prefix() . $this->user_id, $this->data, $this->expiration_timestamp - time(), static::$cache_group_name );
 
 		$this->unsaved = false;
 		if ( get_current_user_id() != $logged_out_key && ! is_object( get_user_by( 'id', $logged_out_key ) ) ) {
@@ -352,7 +387,7 @@ abstract class Session_Abstract implements Session_Interface {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function set_session_expiration() {
+	public function set_expiration_timestamp() {
 		/**
 		 * Filter the Session Expiration Date.
 		 *
@@ -415,7 +450,7 @@ abstract class Session_Abstract implements Session_Interface {
 		);
 		$wpdb->query( $query );
 
-		$this->cache->invalidate_cache_group( static::$cache_name );
+		$this->cache->invalidate_cache_group( static::$cache_group_name );
 	}
 
 	/**
@@ -424,7 +459,7 @@ abstract class Session_Abstract implements Session_Interface {
 	public function delete_session( $user_id ) {
 		global $wpdb;
 
-		$this->cache->delete( $this->get_cache_prefix() . $user_id, static::$cache_name );
+		$this->cache->delete( $this->get_cache_prefix() . $user_id, static::$cache_group_name );
 
 		$wpdb->delete(
 			$this->get_table_name(),
@@ -438,9 +473,14 @@ abstract class Session_Abstract implements Session_Interface {
 	 * {@inheritDoc}
 	 */
 	public function forget_session() {
+		/**
+		 * Hook to run when forgetting a session.
+		 *
+		 * Session cookies are hooked in here to be removed.
+		 *
+		 * @since 4.0.0
+		 */
 		do_action( 'pngx_forget_session', $this );
-
-		// todo - add a function here to clear a cart? it should have a method that hooks into this, the abstract should force it.
 
 		$this->data    = [];
 		$this->unsaved = false;

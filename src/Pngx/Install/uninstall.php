@@ -11,7 +11,9 @@
 
 use Pngx\Install\Database;
 
-defined( 'PNGX_UNINSTALL_PLUGIN' ) || exit;
+if ( ! defined( 'PNGX_UNINSTALL_PLUGIN' ) ) {
+	return;
+}
 
 global $wpdb, $wp_version;
 

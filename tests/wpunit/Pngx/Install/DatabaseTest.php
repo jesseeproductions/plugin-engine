@@ -31,9 +31,7 @@ class DatabaseTest extends \Codeception\TestCase\WPTestCase {
 	}
 
 	/**
-	 * Integration test for database table creation.
-	 *
-	 * @group database
+	 * @test
 	 */
 	public function test_create_tables() {
 		global $wpdb;

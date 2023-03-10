@@ -2,11 +2,11 @@
 
 namespace Pngx\Session;
 
+use Pngx\Install\Setup;
 use Pngx\Tests\Traits\With_Uopz;
-
-if ( ! class_exists( '\\SessionForTesting' ) ) {
-	require_once codecept_data_dir( 'classes/mocks/SessionForTesting.php' );
-}
+use Pngx\Tests\Classes\Mocks\SessionForTesting;
+use Pngx\Tests\Classes\Mocks\Session_Provider;
+use Pngx__Main;
 
 /**
  * Test Pngx Session Abstract Class.
@@ -19,11 +19,52 @@ class SessionTest extends \Codeception\TestCase\WPTestCase {
 
 	use With_Uopz;
 
+	public function setUp() {
+		parent::setUp();
+		Pngx__Main::instance();
+		Setup::install();
+		wp_set_current_user( 1 );
+		pngx_register_provider( Session_Provider::class );
+		$this->handler = pngx( SessionForTesting::class );
+
+		$this->create_session();
+	}
+
+	/**
+	 * Get session from DB.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @param string $session_key The Session key.
+	 *
+	 * @return array|object|null A session object or null of none.
+	 */
+	protected function get_session_from_db( $session_key ) {
+		global $wpdb;
+
+		$session_data = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}pngx_sessions WHERE `session_key` = %s", $session_key ) );
+
+		return $session_data;
+	}
+
+	/**
+	 * Helper function to create a WC session and save it to the DB.
+	 *
+	 * @since 4.0.0
+	 *
+	 */
+	protected function create_session() {
+		$this->handler->set( 'cart', 'test cart' );
+		$this->handler->save_data();
+		$this->session_key  = $this->handler->get_user_id();
+		$this->cache_prefix = $this->handler->get_cache_prefix();
+	}
+
 	/**
 	 * @return SessionForTesting
 	 */
 	protected function make_instance() {
-		return new SessionForTesting();
+		return new SessionForTesting( pngx( 'cache' ) );
 	}
 
 	/**
@@ -105,7 +146,7 @@ class SessionTest extends \Codeception\TestCase\WPTestCase {
 		$this->uopz_set_return( 'time', '1637837732' );
 		$session = $this->make_instance();
 		$now     = time();
-		$session->set_session_expiration();
+		$session->set_expiration_timestamp();
 
 		$this->assertEquals( $now + HOUR_IN_SECONDS * 48, $session->get_expiration_timestamp() );
 		$this->assertEquals( $now + HOUR_IN_SECONDS * 47, $session->get_expiring_soon_timestamp() );
@@ -124,7 +165,7 @@ class SessionTest extends \Codeception\TestCase\WPTestCase {
 		add_filter( 'pngx_expiring_soon_timestamp', static function ( $expiring_soon_timestamp ) use ( $now ) {
 			return HOUR_IN_SECONDS * 19;
 		}, 10 );
-		$session->set_session_expiration();
+		$session->set_expiration_timestamp();
 
 		$this->assertEquals( $now + HOUR_IN_SECONDS * 20, $session->get_expiration_timestamp() );
 		$this->assertEquals( $now + HOUR_IN_SECONDS * 19, $session->get_expiring_soon_timestamp() );
@@ -136,6 +177,7 @@ class SessionTest extends \Codeception\TestCase\WPTestCase {
 			[ false, 40 ],
 		];
 	}
+
 	/**
 	 * @test
 	 * @dataProvider  user_states
@@ -155,32 +197,16 @@ class SessionTest extends \Codeception\TestCase\WPTestCase {
 		}
 	}
 
-	//todo - setup uninstall scripts
-	// todo test get_cache_prefix - cache system needs to be setup does woocommerce have caching tests?
-	// todo test get_user_id
-	// todo test saving dnd get_session_data
-	// todo test deleting, forgetting
-	// todo test cookies, saving, deleting, updating
-	// todo test maybe_update_nonce_of_logged_out_user - can I do this with a logged out user?
-	// todo test cron is setup and running
-
-
-	// todo change these to work with my coding:
-/*	public function setUp() {
-		parent::setUp();
-
-		$this->handler = new WC_Session_Handler();
-		$this->create_session();
-	}*/
-
 	/**
-	 * @testdox Test that save data should insert new row.
+	 * @test
 	 */
 	public function test_save_data_should_insert_new_row() {
 		$current_session_data = $this->get_session_from_db( $this->session_key );
 		// delete session to make sure a new row is created in the DB.
 		$this->handler->delete_session( $this->session_key );
-		$this->assertFalse( wp_cache_get( $this->cache_prefix . $this->session_key, WC_SESSION_CACHE_GROUP ) );
+
+		$cache = pngx( 'cache' );
+		$this->assertFalse( $cache->get( $this->cache_prefix . $this->session_key, $this->handler->get_cache_group() ) );
 
 		$this->handler->set( 'cart', 'new cart' );
 		$this->handler->save_data();
@@ -189,13 +215,13 @@ class SessionTest extends \Codeception\TestCase\WPTestCase {
 
 		$this->assertEquals( $current_session_data->session_id + 1, $updated_session_data->session_id );
 		$this->assertEquals( $this->session_key, $updated_session_data->session_key );
-		$this->assertEquals( maybe_serialize( array( 'cart' => 'new cart' ) ), $updated_session_data->session_value );
+		$this->assertEquals( maybe_serialize( [ 'cart' => 'new cart' ] ), $updated_session_data->session_value );
 		$this->assertTrue( is_numeric( $updated_session_data->session_expiry ) );
-		$this->assertEquals( array( 'cart' => 'new cart' ), wp_cache_get( $this->cache_prefix . $this->session_key, WC_SESSION_CACHE_GROUP ) );
+		$this->assertEquals( [ 'cart' => 'new cart' ], $cache->get( $this->cache_prefix . $this->session_key, $this->handler->get_cache_group() ) );
 	}
 
 	/**
-	 * @testdox Test that save data should replace existing row.
+	 * @test
 	 */
 	public function test_save_data_should_replace_existing_row() {
 		$current_session_data = $this->get_session_from_db( $this->session_key );
@@ -212,24 +238,24 @@ class SessionTest extends \Codeception\TestCase\WPTestCase {
 	}
 
 	/**
-	 * @testdox Test that get_setting() should use cache.
+	 * @test
 	 */
 	public function test_get_session_should_use_cache() {
 		$session = $this->handler->get_session( $this->session_key );
-		$this->assertEquals( array( 'cart' => 'fake cart' ), $session );
+		$this->assertEquals( array( 'cart' => 'test cart' ), $session );
 	}
 
 	/**
-	 * @testdox Test that get_setting() shouldn't use cache.
+	 * @test
 	 */
 	public function test_get_session_should_not_use_cache() {
-		wp_cache_delete( $this->cache_prefix . $this->session_key, WC_SESSION_CACHE_GROUP );
+		wp_cache_delete( $this->cache_prefix . $this->session_key, $this->handler->get_cache_group() );
 		$session = $this->handler->get_session( $this->session_key );
-		$this->assertEquals( array( 'cart' => 'fake cart' ), $session );
+		$this->assertEquals( array( 'cart' => 'test cart' ), $session );
 	}
 
 	/**
-	 * @testdox Test that get_setting() should return default value.
+	 * @test
 	 */
 	public function test_get_session_should_return_default_value() {
 		$default_session = array( 'session' => 'default' );
@@ -238,26 +264,21 @@ class SessionTest extends \Codeception\TestCase\WPTestCase {
 	}
 
 	/**
-	 * @testdox Test delete_session().
+	 * @test
 	 */
 	public function test_delete_session() {
 		global $wpdb;
 
 		$this->handler->delete_session( $this->session_key );
 
-		$session_id = $wpdb->get_var(
-			$wpdb->prepare(
-				"SELECT `session_id` FROM {$wpdb->prefix}woocommerce_sessions WHERE session_key = %s",
-				$this->session_key
-			)
-		);
+		$session_id = $wpdb->get_var( $wpdb->prepare( "SELECT `session_id` FROM {$wpdb->prefix}pngx_sessions WHERE session_key = %s", $this->session_key ) );
 
-		$this->assertFalse( wp_cache_get( $this->cache_prefix . $this->session_key, WC_SESSION_CACHE_GROUP ) );
+		$this->assertFalse( wp_cache_get( $this->cache_prefix . $this->session_key, $this->handler->get_cache_group() ) );
 		$this->assertNull( $session_id );
 	}
 
 	/**
-	 * @testdox Test update_session_timestamp().
+	 * @test
 	 */
 	public function test_update_session_timestamp() {
 		global $wpdb;
@@ -266,51 +287,15 @@ class SessionTest extends \Codeception\TestCase\WPTestCase {
 
 		$this->handler->update_session_timestamp( $this->session_key, $timestamp );
 
-		$session_expiry = $wpdb->get_var(
-			$wpdb->prepare(
-				"SELECT session_expiry FROM {$wpdb->prefix}woocommerce_sessions WHERE session_key = %s",
-				$this->session_key
-			)
-		);
+		$session_expiry = $wpdb->get_var( $wpdb->prepare( "SELECT session_expiry FROM {$wpdb->prefix}pngx_sessions WHERE session_key = %s", $this->session_key ) );
 		$this->assertEquals( $timestamp, $session_expiry );
 	}
 
 	/**
-	 * @testdox Test that nonce of user logged out is only changed by WooCommerce.
+	 * @test
 	 */
 	public function test_maybe_update_nonce_user_logged_out() {
-		$this->assertEquals( 1, $this->handler->maybe_update_nonce_user_logged_out( 1, 'wp_rest' ) );
-		$this->assertEquals( $this->handler->get_customer_unique_id(), $this->handler->maybe_update_nonce_user_logged_out( 1, 'woocommerce-something' ) );
-	}
-
-	/**
-	 * Helper function to create a WC session and save it to the DB.
-	 */
-	protected function create_session() {
-		$this->handler->init();
-		wp_set_current_user( 1 );
-		$this->handler->set( 'cart', 'fake cart' );
-		$this->handler->save_data();
-		$this->session_key  = $this->handler->get_customer_id();
-		$this->cache_prefix = WC_Cache_Helper::get_cache_prefix( WC_SESSION_CACHE_GROUP );
-	}
-
-	/**
-	 * Helper function to get session data from DB.
-	 *
-	 * @param string $session_key Session key.
-	 * @return stdClass
-	 */
-	protected function get_session_from_db( $session_key ) {
-		global $wpdb;
-
-		$session_data = $wpdb->get_row(
-			$wpdb->prepare(
-				"SELECT * FROM {$wpdb->prefix}woocommerce_sessions WHERE `session_key` = %s",
-				$session_key
-			)
-		);
-
-		return $session_data;
+		$this->assertEquals( 1, $this->handler->maybe_update_nonce_of_logged_out_user( 1, 'wp_rest' ) );
+		$this->assertEquals( $this->handler->get_session_id(), $this->handler->maybe_update_nonce_of_logged_out_user( 1, 'pngx-testing' ) );
 	}
 }

@@ -188,7 +188,6 @@ class Pngx__Main {
 		pngx_register_provider( Pngx\Service_Providers\Dialog::class );
 		pngx_register_provider( Pngx\Service_Providers\Carousel::class );
 		pngx_register_provider( Pngx\Duplicate\Post_Types::class );
-		pngx_register_provider( Pngx\Service_Providers\Updates::class );
 	}
 
 	/**
