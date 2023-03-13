@@ -78,7 +78,6 @@ class Pngx__Sanitize {
 
 			$this->result = false;
 		}
-
 	}
 
 	/**
@@ -89,7 +88,6 @@ class Pngx__Sanitize {
 	private function sanitize_icon() {
 
 		return $this->sanitize_text();
-
 	}
 
 	/**
@@ -100,7 +98,6 @@ class Pngx__Sanitize {
 	private function sanitize_license() {
 
 		return $this->sanitize_text();
-
 	}
 
 	/*
@@ -111,7 +108,6 @@ class Pngx__Sanitize {
 	private function sanitize_license_status() {
 
 		return $this->sanitize_text();
-
 	}
 
 	/**
@@ -182,7 +178,6 @@ class Pngx__Sanitize {
 		}
 
 		return $input;
-
 	}
 
 	/**
@@ -193,7 +188,6 @@ class Pngx__Sanitize {
 	private function sanitize_url() {
 
 		return esc_url_raw( $this->input );
-
 	}
 
 	/**
@@ -204,7 +198,6 @@ class Pngx__Sanitize {
 	private function sanitize_file() {
 
 		return $this->sanitize_absint();
-
 	}
 
 	/**
@@ -388,17 +381,6 @@ class Pngx__Sanitize {
 	}
 
 	/**
-	 * File ID Sanitize
-	 *
-	 * @return string
-	 */
-	private function sanitize_file() {
-
-		return $this->sanitize_absint();
-
-	}
-
-	/**
 	 * Image ID Sanitize
 	 *
 	 * @return interger
@@ -406,7 +388,6 @@ class Pngx__Sanitize {
 	private function sanitize_image() {
 
 		return $this->sanitize_absint();
-
 	}
 
 	/**
@@ -417,7 +398,6 @@ class Pngx__Sanitize {
 	private function sanitize_proimage() {
 
 		return $this->sanitize_absint();
-
 	}
 
 	/**
@@ -428,7 +408,6 @@ class Pngx__Sanitize {
 	private function sanitize_post_id() {
 
 		return $this->sanitize_absint();
-
 	}
 
 	/**
@@ -439,7 +418,6 @@ class Pngx__Sanitize {
 	private function sanitize_number() {
 
 		return $this->sanitize_absint();
-
 	}
 
 	/**
@@ -450,7 +428,6 @@ class Pngx__Sanitize {
 	private function sanitize_dimensions() {
 
 		return $this->sanitize_absint();
-
 	}
 
 	/**
@@ -489,13 +466,9 @@ class Pngx__Sanitize {
 		if ( ! preg_match( '|^UA-\d{4,}-\d+$|', $this->input ) ) {
 
 			return false;
-
 		} else {
 
 			return $this->input;
-
 		}
-
 	}
-
-} //end
+}

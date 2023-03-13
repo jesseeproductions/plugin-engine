@@ -226,7 +226,7 @@ if ( ! function_exists( 'pngx_sort_by_priority' ) ) {
 	/**
 	 * Sorting function based on Priority
 	 *
-	 * @since  4.7.20
+	 * @since 4.0.0
 	 *
 	 * @param object|array $b Second subject to compare
 	 *
@@ -247,7 +247,11 @@ if ( ! function_exists( 'pngx_sort_by_priority' ) ) {
 			$b_priority = $b->priority;
 		}
 
-		return (int) $a_priority === (int) $b_priority ? 0 : (int) $a_priority > (int) $b_priority;
+		if ( (int) $a_priority === (int) $b_priority ) {
+			return 0;
+		}
+
+		return (int) $a_priority > (int) $b_priority ? 1 : -1;
 	}
 }
 
