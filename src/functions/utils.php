@@ -957,3 +957,29 @@ if ( ! function_exists( 'pngx_maybe_define_constant' ) ) {
 		}
 	}
 }
+if ( ! function_exists( 'pngx_get_cart_item_data_hash' ) ) {
+	/**
+	 * Gets a hash of the coupon data.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @param WP_POST $post WordPress Post object.
+	 * @return string
+	 */
+	function pngx_get_cart_item_data_hash( $post ) {
+		return md5(
+			wp_json_encode(
+				apply_filters(
+					'pngx_cart_item_data_to_validate',
+					[
+						'id'          => $post->ID,
+						'post_name'   => $post->post_name,
+						'post_status' => $post->post_status,
+						'post_type'   => $post->post_type,
+					],
+					$post
+				)
+			)
+		);
+	}
+}

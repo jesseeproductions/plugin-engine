@@ -3,7 +3,8 @@
  * Dialog Alert View Template
  * The alert template for pngx-dialogs.
  *
- * Override this template in your own theme by creating a file at [your-theme]/pngx/dialogs/alert.php
+ * Override this template in your own theme by creating a file at
+ * [your-theme]/pngx/dialogs/alert.php
  *
  * @since 3.2.0
  *
