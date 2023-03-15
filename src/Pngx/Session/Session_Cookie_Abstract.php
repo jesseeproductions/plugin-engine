@@ -42,7 +42,7 @@ abstract class Session_Cookie_Abstract extends Session_Abstract implements Sessi
 	 * {@inheritDoc}
 	 */
 	public function has_session() {
-		return isset( $_COOKIE[ $this->cookie ] ) || $this->has_cookie || is_user_logged_in();
+		return isset( $_COOKIE[ $this->cookie_name ] ) || $this->has_cookie || is_user_logged_in();
 	}
 
 	/**
@@ -110,7 +110,7 @@ abstract class Session_Cookie_Abstract extends Session_Abstract implements Sessi
 		 * @since 4.0.0
 		 *
 		 * @param string The default cooke name session.
-		 * @param Session $this The current session object.
+		 * @param Session_Cookie_Abstract $this The current session object.
 		 */
 		$this->cookie_name = apply_filters( 'wp_pngx_session_cookie_name', 'pngx_session_' . COOKIEHASH, $this );
 	}
@@ -126,8 +126,8 @@ abstract class Session_Cookie_Abstract extends Session_Abstract implements Sessi
 			$this->has_cookie = true;
 
 			// Cookies set only if called before headers are sent.
-			if ( ! isset( $_COOKIE[ $this->cookie ] ) || $_COOKIE[ $this->cookie ] !== $cookie_value ) {
-				pngx_setcookie( $this->cookie, $cookie_value, $this->expiration_timestamp, $this->use_secure_cookie(), true );
+			if ( ! isset( $_COOKIE[ $this->cookie_name ] ) || $_COOKIE[ $this->cookie_name ] !== $cookie_value ) {
+				pngx_setcookie( $this->cookie_name, $cookie_value, $this->expiration_timestamp, $this->use_secure_cookie(), true );
 			}
 		}
 	}
@@ -143,7 +143,7 @@ abstract class Session_Cookie_Abstract extends Session_Abstract implements Sessi
 	 * {@inheritDoc}
 	 */
 	public function get_session_cookie() {
-		$cookie_value = isset( $_COOKIE[ $this->cookie ] ) ? wp_unslash( $_COOKIE[ $this->cookie ] ) : false;
+		$cookie_value = isset( $_COOKIE[ $this->cookie_name ] ) ? wp_unslash( $_COOKIE[ $this->cookie_name ] ) : false;
 
 		if ( empty( $cookie_value ) || ! is_string( $cookie_value ) ) {
 			return false;
@@ -170,7 +170,7 @@ abstract class Session_Cookie_Abstract extends Session_Abstract implements Sessi
 	 * {@inheritDoc}
 	 */
 	public function forget_cookie() {
-		pngx_setcookie( $this->cookie, '', time() - YEAR_IN_SECONDS, $this->use_secure_cookie(), true );
+		pngx_setcookie( $this->cookie_name, '', time() - YEAR_IN_SECONDS, $this->use_secure_cookie(), true );
 	}
 
 	/**

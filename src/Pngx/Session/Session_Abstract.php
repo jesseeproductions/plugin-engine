@@ -9,6 +9,8 @@
 
 namespace Pngx\Session;
 
+use Pngx__Cache;
+
 /**
  * Class Session
  *
@@ -109,7 +111,7 @@ abstract class Session_Abstract implements Session_Interface {
 	 *
 	 * @var boolean Whether there is data unsaved.
 	 */
-	protected $unsaved;
+	protected $unsaved = false;
 
 	/**
 	 * Pngx cache
@@ -355,7 +357,7 @@ abstract class Session_Abstract implements Session_Interface {
 	 */
 	public function save_data( $logged_out_key = 0 ) {
 		// Only save if there is something to save.
-		if ( ! $this->unsaved && ! $this->has_session() ) {
+		if ( ! $this->unsaved || ! $this->has_session() ) {
 			return;
 		}
 
