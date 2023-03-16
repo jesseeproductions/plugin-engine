@@ -419,7 +419,7 @@ class Pngx__Admin__Notices {
 	 *
 	 * @return stdClass
 	 */
-	public function register( $slug, $callback, $arguments = array(), $active_callback = null ) {
+	public function register( $slug, $callback, $arguments = [], $active_callback = null ) {
 		// Prevent weird stuff here
 		$slug = sanitize_title_with_dashes( $slug );
 

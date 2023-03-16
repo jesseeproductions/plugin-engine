@@ -375,15 +375,25 @@ abstract class Session_Abstract implements Session_Interface {
 			$this->expiration_timestamp
 		);
 
-		$wpdb->query( $session_query );
+		$response = $wpdb->query( $session_query );
+		// If Unknown error 1146 change option and display notice to run the custom table install.
+		if ( ! $response ) {
+			$last_error = $wpdb->last_error;
+			if ( $last_error === 'Unknown error 1146' ) {
+				update_option( 'pngx_database_missing_tables', true );
+			}
+		}
 
 		$this->cache->set( $this->get_cache_prefix() . $this->user_id, $this->data, $this->expiration_timestamp - time(), static::$cache_group_name );
 
 		$this->unsaved = false;
-		if ( get_current_user_id() != $logged_out_key && ! is_object( get_user_by( 'id', $logged_out_key ) ) ) {
+		if (
+			get_current_user_id() != $logged_out_key
+			&&
+			! is_object( get_user_by( 'id', $logged_out_key ) )
+		) {
 			$this->delete_session( $logged_out_key );
 		}
-
 	}
 
 	/**

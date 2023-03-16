@@ -122,18 +122,19 @@ class Database  {
 		if ( 0 < count( $missing_tables ) ) {
 			if ( $modify_notice ) {
 				pngx_notice(
-					'missing_tables',
-					[ Database::class, 'show_base_tables_missing' ]
+					'pngx_missing_tables',
+					[ pngx( Database::class ), 'show_base_tables_missing' ]
 				);
 			}
 
 			update_option( 'pngx_schema_missing_tables', $missing_tables );
 		} else {
 			if ( $modify_notice ) {
-				\Pngx__Admin__Notices::instance()->remove( 'missing_tables' );
+				\Pngx__Admin__Notices::instance()->remove( 'pngx_missing_tables' );
 			}
 
 			update_option( Pngx__Main::$db_version_key, Pngx__Main::$db_version );
+			update_option( 'pngx_database_missing_tables', false );
 			delete_option( 'pngx_schema_missing_tables' );
 		}
 		return $missing_tables;
@@ -158,33 +159,40 @@ class Database  {
 	 * Show Base Table Missing Notice.
 	 */
 	public function show_base_tables_missing() {
-		if ( ! current_user_can( 'activate_plugins' ) ) {
+		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
 
-		// Set to Plugin Engine Options.
-		$query_args       = [
-			'post_type' => 'pngx',
-			'page'      => 'pngx-options',
-		];
-		$base_tables_link = add_query_arg( $query_args, admin_url( 'edit.php' ) );
-
 		/**
-		 * Filter the base url for missing tables notice to be able to reinstall.
+		 * Filter the plugin name for missing tables notice to be able to reinstall.
 		 *
 		 * @since 4.0.0
 		 *
-		 * @param array<int|string> $tables An array of Plugin Engine table names.
+		 * @param string The default plugin name is Plugin Engine.
 		 */
-		$base_tables_link = apply_filters( 'pngx_missing_tables_notice_link', $base_tables_link );
+		$plugin_name = apply_filters( 'pngx_missing_tables_plugin_name', 'Plugin Engine' );
+
+		/**
+		 * Filter the url for missing tables notice to be able to reinstall.
+		 *
+		 * @since 4.0.0
+		 *
+		 * @param string The default link, empty string as it must be provided by a plugin.
+		 */
+		$database_install_link = apply_filters( 'pngx_missing_tables_notice_link', '' );
+
+		if ( empty( $database_install_link) ) {
+			return;
+		}
 
 		printf(
 			'<div class="error pngx-notice pngx-dependency-error" data-plugin="%1$s"><p>'
-			. esc_html__( 'One or more custom tables are missing from your install. Missing tables: %2$s. <a href="%2$s">Check again.</a>', 'plugin-engine' )
+			. _x( 'One or more custom tables are missing from your install of %2$s. Missing tables: %3$s. <a href="%4$s">Run install again with this link.</a>', 'Error message that displays if missing custom tables, it provides a link to install tables again.', 'plugin-engine' )
 			. '</p></div>',
 			'plugin-engine',
+			$plugin_name,
 			get_option( 'pngx_schema_missing_tables' ),
-			pngx_sanitize_url( $base_tables_link )
+			pngx_sanitize_url( $database_install_link )
 		);
 	}
 
