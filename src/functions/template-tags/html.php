@@ -2,7 +2,8 @@
 /**
  * HTML functions (template-tags) for use in WordPress templates.
  */
-use Pngx\Utilities\Element_Classes;
+use Pngx\Utils\Element_Classes;
+use Pngx\Utils\Element_Attributes;
 
 /**
  * Parse input values into a valid array of classes to be used in the templates.
@@ -16,6 +17,34 @@ use Pngx\Utilities\Element_Classes;
 function pngx_get_classes() {
 	$element_classes = new Element_Classes( func_get_args() );
 	return $element_classes->get_classes();
+}
+
+/**
+ * Parse input values into a valid array of attributes to be used in the templates.
+ *
+ * @since  TBD
+ *
+ * @param  mixed $attributes,... unlimited Any amount of params to be rendered as attributes.
+ *
+ * @return array<string> An array of the parsed string attributes.
+ */
+function pngx_get_attributes() {
+	$element_attributes = new Element_Attributes( func_get_args() );
+	return $element_attributes->get_attributes_array();
+}
+
+/**
+ * Parse input values into a valid html attributes to be used in the templates.
+ *
+ * @since  TBD
+ *
+ * @param  mixed $attributes,... unlimited Any amount of params to be rendered as attributes.
+ *
+ * @return void
+ */
+function pngx_attributes() {
+	$element_attributes = new Element_Attributes( func_get_args() );
+	echo $element_attributes->get_attributes();
 }
 
 /**
