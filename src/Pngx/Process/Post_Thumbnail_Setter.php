@@ -114,7 +114,7 @@ class Pngx__Process__Post_Thumbnail_Setter extends Pngx__Process__Handler {
 		}
 
 		$id             = filter_var( $data_source['post_id'], FILTER_SANITIZE_NUMBER_INT );
-		$post_thumbnail = filter_var( $data_source['post_thumbnail'], FILTER_SANITIZE_STRING );
+		$post_thumbnail = filter_var( $data_source['post_thumbnail'], FILTER_SANITIZE_URL );
 
 		$logger->log_debug( "(ID: {$this->identifier}) - fetching {$post_thumbnail} for post {$id}", $log_src );
 

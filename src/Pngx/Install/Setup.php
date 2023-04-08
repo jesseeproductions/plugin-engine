@@ -24,6 +24,13 @@ class Setup {
 	use With_AJAX;
 
 	/**
+	 * The name of the transient that will be used to flag whether if setup is active.
+	 *
+	 * @since 4.0.0
+	 */
+	public const SETUP_TRANSIENT = 'pngx_setup_active';
+
+	/**
 	 * The name of the action used add a coupon to the cart.
 	 *
 	 * @since 4.0.0
@@ -73,13 +80,13 @@ class Setup {
 		}
 
 		// Check if we are not already running this routine.
-		if ( pngx_is_truthy( get_transient( 'pngx_setup_active' ) ) ) {
+		if ( pngx_is_truthy( get_transient( static::SETUP_TRANSIENT ) ) ) {
 			return;
 		}
 
 		// Setup transient that the setup is in process.
-		set_transient( 'pngx_setup_active', 'yes', MINUTE_IN_SECONDS * 10 );
-		pngx_maybe_define_constant( 'pngx_setup_active', true );
+		set_transient( static::SETUP_TRANSIENT, 'yes', MINUTE_IN_SECONDS * 10 );
+		pngx_maybe_define_constant( static::SETUP_TRANSIENT, true );
 
 		pngx( Database::class )::create_tables();
 		pngx( Database::class )::verify_base_tables();
@@ -88,7 +95,7 @@ class Setup {
 
 		do_action( 'pngx_installing' );
 
-		delete_transient( 'pngx_setup_active' );
+		delete_transient( static::SETUP_TRANSIENT );
 
 		// Set permalink change on next reload of admin.
 		update_option( 'pngx_permalink_change', true );
@@ -104,7 +111,7 @@ class Setup {
 	 * @return bool
 	 */
 	public static function is_installing() {
-		return pngx_is_truthy( get_transient( 'pngx_setup_active' ) );
+		return pngx_is_truthy( get_transient( static::SETUP_TRANSIENT ) );
 	}
 
 	/**

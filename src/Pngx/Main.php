@@ -4,7 +4,22 @@
  */
 class Pngx__Main {
 
-	const VERSION    = '4.0.0';
+	/**
+	 * Stores the version for the plugin engine.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @var string
+	 */
+	const VERSION = '4.0.0';
+
+	/**
+	 * Name of the plugin engine options.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @var string
+	 */
 	const OPTIONS_ID = 'plugin_engine_options';
 
 	/**
@@ -25,18 +40,96 @@ class Pngx__Main {
 	 */
 	public static $db_version = '400';
 
+	/**
+	 * Plugin context.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @var string
+	 */
 	protected $plugin_context;
+
+	/**
+	 * Plugin context class.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @var object
+	 */
 	protected $plugin_context_class;
-	public    $doing_ajax = false;
 
+	/**
+	 * Whether AJAX is currently being processed.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @var bool
+	 */
+	public $doing_ajax = false;
+
+	/**
+	 * Plugin Directory path.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @var string
+	 */
 	public $plugin_dir;
-	public $plugin_path;
-	public $plugin_url;
-	public $resource_path;
-	public $resource_url;
-	public $vendor_path;
-	public $vendor_url;
 
+	/**
+	 * Plugin Path.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @var string
+	 */
+	public $plugin_path;
+
+	/**
+	 * Plugin Ur.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @var string
+	 */
+	public $plugin_url;
+
+	/**
+	 * Plugin Resource Path.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @var string
+	 */
+	public $resource_path;
+
+	/**
+	 * Plugin Resource Url.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @var string
+	 */
+	public $resource_url;
+
+
+	/**
+	 * Plugin Vendor Path.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @var string
+	 */
+	public $vendor_path;
+
+	/**
+	 * Plugin Vendor Path.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @var string
+	 */
+	public $vendor_url;
 
 	/**
 	 * The slug that will be used to identify HTTP requests common should handle.
@@ -49,12 +142,18 @@ class Pngx__Main {
 
 	/**
 	 * Static Singleton Holder
+	 *
+	 * @since 1.0.0
+	 *
 	 * @var self
 	 */
 	protected static $instance;
 
 	/**
-	 * constructor
+	 * Constructor
+	 *
+	 * @since 1.0.0
+	 *
 	 */
 	public function __construct( $context = null ) {
 		if ( self::$instance ) {
