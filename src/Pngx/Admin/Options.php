@@ -14,43 +14,51 @@ if ( class_exists( 'Pngx__Admin__Options' ) ) {
  */
 class Pngx__Admin__Options {
 
+	/**
+	 *  Instance of Pngx__Admin__Options.
+	 *
+	 * @var Pngx__Admin__Options
+	 */
 	protected static $instance;
-	/*
-	* Tab Sections
-	*/
+
+	/**
+	 * Tab Sections
+	 */
 	protected $sections;
-	/*
-	* Checkbox Fields
-	*/
+
+	/**
+	 * Checkbox Options.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @var array
+	 */
 	protected $checkboxes;
-	/*
-	* Option Fields
-	*/
+
+	/**
+	 * Option Fields
+	 */
 	public $fields;
 
-	/*
-	* Options Page Slug
-	*/
+	/**
+	 * Options Page Slug
+	 */
 	protected $options_slug = 'plugin-engine-options';
 
-	/*
-	* Options ID
-	*/
+	/**
+	 * Options ID
+	 */
 	protected $options_id = Pngx__Main::OPTIONS_ID;
 
-	/*
-	* Field Prefix
-	*/
+	/**
+	 * Field Prefix
+	 */
 	protected $field_prefix = 'pngx_';
 
-
-	/*
-	* Construct
-	*/
+	/**
+	 * Construct
+	 */
 	public function __construct() {
-
-		$this->checkboxes = array();
-
 		add_action( 'admin_menu', array( $this, 'options_page' ) );
 		add_action( 'admin_init', array( $this, 'register_options' ), 15 );
 
@@ -60,14 +68,12 @@ class Pngx__Admin__Options {
 
 		add_action( 'pngx_before_option_form', array( $this, 'display_options_header' ), 5 );
 		add_action( 'pngx_after_option_form', array( $this, 'display_options_footer' ), 5 );
-
 	}
 
 	/**
 	 * Setup Options Page
 	 */
 	public function options_page() {
-
 		$admin_page = add_submenu_page( 'options-general.php', // parent_slug
 			'Plugin Engine Options', // page_title __( 'use translation', 'plugin-engine' )
 			'Plugin Engine', // menu_title __( 'use translation', 'plugin-engine' )
@@ -76,15 +82,13 @@ class Pngx__Admin__Options {
 			array( $this, 'display_fields' ) // function
 		);
 
-		add_action( 'admin_print_scripts-' . $admin_page, pngx_callback( 'pngx.admin.assets', 'load_assets' ) );
-
+		add_action( 'admin_print_scripts-' . $admin_page, pngx_callback( 'admin.assets', 'load_assets' ) );
 	}
 
-	/*
-	* Register Options
-	*/
+	/**
+	 * Register Options
+	 */
 	public function register_options() {
-
 		//Set options and sections here so they can be translated
 		$this->fields = $this->get_option_fields();
 		$this->set_sections();
@@ -109,37 +113,37 @@ class Pngx__Admin__Options {
 			$option['id'] = $id;
 			$this->create_field( $option );
 		}
-
 	}
 
-	/*
-	* Display Section
-	*/
+	/**
+	 * Display Section
+	 */
 	public function display_section() {
 		//Empty Method that is need to prevent infinite redirects
 	}
 
-	/*
-	* Get Section Tabs
-	*/
+	/**
+	 * Get Section Tabs
+	 */
 	public function set_sections() {
 		//Section Tab Headings
 		$this->sections['defaults'] = 'Defaults'; // use __( 'use translation', 'plugin-engine' )
 	}
 
-	/*
-	* Get Section Tabs
-	*/
+	/**
+	 * Get Section Tabs.
+	 */
 	public function get_sections() {
 		return $this->sections;
 	}
 
-	/*
-	* Individual Fields Framework
-	*/
-	public function create_field( $args = array() ) {
-
-		$defaults = array(
+	/**
+	 * Individual Fields Framework.
+	 *
+	 * @param $args
+	 */
+	public function create_field( $args = [] ) {
+		$defaults = [
 			'id'        => 'default_id',
 			'title'     => 'Default', //__( 'use translation', 'plugin-engine' )
 			'desc'      => 'This is a default description.', //__( 'use translation', 'plugin-engine' )
@@ -148,12 +152,12 @@ class Pngx__Admin__Options {
 			'condition' => '',
 			'std'       => '',
 			'type'      => 'text',
-			'choices'   => array(),
+			'choices'   => [],
 			'class'     => '',
 			'imagemsg'  => '',
 			'size'      => 35,
-			'toggle'    => array(),
-		);
+			'toggle'    => [],
+		];
 
 		$field_args = wp_parse_args( $args, $defaults );
 
@@ -174,11 +178,10 @@ class Pngx__Admin__Options {
 		);
 	}
 
-	/*
-	* Option Fields
-	*/
+	/**
+	 * Option Fields
+	 */
 	public function get_option_fields() {
-
 		//Expiration
 		$fields['header_expiration'] = array(
 			'section' => 'defaults',
@@ -196,15 +199,15 @@ class Pngx__Admin__Options {
 		);
 
 		return $fields;
-
 	}
 
-	/*
-	* Validate Options
-	*/
+	/**
+	 * Validate Options.
+	 *
+	 * @param $input
+	 */
 	public function validate_options( $input ) {
-
-		$clean = array();
+		$clean = [];
 
 		//if Reset is Checked then delete all options
 		if ( ! isset( $input['reset_theme'] ) ) {
@@ -301,7 +304,7 @@ class Pngx__Admin__Options {
 				/**
 				 * Filter the Validation Input for Each Field Option.
 				 *
-				 * @since 3.2.0
+				 * @since TBD
 				 *
 				 * @param array  $input  An array of inputs being saved.
 				 * @param string $id     The ID for the option field.
@@ -320,7 +323,6 @@ class Pngx__Admin__Options {
 		update_option( 'pngx_permalink_change', true );
 
 		return false;
-
 	}
 
 	/**
@@ -330,7 +332,8 @@ class Pngx__Admin__Options {
 		global $wp_version;
 
 		//Create Array of Tabs and Localize to Meta Script
-		$tabs_array = [];
+		$tabs_array = array();
+
 		foreach ( $this->sections as $tab_slug => $tab ) {
 			$tabs_array[ $tab ] = $tab_slug;
 		}
@@ -381,20 +384,17 @@ class Pngx__Admin__Options {
 		do_action( 'pngx_after_option_form', $this->options_slug );
 
 		echo '</div><!-- .wrap -->';
-
 	}
 
-
-	/*
-	 * Options Header
+	/**
+	 * Options Header.
 	 *
+	 * @param $slug
 	 */
 	public function display_options_header( $slug ) {
-
 		if ( 'plugin-engine-options' == $slug ) {
 			echo '<h1>Plugin Engine Options</h1>';
 		}
-
 	}
 
 	/**
@@ -406,6 +406,8 @@ class Pngx__Admin__Options {
 
 	/**
 	 * Display Individual Fields
+	 *
+	 * @param $field
 	 */
 	public function display_field( $field = array() ) {
 		$options = get_option( $this->options_id );
@@ -426,10 +428,11 @@ class Pngx__Admin__Options {
 		$this->initialize_options();
 	}
 
-	/**
-	 * Initialize Options and Default Values
-	 */
+	/*
+	* Initialize Options and Default Values
+	*/
 	public function initialize_options() {
+
 		$default_options = array();
 		$this->fields    = $this->get_option_fields();
 
@@ -450,7 +453,6 @@ class Pngx__Admin__Options {
 
 			update_option( $this->options_id, $default_options );
 		}
-
 	}
 
 	/**
