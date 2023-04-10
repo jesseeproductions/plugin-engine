@@ -44,6 +44,12 @@ class Pngx__Fields {
 
 				break;
 
+			case 'html':
+
+				echo $field['html'];
+
+				break;
+
 			case 'icon':
 
 				Pngx__Field__Icon::display( $field, $post_id, $meta, $template_fields, $var );

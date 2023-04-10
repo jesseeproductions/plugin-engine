@@ -409,8 +409,8 @@ class Pngx__Admin__Options {
 	 *
 	 * @param $field
 	 */
-	public function display_field( $field = array() ) {
-		$options = get_option( $this->options_id );
+	public function display_field( $field = [] ) {
+		$options = (array) get_option( $this->options_id, [] );
 
 		if ( ! isset( $options[ $field['id'] ] ) && 'checkbox' != $field['type'] ) {
 			$options[ $field['id'] ] = $field['std'];

@@ -123,6 +123,12 @@ class Pngx__Admin__Fields {
 
 				break;
 
+			case 'html':
+
+				echo $field['html'];
+
+				break;
+
 			case 'icon':
 
 				Pngx__Admin__Field__Icon::display( $field, $options, $options_id, $meta, $repeat_vars );
