@@ -6,6 +6,7 @@
  * Register all plugins to Dependency Class
  *
  * @package Pngx
+ *
  * @since 3.0
  *
  */
