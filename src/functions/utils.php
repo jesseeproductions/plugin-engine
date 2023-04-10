@@ -959,7 +959,7 @@ if ( ! function_exists( 'pngx_maybe_define_constant' ) ) {
 }
 if ( ! function_exists( 'pngx_get_cart_item_data_hash' ) ) {
 	/**
-	 * Gets a hash of the coupon data.
+	 * Gets a hash of the cart data.
 	 *
 	 * @since 4.0.0
 	 *

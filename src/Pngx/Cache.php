@@ -33,9 +33,6 @@ class Pngx__Cache implements ArrayAccess {
 		}
 
 		add_action( self::SCHEDULED_EVENT_DELETE_TRANSIENT, [ $this, 'delete_expired_transients' ] );
-
-		//todo there was a support thread opened, is this needed Coupon plugins?
-		//add_action( 'shutdown', [ $this, 'maybe_delete_expired_transients' ] );
 	}
 
 	public static function setup() {

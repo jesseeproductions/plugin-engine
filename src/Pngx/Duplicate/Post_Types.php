@@ -73,8 +73,8 @@ class Post_Types extends \tad_DI52_ServiceProvider {
 		}
 
 		// Duplicate Custom Fields
-		$coupon_post_field_keys = get_post_custom_keys( $post_id );
-		foreach ( $coupon_post_field_keys as $meta_name ) {
+		$post_field_keys = get_post_custom_keys( $post_id );
+		foreach ( $post_field_keys as $meta_name ) {
 			$meta_value = get_post_meta( $post_id, $meta_name, true );
 			update_post_meta( $new_post_id, $meta_name, $meta_value );
 		}

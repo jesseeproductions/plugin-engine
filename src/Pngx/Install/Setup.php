@@ -31,7 +31,7 @@ class Setup {
 	public const SETUP_TRANSIENT = 'pngx_setup_active';
 
 	/**
-	 * The name of the action used add a coupon to the cart.
+	 * The name of the action used reinstall the database.
 	 *
 	 * @since 4.0.0
 	 *
