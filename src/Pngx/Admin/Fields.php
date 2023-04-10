@@ -59,7 +59,6 @@ class Pngx__Admin__Fields {
 	*
 	*/
 	public static function flush_permalinks() {
-
 		if ( true == get_option( 'pngx_permalink_change' ) ) {
 
 			do_action( 'pngx_flush_permalinks' );
@@ -68,9 +67,7 @@ class Pngx__Admin__Fields {
 
 			update_option( 'pngx_permalink_flush', date( 'l jS \of F Y h:i:s A' ) );
 			update_option( 'pngx_permalink_change', false );
-
 		}
-
 	}
 
 	/*
