@@ -1,12 +1,7 @@
 <?php
-// Don't load directly
-if ( ! defined( 'ABSPATH' ) ) {
-	die( '-1' );
-}
 if ( class_exists( 'Pngx__Admin__Field__Help' ) ) {
 	return;
 }
-
 
 /**
  * Class Pngx__Admin__Field__Help
@@ -35,7 +30,5 @@ class Pngx__Admin__Field__Help {
 		//Display Help Per Tab
 		$help_class = new Pngx__Admin__Help();
 		$help_class->display_help( $tab, $screen_id, 'pngx' );
-
 	}
-
 }

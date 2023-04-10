@@ -1,12 +1,7 @@
 <?php
-// Don't load directly
-if ( ! defined( 'ABSPATH' ) ) {
-	die( '-1' );
-}
 if ( class_exists( 'Pngx__Admin__Help' ) ) {
 	return;
 }
-
 
 /**
  * Class Pngx__Admin__Help
@@ -15,7 +10,7 @@ if ( class_exists( 'Pngx__Admin__Help' ) ) {
 class Pngx__Admin__Help {
 
 	//Help Fields array()
-	protected $fields = array();
+	protected $fields = [];
 
 	/**
 	 * Return Array of Help Fields
@@ -37,20 +32,20 @@ class Pngx__Admin__Help {
 		 *
 		 * Choose either section or tab to place the content
 		 */
-		$this->fields['header_video_guides_content'] = array(  // unique id
+		$this->fields['header_video_guides_content'] = array(
 			'section' => '', // options tab to place help content
 			'tab'     => 'content', // meta tab to place help content
 			'text'    => 'Content', // title for content section on help tab
 			'type'    => 'heading' //field type heading only used in opening
 		);
-		$this->fields['video_creating']       = array( // unique id
+		$this->fields['video_creating'] = array(
 			'section'  => '', //option tab to place help
 			'tab'      => 'content', //meta tab to place help
 			'text'     => 'Overview of Creating', //descriptive text for help
 			'video_id' => 'I1v9HxdIsSE', //Youtube Video ID
 			'type'     => 'video' //field type video
 		);
-		$this->fields['link_pro_hide_deal']           = array( // unique id
+		$this->fields['link_pro_hide_deal'] = array(
 			'section' => '', //option tab to place help
 			'tab'     => 'content', //meta tab to place help
 			'text'    => 'Descriptive Text',//descriptive text for help
@@ -58,7 +53,7 @@ class Pngx__Admin__Help {
 			'pro'     => 'Pro', //Add Pro superscript for pro only feature
 			'type'    => 'links' //field type links
 		);
-		$this->fields['video_end_list_content']      = array( // unique id
+		$this->fields['video_end_list_content'] = array(
 			'section' => '', // options tab close for this content
 			'tab'     => 'content', // meta tab close for this content
 			'type'    => 'end_list'
@@ -92,7 +87,6 @@ class Pngx__Admin__Help {
 	 * @param null $section
 	 */
 	public function display_help( $section = null, $page_screen_id = null, $class = null ) {
-
 		if ( ! $section ) {
 			return;
 		}
@@ -168,7 +162,6 @@ class Pngx__Admin__Help {
 				}
 			}
 		}
-
 	}
 
 	protected function help_fields_switch( $help_field = array(), $section = null ) {
@@ -214,8 +207,6 @@ class Pngx__Admin__Help {
 				       href="<?php echo esc_url( $help_field['link'] ); ?>"><?php echo esc_html( $help_field['text'] ); ?></a><?php echo $pro; ?>
 				</li>
 				<?php break;
-
 		}
-
 	}
 }

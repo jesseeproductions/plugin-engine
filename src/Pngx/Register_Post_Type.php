@@ -13,7 +13,6 @@ if ( class_exists( 'Pngx__Register_Post_Type' ) ) {
  * Register Custom Post Types in WordPress and Modify Messaging
  */
 class Pngx__Register_Post_Type {
-
 	protected $post_type = '';
 	protected $title_msg = '';
 
@@ -200,7 +199,5 @@ class Pngx__Register_Post_Type {
 		$args = apply_filters( 'pngx_register_' . $post_type . '_type_args', $args );
 
 		register_post_type( $post_type, $args );
-
 	}
-
 }

@@ -323,16 +323,14 @@ class Pngx__Admin__Options {
 
 	}
 
-	/*
-	* Display Fields
-	*/
+	/**
+	 * Display Fields
+	 */
 	public function display_fields() {
-
 		global $wp_version;
 
 		//Create Array of Tabs and Localize to Meta Script
-		$tabs_array = array();
-
+		$tabs_array = [];
 		foreach ( $this->sections as $tab_slug => $tab ) {
 			$tabs_array[ $tab ] = $tab_slug;
 		}
@@ -399,21 +397,17 @@ class Pngx__Admin__Options {
 
 	}
 
-	/*
+	/**
 	 * Option Footer Fields
-	 *
 	 */
 	public function display_options_footer() {
-
 		echo '<p style="text-align:right;">&copy; ' . date( "Y" ) . ' Jessee Productions, LLC</p>';
-
 	}
 
-	/*
-	* Display Individual Fields
-	*/
+	/**
+	 * Display Individual Fields
+	 */
 	public function display_field( $field = array() ) {
-
 		$options = get_option( $this->options_id );
 
 		if ( ! isset( $options[ $field['id'] ] ) && 'checkbox' != $field['type'] ) {
@@ -423,21 +417,19 @@ class Pngx__Admin__Options {
 		}
 
 		Pngx__Admin__Fields::display_field( $field, $options, $this->options_id, false, null );
-
 	}
 
-	/*
+	/**
 	 * Set Default Options
 	 */
 	public function set_defaults() {
 		$this->initialize_options();
 	}
 
-	/*
-	* Initialize Options and Default Values
-	*/
+	/**
+	 * Initialize Options and Default Values
+	 */
 	public function initialize_options() {
-
 		$default_options = array();
 		$this->fields    = $this->get_option_fields();
 
@@ -473,6 +465,4 @@ class Pngx__Admin__Options {
 
 		return self::$instance;
 	}
-
-
 }
