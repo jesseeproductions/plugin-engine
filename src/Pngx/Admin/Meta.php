@@ -37,34 +37,31 @@ class Pngx__Admin__Meta {
 	* Construct
 	*/
 	public function __construct() {
-
 		//Save Meta
 		add_action( 'save_post', array( $this, 'save_meta' ), 10, 2 );
-
 		//JS Error Check
 		add_action( 'pngx_meta_message', array( $this, 'get_js_error_check_msg' ) );
 	}
 
 	/**
-	 * Javascript Conflict Message
+	 * Javascript Conflict Message.
 	 *
-	 * @return string
+	 * @since 1.9.0
+	 *
+	 * @return string The conflict message.
 	 */
 	public function get_js_error_check_msg() {
-
 		$js_troubleshoot_url = 'http://cctor.link/R7KRa';
 
 		$js_msg = '<div class="javascript-conflict pngx-error"><p>' . sprintf( __( 'There maybe a javascript conflict preventing some features from working.  <a href="%s" target="_blank" >Please check this guide to narrow down the cause.</a>', 'plugin-engine' ), esc_url( $js_troubleshoot_url ) ) . '</p></div>';
 
 		return $js_msg;
-
 	}
 
 	/*
 	* Set Current Screen Variables
 	*/
 	public function get_screen_variables() {
-
 		global $pagenow, $typenow;
 		$current_screen['pagenow'] = $pagenow;
 		$current_screen['post']    = isset( $_GET['post'] ) ? $_GET['post'] : '';
@@ -76,53 +73,43 @@ class Pngx__Admin__Meta {
 		}
 
 		return $current_screen;
-
 	}
 
 	/*
 	* Get Post Type
 	*/
 	public function get_post_types() {
-
 		return $this->post_type;
-
 	}
 
 	/*
 	* Get User Capability
 	*/
 	public function get_user_capability() {
-
 		return $this->user_capability;
-
 	}
 
 	/*
 	* Set Tabs
 	*/
 	protected function set_tabs() {
-
 		//CPT Fields Tabs
 		$tabs['content'] = __( 'Content', 'plugin-engine' ); //set key and tab title
 
 		$this->tabs = $tabs;
-
 	}
 
 	/*
 	* Get Tabs
 	*/
 	public function get_tabs() {
-
 		return $this->tabs;
-
 	}
 
 	/*
 	* Load Meta Box Functions
 	*/
 	public function set_fields() {
-
 		$this->fields = Pngx__Meta__Fields::get_fields();
 	}
 
@@ -130,9 +117,7 @@ class Pngx__Admin__Meta {
 	* Get Fields
 	*/
 	public function get_fields() {
-
 		return $this->fields;
-
 	}
 
 	/**
@@ -142,7 +127,6 @@ class Pngx__Admin__Meta {
 	 * @param $metabox
 	 */
 	public function display_fields( $post, $metabox ) {
-
 		global $wp_version;
 
 		wp_nonce_field( 'pngx_save_fields', 'pngx_nonce' );
@@ -311,11 +295,13 @@ class Pngx__Admin__Meta {
 		<?php echo ob_get_clean();
 	}
 
-	/*
-	* Save Meta Fields
-	*/
+	/**
+	 * Save Meta Fields.
+	 *
+	 * @param int $post_id The post ID.
+	 * @param WP_Post $post An instance of the post object.
+	 */
 	public function save_meta( $post_id, $post ) {
-
 		//Autosave or no past variable then kick out
 		if (
 			empty( $_POST ) ||
@@ -433,7 +419,6 @@ class Pngx__Admin__Meta {
 		 *
 		 */
 		do_action( 'pngx_after_save_meta_fields', $_POST );
-
 	}
 
 	/**
@@ -448,5 +433,4 @@ class Pngx__Admin__Meta {
 
 		return self::$instance;
 	}
-
 }
