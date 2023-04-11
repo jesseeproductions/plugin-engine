@@ -205,64 +205,76 @@ class Pngx__Cache implements ArrayAccess {
 	}
 
 	/**
-	 * Whether a offset exists
+	 * Whether an offset exists
 	 *
 	 * @link  http://php.net/manual/en/arrayaccess.offsetexists.php
+	 *
+	 * @since 3.0.0
+	 *
 	 * @param mixed $offset <p>
 	 *                      An offset to check for.
 	 *                      </p>
+	 *
 	 * @return boolean true on success or false on failure.
 	 *                      </p>
 	 *                      <p>
 	 *                      The return value will be casted to boolean if non-boolean was returned.
-	 * @since 5.0.0
 	 */
-	public function offsetExists( $offset ) {
-		return in_array( $offset, $this->non_persistent_keys );
+	#[\ReturnTypeWillChange]
+	public function offsetExists( $offset ): bool {
+		$value = $this->get( $offset );
+
+		return $value !== false && $value !== null;
 	}
 
 	/**
 	 * Offset to retrieve
 	 *
 	 * @link  http://php.net/manual/en/arrayaccess.offsetget.php
+	 *
+	 * @since 3.0.0
+	 *
 	 * @param mixed $offset <p>
 	 *                      The offset to retrieve.
 	 *                      </p>
+	 *
 	 * @return mixed Can return all value types.
-	 * @since 5.0.0
 	 */
+	#[\ReturnTypeWillChange]
 	public function offsetGet( $offset ) {
 		return $this->get( $offset );
 	}
 
 	/**
-	 * Offset to set
+	 * Offset to set.
+	 *
+	 * @since 3.0.0
 	 *
 	 * @link  http://php.net/manual/en/arrayaccess.offsetset.php
-	 * @param mixed $offset <p>
-	 *                      The offset to assign the value to.
-	 *                      </p>
-	 * @param mixed $value  <p>
-	 *                      The value to set.
-	 *                      </p>
+	 *
+	 * @param mixed $offset The offset to assign the value to.
+	 * @param mixed $value  The value to set.
+	 *
 	 * @return void
-	 * @since 5.0.0
 	 */
-	public function offsetSet( $offset, $value ) {
+	#[\ReturnTypeWillChange]
+	public function offsetSet( $offset, $value ): void {
 		$this->set( $offset, $value, self::NON_PERSISTENT );
 	}
 
 	/**
-	 * Offset to unset
+	 * Offset to unset.
+	 *
+	 * @since 3.0.0
 	 *
 	 * @link  http://php.net/manual/en/arrayaccess.offsetunset.php
-	 * @param mixed $offset <p>
-	 *                      The offset to unset.
-	 *                      </p>
+	 *
+	 * @param mixed $offset The offset to unset.
+	 *
 	 * @return void
-	 * @since 5.0.0
 	 */
-	public function offsetUnset( $offset ) {
+	#[\ReturnTypeWillChange]
+	public function offsetUnset( $offset ): void {
 		$this->delete( $offset );
 	}
 }
