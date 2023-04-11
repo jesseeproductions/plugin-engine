@@ -16,6 +16,7 @@ pngx.carousels = pngx.carousels || {};
 					autoplay: carousel.autoplay,
 					autoplaySpeed: Number( carousel.autoplaySpeed ),
 					arrows: carousel.arrows,
+					dots: carousel.dots,
 					prevArrow: carousel.prevArrow,
 					nextArrow: carousel.nextArrow,
 					draggable: carousel.draggable,
