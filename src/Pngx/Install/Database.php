@@ -10,7 +10,6 @@
 namespace Pngx\Install;
 
 use Pngx__Main;
-use TEC\Event_Automator\Plugin;
 
 /**
  * Class Database
