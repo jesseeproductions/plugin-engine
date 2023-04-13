@@ -198,10 +198,9 @@ class Pngx__Main {
 	}
 
 	/**
-	 *
+	 * Load the plugin engine.
 	 */
 	public function plugins_loaded() {
-
 		$this->load_text_domain( 'plugin-engine', basename( dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) ) . '/plugin-engine/languages/' );
 
 		$this->init_autoloading();
@@ -221,7 +220,6 @@ class Pngx__Main {
 
 		/**
 		 * Runs to register loaded plugins
-		 *
 		 */
 		do_action( 'pngx_plugins_loaded' );
 
