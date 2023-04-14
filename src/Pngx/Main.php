@@ -289,6 +289,7 @@ class Pngx__Main {
 		pngx_register( 'pngx.register.cpt', new Pngx__Register_Post_Type() );
 		pngx_register( 'pngx.register.tax', new Pngx__Register_Taxonomy() );
 		pngx_singleton( 'cache', 'Pngx__Cache', [ 'hook' ] );
+		pngx_singleton( \Pngx\Ajax\Dropdown::class, \Pngx\Ajax\Dropdown::class, [ 'hook' ] );
 
 		//pngx_register_provider( Pngx\Service_Providers\Tooltip::class );
 		pngx_register_provider( Pngx\Service_Providers\Dialog::class );
@@ -326,6 +327,7 @@ class Pngx__Main {
 	 */
 	public function pngx_plugins_loaded() {
 		pngx( 'cache' );
+		pngx( \Pngx\Ajax\Dropdown::class );
 		pngx_singleton( 'pngx.feature-detection', 'Pngx__Feature_Detection' );
 		pngx_register_provider( 'Pngx__Service_Providers__Processes' );
 

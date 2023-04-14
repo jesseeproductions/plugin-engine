@@ -7,9 +7,9 @@
  *
  * See more documentation about our views templating system.
  *
- * @since 0.1.0
+ * @since 4.0.0
  *
- * @version 0.1.0
+ * @version 4.0.0
  *
  * @link    https://voltvectors.com/guide/templates/
  *

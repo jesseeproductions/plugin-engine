@@ -22,13 +22,13 @@ class Pngx__Admin__Meta {
 	protected static $instance;
 
 	//tabs key and label
-	protected $tabs = array();
+	protected $tabs = [];
 
 	//fields
-	protected $fields = array();
+	protected $fields = [];
 
 	//post type
-	protected $post_type = array( 'pngx' );
+	protected $post_type = [ 'pngx' ];
 
 	//user capability
 	protected $user_capability = 'edit_post';
@@ -132,7 +132,7 @@ class Pngx__Admin__Meta {
 		wp_nonce_field( 'pngx_save_fields', 'pngx_nonce' );
 
 		//Create Array of Tabs and Localize to Meta Script
-		$tabs_array = array();
+		$tabs_array = [];
 
 		foreach ( $this->get_tabs() as $tab_slug => $tab ) {
 			$tabs_array[ $tab ] = $tab_slug;
@@ -223,7 +223,7 @@ class Pngx__Admin__Meta {
 
 							//if in template area only get fields with the template value
 							if ( $template_area ) {
-								$field_template = isset( $field['template'] ) ? $field['template'] : array();
+								$field_template = isset( $field['template'] ) ? $field['template'] : [];
 								if ( ! in_array( $template_area, $field_template ) ) {
 									continue;
 								}

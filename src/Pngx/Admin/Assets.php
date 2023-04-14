@@ -31,6 +31,12 @@ class Pngx__Admin__Assets {
 			filemtime( Pngx__Main::instance()->vendor_path . 'bootstrap-iconpicker/icon-fonts/font-awesome-4.3.0/css/font-awesome.css' )
 		);
 		wp_register_style(
+			'pngx-select2-css',
+			Pngx__Main::instance()->vendor_url . 'tribe-selectWoo/dist/css/selectWoo.css',
+			false,
+			filemtime( Pngx__Main::instance()->vendor_path . 'tribe-selectWoo/dist/css/selectWoo.css' )
+		);
+		wp_register_style(
 			'pngx-colorbox',
 			Pngx__Main::instance()->vendor_url . 'colorbox/colorbox.css',
 			false,
@@ -39,35 +45,41 @@ class Pngx__Admin__Assets {
 		wp_register_style(
 			'pngx-admin',
 			Pngx__Main::instance()->resource_url . 'css/pngx-admin.css',
-			array( 'pngx-colorbox', 'pngx-bootstrap-iconpicker','pngx-font-awesome', 'pngx-bootstrap-iconpicker' ),
+			[
+				'pngx-select2-css',
+				'pngx-colorbox',
+				'pngx-bootstrap-iconpicker',
+				'pngx-font-awesome',
+				'pngx-bootstrap-iconpicker'
+			],
 			filemtime( Pngx__Main::instance()->resource_path . 'css/pngx-admin.css' )
 		);
 
 		wp_register_script(
 			'pngx-clipboard',
 			Pngx__Main::instance()->vendor_url . 'clipboard/clipboard.js',
-			array(),
+			[],
 			filemtime( Pngx__Main::instance()->vendor_path . 'clipboard/clipboard.js' ),
 			true
 		);
 		wp_register_script(
 			'pngx-bootstrap',
 			Pngx__Main::instance()->vendor_url . 'bootstrap-iconpicker/bootstrap-3.2.0/js/bootstrap.min.js',
-			array(),
+			[],
 			filemtime( Pngx__Main::instance()->vendor_path . 'bootstrap-iconpicker/bootstrap-3.2.0/js/bootstrap.min.js' ),
 			true
 		);
 		wp_register_script(
 			'pngx-bootstrap-iconpicker-fontawesome',
 			Pngx__Main::instance()->vendor_url . 'bootstrap-iconpicker/bootstrap-iconpicker/js/iconset/iconset-fontawesome-4.3.0.min.js',
-			array(),
+			[],
 			filemtime( Pngx__Main::instance()->vendor_path . 'bootstrap-iconpicker/bootstrap-iconpicker/js/iconset/iconset-fontawesome-4.3.0.min.js' ),
 			true
 		);
 		wp_register_script(
 			'pngx-bootstrap-iconpicker',
 			Pngx__Main::instance()->vendor_url . 'bootstrap-iconpicker/bootstrap-iconpicker/js/bootstrap-iconpicker.min.js',
-			array(),
+			[],
 			filemtime( Pngx__Main::instance()->vendor_path . 'bootstrap-iconpicker/bootstrap-iconpicker/js/bootstrap-iconpicker.min.js' ),
 			true
 		);
@@ -75,7 +87,7 @@ class Pngx__Admin__Assets {
 		wp_register_script(
 			'pngx-color-picker-alpha',
 			Pngx__Main::instance()->vendor_url . 'wp-color-picker-alpha/wp-color-picker-alpha.min.js',
-			array(),
+			[],
 			filemtime( Pngx__Main::instance()->vendor_path . 'wp-color-picker-alpha/wp-color-picker-alpha.min.js' ),
 			true
 		);
@@ -83,21 +95,39 @@ class Pngx__Admin__Assets {
 		wp_register_script(
 			'pngx-bumpdown',
 			Pngx__Main::instance()->resource_url . 'js/bumpdown.js',
-			array(),
+			[],
 			filemtime( Pngx__Main::instance()->resource_path . 'js/bumpdown.js' ),
+			true
+		);
+		wp_register_script(
+			'pngx-select2',
+			Pngx__Main::instance()->vendor_url . 'tribe-selectWoo/dist/js/selectWoo.full.js',
+			[ 'jquery' ],
+			filemtime( Pngx__Main::instance()->vendor_path . 'tribe-selectWoo/dist/js/selectWoo.full.js' ),
+			true
+		);
+		wp_register_script(
+			'pngx-dropdowns',
+			Pngx__Main::instance()->resource_url . 'js/dropdowns.js',
+			[
+				'jquery',
+				'underscore',
+				'pngx-select2'
+			],
+			filemtime( Pngx__Main::instance()->resource_path . 'js/dropdowns.js' ),
 			true
 		);
 		wp_register_script(
 			'pngx-dependency',
 			Pngx__Main::instance()->resource_url . 'js/dependency.js',
-			array(),
+			[],
 			filemtime( Pngx__Main::instance()->resource_path . 'js/dependency.js' ),
 			true
 		);
 		wp_register_script(
 			'pngx-wp-editor',
 			Pngx__Main::instance()->resource_url . 'js/wp_editor.js',
-			array(),
+			[],
 			filemtime( Pngx__Main::instance()->resource_path . 'js/wp_editor.js' ),
 			true
 		);
@@ -105,7 +135,7 @@ class Pngx__Admin__Assets {
 		wp_register_script(
 			'pngx-load-template-ajax',
 			Pngx__Main::instance()->resource_url . 'js/templates.js',
-			array(),
+			[],
 			filemtime( Pngx__Main::instance()->resource_path . 'js/templates.js' ),
 			true
 		);
@@ -119,7 +149,21 @@ class Pngx__Admin__Assets {
 		wp_register_script(
 			'pngx-admin',
 			Pngx__Main::instance()->resource_url . 'js/pngx-admin.js',
-			array( 'pngx-bumpdown', 'pngx-dependency', 'pngx-clipboard', 'pngx-colorbox', 'pngx-wp-editor', 'pngx-load-template-ajax', 'pngx-color-picker-alpha', 'pngx-bootstrap', 'pngx-bootstrap-iconpicker-fontawesome', 'pngx-bootstrap-iconpicker', 'jquery-ui-tabs' ),
+				[
+					'jquery',
+					'pngx-bumpdown',
+					'pngx-dropdowns',
+					'pngx-dependency',
+					'pngx-clipboard',
+					'pngx-colorbox',
+					'pngx-wp-editor',
+					'pngx-load-template-ajax',
+					'pngx-color-picker-alpha',
+					'pngx-bootstrap',
+					'pngx-bootstrap-iconpicker-fontawesome',
+					'pngx-bootstrap-iconpicker',
+					'jquery-ui-tabs'
+				],
 			filemtime( Pngx__Main::instance()->resource_path . 'js/pngx-admin.js' ),
 			true
 		);

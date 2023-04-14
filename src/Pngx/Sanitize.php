@@ -86,7 +86,6 @@ class Pngx__Sanitize {
 	 * @return string
 	 */
 	private function sanitize_icon() {
-
 		return $this->sanitize_text();
 	}
 
@@ -96,7 +95,6 @@ class Pngx__Sanitize {
 	 * @return string
 	 */
 	private function sanitize_license() {
-
 		return $this->sanitize_text();
 	}
 
@@ -106,7 +104,6 @@ class Pngx__Sanitize {
 	 * @return string
 	 */
 	private function sanitize_license_status() {
-
 		return $this->sanitize_text();
 	}
 
@@ -116,9 +113,7 @@ class Pngx__Sanitize {
 	 * @return string
 	 */
 	private function sanitize_text() {
-
 		return sanitize_text_field( trim( $this->input ) );
-
 	}
 
 	/**
@@ -127,7 +122,6 @@ class Pngx__Sanitize {
 	 * @return string
 	 */
 	private function sanitize_titles() {
-
 		$terms_tags = array(
 			'b'      => array(),
 			'br'     => array(),
@@ -150,7 +144,6 @@ class Pngx__Sanitize {
 	 * @return string
 	 */
 	private function sanitize_textarea() {
-
 		if ( isset( $this->option['class'] ) && "code" != $this->option['class'] ) {
 
 			global $allowedtags;
@@ -169,7 +162,6 @@ class Pngx__Sanitize {
 	 * @return string
 	 */
 	private function sanitize_wysiwyg() {
-
 		if ( current_user_can( 'unfiltered_html' ) ) {
 			$input = $this->input;
 		} else {
@@ -186,7 +178,6 @@ class Pngx__Sanitize {
 	 * @return string
 	 */
 	private function sanitize_url() {
-
 		return esc_url_raw( $this->input );
 	}
 
@@ -196,7 +187,6 @@ class Pngx__Sanitize {
 	 * @return interger
 	 */
 	private function sanitize_file() {
-
 		return $this->sanitize_absint();
 	}
 
@@ -206,9 +196,7 @@ class Pngx__Sanitize {
 	 * @return mixed|string
 	 */
 	private function sanitize_select() {
-
 		return $this->sanitize_enum();
-
 	}
 
 	/**
@@ -217,9 +205,24 @@ class Pngx__Sanitize {
 	 * @return mixed|string
 	 */
 	private function sanitize_dropdown() {
-
 		return $this->sanitize_enum();
+	}
 
+	/**
+	 * Dropdown Sanitize
+	 *
+	 * @return mixed|string
+	 */
+	private function sanitize_wooselect() {
+		if ( is_array( $this->input ) ) {
+			$sanitized_array = array_map( function ( $item ) {
+				return sanitize_text_field( trim( $item ) );
+			}, $this->input );
+
+			return $sanitized_array;
+		}
+
+		return $this->sanitize_text();
 	}
 
 	/**
@@ -228,9 +231,7 @@ class Pngx__Sanitize {
 	 * @return mixed|string
 	 */
 	private function sanitize_variety() {
-
 		return $this->sanitize_enum();
-
 	}
 
 	/**
@@ -239,9 +240,7 @@ class Pngx__Sanitize {
 	 * @return mixed|string
 	 */
 	private function sanitize_selectpage() {
-
 		return $this->sanitize_enum();
-
 	}
 
 	/**
@@ -250,9 +249,7 @@ class Pngx__Sanitize {
 	 * @return mixed|string
 	 */
 	private function sanitize_radio() {
-
 		return $this->sanitize_enum();
-
 	}
 
 	/**
@@ -261,7 +258,6 @@ class Pngx__Sanitize {
 	 * @return mixed|string
 	 */
 	private function sanitize_enum() {
-
 		if (
 			isset( $this->option['choices'] ) &&
 			is_array( $this->option['choices'] ) &&
@@ -305,7 +301,6 @@ class Pngx__Sanitize {
 	 * @return mixed
 	 */
 	private function sanitize_date() {
-
 		$this->input = preg_replace( "([^0-9/])", "", $this->input );
 
 		return $this->input;
@@ -317,7 +312,6 @@ class Pngx__Sanitize {
 	 * @return bool|mixed
 	 */
 	private function sanitize_color() {
-
 		// If string does not start with 'rgba', then treat as hex
 		// sanitize the hex color and finally convert hex to rgba
 		if ( false === strpos( $this->input, 'rgba' ) ) {
@@ -363,7 +357,6 @@ class Pngx__Sanitize {
 	 * @return bool
 	 */
 	private function validate_rgba( $rgba ) {
-
 		// If empty or an array return transparent
 		if ( empty( $rgba ) || is_array( $rgba ) ) {
 			$this->input = '';
@@ -377,7 +370,6 @@ class Pngx__Sanitize {
 		$this->input = 'rgba(' . $red . ',' . $green . ',' . $blue . ',' . $alpha . ')';
 
 		return true;
-
 	}
 
 	/**
@@ -386,7 +378,6 @@ class Pngx__Sanitize {
 	 * @return interger
 	 */
 	private function sanitize_image() {
-
 		return $this->sanitize_absint();
 	}
 
@@ -396,7 +387,6 @@ class Pngx__Sanitize {
 	 * @return string
 	 */
 	private function sanitize_proimage() {
-
 		return $this->sanitize_absint();
 	}
 
@@ -406,7 +396,6 @@ class Pngx__Sanitize {
 	 * @return string
 	 */
 	private function sanitize_post_id() {
-
 		return $this->sanitize_absint();
 	}
 
@@ -416,7 +405,6 @@ class Pngx__Sanitize {
 	 * @return string
 	 */
 	private function sanitize_number() {
-
 		return $this->sanitize_absint();
 	}
 
@@ -426,7 +414,6 @@ class Pngx__Sanitize {
 	 * @return string
 	 */
 	private function sanitize_dimensions() {
-
 		return $this->sanitize_absint();
 	}
 
@@ -458,7 +445,6 @@ class Pngx__Sanitize {
 	 * @return bool|mixed
 	 */
 	private function sanitize_ga_analytics() {
-
 		$this->input = trim( esc_html( $this->input ) );
 		// en dash to minus, prevents issue with code copied from web with "fancy" dash
 		$this->input = str_replace( '�', '-', $this->input );

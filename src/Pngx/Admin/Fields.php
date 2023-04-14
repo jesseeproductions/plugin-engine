@@ -1,18 +1,40 @@
 <?php
-// Don't load directly
-if ( ! defined( 'ABSPATH' ) ) {
-	die( '-1' );
-}
-if ( class_exists( 'Pngx__Admin__Fields' ) ) {
-	return;
-}
+/**
+ * Handles the Fields in the options and meta.
+ *
+ * @since 4.0.0
+ *
+ * @package Pngx\Admin;
+ */
 
+use Pngx\Template;
 
 /**
  * Class Pngx__Admin__Fields
  * Fields for Meta and Options
  */
 class Pngx__Admin__Fields {
+
+	/**
+	 * An instance of the admin template handler.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @var Template
+	 */
+	protected static $admin_template;
+
+	/**
+	 * Template_Modifications constructor.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param Template $template An instance of the backend template handler.
+	 */
+	public function __construct( Template $admin_template ) {
+		static::$admin_template = $admin_template;
+		static::$admin_template->set_template_context_extract( true );
+	}
 
 	/*
 	* Toggle Field Data Setup
@@ -198,6 +220,12 @@ class Pngx__Admin__Fields {
 			case 'select':
 
 				Pngx__Admin__Field__Select::display( $field, $options, $options_id, $meta, $repeat_vars );
+
+				break;
+
+			case 'wooselect':
+
+				Pngx__Admin__Field__Wooselect::display( $field, $options, $options_id, $meta, $repeat_vars, static::$admin_template );
 
 				break;
 

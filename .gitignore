@@ -33,3 +33,7 @@ vendor/*
 !vendor/wp-color-picker-alpha/*
 !vendor/selectWoo
 !vendor/selectWoo/*
+!vendor/tribe-select2
+!vendor/tribe-select2/*
+!vendor/tribe-selectWoo
+!vendor/tribe-selectWoo/*
