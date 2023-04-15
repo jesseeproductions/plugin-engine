@@ -327,8 +327,70 @@ class Pngx__Admin__Options {
 
 	/**
 	 * Display Fields
+	 *
+	 * @since 4.0.0
+	 *
 	 */
 	public function display_fields() {
+	    global $wp_version;
+
+	    // Create Array of Tabs and Localize to Meta Script
+	    $tabs_array = [];
+
+	    foreach ($this->sections as $tab_slug => $tab) {
+	        $tabs_array[$tab] = $tab_slug;
+	    }
+
+	    $tab_data = [
+	        'tabs'           => $tabs_array,
+	        'update_message' => get_settings_errors(),
+	        'id'             => 'pngx-options',
+	        'wp_version'     => $wp_version,
+	    ];
+	    ?>
+	    <div class="wrap pngx-wrapper">
+	        <?php
+	        /**
+	         * Before Plugin Engine Options Form
+	         *
+	         * @since 4.0.0
+	         *
+	         * @param string $this ->options_slug options page string
+	         */
+	        do_action('pngx_before_option_form', $this->options_slug);
+	        ?>
+	        <form action="options.php" method="post">
+	            <?php settings_fields($this->options_id); ?>
+	            <div class="main pngx-tabs" <?php echo Pngx__Admin__Fields::toggle($tab_data, null); ?>>
+	                <ul class="main pngx-tabs-nav">
+	                    <?php
+	                    foreach ($this->sections as $section_slug => $section) {
+	                        echo sprintf('<li><a href="#%s">%s</a></li>', $section_slug, $section);
+	                    }
+	                    ?>
+	                </ul>
+	                <?php do_settings_sections($_GET['page']); ?>
+	            </div><!-- .pngx-tabs -->
+	            <p class="submit"><input name="Submit" type="submit" class="button-primary" value="<?php echo esc_attr__('Save Changes'); ?>" /></p>
+	        </form>
+	        <?php
+	        /**
+	         * After Plugin Engine Options Form
+	         *
+	         * @since 4.0.0
+	         *
+	         * @param string $this ->options_slug options page string
+	         */
+	        do_action('pngx_after_option_form', $this->options_slug);
+	        ?>
+	    </div><!-- .wrap -->
+	    <?php
+	}
+
+	/**
+	 * Display Fields
+	 */
+	public function display_fields_old() {
 		global $wp_version;
 
 		//Create Array of Tabs and Localize to Meta Script

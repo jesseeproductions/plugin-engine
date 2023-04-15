@@ -22,7 +22,7 @@ if ( empty( $message ) ) {
 	return;
 }
 
-$message_classes = [ 'pngx-volt-vectors-options-message__wrap' ];
+$message_classes = [ 'pngx-engine-options-message__wrap' ];
 if ( ! empty( $add_classes ) ) {
 	array_push( $message_classes, $add_classes );
 }

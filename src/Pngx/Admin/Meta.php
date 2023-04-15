@@ -150,6 +150,10 @@ class Pngx__Admin__Meta {
 
 		ob_start(); ?>
 
+		<?php $this->admin_template->template( '/components/loader', [ 'loader_classes' => [ 'pngx-loader__dots' ] ] ); ?>
+
+		<div class="pngx-engine-options-message__wrap"></div>
+
 		<div class="main pngx-tabs" <?php echo Pngx__Admin__Fields::toggle( $tab_data, null ); ?> >
 
 			<ul class="main pngx-tabs-nav">
