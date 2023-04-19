@@ -9,6 +9,7 @@
 
 use Pngx\Template;
 
+use Pngx\Admin\Field\WooSelect;
 /**
  * Class Pngx__Admin__Fields
  * Fields for Meta and Options
@@ -225,7 +226,7 @@ class Pngx__Admin__Fields {
 
 			case 'wooselect':
 
-				Pngx__Admin__Field__Wooselect::display( $field, $options, $options_id, $meta, $repeat_vars, static::$admin_template );
+				Wooselect::display( $field, $options, $options_id, $meta, $repeat_vars, static::$admin_template );
 
 				break;
 

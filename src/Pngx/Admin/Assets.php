@@ -153,7 +153,6 @@ class Pngx__Admin__Assets {
 					'jquery',
 					'pngx-bumpdown',
 					'pngx-dropdowns',
-					'pngx-dependency',
 					'pngx-clipboard',
 					'pngx-colorbox',
 					'pngx-wp-editor',
@@ -162,7 +161,8 @@ class Pngx__Admin__Assets {
 					'pngx-bootstrap',
 					'pngx-bootstrap-iconpicker-fontawesome',
 					'pngx-bootstrap-iconpicker',
-					'jquery-ui-tabs'
+					'jquery-ui-tabs',
+					'pngx-dependency'
 				],
 			filemtime( Pngx__Main::instance()->resource_path . 'js/pngx-admin.js' ),
 			true

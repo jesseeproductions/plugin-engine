@@ -4,16 +4,17 @@
  *
  * @since   4.0.0
  *
- * @package Pngx\Volt_Vectors\Admin;
+ * @package Pngx\Admin\Field
  */
 
+namespace Pngx\Admin\Field;
 
 /**
- * Class Pngx__Field__WooDropdown
+ * Class Pngx__Admin__Field__Wooselect
  *
  * @since 4.0.0
  */
-class Pngx__Admin__Field__Wooselect {
+class Wooselect {
 
 	public static function display( $field = [], $option_value = [], $options_id = null, $meta = null, $var = null, $template = null ) {
 		global $pagenow;
@@ -47,7 +48,7 @@ class Pngx__Admin__Field__Wooselect {
 
 		$selected_option = [];
 		if ( ! empty( $field['attrs']['data-source'] ) ) {
-			$selected_text   = empty( $selected ) ? $field['placeholder'] : get_the_title( $selected );
+			$selected_text   = empty( $selected ) ? '' : get_the_title( $selected );
 			$selected_option = [
 				[
 					'id'   => $selected,
@@ -81,6 +82,7 @@ class Pngx__Admin__Field__Wooselect {
 				'data-selected' => $selected,
 				'data-options'  => json_encode( $field['options'] ),
 			],
+			'wrap_attrs'      => empty( $field['wrap_attrs'] ) ? [] : $field['wrap_attrs'],
 		];
 
 		$template->template( 'components/dropdown', $dropdown );

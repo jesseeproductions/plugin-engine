@@ -34,7 +34,6 @@ class Database  {
 		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 
 		// dbDelta() cannot handle primary key changes, if there are changes to a primary key, run them here before it.
-
 		dbDelta( self::get_schema() );
 	}
 
@@ -64,6 +63,26 @@ class Database  {
 			  session_expiry BIGINT UNSIGNED NOT NULL,
 			  PRIMARY KEY  (session_id),
 			  UNIQUE KEY session_key (session_key)
+			) $collate;
+
+			CREATE TABLE {$wpdb->prefix}pngx_collection (
+				id BIGINT(20) AUTO_INCREMENT PRIMARY KEY,
+				name VARCHAR(255) NOT NULL
+			) $collate;
+
+		    CREATE TABLE {$wpdb->prefix}pngx_embeddings (
+		        id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+		        uuid VARCHAR(36) NOT NULL,
+		        collection_id BIGINT(20),
+		        post_id BIGINT(20),
+		        document TEXT NOT NULL,
+		        metadata TEXT NOT NULL
+		    ) $collate;
+
+			CREATE TABLE {$wpdb->prefix}pngx_embeddings_values (
+				id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+				embeddings_id INTEGER,
+				value DECIMAL(14, 12)
 			) $collate;
 		";
 
@@ -111,7 +130,7 @@ class Database  {
 			self::create_tables();
 		}
 		$queries        = dbDelta( self::get_schema(), false );
-		$missing_tables = array();
+		$missing_tables = [];
 		foreach ( $queries as $table_name => $result ) {
 			if ( "Created table $table_name" === $result ) {
 				$missing_tables[] = $table_name;
@@ -134,7 +153,7 @@ class Database  {
 
 			update_option( Pngx__Main::$db_version_key, Pngx__Main::$db_version );
 			update_option( 'pngx_database_missing_tables', false );
-			delete_option( 'pngx_schema_missing_tables' );
+			delete_option( 'pngx_schema_missing_tables', [] );
 		}
 		return $missing_tables;
 	}
@@ -184,13 +203,15 @@ class Database  {
 			return;
 		}
 
+		$missing_tables = get_option( 'pngx_schema_missing_tables', [] );
+
 		printf(
 			'<div class="error pngx-notice pngx-dependency-error" data-plugin="%1$s"><p>'
 			. _x( 'One or more custom tables are missing from your install of %2$s. Missing tables: %3$s. <a href="%4$s">Run install again with this link.</a>', 'Error message that displays if missing custom tables, it provides a link to install tables again.', 'plugin-engine' )
 			. '</p></div>',
 			'plugin-engine',
 			$plugin_name,
-			get_option( 'pngx_schema_missing_tables' ),
+			implode(", ", $missing_tables ),
 			pngx_sanitize_url( $database_install_link )
 		);
 	}
