@@ -2,8 +2,8 @@
    Meta Box
    ========================================================================== */
 @mixin meta-label() {
-	background: $white;
-	color: $color__link;
+	background: var( --pngx-white );
+	color: var( --pngx-color-button-primary );
 	display: block;
 	float: left;
 	font-size: 15px;
@@ -41,7 +41,7 @@
 		&.field-url,
 		&.field-variety,
 		&.field-wysiwyg {
-			border: 1px solid $color__light_grey;
+			border: 1px solid var( --pngx-grey-4 );
 			border-radius: 3px;
 			display: block;
 			max-width: 600px;
@@ -77,7 +77,7 @@
 		> .pngx-meta-field-styles,
 		> .description {
 			background: #F3F3F3;
-			color: $color__grey;
+			color: var( --pngx-grey-6 );
 			display: block;
 			font-size: 11px;
 			margin: 10px -9px -9px -9px;
@@ -91,7 +91,7 @@
 		}
 
 		.checkbox-description {
-			color: $color__dark_grey;
+			color: var( --pngx-grey-9 );
 			font-size: 11px;
 		}
 
@@ -100,7 +100,7 @@
 			position: relative;
 
 			.inline-style-title {
-				color: $color__link;
+				color: var( --pngx-color-button-primary );
 				font-size: 12px;
 				font-weight: 400;
 				left: 9px;
@@ -128,7 +128,7 @@
 			margin: 40px 0;
 
 			> .pngx-variety-field {
-				border: 1px solid $color__grey;
+				border: 1px solid var( --pngx-grey-6 );
 				border-radius: 4px;
 				display: block;
 				max-width: 100%;
@@ -136,13 +136,13 @@
 				width: auto;
 
 				label {
-					color: $color__link;
+					color: var( --pngx-color-button-primary );
 					font-size: 13px;
 				}
 
 				& > label {
-					background: $white;
-					color: $color__link;
+					background: var( --pngx-white );
+					color: var( --pngx-color-button-primary );
 					display: block;
 					float: left;
 					font-size: 13px;

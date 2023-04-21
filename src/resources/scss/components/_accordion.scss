@@ -1,0 +1,60 @@
+/* ==========================================================================
+   Accordion CSS
+   ========================================================================== */
+
+/*
+.pngx-control-accordion__wrapper {
+
+	.pngx-control-accordion__toggle {
+		font-size: 12px;
+		font-weight: 500;
+	}
+
+	.tribe-field-switch-inner-wrap {
+		display: flex;
+		justify-content: space-between;
+		margin: 0 0 var(--tec-spacer-2) 0;
+	}
+}
+*/
+
+.pngx-control-accordion__wrapper {
+	background-color: var(--pngx-color-background);
+	max-width: 100%;
+
+	.pngx-control-accordion__toggle {
+		background: transparent;
+		border: 1px solid var(--pngx-grey-4);
+		color: var(--pngx-color-text-primary);
+		cursor: pointer;
+		display: flex;
+		font-size: var(--pngx-font-size-2);
+		font-weight: var(--pngx-font-weight-bold);
+		justify-content: space-between;
+		line-height: 16px;
+		padding: 12px 14px;
+		text-align: left;
+		width: 100%;
+
+		.pngx-control-accordion__icon-caret-svg {
+			transition: 200ms linear all;
+			width: 13px;
+		}
+
+		&[aria-expanded="true"] {
+			border-bottom-left-radius: 0;
+			border-bottom-right-radius: 0;
+
+			.pngx-control-accordion__icon-caret-svg {
+				transform: rotate(-180deg);
+			}
+		}
+	}
+
+	.pngx-control-accordion__contents {
+		border: 1px solid #c3c4c7;
+		border-top: none;
+		display: none;
+		padding: 15px 25px;
+	}
+}

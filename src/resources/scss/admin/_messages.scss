@@ -12,21 +12,21 @@
 .success,
 .pngx-success,
 .pngx-message {
-	border-left: 4px solid $color__sucess;
+	border-left: 4px solid var( --pngx-success );
 	font-weight: bold;
 }
 
 .pngx-success-msg {
-	color: $color__sucess;
+	color: var( --pngx-success );
 }
 
 .pngx-error {
-	border-left: 4px solid $color__alert;
-	color: $color__alert;
+	border-left: 4px solid var( --pngx-error );
+	color: var( --pngx-error );
 }
 
 .pngx-error-msg {
-	color: $color__alert;
+	color: var( --pngx-error );
 }
 
 .pngx-warning {

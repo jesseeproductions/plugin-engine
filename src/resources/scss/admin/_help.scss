@@ -2,14 +2,14 @@
    Help CSS
    ========================================================================== */
 .pngx-meta-field-wrap.pngx-section-help-container {
-	background-color: $color__light_grey;
+	background-color: var( --pngx-grey-4 );
 	border-radius: 10px 10px 0;
 	margin-bottom: 1em;
 	overflow: hidden;
 }
 
 .pngx-section-help-container-toggle {
-	background-color: $color__light_grey;
+	background-color: var( --pngx-grey-4 );
 	border: medium none;
 	color: white;
 	cursor: pointer;
@@ -22,9 +22,9 @@
 
 .pngx-section-help-container:hover,
 .pngx-section-help-container-toggle:hover {
-	background: $color__link_hover none repeat scroll 0 0;
-	border: 1px solid $color__link;
-	color: $black;
+	background: var( --pngx-color-button-primary-hover ) none repeat scroll 0 0;
+	border: 1px solid var( --pngx-color-button-primary );
+	color: var( --pngx-black );
 }
 
 .pngx-section-help-container-toggle .dashicons-before::before {
@@ -36,8 +36,8 @@
 }
 
 .pngx-section-help-slideout {
-	background-color: $white;
-	border: 1px solid $color__link;
+	background-color: var( --pngx-white );
+	border: 1px solid var( --pngx-color-button-primary );
 	border-bottom-left-radius: 10px;
 	display: none;
 	overflow: hidden;
@@ -46,16 +46,16 @@
 
 .ui-widget-content a.pngx-support,
 .pngx-support {
-	color: $color__link;
+	color: var( --pngx-color-button-primary );
 }
 
 .ui-widget-content a.pngx-support:hover,
 .pngx-support:hover {
-	color: $color__link_hover;
+	color: var( --pngx-color-button-primary-hover );
 }
 
 .pngx-help-images {
-	box-shadow: 0 1px 2px 0 $color__link_hover;
+	box-shadow: 0 1px 2px 0 var( --pngx-color-button-primary-hover );
 	display: none;
 	margin: 10px;
 	max-width: 95%;
@@ -72,7 +72,7 @@
 }
 
 .promote-sup {
-	color: $color__grey;
+	color: var( --pngx-grey-6 );
 }
 
 @include breakpoint_max('sm') {

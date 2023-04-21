@@ -47,6 +47,7 @@ class Pngx__Admin__Assets {
 			Pngx__Main::instance()->resource_url . 'css/pngx-admin.css',
 			[
 				'pngx-select2-css',
+				'pngx-select2-css',
 				'pngx-colorbox',
 				'pngx-bootstrap-iconpicker',
 				'pngx-font-awesome',
@@ -107,6 +108,20 @@ class Pngx__Admin__Assets {
 			true
 		);
 		wp_register_script(
+			'pngx-engine',
+			Pngx__Main::instance()->resource_url . 'js/pngx-engine.js',
+			[],
+			filemtime( Pngx__Main::instance()->resource_path . 'js/pngx-engine.js' ),
+			true
+		);
+		wp_register_script(
+			'pngx-accordion',
+			Pngx__Main::instance()->resource_url . 'js/accordion.js',
+			[],
+			filemtime( Pngx__Main::instance()->resource_path . 'js/accordion.js' ),
+			true
+		);
+		wp_register_script(
 			'pngx-dropdowns',
 			Pngx__Main::instance()->resource_url . 'js/dropdowns.js',
 			[
@@ -122,6 +137,13 @@ class Pngx__Admin__Assets {
 			Pngx__Main::instance()->resource_url . 'js/dependency.js',
 			[],
 			filemtime( Pngx__Main::instance()->resource_path . 'js/dependency.js' ),
+			true
+		);
+		wp_register_script(
+			'pngx-tooltip',
+			Pngx__Main::instance()->resource_url . 'js/tooltip.js',
+			[],
+			filemtime( Pngx__Main::instance()->resource_path . 'js/tooltip.js' ),
 			true
 		);
 		wp_register_script(
@@ -147,12 +169,22 @@ class Pngx__Admin__Assets {
 			true
 		);
 		wp_register_script(
+			'pngx-accounts',
+			Pngx__Main::instance()->resource_url . 'js/accounts.js',
+			[ 'jquery', 'pngx-accordion', 'pngx-dropdowns' ],
+			filemtime( Pngx__Main::instance()->resource_path . 'js/accounts.js' ),
+			true
+		);
+		wp_register_script(
 			'pngx-admin',
 			Pngx__Main::instance()->resource_url . 'js/pngx-admin.js',
 				[
 					'jquery',
+					'pngx-engine',
+					'pngx-accordion',
 					'pngx-bumpdown',
 					'pngx-dropdowns',
+					'pngx-tooltip',
 					'pngx-clipboard',
 					'pngx-colorbox',
 					'pngx-wp-editor',
@@ -162,7 +194,8 @@ class Pngx__Admin__Assets {
 					'pngx-bootstrap-iconpicker-fontawesome',
 					'pngx-bootstrap-iconpicker',
 					'jquery-ui-tabs',
-					'pngx-dependency'
+					'pngx-dependency',
+					'pngx-accounts'
 				],
 			filemtime( Pngx__Main::instance()->resource_path . 'js/pngx-admin.js' ),
 			true

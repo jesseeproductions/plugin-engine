@@ -29,7 +29,7 @@ class Tooltip extends \tad_DI52_ServiceProvider {
 	 * @since 3.2.0
 	 */
 	private function hook() {
-		add_action( 'pngx_common_loaded', [ $this, 'add_tooltip_assets' ] );
+		add_action( 'pngx_engine_loaded', [ $this, 'add_tooltip_assets' ] );
 	}
 
 	/**

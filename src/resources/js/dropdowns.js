@@ -1,7 +1,11 @@
 /**
- * PNGX Dropdowns. Based of Modern Tribe Dropdowns.
+ * Makes sure we have all the required levels on the pngx Object
+ *
+ * @since 0.1.0
+ *
+ * @type {PlainObject}
  */
-var pngx_dropdowns = window.pngx_dropdowns || {};
+pngx.dropdowns = pngx.dropdowns || {};
 
 ( function( $, obj, _ ) {
 	'use strict';
@@ -558,4 +562,4 @@ var pngx_dropdowns = window.pngx_dropdowns || {};
 		$( obj.selector.dropdown ).pngx_dropdowns();
 	});
 
-} )( jQuery, pngx_dropdowns, window.underscore || window._ );
+} )( jQuery, pngx.dropdowns, window.underscore || window._ );

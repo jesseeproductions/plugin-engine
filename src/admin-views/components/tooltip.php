@@ -17,7 +17,7 @@
  * @var string               $message  The message to add to the tooltip.
  *
  */
-$wrap_classes = [ 'pngx-tooltip', 'pngx-helper-text' ];
+$wrap_classes = [ 'pngx-tooltip-hover', 'pngx-helper-text' ];
 if ( ! empty( $classes_wrap ) ) {
 	$wrap_classes = array_merge( $wrap_classes, $classes_wrap );
 }
@@ -31,9 +31,14 @@ if ( ! empty( $classes_wrap ) ) {
 	<div class="down">
 		<p>
 			<?php
-			echo wp_kses(
-				$message,
-				[ 'a' => [ 'href' => [] ] ] );
+				echo wp_kses(
+					$message,
+					[
+						'a' => [ 'href' => [] ],
+						'ul' => [],
+						'li' => [],
+					]
+				);
 			?>
 		</p>
 	</div>

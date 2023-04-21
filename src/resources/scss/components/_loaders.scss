@@ -33,7 +33,7 @@
 	animation-duration: 2.24s;
 	animation-iteration-count: infinite;
 	animation-name: pngx-admin-loader-bounce;
-	fill: $darkred;
+	fill: var( --pngx-dark-red );
 	opacity: 0.07;
 }
 

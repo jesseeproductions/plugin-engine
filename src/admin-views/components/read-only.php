@@ -22,11 +22,11 @@
  */
 ?>
 <div <?php pngx_classes( $classes_wrap ); ?> >
-	<fieldset class="pngx-volt-vectors-options-details__read-only-field">
-		<legend class="pngx-volt-vectors-options-details__label tribe-field-label screen-reader-text">
+	<fieldset class="pngx-engine-options-details__read-only-field">
+		<legend class="pngx-engine-options-details__label tribe-field-label screen-reader-text">
 			<?php echo esc_html( $label ); ?>
 		</legend>
-		<div class="pngx-volt-vectors-options-details__field-wrap pngx-field-wrap">
+		<div class="pngx-engine-options-details__field-wrap pngx-field-wrap">
 			<?php echo esc_html( $value ); ?>
 			<input
 				id="<?php echo esc_attr( $id ); ?>"

@@ -3,6 +3,406 @@
 	Plugin Engine Admin CSS
 
 */
+/*
+ * Utilities CSS
+ * -------------------------------------------------------------
+ */
+/*
+ * Volt Vectors Color Variables.
+ * -------------------------------------------------------------
+ */
+:root {
+  /* -----------------------------------------------------------------------------
+   * Colors - Utilties
+   * ----------------------------------------------------------------------------- */
+  --pngx-white: #fff;
+  --pngx-grey-1: #FAFAFA;
+  --pngx-grey-2: #F5F5F5;
+  --pngx-grey-3: #EEEEEE;
+  --pngx-grey-4: #E0E0E0;
+  --pngx-grey-5: #BDBDBD;
+  --pngx-grey-6: #9E9E9E;
+  --pngx-grey-7: #757575;
+  --pngx-grey-8: #616161;
+  --pngx-grey-9: #424242;
+  --pngx-grey-10: #212121;
+  --pngx-black: #000;
+  --pngx-error: #dd3d36;
+  --pngx-success: #3ca900;
+  --pngx-dark-red: #950402;
+  /* -----------------------------------------------------------------------------
+   * Colors - Typography
+   * ----------------------------------------------------------------------------- */
+  --pngx-color-text-primary: #1f0808;
+  --pngx-color-text-primary-light: rgba(30, 5, 5, 0.62);
+  --pngx-color-text-secondary: #605c5c;
+  --pngx-color-text-disabled: #c2c2c2;
+  /* -----------------------------------------------------------------------------
+   * Colors - Backgrounds
+   * ----------------------------------------------------------------------------- */
+  --pngx-color-background: #ffffff;
+  --pngx-color-background-secondary: #d6fcf9;
+  --pngx-color-background-grey: rgb(249 250 251);
+  /* -----------------------------------------------------------------------------
+   * Colors - UI Base
+   * ----------------------------------------------------------------------------- */
+  --pngx-color-accent-primary: #2271b1;
+  --pngx-color-accent-primary-hover: rgba(34, 113, 177, 0.81);
+  /* -----------------------------------------------------------------------------
+   * Colors - Shadows
+   * ----------------------------------------------------------------------------- */
+  --pngx-color-shadow-primary: rgba(0, 0, 0, 0.8);
+  /* -----------------------------------------------------------------------------
+   * Colors - Borders
+   * ----------------------------------------------------------------------------- */
+  --pngx-color-border-default: #d5d5d5;
+  --pngx-color-border-primary: #1b700c;
+  /* -----------------------------------------------------------------------------
+   * Colors - Buttons
+   * ----------------------------------------------------------------------------- */
+  --pngx-color-button-primary: var(--pngx-color-accent-primary);
+  --pngx-color-button-primary-hover: var(--pngx-color-accent-primary-hover);
+  /* -----------------------------------------------------------------------------
+   * Colors - Shadows
+   * ----------------------------------------------------------------------------- */
+  --pngx-ring-offset-shadow: 0 0 #0000;
+  --pngx-ring-shadow: 0 0 #0000;
+  --pngx-shadow: 0 0 #0000;
+  /* -----------------------------------------------------------------------------
+   * Opacity - Shadows
+   * ----------------------------------------------------------------------------- */
+  --pngx-defualt-opacity: 1;
+  --pngx-disable-opacity: .4;
+}
+
+:root {
+  /* -----------------------------------------------------------------------------
+   * Spacers
+   * ----------------------------------------------------------------------------- */
+  --pngx-spacer-0: 4px;
+  --pngx-spacer-1: 8px;
+  --pngx-spacer-2: 12px;
+  --pngx-spacer-3: 16px;
+  --pngx-spacer-4: 20px;
+  --pngx-spacer-5: 24px;
+  --pngx-spacer-6: 28px;
+  --pngx-spacer-7: 32px;
+  --pngx-spacer-8: 40px;
+  --pngx-spacer-9: 48px;
+  --pngx-spacer-10: 56px;
+  --pngx-spacer-11: 64px;
+  --pngx-spacer-12: 80px;
+  --pngx-spacer-13: 96px;
+  --pngx-spacer-14: 160px;
+}
+
+/**
+ * Removes the unit (e.g. px, em, rem) from a value, returning the number only.
+ * @param {Number} $num - Number to strip unit from.
+ * @returns {Number} The same number, sans unit.
+ */
+/**
+ * Convert a pixel value to rem.
+ * @param {Number} $px - The pixel value to convert.
+ * @param {Number} $base - The base font size to use.
+ * @return {Number} - The rem value.
+ */
+/** Converts a pixel value to matching rem value. *Any* value passed, regardless of unit, is assumed to be a pixel value. By default, the base pixel value used to calculate the rem value is taken from the `$global-font-size` variable.
+ * @access private
+ * @param {Number} $value - Pixel value to convert.
+ * @param {Number} $base [null] - Base for pixel conversion.
+ * @returns {Number} A number in rems, calculated based on the given value and the base pixel value. rem values are passed through as is.
+ */
+/*
+ * Volt Vectors Loader CSS
+ * -------------------------------------------------------------
+ */
+.volt-vectors_page_volt-vectors-options .pngx-admin-loader__dot circle {
+  fill: var(--pngx-color-accent-primary);
+}
+
+/*
+ * Utilities CSS
+ * -------------------------------------------------------------
+ */
+/* ==========================================================================
+   Accordion CSS
+   ========================================================================== */
+/*
+.pngx-control-accordion__wrapper {
+
+	.pngx-control-accordion__toggle {
+		font-size: 12px;
+		font-weight: 500;
+	}
+
+	.tribe-field-switch-inner-wrap {
+		display: flex;
+		justify-content: space-between;
+		margin: 0 0 var(--tec-spacer-2) 0;
+	}
+}
+*/
+.pngx-control-accordion__wrapper {
+  background-color: var(--pngx-color-background);
+  max-width: 100%;
+}
+.pngx-control-accordion__wrapper .pngx-control-accordion__toggle {
+  background: transparent;
+  border: 1px solid var(--pngx-grey-4);
+  color: var(--pngx-color-text-primary);
+  cursor: pointer;
+  display: flex;
+  font-size: var(--pngx-font-size-2);
+  font-weight: var(--pngx-font-weight-bold);
+  justify-content: space-between;
+  line-height: 16px;
+  padding: 12px 14px;
+  text-align: left;
+  width: 100%;
+}
+.pngx-control-accordion__wrapper .pngx-control-accordion__toggle .pngx-control-accordion__icon-caret-svg {
+  transition: 200ms linear all;
+  width: 13px;
+}
+.pngx-control-accordion__wrapper .pngx-control-accordion__toggle[aria-expanded=true] {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.pngx-control-accordion__wrapper .pngx-control-accordion__toggle[aria-expanded=true] .pngx-control-accordion__icon-caret-svg {
+  transform: rotate(-180deg);
+}
+.pngx-control-accordion__wrapper .pngx-control-accordion__contents {
+  border: 1px solid #c3c4c7;
+  border-top: none;
+  display: none;
+  padding: 15px 25px;
+}
+
+/*
+ * Accounts CSS
+ * -------------------------------------------------------------
+ */
+.pngx-volt-vectors-options {
+  /*	.pngx-volt-vectors-application__description {
+  		margin: 0 0 var(--pngx-spacer-1);
+  		padding-left: var(--pngx-spacer-2);
+  	}*/
+  /*	.pngx-volt-vectors-options {
+  		margin-bottom: var(--pngx-spacer-3);
+  		padding-left: var(--pngx-spacer-2);
+  	}*/
+}
+.pngx-volt-vectors-options .notice,
+.pngx-volt-vectors-options div.error,
+.pngx-volt-vectors-options div.updated {
+  padding: var(--pngx-spacer-1) var(--pngx-spacer-2);
+}
+.pngx-volt-vectors-options .pngx-engine-options-items__wrap {
+  margin: var(--pngx-spacer-2) auto var(--pngx-spacer-3);
+}
+.pngx-volt-vectors-options fieldset {
+  padding: 0;
+}
+.pngx-volt-vectors-options label,
+.pngx-volt-vectors-options legend {
+  display: block;
+  font-weight: 700;
+  margin: 0;
+}
+.pngx-volt-vectors-options legend {
+  float: none;
+}
+.pngx-volt-vectors-options .pngx-engine-options-details__read-only-field .pngx-engine-options-details__field-wrap.pngx-field-wrap {
+  line-height: var(--pngx-spacer-7);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.pngx-volt-vectors-options .pngx-engine-options-details-accounts__last-access-wrap .pngx-engine-options-details__field-wrap.pngx-field-wrap {
+  line-height: var(--pngx-spacer-3);
+}
+.pngx-volt-vectors-options .pngx-engine-options-details-action__revoke {
+  background: transparent;
+  border: 0;
+  color: #2271b1;
+  cursor: pointer;
+  line-height: var(--pngx-spacer-7);
+  padding: 0;
+}
+.pngx-volt-vectors-options .pngx-engine-options-details-action__revoke:hover {
+  color: var(--pngx-color-accent-primary-hover);
+}
+.pngx-volt-vectors-options .pngx-engine-options__add-account-button .dashicons {
+  margin-top: calc(var(--pngx-spacer-0) + 1px);
+}
+.pngx-volt-vectors-options .pngx-engine-options-api-key__wrap {
+  background: var(--pngx-color-background);
+  border: 1px solid var(--pngx-color-border-default);
+  margin: var(--pngx-spacer-1) var(--pngx-spacer-3) var(--pngx-spacer-3);
+  padding: var(--pngx-spacer-2);
+}
+.pngx-volt-vectors-options .pngx-engine-options-api-key-title {
+  font-weight: 700;
+  margin: 0 0 var(--pngx-spacer-3);
+}
+.pngx-volt-vectors-options .pngx-engine-options-details-accounts__message-wrap {
+  border-bottom: 1px solid var(--pngx-color-border-default);
+  margin: 0 0 var(--pngx-spacer-3);
+  padding: 0 0 var(--pngx-spacer-3);
+}
+.pngx-volt-vectors-options .dashicons {
+  background: transparent;
+  border: 0;
+  color: var(--pngx-color-text-secondary);
+  cursor: pointer;
+  font-family: dashicons;
+  font-size: 20px;
+  padding: 0;
+}
+.pngx-volt-vectors-options .dashicons:hover {
+  color: var(--pngx-color-text-disabled);
+}
+
+/*
+ * Volt Vectors Grid CSS
+ * -------------------------------------------------------------
+ */
+.pngx-volt-vectors-grid {
+  background-color: var(--pngx-color-background);
+  display: grid;
+  grid-gap: var(--pngx-spacer-2);
+  grid-template-columns: 3fr 2fr 2fr 1fr;
+  max-width: 1000px;
+}
+.pngx-volt-vectors-grid:nth-child(even) {
+  background-color: var(--pngx-color-background-secondary);
+}
+.pngx-volt-vectors-grid.pngx-volt-vectors-grid__pinecone {
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.pngx-volt-vectors-grid-header {
+  background-color: var(--pngx-color-background);
+  border: 1px solid var(--pngx-color-border-default);
+  border-bottom: none;
+}
+
+.pngx-engine-grid-row {
+  border: 1px solid var(--pngx-color-border-default);
+}
+
+.pngx-volt-vectors-grid-item {
+  padding: var(--pngx-spacer-2);
+}
+.pngx-volt-vectors-grid-item.disabled {
+  opacity: var(--pngx-opacity-select-highlighted);
+}
+
+.pngx-engine-grid-full-width {
+  grid-column: 1/-1;
+}
+
+/* ## PNGX Admin Loader
+--------------------------------------------- */
+.pngx-admin-loader {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.8);
+  bottom: 0;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  left: 0;
+  padding-top: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+}
+
+.pngx-admin-loader__dot {
+  width: 15px;
+}
+.pngx-admin-loader__dot:not(:first-of-type) {
+  margin-left: 8px;
+}
+.pngx-admin-loader__dot circle {
+  fill: currentColor;
+}
+
+.pngx-admin-loader__dot circle {
+  animation-direction: normal;
+  animation-duration: 2.24s;
+  animation-iteration-count: infinite;
+  animation-name: pngx-admin-loader-bounce;
+  fill: var(--pngx-dark-red);
+  opacity: 0.07;
+}
+
+.pngx-admin-loader__dot--first circle {
+  animation-delay: 0.45s;
+}
+
+.pngx-admin-loader__dot--second circle {
+  animation-delay: 1.05s;
+}
+
+.pngx-admin-loader__dot--third circle {
+  animation-delay: 1.35s;
+}
+
+@keyframes pngx-admin-loader-bounce {
+  50% {
+    opacity: 1;
+  }
+}
+/* ## PNGX Admin Loader
+--------------------------------------------- */
+/* CSS Switch based off https://codepen.io/mallendeo/pen/eLIiG
+============================================= */
+input[type=checkbox].pngx-engine-switch__input {
+  display: none;
+}
+input[type=checkbox].pngx-engine-switch__input + .tribe-common-switch__label {
+  background: var(--pngx-white);
+  border: 1px solid var(--pngx-grey-5);
+  border-radius: 4px;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: block;
+  height: 18px;
+  outline: 0;
+  padding: 3px;
+  position: relative;
+  transition: all 0.2s ease;
+  user-select: none;
+  width: 27px;
+}
+input[type=checkbox].pngx-engine-switch__input + .tribe-common-switch__label:after, input[type=checkbox].pngx-engine-switch__input + .tribe-common-switch__label:before {
+  content: "";
+  display: block;
+  height: 10px;
+  position: relative;
+  width: 10px;
+}
+input[type=checkbox].pngx-engine-switch__input + .tribe-common-switch__label:after {
+  background: var(--pngx-grey-6);
+  border-radius: 2px;
+  content: "";
+  left: 0;
+  transition: all 0.2s ease;
+}
+input[type=checkbox].pngx-engine-switch__input + .tribe-common-switch__label:before {
+  display: none;
+}
+input[type=checkbox].pngx-engine-switch__input + .tribe-common-switch__label::selection {
+  background: none;
+}
+input[type=checkbox].pngx-engine-switch__input:checked + .pngx-engine-switch__label:after {
+  background: var(--pngx-color-accent-primary);
+  left: 50%;
+}
+
 /* ==========================================================================
    Bootstrap Dropdown & Popup CSS
    ========================================================================== */
@@ -448,7 +848,7 @@ fieldset[disabled] .btn-primary.active {
 ***************************************************/
 .pro-heading,
 .postbox h4.pngx-fields-heading {
-  color: #003ca9;
+  color: var(--pngx-color-button-primary);
   font-size: 15px;
   font-weight: bold;
   margin: 0 0 10px;
@@ -502,7 +902,7 @@ fieldset[disabled] .btn-primary.active {
 * Linked Style Fields
 ***************************************************/
 .pngx-inside-label {
-  color: #333;
+  color: var(--pngx-grey-9);
   font-size: 10px;
   line-height: 26px;
   margin: 0 15px 0 0;
@@ -513,9 +913,9 @@ fieldset[disabled] .btn-primary.active {
 ------------------------------------------------------------ */
 .pngx-list-license-button,
 .pngx-license-button-act {
-  background: #003ca9;
-  border: 1px solid #003ca9;
-  color: #fff;
+  background: var(--pngx-color-button-primary);
+  border: 1px solid var(--pngx-color-button-primary);
+  color: var(--pngx-white);
 }
 
 .pngx-list-license-button:hover,
@@ -525,13 +925,13 @@ fieldset[disabled] .btn-primary.active {
 }
 
 .pngx-license-button-det {
-  background: #3ca900;
-  border: 1px solid #3ca900;
-  color: #fff;
+  background: var(--pngx-success);
+  border: 1px solid var(--pngx-success);
+  color: var(--pngx-white);
 }
 
 .pngx-license-button-det:hover {
-  background: #003ca9;
+  background: var(--pngx-color-button-primary);
   cursor: pointer;
 }
 
@@ -565,12 +965,12 @@ fieldset[disabled] .btn-primary.active {
   margin: 0;
 }
 .pngx-list li {
-  color: #000;
+  color: var(--pngx-black);
   padding-left: 1em;
   text-indent: -0.7em;
 }
 .pngx-list li:before {
-  color: #950402;
+  color: var(--pngx-dark-red);
   content: "•";
   padding-right: 10px;
 }
@@ -1538,14 +1938,14 @@ fieldset[disabled] .btn-primary.active {
    Help CSS
    ========================================================================== */
 .pngx-meta-field-wrap.pngx-section-help-container {
-  background-color: #ccc;
+  background-color: var(--pngx-grey-4);
   border-radius: 10px 10px 0;
   margin-bottom: 1em;
   overflow: hidden;
 }
 
 .pngx-section-help-container-toggle {
-  background-color: #ccc;
+  background-color: var(--pngx-grey-4);
   border: medium none;
   color: white;
   cursor: pointer;
@@ -1558,9 +1958,9 @@ fieldset[disabled] .btn-primary.active {
 
 .pngx-section-help-container:hover,
 .pngx-section-help-container-toggle:hover {
-  background: #4d6eab none repeat scroll 0 0;
-  border: 1px solid #003ca9;
-  color: #000;
+  background: var(--pngx-color-button-primary-hover) none repeat scroll 0 0;
+  border: 1px solid var(--pngx-color-button-primary);
+  color: var(--pngx-black);
 }
 
 .pngx-section-help-container-toggle .dashicons-before::before {
@@ -1572,8 +1972,8 @@ fieldset[disabled] .btn-primary.active {
 }
 
 .pngx-section-help-slideout {
-  background-color: #fff;
-  border: 1px solid #003ca9;
+  background-color: var(--pngx-white);
+  border: 1px solid var(--pngx-color-button-primary);
   border-bottom-left-radius: 10px;
   display: none;
   overflow: hidden;
@@ -1582,16 +1982,16 @@ fieldset[disabled] .btn-primary.active {
 
 .ui-widget-content a.pngx-support,
 .pngx-support {
-  color: #003ca9;
+  color: var(--pngx-color-button-primary);
 }
 
 .ui-widget-content a.pngx-support:hover,
 .pngx-support:hover {
-  color: #4d6eab;
+  color: var(--pngx-color-button-primary-hover);
 }
 
 .pngx-help-images {
-  box-shadow: 0 1px 2px 0 #4d6eab;
+  box-shadow: 0 1px 2px 0 var(--pngx-color-button-primary-hover);
   display: none;
   margin: 10px;
   max-width: 95%;
@@ -1608,7 +2008,7 @@ fieldset[disabled] .btn-primary.active {
 }
 
 .promote-sup {
-  color: #777;
+  color: var(--pngx-grey-6);
 }
 
 @media (max-width: 640px) {
@@ -1764,21 +2164,21 @@ fieldset[disabled] .btn-primary.active {
 .success,
 .pngx-success,
 .pngx-message {
-  border-left: 4px solid #3ca900;
+  border-left: 4px solid var(--pngx-success);
   font-weight: bold;
 }
 
 .pngx-success-msg {
-  color: #3ca900;
+  color: var(--pngx-success);
 }
 
 .pngx-error {
-  border-left: 4px solid #dd3d36;
-  color: #dd3d36;
+  border-left: 4px solid var(--pngx-error);
+  color: var(--pngx-error);
 }
 
 .pngx-error-msg {
-  color: #dd3d36;
+  color: var(--pngx-error);
 }
 
 .pngx-warning {
@@ -1833,7 +2233,7 @@ fieldset[disabled] .btn-primary.active {
 .postbox-container .pngx-meta-field.field-url,
 .postbox-container .pngx-meta-field.field-variety,
 .postbox-container .pngx-meta-field.field-wysiwyg {
-  border: 1px solid #ccc;
+  border: 1px solid var(--pngx-grey-4);
   border-radius: 3px;
   display: block;
   max-width: 600px;
@@ -1852,8 +2252,8 @@ fieldset[disabled] .btn-primary.active {
 .postbox-container .pngx-meta-field.field-url > label,
 .postbox-container .pngx-meta-field.field-variety > label,
 .postbox-container .pngx-meta-field.field-wysiwyg > label {
-  background: #fff;
-  color: #003ca9;
+  background: var(--pngx-white);
+  color: var(--pngx-color-button-primary);
   display: block;
   float: left;
   font-size: 15px;
@@ -2006,7 +2406,7 @@ fieldset[disabled] .btn-primary.active {
 .postbox-container .pngx-meta-field > .pngx-meta-field-styles,
 .postbox-container .pngx-meta-field > .description {
   background: #F3F3F3;
-  color: #777;
+  color: var(--pngx-grey-6);
   display: block;
   font-size: 11px;
   margin: 10px -9px -9px -9px;
@@ -2020,7 +2420,7 @@ fieldset[disabled] .btn-primary.active {
 }
 .postbox-container .pngx-meta-fields-wrap .checkbox-description,
 .postbox-container .pngx-meta-field .checkbox-description {
-  color: #333;
+  color: var(--pngx-grey-9);
   font-size: 11px;
 }
 .postbox-container .pngx-meta-fields-wrap .pngx-meta-field-styles,
@@ -2030,7 +2430,7 @@ fieldset[disabled] .btn-primary.active {
 }
 .postbox-container .pngx-meta-fields-wrap .pngx-meta-field-styles .inline-style-title,
 .postbox-container .pngx-meta-field .pngx-meta-field-styles .inline-style-title {
-  color: #003ca9;
+  color: var(--pngx-color-button-primary);
   font-size: 12px;
   font-weight: 400;
   left: 9px;
@@ -2049,7 +2449,7 @@ fieldset[disabled] .btn-primary.active {
 }
 .postbox-container .pngx-meta-fields-wrap .pngx-variety-fields-wrapper > .pngx-variety-field,
 .postbox-container .pngx-meta-field .pngx-variety-fields-wrapper > .pngx-variety-field {
-  border: 1px solid #777;
+  border: 1px solid var(--pngx-grey-6);
   border-radius: 4px;
   display: block;
   max-width: 100%;
@@ -2058,13 +2458,13 @@ fieldset[disabled] .btn-primary.active {
 }
 .postbox-container .pngx-meta-fields-wrap .pngx-variety-fields-wrapper > .pngx-variety-field label,
 .postbox-container .pngx-meta-field .pngx-variety-fields-wrapper > .pngx-variety-field label {
-  color: #003ca9;
+  color: var(--pngx-color-button-primary);
   font-size: 13px;
 }
 .postbox-container .pngx-meta-fields-wrap .pngx-variety-fields-wrapper > .pngx-variety-field > label,
 .postbox-container .pngx-meta-field .pngx-variety-fields-wrapper > .pngx-variety-field > label {
-  background: #fff;
-  color: #003ca9;
+  background: var(--pngx-white);
+  color: var(--pngx-color-button-primary);
   display: block;
   float: left;
   font-size: 13px;
@@ -2218,8 +2618,8 @@ fieldset[disabled] .btn-primary.active {
   top: 5px;
 }
 .pngx-wrapper.section .pngx-column-label {
-  background: #fff;
-  color: #003ca9;
+  background: var(--pngx-white);
+  color: var(--pngx-color-button-primary);
   display: block;
   float: left;
   font-size: 15px;
@@ -2235,8 +2635,8 @@ fieldset[disabled] .btn-primary.active {
   left: 20px;
 }
 .pngx-wrapper.section .pngx-section-label {
-  background: #fff;
-  color: #003ca9;
+  background: var(--pngx-white);
+  color: var(--pngx-color-button-primary);
   display: block;
   float: left;
   font-size: 15px;
@@ -2271,7 +2671,7 @@ fieldset[disabled] .btn-primary.active {
   width: 100%;
 }
 .pngx-wrapper.section .repeater-section .repeating-column .repeater-column .repeater-section {
-  border: 1px solid #777;
+  border: 1px solid var(--pngx-grey-6);
   border-radius: 3px;
   margin: 18px 0;
   padding: 40px 2% 2%;
@@ -2513,6 +2913,120 @@ div.repeating-field .remove-repeater {
   visibility: visible;
 }
 
+/* = Tooltips
+============================ */
+.pngx-tooltip-hover {
+  cursor: pointer;
+  display: inline-block;
+  margin: 0;
+  position: relative;
+  text-align: left;
+  /* defaults */
+}
+.pngx-tooltip-hover .dashicons-info {
+  color: #a9a9a9;
+  font-size: 16px;
+  line-height: 1em;
+  vertical-align: middle;
+}
+.pngx-tooltip-hover .down,
+.pngx-tooltip-hover .left,
+.pngx-tooltip-hover .right,
+.pngx-tooltip-hover .up {
+  background-color: #fff;
+  box-shadow: 0 0 3px 3px rgba(4, 5, 5, 0.05);
+  box-sizing: border-box;
+  color: #333;
+  font-size: 16px;
+  font-weight: 400;
+  max-width: 100vw;
+  opacity: 0;
+  padding: 15px;
+  position: absolute;
+  transform: translate(-50%, 0);
+  transition: opacity 0.8s;
+  visibility: hidden;
+  width: 350px;
+  z-index: 99999999;
+}
+.pngx-tooltip-hover .down i,
+.pngx-tooltip-hover .left i,
+.pngx-tooltip-hover .right i,
+.pngx-tooltip-hover .up i {
+  height: 12px;
+  overflow: hidden;
+  position: absolute;
+  width: 24px;
+}
+.pngx-tooltip-hover .down i:after,
+.pngx-tooltip-hover .left i:after,
+.pngx-tooltip-hover .right i:after,
+.pngx-tooltip-hover .up i:after {
+  background-color: #fff;
+  content: "";
+  height: 12px;
+  position: absolute;
+  width: 24px;
+}
+.pngx-tooltip-hover .down ul,
+.pngx-tooltip-hover .left ul,
+.pngx-tooltip-hover .right ul,
+.pngx-tooltip-hover .up ul {
+  font-size: 0.875rem;
+  list-style-type: disc;
+}
+.pngx-tooltip-hover .down ul li,
+.pngx-tooltip-hover .left ul li,
+.pngx-tooltip-hover .right ul li,
+.pngx-tooltip-hover .up ul li {
+  margin-left: 0.625rem;
+}
+.pngx-tooltip-hover.large .down,
+.pngx-tooltip-hover.large .left,
+.pngx-tooltip-hover.large .right,
+.pngx-tooltip-hover.large .up {
+  width: 400px;
+}
+@media screen and (max-width: 480px) {
+  .pngx-tooltip-hover.large .down,
+  .pngx-tooltip-hover.large .left,
+  .pngx-tooltip-hover.large .right,
+  .pngx-tooltip-hover.large .up {
+    width: 250px;
+  }
+}
+.pngx-tooltip-hover .tooltip-list {
+  padding-left: 10px;
+}
+.pngx-tooltip-hover .tooltip-list li {
+  list-style-type: disc;
+}
+
+.pngx-tooltip-hover .down {
+  left: 50%;
+  top: 28px;
+}
+.pngx-tooltip-hover .down i {
+  bottom: 100%;
+  left: 50%;
+  margin-left: -7px;
+}
+.pngx-tooltip-hover .down i:after {
+  box-shadow: 0 0 3px 3px rgba(4, 5, 5, 0.05);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, 50%) rotate(45deg);
+}
+
+/* active (open) styles */
+.pngx-tooltip-hover.active .down,
+.pngx-tooltip-hover.active .left,
+.pngx-tooltip-hover.active .right,
+.pngx-tooltip-hover.active .up {
+  opacity: 1;
+  visibility: visible;
+}
+
 /* Typography
 =============================================*/
 /* ## Hidden Class
@@ -2612,59 +3126,4 @@ div.repeating-field .remove-repeater {
 
 .pngx-field-two-thirds {
   width: -0.3333333333;
-}
-
-/* ## PNGX Admin Loader
---------------------------------------------- */
-.pngx-admin-loader {
-  align-items: center;
-  background: rgba(255, 255, 255, 0.8);
-  bottom: 0;
-  display: flex;
-  height: 100%;
-  justify-content: center;
-  left: 0;
-  padding-top: 0;
-  position: fixed;
-  right: 0;
-  top: 0;
-  width: 100%;
-  z-index: 100;
-}
-
-.pngx-admin-loader__dot {
-  width: 15px;
-}
-.pngx-admin-loader__dot:not(:first-of-type) {
-  margin-left: 8px;
-}
-.pngx-admin-loader__dot circle {
-  fill: currentColor;
-}
-
-.pngx-admin-loader__dot circle {
-  animation-direction: normal;
-  animation-duration: 2.24s;
-  animation-iteration-count: infinite;
-  animation-name: pngx-admin-loader-bounce;
-  fill: #950402;
-  opacity: 0.07;
-}
-
-.pngx-admin-loader__dot--first circle {
-  animation-delay: 0.45s;
-}
-
-.pngx-admin-loader__dot--second circle {
-  animation-delay: 1.05s;
-}
-
-.pngx-admin-loader__dot--third circle {
-  animation-delay: 1.35s;
-}
-
-@keyframes pngx-admin-loader-bounce {
-  50% {
-    opacity: 1;
-  }
 }

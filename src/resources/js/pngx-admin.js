@@ -818,22 +818,6 @@ var pngx_loadScript = pngx_loadScript || {};
 
 })( jQuery, pngx_loadScript );
 
-// Run some magic to allow a better handling of class names for jQuery.hasClass type of methods
-String.prototype.className = function () {
-	// Prevent Non Strings to be included
-	if (
-		(
-			'string' !== typeof this
-			&& ! this instanceof String
-		)
-		|| 'function' !== typeof this.replace
-	) {
-		return this;
-	}
-
-	return this.replace( '.', '' );
-};
-
 /**
  * File Upload Object
  * @type {{}}

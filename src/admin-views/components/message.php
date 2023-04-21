@@ -33,7 +33,7 @@ if ( ! empty( $message_classes ) ) {
 ?>
 
 <div
-	id="pngx-volt-vectors-options-message"
+	id="pngx-engine-options-message"
 	<?php pngx_classes( $message_classes ); ?>
 >
 	<?php echo wp_kses_post( $message ); ?>

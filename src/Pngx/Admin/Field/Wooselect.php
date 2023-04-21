@@ -68,23 +68,31 @@ class Wooselect {
 		}
 
 		$selected =  is_array( $selected ) ? implode( ',', $selected ) : $selected;
-		$dropdown = [
-			'label'           => $field['id'],
-			'id'              => $field['id'],
-			'classes_wrap'    => $field['classes_wrap'],
-			'classes_label'   => [ 'screen-reader-text' ],
-			'classes_select'  => $classes,
-			'name'            => $name,
-			'selected'        => $selected,
-			'selected_option' => $selected_option,
-			'attrs'           => [
-				...$field['attrs'],
-				'data-selected' => $selected,
-				'data-options'  => json_encode( $field['options'] ),
-			],
-			'wrap_attrs'      => empty( $field['wrap_attrs'] ) ? [] : $field['wrap_attrs'],
-		];
 
-		$template->template( 'components/dropdown', $dropdown );
+		$template->template( 'components/field', [
+				'classes_wrap'  => [ "pngx-engine-field__{$field['id']}-wrap" ],
+				'id'            => $field['id'],
+				'label'         => $field['label'],
+				'tooltip'       => $field['tooltip'] ?? null,
+				'template_name' => 'dropdown',
+				'template_echo' => true,
+				'template_args' => [
+					'label'           => $field['label'],
+					'id'              => $field['id'],
+					'classes_wrap'    => $field['classes_wrap'],
+					'classes_label'   => [ 'screen-reader-text' ],
+					'classes_select'  => $classes,
+					'name'            => $name,
+					'selected'        => $selected,
+					'selected_option' => $selected_option,
+					'attrs'           => [
+						...$field['attrs'],
+						'data-selected' => $selected,
+						'data-options'  => json_encode( $field['options'] ),
+					],
+					'wrap_attrs'      => empty( $field['wrap_attrs'] ) ? [] : $field['wrap_attrs'],
+				],
+			]
+		);
 	}
 }

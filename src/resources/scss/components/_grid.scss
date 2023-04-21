@@ -1,0 +1,42 @@
+/*
+ * Volt Vectors Grid CSS
+ * -------------------------------------------------------------
+ */
+.pngx-volt-vectors-grid {
+	background-color: var(--pngx-color-background);
+	display: grid;
+	grid-gap: var(--pngx-spacer-2);
+	grid-template-columns: 3fr 2fr 2fr 1fr;
+	max-width: 1000px;
+
+	&:nth-child(even) {
+		background-color: var(--pngx-color-background-secondary);
+	}
+
+	&.pngx-volt-vectors-grid__pinecone {
+		grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+	}
+}
+
+.pngx-volt-vectors-grid-header {
+	background-color: var(--pngx-color-background);
+	border: 1px solid var(--pngx-color-border-default);
+	border-bottom: none;
+}
+
+.pngx-engine-grid-row {
+	border: 1px solid var(--pngx-color-border-default);
+}
+
+.pngx-volt-vectors-grid-item {
+	padding: var(--pngx-spacer-2);
+
+	&.disabled {
+		opacity: var(--pngx-opacity-select-highlighted);
+	}
+}
+
+.pngx-engine-grid-full-width {
+	grid-column: 1 / -1;
+}
+

@@ -36,7 +36,7 @@
 ***************************************************/
 .pro-heading,
 .postbox h4.pngx-fields-heading {
-	color: $color__link;
+	color: var( --pngx-color-button-primary );
 	font-size: 15px;
 	font-weight: bold;
 	margin: 0 0 10px;
@@ -87,7 +87,7 @@
 * Linked Style Fields
 ***************************************************/
 .pngx-inside-label {
-	color: $color__dark_grey;
+	color: var( --pngx-grey-9 );
 	font-size: 10px;
 	line-height: 26px;
 	margin: 0 15px 0 0;
@@ -98,9 +98,9 @@
 ------------------------------------------------------------ */
 .pngx-list-license-button,
 .pngx-license-button-act {
-	background: $color__link;
-	border: 1px solid $color__link;
-	color: $white;
+	background: var( --pngx-color-button-primary );
+	border: 1px solid var( --pngx-color-button-primary );
+	color: var( --pngx-white );
 }
 
 .pngx-list-license-button:hover,
@@ -110,13 +110,13 @@
 }
 
 .pngx-license-button-det {
-	background: $color__sucess;
-	border: 1px solid $color__sucess;
-	color: $white;
+	background: var( --pngx-success );
+	border: 1px solid var( --pngx-success );
+	color: var( --pngx-white );
 }
 
 .pngx-license-button-det:hover {
-	background: $color__link;
+	background: var( --pngx-color-button-primary );
 	cursor: pointer;
 }
 
@@ -153,13 +153,13 @@
 	margin: 0;
 
 	li {
-		color: $black;
+		color: var( --pngx-black );
 		padding-left: 1em;
 		text-indent: -.7em;
 	}
 
 	li:before {
-		color: $darkred;
+		color: var( --pngx-dark-red );
 		content: "\002022 ";
 		padding-right: 10px;
 	}
