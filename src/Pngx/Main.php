@@ -141,7 +141,7 @@ class Pngx__Main {
 	public $vendor_url;
 
 	/**
-	 * The slug that will be used to identify HTTP requests common should handle.
+	 * The slug that will be used to identify HTTP requests pngx should handle.
 	 *
 	 * @since 3.3.0
 	 *
@@ -221,7 +221,7 @@ class Pngx__Main {
 		$this->add_hooks();
 
 		/**
-		 * Runs once all common libs are loaded and initial hooks are in place.
+		 * Runs once all pngx libs are loaded and initial hooks are in place.
 		 *
 		 * @since 3.0
 		 */
@@ -248,7 +248,7 @@ class Pngx__Main {
 	}
 
 	/**
-	 * Setup the autoloader for common files
+	 * Setup the autoloader for pngx files
 	 */
 	protected function init_autoloading() {
 
@@ -291,7 +291,6 @@ class Pngx__Main {
 		pngx_singleton( 'cache', 'Pngx__Cache', [ 'hook' ] );
 		pngx_singleton( \Pngx\Ajax\Dropdown::class, \Pngx\Ajax\Dropdown::class, [ 'hook' ] );
 
-		//pngx_register_provider( Pngx\Service_Providers\Tooltip::class );
 		pngx_register_provider( Pngx\Service_Providers\Dialog::class );
 		pngx_register_provider( Pngx\Service_Providers\Carousel::class );
 		pngx_register_provider( Pngx\Duplicate\Post_Types::class );

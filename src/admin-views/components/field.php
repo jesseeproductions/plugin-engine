@@ -19,7 +19,6 @@
  * @var string              $tooltip       The tooltip for the field.
  * @var string              $template_name The name of the template
  * @var array<string|mixed> $template_args The arguments for the template.
- * @var bool                $template_echo Whether to echo the template.
  */
 $field_wrap_classes = [ 'pngx-field', 'pngx-field-text' ];
 if ( ! empty( $classes_wrap ) ) {

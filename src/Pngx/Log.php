@@ -11,7 +11,7 @@ class Pngx__Log {
 	const DEBUG   = 'debug';
 	const WARNING = 'warning';
 	const ERROR   = 'error';
-	const CLEANUP = 'pngx_common_log_cleanup';
+	const CLEANUP = 'pngx_log_cleanup';
 	const SUCCESS = 'success';
 	const COLORIZE = 'colorize';
 
@@ -183,7 +183,7 @@ class Pngx__Log {
 		 * @param string $type  The message type.
 		 * @param string $src   The message source.
 		 */
-		$log_to_wpcli = apply_filters( 'pngx_common_log_to_wpcli', true, $entry, $type, $src );
+		$log_to_wpcli = apply_filters( 'pngx_log_to_wpcli', true, $entry, $type, $src );
 
 		// Only go further if we have WP_CLI or if we want to log to WP-CLI.
 		if ( ! class_exists( 'WP_CLI' ) || false === $log_to_wpcli ) {
@@ -241,7 +241,7 @@ class Pngx__Log {
 		 *
 		 * @var array $available_engines
 		 */
-		return apply_filters( 'pngx_common_logging_engines', $available_engines );
+		return apply_filters( 'pngx_logging_engines', $available_engines );
 	}
 
 	/**
@@ -286,7 +286,7 @@ class Pngx__Log {
 		$engine = str_replace( '\\\\', '\\', $engine );
 
 		if ( ! isset( $available_engines[ $engine ] ) ) {
-			throw new Exception( sprintf( __( 'Cannot set %s as the current logging engine', 'pngx-common' ), $engine ) );
+			throw new Exception( sprintf( __( 'Cannot set %s as the current logging engine', 'pngx-engine' ), $engine ) );
 		}
 
 		pngx_update_option( 'logging_class', $engine );
@@ -384,11 +384,11 @@ class Pngx__Log {
 			 *
 			 * @param array $logging_levels
 			 */
-			$this->levels = (array) apply_filters( 'pngx_common_logging_levels', array(
-				array( self::DISABLE, __( 'Disabled', 'pngx-common' ) ),
-				array( self::ERROR,   __( 'Only errors', 'pngx-common' ) ),
-				array( self::WARNING, __( 'Warnings and errors', 'pngx-common' ) ),
-				array( self::DEBUG,   __( 'Full debug (all events)', 'pngx-common' ) ),
+			$this->levels = (array) apply_filters( 'pngx_logging_levels', array(
+				array( self::DISABLE, __( 'Disabled', 'pngx-engine' ) ),
+				array( self::ERROR,   __( 'Only errors', 'pngx-engine' ) ),
+				array( self::WARNING, __( 'Warnings and errors', 'pngx-engine' ) ),
+				array( self::DEBUG,   __( 'Full debug (all events)', 'pngx-engine' ) ),
 			) );
 		}
 

@@ -1021,7 +1021,7 @@ abstract class Pngx__Process__Queue extends Pngx__Process__Handler {
 		// Adds every 5 minutes to the existing schedules.
 		$schedules[ $this->identifier . '_cron_interval' ] = [
 			'interval' => MINUTE_IN_SECONDS * $interval,
-			'display'  => sprintf( __( 'Every %d Minutes', 'pngx-common' ), $interval ),
+			'display'  => sprintf( __( 'Every %d Minutes', 'pngx-engine' ), $interval ),
 		];
 
 		return $schedules;

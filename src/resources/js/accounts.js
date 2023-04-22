@@ -123,7 +123,7 @@ pngx.accounts = pngx.accounts || {};
 			$table.find( obj.selectors.accountList ).append( accountItemWrap );
 
 			// Setup dropdowns after loading account fields.
-			const $dropdowns = $( obj.selectors.accountList )
+			const $dropdowns = $table
 				.find( pngxDropdowns.selector.dropdown )
 				.not( pngxDropdowns.selector.created );
 
@@ -187,6 +187,13 @@ pngx.accounts = pngx.accounts || {};
 		const existingPage = $table.find( `[data-unique-id='${uniqueId}']` );
 		existingPage.replaceWith( $accountItemWrap );
 
+		// Setup dropdowns after loading account fields.
+		const $dropdowns = $accountItemWrap
+			.find( pngxDropdowns.selector.dropdown )
+			.not( pngxDropdowns.selector.created );
+
+		$dropdowns.pngx_dropdowns();
+
 		pngxAccordion.bindAccordionEvents( $accountItemWrap );
 	};
 
@@ -228,7 +235,7 @@ pngx.accounts = pngx.accounts || {};
 		const $accountItem = $this.closest( obj.selectors.accountItem );
 		const is_valid = obj.validateFields( $accountItem );
 		if ( !is_valid ) {
-			window.alert( $this.data( 'generateError' ) );
+			window.alert( $this.data( 'accountError' ) );
 			return;
 		}
 

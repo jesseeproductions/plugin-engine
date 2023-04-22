@@ -6,7 +6,7 @@ namespace Pngx\Utils;
  *
  * @since  YBD
  *
- * @package Tribe\Utils
+ * @package Pngx\Utils
  */
 class Element_Classes {
 	/**

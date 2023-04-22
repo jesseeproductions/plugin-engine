@@ -23,7 +23,7 @@
 ?>
 <div <?php pngx_classes( $classes_wrap ); ?> >
 	<fieldset class="pngx-engine-options-details__read-only-field">
-		<legend class="pngx-engine-options-details__label tribe-field-label screen-reader-text">
+		<legend class="pngx-engine-options-details__label pngx-field-label screen-reader-text">
 			<?php echo esc_html( $label ); ?>
 		</legend>
 		<div class="pngx-engine-options-details__field-wrap pngx-field-wrap">

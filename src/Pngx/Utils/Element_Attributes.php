@@ -9,7 +9,7 @@ namespace Pngx\Utils;
  *
  * @since   4.0.0
  *
- * @package Tribe\Utils
+ * @package Pngx\Utils
  */
 class Element_Attributes {
 

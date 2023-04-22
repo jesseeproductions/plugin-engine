@@ -96,7 +96,7 @@ function pngx_required( $required, $echo = true ) {
 function pngx_required_label( $required, $echo = true ) {
 	if ( $required ) {
 		$required_string = '<span class="screen-reader-text">'
-			. esc_html_x( '(required)', 'The associated field is required.', 'pngx-common' )
+			. esc_html_x( '(required)', 'The associated field is required.', 'pngx-engine' )
 			. '</span><span class="pngx-required" aria-hidden=”true” role=”presentation”>*</span>';
 
 		if ( ! $echo ) {

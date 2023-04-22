@@ -148,8 +148,8 @@ class View extends \Pngx__Template {
 		$default_args = [
 			'append_target'           => '',
 			'body_lock'               => true,
-			'button_text'             => __( 'Open the modal window', 'pngx-common' ),
-			'close_button_aria_label' => __( 'Close this modal window', 'pngx-common' ),
+			'button_text'             => __( 'Open the modal window', 'pngx-engine' ),
+			'close_button_aria_label' => __( 'Close this modal window', 'pngx-engine' ),
 			'close_button_classes'    => 'pngx-dialog__close-button pngx-modal__close-button',
 			'close_event'             => 'pngx_dialog_close_modal',
 			'content_classes'         => 'pngx-dialog__content pngx-modal__content',
@@ -216,8 +216,8 @@ class View extends \Pngx__Template {
 	public function render_confirm( $content, $args = [], $id = null, $echo = true ) {
 		$default_args = [
 			'body_lock'               => true,
-			'cancel_button_text'      => __( 'Cancel', 'pngx-common' ),
-			'continue_button_text'    => __( 'Confirm', 'pngx-common' ),
+			'cancel_button_text'      => __( 'Cancel', 'pngx-engine' ),
+			'continue_button_text'    => __( 'Confirm', 'pngx-engine' ),
 			'close_button_aria_label' => '',
 			'close_button_classes'    => 'pngx-dialog__close-button--hidden',
 			'close_event'             => 'pngx_dialog_close_confirm',
@@ -281,7 +281,7 @@ class View extends \Pngx__Template {
 	 */
 	public function render_alert( $content, $args = [], $id = null, $echo = true ) {
 		$default_args = [
-			'alert_button_text'       => __( 'OK', 'pngx-common' ),
+			'alert_button_text'       => __( 'OK', 'pngx-engine' ),
 			'body_lock'               => true,
 			'close_button_aria_label' => '',
 			'close_button_classes'    => 'pngx-dialog__close-button--hidden',
@@ -346,7 +346,7 @@ class View extends \Pngx__Template {
 			'button_classes'          => '',
 			'button_id'               => '',
 			'button_name'             => '',
-			'button_text'             => __( 'Open the dialog window', 'pngx-common' ),
+			'button_text'             => __( 'Open the dialog window', 'pngx-engine' ),
 			'button_type'             => '',
 			'button_value'            => '',
 			'close_event'             => 'pngx_dialog_close_dialog',
@@ -360,7 +360,7 @@ class View extends \Pngx__Template {
 			// Dialog script options.
 			'append_target'           => '', // The dialog will be inserted after the button, you could supply a selector string here to override.
 			'body_lock'               => false, // Lock the body while dialog open?
-			'close_button_aria_label' => __( 'Close this dialog window', 'pngx-common' ), // Aria label for close button.
+			'close_button_aria_label' => __( 'Close this dialog window', 'pngx-engine' ), // Aria label for close button.
 			'close_button_classes'    => 'pngx-dialog__close-button', // Classes for close button.
 			'content_wrapper_classes' => 'pngx-dialog__wrapper', // Dialog content classes.
 			'effect'                  => 'none', // None or fade (for now).

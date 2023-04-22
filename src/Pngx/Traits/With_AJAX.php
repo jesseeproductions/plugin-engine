@@ -40,7 +40,7 @@ trait With_AJAX {
 				[
 					'status'  => 'fail',
 					'code'    => 'invalid-nonce',
-					'message' => _x( 'The provided nonce is not valid.', 'Ajax error message.', 'pngx-common' ),
+					'message' => _x( 'The provided nonce is not valid.', 'Ajax error message.', 'pngx-engine' ),
 				],
 				403
 			);
@@ -71,7 +71,7 @@ trait With_AJAX {
 			$error = _x(
 				'The post ID is missing from the request.',
 				'An error raised in the context of an API integration.',
-				'pngx-common'
+				'pngx-engine'
 			);
 
 			wp_send_json_error(

@@ -70,7 +70,7 @@ class Wooselect {
 		$selected =  is_array( $selected ) ? implode( ',', $selected ) : $selected;
 
 		$template->template( 'components/field', [
-				'classes_wrap'  => [ "pngx-engine-field__{$field['id']}-wrap" ],
+				'classes_wrap'  => [ "pngx-engine-field__{$field['id']}-wrap", ...$field['fieldset_wrap'] ],
 				'id'            => $field['id'],
 				'label'         => $field['label'],
 				'tooltip'       => $field['tooltip'] ?? null,
@@ -79,7 +79,6 @@ class Wooselect {
 				'template_args' => [
 					'label'           => $field['label'],
 					'id'              => $field['id'],
-					'classes_wrap'    => $field['classes_wrap'],
 					'classes_label'   => [ 'screen-reader-text' ],
 					'classes_select'  => $classes,
 					'name'            => $name,

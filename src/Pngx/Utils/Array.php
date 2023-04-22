@@ -257,7 +257,7 @@ if ( ! class_exists( 'Pngx__Utils__Array' ) ) {
 			$mapped = [];
 
 			foreach ( (array) $keys as $key ) {
-				$meta_key = Tribe__Utils__Array::get( $map, $key, $hash );
+				$meta_key = Pngx__Utils__Array::get( $map, $key, $hash );
 				if ( $hash === $meta_key ) {
 					continue;
 				}

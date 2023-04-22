@@ -14,7 +14,7 @@ namespace Pngx\Session;
  *
  * @since   4.0.0
  *
- * @package Tribe\Widget
+ * @package Pngx\Session
  *
  */
 interface Session_Interface {
