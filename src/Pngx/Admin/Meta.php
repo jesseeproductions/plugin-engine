@@ -48,11 +48,11 @@ class Pngx__Admin__Meta {
 	 *
 	 * @since 1.9.0
 	 *
+	 * @param string $js_troubleshoot_url The url to the javascript troubleshooting guide.
+	 *
 	 * @return string The conflict message.
 	 */
-	public function get_js_error_check_msg() {
-		$js_troubleshoot_url = 'http://cctor.link/R7KRa';
-
+	public function get_js_error_check_msg( $js_troubleshoot_url = 'http://cctor.link/R7KRa' ) {
 		$js_msg = '<div class="javascript-conflict pngx-error"><p>' . sprintf( __( 'There maybe a javascript conflict preventing some features from working.  <a href="%s" target="_blank" >Please check this guide to narrow down the cause.</a>', 'plugin-engine' ), esc_url( $js_troubleshoot_url ) ) . '</p></div>';
 
 		return $js_msg;

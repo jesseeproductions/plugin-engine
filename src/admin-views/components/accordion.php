@@ -11,7 +11,7 @@
  *
  * @version 4.0.0
  *
- * @link    https://voltvectors.com/guide/templates/
+ * @link    https://pngx.ink/RYIOh
  *
  * @var string               $label          The accordion label.
  * @var string               $id             The id of the accordion contents.

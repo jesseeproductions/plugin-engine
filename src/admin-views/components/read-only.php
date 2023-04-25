@@ -11,7 +11,7 @@
  *
  * @version 4.0.0
  *
- * @link    https://voltvectors.com/guide/templates/
+ * @link    https://pngx.ink/RYIOh
  *
  * @var array<string,string> $classes_wrap  An array of classes for the toggle button.
  * @var string               $label         The label for the text input.

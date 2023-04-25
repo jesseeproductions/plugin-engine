@@ -7,7 +7,7 @@
  *
  * See more documentation about our views templating system.
  *
- * @link    https://voltvectors.com/guide/templates/
+ * @link    https://pngx.ink/RYIOh
  *
  * @since   4.0.0
  *

@@ -11,7 +11,7 @@
  *
  * @version 4.0.0
  *
- * @link    https://voltvectors.com/guide/templates/
+ * @link    https://pngx.ink/RYIOh
  *
  */
 $svg_classes = [ 'pngx-control-svgicon', 'pngx-control-svgicon--caret-down' ];

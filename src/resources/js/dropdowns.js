@@ -465,23 +465,6 @@ pngx.dropdowns = pngx.dropdowns || {};
 		$container.data( 'select2' ).$container.removeClass( 'hide-before-select2-init' );
 
 		$container.on( 'select2:open', obj.action_select2_open );
-
-		/**
-		 * @todo @bordoni Investigate how and if we should be doing this.
-		 *
-		if ( carryOverData.length > 0 ) {
-			carryOverData.map( function( dataKey ) {
-				var attr = 'data-' + dataKey;
-				var val = $select.attr( attr );
-
-				if ( ! val ) {
-					return;
-				}
-
-				this.attr( attr, val );
-			}, $container );
-		}
-		 */
 	};
 
 	obj.ajaxurl = function() {

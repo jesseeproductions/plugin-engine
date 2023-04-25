@@ -11,7 +11,7 @@
  *
  * @version 4.0.0
  *
- * @link    https://voltvectors.com/guide/templates/
+ * @link    https://pngx.ink/RYIOh
  *
  * @var string               $label         Label for the switch input.
  * @var string               $id            ID of the switch input.

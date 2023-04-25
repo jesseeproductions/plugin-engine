@@ -11,8 +11,6 @@ class Pngx__Editor {
 	 * Checks if we have Gutenberg Project online, only useful while
 	 * its a external plugin
 	 *
-	 * @todo   Revise when Gutenberg is merged into core
-	 *
 	 * @since  3.2.0
 	 *
 	 * @return boolean
@@ -91,11 +89,7 @@ class Pngx__Editor {
 	 * @return array
 	 */
 	public function add_template_blocks( $args = array() ) {
-		$template = array();
-
-		/**
-		 * @todo Have a good method from the block class to em here
-		 */
+		$template = [];
 		$template[] = array( 'pngx/blocks' );
 		$template[] = array(
 			'core/paragraph',
