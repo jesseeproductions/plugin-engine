@@ -30,7 +30,7 @@ pngx.access_profiles = pngx.access_profiles || {};
 		profileList: '.pngx-engine-options-items__wrap',
 		profileItem: '.pngx-engine-grid-row',
 		profileName: '.pngx-engine-options-details__name-input',
-		profileApiKey: '.pngx-engine-options-details__api-key-input',
+		profilePrimary: '.pngx-engine-options-details__primary-input',
 		profileDefaults: '.pngx-engine-options-profile-defaults__input',
 		profileSave: '.pngx-engine-options-details-action__save',
 		profileUpdate: '.pngx-engine-options-details-action__update',
@@ -69,8 +69,8 @@ pngx.access_profiles = pngx.access_profiles || {};
 	 */
 	obj.validateFields = function( $profileItem ) {
 		const profileName = $profileItem.find( obj.selectors.profileName ).val();
-		const intergrationApiKey = $profileItem.find( obj.selectors.profileApiKey ).val();
-		if ( profileName && intergrationApiKey ) {
+		const intergrationPrimary = $profileItem.find( obj.selectors.profilePrimary ).val();
+		if ( profileName && intergrationPrimary ) {
 			return true;
 		}
 
@@ -233,20 +233,27 @@ pngx.access_profiles = pngx.access_profiles || {};
 		const $this = $( event.target ).closest( obj.selectors.profileSave );
 		const url = $this.data( 'ajaxSaveUrl' );
 		const $profileItem = $this.closest( obj.selectors.profileItem );
-		const is_valid = obj.validateFields( $profileItem );
+/*		const is_valid = obj.validateFields( $profileItem );
 		if ( !is_valid ) {
 			window.alert( $this.data( 'profileError' ) );
 			return;
-		}
+		}*/
 
 		const uniqueId = $profileItem.data( 'uniqueId' );
 		const profileName = $profileItem.find( obj.selectors.profileName ).val();
-		const intergrationApiKey = $profileItem.find( obj.selectors.profileApiKey ).val();
+		const $primaryInput = $profileItem.find(obj.selectors.profilePrimary);
+		let intergrationPrimary;
+
+		if ($primaryInput.is('select')) {
+		  intergrationPrimary = $primaryInput.find('option:selected').val();
+		} else if ($primaryInput.is('input[type="text"]')) {
+		  intergrationPrimary = $primaryInput.val();
+		}
 		const intergrationDefaults = obj.getInputValuesAndNames( obj.selectors.profileDefaults, $profileItem );
 
 		sendAjaxRequest( url, {
 			unique_id: uniqueId,
-			api_key: intergrationApiKey,
+			primary: intergrationPrimary,
 			name: profileName,
 			defaults: intergrationDefaults,
 		}, obj.onProfileSuccess, $this );
