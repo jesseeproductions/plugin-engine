@@ -180,7 +180,7 @@
 }
 
 /*
- * Accounts CSS
+ * Profiles CSS
  * -------------------------------------------------------------
  */
 .pngx-volt-vectors-options {
@@ -218,7 +218,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.pngx-volt-vectors-options .pngx-engine-options-details-accounts__last-access-wrap .pngx-engine-options-details__field-wrap.pngx-field-wrap {
+.pngx-volt-vectors-options .pngx-engine-options-details-profiles__last-access-wrap .pngx-engine-options-details__field-wrap.pngx-field-wrap {
   line-height: var(--pngx-spacer-3);
 }
 .pngx-volt-vectors-options .pngx-engine-options-details-action__revoke {
@@ -232,7 +232,7 @@
 .pngx-volt-vectors-options .pngx-engine-options-details-action__revoke:hover {
   color: var(--pngx-color-accent-primary-hover);
 }
-.pngx-volt-vectors-options .pngx-engine-options__add-account-button .dashicons {
+.pngx-volt-vectors-options .pngx-engine-options__add-profile-button .dashicons {
   margin-top: calc(var(--pngx-spacer-0) + 1px);
 }
 .pngx-volt-vectors-options .pngx-engine-options-api-key__wrap {
@@ -245,7 +245,7 @@
   font-weight: 700;
   margin: 0 0 var(--pngx-spacer-3);
 }
-.pngx-volt-vectors-options .pngx-engine-options-details-accounts__message-wrap {
+.pngx-volt-vectors-options .pngx-engine-options-details-profiles__message-wrap {
   border-bottom: 1px solid var(--pngx-color-border-default);
   margin: 0 0 var(--pngx-spacer-3);
   padding: 0 0 var(--pngx-spacer-3);

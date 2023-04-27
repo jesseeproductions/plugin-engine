@@ -169,10 +169,10 @@ class Pngx__Admin__Assets {
 			true
 		);
 		wp_register_script(
-			'pngx-accounts',
-			Pngx__Main::instance()->resource_url . 'js/accounts.js',
+			'pngx-access-profiles',
+			Pngx__Main::instance()->resource_url . 'js/access-profiles.js',
 			[ 'jquery', 'pngx-accordion', 'pngx-dropdowns' ],
-			filemtime( Pngx__Main::instance()->resource_path . 'js/accounts.js' ),
+			filemtime( Pngx__Main::instance()->resource_path . 'js/access-profiles.js' ),
 			true
 		);
 		wp_register_script(
@@ -195,7 +195,7 @@ class Pngx__Admin__Assets {
 					'pngx-bootstrap-iconpicker',
 					'jquery-ui-tabs',
 					'pngx-dependency',
-					'pngx-accounts'
+					'pngx-access-profiles'
 				],
 			filemtime( Pngx__Main::instance()->resource_path . 'js/pngx-admin.js' ),
 			true

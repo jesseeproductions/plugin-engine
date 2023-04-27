@@ -7,6 +7,8 @@
 
 namespace Pngx\Ajax;
 
+use Pngx\Volt_Vectors\Plugin;
+
 /**
  * Class Abstract_Url
  *
@@ -57,4 +59,73 @@ class Abstract_Url {
 
 		return add_query_arg( $query_args, admin_url( 'admin-ajax.php' ) );
 	}
+
+	/**
+	 * Returns the URL that should be used to add an access profile fields in the options.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return string The URL to add an profile.
+	 */
+	public function to_add_profile_link() {
+		$api_id = static::$api_id;
+		$nonce  = wp_create_nonce( $this->actions::$add_profile_action );
+
+		return $this->get_admin_ajax_url_with_parameters( Plugin::$request_slug, "pngx_volt_vectors_ev_{$api_id}_options_add_profile", $nonce, [] );
+	}
+
+	/**
+	 * Returns the URL that should be used to save an access profile.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $profile_id The profile id.
+	 *
+	 * @return string The URL used to save an access profile.
+	 */
+	public function to_save_access_profile( $profile_id ) {
+		$api_id = static::$api_id;
+		$nonce  = wp_create_nonce( $this->actions::$save_action );
+
+		return $this->get_admin_ajax_url_with_parameters( Plugin::$request_slug, "pngx_volt_vectors_ev_{$api_id}_options_save_profile", $nonce, [
+			'api_key' => $profile_id
+		] );
+	}
+
+	/**
+	 * Returns the URL that should be used to update an access profile.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $profile_id The profile id.
+	 *
+	 * @return string The URL used to update save an access profile.
+	 */
+	public function to_update_profile( $profile_id ) {
+		$api_id = static::$api_id;
+		$nonce  = wp_create_nonce( $this->actions::$update_action );
+
+		return $this->get_admin_ajax_url_with_parameters( Plugin::$request_slug, "pngx_volt_vectors_ev_{$api_id}_options_update_profile", $nonce, [
+			'api_key' => $profile_id
+		] );
+	}
+
+	/**
+	 * Returns the URL that should be used to delete an access profile.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $profile_id The profile id.
+	 *
+	 * @return string The URL to delete an access profile.
+	 */
+	public function to_delete_profile_link( $profile_id ) {
+		$api_id = static::$api_id;
+		$nonce  = wp_create_nonce( $this->actions::$delete_action );
+
+		return $this->get_admin_ajax_url_with_parameters( Plugin::$request_slug, "pngx_volt_vectors_ev_{$api_id}_options_delete_profile", $nonce, [
+			'api_key' => $profile_id
+		] );
+	}
+
 }

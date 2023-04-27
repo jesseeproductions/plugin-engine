@@ -6,7 +6,7 @@
  *
  * @type {PlainObject}
  */
-pngx.accounts = pngx.accounts || {};
+pngx.access_profiles = pngx.access_profiles || {};
 
 (function( $, obj, pngxLoader, pngxDropdowns, pngxAccordion ) {
 	'use-strict';
@@ -20,40 +20,40 @@ pngx.accounts = pngx.accounts || {};
 	 * @type {PlainObject}
 	 */
 	obj.selectors = {
-		accountContainer: '.pngx-wrapper',
-		accountAdd: '.pngx-engine-options__add-account-button',
+		profileContainer: '.pngx-wrapper',
+		profileAdd: '.pngx-engine-options__add-profile-button',
 		messageWrap: '.pngx-engine-options-message__wrap',
 		formTable: '.form-table',
-		defaultAccount: '.pngx-engine-default-account-select-field',
+		defaultProfile: '.pngx-engine-default-profile-select-field',
 
-		// Individual Accounts.
-		accountList: '.pngx-engine-options-items__wrap',
-		accountItem: '.pngx-engine-grid-row',
-		accountName: '.pngx-engine-options-details__name-input',
-		accountApiKey: '.pngx-engine-options-details__api-key-input',
-		accountDefaults: '.pngx-engine-options-account-defaults__input',
-		accountSave: '.pngx-engine-options-details-action__save',
-		accountUpdate: '.pngx-engine-options-details-action__update',
-		accountDelete: '.pngx-engine-options-details-action__delete',
+		// Individual Profiles.
+		profileList: '.pngx-engine-options-items__wrap',
+		profileItem: '.pngx-engine-grid-row',
+		profileName: '.pngx-engine-options-details__name-input',
+		profileApiKey: '.pngx-engine-options-details__api-key-input',
+		profileDefaults: '.pngx-engine-options-profile-defaults__input',
+		profileSave: '.pngx-engine-options-details-action__save',
+		profileUpdate: '.pngx-engine-options-details-action__update',
+		profileDelete: '.pngx-engine-options-details-action__delete',
 
 		// Loader
 		pngxAdminLoader: '.pngx-admin-loader',
 	};
 
 	/**
-	 * Scroll to bottom of list of Accounts.
+	 * Scroll to bottom of list of Profiles.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param {jQuery} $container The jQuery object of the account's setting container.
+	 * @param {jQuery} $container The jQuery object of the profile's setting container.
 	 */
 	obj.scrollToBottom = function( $container ) {
 		let totalHeight = 0;
-		$container.find( obj.selectors.accountItem ).each( function() {
+		$container.find( obj.selectors.profileItem ).each( function() {
 			totalHeight += $( this ).outerHeight();
 		} );
 
-		$( obj.selectors.accountList ).animate( {
+		$( obj.selectors.profileList ).animate( {
 			scrollTop: totalHeight
 		}, 500 );
 	};
@@ -63,14 +63,14 @@ pngx.accounts = pngx.accounts || {};
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param {jQuery} $accountItem The jQuery object of the account item wrap.
+	 * @param {jQuery} $profileItem The jQuery object of the profile item wrap.
 	 *
 	 * @returns {boolean} Whether the description and user field has values.
 	 */
-	obj.validateFields = function( $accountItem ) {
-		const accountName = $accountItem.find( obj.selectors.accountName ).val();
-		const intergrationApiKey = $accountItem.find( obj.selectors.accountApiKey ).val();
-		if ( accountName && intergrationApiKey ) {
+	obj.validateFields = function( $profileItem ) {
+		const profileName = $profileItem.find( obj.selectors.profileName ).val();
+		const intergrationApiKey = $profileItem.find( obj.selectors.profileApiKey ).val();
+		if ( profileName && intergrationApiKey ) {
 			return true;
 		}
 
@@ -88,82 +88,82 @@ pngx.accounts = pngx.accounts || {};
 	 * @param {object} event_target The target element of the event
 	 */
 	const sendAjaxRequest = ( url, requestData, onSuccess, event_target ) => {
-		const $accountContainer = $( event_target ).closest( obj.selectors.accountContainer );
-		pngxLoader.show( $accountContainer, obj.selectors.pngxAdminLoader );
+		const $profileContainer = $( event_target ).closest( obj.selectors.profileContainer );
+		pngxLoader.show( $profileContainer, obj.selectors.pngxAdminLoader );
 
 		$.ajax( {
 			url,
 			contentType: 'application/json',
-			context: $( obj.selectors.accountList ),
+			context: $( obj.selectors.profileList ),
 			data: requestData,
 			success: ( html ) => onSuccess( html, event_target ),
 		} );
 	};
 
 	/**
-	 * Handles the successful response from the backend to add Account fields.
+	 * Handles the successful response from the backend to add Profile fields.
 	 *
 	 * @since 0.1.0
 	 *
 	 * @param {string} html The HTML that adds a message and the page fields html.
 	 * @param {object} event_target The target element of the event.
 	 */
-	obj.onAddAccountFieldsSuccess = function( html, event_target ) {
+	obj.onAddProfileFieldsSuccess = function( html, event_target ) {
 		const $this = $( event_target );
 		const $table = $this.closest( obj.selectors.formTable );
-		const $container = $this.closest( obj.selectors.accountContainer );
+		const $container = $this.closest( obj.selectors.profileContainer );
 		const message = $( html ).filter( obj.selectors.messageWrap );
-		const accountItemWrap = $( html ).filter( obj.selectors.accountItem );
+		const profileItemWrap = $( html ).filter( obj.selectors.profileItem );
 
 		$table.find( obj.selectors.messageWrap ).html( message );
 
 		pngxLoader.hide( $container, obj.selectors.pngxAdminLoader );
 
-		if ( accountItemWrap.length > 0 ) {
-			$table.find( obj.selectors.accountList ).append( accountItemWrap );
+		if ( profileItemWrap.length > 0 ) {
+			$table.find( obj.selectors.profileList ).append( profileItemWrap );
 
-			// Setup dropdowns after loading account fields.
+			// Setup dropdowns after loading profile fields.
 			const $dropdowns = $table
 				.find( pngxDropdowns.selector.dropdown )
 				.not( pngxDropdowns.selector.created );
 
 			$dropdowns.pngx_dropdowns();
 
-			pngxAccordion.bindAccordionEvents( accountItemWrap );
+			pngxAccordion.bindAccordionEvents( profileItemWrap );
 		}
 	};
 
 
 	/**
-	 * Handles adding a new account fields.
+	 * Handles adding a new profile fields.
 	 *
 	 * @since 0.1.0
 	 *
 	 * @param {Event} event The click event.
 	 */
-	obj.handleAddAccount = ( event ) => {
+	obj.handleAddProfile = ( event ) => {
 		event.preventDefault();
 		const url = $( event.target ).attr( 'href' );
-		sendAjaxRequest( url, {}, obj.onAddAccountFieldsSuccess, event.target );
+		sendAjaxRequest( url, {}, obj.onAddProfileFieldsSuccess, event.target );
 	};
 
 	/**
-	 * Handles setting up the default account dropdown on save or delete of an account.
+	 * Handles setting up the default profile dropdown on save or delete of an profile.
 	 *
 	 * @since 0.1.
 	 *
 	 * @param $table    The jQuery object of the table.
-	 * @param accountDefaultAccounts    The HTML of the default account dropdown.
+	 * @param profileDefaultProfiles    The HTML of the default profile dropdown.
 	 */
-	obj.handleDefaultAccounts = function( $table, accountDefaultAccounts ) {
-		if ( 0 === accountDefaultAccounts.length ) {
+	obj.handleDefaultProfiles = function( $table, profileDefaultProfiles ) {
+		if ( 0 === profileDefaultProfiles.length ) {
 			return
 		}
 
-		$table.find( obj.selectors.defaultAccount ).html( accountDefaultAccounts );
+		$table.find( obj.selectors.defaultProfile ).html( profileDefaultProfiles );
 
-		// Setup dropdowns after loading account fields.
-		const $dropdowns = $( obj.selectors.defaultAccount )
+		// Setup dropdowns after loading profile fields.
+		const $dropdowns = $( obj.selectors.defaultProfile )
 			.find( pngxDropdowns.selector.dropdown )
 			.not( pngxDropdowns.selector.created );
 
@@ -171,53 +171,53 @@ pngx.accounts = pngx.accounts || {};
 	};
 
 	/**
-	 * Replaces the account item in the table.
+	 * Replaces the profile item in the table.
 	 *
 	 * @since 0.1.0
 	 *
 	 * @param {object} $table The table jQuery object.
-	 * @param {object} $accountItemWrap The account item wrap jQuery object.
+	 * @param {object} $profileItemWrap The profile item wrap jQuery object.
 	 */
-	obj.replaceAccountItem = function( $table, $accountItemWrap ) {
-		if ( 0 === $accountItemWrap.length ) {
+	obj.replaceProfileItem = function( $table, $profileItemWrap ) {
+		if ( 0 === $profileItemWrap.length ) {
 			return;
 		}
 
-		const uniqueId = $accountItemWrap.data( 'uniqueId' );
+		const uniqueId = $profileItemWrap.data( 'uniqueId' );
 		const existingPage = $table.find( `[data-unique-id='${uniqueId}']` );
-		existingPage.replaceWith( $accountItemWrap );
+		existingPage.replaceWith( $profileItemWrap );
 
-		// Setup dropdowns after loading account fields.
-		const $dropdowns = $accountItemWrap
+		// Setup dropdowns after loading profile fields.
+		const $dropdowns = $profileItemWrap
 			.find( pngxDropdowns.selector.dropdown )
 			.not( pngxDropdowns.selector.created );
 
 		$dropdowns.pngx_dropdowns();
 
-		pngxAccordion.bindAccordionEvents( $accountItemWrap );
+		pngxAccordion.bindAccordionEvents( $profileItemWrap );
 	};
 
 	/**
-	 * Handles the successful response from the backend to save or update accounts.
+	 * Handles the successful response from the backend to save or update profiles.
 	 *
 	 * @since 0.1.0
 	 *
 	 * @param {string} html The HTML that adds a message and the page fields html.
 	 * @param {object} event_target The target element of the event.
 	 */
-	obj.onAccountSuccess = function( html, event_target ) {
+	obj.onProfileSuccess = function( html, event_target ) {
 		const $this = $( event_target );
 		const $table = $this.closest( obj.selectors.formTable );
-		const $container = $this.closest( obj.selectors.accountContainer );
+		const $container = $this.closest( obj.selectors.profileContainer );
 		const $message = $( html ).filter( obj.selectors.messageWrap );
-		const $accountItemWrap = $( html ).filter( obj.selectors.accountItem );
-		const accountDefaultAccounts = $( html ).filter( obj.selectors.defaultAccount );
+		const $profileItemWrap = $( html ).filter( obj.selectors.profileItem );
+		const profileDefaultProfiles = $( html ).filter( obj.selectors.defaultProfile );
 
 		$table.find( obj.selectors.messageWrap ).html( $message );
 		pngxLoader.hide( $container, obj.selectors.pngxAdminLoader );
 
-		obj.replaceAccountItem( $table, $accountItemWrap );
-		obj.handleDefaultAccounts( $table, accountDefaultAccounts );
+		obj.replaceProfileItem( $table, $profileItemWrap );
+		obj.handleDefaultProfiles( $table, profileDefaultProfiles );
 	};
 
 	/**
@@ -230,26 +230,26 @@ pngx.accounts = pngx.accounts || {};
 	obj.handleSave = function( event ) {
 		event.preventDefault();
 
-		const $this = $( event.target ).closest( obj.selectors.accountSave );
+		const $this = $( event.target ).closest( obj.selectors.profileSave );
 		const url = $this.data( 'ajaxSaveUrl' );
-		const $accountItem = $this.closest( obj.selectors.accountItem );
-		const is_valid = obj.validateFields( $accountItem );
+		const $profileItem = $this.closest( obj.selectors.profileItem );
+		const is_valid = obj.validateFields( $profileItem );
 		if ( !is_valid ) {
-			window.alert( $this.data( 'accountError' ) );
+			window.alert( $this.data( 'profileError' ) );
 			return;
 		}
 
-		const uniqueId = $accountItem.data( 'uniqueId' );
-		const accountName = $accountItem.find( obj.selectors.accountName ).val();
-		const intergrationApiKey = $accountItem.find( obj.selectors.accountApiKey ).val();
-		const intergrationDefaults = obj.getInputValuesAndNames( obj.selectors.accountDefaults, $accountItem );
+		const uniqueId = $profileItem.data( 'uniqueId' );
+		const profileName = $profileItem.find( obj.selectors.profileName ).val();
+		const intergrationApiKey = $profileItem.find( obj.selectors.profileApiKey ).val();
+		const intergrationDefaults = obj.getInputValuesAndNames( obj.selectors.profileDefaults, $profileItem );
 
 		sendAjaxRequest( url, {
 			unique_id: uniqueId,
 			api_key: intergrationApiKey,
-			name: accountName,
+			name: profileName,
 			defaults: intergrationDefaults,
-		}, obj.onAccountSuccess, $this );
+		}, obj.onProfileSuccess, $this );
 	};
 
 	/**
@@ -262,20 +262,20 @@ pngx.accounts = pngx.accounts || {};
 	obj.handleUpdate = function( event ) {
 		event.preventDefault();
 
-		const $this = $( event.target ).closest( obj.selectors.accountUpdate );
+		const $this = $( event.target ).closest( obj.selectors.profileUpdate );
 		const url = $this.data( 'ajaxUpdateUrl' );
-		const $accountItem = $this.closest( obj.selectors.accountItem );
-		const uniqueId = $accountItem.data( 'uniqueId' );
-		const intergrationDefaults = obj.getInputValuesAndNames( obj.selectors.accountDefaults, $accountItem );
+		const $profileItem = $this.closest( obj.selectors.profileItem );
+		const uniqueId = $profileItem.data( 'uniqueId' );
+		const intergrationDefaults = obj.getInputValuesAndNames( obj.selectors.profileDefaults, $profileItem );
 
 		sendAjaxRequest( url, {
 			unique_id: uniqueId,
 			defaults: intergrationDefaults,
-		}, obj.onAccountSuccess, $this );
+		}, obj.onProfileSuccess, $this );
 	};
 
 	/**
-	 * Handles the successful response from the backend to delete an account.
+	 * Handles the successful response from the backend to delete an profile.
 	 *
 	 * @since 0.1.0
 	 *
@@ -285,22 +285,22 @@ pngx.accounts = pngx.accounts || {};
 	obj.onDeleteSuccess = function( html, event_target ) {
 		const $this = $( event_target );
 		const $message = $( html ).filter( obj.selectors.messageWrap );
-		const $accountContainer = $( obj.selectors.accountContainer );
+		const $profileContainer = $( obj.selectors.profileContainer );
 		const $table = $this.closest( obj.selectors.formTable );
-		const accountDefaultAccounts = $( html ).filter( obj.selectors.defaultAccount );
+		const profileDefaultProfiles = $( html ).filter( obj.selectors.defaultProfile );
 
 		$table.find( obj.selectors.messageWrap ).html( $message );
 
-		pngxLoader.hide( $accountContainer, obj.selectors.pngxAdminLoader );
+		pngxLoader.hide( $profileContainer, obj.selectors.pngxAdminLoader );
 
-		// Delete marked account wrap.
-		$( `${obj.selectors.accountItem}.to-delete` ).remove();
+		// Delete marked profile wrap.
+		$( `${obj.selectors.profileItem}.to-delete` ).remove();
 
-		obj.handleDefaultAccounts( $table, accountDefaultAccounts );
+		obj.handleDefaultProfiles( $table, profileDefaultProfiles );
 	};
 
 	/**
-	 * Handles revoking an account key.
+	 * Handles revoking an profile key.
 	 *
 	 * @since 0.1.0
 	 *
@@ -309,17 +309,17 @@ pngx.accounts = pngx.accounts || {};
 	obj.handleDelete = function( event ) {
 		event.preventDefault();
 
-		const $this = $( event.target ).closest( obj.selectors.accountDelete );
+		const $this = $( event.target ).closest( obj.selectors.profileDelete );
 		const url = $this.data( 'ajaxDeleteUrl' );
-		const $accountItem = $this.closest( obj.selectors.accountItem );
-		const uniqueId = $accountItem.data( 'uniqueId' );
+		const $profileItem = $this.closest( obj.selectors.profileItem );
+		const uniqueId = $profileItem.data( 'uniqueId' );
 		const confirmed = confirm( $this.data( 'confirmation' ) );
 		if ( !confirmed ) {
 			return;
 		}
 
 		// Add a class to mark for deletion.
-		$accountItem.addClass( 'to-delete' );
+		$profileItem.addClass( 'to-delete' );
 
 		sendAjaxRequest( url, {
 			unique_id: uniqueId,
@@ -361,22 +361,22 @@ pngx.accounts = pngx.accounts || {};
 	};
 
 	/**
-	 * Bind the account events.
+	 * Bind the profile events.
 	 *
 	 * @since 0.1.0
 	 */
 	obj.bindEvents = function() {
 		$document
-			.on( 'click', obj.selectors.accountUpdate, obj.handleUpdate )
-			.on( 'click', obj.selectors.accountSave, obj.handleSave )
-			.on( 'click', obj.selectors.accountDelete, obj.handleDelete )
-			.on( 'click', obj.selectors.accountAdd, obj.handleAddAccount );
+			.on( 'click', obj.selectors.profileUpdate, obj.handleUpdate )
+			.on( 'click', obj.selectors.profileSave, obj.handleSave )
+			.on( 'click', obj.selectors.profileDelete, obj.handleDelete )
+			.on( 'click', obj.selectors.profileAdd, obj.handleAddProfile );
 
-		pngxAccordion.bindAccordionEvents( $( obj.selectors.accountContainer ) );
+		pngxAccordion.bindAccordionEvents( $( obj.selectors.profileContainer ) );
 	};
 
 	/**
-	 * Unbind the account events.
+	 * Unbind the profile events.
 	 *
 	 * @since 0.1.0
 	 */
@@ -394,4 +394,4 @@ pngx.accounts = pngx.accounts || {};
 
 	// Configure on document ready
 	$( obj.ready );
-})( jQuery, pngx.accounts, pngx.loader, pngx.dropdowns, pngx.pngxAccordion );
+})( jQuery, pngx.access_profiles, pngx.loader, pngx.dropdowns, pngx.pngxAccordion );

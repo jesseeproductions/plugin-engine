@@ -129,7 +129,6 @@ class Pngx__Register_Post_Type {
 		);
 
 		return $labels;
-
 	}
 
 
