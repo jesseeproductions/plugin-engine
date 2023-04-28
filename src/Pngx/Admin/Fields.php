@@ -10,6 +10,8 @@
 use Pngx\Template;
 
 use Pngx\Admin\Field\WooSelect;
+use Pngx\Admin\Field\Read_Only;
+
 /**
  * Class Pngx__Admin__Fields
  * Fields for Meta and Options
@@ -203,6 +205,12 @@ class Pngx__Admin__Fields {
 			case 'radio':
 
 				Pngx__Admin__Field__Radio::display( $field, $options, $options_id, $meta, $repeat_vars );
+
+				break;
+
+			case 'read-only':
+
+				Read_Only::display( $field, $options, $options_id, $meta, $repeat_vars, static::$admin_template );
 
 				break;
 

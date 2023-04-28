@@ -14,7 +14,7 @@ if ( class_exists( 'Pngx__Admin__Field__Text' ) ) {
  */
 class Pngx__Admin__Field__Text {
 
-	public static function display( $field = array(), $options = array(), $options_id = null, $meta = null, $var = null ) {
+	public static function display( $field = [], $options = [], $options_id = null, $meta = null, $var = null ) {
 
 		if ( ! empty( $options_id ) ) {
 			$name  = $options_id;
@@ -42,14 +42,14 @@ class Pngx__Admin__Field__Text {
 			echo '<div class="pngx-error">&nbsp;&nbsp;' . esc_html( $field['alert'] ) . '</div>';
 		}
 
-		echo '<input 
-				type="text" 
-				id="' . esc_attr( $field['id'] ) . '" 
-				class="regular-text ' . esc_attr( $class ) . '"  
-				name="' . esc_attr( $name ) . '" 
-				placeholder="' . esc_attr( $std ) . '" 
-				value="' . esc_attr( $value ) . '" 
-				size="' . absint( $size ) . '" 
+		echo '<input
+				type="text"
+				id="' . esc_attr( $field['id'] ) . '"
+				class="regular-text ' . esc_attr( $class ) . '"
+				name="' . esc_attr( $name ) . '"
+				placeholder="' . esc_attr( $std ) . '"
+				value="' . esc_attr( $value ) . '"
+				size="' . absint( $size ) . '"
 				' . $attributes . '
 				' . ( ! empty( $field['post_title'] ) ? 'data-post-title="' . esc_attr( $field['post_title'] ) . '"' : '' ) .
 			'/>';
