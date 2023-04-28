@@ -27,7 +27,9 @@
 			<?php echo esc_html( $label ); ?>
 		</legend>
 		<div class="pngx-engine-options-details__field-wrap pngx-field-wrap">
+			<div class="pngx-engine-options-details-field-read-only__value-wrap">
 			<?php echo esc_html( $value ); ?>
+			</div>
 			<input
 				id="<?php echo esc_attr( $id ); ?>"
 				type="hidden"
