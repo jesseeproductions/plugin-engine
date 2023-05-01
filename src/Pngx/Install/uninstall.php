@@ -9,8 +9,6 @@
  * @since 4.0.0
  */
 
-use Pngx\Install\Database;
-
 if ( ! defined( 'PNGX_UNINSTALL_PLUGIN' ) ) {
 	return;
 }
@@ -23,9 +21,6 @@ wp_clear_scheduled_hook( 'pngx_cleanup_sessions' );
  * Remove only if WC_REMOVE_ALL_DATA is set in the wp-config.php.
  */
 if ( defined( 'PNGX_REMOVE_ALL_DATA' ) && true === PNGX_REMOVE_ALL_DATA ) {
-
-	// Tables.
-	Database::drop_tables();
 
 	// Delete options.
 	$wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE 'pngx\_%';" );

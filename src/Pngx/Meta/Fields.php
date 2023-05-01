@@ -25,7 +25,7 @@ class Pngx__Meta__Fields {
 	 *
 	 * @return mixed
 	 */
-	public function get_fields() {
+	public function get_fields( array $fields = [] ) {
 
 		//Prefix for fields id
 		$prefix = $this->get_fields_prefix();

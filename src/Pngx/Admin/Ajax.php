@@ -1,8 +1,4 @@
 <?php
-// Don't load directly
-if ( ! defined( 'ABSPATH' ) ) {
-	die( '-1' );
-}
 
 
 /**
@@ -10,26 +6,16 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  */
 class Pngx__Admin__Ajax {
-
-
 	public function __construct() {
-
 		$this->start();
-
 	}
-
 	protected function start() {
-
 		add_action( 'wp_ajax_pngx_templates', array( $this, 'load_templates' ) );
-
 		add_action( 'wp_ajax_pngx_variety', array( $this, 'load_variety' ) );
-
 		add_action( 'wp_ajax_pngx_repeatable', array( $this, 'save_repeating_items' ) );
-
 	}
 
 	public function load_templates() {
-
 		// End if not the correct action
 		if ( ! isset( $_POST['action'] ) || 'pngx_templates' !== $_POST['action'] ) {
 			wp_send_json_error( __( 'A Permission Error has occurred. Please save, reload, and try again.', 'plugin-engine' ) );
@@ -51,11 +37,10 @@ class Pngx__Admin__Ajax {
 		/**
 		 * Filter to Add All Fields for a Plugin
 		 */
-		$fields = apply_filters( 'pngx_meta_fields', array() );
-
+		$fields = (array) apply_filters( 'pngx_meta_fields', [] );
 		foreach ( $fields as $field ) {
 
-			$field_template = isset( $field['template'] ) ? $field['template'] : array();
+			$field_template = isset( $field['template'] ) ? $field['template'] : [];
 
 			if ( $field['type'] && in_array( $_POST['option'], $field_template ) ) {
 
@@ -121,8 +106,11 @@ class Pngx__Admin__Ajax {
 		wp_send_json_success( json_encode( $template_fields ) );
 	}
 
+	/**
+	 * Load Variety Fields
+	 *
+	 */
 	public function load_variety() {
-
 		//End if not the correct action
 		if ( ! isset( $_POST['action'] ) || 'pngx_variety' != $_POST['action'] ) {
 			wp_send_json_error( __( 'Permission Error has occurred. Please save, reload, and try again.', 'plugin-engine' ) );
@@ -148,7 +136,7 @@ class Pngx__Admin__Ajax {
 		/**
 		 * Filter to Add All Fields for a Plugin
 		 */
-		$fields = apply_filters( 'pngx_meta_fields', array() );
+		$fields = apply_filters( 'pngx_meta_fields', [] );
 
 		if ( isset( $fields[ $_POST['field'] ]['variety_choices'][ $_POST['option'] ] ) ) {
 			foreach ( $fields[ $_POST['field'] ]['variety_choices'][ $_POST['option'] ] as $label ) {

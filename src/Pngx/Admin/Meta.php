@@ -376,6 +376,11 @@ class Pngx__Admin__Meta {
 			 */
 			do_action( 'pngx_save_meta_fields', $post_id, $option );
 
+			// Ready only fields have value saved by other processes, this prevents them from being overwritten or cleared.
+			if ( $option['type'] === 'read-only' ) {
+				continue;
+			}
+
 			//handle check box saving
 			if ( $option['type'] == 'checkbox' ) {
 

@@ -24,7 +24,6 @@ class Database  {
 	 * Create custom tables for Plugin Engine.
 	 *
 	 * @since 4.0.0
-	 *
 	 */
 	public static function create_tables() {
 		global $wpdb;
@@ -34,7 +33,25 @@ class Database  {
 		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 
 		// dbDelta() cannot handle primary key changes, if there are changes to a primary key, run them here before it.
-		dbDelta( self::get_schema() );
+		$create_tables = self::get_schema();
+		if ( ! empty( $create_tables ) ) {
+			dbDelta( $create_tables );
+		}
+	}
+
+	/**
+	 * Alter tables.
+	 *
+	 * @since 4.0.0
+	 */
+	public static function alter_tables() {
+		global $wpdb;
+
+		$alter_tables = self::get_alter_schema();
+
+		if ( ! empty( $alter_tables ) ) {
+			$wpdb->query( $alter_tables );
+		}
 	}
 
 	/**
@@ -47,46 +64,40 @@ class Database  {
 	 * @return string The sql to create or update tables.
 	 */
 	private static function get_schema() {
-		global $wpdb;
+		$create_tables = "";
 
-		$collate = '';
+		/**
+		 * Filter the create table schema.
+		 *
+		 * @since 4.0.0
+		 *
+		 * @param string $create_tables The SQL to create tables.
+		 */
+		$tables = (string) apply_filters('pngx_create_table_statements', $create_tables );
 
-		if ( $wpdb->has_cap( 'collation' ) ) {
-			$collate = $wpdb->get_charset_collate();
-		}
+        return $tables;
+	}
 
-		$tables = "
-			CREATE TABLE {$wpdb->prefix}pngx_sessions (
-			  session_id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-			  session_key char(32) NOT NULL,
-			  session_value longtext NOT NULL,
-			  session_expiry BIGINT UNSIGNED NOT NULL,
-			  PRIMARY KEY  (session_id),
-			  UNIQUE KEY session_key (session_key)
-			) $collate;
+	/**
+	 * Get alter table schema.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @return string The SQL to alter tables.
+	 */
+	private static function get_alter_schema() {
+		$alter_tables = "";
 
-			CREATE TABLE {$wpdb->prefix}pngx_collection (
-				id BIGINT(20) AUTO_INCREMENT PRIMARY KEY,
-				name VARCHAR(255) NOT NULL
-			) $collate;
+		/**
+		 * Filter the alter table schema.
+		 *
+		 * @since 4.0.0
+		 *
+		 * @param string $alter_tables The SQL to alter tables.
+		 */
+		$alter_tables = (string) apply_filters('pngx_alter_table_statements', $alter_tables );
 
-		    CREATE TABLE {$wpdb->prefix}pngx_embeddings (
-		        id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-		        uuid VARCHAR(36) NOT NULL,
-		        collection_id BIGINT(20),
-		        post_id BIGINT(20),
-		        document TEXT NOT NULL,
-		        metadata TEXT NOT NULL
-		    ) $collate;
-
-			CREATE TABLE {$wpdb->prefix}pngx_embeddings_values (
-				id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-				embeddings_id INTEGER,
-				value DECIMAL(14, 12)
-			) $collate;
-		";
-
-		return $tables;
+        return $alter_tables;
 	}
 
 	/**
@@ -97,11 +108,7 @@ class Database  {
 	 * @return array<int|string> $tables An array of Plugin Engine table names.
 	 */
 	public static function get_tables() {
-		global $wpdb;
-
-		$tables = array(
-			"{$wpdb->prefix}pngx_sessions",
-		);
+		$tables = [];
 
 		/**
 		 * Filter the list of Plugin Engine table names.
@@ -121,7 +128,7 @@ class Database  {
 	 * @param bool $modify_notice Whether to modify notice based on if all tables are present.
 	 * @param bool $execute       Whether to execute get_schema queries as well.
 	 *
-	 * @return array List of querues.
+	 * @return array<string> List of queries.
 	 */
 	public static function verify_base_tables( $modify_notice = true, $execute = false ) {
 		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
@@ -129,7 +136,12 @@ class Database  {
 		if ( $execute ) {
 			self::create_tables();
 		}
-		$queries        = dbDelta( self::get_schema(), false );
+
+		$queries = [];
+		$create_tables = self::get_schema();
+		if ( ! empty( $create_tables ) ) {
+			$queries = dbDelta( $create_tables, false );
+		}
 		$missing_tables = [];
 		foreach ( $queries as $table_name => $result ) {
 			if ( "Created table $table_name" === $result ) {
@@ -162,11 +174,11 @@ class Database  {
 	 * Drop tables.
 	 *
 	 * @since 4.0.0
+	 *
+	 * @param array<string> $tables An array of table names.
 	 */
-	public static function drop_tables() {
+	public static function drop_tables( $tables ) {
 		global $wpdb;
-
-		$tables = static::get_tables();
 
 		foreach ( $tables as $table ) {
 			$wpdb->query( "DROP TABLE IF EXISTS {$table}" );
@@ -175,6 +187,8 @@ class Database  {
 
 	/**
 	 * Show Base Table Missing Notice.
+	 *
+	 * @since 4.0.0
 	 */
 	public function show_base_tables_missing() {
 		if ( ! current_user_can( 'manage_options' ) ) {
@@ -198,7 +212,6 @@ class Database  {
 		 * @param string The default link, empty string as it must be provided by a plugin.
 		 */
 		$database_install_link = apply_filters( 'pngx_missing_tables_notice_link', '' );
-
 		if ( empty( $database_install_link) ) {
 			return;
 		}

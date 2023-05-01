@@ -14,6 +14,7 @@ namespace Pngx\Tests\Classes\Mocks;
 use Pngx\Install\Database;
 use Pngx\Install\Setup;
 use Pngx\Traits\With_Nonce_Routes;
+use tad_DI52_ServiceProvider;
 
 /**
  * Class Updates
@@ -21,7 +22,7 @@ use Pngx\Traits\With_Nonce_Routes;
  * @since 4.0.0
  *
  */
-class Updates extends \tad_DI52_ServiceProvider {
+class Updates extends tad_DI52_ServiceProvider {
 
 	use With_Nonce_Routes;
 
@@ -33,9 +34,9 @@ class Updates extends \tad_DI52_ServiceProvider {
 	public function register() {
 		// Register the SP on the container
 		$this->container->singleton( 'pngx.updates.provider', $this );
+		$this->container->singleton( Schema::class, Schema::class );
 
-		$this->hook();
-		$this->register_database_install();
+		$this->hooks();
 	}
 
 	/**
@@ -43,10 +44,54 @@ class Updates extends \tad_DI52_ServiceProvider {
 	 *
 	 * @since 4.0.0
 	 */
-	protected function hook() {
-		add_action( 'admin_init', [ $this, 'check_version' ], 5 );
+	protected function hooks() {
+		add_filter( 'pngx_create_table_statements', [ $this, 'create_table_statements' ] );
+		add_filter( 'pngx_alter_table_statements', [ $this, 'alter_table_statements' ] );
+		add_filter( 'pngx_install_get_tables', [ $this, 'table_names' ] );
+
+		add_action( 'admin_init', [ $this, 'register_database_install' ], 5 );
+		add_action( 'admin_init', [ $this, 'check_version' ], 0 );
 		add_filter( 'pngx_missing_tables_plugin_name', [ $this, 'add_plugin_name' ] );
 		add_filter( 'pngx_missing_tables_notice_link', [ $this, 'add_database_install_link' ] );
+	}
+
+	/**
+	 * Add the Create Tables Schema.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $create_tables The SQL to create tables.
+	 *
+	 * @return string The SQL to create tables.
+	 */
+	public function create_table_statements( $create_tables ) {
+		return $this->container->make( Schema::class )->create_table_statements( $create_tables );
+	}
+
+	/**
+	 * Add the Alter Tables Schema.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param string $alter_tables The SQL to alter tables.
+	 *
+	 * @return string The SQL to alter tables.
+	 */
+	public function alter_table_statements( $alter_tables ) {
+		return $this->container->make( Schema::class )->alter_table_statements( $alter_tables );
+	}
+
+	/**
+	 * Add the table names to the array of tables.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param array<string> $tables An array of table names.
+	 *
+	 * @return array<string> $tables An array of table names.
+	 */
+	public function table_names( $tables ) {
+		return $this->container->make( Schema::class )->table_names( $tables );
 	}
 
 	/**
@@ -81,7 +126,7 @@ class Updates extends \tad_DI52_ServiceProvider {
 	 *
 	 * @since 3.4.0
 	 */
-	protected function register_database_install() {
+	public function register_database_install() {
 		$database_missing = get_option( 'pngx_database_missing_tables', false );
 		if ( ! $database_missing ) {
 			return;

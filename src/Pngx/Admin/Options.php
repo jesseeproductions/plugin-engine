@@ -357,7 +357,7 @@ class Pngx__Admin__Options {
 	         *
 	         * @param string $this ->options_slug options page string
 	         */
-	        do_action('pngx_before_option_form', $this->options_slug);
+	        do_action('pngx_before_option_form', $this->options_slug );
 	        ?>
 	        <form action="options.php" method="post">
 	            <?php settings_fields($this->options_id); ?>

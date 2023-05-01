@@ -89,6 +89,7 @@ class Setup {
 		pngx_maybe_define_constant( static::SETUP_TRANSIENT, true );
 
 		pngx( Database::class )::create_tables();
+		pngx( Database::class )::alter_tables();
 		pngx( Database::class )::verify_base_tables();
 		pngx( Cron::class )::create_crons();
 		pngx( Database::class )::update_db_version();
