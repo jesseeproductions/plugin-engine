@@ -68,6 +68,7 @@ class Pngx__Admin__Options {
 
 		add_action( 'pngx_before_option_form', array( $this, 'display_options_header' ), 5 );
 		add_action( 'pngx_after_option_form', array( $this, 'display_options_footer' ), 5 );
+		add_filter( 'admin_body_class', array( $this, 'add_body_class' ) );
 	}
 
 	/**
@@ -528,5 +529,29 @@ class Pngx__Admin__Options {
 		}
 
 		return self::$instance;
+	}
+
+	/**
+	 * Add Plugin Engine Body Class
+	 *
+	 * @param string $classes A string of body classes.
+	 *
+	 * @return string A string of body classes.
+	 */
+	public function add_body_class( $classes ) {
+		$screen = get_current_screen();
+		if ( ! isset( $screen->id ) ) {
+			return $classes;
+		}
+
+		if (
+			'settings_page_plugin-engine-options' !== $screen->id
+		) {
+			return $classes;
+		}
+
+		$classes .= ' pngx-admin-body';
+
+		return $classes;
 	}
 }
