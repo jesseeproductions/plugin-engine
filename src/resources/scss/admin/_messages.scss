@@ -21,8 +21,10 @@
 }
 
 .pngx-error {
+	background: var( --pngx-grey-1 );
 	border-left: 4px solid var( --pngx-error );
 	color: var( --pngx-error );
+    margin-bottom: 1rem;
 }
 
 .pngx-error-msg {

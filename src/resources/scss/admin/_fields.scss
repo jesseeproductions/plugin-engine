@@ -34,8 +34,7 @@
 /**
 * Headings
 ***************************************************/
-.pro-heading,
-.postbox h4.pngx-fields-heading {
+.pro-heading {
 	color: var( --pngx-color-button-primary );
 	font-size: 15px;
 	font-weight: bold;
@@ -45,8 +44,7 @@
 	}
 }
 
-.pro-heading:before,
-.postbox h4.pngx-fields-heading:after {
+.pro-heading:before {
 	background: linear-gradient(to right, rgba(0, 0, 0, 1) 1%, rgba(155, 155, 155, 1) 28%, rgba(255, 255, 255, 1) 85%) repeat scroll 0 0 rgba(0, 0, 0, 0);
 	content: "";
 	display: block;
@@ -185,7 +183,6 @@
 * Based off https://github.com/carloscabo/pure-css-select-style
 ***************************************************/
 .pngx-default-select {
-	display: inline-block;
 	margin: 0 0 10px;
 	max-width: 400px;
 	overflow: hidden;
@@ -244,7 +241,11 @@
 			font-size: 16px;
 			height: auto;
 			line-height: 1.5em;
-			padding: 12px 38px 12px 8px;
+			padding: 8px 38px 8px 12px;
+
+			&:focus {
+				box-shadow: none;
+			}
 		}
 	}
 

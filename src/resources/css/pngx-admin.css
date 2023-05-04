@@ -30,6 +30,7 @@
   --pngx-error: #dd3d36;
   --pngx-success: #3ca900;
   --pngx-dark-red: #950402;
+  --pngx-blue: #2A5A8A;
   /* -----------------------------------------------------------------------------
    * Colors - Typography
    * ----------------------------------------------------------------------------- */
@@ -180,7 +181,7 @@
 }
 
 /*
- * Profiles CSS
+ * profiles CSS
  * -------------------------------------------------------------
  */
 .pngx-volt-vectors-options {
@@ -846,22 +847,19 @@ fieldset[disabled] .btn-primary.active {
 /**
 * Headings
 ***************************************************/
-.pro-heading,
-.postbox h4.pngx-fields-heading {
+.pro-heading {
   color: var(--pngx-color-button-primary);
   font-size: 15px;
   font-weight: bold;
   margin: 0 0 10px;
 }
 @media (max-width: 640px) {
-  .pro-heading,
-  .postbox h4.pngx-fields-heading {
+  .pro-heading {
     margin: 0;
   }
 }
 
-.pro-heading:before,
-.postbox h4.pngx-fields-heading:after {
+.pro-heading:before {
   background: linear-gradient(to right, rgb(0, 0, 0) 1%, rgb(155, 155, 155) 28%, rgb(255, 255, 255) 85%) repeat scroll 0 0 rgba(0, 0, 0, 0);
   content: "";
   display: block;
@@ -993,7 +991,6 @@ fieldset[disabled] .btn-primary.active {
 * Based off https://github.com/carloscabo/pure-css-select-style
 ***************************************************/
 .pngx-default-select {
-  display: inline-block;
   margin: 0 0 10px;
   max-width: 400px;
   overflow: hidden;
@@ -1045,7 +1042,10 @@ fieldset[disabled] .btn-primary.active {
   font-size: 16px;
   height: auto;
   line-height: 1.5em;
-  padding: 12px 38px 12px 8px;
+  padding: 8px 38px 8px 12px;
+}
+.pngx-default-select.pngx-default select:focus {
+  box-shadow: none;
 }
 
 /* IE9: To hide select arrow we make the select overflow on the right side there is not another way :( */
@@ -1938,29 +1938,32 @@ fieldset[disabled] .btn-primary.active {
    Help CSS
    ========================================================================== */
 .pngx-meta-field-wrap.pngx-section-help-container {
-  background-color: var(--pngx-grey-4);
-  border-radius: 10px 10px 0;
+  background-color: var(--pngx-white);
+  border: 1px solid var(--pngx-grey-4);
+  border-radius: 10px;
   margin-bottom: 1em;
   overflow: hidden;
 }
 
 .pngx-section-help-container-toggle {
-  background-color: var(--pngx-grey-4);
+  background-color: var(--pngx-white);
   border: medium none;
-  color: white;
   cursor: pointer;
+  font-weight: bold;
   margin: 0;
   outline: medium none;
-  padding: 0.5em;
+  padding: 1.25rem;
   text-align: left;
   width: 100%;
 }
-
-.pngx-section-help-container:hover,
+@media (max-width: 640px) {
+  .pngx-section-help-container-toggle {
+    padding: 1rem;
+  }
+}
 .pngx-section-help-container-toggle:hover {
-  background: var(--pngx-color-button-primary-hover) none repeat scroll 0 0;
-  border: 1px solid var(--pngx-color-button-primary);
-  color: var(--pngx-black);
+  background-color: var(--pngx-color-button-primary);
+  color: var(--pngx-white);
 }
 
 .pngx-section-help-container-toggle .dashicons-before::before {
@@ -1968,16 +1971,21 @@ fieldset[disabled] .btn-primary.active {
 }
 
 .pngx-section-help-container-toggle .toggle__arrow {
+  float: right;
   text-decoration: none;
 }
 
 .pngx-section-help-slideout {
   background-color: var(--pngx-white);
-  border: 1px solid var(--pngx-color-button-primary);
-  border-bottom-left-radius: 10px;
+  border-top: 1px solid var(--pngx-grey-4);
   display: none;
   overflow: hidden;
-  padding: 0.5em;
+  padding: 1.25rem;
+}
+@media (max-width: 640px) {
+  .pngx-section-help-slideout {
+    padding: 1rem;
+  }
 }
 
 .ui-widget-content a.pngx-support,
@@ -2001,6 +2009,9 @@ fieldset[disabled] .btn-primary.active {
   display: inline-block;
   vertical-align: top;
   width: 49%;
+}
+.pngx-meta-field-content h4 {
+  margin: 0;
 }
 
 .pngx-meta-field-content.text {
@@ -2173,8 +2184,10 @@ fieldset[disabled] .btn-primary.active {
 }
 
 .pngx-error {
+  background: var(--pngx-grey-1);
   border-left: 4px solid var(--pngx-error);
   color: var(--pngx-error);
+  margin-bottom: 1rem;
 }
 
 .pngx-error-msg {
@@ -2495,6 +2508,10 @@ fieldset[disabled] .btn-primary.active {
 /* ==========================================================================
    Options CSS
    ========================================================================== */
+.pngx-admin-body {
+  background-color: var(--pngx-white);
+}
+
 .pngx-wrapper * {
   box-sizing: border-box;
 }
@@ -2510,19 +2527,6 @@ fieldset[disabled] .btn-primary.active {
   display: none;
 }
 
-.pngx-wrapper .pngx-tabs-panel.ui-tabs-panel.ui-widget-content h4 {
-  margin: 0 0 0 -10px;
-}
-
-@media (max-width: 768px) {
-  .pngx-wrapper .pngx-tabs-panel.ui-tabs-panel.ui-widget-content h4 {
-    margin: 0 0 0 0px;
-  }
-}
-.pngx-wrapper .pngx-tabs-panel.ui-tabs-panel.ui-widget-content .pngx-section-help-slideout h4 {
-  margin: 0;
-}
-
 .wp-core-ui .pngx-wrapper .button-primary {
   float: right;
 }
@@ -2531,6 +2535,7 @@ fieldset[disabled] .btn-primary.active {
 .pngx-wrapper input[type=number],
 .pngx-wrapper input[type=text],
 .pngx-wrapper input[type=url] {
+  margin: 0 0 10px;
   padding: 12px 8px;
   width: auto;
 }
@@ -2539,6 +2544,30 @@ fieldset[disabled] .btn-primary.active {
 }
 .pngx-wrapper span.description {
   display: block;
+}
+.pngx-wrapper [class$=icon32] + h2 {
+  font-weight: bold;
+  line-height: 1;
+}
+@media (min-width: 768px) {
+  .pngx-wrapper [class$=icon32] + h2 {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+  }
+}
+@media (max-width: 640px) {
+  .pngx-wrapper [class$=icon32] + h2 {
+    margin-bottom: 1rem;
+  }
+}
+@media (min-width: 768px) {
+  .pngx-wrapper .cctor-options-icon {
+    height: 40px;
+    width: 40px;
+  }
+}
+.pngx-wrapper > h4 {
+  margin: 0;
 }
 
 .pngx-meta-field.field-repeater {
@@ -2766,6 +2795,7 @@ div.repeating-field .remove-repeater {
 .pngx-tabs.ui-tabs.ui-widget-content {
   background: none;
   border: none;
+  padding: 0;
 }
 .pngx-tabs.ui-tabs .pngx-tabs-nav.ui-tabs-nav {
   background: none;
@@ -2774,31 +2804,37 @@ div.repeating-field .remove-repeater {
   margin: 20px 0 0;
   padding: 0;
 }
+.pngx-tabs.ui-tabs .pngx-tabs-nav.ui-tabs-nav li {
+  margin: 0;
+}
+.pngx-tabs.ui-tabs .pngx-tabs-nav.ui-tabs-nav li:not(:last-child) {
+  margin-right: 8px;
+}
 .pngx-tabs.ui-tabs .pngx-tabs-nav.ui-tabs-nav li.ui-state-default, .pngx-tabs.ui-tabs .pngx-tabs-nav.ui-tabs-nav li.ui-state-active {
   background: none;
   border: none;
   display: inline;
+  outline: none;
 }
 .pngx-tabs.ui-tabs .pngx-tabs-nav.ui-tabs-nav li a {
-  border-color: #fff;
-  border-radius: 8px 8px 0 0;
+  border-color: transparent;
   border-style: solid;
-  border-width: 1px 1px 0;
-  box-shadow: 0 0 2px 0 rgba(50, 50, 50, 0.5);
+  border-width: 0 0 2px;
+  box-shadow: none;
   color: #5C5C5C;
   display: inline-block;
   font-size: 13px;
   font-weight: bold;
-  margin: 0 6px 1px 0;
-  padding: 4px 14px 6px;
+  padding: 16px;
   text-decoration: none;
-  text-shadow: rgb(255, 255, 255) 0 1px 0;
 }
 .pngx-tabs.ui-tabs .pngx-tabs-nav.ui-tabs-nav li.ui-tabs-selected a, .pngx-tabs.ui-tabs .pngx-tabs-nav.ui-tabs-nav li.ui-state-active a {
-  background: #fff;
-  border-width: 1px 1px 0;
-  box-shadow: 0 0 5px 0 rgb(18, 68, 107);
-  color: #2A5A8A;
+  border-color: var(--pngx-blue);
+  color: var(--pngx-blue);
+}
+.pngx-tabs.ui-tabs .pngx-tabs-nav.ui-tabs-nav li.ui-state-hover:not(.ui-state-active) a {
+  border-color: #323232;
+  color: #323232;
 }
 .pngx-tabs .form-table {
   margin-top: 0;
@@ -2807,13 +2843,30 @@ div.repeating-field .remove-repeater {
   position: relative;
 }
 .pngx-tabs .pngx-tabs-panel.ui-tabs-panel.ui-widget-content {
-  background: #fff;
+  background: var(--pngx-grey-1);
   box-shadow: 0 0 1px 0 rgba(50, 50, 50, 0.5);
   clear: both;
   padding: 2%;
 }
+@media (min-width: 768px) {
+  .pngx-tabs .pngx-tabs-panel.ui-tabs-panel.ui-widget-content > h2 {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+}
+.pngx-tabs .pngx-tabs-panel.ui-tabs-panel.ui-widget-content > h2:first-child {
+  margin-top: 0;
+}
+.pngx-wrapper .pngx-tabs .pngx-tabs-panel.ui-tabs-panel.ui-widget-content h4.pngx-fields-heading {
+  margin: 0 0 0 -10px;
+}
+@media (max-width: 768px) {
+  .pngx-wrapper .pngx-tabs .pngx-tabs-panel.ui-tabs-panel.ui-widget-content h4.pngx-fields-heading {
+    margin-left: 0px;
+  }
+}
 .pngx-tabs .pngx-tabs-panel.ui-tabs-panel.ui-widget-content h3 {
-  color: #2A5A8A;
+  color: var(--pngx-blue);
   font: italic normal normal 24px/29px Georgia, Times, serif;
   line-height: 35px;
   margin: 0;
@@ -2821,54 +2874,65 @@ div.repeating-field .remove-repeater {
   text-shadow: 0 1px 0 #fff;
 }
 .pngx-tabs .pngx-tabs-panel.ui-tabs-panel.ui-widget-content h4 {
-  color: #048C7F;
-  font-size: 15px;
   font-weight: bold;
 }
-.pngx-tabs .pngx-tabs-panel.ui-tabs-panel.ui-widget-content h4:after {
-  background: rgb(0, 0, 0);
-  background: -moz-linear-gradient(left, rgb(0, 0, 0) 1%, rgb(155, 155, 155) 28%, rgb(255, 255, 255) 85%);
-  background: -webkit-gradient(linear, left top, right top, color-stop(1%, rgb(0, 0, 0)), color-stop(28%, rgb(155, 155, 155)), color-stop(85%, rgb(255, 255, 255)));
-  background: -webkit-linear-gradient(left, rgb(0, 0, 0) 1%, rgb(155, 155, 155) 28%, rgb(255, 255, 255) 85%);
-  background: -o-linear-gradient(left, rgb(0, 0, 0) 1%, rgb(155, 155, 155) 28%, rgb(255, 255, 255) 85%);
-  background: -ms-linear-gradient(left, rgb(0, 0, 0) 1%, rgb(155, 155, 155) 28%, rgb(255, 255, 255) 85%);
-  background: linear-gradient(to right, rgb(0, 0, 0) 1%, rgb(155, 155, 155) 28%, rgb(255, 255, 255) 85%);
-  content: "";
-  display: block;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000", endColorstr="#ffffff", GradientType=1);
-  height: 1px;
-  margin-top: 10px;
+@media (min-width: 768px) {
+  .pngx-tabs .pngx-tabs-panel.ui-tabs-panel.ui-widget-content h4 {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+}
+@media (max-width: 640px) {
+  .pngx-tabs .pngx-tabs-panel.ui-tabs-panel.ui-widget-content h4 {
+    font-size: 1.1rem;
+  }
 }
 .pngx-tabs .pngx-tabs-nav-mobile {
-  background: #fff;
-  border-color: #fff;
-  border-radius: 8px 8px 0 0;
-  border-style: solid;
-  border-width: 1px 1px 0;
-  box-shadow: 0 0 5px 0 rgb(18, 68, 107);
-  color: #2A5A8A;
+  background-color: var(--pngx-white);
+  border: 1px solid var(--pngx-grey-4);
+  border-radius: 10px 10px 0 0;
   cursor: pointer;
   display: none;
-  margin-bottom: 2px;
-  padding: 3px 10px 8px;
+  font-weight: bold;
+  margin-top: 20px;
+  padding: 1.25rem;
+  position: relative;
+}
+@media (max-width: 640px) {
+  .pngx-tabs .pngx-tabs-nav-mobile {
+    padding: 1rem;
+  }
 }
 .pngx-tabs .pngx-tabs-nav-mobile.show {
   display: block;
 }
 .pngx-tabs .pngx-tabs-nav-mobile:after {
-  content: "?";
+  content: "\f140";
+  font-family: dashicons;
+  font-size: 16px;
   pointer-events: none;
   position: absolute;
-  right: 15px;
-  top: 8px;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
   z-index: 2;
 }
 .pngx-tabs .pngx-tabs-nav.ui-tabs-nav.ui-corner-all.pngx-tabs-accordian {
-  background: #fff;
-  border-bottom: 0;
+  background: var(--pngx-white);
+  border: 1px solid var(--pngx-grey-4);
+  border-radius: 0;
   display: none;
   height: auto;
-  margin: 5px 0 15px;
+  margin: -1px 0 0;
+  padding: 1rem;
+}
+@media (max-width: 640px) {
+  .pngx-tabs .pngx-tabs-nav.ui-tabs-nav.ui-corner-all.pngx-tabs-accordian {
+    padding: 0.75rem;
+  }
+}
+.pngx-tabs .pngx-tabs-nav.ui-tabs-nav.ui-corner-all.pngx-tabs-accordian li:not(:last-child) {
+  margin-right: 0;
 }
 .pngx-tabs .pngx-tabs-nav.pngx-tabs-accordian li a.ui-tabs-anchor {
   border: none;
