@@ -69,6 +69,12 @@ class Wooselect {
 
 		$selected =  is_array( $selected ) ? implode( ',', $selected ) : $selected;
 
+		$selected_attrs = [
+			'data-selected' => $selected,
+			'data-options'  => json_encode( $field['options'] ),
+		];
+		$attrs = array_merge( $field['attrs'], $selected_attrs );
+
 		$template->template( 'components/field', [
 				'classes_wrap'  => [ "pngx-engine-field__{$field['id']}-wrap", ...$field['fieldset_wrap'] ],
 				'id'            => $field['id'],
@@ -84,11 +90,7 @@ class Wooselect {
 					'name'            => $name,
 					'selected'        => $selected,
 					'selected_option' => $selected_option,
-					'attrs'           => [
-						...$field['attrs'],
-						'data-selected' => $selected,
-						'data-options'  => json_encode( $field['options'] ),
-					],
+					'attrs'           => $attrs,
 					'wrap_attrs'      => empty( $field['wrap_attrs'] ) ? [] : $field['wrap_attrs'],
 				],
 			]
