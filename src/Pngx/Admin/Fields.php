@@ -100,10 +100,7 @@ class Pngx__Admin__Fields {
 	* Display Individual Fields
 	*/
 	public static function display_field( $field = array(), $options = array(), $options_id = null, $meta = null, $repeat_vars = null ) {
-		if ( empty( static::$admin_template ) ) {
-			static::$admin_template = pngx( Template::class );
-			static::$admin_template->set_template_context_extract( true );
-		}
+
 		//Create Different name attribute for Option Fields and Not Meta Fields
 		if ( $options && $options_id ) {
 			$options_id = $options_id . '[' . $field['id'] . ']';
