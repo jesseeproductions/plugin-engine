@@ -4,6 +4,89 @@
 
 .pngx-admin-body {
 	background-color: var( --pngx-white );
+
+	.button,
+	.button-primary {
+		border-radius: 0.5rem;
+		font-size: .875rem;
+		line-height: 1.25rem;
+		padding: 0.625rem 1.25rem;
+
+		.dashicons {
+			margin-top: 0;
+			position: relative;
+			top: 1px;
+		}
+	}
+
+	.button {
+		background: var( --pngx-white );
+		border-color: var( --pngx-grey-5 );
+		color: var( --pngx-black );
+
+		.dashicons {
+			color: var( --pngx-black );
+		}
+
+		&:focus,
+		&:hover {
+			background: var( --pngx-grey-2 );
+			border-color: var( --pngx-grey-5 );
+			color: var( --pngx-blue );
+
+			.dashicons {
+				color: var( --pngx-blue );
+			}
+		}
+	}
+
+	.wp-picker-container {
+		.wp-color-result {
+			border-radius: 3px;
+			margin-bottom: 0;
+		}
+	}
+}
+
+body:not(.pngx-admin-body) .pngx-tabs {
+	.button-primary {
+		border-radius: 0.5rem;
+		font-size: .875rem;
+		line-height: 1.25rem;
+		padding: 0.625rem 1.25rem;
+	}
+}
+
+.pngx-admin-body,
+body:not(.pngx-admin-body) .pngx-tabs {
+	.pngx-field-label {
+		margin-bottom: var(--pngx-spacer-2);
+	}
+
+	.select2-container .select2-selection--single {
+		border-radius: 0.5rem;
+		height: auto;
+
+		.select2-selection__rendered {
+			color: inherit;
+			line-height: 1.5rem;
+			padding: 8px 32px 8px 12px;
+		}
+
+		.select2-selection__placeholder {
+			color: inherit;
+		}
+
+		.select2-selection__arrow {
+			height: calc(100% - 2px);
+			width: 32px;
+
+			b {
+				border-width: 8px 5px 0 5px;
+				margin-top: -3px;
+			}
+		}
+	}
 }
 
 .pngx-wrapper * {
@@ -34,9 +117,13 @@
 	input[type="email"],
 	input[type="number"],
 	input[type="text"],
-	input[type="url"] {
-		margin: 0 0 10px;
-		padding: 12px 8px;
+	input[type="url"],
+	textarea {
+		border-color: var( --pngx-grey-5 );
+		border-radius: 0.5rem;
+		font-size: 0.875rem;
+		line-height: 1.5rem;
+		padding: 8px 12px;
 		width: auto;
 	}
 
@@ -46,6 +133,10 @@
 
 	span.description {
 		display: block;
+
+		&:not(:first-child) {
+			margin-top: 10px;
+		}
 	}
 
 	[class$=icon32] + h2 {
@@ -72,5 +163,4 @@
 	> h4 {
 		margin: 0;
 	}
-
 }

@@ -81,6 +81,30 @@
 		padding: 0 0 var(--pngx-spacer-3);
 	}
 
+	.pngx-engine-options-test-details__actions {
+		display: flex;
+		gap: 0.5rem;
+	}
+
+	.pngx-engine-options-details-action__save,
+	.pngx-engine-options-details-action__update {
+		background: #2271b1;
+		border: 1px solid #2271b1;
+		border-radius: 0.5rem;
+		cursor: pointer;
+		color: var( --pngx-white );
+		font-size: .875rem;
+		line-height: 1.25rem;
+		padding: 0.625rem 1.25rem;
+
+		&:focus,
+		&:hover {
+			background: #135e96;
+			border-color: #135e96;
+			color: var( --pngx-white );
+		}
+	}
+
 	.dashicons {
 		background: transparent;
 		border: 0;
@@ -91,6 +115,18 @@
 		padding: 0;
 
 		&.dashicons-trash {
+			border: 1px solid var( --pngx-dark-red );
+			border-radius: 0.5rem;
+			color: var( --pngx-dark-red );
+			line-height: 1.25rem;
+			height: 42px;
+			width: 42px;
+
+			&:focus,
+			&:hover {
+				border-color: var( --pngx-error );
+				color: var( --pngx-error );
+			}
 		}
 
 		&:hover {
