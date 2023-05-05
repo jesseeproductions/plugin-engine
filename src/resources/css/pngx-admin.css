@@ -183,45 +183,35 @@
  * Profiles CSS
  * -------------------------------------------------------------
  */
-.pngx-volt-vectors-options {
-  /*	.pngx-volt-vectors-application__description {
-  		margin: 0 0 var(--pngx-spacer-1);
-  		padding-left: var(--pngx-spacer-2);
-  	}*/
-  /*	.pngx-volt-vectors-options {
-  		margin-bottom: var(--pngx-spacer-3);
-  		padding-left: var(--pngx-spacer-2);
-  	}*/
-}
-.pngx-volt-vectors-options .notice,
-.pngx-volt-vectors-options div.error,
-.pngx-volt-vectors-options div.updated {
+.pngx-admin-body .notice,
+.pngx-admin-body div.error,
+.pngx-admin-body div.updated {
   padding: var(--pngx-spacer-1) var(--pngx-spacer-2);
 }
-.pngx-volt-vectors-options .pngx-engine-options-items__wrap {
+.pngx-admin-body .pngx-engine-options-items__wrap {
   margin: var(--pngx-spacer-2) auto var(--pngx-spacer-3);
 }
-.pngx-volt-vectors-options fieldset {
+.pngx-admin-body fieldset {
   padding: 0;
 }
-.pngx-volt-vectors-options label,
-.pngx-volt-vectors-options legend {
+.pngx-admin-body label,
+.pngx-admin-body legend {
   display: block;
   font-weight: 700;
   margin: 0;
 }
-.pngx-volt-vectors-options legend {
+.pngx-admin-body legend {
   float: none;
 }
-.pngx-volt-vectors-options .pngx-engine-options-details__read-only-field .pngx-engine-options-details__field-wrap.pngx-field-wrap {
+.pngx-admin-body .pngx-engine-options-details__read-only-field .pngx-engine-options-details__field-wrap.pngx-field-wrap {
   line-height: var(--pngx-spacer-7);
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.pngx-volt-vectors-options .pngx-engine-options-details-profiles__last-access-wrap .pngx-engine-options-details__field-wrap.pngx-field-wrap {
+.pngx-admin-body .pngx-engine-options-details-profiles__last-access-wrap .pngx-engine-options-details__field-wrap.pngx-field-wrap {
   line-height: var(--pngx-spacer-3);
 }
-.pngx-volt-vectors-options .pngx-engine-options-details-action__revoke {
+.pngx-admin-body .pngx-engine-options-details-action__revoke {
   background: transparent;
   border: 0;
   color: #2271b1;
@@ -229,28 +219,28 @@
   line-height: var(--pngx-spacer-7);
   padding: 0;
 }
-.pngx-volt-vectors-options .pngx-engine-options-details-action__revoke:hover {
+.pngx-admin-body .pngx-engine-options-details-action__revoke:hover {
   color: var(--pngx-color-accent-primary-hover);
 }
-.pngx-volt-vectors-options .pngx-engine-options__add-profile-button .dashicons {
+.pngx-admin-body .pngx-engine-options__add-profile-button .dashicons {
   margin-top: calc(var(--pngx-spacer-0) + 1px);
 }
-.pngx-volt-vectors-options .pngx-engine-options-api-key__wrap {
+.pngx-admin-body .pngx-engine-options-api-key__wrap {
   background: var(--pngx-color-background);
   border: 1px solid var(--pngx-color-border-default);
   margin: var(--pngx-spacer-1) var(--pngx-spacer-3) var(--pngx-spacer-3);
   padding: var(--pngx-spacer-2);
 }
-.pngx-volt-vectors-options .pngx-engine-options-api-key-title {
+.pngx-admin-body .pngx-engine-options-api-key-title {
   font-weight: 700;
   margin: 0 0 var(--pngx-spacer-3);
 }
-.pngx-volt-vectors-options .pngx-engine-options-details-profiles__message-wrap {
+.pngx-admin-body .pngx-engine-options-details-profiles__message-wrap {
   border-bottom: 1px solid var(--pngx-color-border-default);
   margin: 0 0 var(--pngx-spacer-3);
   padding: 0 0 var(--pngx-spacer-3);
 }
-.pngx-volt-vectors-options .dashicons {
+.pngx-admin-body .dashicons {
   background: transparent;
   border: 0;
   color: var(--pngx-color-text-secondary);
@@ -259,7 +249,7 @@
   font-size: 20px;
   padding: 0;
 }
-.pngx-volt-vectors-options .dashicons:hover {
+.pngx-admin-body .dashicons:hover {
   color: var(--pngx-color-text-disabled);
 }
 
@@ -267,21 +257,18 @@
  * Volt Vectors Grid CSS
  * -------------------------------------------------------------
  */
-.pngx-volt-vectors-grid {
+.pngx-profiles-grid {
   background-color: var(--pngx-color-background);
   display: grid;
   grid-gap: var(--pngx-spacer-2);
-  grid-template-columns: 3fr 2fr 2fr 1fr;
+  grid-template-columns: 2fr 2fr 1fr 1fr;
   max-width: 1000px;
 }
-.pngx-volt-vectors-grid:nth-child(even) {
+.pngx-profiles-grid:nth-child(even) {
   background-color: var(--pngx-color-background-secondary);
 }
-.pngx-volt-vectors-grid.pngx-volt-vectors-grid__pinecone {
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-}
 
-.pngx-volt-vectors-grid-header {
+.pngx-profiles-grid-header {
   background-color: var(--pngx-color-background);
   border: 1px solid var(--pngx-color-border-default);
   border-bottom: none;
@@ -291,10 +278,10 @@
   border: 1px solid var(--pngx-color-border-default);
 }
 
-.pngx-volt-vectors-grid-item {
+.pngx-profiles-grid-item {
   padding: var(--pngx-spacer-2);
 }
-.pngx-volt-vectors-grid-item.disabled {
+.pngx-profiles-grid-item.disabled {
   opacity: var(--pngx-opacity-select-highlighted);
 }
 
