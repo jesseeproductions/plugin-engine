@@ -1,20 +1,15 @@
 /*
- * profiles CSS
+ * Profiles CSS
  * -------------------------------------------------------------
  */
 
-.pngx-volt-vectors-options {
+.pngx-admin-body {
 
 	.notice,
 	div.error,
 	div.updated {
 		padding: var(--pngx-spacer-1) var(--pngx-spacer-2);
 	}
-
-/*	.pngx-volt-vectors-application__description {
-		margin: 0 0 var(--pngx-spacer-1);
-		padding-left: var(--pngx-spacer-2);
-	}*/
 
 	.pngx-engine-options-items__wrap {
 		margin: var(--pngx-spacer-2) auto var(--pngx-spacer-3);
@@ -23,11 +18,6 @@
 	fieldset {
 		padding: 0;
 	}
-
-/*	.pngx-volt-vectors-options {
-		margin-bottom: var(--pngx-spacer-3);
-		padding-left: var(--pngx-spacer-2);
-	}*/
 
 	label,
 	legend {

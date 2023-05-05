@@ -2,23 +2,19 @@
  * Volt Vectors Grid CSS
  * -------------------------------------------------------------
  */
-.pngx-volt-vectors-grid {
+.pngx-profiles-grid {
 	background-color: var(--pngx-color-background);
 	display: grid;
 	grid-gap: var(--pngx-spacer-2);
-	grid-template-columns: 3fr 2fr 2fr 1fr;
+	grid-template-columns: 2fr 2fr 1fr 1fr;
 	max-width: 1000px;
 
 	&:nth-child(even) {
 		background-color: var(--pngx-color-background-secondary);
 	}
-
-	&.pngx-volt-vectors-grid__pinecone {
-		grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-	}
 }
 
-.pngx-volt-vectors-grid-header {
+.pngx-profiles-grid-header {
 	background-color: var(--pngx-color-background);
 	border: 1px solid var(--pngx-color-border-default);
 	border-bottom: none;
@@ -28,7 +24,7 @@
 	border: 1px solid var(--pngx-color-border-default);
 }
 
-.pngx-volt-vectors-grid-item {
+.pngx-profiles-grid-item {
 	padding: var(--pngx-spacer-2);
 
 	&.disabled {
