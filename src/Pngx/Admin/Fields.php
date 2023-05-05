@@ -9,7 +9,7 @@
 
 use Pngx\Template;
 
-use Pngx\Admin\Field\WooSelect;
+use Pngx\Admin\Field\Wooselect;
 use Pngx\Admin\Field\Read_Only;
 
 /**
