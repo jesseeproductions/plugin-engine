@@ -65,10 +65,10 @@ body:not(.pngx-admin-body) .pngx-tabs {
 .pngx-admin-body,
 body:not(.pngx-admin-body) .pngx-tabs {
 	.pngx-field-label {
-		margin-bottom: var(--pngx-spacer-2);
+		margin-bottom: var(--pngx-spacer-1);
 	}
 
-	.select2-container--default {
+	.select2-container.select2-container--default {
 		.select2-selection--single {
 			border-radius: 0.5rem;
 			height: auto;

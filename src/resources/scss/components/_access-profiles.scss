@@ -63,11 +63,8 @@
 		margin-top: calc(var(--pngx-spacer-0) + 1px);
 	}
 
-	.pngx-engine-options-api-key__wrap {
-		background: var(--pngx-color-background);
-		border: 1px solid var(--pngx-color-border-default);
+	.pngx-engine-options-profile-panel__wrap {
 		margin: var(--pngx-spacer-1) var(--pngx-spacer-3) var(--pngx-spacer-3);
-		padding: var(--pngx-spacer-2);
 	}
 
 	.pngx-engine-options-api-key-title {
@@ -81,7 +78,7 @@
 		padding: 0 0 var(--pngx-spacer-3);
 	}
 
-	.pngx-engine-options-test-details__actions {
+	.pngx-engine-options-profile-action__buttons-wrap {
 		display: flex;
 		gap: 0.5rem;
 	}

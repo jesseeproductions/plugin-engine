@@ -8,7 +8,7 @@
  * -------------------------------------------------------------
  */
 /*
- * Volt Vectors Color Variables.
+ * Pngx Color Variables.
  * -------------------------------------------------------------
  */
 :root {
@@ -42,7 +42,7 @@
    * Colors - Backgrounds
    * ----------------------------------------------------------------------------- */
   --pngx-color-background: #ffffff;
-  --pngx-color-background-secondary: #d6fcf9;
+  --pngx-color-background-secondary: #e4eeec;
   --pngx-color-background-grey: rgb(249 250 251);
   /* -----------------------------------------------------------------------------
    * Colors - UI Base
@@ -114,14 +114,6 @@
  * @param {Number} $base [null] - Base for pixel conversion.
  * @returns {Number} A number in rems, calculated based on the given value and the base pixel value. rem values are passed through as is.
  */
-/*
- * Volt Vectors Loader CSS
- * -------------------------------------------------------------
- */
-.volt-vectors_page_volt-vectors-options .pngx-admin-loader__dot circle {
-  fill: var(--pngx-color-accent-primary);
-}
-
 /*
  * Utilities CSS
  * -------------------------------------------------------------
@@ -228,11 +220,8 @@
 .pngx-admin-body .pngx-engine-options__add-profile-button .dashicons {
   margin-top: calc(var(--pngx-spacer-0) + 1px);
 }
-.pngx-admin-body .pngx-engine-options-api-key__wrap {
-  background: var(--pngx-color-background);
-  border: 1px solid var(--pngx-color-border-default);
+.pngx-admin-body .pngx-engine-options-profile-panel__wrap {
   margin: var(--pngx-spacer-1) var(--pngx-spacer-3) var(--pngx-spacer-3);
-  padding: var(--pngx-spacer-2);
 }
 .pngx-admin-body .pngx-engine-options-api-key-title {
   font-weight: 700;
@@ -243,7 +232,7 @@
   margin: 0 0 var(--pngx-spacer-3);
   padding: 0 0 var(--pngx-spacer-3);
 }
-.pngx-admin-body .pngx-engine-options-test-details__actions {
+.pngx-admin-body .pngx-engine-options-profile-action__buttons-wrap {
   display: flex;
   gap: 0.5rem;
 }
@@ -291,11 +280,11 @@
 }
 
 /*
- * Volt Vectors Grid CSS
+ * Profiles Grid CSS
  * -------------------------------------------------------------
  */
 .pngx-profiles-grid {
-  background-color: var(--pngx-color-background);
+  background-color: var(--pngx-color-background-grey);
   display: grid;
   grid-gap: var(--pngx-spacer-2);
   grid-template-columns: 2fr 2fr 1fr 1fr;
@@ -324,6 +313,14 @@
 
 .pngx-engine-grid-full-width {
   grid-column: 1/-1;
+}
+
+/*
+ * Fields CSS
+ * -------------------------------------------------------------
+ */
+.pngx-field + .pngx-field {
+  margin-top: var(--pngx-spacer-4);
 }
 
 /* ## PNGX Admin Loader
@@ -2578,40 +2575,40 @@ body:not(.pngx-admin-body) .pngx-tabs .button-primary {
 
 .pngx-admin-body .pngx-field-label,
 body:not(.pngx-admin-body) .pngx-tabs .pngx-field-label {
-  margin-bottom: var(--pngx-spacer-2);
+  margin-bottom: var(--pngx-spacer-1);
 }
-.pngx-admin-body .select2-container--default .select2-selection--single,
-body:not(.pngx-admin-body) .pngx-tabs .select2-container--default .select2-selection--single {
+.pngx-admin-body .select2-container.select2-container--default .select2-selection--single,
+body:not(.pngx-admin-body) .pngx-tabs .select2-container.select2-container--default .select2-selection--single {
   border-radius: 0.5rem;
   height: auto;
 }
-.pngx-admin-body .select2-container--default .select2-selection--single .select2-selection__rendered,
-body:not(.pngx-admin-body) .pngx-tabs .select2-container--default .select2-selection--single .select2-selection__rendered {
+.pngx-admin-body .select2-container.select2-container--default .select2-selection--single .select2-selection__rendered,
+body:not(.pngx-admin-body) .pngx-tabs .select2-container.select2-container--default .select2-selection--single .select2-selection__rendered {
   color: inherit;
   line-height: 1.5rem;
   padding: 8px 32px 8px 12px;
 }
-.pngx-admin-body .select2-container--default .select2-selection--single .select2-selection__placeholder,
-body:not(.pngx-admin-body) .pngx-tabs .select2-container--default .select2-selection--single .select2-selection__placeholder {
+.pngx-admin-body .select2-container.select2-container--default .select2-selection--single .select2-selection__placeholder,
+body:not(.pngx-admin-body) .pngx-tabs .select2-container.select2-container--default .select2-selection--single .select2-selection__placeholder {
   color: inherit;
 }
-.pngx-admin-body .select2-container--default .select2-selection--single .select2-selection__arrow,
-body:not(.pngx-admin-body) .pngx-tabs .select2-container--default .select2-selection--single .select2-selection__arrow {
+.pngx-admin-body .select2-container.select2-container--default .select2-selection--single .select2-selection__arrow,
+body:not(.pngx-admin-body) .pngx-tabs .select2-container.select2-container--default .select2-selection--single .select2-selection__arrow {
   height: calc(100% - 2px);
   width: 32px;
 }
-.pngx-admin-body .select2-container--default .select2-selection--single .select2-selection__arrow b,
-body:not(.pngx-admin-body) .pngx-tabs .select2-container--default .select2-selection--single .select2-selection__arrow b {
+.pngx-admin-body .select2-container.select2-container--default .select2-selection--single .select2-selection__arrow b,
+body:not(.pngx-admin-body) .pngx-tabs .select2-container.select2-container--default .select2-selection--single .select2-selection__arrow b {
   border-width: 8px 5px 0 5px;
   margin-top: -3px;
 }
-.pngx-admin-body .select2-container--default .select2-selection--multiple,
-body:not(.pngx-admin-body) .pngx-tabs .select2-container--default .select2-selection--multiple {
+.pngx-admin-body .select2-container.select2-container--default .select2-selection--multiple,
+body:not(.pngx-admin-body) .pngx-tabs .select2-container.select2-container--default .select2-selection--multiple {
   border-color: var(--pngx-grey-5);
   border-radius: 0.5rem;
 }
-.pngx-admin-body .select2-container--default .select2-selection--multiple::after,
-body:not(.pngx-admin-body) .pngx-tabs .select2-container--default .select2-selection--multiple::after {
+.pngx-admin-body .select2-container.select2-container--default .select2-selection--multiple::after,
+body:not(.pngx-admin-body) .pngx-tabs .select2-container.select2-container--default .select2-selection--multiple::after {
   border-color: #888 transparent transparent transparent;
   border-style: solid;
   border-width: 8px 5px 0 5px;
@@ -2622,31 +2619,31 @@ body:not(.pngx-admin-body) .pngx-tabs .select2-container--default .select2-selec
   top: 50%;
   transform: translateY(-50%);
 }
-.pngx-admin-body .select2-container--default .select2-selection--multiple .select2-selection__rendered,
-body:not(.pngx-admin-body) .pngx-tabs .select2-container--default .select2-selection--multiple .select2-selection__rendered {
+.pngx-admin-body .select2-container.select2-container--default .select2-selection--multiple .select2-selection__rendered,
+body:not(.pngx-admin-body) .pngx-tabs .select2-container.select2-container--default .select2-selection--multiple .select2-selection__rendered {
   display: block;
   padding: 5px 32px 0 12px;
 }
-.pngx-admin-body .select2-container--default .select2-selection--multiple .select2-selection__rendered li,
-body:not(.pngx-admin-body) .pngx-tabs .select2-container--default .select2-selection--multiple .select2-selection__rendered li {
+.pngx-admin-body .select2-container.select2-container--default .select2-selection--multiple .select2-selection__rendered li,
+body:not(.pngx-admin-body) .pngx-tabs .select2-container.select2-container--default .select2-selection--multiple .select2-selection__rendered li {
   background-color: transparent;
 }
-.pngx-admin-body .select2-container--default .select2-selection--multiple .select2-search__field,
-body:not(.pngx-admin-body) .pngx-tabs .select2-container--default .select2-selection--multiple .select2-search__field {
+.pngx-admin-body .select2-container.select2-container--default .select2-selection--multiple .select2-search__field,
+body:not(.pngx-admin-body) .pngx-tabs .select2-container.select2-container--default .select2-selection--multiple .select2-search__field {
   margin-top: 0;
 }
 @media (max-width: 960px) {
-  .pngx-admin-body .select2-container--default .select2-selection--multiple .select2-search__field,
-  body:not(.pngx-admin-body) .pngx-tabs .select2-container--default .select2-selection--multiple .select2-search__field {
+  .pngx-admin-body .select2-container.select2-container--default .select2-selection--multiple .select2-search__field,
+  body:not(.pngx-admin-body) .pngx-tabs .select2-container.select2-container--default .select2-selection--multiple .select2-search__field {
     min-height: 30px;
   }
 }
-.pngx-admin-body .select2-container--default.select2-container--open .select2-selection--single .select2-selection__arrow b,
-body:not(.pngx-admin-body) .pngx-tabs .select2-container--default.select2-container--open .select2-selection--single .select2-selection__arrow b {
+.pngx-admin-body .select2-container.select2-container--default.select2-container--open .select2-selection--single .select2-selection__arrow b,
+body:not(.pngx-admin-body) .pngx-tabs .select2-container.select2-container--default.select2-container--open .select2-selection--single .select2-selection__arrow b {
   border-width: 0 5px 8px 5px;
 }
-.pngx-admin-body .select2-container--default.select2-container--open .select2-selection--multiple::after,
-body:not(.pngx-admin-body) .pngx-tabs .select2-container--default.select2-container--open .select2-selection--multiple::after {
+.pngx-admin-body .select2-container.select2-container--default.select2-container--open .select2-selection--multiple::after,
+body:not(.pngx-admin-body) .pngx-tabs .select2-container.select2-container--default.select2-container--open .select2-selection--multiple::after {
   border-color: transparent transparent #888;
   border-width: 0 5px 8px 5px;
 }
