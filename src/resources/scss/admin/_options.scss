@@ -49,6 +49,11 @@
 }
 
 body:not(.pngx-admin-body) .pngx-tabs {
+	label,
+	legend {
+		font-weight: 700;
+	}
+
 	.button-primary {
 		border-radius: 0.5rem;
 		font-size: .875rem;
@@ -63,27 +68,74 @@ body:not(.pngx-admin-body) .pngx-tabs {
 		margin-bottom: var(--pngx-spacer-2);
 	}
 
-	.select2-container .select2-selection--single {
-		border-radius: 0.5rem;
-		height: auto;
+	.select2-container--default {
+		.select2-selection--single {
+			border-radius: 0.5rem;
+			height: auto;
 
-		.select2-selection__rendered {
-			color: inherit;
-			line-height: 1.5rem;
-			padding: 8px 32px 8px 12px;
+			.select2-selection__rendered {
+				color: inherit;
+				line-height: 1.5rem;
+				padding: 8px 32px 8px 12px;
+			}
+
+			.select2-selection__placeholder {
+				color: inherit;
+			}
+
+			.select2-selection__arrow {
+				height: calc(100% - 2px);
+				width: 32px;
+
+				b {
+					border-width: 8px 5px 0 5px;
+					margin-top: -3px;
+				}
+			}
 		}
 
-		.select2-selection__placeholder {
-			color: inherit;
-		}
+		.select2-selection--multiple {
+			border-color: var(--pngx-grey-5);
+			border-radius: 0.5rem;
 
-		.select2-selection__arrow {
-			height: calc(100% - 2px);
-			width: 32px;
-
-			b {
+			&::after {
+				border-color: #888 transparent transparent transparent;
+				border-style: solid;
 				border-width: 8px 5px 0 5px;
-				margin-top: -3px;
+				content: '';
+				pointer-events: none;
+				position: absolute;
+				right: 13px;
+				top: 50%;
+				transform: translateY(-50%);
+			}
+
+			.select2-selection__rendered {
+				display: block;
+				padding: 5px 32px 0 12px;
+
+				li {
+					background-color: transparent;
+				}
+			}
+
+			.select2-search__field {
+				margin-top: 0;
+
+				@include breakpoint_max('lg') {
+					min-height: 30px;
+				}
+			}
+		}
+
+		&.select2-container--open {
+			.select2-selection--single .select2-selection__arrow b {
+				border-width: 0 5px 8px 5px;
+			}
+
+			.select2-selection--multiple::after {
+				border-color: transparent transparent #888;
+				border-width: 0 5px 8px 5px;
 			}
 		}
 	}
@@ -162,5 +214,17 @@ body:not(.pngx-admin-body) .pngx-tabs {
 
 	> h4 {
 		margin: 0;
+	}
+}
+
+#poststuff .pngx-tabs h2 {
+	font-size: 2.25rem;
+	font-weight: 600;
+	line-height: 2.5rem;
+	padding: 0;
+
+	@include breakpoint_max('sm') {
+		font-size: 1.3em;
+		line-height: 1.4em;
 	}
 }

@@ -115,17 +115,17 @@
 		padding: 0;
 
 		&.dashicons-trash {
-			border: 1px solid var( --pngx-dark-red );
+			border: 1px solid var( --pngx-error );
 			border-radius: 0.5rem;
-			color: var( --pngx-dark-red );
+			color: var( --pngx-error );
 			line-height: 1.25rem;
 			height: 42px;
 			width: 42px;
 
 			&:focus,
 			&:hover {
-				border-color: var( --pngx-error );
-				color: var( --pngx-error );
+				background-color: var( --pngx-error );
+				color: var( --pngx-white );
 			}
 		}
 
