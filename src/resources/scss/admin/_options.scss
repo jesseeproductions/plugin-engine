@@ -177,6 +177,10 @@ body:not(.pngx-admin-body) .pngx-tabs {
 		line-height: 1.5rem;
 		padding: 8px 12px;
 		width: auto;
+
+		&.pngx-engine-options-control__text-input {
+			width: 100%;
+		}
 	}
 
 	input[type="number"] {

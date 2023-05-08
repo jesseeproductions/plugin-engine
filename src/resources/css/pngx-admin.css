@@ -2679,6 +2679,13 @@ body:not(.pngx-admin-body) .pngx-tabs .select2-container.select2-container--defa
   padding: 8px 12px;
   width: auto;
 }
+.pngx-wrapper input[type=email].pngx-engine-options-control__text-input,
+.pngx-wrapper input[type=number].pngx-engine-options-control__text-input,
+.pngx-wrapper input[type=text].pngx-engine-options-control__text-input,
+.pngx-wrapper input[type=url].pngx-engine-options-control__text-input,
+.pngx-wrapper textarea.pngx-engine-options-control__text-input {
+  width: 100%;
+}
 .pngx-wrapper input[type=number] {
   height: auto;
 }
