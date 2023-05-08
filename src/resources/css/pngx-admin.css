@@ -1949,7 +1949,7 @@ fieldset[disabled] .btn-primary.active {
 .pngx-meta-field-wrap.pngx-section-help-container {
   background-color: var(--pngx-white);
   border: 1px solid var(--pngx-grey-4);
-  border-radius: 10px;
+  border-radius: 0.625rem;
   margin-bottom: 1em;
   overflow: hidden;
 }
