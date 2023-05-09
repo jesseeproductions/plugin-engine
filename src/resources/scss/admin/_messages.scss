@@ -2,11 +2,11 @@
    Messages CSS
    ========================================================================== */
 .pngx-meta-bg {
-	background-color: #fff;
+	background-color: var( --pngx-color-background );
 	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
-	margin: 5px 0 15px;
+	margin: rem-calc(5 0 15);
 	overflow: hidden;
-	padding: 8px 12px;
+	padding: rem-calc(8 12);
 }
 
 .success,
@@ -24,7 +24,7 @@
 	background: var( --pngx-grey-1 );
 	border-left: 4px solid var( --pngx-error );
 	color: var( --pngx-error );
-	margin-bottom: 1rem;
+	margin-bottom: rem-calc(16);
 }
 
 .pngx-error-msg {
@@ -40,15 +40,15 @@
 }
 
 .success {
-	padding: 1px 12px;
+	padding: rem-calc(1 12);
 }
 
 .pngx-error {
-	padding: 1px 12px;
+	padding: rem-calc(1 12);
 }
 
 .pngx-section-fields .pngx-error {
-	margin: 30px 0;
+	margin: rem-calc(30 0);
 }
 
 .pngx-error div,

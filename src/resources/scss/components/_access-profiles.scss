@@ -49,7 +49,7 @@
 	.pngx-engine-options-details-action__revoke {
 		background: transparent;
 		border: 0;
-		color: #2271b1;
+		color: var( --pngx-color-accent-primary );
 		cursor: pointer;
 		line-height: var(--pngx-spacer-7);
 		padding: 0;
@@ -80,24 +80,24 @@
 
 	.pngx-engine-options-profile-action__buttons-wrap {
 		display: flex;
-		gap: 0.5rem;
+		gap: rem-calc(8);
 	}
 
 	.pngx-engine-options-details-action__save,
 	.pngx-engine-options-details-action__update {
-		background: #2271b1;
-		border: 1px solid #2271b1;
-		border-radius: 0.5rem;
+		background: var( --pngx-color-accent-primary );
+		border: 1px solid var( --pngx-color-accent-primary );
+		border-radius: rem-calc(8);
 		cursor: pointer;
 		color: var( --pngx-white );
-		font-size: .875rem;
-		line-height: 1.25rem;
-		padding: 0.625rem 1.25rem;
+		font-size: rem-calc(14);
+		line-height: rem-calc(20);
+		padding: rem-calc(10) rem-calc(20);
 
 		&:focus,
 		&:hover {
-			background: #135e96;
-			border-color: #135e96;
+			background: var( --pngx-color-accent-primary-hover );
+			border-color: var( --pngx-color-accent-primary-hover );
 			color: var( --pngx-white );
 		}
 	}
@@ -108,16 +108,16 @@
 		color: var(--pngx-color-text-secondary);
 		cursor: pointer;
 		font-family: dashicons;
-		font-size: 20px;
+		font-size: rem-calc(20);
 		padding: 0;
 
 		&.dashicons-trash {
 			border: 1px solid var( --pngx-error );
-			border-radius: 0.5rem;
+			border-radius: rem-calc(8);
 			color: var( --pngx-error );
-			line-height: 1.25rem;
-			height: 42px;
-			width: 42px;
+			line-height: rem-calc(20);
+			height: rem-calc(42);
+			width: rem-calc(42);
 
 			&:focus,
 			&:hover {

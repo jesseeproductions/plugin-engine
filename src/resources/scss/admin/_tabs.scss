@@ -14,7 +14,7 @@
 		background: none;
 		border: none;
 		height: 100%;
-		margin: 20px 0 0;
+		margin: rem-calc(20) 0 0;
 		padding: 0;
 	}
 
@@ -22,7 +22,7 @@
 		margin: 0;
 
 		&:not(:last-child) {
-			margin-right: 8px;
+			margin-right: rem-calc(8);
 		}
 	}
 
@@ -41,9 +41,9 @@
 		box-shadow: none;
 		color: #5C5C5C;
 		display: inline-block;
-		font-size: 13px;
+		font-size: rem-calc(13);
 		font-weight: bold;
-		padding: 16px;
+		padding: rem-calc(16);
 		text-decoration: none;
 	}
 
@@ -74,8 +74,8 @@
 
 		> h2 {
 			@include breakpoint('sm') {
-				font-size: 2.25rem;
-				line-height: 2.5rem;
+				font-size: rem-calc(36);
+				line-height: rem-calc(40);
 			}
 
 			&:first-child {
@@ -85,10 +85,10 @@
 
 		h4.pngx-fields-heading {
 			.pngx-wrapper & {
-				margin: 0 0 0 -10px;
+				margin: 0 0 0 rem-calc(-10);
 
 				@include breakpoint_max('md') {
-					margin-left: 0px;
+					margin-left: 0;
 				}
 			}
 		}
@@ -97,40 +97,40 @@
 	.pngx-tabs-panel.ui-tabs-panel.ui-widget-content h3 {
 		color: var( --pngx-blue );
 		font: italic normal normal 24px/29px Georgia, Times, serif;
-		line-height: 35px;
+		line-height: rem-calc(35);
 		margin: 0;
-		padding: 0 0 5px;
-		text-shadow: 0 1px 0 #fff;
+		padding: 0 0 rem-calc(5);
+		text-shadow: 0 1px 0 var( --pngx-white );
 	}
 
 	.pngx-tabs-panel.ui-tabs-panel.ui-widget-content h4 {
 		font-weight: bold;
 
 		@include breakpoint('sm') {
-			font-size: 1.5rem;
-			line-height: 2rem;
+			font-size: rem-calc(24);
+			line-height: rem-calc(32);
 		}
 
 		@include breakpoint_max('sm') {
-			font-size: 1.1rem;
+			font-size: rem-calc(17.6);
 		}
 	}
 
 	/* Responsive Tab Mode
 	------------------------------------------------------------ */
 	.pngx-tabs-nav-mobile {
-		background-color: var( --pngx-white );
+		background-color: var( --pngx-color-background );
 		border: 1px solid var( --pngx-grey-4 );
-		border-radius: 10px 10px 0 0;
+		border-radius: rem-calc(10 10 0 0);
 		cursor: pointer;
 		display: none;
 		font-weight: bold;
-		margin-top: 20px;
-		padding: 1.25rem;
+		margin-top: rem-calc(20);
+		padding: rem-calc(20);
 		position: relative;
 
 		@include breakpoint_max('sm') {
-			padding: 1rem;
+			padding: rem-calc(16);
 		}
 	}
 
@@ -141,26 +141,26 @@
 	.pngx-tabs-nav-mobile:after {
 		content: "\f140";
 		font-family: dashicons;
-		font-size: 16px;
+		font-size: rem-calc(16);
 		pointer-events: none;
 		position: absolute;
-		right: 20px;
+		right: rem-calc(20);
 		top: 50%;
 		transform: translateY(-50%);
 		z-index: 2;
 	}
 
 	.pngx-tabs-nav.ui-tabs-nav.ui-corner-all.pngx-tabs-accordian {
-		background: var( --pngx-white );
+		background: var( --pngx-color-background );
 		border: 1px solid var(--pngx-grey-4);
 		border-radius: 0;
 		display: none;
 		height: auto;
 		margin: -1px 0 0;
-		padding: 1rem;
+		padding: rem-calc(16);
 
 		@include breakpoint_max('sm') {
-			padding: .75rem;
+			padding: rem-calc(12);
 		}
 	}
 
@@ -174,7 +174,7 @@
 		display: block;
 		float: none;
 		margin: 0;
-		padding: 5px;
+		padding: rem-calc(5);
 		position: relative;
 	}
 
