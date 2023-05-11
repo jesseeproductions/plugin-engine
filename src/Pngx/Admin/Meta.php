@@ -264,7 +264,13 @@ class Pngx__Admin__Meta {
 
 								<div class="pngx-meta-field field-<?php echo esc_attr( $field['type'] ); ?> field-<?php echo esc_attr( $field['id'] ); ?>">
 
-									<?php if ( ! empty( $field['label'] ) && $field['type'] !== 'wooselect' ) { ?>
+									<?php if ( ! empty( $field['label'] )
+										&& (
+											$field['type'] !== 'wooselect'
+											&& $field['type'] !== 'switch'
+									   )
+									) {
+									?>
 										<label for="<?php echo esc_attr( $field['id'] ); ?>">
 											<?php echo esc_attr( $field['label'] ); ?>
 										</label>
@@ -382,7 +388,7 @@ class Pngx__Admin__Meta {
 			}
 
 			//handle check box saving
-			if ( $option['type'] == 'checkbox' ) {
+			if ( $option['type'] === 'checkbox' || $option['type'] === 'switch' ) {
 
 				$checkbox = get_post_meta( $post_id, $option['id'], true );
 

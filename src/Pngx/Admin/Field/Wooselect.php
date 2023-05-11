@@ -10,7 +10,7 @@
 namespace Pngx\Admin\Field;
 
 /**
- * Class Pngx__Admin__Field__Wooselect
+ * Class Wooselect
  *
  * @since 4.0.0
  */
@@ -50,7 +50,10 @@ class Wooselect {
 		if ( ! empty( $field['attrs']['data-source'] ) ) {
 			if ( is_array( $selected ) ) {
 				foreach ( $selected as $sel_option ) {
-					$selected_text = empty( $sel_option ) ? '' : $sel_option;
+					if ( empty( $sel_option ) ) {
+						continue;
+					}
+
 					if ( $field['attrs']['data-source-type'] === 'post' ) {
 						$selected_text = empty( $sel_option ) ? '' : get_the_title( $sel_option );
 					} elseif ( $field['attrs']['data-source-type'] === 'term' ) {
@@ -63,7 +66,6 @@ class Wooselect {
 					];
 				}
 			} else {
-				$selected_text = empty( $sel_option ) ? '' : $sel_option;
 				if ( $field['attrs']['data-source-type'] === 'post' ) {
 					$selected_text = empty( $selected ) ? '' : get_the_title( $selected );
 				} elseif ( $field['attrs']['data-source-type'] === 'term' ) {
@@ -71,7 +73,7 @@ class Wooselect {
 				}
 
 				$selected_option[] = [
-						'id'   => $sel_option,
+						'id'   => $selected,
 						'text' => $selected_text,
 				];
 			}

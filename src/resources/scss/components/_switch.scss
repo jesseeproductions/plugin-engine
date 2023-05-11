@@ -6,7 +6,7 @@
 input[type="checkbox"].pngx-engine-switch__input {
 	display: none;
 
-	+ .tribe-common-switch__label {
+	+ .pngx-engine-switch__label {
 		background: var( --pngx-white);
 		border: 1px solid var( --pngx-grey-5 );
 		border-radius: 4px;

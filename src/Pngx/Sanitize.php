@@ -296,6 +296,21 @@ class Pngx__Sanitize {
 	}
 
 	/**
+	 * Switch Sanitize
+	 *
+	 * @return bool|mixed|string
+	 */
+	private function sanitize_switch() {
+		if ( $this->input ) {
+			$this->input = '1';
+		} else {
+			$this->input = false;
+		}
+
+		return $this->input;
+	}
+
+	/**
 	 * Sanitize Date
 	 *
 	 * @return mixed

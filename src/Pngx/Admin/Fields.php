@@ -9,6 +9,7 @@
 
 use Pngx\Template;
 
+use Pngx\Admin\Field\Switch_Field;
 use Pngx\Admin\Field\Wooselect;
 use Pngx\Admin\Field\Read_Only;
 
@@ -235,6 +236,12 @@ class Pngx__Admin__Fields {
 			case 'wooselect':
 
 				Wooselect::display( $field, $options, $options_id, $meta, $repeat_vars, static::$admin_template );
+
+				break;
+
+			case 'switch':
+
+				Switch_Field::display( $field, $options, $options_id, $meta, $repeat_vars, static::$admin_template );
 
 				break;
 
