@@ -2,16 +2,16 @@
    Meta Box
    ========================================================================== */
 @mixin meta-label() {
-	background: var( --pngx-white );
+	background: var( --pngx-color-background );
 	color: var( --pngx-color-button-primary );
 	display: block;
 	float: left;
-	font-size: 15px;
+	font-size: rem-calc(15);
 	font-weight: 700;
-	height: 18px;
-	margin: -31px 0 0;
+	height: rem-calc(18);
+	margin: rem-calc(-31) 0 0;
 	overflow: hidden;
-	padding: 0 5px;
+	padding: 0 rem-calc(5);
 	width: auto;
 }
 
@@ -19,9 +19,8 @@
 
 	.pngx-meta-field-wrap {
 		box-sizing: border-box;
-		margin: 25px 0;
+		margin: rem-calc(25) 0;
 		//overflow: visible;
-
 	}
 
 	.pngx-meta-fields-wrap,
@@ -42,10 +41,10 @@
 		&.field-variety,
 		&.field-wysiwyg {
 			border: 1px solid var( --pngx-grey-4 );
-			border-radius: 3px;
+			border-radius: rem-calc(3);
 			display: block;
-			max-width: 600px;
-			padding: 19px 9px 9px;
+			max-width: rem-calc(600);
+			padding: rem-calc(19 9 9);
 
 			& > label {
 				@include meta-label();
@@ -55,12 +54,16 @@
 			input[type="number"],
 			input[type="text"],
 			input[type="url"] {
-				padding: 12px 8px;
+				border-color: var( --pngx-grey-5 );
+				border-radius: rem-calc(8);
+				font-size: rem-calc(14);
+				line-height: rem-calc(24);
+				padding: rem-calc(8 12);
 				width: 100%;
 			}
 
 			input[type="date"] {
-				padding: 12px 8px;
+				padding: rem-calc(8 12);
 			}
 
 			input[type="number"] {
@@ -79,33 +82,33 @@
 			background: #F3F3F3;
 			color: var( --pngx-grey-6 );
 			display: block;
-			font-size: 11px;
-			margin: 10px -9px -9px -9px;
-			padding: 3px;
+			font-size: rem-calc(11);
+			margin: rem-calc(10 -9 -9 -9);
+			padding: rem-calc(3);
 			text-align: center;
 			width: auto;
 		}
 
 		.pngx-variety-selection > .description {
-			margin: 0 -9px 0 -9px;
+			margin: rem-calc(0 -9 0 -9);
 		}
 
 		.checkbox-description {
 			color: var( --pngx-grey-9 );
-			font-size: 11px;
+			font-size: rem-calc(11);
 		}
 
 		.pngx-meta-field-styles {
-			padding: 24px 5px 0;
+			padding: rem-calc(24 5 0);
 			position: relative;
 
 			.inline-style-title {
 				color: var( --pngx-color-button-primary );
-				font-size: 12px;
+				font-size: rem-calc(12);
 				font-weight: 400;
-				left: 9px;
+				left: rem-calc(9);
 				position: absolute;
-				top: 2px;
+				top: rem-calc(2);
 			}
 
 			.pngx-color-picker-wrap {
@@ -125,32 +128,32 @@
 		}
 
 		.pngx-variety-fields-wrapper {
-			margin: 40px 0;
+			margin: rem-calc(40) 0;
 
 			> .pngx-variety-field {
 				border: 1px solid var( --pngx-grey-6 );
-				border-radius: 4px;
+				border-radius: rem-calc(4);
 				display: block;
 				max-width: 100%;
-				padding: 19px 9px 9px;
+				padding: rem-calc(19 9 9);
 				width: auto;
 
 				label {
 					color: var( --pngx-color-button-primary );
-					font-size: 13px;
+					font-size: rem-calc(13);
 				}
 
 				& > label {
-					background: var( --pngx-white );
+					background: var( --pngx-color-background );
 					color: var( --pngx-color-button-primary );
 					display: block;
 					float: left;
-					font-size: 13px;
+					font-size: rem-calc(13);
 					font-weight: 400;
-					height: 18px;
-					margin: -30px 0 0;
+					height: rem-calc(18);
+					margin: rem-calc(-30) 0 0;
 					overflow: hidden;
-					padding: 0 3px;
+					padding: 0 rem-calc(3);
 					width: auto;
 				}
 			}
@@ -159,7 +162,7 @@
 				display: flex;
 
 				.expiration-icon {
-					flex-basis: 34px;
+					flex-basis: rem-calc(34);
 					flex-grow: 0;
 					flex-shrink: 0;
 				}

@@ -20,6 +20,7 @@
 
 .pngx-control-accordion__wrapper {
 	background-color: var(--pngx-color-background);
+	border-radius: rem-calc(8);
 	max-width: 100%;
 
 	.pngx-control-accordion__toggle {
@@ -31,14 +32,14 @@
 		font-size: var(--pngx-font-size-2);
 		font-weight: var(--pngx-font-weight-bold);
 		justify-content: space-between;
-		line-height: 16px;
-		padding: 12px 14px;
+		line-height: rem-calc(16);
+		padding: rem-calc(12 14);
 		text-align: left;
 		width: 100%;
 
 		.pngx-control-accordion__icon-caret-svg {
 			transition: 200ms linear all;
-			width: 13px;
+			width: rem-calc(13);
 		}
 
 		&[aria-expanded="true"] {
@@ -52,9 +53,11 @@
 	}
 
 	.pngx-control-accordion__contents {
-		border: 1px solid #c3c4c7;
+		border: 1px solid var(--pngx-grey-5);
 		border-top: none;
+		border-bottom-left-radius: rem-calc(8);
+		border-bottom-right-radius: rem-calc(8);
 		display: none;
-		padding: 15px 25px;
+		padding: rem-calc(20);
 	}
 }

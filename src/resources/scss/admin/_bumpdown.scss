@@ -4,12 +4,12 @@
 .pngx-bumpdown,
 .pngx-bumpdown-cell.pngx-bumpdown {
 	display: none;
-	margin: 1rem 0;
+	margin: rem-calc(16) 0;
 
 	.pngx-bumpdown-content {
 		background: #f1f1f1;
-		padding: 10px 35px 10px 10px;
-		font-size: 12px;
+		padding: rem-calc(10 35 10 10);
+		font-size: rem-calc(12);
 		position: relative;
 	}
 }
@@ -34,11 +34,10 @@
 	position: absolute;
 	width: 0;
 	height: 0;
-	top: -11px;
-	margin-left: -18px;
+	top: rem-calc(-11);
+	margin-left: rem-calc(-18);
 	border-left: 8px solid transparent;
 	border-right: 8px solid transparent;
-
 	border-bottom: 11px solid #f1f1f1;
 }
 
@@ -46,8 +45,8 @@
 	color: #686868;
 	cursor: pointer;
 	position: absolute;
-	right: .5rem;
-	top: .5rem;
+	right: rem-calc(8);
+	top: rem-calc(8);
 	z-index: 2;
 }
 
@@ -61,10 +60,10 @@
 
 @media screen and (max-width: 782px) {
 	.wrap td.pngx-bumpdown {
-		padding-right: 35px;
+		padding-right: rem-calc(35);
 	}
 
 	.pngx-bumpdown-arrow {
-		margin-left: -15px;
+		margin-left: rem-calc(-15);
 	}
 }

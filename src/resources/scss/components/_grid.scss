@@ -1,9 +1,9 @@
 /*
- * Volt Vectors Grid CSS
+ * Profiles Grid CSS
  * -------------------------------------------------------------
  */
 .pngx-profiles-grid {
-	background-color: var(--pngx-color-background);
+	background-color: var(--pngx-color-background-grey);
 	display: grid;
 	grid-gap: var(--pngx-spacer-2);
 	grid-template-columns: 2fr 2fr 1fr 1fr;

@@ -8,7 +8,7 @@
  * -------------------------------------------------------------
  */
 /*
- * Volt Vectors Color Variables.
+ * Pngx Color Variables.
  * -------------------------------------------------------------
  */
 :root {
@@ -30,6 +30,7 @@
   --pngx-error: #dd3d36;
   --pngx-success: #3ca900;
   --pngx-dark-red: #950402;
+  --pngx-blue: #2A5A8A;
   /* -----------------------------------------------------------------------------
    * Colors - Typography
    * ----------------------------------------------------------------------------- */
@@ -41,7 +42,7 @@
    * Colors - Backgrounds
    * ----------------------------------------------------------------------------- */
   --pngx-color-background: #ffffff;
-  --pngx-color-background-secondary: #d6fcf9;
+  --pngx-color-background-secondary: #e4eeec;
   --pngx-color-background-grey: rgb(249 250 251);
   /* -----------------------------------------------------------------------------
    * Colors - UI Base
@@ -114,14 +115,6 @@
  * @returns {Number} A number in rems, calculated based on the given value and the base pixel value. rem values are passed through as is.
  */
 /*
- * Volt Vectors Loader CSS
- * -------------------------------------------------------------
- */
-.volt-vectors_page_volt-vectors-options .pngx-admin-loader__dot circle {
-  fill: var(--pngx-color-accent-primary);
-}
-
-/*
  * Utilities CSS
  * -------------------------------------------------------------
  */
@@ -145,6 +138,7 @@
 */
 .pngx-control-accordion__wrapper {
   background-color: var(--pngx-color-background);
+  border-radius: 0.5rem;
   max-width: 100%;
 }
 .pngx-control-accordion__wrapper .pngx-control-accordion__toggle {
@@ -156,14 +150,14 @@
   font-size: var(--pngx-font-size-2);
   font-weight: var(--pngx-font-weight-bold);
   justify-content: space-between;
-  line-height: 16px;
-  padding: 12px 14px;
+  line-height: 1rem;
+  padding: 0.75rem 0.875rem;
   text-align: left;
   width: 100%;
 }
 .pngx-control-accordion__wrapper .pngx-control-accordion__toggle .pngx-control-accordion__icon-caret-svg {
   transition: 200ms linear all;
-  width: 13px;
+  width: 0.8125rem;
 }
 .pngx-control-accordion__wrapper .pngx-control-accordion__toggle[aria-expanded=true] {
   border-bottom-left-radius: 0;
@@ -173,10 +167,12 @@
   transform: rotate(-180deg);
 }
 .pngx-control-accordion__wrapper .pngx-control-accordion__contents {
-  border: 1px solid #c3c4c7;
+  border: 1px solid var(--pngx-grey-5);
   border-top: none;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
   display: none;
-  padding: 15px 25px;
+  padding: 1.25rem;
 }
 
 /*
@@ -214,7 +210,7 @@
 .pngx-admin-body .pngx-engine-options-details-action__revoke {
   background: transparent;
   border: 0;
-  color: #2271b1;
+  color: var(--pngx-color-accent-primary);
   cursor: pointer;
   line-height: var(--pngx-spacer-7);
   padding: 0;
@@ -225,11 +221,8 @@
 .pngx-admin-body .pngx-engine-options__add-profile-button .dashicons {
   margin-top: calc(var(--pngx-spacer-0) + 1px);
 }
-.pngx-admin-body .pngx-engine-options-api-key__wrap {
-  background: var(--pngx-color-background);
-  border: 1px solid var(--pngx-color-border-default);
+.pngx-admin-body .pngx-engine-options-profile-panel__wrap {
   margin: var(--pngx-spacer-1) var(--pngx-spacer-3) var(--pngx-spacer-3);
-  padding: var(--pngx-spacer-2);
 }
 .pngx-admin-body .pngx-engine-options-api-key-title {
   font-weight: 700;
@@ -240,25 +233,59 @@
   margin: 0 0 var(--pngx-spacer-3);
   padding: 0 0 var(--pngx-spacer-3);
 }
+.pngx-admin-body .pngx-engine-options-profile-action__buttons-wrap {
+  display: flex;
+  gap: 0.5rem;
+}
+.pngx-admin-body .pngx-engine-options-details-action__save,
+.pngx-admin-body .pngx-engine-options-details-action__update {
+  background: var(--pngx-color-accent-primary);
+  border: 1px solid var(--pngx-color-accent-primary);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  color: var(--pngx-white);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  padding: 0.625rem 1.25rem;
+}
+.pngx-admin-body .pngx-engine-options-details-action__save:focus, .pngx-admin-body .pngx-engine-options-details-action__save:hover,
+.pngx-admin-body .pngx-engine-options-details-action__update:focus,
+.pngx-admin-body .pngx-engine-options-details-action__update:hover {
+  background: var(--pngx-color-accent-primary-hover);
+  border-color: var(--pngx-color-accent-primary-hover);
+  color: var(--pngx-white);
+}
 .pngx-admin-body .dashicons {
   background: transparent;
   border: 0;
   color: var(--pngx-color-text-secondary);
   cursor: pointer;
   font-family: dashicons;
-  font-size: 20px;
+  font-size: 1.25rem;
   padding: 0;
+}
+.pngx-admin-body .dashicons.dashicons-trash {
+  border: 1px solid var(--pngx-error);
+  border-radius: 0.5rem;
+  color: var(--pngx-error);
+  line-height: 1.25rem;
+  height: 2.625rem;
+  width: 2.625rem;
+}
+.pngx-admin-body .dashicons.dashicons-trash:focus, .pngx-admin-body .dashicons.dashicons-trash:hover {
+  background-color: var(--pngx-error);
+  color: var(--pngx-white);
 }
 .pngx-admin-body .dashicons:hover {
   color: var(--pngx-color-text-disabled);
 }
 
 /*
- * Volt Vectors Grid CSS
+ * Profiles Grid CSS
  * -------------------------------------------------------------
  */
 .pngx-profiles-grid {
-  background-color: var(--pngx-color-background);
+  background-color: var(--pngx-color-background-grey);
   display: grid;
   grid-gap: var(--pngx-spacer-2);
   grid-template-columns: 2fr 2fr 1fr 1fr;
@@ -287,6 +314,14 @@
 
 .pngx-engine-grid-full-width {
   grid-column: 1/-1;
+}
+
+/*
+ * Fields CSS
+ * -------------------------------------------------------------
+ */
+.pngx-field + .pngx-field {
+  margin-top: var(--pngx-spacer-4);
 }
 
 /* ## PNGX Admin Loader
@@ -729,8 +764,8 @@ fieldset[disabled] .btn-primary.active {
 .pngx-bumpdown .pngx-bumpdown-content,
 .pngx-bumpdown-cell.pngx-bumpdown .pngx-bumpdown-content {
   background: #f1f1f1;
-  padding: 10px 35px 10px 10px;
-  font-size: 12px;
+  padding: 0.625rem 2.1875rem 0.625rem 0.625rem;
+  font-size: 0.75rem;
   position: relative;
 }
 
@@ -754,8 +789,8 @@ fieldset[disabled] .btn-primary.active {
   position: absolute;
   width: 0;
   height: 0;
-  top: -11px;
-  margin-left: -18px;
+  top: -0.6875rem;
+  margin-left: -1.125rem;
   border-left: 8px solid transparent;
   border-right: 8px solid transparent;
   border-bottom: 11px solid #f1f1f1;
@@ -780,10 +815,10 @@ fieldset[disabled] .btn-primary.active {
 
 @media screen and (max-width: 782px) {
   .wrap td.pngx-bumpdown {
-    padding-right: 35px;
+    padding-right: 2.1875rem;
   }
   .pngx-bumpdown-arrow {
-    margin-left: -15px;
+    margin-left: -0.9375rem;
   }
 }
 /* Dependency CSS */
@@ -833,22 +868,19 @@ fieldset[disabled] .btn-primary.active {
 /**
 * Headings
 ***************************************************/
-.pro-heading,
-.postbox h4.pngx-fields-heading {
+.pro-heading {
   color: var(--pngx-color-button-primary);
   font-size: 15px;
   font-weight: bold;
   margin: 0 0 10px;
 }
 @media (max-width: 640px) {
-  .pro-heading,
-  .postbox h4.pngx-fields-heading {
+  .pro-heading {
     margin: 0;
   }
 }
 
-.pro-heading:before,
-.postbox h4.pngx-fields-heading:after {
+.pro-heading:before {
   background: linear-gradient(to right, rgb(0, 0, 0) 1%, rgb(155, 155, 155) 28%, rgb(255, 255, 255) 85%) repeat scroll 0 0 rgba(0, 0, 0, 0);
   content: "";
   display: block;
@@ -919,6 +951,7 @@ fieldset[disabled] .btn-primary.active {
 
 .pngx-license-button-det:hover {
   background: var(--pngx-color-button-primary);
+  border-color: var(--pngx-color-button-primary);
   cursor: pointer;
 }
 
@@ -980,8 +1013,6 @@ fieldset[disabled] .btn-primary.active {
 * Based off https://github.com/carloscabo/pure-css-select-style
 ***************************************************/
 .pngx-default-select {
-  display: inline-block;
-  margin: 0 0 10px;
   max-width: 400px;
   overflow: hidden;
   width: 100%;
@@ -1023,16 +1054,19 @@ fieldset[disabled] .btn-primary.active {
   font: inherit;
 }
 .pngx-default-select.pngx-default {
-  background: #fff url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2211%22%20height%3D%2211%22%20viewBox%3D%220%200%2011%2011%22%3E%3Cpath%20d%3D%22M4.33%208.5L0%201L8.66%201z%22%20fill%3D%22%23666%22%2F%3E%3C%2Fsvg%3E") right 10px center no-repeat;
-  border: 1px solid #bbb;
+  background: var(--pngx-color-background) url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2211%22%20height%3D%2211%22%20viewBox%3D%220%200%2011%2011%22%3E%3Cpath%20d%3D%22M4.33%208.5L0%201L8.66%201z%22%20fill%3D%22%23666%22%2F%3E%3C%2Fsvg%3E") right 10px center no-repeat;
+  border: 1px solid var(--pngx-grey-5);
   /* <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 11 11"><path d="M4.33 8.5L0 1L8.66 1z" fill="#666"/></svg> */
-  border-radius: 2px;
+  border-radius: 0.5rem;
 }
 .pngx-default-select.pngx-default select {
-  font-size: 16px;
+  font-size: 0.875rem;
   height: auto;
-  line-height: 1.5em;
-  padding: 12px 38px 12px 8px;
+  line-height: 1.5rem;
+  padding: 0.5rem 2rem 0.5rem 0.75rem;
+}
+.pngx-default-select.pngx-default select:focus {
+  box-shadow: none;
 }
 
 /* IE9: To hide select arrow we make the select overflow on the right side there is not another way :( */
@@ -1041,17 +1075,6 @@ fieldset[disabled] .btn-primary.active {
     width: calc(100% + 58px);
   }
 }
-.pngx-wrapper .select2-container .select2-selection--single {
-  font-size: 16px;
-  height: auto;
-  line-height: 1.5em;
-  padding: 12px 8px;
-}
-
-.cctor_coupon_page_coupon-options .pngx-wrapper .select2-container .select2-selection--single {
-  height: auto;
-}
-
 #wpbody .pngx-default-select.pngx-default select {
   height: auto;
 }
@@ -1925,46 +1948,58 @@ fieldset[disabled] .btn-primary.active {
    Help CSS
    ========================================================================== */
 .pngx-meta-field-wrap.pngx-section-help-container {
-  background-color: var(--pngx-grey-4);
-  border-radius: 10px 10px 0;
+  background-color: var(--pngx-color-background);
+  border: 1px solid var(--pngx-grey-4);
+  border-radius: 0.625rem;
   margin-bottom: 1em;
   overflow: hidden;
 }
 
 .pngx-section-help-container-toggle {
-  background-color: var(--pngx-grey-4);
+  background-color: var(--pngx-color-background);
   border: medium none;
-  color: white;
   cursor: pointer;
+  font-weight: bold;
   margin: 0;
   outline: medium none;
-  padding: 0.5em;
+  padding: 1.25rem;
   text-align: left;
   width: 100%;
 }
-
-.pngx-section-help-container:hover,
+@media (max-width: 640px) {
+  .pngx-section-help-container-toggle {
+    padding: 1rem;
+  }
+}
 .pngx-section-help-container-toggle:hover {
-  background: var(--pngx-color-button-primary-hover) none repeat scroll 0 0;
-  border: 1px solid var(--pngx-color-button-primary);
-  color: var(--pngx-black);
+  background-color: var(--pngx-color-button-primary);
+  color: var(--pngx-white);
+}
+.pngx-section-help-container-toggle:hover .toggle__arrow {
+  color: var(--pngx-white);
 }
 
 .pngx-section-help-container-toggle .dashicons-before::before {
-  margin-right: 5px;
+  margin-right: 0.3125rem;
 }
 
 .pngx-section-help-container-toggle .toggle__arrow {
+  float: right;
+  font-size: 1.5rem;
   text-decoration: none;
 }
 
 .pngx-section-help-slideout {
-  background-color: var(--pngx-white);
-  border: 1px solid var(--pngx-color-button-primary);
-  border-bottom-left-radius: 10px;
+  background-color: var(--pngx-color-background);
+  border-top: 1px solid var(--pngx-grey-4);
   display: none;
   overflow: hidden;
-  padding: 0.5em;
+  padding: 1.25rem;
+}
+@media (max-width: 640px) {
+  .pngx-section-help-slideout {
+    padding: 1rem;
+  }
 }
 
 .ui-widget-content a.pngx-support,
@@ -1980,7 +2015,7 @@ fieldset[disabled] .btn-primary.active {
 .pngx-help-images {
   box-shadow: 0 1px 2px 0 var(--pngx-color-button-primary-hover);
   display: none;
-  margin: 10px;
+  margin: 0.625rem;
   max-width: 95%;
 }
 
@@ -1988,6 +2023,9 @@ fieldset[disabled] .btn-primary.active {
   display: inline-block;
   vertical-align: top;
   width: 49%;
+}
+.pngx-meta-field-content h4 {
+  margin: 0;
 }
 
 .pngx-meta-field-content.text {
@@ -2141,11 +2179,11 @@ fieldset[disabled] .btn-primary.active {
    Messages CSS
    ========================================================================== */
 .pngx-meta-bg {
-  background-color: #fff;
+  background-color: var(--pngx-color-background);
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
-  margin: 5px 0 15px;
+  margin: 0.3125rem 0 0.9375rem;
   overflow: hidden;
-  padding: 8px 12px;
+  padding: 0.5rem 0.75rem;
 }
 
 .success,
@@ -2160,8 +2198,10 @@ fieldset[disabled] .btn-primary.active {
 }
 
 .pngx-error {
+  background: var(--pngx-grey-1);
   border-left: 4px solid var(--pngx-error);
   color: var(--pngx-error);
+  margin-bottom: 1rem;
 }
 
 .pngx-error-msg {
@@ -2177,15 +2217,15 @@ fieldset[disabled] .btn-primary.active {
 }
 
 .success {
-  padding: 1px 12px;
+  padding: 0.0625rem 0.75rem;
 }
 
 .pngx-error {
-  padding: 1px 12px;
+  padding: 0.0625rem 0.75rem;
 }
 
 .pngx-section-fields .pngx-error {
-  margin: 30px 0;
+  margin: 1.875rem 0;
 }
 
 .pngx-error div,
@@ -2200,7 +2240,7 @@ fieldset[disabled] .btn-primary.active {
    ========================================================================== */
 .postbox-container .pngx-meta-field-wrap {
   box-sizing: border-box;
-  margin: 25px 0;
+  margin: 1.5625rem 0;
 }
 .postbox-container .pngx-meta-fields-wrap,
 .postbox-container .pngx-meta-field {
@@ -2221,10 +2261,10 @@ fieldset[disabled] .btn-primary.active {
 .postbox-container .pngx-meta-field.field-variety,
 .postbox-container .pngx-meta-field.field-wysiwyg {
   border: 1px solid var(--pngx-grey-4);
-  border-radius: 3px;
+  border-radius: 0.1875rem;
   display: block;
-  max-width: 600px;
-  padding: 19px 9px 9px;
+  max-width: 37.5rem;
+  padding: 1.1875rem 0.5625rem 0.5625rem;
 }
 .postbox-container .pngx-meta-fields-wrap.admin-field-wrap > label, .postbox-container .pngx-meta-fields-wrap.field-checkbox > label, .postbox-container .pngx-meta-fields-wrap.field-color > label, .postbox-container .pngx-meta-fields-wrap.field-date > label, .postbox-container .pngx-meta-fields-wrap.field-image > label, .postbox-container .pngx-meta-fields-wrap.field-number > label, .postbox-container .pngx-meta-fields-wrap.field-select > label, .postbox-container .pngx-meta-fields-wrap.field-text > label, .postbox-container .pngx-meta-fields-wrap.field-textarea > label, .postbox-container .pngx-meta-fields-wrap.field-url > label, .postbox-container .pngx-meta-fields-wrap.field-variety > label, .postbox-container .pngx-meta-fields-wrap.field-wysiwyg > label,
 .postbox-container .pngx-meta-field.admin-field-wrap > label,
@@ -2239,16 +2279,16 @@ fieldset[disabled] .btn-primary.active {
 .postbox-container .pngx-meta-field.field-url > label,
 .postbox-container .pngx-meta-field.field-variety > label,
 .postbox-container .pngx-meta-field.field-wysiwyg > label {
-  background: var(--pngx-white);
+  background: var(--pngx-color-background);
   color: var(--pngx-color-button-primary);
   display: block;
   float: left;
-  font-size: 15px;
+  font-size: 0.9375rem;
   font-weight: 700;
-  height: 18px;
-  margin: -31px 0 0;
+  height: 1.125rem;
+  margin: -1.9375rem 0 0;
   overflow: hidden;
-  padding: 0 5px;
+  padding: 0 0.3125rem;
   width: auto;
 }
 .postbox-container .pngx-meta-fields-wrap.admin-field-wrap input[type=email],
@@ -2336,7 +2376,11 @@ fieldset[disabled] .btn-primary.active {
 .postbox-container .pngx-meta-field.field-wysiwyg input[type=number],
 .postbox-container .pngx-meta-field.field-wysiwyg input[type=text],
 .postbox-container .pngx-meta-field.field-wysiwyg input[type=url] {
-  padding: 12px 8px;
+  border-color: var(--pngx-grey-5);
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+  padding: 0.5rem 0.75rem;
   width: 100%;
 }
 .postbox-container .pngx-meta-fields-wrap.admin-field-wrap input[type=date], .postbox-container .pngx-meta-fields-wrap.field-checkbox input[type=date], .postbox-container .pngx-meta-fields-wrap.field-color input[type=date], .postbox-container .pngx-meta-fields-wrap.field-date input[type=date], .postbox-container .pngx-meta-fields-wrap.field-image input[type=date], .postbox-container .pngx-meta-fields-wrap.field-number input[type=date], .postbox-container .pngx-meta-fields-wrap.field-select input[type=date], .postbox-container .pngx-meta-fields-wrap.field-text input[type=date], .postbox-container .pngx-meta-fields-wrap.field-textarea input[type=date], .postbox-container .pngx-meta-fields-wrap.field-url input[type=date], .postbox-container .pngx-meta-fields-wrap.field-variety input[type=date], .postbox-container .pngx-meta-fields-wrap.field-wysiwyg input[type=date],
@@ -2352,7 +2396,7 @@ fieldset[disabled] .btn-primary.active {
 .postbox-container .pngx-meta-field.field-url input[type=date],
 .postbox-container .pngx-meta-field.field-variety input[type=date],
 .postbox-container .pngx-meta-field.field-wysiwyg input[type=date] {
-  padding: 12px 8px;
+  padding: 0.5rem 0.75rem;
 }
 .postbox-container .pngx-meta-fields-wrap.admin-field-wrap input[type=number], .postbox-container .pngx-meta-fields-wrap.field-checkbox input[type=number], .postbox-container .pngx-meta-fields-wrap.field-color input[type=number], .postbox-container .pngx-meta-fields-wrap.field-date input[type=number], .postbox-container .pngx-meta-fields-wrap.field-image input[type=number], .postbox-container .pngx-meta-fields-wrap.field-number input[type=number], .postbox-container .pngx-meta-fields-wrap.field-select input[type=number], .postbox-container .pngx-meta-fields-wrap.field-text input[type=number], .postbox-container .pngx-meta-fields-wrap.field-textarea input[type=number], .postbox-container .pngx-meta-fields-wrap.field-url input[type=number], .postbox-container .pngx-meta-fields-wrap.field-variety input[type=number], .postbox-container .pngx-meta-fields-wrap.field-wysiwyg input[type=number],
 .postbox-container .pngx-meta-field.admin-field-wrap input[type=number],
@@ -2395,34 +2439,34 @@ fieldset[disabled] .btn-primary.active {
   background: #F3F3F3;
   color: var(--pngx-grey-6);
   display: block;
-  font-size: 11px;
-  margin: 10px -9px -9px -9px;
-  padding: 3px;
+  font-size: 0.6875rem;
+  margin: 0.625rem -0.5625rem -0.5625rem -0.5625rem;
+  padding: 0.1875rem;
   text-align: center;
   width: auto;
 }
 .postbox-container .pngx-meta-fields-wrap .pngx-variety-selection > .description,
 .postbox-container .pngx-meta-field .pngx-variety-selection > .description {
-  margin: 0 -9px 0 -9px;
+  margin: 0 -0.5625rem 0 -0.5625rem;
 }
 .postbox-container .pngx-meta-fields-wrap .checkbox-description,
 .postbox-container .pngx-meta-field .checkbox-description {
   color: var(--pngx-grey-9);
-  font-size: 11px;
+  font-size: 0.6875rem;
 }
 .postbox-container .pngx-meta-fields-wrap .pngx-meta-field-styles,
 .postbox-container .pngx-meta-field .pngx-meta-field-styles {
-  padding: 24px 5px 0;
+  padding: 1.5rem 0.3125rem 0;
   position: relative;
 }
 .postbox-container .pngx-meta-fields-wrap .pngx-meta-field-styles .inline-style-title,
 .postbox-container .pngx-meta-field .pngx-meta-field-styles .inline-style-title {
   color: var(--pngx-color-button-primary);
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 400;
-  left: 9px;
+  left: 0.5625rem;
   position: absolute;
-  top: 2px;
+  top: 0.125rem;
 }
 .postbox-container .pngx-meta-fields-wrap .pngx-meta-field-styles .pngx-color-picker-wrap,
 .postbox-container .pngx-meta-field .pngx-meta-field-styles .pngx-color-picker-wrap {
@@ -2432,34 +2476,34 @@ fieldset[disabled] .btn-primary.active {
 }
 .postbox-container .pngx-meta-fields-wrap .pngx-variety-fields-wrapper,
 .postbox-container .pngx-meta-field .pngx-variety-fields-wrapper {
-  margin: 40px 0;
+  margin: 2.5rem 0;
 }
 .postbox-container .pngx-meta-fields-wrap .pngx-variety-fields-wrapper > .pngx-variety-field,
 .postbox-container .pngx-meta-field .pngx-variety-fields-wrapper > .pngx-variety-field {
   border: 1px solid var(--pngx-grey-6);
-  border-radius: 4px;
+  border-radius: 0.25rem;
   display: block;
   max-width: 100%;
-  padding: 19px 9px 9px;
+  padding: 1.1875rem 0.5625rem 0.5625rem;
   width: auto;
 }
 .postbox-container .pngx-meta-fields-wrap .pngx-variety-fields-wrapper > .pngx-variety-field label,
 .postbox-container .pngx-meta-field .pngx-variety-fields-wrapper > .pngx-variety-field label {
   color: var(--pngx-color-button-primary);
-  font-size: 13px;
+  font-size: 0.8125rem;
 }
 .postbox-container .pngx-meta-fields-wrap .pngx-variety-fields-wrapper > .pngx-variety-field > label,
 .postbox-container .pngx-meta-field .pngx-variety-fields-wrapper > .pngx-variety-field > label {
-  background: var(--pngx-white);
+  background: var(--pngx-color-background);
   color: var(--pngx-color-button-primary);
   display: block;
   float: left;
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-weight: 400;
-  height: 18px;
-  margin: -30px 0 0;
+  height: 1.125rem;
+  margin: -1.875rem 0 0;
   overflow: hidden;
-  padding: 0 3px;
+  padding: 0 0.1875rem;
   width: auto;
 }
 .postbox-container .pngx-meta-fields-wrap .pngx-variety-fields-wrapper .pngx-variety-flex,
@@ -2468,7 +2512,7 @@ fieldset[disabled] .btn-primary.active {
 }
 .postbox-container .pngx-meta-fields-wrap .pngx-variety-fields-wrapper .pngx-variety-flex .expiration-icon,
 .postbox-container .pngx-meta-field .pngx-variety-fields-wrapper .pngx-variety-flex .expiration-icon {
-  flex-basis: 34px;
+  flex-basis: 2.125rem;
   flex-grow: 0;
   flex-shrink: 0;
 }
@@ -2482,6 +2526,129 @@ fieldset[disabled] .btn-primary.active {
 /* ==========================================================================
    Options CSS
    ========================================================================== */
+.pngx-admin-body {
+  background-color: var(--pngx-color-background);
+}
+.pngx-admin-body .button,
+.pngx-admin-body .button-primary {
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  padding: 0.625rem 1.25rem;
+}
+.pngx-admin-body .button .dashicons,
+.pngx-admin-body .button-primary .dashicons {
+  margin-top: 0;
+  position: relative;
+  top: 0.0625rem;
+}
+.pngx-admin-body .button {
+  background: var(--pngx-color-background);
+  border-color: var(--pngx-grey-5);
+  color: var(--pngx-black);
+}
+.pngx-admin-body .button .dashicons {
+  color: var(--pngx-black);
+}
+.pngx-admin-body .button:focus, .pngx-admin-body .button:hover {
+  background: var(--pngx-grey-2);
+  border-color: var(--pngx-grey-5);
+  color: var(--pngx-blue);
+}
+.pngx-admin-body .button:focus .dashicons, .pngx-admin-body .button:hover .dashicons {
+  color: var(--pngx-blue);
+}
+.pngx-admin-body .wp-picker-container .wp-color-result {
+  border-radius: 0.1875rem;
+  margin-bottom: 0;
+}
+
+body:not(.pngx-admin-body) .pngx-tabs label,
+body:not(.pngx-admin-body) .pngx-tabs legend {
+  font-weight: 700;
+}
+body:not(.pngx-admin-body) .pngx-tabs .button-primary {
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  padding: 0.625rem 1.25rem;
+}
+
+.pngx-admin-body .pngx-field-label,
+body:not(.pngx-admin-body) .pngx-tabs .pngx-field-label {
+  margin-bottom: var(--pngx-spacer-1);
+}
+.pngx-admin-body .select2-container.select2-container--default .select2-selection--single,
+body:not(.pngx-admin-body) .pngx-tabs .select2-container.select2-container--default .select2-selection--single {
+  border-radius: 0.5rem;
+  height: auto;
+}
+.pngx-admin-body .select2-container.select2-container--default .select2-selection--single .select2-selection__rendered,
+body:not(.pngx-admin-body) .pngx-tabs .select2-container.select2-container--default .select2-selection--single .select2-selection__rendered {
+  color: inherit;
+  line-height: 1.5rem;
+  padding: 0.5rem 2rem 0.5rem 0.75rem;
+}
+.pngx-admin-body .select2-container.select2-container--default .select2-selection--single .select2-selection__placeholder,
+body:not(.pngx-admin-body) .pngx-tabs .select2-container.select2-container--default .select2-selection--single .select2-selection__placeholder {
+  color: inherit;
+}
+.pngx-admin-body .select2-container.select2-container--default .select2-selection--single .select2-selection__arrow,
+body:not(.pngx-admin-body) .pngx-tabs .select2-container.select2-container--default .select2-selection--single .select2-selection__arrow {
+  height: calc(100% - 0.125rem);
+  width: 2rem;
+}
+.pngx-admin-body .select2-container.select2-container--default .select2-selection--single .select2-selection__arrow b,
+body:not(.pngx-admin-body) .pngx-tabs .select2-container.select2-container--default .select2-selection--single .select2-selection__arrow b {
+  border-width: 0.5rem 0.3125rem 0 0.3125rem;
+  margin-top: -0.1875rem;
+}
+.pngx-admin-body .select2-container.select2-container--default .select2-selection--multiple,
+body:not(.pngx-admin-body) .pngx-tabs .select2-container.select2-container--default .select2-selection--multiple {
+  border-color: var(--pngx-grey-5);
+  border-radius: 0.5rem;
+}
+.pngx-admin-body .select2-container.select2-container--default .select2-selection--multiple::after,
+body:not(.pngx-admin-body) .pngx-tabs .select2-container.select2-container--default .select2-selection--multiple::after {
+  border-color: #888 transparent transparent transparent;
+  border-style: solid;
+  border-width: 0.5rem 0.3125rem 0 0.3125rem;
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  right: 0.8125rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.pngx-admin-body .select2-container.select2-container--default .select2-selection--multiple .select2-selection__rendered,
+body:not(.pngx-admin-body) .pngx-tabs .select2-container.select2-container--default .select2-selection--multiple .select2-selection__rendered {
+  display: block;
+  padding: 0.3125rem 2rem 0 0.75rem;
+}
+.pngx-admin-body .select2-container.select2-container--default .select2-selection--multiple .select2-selection__rendered li,
+body:not(.pngx-admin-body) .pngx-tabs .select2-container.select2-container--default .select2-selection--multiple .select2-selection__rendered li {
+  background-color: transparent;
+}
+.pngx-admin-body .select2-container.select2-container--default .select2-selection--multiple .select2-search__field,
+body:not(.pngx-admin-body) .pngx-tabs .select2-container.select2-container--default .select2-selection--multiple .select2-search__field {
+  margin-top: 0;
+}
+@media (max-width: 960px) {
+  .pngx-admin-body .select2-container.select2-container--default .select2-selection--multiple .select2-search__field,
+  body:not(.pngx-admin-body) .pngx-tabs .select2-container.select2-container--default .select2-selection--multiple .select2-search__field {
+    min-height: 1.875rem;
+  }
+}
+.pngx-admin-body .select2-container.select2-container--default.select2-container--open .select2-selection--single .select2-selection__arrow b,
+body:not(.pngx-admin-body) .pngx-tabs .select2-container.select2-container--default.select2-container--open .select2-selection--single .select2-selection__arrow b {
+  border-width: 0 0.3125rem 0.5rem 0.3125rem;
+}
+.pngx-admin-body .select2-container.select2-container--default.select2-container--open .select2-selection--multiple::after,
+body:not(.pngx-admin-body) .pngx-tabs .select2-container.select2-container--default.select2-container--open .select2-selection--multiple::after {
+  border-color: transparent transparent #888;
+  border-width: 0 0.3125rem 0.5rem 0.3125rem;
+}
+
 .pngx-wrapper * {
   box-sizing: border-box;
 }
@@ -2497,19 +2664,6 @@ fieldset[disabled] .btn-primary.active {
   display: none;
 }
 
-.pngx-wrapper .pngx-tabs-panel.ui-tabs-panel.ui-widget-content h4 {
-  margin: 0 0 0 -10px;
-}
-
-@media (max-width: 768px) {
-  .pngx-wrapper .pngx-tabs-panel.ui-tabs-panel.ui-widget-content h4 {
-    margin: 0 0 0 0px;
-  }
-}
-.pngx-wrapper .pngx-tabs-panel.ui-tabs-panel.ui-widget-content .pngx-section-help-slideout h4 {
-  margin: 0;
-}
-
 .wp-core-ui .pngx-wrapper .button-primary {
   float: right;
 }
@@ -2517,15 +2671,67 @@ fieldset[disabled] .btn-primary.active {
 .pngx-wrapper input[type=email],
 .pngx-wrapper input[type=number],
 .pngx-wrapper input[type=text],
-.pngx-wrapper input[type=url] {
-  padding: 12px 8px;
+.pngx-wrapper input[type=url],
+.pngx-wrapper textarea {
+  border-color: var(--pngx-grey-5);
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+  padding: 0.5rem 0.75rem;
   width: auto;
+}
+.pngx-wrapper input[type=email].pngx-engine-options-control__text-input,
+.pngx-wrapper input[type=number].pngx-engine-options-control__text-input,
+.pngx-wrapper input[type=text].pngx-engine-options-control__text-input,
+.pngx-wrapper input[type=url].pngx-engine-options-control__text-input,
+.pngx-wrapper textarea.pngx-engine-options-control__text-input {
+  width: 100%;
 }
 .pngx-wrapper input[type=number] {
   height: auto;
 }
 .pngx-wrapper span.description {
   display: block;
+}
+.pngx-wrapper span.description:not(:first-child) {
+  margin-top: 0.625rem;
+}
+.pngx-wrapper [class$=icon32] + h2 {
+  font-weight: bold;
+  line-height: 1;
+}
+@media (min-width: 768px) {
+  .pngx-wrapper [class$=icon32] + h2 {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+  }
+}
+@media (max-width: 640px) {
+  .pngx-wrapper [class$=icon32] + h2 {
+    margin-bottom: 1rem;
+  }
+}
+@media (min-width: 768px) {
+  .pngx-wrapper .cctor-options-icon {
+    height: 2.5rem;
+    width: 2.5rem;
+  }
+}
+.pngx-wrapper > h4 {
+  margin: 0;
+}
+
+#poststuff .pngx-tabs h2 {
+  font-size: 2.25rem;
+  font-weight: 600;
+  line-height: 2.5rem;
+  padding: 0;
+}
+@media (max-width: 640px) {
+  #poststuff .pngx-tabs h2 {
+    font-size: 1.3em;
+    line-height: 1.4em;
+  }
 }
 
 .pngx-meta-field.field-repeater {
@@ -2605,16 +2811,16 @@ fieldset[disabled] .btn-primary.active {
   top: 5px;
 }
 .pngx-wrapper.section .pngx-column-label {
-  background: var(--pngx-white);
+  background: var(--pngx-color-background);
   color: var(--pngx-color-button-primary);
   display: block;
   float: left;
-  font-size: 15px;
+  font-size: 0.9375rem;
   font-weight: 700;
-  height: 18px;
-  margin: -31px 0 0;
+  height: 1.125rem;
+  margin: -1.9375rem 0 0;
   overflow: hidden;
-  padding: 0 5px;
+  padding: 0 0.3125rem;
   width: auto;
   margin: 0;
   position: absolute;
@@ -2622,16 +2828,16 @@ fieldset[disabled] .btn-primary.active {
   left: 20px;
 }
 .pngx-wrapper.section .pngx-section-label {
-  background: var(--pngx-white);
+  background: var(--pngx-color-background);
   color: var(--pngx-color-button-primary);
   display: block;
   float: left;
-  font-size: 15px;
+  font-size: 0.9375rem;
   font-weight: 700;
-  height: 18px;
-  margin: -31px 0 0;
+  height: 1.125rem;
+  margin: -1.9375rem 0 0;
   overflow: hidden;
-  padding: 0 5px;
+  padding: 0 0.3125rem;
   width: auto;
   margin: 0;
   position: absolute;
@@ -2753,39 +2959,46 @@ div.repeating-field .remove-repeater {
 .pngx-tabs.ui-tabs.ui-widget-content {
   background: none;
   border: none;
+  padding: 0;
 }
 .pngx-tabs.ui-tabs .pngx-tabs-nav.ui-tabs-nav {
   background: none;
   border: none;
   height: 100%;
-  margin: 20px 0 0;
+  margin: 1.25rem 0 0;
   padding: 0;
+}
+.pngx-tabs.ui-tabs .pngx-tabs-nav.ui-tabs-nav li {
+  margin: 0;
+}
+.pngx-tabs.ui-tabs .pngx-tabs-nav.ui-tabs-nav li:not(:last-child) {
+  margin-right: 0.5rem;
 }
 .pngx-tabs.ui-tabs .pngx-tabs-nav.ui-tabs-nav li.ui-state-default, .pngx-tabs.ui-tabs .pngx-tabs-nav.ui-tabs-nav li.ui-state-active {
   background: none;
   border: none;
   display: inline;
+  outline: none;
 }
 .pngx-tabs.ui-tabs .pngx-tabs-nav.ui-tabs-nav li a {
-  border-color: #fff;
-  border-radius: 8px 8px 0 0;
+  border-color: transparent;
   border-style: solid;
-  border-width: 1px 1px 0;
-  box-shadow: 0 0 2px 0 rgba(50, 50, 50, 0.5);
+  border-width: 0 0 2px;
+  box-shadow: none;
   color: #5C5C5C;
   display: inline-block;
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-weight: bold;
-  margin: 0 6px 1px 0;
-  padding: 4px 14px 6px;
+  padding: 1rem;
   text-decoration: none;
-  text-shadow: rgb(255, 255, 255) 0 1px 0;
 }
 .pngx-tabs.ui-tabs .pngx-tabs-nav.ui-tabs-nav li.ui-tabs-selected a, .pngx-tabs.ui-tabs .pngx-tabs-nav.ui-tabs-nav li.ui-state-active a {
-  background: #fff;
-  border-width: 1px 1px 0;
-  box-shadow: 0 0 5px 0 rgb(18, 68, 107);
-  color: #2A5A8A;
+  border-color: var(--pngx-blue);
+  color: var(--pngx-blue);
+}
+.pngx-tabs.ui-tabs .pngx-tabs-nav.ui-tabs-nav li.ui-state-hover:not(.ui-state-active) a {
+  border-color: #323232;
+  color: #323232;
 }
 .pngx-tabs .form-table {
   margin-top: 0;
@@ -2794,68 +3007,96 @@ div.repeating-field .remove-repeater {
   position: relative;
 }
 .pngx-tabs .pngx-tabs-panel.ui-tabs-panel.ui-widget-content {
-  background: #fff;
+  background: var(--pngx-grey-1);
   box-shadow: 0 0 1px 0 rgba(50, 50, 50, 0.5);
   clear: both;
   padding: 2%;
 }
+@media (min-width: 768px) {
+  .pngx-tabs .pngx-tabs-panel.ui-tabs-panel.ui-widget-content > h2 {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+}
+.pngx-tabs .pngx-tabs-panel.ui-tabs-panel.ui-widget-content > h2:first-child {
+  margin-top: 0;
+}
+.pngx-wrapper .pngx-tabs .pngx-tabs-panel.ui-tabs-panel.ui-widget-content h4.pngx-fields-heading {
+  margin: 0 0 0 -0.625rem;
+}
+@media (max-width: 768px) {
+  .pngx-wrapper .pngx-tabs .pngx-tabs-panel.ui-tabs-panel.ui-widget-content h4.pngx-fields-heading {
+    margin-left: 0;
+  }
+}
 .pngx-tabs .pngx-tabs-panel.ui-tabs-panel.ui-widget-content h3 {
-  color: #2A5A8A;
+  color: var(--pngx-blue);
   font: italic normal normal 24px/29px Georgia, Times, serif;
-  line-height: 35px;
+  line-height: 2.1875rem;
   margin: 0;
-  padding: 0 0 5px;
-  text-shadow: 0 1px 0 #fff;
+  padding: 0 0 0.3125rem;
+  text-shadow: 0 1px 0 var(--pngx-white);
 }
 .pngx-tabs .pngx-tabs-panel.ui-tabs-panel.ui-widget-content h4 {
-  color: #048C7F;
-  font-size: 15px;
   font-weight: bold;
 }
-.pngx-tabs .pngx-tabs-panel.ui-tabs-panel.ui-widget-content h4:after {
-  background: rgb(0, 0, 0);
-  background: -moz-linear-gradient(left, rgb(0, 0, 0) 1%, rgb(155, 155, 155) 28%, rgb(255, 255, 255) 85%);
-  background: -webkit-gradient(linear, left top, right top, color-stop(1%, rgb(0, 0, 0)), color-stop(28%, rgb(155, 155, 155)), color-stop(85%, rgb(255, 255, 255)));
-  background: -webkit-linear-gradient(left, rgb(0, 0, 0) 1%, rgb(155, 155, 155) 28%, rgb(255, 255, 255) 85%);
-  background: -o-linear-gradient(left, rgb(0, 0, 0) 1%, rgb(155, 155, 155) 28%, rgb(255, 255, 255) 85%);
-  background: -ms-linear-gradient(left, rgb(0, 0, 0) 1%, rgb(155, 155, 155) 28%, rgb(255, 255, 255) 85%);
-  background: linear-gradient(to right, rgb(0, 0, 0) 1%, rgb(155, 155, 155) 28%, rgb(255, 255, 255) 85%);
-  content: "";
-  display: block;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000", endColorstr="#ffffff", GradientType=1);
-  height: 1px;
-  margin-top: 10px;
+@media (min-width: 768px) {
+  .pngx-tabs .pngx-tabs-panel.ui-tabs-panel.ui-widget-content h4 {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+}
+@media (max-width: 640px) {
+  .pngx-tabs .pngx-tabs-panel.ui-tabs-panel.ui-widget-content h4 {
+    font-size: 1.1rem;
+  }
 }
 .pngx-tabs .pngx-tabs-nav-mobile {
-  background: #fff;
-  border-color: #fff;
-  border-radius: 8px 8px 0 0;
-  border-style: solid;
-  border-width: 1px 1px 0;
-  box-shadow: 0 0 5px 0 rgb(18, 68, 107);
-  color: #2A5A8A;
+  background-color: var(--pngx-color-background);
+  border: 1px solid var(--pngx-grey-4);
+  border-radius: 0.625rem 0.625rem 0 0;
   cursor: pointer;
   display: none;
-  margin-bottom: 2px;
-  padding: 3px 10px 8px;
+  font-weight: bold;
+  margin-top: 1.25rem;
+  padding: 1.25rem;
+  position: relative;
+}
+@media (max-width: 640px) {
+  .pngx-tabs .pngx-tabs-nav-mobile {
+    padding: 1rem;
+  }
 }
 .pngx-tabs .pngx-tabs-nav-mobile.show {
   display: block;
 }
 .pngx-tabs .pngx-tabs-nav-mobile:after {
-  content: "?";
+  content: "\f140";
+  font-family: dashicons;
+  font-size: 1rem;
   pointer-events: none;
   position: absolute;
-  right: 15px;
-  top: 8px;
+  right: 1.25rem;
+  top: 50%;
+  transform: translateY(-50%);
   z-index: 2;
 }
 .pngx-tabs .pngx-tabs-nav.ui-tabs-nav.ui-corner-all.pngx-tabs-accordian {
-  background: #fff;
-  border-bottom: 0;
+  background: var(--pngx-color-background);
+  border: 1px solid var(--pngx-grey-4);
+  border-radius: 0;
   display: none;
   height: auto;
-  margin: 5px 0 15px;
+  margin: -1px 0 0;
+  padding: 1rem;
+}
+@media (max-width: 640px) {
+  .pngx-tabs .pngx-tabs-nav.ui-tabs-nav.ui-corner-all.pngx-tabs-accordian {
+    padding: 0.75rem;
+  }
+}
+.pngx-tabs .pngx-tabs-nav.ui-tabs-nav.ui-corner-all.pngx-tabs-accordian li:not(:last-child) {
+  margin-right: 0;
 }
 .pngx-tabs .pngx-tabs-nav.pngx-tabs-accordian li a.ui-tabs-anchor {
   border: none;
@@ -2863,7 +3104,7 @@ div.repeating-field .remove-repeater {
   display: block;
   float: none;
   margin: 0;
-  padding: 5px;
+  padding: 0.3125rem;
   position: relative;
 }
 .pngx-tabs .pngx-tabs-nav.pngx-tabs-accordian li.ui-state-default {

@@ -2,46 +2,58 @@
    Help CSS
    ========================================================================== */
 .pngx-meta-field-wrap.pngx-section-help-container {
-	background-color: var( --pngx-grey-4 );
-	border-radius: 10px 10px 0;
+	background-color: var( --pngx-color-background );
+	border: 1px solid var( --pngx-grey-4 );
+	border-radius: rem-calc(10);
 	margin-bottom: 1em;
 	overflow: hidden;
 }
 
 .pngx-section-help-container-toggle {
-	background-color: var( --pngx-grey-4 );
+	background-color: var( --pngx-color-background );
 	border: medium none;
-	color: white;
 	cursor: pointer;
+	font-weight: bold;
 	margin: 0;
 	outline: medium none;
-	padding: 0.5em;
+	padding: rem-calc(20);
 	text-align: left;
 	width: 100%;
-}
 
-.pngx-section-help-container:hover,
-.pngx-section-help-container-toggle:hover {
-	background: var( --pngx-color-button-primary-hover ) none repeat scroll 0 0;
-	border: 1px solid var( --pngx-color-button-primary );
-	color: var( --pngx-black );
+	@include breakpoint_max('sm') {
+		padding: rem-calc(16);
+	}
+
+	&:hover {
+		background-color: var( --pngx-color-button-primary );
+		color: var( --pngx-white );
+
+		.toggle__arrow {
+			color: var( --pngx-white );
+		}
+	}
 }
 
 .pngx-section-help-container-toggle .dashicons-before::before {
-	margin-right: 5px;
+	margin-right: rem-calc(5);
 }
 
 .pngx-section-help-container-toggle .toggle__arrow {
+	float: right;
+	font-size: rem-calc(24);
 	text-decoration: none;
 }
 
 .pngx-section-help-slideout {
-	background-color: var( --pngx-white );
-	border: 1px solid var( --pngx-color-button-primary );
-	border-bottom-left-radius: 10px;
+	background-color: var( --pngx-color-background );
+	border-top: 1px solid var( --pngx-grey-4 );
 	display: none;
 	overflow: hidden;
-	padding: 0.5em;
+	padding: rem-calc(20);
+
+	@include breakpoint_max('sm') {
+		padding: rem-calc(16);
+	}
 }
 
 .ui-widget-content a.pngx-support,
@@ -57,7 +69,7 @@
 .pngx-help-images {
 	box-shadow: 0 1px 2px 0 var( --pngx-color-button-primary-hover );
 	display: none;
-	margin: 10px;
+	margin: rem-calc(10);
 	max-width: 95%;
 }
 
@@ -65,6 +77,10 @@
 	display: inline-block;
 	vertical-align: top;
 	width: 49%;
+
+	h4 {
+		margin: 0;
+	}
 }
 
 .pngx-meta-field-content.text {

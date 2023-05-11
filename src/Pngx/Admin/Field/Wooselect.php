@@ -48,13 +48,35 @@ class Wooselect {
 
 		$selected_option = [];
 		if ( ! empty( $field['attrs']['data-source'] ) ) {
-			$selected_text   = empty( $selected ) ? '' : get_the_title( $selected );
-			$selected_option = [
-				[
-					'id'   => $selected,
-					'text' => $selected_text,
-				]
-			];
+			if ( is_array( $selected ) ) {
+				foreach ( $selected as $sel_option ) {
+					$selected_text = empty( $sel_option ) ? '' : $sel_option;
+					if ( $field['attrs']['data-source-type'] === 'post' ) {
+						$selected_text = empty( $sel_option ) ? '' : get_the_title( $sel_option );
+					} elseif ( $field['attrs']['data-source-type'] === 'term' ) {
+						$selected_text = empty( $sel_option ) ? '' : get_term( $sel_option )->name;
+					}
+
+					$selected_option[] = [
+							'id'   => $sel_option,
+							'text' => $selected_text,
+					];
+				}
+			} else {
+				$selected_text = empty( $sel_option ) ? '' : $sel_option;
+				if ( $field['attrs']['data-source-type'] === 'post' ) {
+					$selected_text = empty( $selected ) ? '' : get_the_title( $selected );
+				} elseif ( $field['attrs']['data-source-type'] === 'term' ) {
+					$selected_text = empty( $selected ) ? '' : get_term( $selected )->name;
+				}
+
+				$selected_option[] = [
+						'id'   => $sel_option,
+						'text' => $selected_text,
+				];
+			}
+
+			$field['options'] = $selected_option;
 		}
 
 		if ( is_array( $field['options'] ) ) {

@@ -1,8 +1,4 @@
 <?php
-// Don't load directly
-if ( ! defined( 'ABSPATH' ) ) {
-	die( '-1' );
-}
 
 /**
  * Class Pngx__Add_Capabilities
@@ -41,61 +37,67 @@ class Pngx__Add_Capabilities {
 	public function get_capabilities( $capability_type ) {
 		$caps = [];
 
+		$singular = $capability_type;
+		$plural   = $capability_type;
+		if ( substr( $capability_type, - 1 ) !== 's' ) {
+			$plural .= 's';
+		}
+
 		//Administrator
 		$caps['administrator'] = array(
-			"read_{$capability_type}",
-			"read_private_{$capability_type}s",
-			"edit_{$capability_type}",
-			"edit_{$capability_type}s",
-			"edit_private_{$capability_type}s",
-			"edit_published_{$capability_type}s",
-			"edit_others_{$capability_type}s",
-			"publish_{$capability_type}s",
-			"delete_{$capability_type}",
-			"delete_{$capability_type}s",
-			"delete_private_{$capability_type}s",
-			"delete_published_{$capability_type}s",
-			"delete_others_{$capability_type}s",
+			"read_{$singular}",
+			"read_private_{$plural}",
+			"edit_{$singular}",
+			"edit_{$plural}",
+			"edit_private_{$plural}",
+			"edit_published_{$plural}",
+			"edit_others_{$plural}",
+			"publish_{$plural}",
+			"delete_{$singular}",
+			"delete_{$plural}",
+			"delete_private_{$plural}",
+			"delete_published_{$plural}",
+			"delete_others_{$plural}",
 		);
 		//Editor
 		$caps['editor'] = array(
-			"read_{$capability_type}",
-			"read_private_{$capability_type}s",
-			"edit_{$capability_type}",
-			"edit_{$capability_type}s",
-			"edit_private_{$capability_type}s",
-			"edit_published_{$capability_type}s",
-			"edit_others_{$capability_type}s",
-			"publish_{$capability_type}s",
-			"delete_{$capability_type}",
-			"delete_{$capability_type}s",
-			"delete_private_{$capability_type}s",
-			"delete_published_{$capability_type}s",
-			"delete_others_{$capability_type}s",
+			"read_{$singular}",
+			"read_private_{$plural}",
+			"edit_{$singular}",
+			"edit_{$plural}",
+			"edit_private_{$plural}",
+			"edit_published_{$plural}",
+			"edit_others_{$plural}",
+			"publish_{$plural}",
+			"delete_{$singular}",
+			"delete_{$plural}",
+			"delete_private_{$plural}",
+			"delete_published_{$plural}",
+			"delete_others_{$plural}",
 		);
 		//Author
 		$caps['author'] = array(
-			"edit_{$capability_type}",
-			"read_{$capability_type}",
-			"delete_{$capability_type}",
-			"delete_{$capability_type}s",
-			"edit_{$capability_type}s",
-			"publish_{$capability_type}s",
-			"edit_published_{$capability_type}s",
-			"delete_published_{$capability_type}s",
+			"edit_{$singular}",
+			"read_{$singular}",
+			"delete_{$singular}",
+			"delete_{$plural}",
+			"edit_{$plural}",
+			"publish_{$plural}",
+			"edit_published_{$plural}",
+			"delete_published_{$plural}",
 		);
 		//Contributor
 		$caps['contributor'] = array(
-			"edit_{$capability_type}",
-			"read_{$capability_type}",
-			"delete_{$capability_type}",
-			"delete_{$capability_type}s",
-			"edit_{$capability_type}s",
+			"edit_{$singular}",
+			"read_{$singular}",
+			"delete_{$singular}",
+			"delete_{$plural}",
+			"edit_{$plural}",
 
 		);
 		//Subscriber
 		$caps['subscriber'] = array(
-			"read_{$capability_type}",
+			"read_{$singular}",
 		);
 
 		return $caps;
