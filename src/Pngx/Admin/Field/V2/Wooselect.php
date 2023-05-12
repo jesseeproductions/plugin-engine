@@ -7,7 +7,7 @@
  * @package Pngx\Admin\Field
  */
 
-namespace Pngx\Admin\Field;
+namespace Pngx\Admin\Field\V2;
 
 /**
  * Class Wooselect
@@ -44,8 +44,6 @@ class Wooselect {
 			$selected = $field['value'];
 		}
 
-		$classes[] = ! empty( $field['display']['class'] ) ? $field['display']['class'] : '';
-
 		$selected_option = [];
 		if ( ! empty( $field['attrs']['data-source'] ) ) {
 			if ( is_array( $selected ) ) {
@@ -61,8 +59,8 @@ class Wooselect {
 					}
 
 					$selected_option[] = [
-							'id'   => $sel_option,
-							'text' => $selected_text,
+						'id'   => $sel_option,
+						'text' => $selected_text,
 					];
 				}
 			} else {
@@ -73,8 +71,8 @@ class Wooselect {
 				}
 
 				$selected_option[] = [
-						'id'   => $selected,
-						'text' => $selected_text,
+					'id'   => $selected,
+					'text' => $selected_text,
 				];
 			}
 
@@ -91,33 +89,35 @@ class Wooselect {
 			}
 		}
 
-		$selected =  is_array( $selected ) ? implode( ',', $selected ) : $selected;
+		$selected = is_array( $selected ) ? implode( ',', $selected ) : $selected;
 
 		$selected_attrs = [
 			'data-selected' => $selected,
 			'data-options'  => json_encode( $field['options'] ),
 		];
-		$attrs = array_merge( $field['attrs'], $selected_attrs );
+		$attrs          = array_merge( $field['attrs'], $selected_attrs );
+		$field_wrap     = isset( $field['fieldset_wrap'] ) ? $field['fieldset_wrap'] : [];
 
 		$template->template( 'components/field', [
-				'classes_wrap'  => [ "pngx-engine-field__{$field['id']}-wrap", ...$field['fieldset_wrap'] ],
-				'id'            => $field['id'],
-				'label'         => $field['label'],
-				'tooltip'       => $field['tooltip'] ?? null,
-				'template_name' => 'dropdown',
-				'template_echo' => true,
-				'template_args' => [
+				'classes_wrap'   => [ "pngx-engine-field__{$field['id']}-wrap", ...$field_wrap ],
+				'id'             => $field['id'],
+				'label'          => $field['label'],
+				'tooltip'        => $field['tooltip'] ?? null,
+				'fieldset_attrs' => ! empty( $field['fieldset_attrs'] ) ? (array) $field['fieldset_attrs'] : [],
+				'template_name'  => 'dropdown',
+				'template_echo'  => true,
+				'template_args'  => [
 					'label'           => $field['label'],
 					'id'              => $field['id'],
-					'classes_label'   => [ 'screen-reader-text' ],
-					'classes_select'  => $classes,
+					'classes_wrap'    => ! empty( $field['classes_wrap'] ) ? (array) $field['classes_wrap'] : [],
+					'classes_input'   => ! empty( $field['classes_input'] ) ? (array) $field['classes_input'] : [ 'pngx-meta-field' ],
+					'classes_label'   => ! empty( $field['classes_label'] ) ? (array) $field['classes_label'] : [ 'screen-reader-text' ],
 					'name'            => $name,
 					'selected'        => $selected,
 					'selected_option' => $selected_option,
 					'attrs'           => $attrs,
-					'wrap_attrs'      => empty( $field['wrap_attrs'] ) ? [] : $field['wrap_attrs'],
+					'wrap_attrs'      => ! empty( $field['wrap_attrs'] ) ? (array) $field['wrap_attrs'] : [],
 				],
-			]
-		);
+			] );
 	}
 }

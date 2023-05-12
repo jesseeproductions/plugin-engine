@@ -22,10 +22,11 @@
  * @var string|int           $value         The value of the switch.
  * @var string|int           $checked       Whether the switch is enabled or not.
  * @var array<string,string> $attrs         Associative array of attributes of the switch.
+ * @var array<string,string> $wrap_attrs      Associative array of attributes of the field wrap.
  */
-$switch_wrap_classes = [ 'pngx-engine', 'pngx-control--switch' ];
+$wrap_classes = [ 'pngx-control--switch' ];
 if ( ! empty( $classes_wrap ) ) {
-	$switch_wrap_classes = array_merge( $switch_wrap_classes, $classes_wrap );
+	$wrap_classes = array_merge( $wrap_classes, $classes_wrap );
 }
 
 $switch_input_classes = [ 'pngx-engine-switch__input' ];
@@ -39,7 +40,8 @@ if ( ! empty( $classes_label ) ) {
 }
 ?>
 <div
-	<?php pngx_classes( $switch_wrap_classes ); ?>
+	<?php pngx_classes( $wrap_classes ); ?>
+	<?php pngx_attributes( $wrap_attrs ) ?>
 >
 	<input
 		<?php pngx_classes( $switch_input_classes ); ?>

@@ -199,6 +199,16 @@ class Pngx__Admin__Meta {
 							// get value of this field if it exists for this post
 							$meta = get_post_meta( $post->ID, $field['id'], true );
 
+							// V2 Displays Fields from admin-views directory.
+							if (
+								isset( $field['version'] )
+								&& $field['version'] === 'v2'
+							) {
+								Pngx__Admin__Fields::display_field( $field, false, false, $meta, null );
+
+								continue;
+							}
+
 							//Wrap Class for Conditionals
 							$wrapclass = isset( $field['wrapclass'] ) ? $field['wrapclass'] : '';
 
@@ -259,17 +269,13 @@ class Pngx__Admin__Meta {
 
 							?>
 
-							<div class="pngx-meta-field-wrap field-wrap-<?php echo esc_html( $field['type'] ); ?> field-wrap-<?php echo esc_html( $field['id'] ); ?> <?php echo esc_html( $wrapclass ); ?>"
-								<?php echo isset( $field['toggle'] ) ? Pngx__Admin__Fields::toggle( $field['toggle'], esc_attr( $field['id'] ) ) : null; ?> >
-
+							<div
+								class="pngx-meta-field-wrap field-wrap-<?php echo esc_html( $field['type'] ); ?> field-wrap-<?php echo esc_html( $field['id'] ); ?> <?php echo esc_html( $wrapclass ); ?>"
+								<?php echo isset( $field['toggle'] ) ? Pngx__Admin__Fields::toggle( $field['toggle'], esc_attr( $field['id'] ) ) : null; ?>
+							>
 								<div class="pngx-meta-field field-<?php echo esc_attr( $field['type'] ); ?> field-<?php echo esc_attr( $field['id'] ); ?>">
 
-									<?php if ( ! empty( $field['label'] )
-										&& (
-											$field['type'] !== 'wooselect'
-											&& $field['type'] !== 'switch'
-									   )
-									) {
+									<?php if ( ! empty( $field['label'] ) ) {
 									?>
 										<label for="<?php echo esc_attr( $field['id'] ); ?>">
 											<?php echo esc_attr( $field['label'] ); ?>

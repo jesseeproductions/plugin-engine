@@ -23,6 +23,7 @@
  * @var array<string|mixed>  $page          The page data.
  * @var string               $value         The value of the text field.
  * @var array<string,string> $attrs         Associative array of attributes of the text input.
+ * @var array<string,string> $wrap_attrs      Associative array of attributes of the field wrap.
  */
 
 $wrap_classes = [ 'pngx-engine-options-control', 'pngx-engine-options-control__text-wrap' ];
@@ -40,7 +41,10 @@ if ( ! empty( $classes_input ) ) {
 	$input_classes = array_merge( $input_classes, $classes_input );
 }
 ?>
-<div <?php pngx_classes( $classes_wrap ); ?> >
+<div
+	<?php pngx_classes( $wrap_classes ); ?>
+	<?php pngx_attributes( $wrap_attrs ) ?>
+>
 	<label
 		<?php pngx_classes( $classes_label ); ?>
 		for="<?php echo esc_attr( $id ); ?>"

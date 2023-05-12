@@ -22,7 +22,7 @@
  * @var string|int           $selected        The selected option id.
  * @var array<string,string> $selected_option A selected option used with ajax options.
  * @var array<string,string> $attrs           Associative array of attributes of the dropdown.
- * @var array<string,string> $wrap_attrs      Associative array of attributes of the dropdown wrap.
+ * @var array<string,string> $wrap_attrs      Associative array of attributes of the field wrap.
  * @var array<string,string> $tooltip         An optional associative array containing information to display in a tooltip.
  */
 

@@ -1,13 +1,4 @@
 <?php
-// Don't load directly
-if ( ! defined( 'ABSPATH' ) ) {
-	die( '-1' );
-}
-if ( class_exists( 'Pngx__Admin__Field__Textarea' ) ) {
-	return;
-}
-
-
 /**
  * Class Pngx__Admin__Field__Textarea
  * Textarea Field
@@ -23,27 +14,34 @@ class Pngx__Admin__Field__Textarea {
 			$name  = $field['id'];
 			$value = $meta;
 		}
-		global $wp_version;
 
-		$rows      = isset( $field['rows'] ) ? $field['rows'] : 12;
-		$cols      = isset( $field['cols'] ) ? $field['cols'] : 50;
-		$class     = isset( $field['class'] ) ? $field['class'] : '';
-		$std       = isset( $field['std'] ) ? $field['std'] : '';
+		$rows  = isset( $field['rows'] ) ? $field['rows'] : 12;
+		$cols  = isset( $field['cols'] ) ? $field['cols'] : 50;
+		$class = isset( $field['class'] ) ? $field['class'] : '';
+		$std   = isset( $field['std'] ) ? $field['std'] : '';
 
 		if ( ! empty( $var['name'] ) ) {
 			$name = $var['name'];
 		}
 
-		if ( version_compare( $wp_version, '4.3', '<' ) ) {
-			echo '<textarea class="' . esc_attr( $class ) . '" id="' . esc_attr( $field['id'] ) . '" name="' . esc_attr( $name ). '" placeholder="' . esc_attr( $std ) . '" rows="' . absint( $rows ) . '" cols="' . absint( $cols ) . '">' . wp_htmledit_pre( $value ) . '</textarea>';
-		} else {
-			echo '<textarea class="' . esc_attr( $class ) . '" id="' . esc_attr( $field['id'] ) . '" name="' . esc_attr( $name ) . '" placeholder="' . esc_attr( $std ) . '" rows="' . absint( $rows ) . '" cols="' . absint( $cols ) . '">' . format_for_editor( $value ) . '</textarea>';
-		}
+		?>
+		<textarea
+			class="<?php echo esc_attr( $class ); ?>"
+			id="<?php echo esc_attr( $field['id'] ); ?>"
+			name="<?php echo esc_attr( $name ); ?>"
+			placeholder="<?php echo esc_attr( $std ); ?>"
+			rows="<?php echo absint( $rows ); ?>"
+			cols="<?php echo absint( $cols ); ?>"
+		>
+		    <?php echo format_for_editor( $value ); ?>
+		</textarea>
 
+		<?php
 		if ( isset( $field['desc'] ) && ! empty( $field['desc'] ) ) {
-			echo '<span class="description">' . esc_html( $field['desc'] ) . '</span>';
+			?>
+			<span class="description"><?php echo esc_html( $field['desc'] ); ?></span>
+			<?php
 		}
-
 	}
 
 }

@@ -168,7 +168,11 @@
 				$dependent.find( selectors.fields ).prop( 'disabled', false );
 
 				if ( 'undefined' !== typeof $().select2 ) {
-					$dependent.find( '.select2-container' ).select2( 'enable', true );
+					$dependent.find( '.select2-container' ).each( function() {
+						if ( $( this ).data( 'select2' ) ) {
+							$( this ).select2( 'enable', false );
+						}
+					} );
 				}
 			} else {
 				$dependent.removeClass( active_class );
@@ -183,7 +187,11 @@
 				}
 
 				if ( 'undefined' !== typeof $().select2 ) {
-					$dependent.find( '.select2-container' ).select2( 'enable', false );
+					$dependent.find( '.select2-container' ).each( function() {
+						if ( $( this ).data( 'select2' ) ) {
+							$( this ).select2( 'enable', false );
+						}
+					} );
 				}
 
 				if ( $dependent.data( 'select2' ) ) {
@@ -224,7 +232,10 @@
 
         if ( $dependencies.not( selectors.dependencyVerified ).length ) {
             // Now verify all the Dependencies
-            $dependencies.trigger( 'verify.dependency' );
+	        // Set on a delay or it does not correctly load.
+            setTimeout( function() {
+	            $dependencies.trigger( 'verify.dependency' );
+            }, 300 );
         }
     };
 

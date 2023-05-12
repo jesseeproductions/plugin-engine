@@ -194,8 +194,8 @@ class Pngx__Admin__Assets {
 					'pngx-bootstrap-iconpicker-fontawesome',
 					'pngx-bootstrap-iconpicker',
 					'jquery-ui-tabs',
+					'pngx-access-profiles',
 					'pngx-dependency',
-					'pngx-access-profiles'
 				],
 			filemtime( Pngx__Main::instance()->resource_path . 'js/pngx-admin.js' ),
 			true

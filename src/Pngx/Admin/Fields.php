@@ -7,11 +7,14 @@
  * @package Pngx\Admin;
  */
 
+use Pngx\Admin\Field\V2\Image;
+use Pngx\Admin\Field\V2\Number;
+use Pngx\Admin\Field\V2\Read_Only;
+use Pngx\Admin\Field\V2\Switch_Field;
+use Pngx\Admin\Field\V2\Text;
+use Pngx\Admin\Field\V2\Textarea;
+use Pngx\Admin\Field\V2\Wooselect;
 use Pngx\Template;
-
-use Pngx\Admin\Field\Switch_Field;
-use Pngx\Admin\Field\Wooselect;
-use Pngx\Admin\Field\Read_Only;
 
 /**
  * Class Pngx__Admin__Fields
@@ -111,183 +114,232 @@ class Pngx__Admin__Fields {
 			echo '<span class="before">' . $field['before'] . '</span>';
 		}
 
-		switch ( $field['type'] ) {
+		if ( ! isset( $field['version'] ) ) {
+			switch ( $field['type'] ) {
 
-			case 'checkbox':
+				case 'checkbox':
 
-				Pngx__Admin__Field__Checkbox::display( $field, $options, $options_id, $meta, $repeat_vars );
+					Pngx__Admin__Field__Checkbox::display( $field, $options, $options_id, $meta, $repeat_vars );
 
-				break;
+					break;
 
-			case 'color':
+				case 'color':
 
-				Pngx__Admin__Field__Color::display( $field, $options, $options_id, $meta, $repeat_vars );
+					Pngx__Admin__Field__Color::display( $field, $options, $options_id, $meta, $repeat_vars );
 
-				break;
+					break;
 
-			case 'date':
+				case 'date':
 
-				Pngx__Admin__Field__Date::display( $field, $options, $options_id, $meta, $repeat_vars );
+					Pngx__Admin__Field__Date::display( $field, $options, $options_id, $meta, $repeat_vars );
 
-				break;
+					break;
 
-			case 'file':
+				case 'file':
 
-				Pngx__Admin__Field__File::display( $field, $options, $options_id, $meta, $repeat_vars );
+					Pngx__Admin__Field__File::display( $field, $options, $options_id, $meta, $repeat_vars );
 
-				break;
+					break;
 
-			case 'heading':
+				case 'heading':
 
-				Pngx__Admin__Field__Heading::display( $field, $options_id );
+					Pngx__Admin__Field__Heading::display( $field, $options_id );
 
-				break;
+					break;
 
-			case 'hidden':
+				case 'hidden':
 
-				Pngx__Admin__Field__Hidden::display( $field, $options, $options_id, $meta, $repeat_vars );
+					Pngx__Admin__Field__Hidden::display( $field, $options, $options_id, $meta, $repeat_vars );
 
-				break;
+					break;
 
-			case 'html':
+				case 'html':
 
-				echo $field['html'];
+					echo $field['html'];
 
-				break;
+					break;
 
-			case 'icon':
+				case 'icon':
 
-				Pngx__Admin__Field__Icon::display( $field, $options, $options_id, $meta, $repeat_vars );
+					Pngx__Admin__Field__Icon::display( $field, $options, $options_id, $meta, $repeat_vars );
 
-				break;
+					break;
 
-			case 'image':
+				case 'image':
 
-				Pngx__Admin__Field__Image::display( $field, $options, $options_id, $meta, $repeat_vars );
+					Pngx__Admin__Field__Image::display( $field, $options, $options_id, $meta, $repeat_vars );
 
-				break;
+					break;
 
-			case 'license':
+				case 'license':
 
-				Pngx__Admin__Field__License::display( $field, $options_id );
+					Pngx__Admin__Field__License::display( $field, $options_id );
 
-				break;
+					break;
 
-			case 'license_status':
+				case 'license_status':
 
-				Pngx__Admin__Field__License_Status::display( $field, $options, $options_id, $meta );
+					Pngx__Admin__Field__License_Status::display( $field, $options, $options_id, $meta );
 
-				break;
+					break;
 
-			case 'list':
+				case 'list':
 
-				Pngx__Admin__Field__List::display( $field, $options, $options_id, $meta, $repeat_vars );
+					Pngx__Admin__Field__List::display( $field, $options, $options_id, $meta, $repeat_vars );
 
-				break;
+					break;
 
-			case 'message':
+				case 'message':
 
-				Pngx__Admin__Field__Message::display( $field, $options, $options_id, $meta );
+					Pngx__Admin__Field__Message::display( $field, $options, $options_id, $meta );
 
-				break;
+					break;
 
-			case 'number':
+				case 'number':
 
-				Pngx__Admin__Field__Number::display( $field, $options, $options_id, $meta, $repeat_vars );
+					Pngx__Admin__Field__Number::display( $field, $options, $options_id, $meta, $repeat_vars );
 
-				break;
+					break;
 
-			case 'post_id':
+				case 'post_id':
 
-				Pngx__Admin__Field__Post_ID::display( $field, $options, $options_id, $meta, $repeat_vars );
+					Pngx__Admin__Field__Post_ID::display( $field, $options, $options_id, $meta, $repeat_vars );
 
-				break;
+					break;
 
-			case 'radio':
+				case 'radio':
 
-				Pngx__Admin__Field__Radio::display( $field, $options, $options_id, $meta, $repeat_vars );
+					Pngx__Admin__Field__Radio::display( $field, $options, $options_id, $meta, $repeat_vars );
 
-				break;
+					break;
 
-			case 'read-only':
+				case 'read-only':
 
-				Read_Only::display( $field, $options, $options_id, $meta, $repeat_vars, static::$admin_template );
+					Read_Only::display( $field, $options, $options_id, $meta, $repeat_vars, static::$admin_template );
 
-				break;
+					break;
 
-			case 'repeater':
+				case 'repeater':
 
-				Pngx__Admin__Field__Repeater::display( $field, $options, $options_id, $meta, $repeat_vars );
+					Pngx__Admin__Field__Repeater::display( $field, $options, $options_id, $meta, $repeat_vars );
 
-				break;
+					break;
 
-			case 'dropdown':
+				case 'dropdown':
 
-				Pngx__Admin__Field__Dropdown::display( $field, $options, $options_id, $meta, $repeat_vars );
+					Pngx__Admin__Field__Dropdown::display( $field, $options, $options_id, $meta, $repeat_vars );
 
-				break;
+					break;
 
-			case 'select':
+				case 'select':
 
-				Pngx__Admin__Field__Select::display( $field, $options, $options_id, $meta, $repeat_vars );
+					Pngx__Admin__Field__Select::display( $field, $options, $options_id, $meta, $repeat_vars );
 
-				break;
+					break;
 
-			case 'wooselect':
+				case 'wooselect':
 
-				Wooselect::display( $field, $options, $options_id, $meta, $repeat_vars, static::$admin_template );
+					Wooselect::display( $field, $options, $options_id, $meta, $repeat_vars, static::$admin_template );
 
-				break;
+					break;
 
-			case 'switch':
+				case 'switch':
 
-				Switch_Field::display( $field, $options, $options_id, $meta, $repeat_vars, static::$admin_template );
+					Switch_Field::display( $field, $options, $options_id, $meta, $repeat_vars, static::$admin_template );
 
-				break;
+					break;
 
-			case 'systeminfo':
+				case 'systeminfo':
 
-				Pngx__Admin__Support::getInstance()->get_system_info_copy();
-				echo Pngx__Admin__Support::getInstance()->formatted_support_stats();
+					Pngx__Admin__Support::getInstance()->get_system_info_copy();
+					echo Pngx__Admin__Support::getInstance()->formatted_support_stats();
 
-				break;
+					break;
 
-			case 'template_chooser':
+				case 'template_chooser':
 
-				Pngx__Admin__Field__Template::display();
+					Pngx__Admin__Field__Template::display();
 
-				break;
+					break;
 
-			case 'text':
+				case 'text':
 
-				Pngx__Admin__Field__Text::display( $field, $options, $options_id, $meta, $repeat_vars );
+					Pngx__Admin__Field__Text::display( $field, $options, $options_id, $meta, $repeat_vars );
 
-				break;
+					break;
 
-			case 'textarea':
+				case 'textarea':
 
-				Pngx__Admin__Field__Textarea::display( $field, $options, $options_id, $meta, $repeat_vars );
+					Pngx__Admin__Field__Textarea::display( $field, $options, $options_id, $meta, $repeat_vars );
 
-				break;
+					break;
 
 
-			case 'url':
+				case 'url':
 
-				Pngx__Admin__Field__Url::display( $field, $options, $options_id, $meta, $repeat_vars );
+					Pngx__Admin__Field__Url::display( $field, $options, $options_id, $meta, $repeat_vars );
 
-				break;
+					break;
 
-			case 'variety':
+				case 'variety':
 
-				Pngx__Admin__Field__Variety::display( $field, $options, $options_id, $meta, $repeat_vars );
+					Pngx__Admin__Field__Variety::display( $field, $options, $options_id, $meta, $repeat_vars );
 
-				break;
+					break;
 
-			case 'wysiwyg':
+				case 'wysiwyg':
 
-				Pngx__Admin__Field__Wysiwyg::display( $field, $options, $options_id, $meta, $repeat_vars );
+					Pngx__Admin__Field__Wysiwyg::display( $field, $options, $options_id, $meta, $repeat_vars );
 
-				break;
+					break;
+			}
+		}
+
+		if ( isset( $field['version'] ) && $field['version'] ===  'v2' ) {
+			switch ( $field['type'] ) {
+
+				case 'image':
+
+					Image::display( $field, $options, $options_id, $meta, $repeat_vars, static::$admin_template );
+
+					break;
+
+				case 'number':
+
+					Number::display( $field, $options, $options_id, $meta, $repeat_vars, static::$admin_template );
+
+					break;
+
+				case 'read-only':
+
+					Read_Only::display( $field, $options, $options_id, $meta, $repeat_vars, static::$admin_template );
+
+					break;
+
+				case 'switch':
+
+					Switch_Field::display( $field, $options, $options_id, $meta, $repeat_vars, static::$admin_template );
+
+					break;
+
+				case 'text':
+
+					Text::display( $field, $options, $options_id, $meta, $repeat_vars, static::$admin_template );
+
+					break;
+
+				case 'textarea':
+
+					Textarea::display( $field, $options, $options_id, $meta, $repeat_vars, static::$admin_template );
+
+					break;
+
+				case 'wooselect':
+
+					Wooselect::display( $field, $options, $options_id, $meta, $repeat_vars, static::$admin_template );
+
+					break;
+			}
 		}
 
 		if ( has_filter( 'pngx_field_types' ) ) {
