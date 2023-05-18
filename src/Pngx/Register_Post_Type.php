@@ -1,13 +1,4 @@
 <?php
-// Don't load directly
-if ( ! defined( 'ABSPATH' ) ) {
-	die( '-1' );
-}
-if ( class_exists( 'Pngx__Register_Post_Type' ) ) {
-	return;
-}
-
-
 /**
  * Class Pngx__Register_Post_Type
  * Register Custom Post Types in WordPress and Modify Messaging
@@ -144,6 +135,15 @@ class Pngx__Register_Post_Type {
 	 * @param $updates
 	 */
 	public function register_post_types( $post_type, $capability_type, $singular_name, $labels, $slug, $text_domain, $updates ) {
+		$singular = $capability_type;
+		if ( substr( $capability_type, - 1 ) === 's' ) {
+			$singular = substr($singular, 0, -1);
+		}
+
+		$plural   = $capability_type;
+		if ( substr( $capability_type, - 1 ) !== 's' ) {
+			$plural .= 's';
+		}
 
 		$args = Pngx__Main::merge_defaults( array(
 			'label'                 => sprintf( esc_html__( '%s', $text_domain ), $singular_name ),
@@ -162,27 +162,27 @@ class Pngx__Register_Post_Type {
 			'map_meta_cap'          => true,
 			'exclude_from_search'   => false,
 			'publicly_queryable'    => true,
-			'capability_type'       => array( $post_type, "{$capability_type}s" ),
-			'capabilities'          => array(
+			'capability_type'       => [ $post_type, $plural ],
+			'capabilities'          => [
 				// Meta capabilities
-				'edit_post'               => "edit_{$capability_type}",
-				'read_post'               => "read_{$capability_type}",
-				'delete_post'             => "delete_{$capability_type}",
+				'edit_post'               => "edit_{$singular}",
+				'read_post'               => "read_{$singular}",
+				'delete_post'             => "delete_{$singular}",
 				// Primitive capabilities used outside of map_meta_cap():
-				'edit_posts'              => "edit_{$capability_type}s",
-				'edit_others_posts'       => "edit_others_{$capability_type}s",
-				'publish_posts'           => "publish_{$capability_type}s",
-				'read_private_posts'      => "read_private_{$capability_type}s",
+				'edit_posts'              => "edit_{$plural}",
+				'edit_others_posts'       => "edit_others_{$plural}",
+				'publish_posts'           => "publish_{$plural}",
+				'read_private_posts'      => "read_private_{$plural}",
 				// Primitive capabilities used within map_meta_cap():
 				'read '                   => 'read',
-				'delete_posts '           => "delete_{$capability_type}s",
-				'delete_private_posts '   => "delete_private_{$capability_type}s",
-				'delete_published_posts ' => "delete_published_{$capability_type}s",
-				'delete_others_posts'     => "delete_others_{$capability_type}s",
-				'edit_private_posts '     => "edit_private_{$capability_type}s",
-				'edit_published_posts '   => "edit_published_{$capability_type}s",
-				'create_posts '           => "edit_{$capability_type}s",
-			),
+				'delete_posts '           => "delete_{$plural}",
+				'delete_private_posts '   => "delete_private_{$plural}",
+				'delete_published_posts ' => "delete_published_{$plural}",
+				'delete_others_posts'     => "delete_others_{$plural}",
+				'edit_private_posts '     => "edit_private_{$plural}",
+				'edit_published_posts '   => "edit_published_{$plural}",
+				'create_posts '           => "edit_{$plural}",
+			],
 			'rewrite'               => array( 'slug' => $slug ),
 			'show_in_rest'          => true,
 			'rest_base'             => $post_type,
