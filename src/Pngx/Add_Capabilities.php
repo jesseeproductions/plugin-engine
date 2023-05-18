@@ -38,6 +38,9 @@ class Pngx__Add_Capabilities {
 		$caps = [];
 
 		$singular = $capability_type;
+		if ( substr( $capability_type, - 1 ) === 's' ) {
+			$singular = substr($singular, 0, -1);
+		}
 		$plural   = $capability_type;
 		if ( substr( $capability_type, - 1 ) !== 's' ) {
 			$plural .= 's';
