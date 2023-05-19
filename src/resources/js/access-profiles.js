@@ -31,7 +31,7 @@ pngx.access_profiles = pngx.access_profiles || {};
 		profileItem: '.pngx-engine-grid-row',
 		profileName: '.pngx-engine-options-details__name-input',
 		profilePrimary: '.pngx-engine-options-details__primary-input',
-		profileDefaults: '.pngx-engine-options-profile-defaults__input',
+		profileProperties: '.pngx-engine-options-profile-properties__input',
 		profileSave: '.pngx-engine-options-details-action__save',
 		profileUpdate: '.pngx-engine-options-details-action__update',
 		profileDelete: '.pngx-engine-options-details-action__delete',
@@ -249,13 +249,13 @@ pngx.access_profiles = pngx.access_profiles || {};
 		} else if ($primaryInput.is('input[type="text"]')) {
 		  intergrationPrimary = $primaryInput.val();
 		}
-		const intergrationDefaults = obj.getInputValuesAndNames( obj.selectors.profileDefaults, $profileItem );
+		const intergrationProperties = obj.getInputValuesAndNames( obj.selectors.profileProperties, $profileItem );
 
 		sendAjaxRequest( url, {
 			unique_id: uniqueId,
 			primary: intergrationPrimary,
 			name: profileName,
-			defaults: intergrationDefaults,
+			properties: intergrationProperties,
 		}, obj.onProfileSuccess, $this );
 	};
 
@@ -273,11 +273,11 @@ pngx.access_profiles = pngx.access_profiles || {};
 		const url = $this.data( 'ajaxUpdateUrl' );
 		const $profileItem = $this.closest( obj.selectors.profileItem );
 		const uniqueId = $profileItem.data( 'uniqueId' );
-		const intergrationDefaults = obj.getInputValuesAndNames( obj.selectors.profileDefaults, $profileItem );
+		const intergrationProperties = obj.getInputValuesAndNames( obj.selectors.profileProperties, $profileItem );
 
 		sendAjaxRequest( url, {
 			unique_id: uniqueId,
-			defaults: intergrationDefaults,
+			properties: intergrationProperties,
 		}, obj.onProfileSuccess, $this );
 	};
 
@@ -354,7 +354,7 @@ pngx.access_profiles = pngx.access_profiles || {};
 		const results = Array.from( inputs ).reduce( function( acc, input ) {
 			const $input = $( input );
 			const fullName = $input.prop( 'name' );
-			const nameMatch = fullName.match( /\['defaults'\]\['([^']*)'\]/ );
+			const nameMatch = fullName.match( /\['properties'\]\['([^']*)'\]/ );
 
 			if ( nameMatch && nameMatch.length > 1 ) {
 				const name = nameMatch[1];
