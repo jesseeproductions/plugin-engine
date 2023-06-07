@@ -2,9 +2,9 @@
 /**
  * Provides methods to check ajax requests.
  *
- * @since   3.3.0
+ * @since   4.0.0
  *
- * @package Pngx\Filters\Traits;
+ * @package Pngx\Traits;
  */
 
 namespace Pngx\Traits;
@@ -12,7 +12,7 @@ namespace Pngx\Traits;
 /**
  * Trait With_AJAX
  *
- * @since   3.3.0
+ * @since   4.0.0
  *
  * @package Pngx\Traits;
  */

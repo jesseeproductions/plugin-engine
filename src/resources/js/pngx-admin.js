@@ -6,6 +6,20 @@ var pngx_admin_fields_init = pngx_admin_fields_init || {};
 (function ( $, obj ) {
 	'use strict';
 
+	/**
+	 * Selectors used for configuration and setup
+	 *
+	 * @since 4.0.0
+	 *
+	 * @type {PlainObject}
+	 */
+	obj.selectors = {
+		passwordInput: '.pngx-engine-options-control__password-input',
+		passwordToggleWrap: '.pngx-engine-options-control-password-input__toggle-wrap',
+		passwordToggle: '.pngx-engine-options-control-password-input__toggle-type',
+		passwordLabel: '.pngx-engine-options-control-password-input__toggle-label',
+	};
+
 	obj.init = function () {
 
 		$( 'html' ).addClass( 'pngx-js' );
@@ -15,6 +29,8 @@ var pngx_admin_fields_init = pngx_admin_fields_init || {};
 		obj.color_picker();
 
 		obj.init_copy();
+
+		obj.toggle_password();
 
 		// Load Visual Editor
 		$( function () {
@@ -80,6 +96,25 @@ var pngx_admin_fields_init = pngx_admin_fields_init || {};
 		} else {
 			document.getElementById( helpid ).style.display = 'inline';
 		}
+
+		return false;
+	};
+
+	/*
+	 * Password Toggle
+	 */
+	obj.toggle_password = function() {
+		$( obj.selectors.passwordToggle ).change( function() {
+			var passwordInput = $( this ).closest( '.pngx-field-wrap' ).find( obj.selectors.passwordInput );
+			var passwordInputWrap = $( this ).closest( obj.selectors.passwordToggleWrap );
+			if ( $( this ).is( ':checked' ) ) {
+				passwordInput.attr( 'type', 'text' );
+				passwordInputWrap.find( obj.selectors.passwordLabel ).text( $( this ).data( 'hideText' ) );
+			} else {
+				passwordInput.attr( 'type', 'password' );
+				passwordInputWrap.find( obj.selectors.passwordLabel ).text( $( this ).data( 'showText' ) );
+			}
+		} );
 
 		return false;
 	};

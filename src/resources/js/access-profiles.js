@@ -25,6 +25,7 @@ pngx.access_profiles = pngx.access_profiles || {};
 		messageWrap: '.pngx-engine-options-message__wrap',
 		formTable: '.form-table',
 		defaultProfile: '.pngx-engine-default-profile-select-field',
+		dependent: '.pngx-dependent',
 
 		// Individual Profiles.
 		profileList: '.pngx-engine-options-items__wrap',
@@ -120,6 +121,7 @@ pngx.access_profiles = pngx.access_profiles || {};
 		pngxLoader.hide( $container, obj.selectors.pngxAdminLoader );
 
 		if ( profileItemWrap.length > 0 ) {
+
 			$table.find( obj.selectors.profileList ).append( profileItemWrap );
 
 			// Setup dropdowns after loading profile fields.
@@ -128,6 +130,8 @@ pngx.access_profiles = pngx.access_profiles || {};
 				.not( pngxDropdowns.selector.created );
 
 			$dropdowns.pngx_dropdowns();
+
+			$table.find( obj.selectors.profilePrimary ).trigger( 'pngx.dependencies-run' );
 
 			pngxAccordion.bindAccordionEvents( profileItemWrap );
 		}
@@ -184,8 +188,8 @@ pngx.access_profiles = pngx.access_profiles || {};
 		}
 
 		const uniqueId = $profileItemWrap.data( 'uniqueId' );
-		const existingPage = $table.find( `[data-unique-id='${uniqueId}']` );
-		existingPage.replaceWith( $profileItemWrap );
+		const existingProfile = $table.find( `[data-unique-id='${uniqueId}']` );
+		existingProfile.replaceWith( $profileItemWrap );
 
 		// Setup dropdowns after loading profile fields.
 		const $dropdowns = $profileItemWrap
@@ -193,6 +197,11 @@ pngx.access_profiles = pngx.access_profiles || {};
 			.not( pngxDropdowns.selector.created );
 
 		$dropdowns.pngx_dropdowns();
+
+		$document
+			.find( `[data-unique-id='${uniqueId}']` )
+			.find( obj.selectors.profilePrimary )
+			.trigger( 'pngx.dependencies-run' );
 
 		pngxAccordion.bindAccordionEvents( $profileItemWrap );
 	};

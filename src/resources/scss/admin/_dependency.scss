@@ -5,7 +5,7 @@
 	&.pngx-active {
 		display: inline-block;
 
-		div {
+		> div {
 			display: block;
 
 			&.select2-container {

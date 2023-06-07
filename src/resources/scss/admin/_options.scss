@@ -168,6 +168,7 @@ body:not(.pngx-admin-body) .pngx-tabs {
 
 	input[type="email"],
 	input[type="number"],
+	input[type="password"],
 	input[type="text"],
 	input[type="url"],
 	textarea {
@@ -180,6 +181,10 @@ body:not(.pngx-admin-body) .pngx-tabs {
 
 		&.pngx-engine-options-control__text-input {
 			width: 100%;
+		}
+
+		&.pngx-engine-options-control__password-input {
+			width: calc(100% - 120px);
 		}
 	}
 

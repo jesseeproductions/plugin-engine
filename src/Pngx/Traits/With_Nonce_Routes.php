@@ -2,9 +2,9 @@
 /**
  * Provides methods to route requests using nonce-based routes to identify the kind of request.
  *
- * @since 3.3.0
+ * @since 4.0.0
  *
- * @package Pngx\Filters\Traits;
+ * @package Pngx\Traits;
  */
 
 namespace Pngx\Traits;
@@ -14,7 +14,7 @@ use Pngx__Main;
 /**
  * Trait With_Nonce_Routes
  *
- * @since §
+ * @since 4.0.0
  *
  * @package Pngx\Traits;
  */

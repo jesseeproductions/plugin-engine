@@ -320,6 +320,9 @@
  * Fields CSS
  * -------------------------------------------------------------
  */
+.pngx-field.pngx-dependent {
+  width: 100%;
+}
 .pngx-field + .pngx-field {
   margin-top: var(--pngx-spacer-4);
 }
@@ -378,6 +381,19 @@
     opacity: 1;
   }
 }
+/*
+ * Password CSS
+ * -------------------------------------------------------------
+ */
+.pngx-field.pngx-dependent .pngx-engine-options-control__password-wrap .pngx-engine-options-control-password-input__toggle-wrap,
+.pngx-field .pngx-engine-options-control__password-wrap .pngx-engine-options-control-password-input__toggle-wrap {
+  display: inline;
+}
+
+input[type=checkbox].pngx-engine-options-control-password-input__toggle-type {
+  display: none;
+}
+
 /* ## PNGX Admin Loader
 --------------------------------------------- */
 /* CSS Switch based off https://codepen.io/mallendeo/pen/eLIiG
@@ -828,10 +844,10 @@ fieldset[disabled] .btn-primary.active {
 .pngx-dependent.pngx-active {
   display: inline-block;
 }
-.pngx-dependent.pngx-active div {
+.pngx-dependent.pngx-active > div {
   display: block;
 }
-.pngx-dependent.pngx-active div.select2-container {
+.pngx-dependent.pngx-active > div.select2-container {
   display: inline-block;
 }
 .pngx-dependent.pngx-active td,
@@ -2670,6 +2686,7 @@ body:not(.pngx-admin-body) .pngx-tabs .select2-container.select2-container--defa
 
 .pngx-wrapper input[type=email],
 .pngx-wrapper input[type=number],
+.pngx-wrapper input[type=password],
 .pngx-wrapper input[type=text],
 .pngx-wrapper input[type=url],
 .pngx-wrapper textarea {
@@ -2682,10 +2699,19 @@ body:not(.pngx-admin-body) .pngx-tabs .select2-container.select2-container--defa
 }
 .pngx-wrapper input[type=email].pngx-engine-options-control__text-input,
 .pngx-wrapper input[type=number].pngx-engine-options-control__text-input,
+.pngx-wrapper input[type=password].pngx-engine-options-control__text-input,
 .pngx-wrapper input[type=text].pngx-engine-options-control__text-input,
 .pngx-wrapper input[type=url].pngx-engine-options-control__text-input,
 .pngx-wrapper textarea.pngx-engine-options-control__text-input {
   width: 100%;
+}
+.pngx-wrapper input[type=email].pngx-engine-options-control__password-input,
+.pngx-wrapper input[type=number].pngx-engine-options-control__password-input,
+.pngx-wrapper input[type=password].pngx-engine-options-control__password-input,
+.pngx-wrapper input[type=text].pngx-engine-options-control__password-input,
+.pngx-wrapper input[type=url].pngx-engine-options-control__password-input,
+.pngx-wrapper textarea.pngx-engine-options-control__password-input {
+  width: calc(100% - 120px);
 }
 .pngx-wrapper input[type=number] {
   height: auto;

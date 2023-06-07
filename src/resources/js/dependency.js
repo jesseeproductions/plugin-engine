@@ -88,7 +88,7 @@
 			var $radios = $( "[name='" + $field.attr( 'name' ) + "']" );
 
 			$radios.not( selectors.linked ).on( 'change', function() {
-				$radios.trigger( 'verify.dependency' );
+				$radios.trigger( 'verify.pngx.dependency' );
 			} ).addClass( selectors.linked.replace( '.', '' ) );
 		}
 
@@ -211,9 +211,9 @@
 
     $document
     // Prevents double global actions
-        .off( 'change.dependency verify.dependency', selectors.dependency )
+        .off( 'change.dependency verify.pngx.dependency', selectors.dependency )
         .on( {
-            'verify.dependency': verify_dependency,
+            'verify.pngx.dependency': verify_dependency,
             'change.dependency': verify_dependency,
         }, selectors.dependency );
 
@@ -234,7 +234,7 @@
             // Now verify all the Dependencies
 	        // Set on a delay or it does not correctly load.
             setTimeout( function() {
-	            $dependencies.trigger( 'verify.dependency' );
+	            $dependencies.trigger( 'verify.pngx.dependency' );
             }, 300 );
         }
     };
