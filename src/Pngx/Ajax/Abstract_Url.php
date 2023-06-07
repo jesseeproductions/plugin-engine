@@ -25,14 +25,14 @@ class Abstract_Url {
 	 *
 	 * @var string
 	 */
-	public static $api_id = '';
+	public static $service_id = '';
 
 	/**
 	 * The current Actions handler instance.
 	 *
 	 * @since 4.0.0
 	 *
-	 * @var \Pngx\Volt_Vectors\OpenAI\Actions
+	 * @var Actions
 	 */
 	protected $actions;
 
@@ -68,10 +68,10 @@ class Abstract_Url {
 	 * @return string The URL to add an profile.
 	 */
 	public function to_add_profile_link() {
-		$api_id = static::$api_id;
+		$service_id = static::$service_id;
 		$nonce  = wp_create_nonce( $this->actions::$add_profile_action );
 
-		return $this->get_admin_ajax_url_with_parameters( Plugin::$request_slug, "pngx_volt_vectors_ev_{$api_id}_options_add_profile", $nonce, [] );
+		return $this->get_admin_ajax_url_with_parameters( Plugin::$request_slug, "pngx_volt_vectors_ev_{$service_id}_options_add_profile", $nonce, [] );
 	}
 
 	/**
@@ -84,10 +84,10 @@ class Abstract_Url {
 	 * @return string The URL used to save an access profile.
 	 */
 	public function to_save_access_profile( $profile_id ) {
-		$api_id = static::$api_id;
+		$service_id = static::$service_id;
 		$nonce  = wp_create_nonce( $this->actions::$save_action );
 
-		return $this->get_admin_ajax_url_with_parameters( Plugin::$request_slug, "pngx_volt_vectors_ev_{$api_id}_options_save_profile", $nonce, [
+		return $this->get_admin_ajax_url_with_parameters( Plugin::$request_slug, "pngx_volt_vectors_ev_{$service_id}_options_save_profile", $nonce, [
 			'api_key' => $profile_id
 		] );
 	}
@@ -102,10 +102,10 @@ class Abstract_Url {
 	 * @return string The URL used to update save an access profile.
 	 */
 	public function to_update_profile( $profile_id ) {
-		$api_id = static::$api_id;
+		$service_id = static::$service_id;
 		$nonce  = wp_create_nonce( $this->actions::$update_action );
 
-		return $this->get_admin_ajax_url_with_parameters( Plugin::$request_slug, "pngx_volt_vectors_ev_{$api_id}_options_update_profile", $nonce, [
+		return $this->get_admin_ajax_url_with_parameters( Plugin::$request_slug, "pngx_volt_vectors_ev_{$service_id}_options_update_profile", $nonce, [
 			'api_key' => $profile_id
 		] );
 	}
@@ -120,10 +120,10 @@ class Abstract_Url {
 	 * @return string The URL to delete an access profile.
 	 */
 	public function to_delete_profile_link( $profile_id ) {
-		$api_id = static::$api_id;
+		$service_id = static::$service_id;
 		$nonce  = wp_create_nonce( $this->actions::$delete_action );
 
-		return $this->get_admin_ajax_url_with_parameters( Plugin::$request_slug, "pngx_volt_vectors_ev_{$api_id}_options_delete_profile", $nonce, [
+		return $this->get_admin_ajax_url_with_parameters( Plugin::$request_slug, "pngx_volt_vectors_ev_{$service_id}_options_delete_profile", $nonce, [
 			'api_key' => $profile_id
 		] );
 	}
