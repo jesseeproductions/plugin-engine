@@ -288,8 +288,7 @@
   background-color: var(--pngx-color-background-grey);
   display: grid;
   grid-gap: var(--pngx-spacer-2);
-  grid-template-columns: 2fr 2fr 1fr 1fr;
-  max-width: 1000px;
+  grid-template-columns: 2fr 2fr 2fr 1fr;
 }
 .pngx-profiles-grid:nth-child(even) {
   background-color: var(--pngx-color-background-secondary);

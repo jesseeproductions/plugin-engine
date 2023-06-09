@@ -23,7 +23,7 @@ use Pngx\Install\Cron;
 class Session_Provider extends \tad_DI52_ServiceProvider {
 
 	/**
-	 * The constant to disable the event status coding.
+	 * The constant to disable the sessions coding.
 	 *
 	 * @since 4.0.0
 	 */
@@ -50,11 +50,11 @@ class Session_Provider extends \tad_DI52_ServiceProvider {
 	}
 
 	/**
-	 * Returns whether the event status should register, thus activate, or not.
+	 * Returns whether the sessions should register, thus activate, or not.
 	 *
 	 * @since 4.0.0
 	 *
-	 * @return bool Whether the event status should register or not.
+	 * @return bool Whether the sessions should register or not.
 	 */
 	public static function is_active() {
 		if ( defined( self::DISABLED ) && constant( self::DISABLED ) ) {
@@ -81,7 +81,7 @@ class Session_Provider extends \tad_DI52_ServiceProvider {
 	}
 
 	/**
-	 * Adds the actions required for event status.
+	 * Adds the actions required for sessions.
 	 *
 	 * @since 4.0.0
 	 */
