@@ -855,50 +855,72 @@ var pngx_loadScript = pngx_loadScript || {};
 
 /**
  * File Upload Object
- * @type {{}}
- */
-/**
  *
- * @param $
- * @param field_id
- * @param upload_title
- * @param button_text
- * @constructor
+ * @since 4.0.0
+ *
+ * @param {Object} $
+ * @param {string} field_id - Field ID for the file input
+ *
+ * @returns {void}
  */
-function PNGX__File( $, field_id ) {
+class PNGX__File {
+	/**
+	 * Create a new instance of PNGX__File.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @param {Object} $ - jQuery instance
+	 * @param {string} field_id - Field ID for the file input
+	 */
+	constructor( $, field_id ) {
+		this.$ = $;
+		this.field_id = field_id;
+		this.upload_title = 'Choose File';
+		this.button_text = 'Use File';
+		this.upload_type = '';
+		this.init();
+	}
 
-	this.field_id = field_id;
-	upload_title = 'Choose CSV';
-	button_text = 'Use CSV';
-
-	this.init = function() {
+	/**
+	 * Initialize the file upload and clear functionality.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @returns {void}
+	 */
+	init = () => {
 		this.upload();
 		this.clear();
-	};
+	}
 
-
-	this.upload = function() {
-
-		/*
+	/**
+	 * Handles the file upload process.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @returns {void}
+	 */
+	upload = () => {
+		/**
 		 * Media Manager 3.5
 		 */
-		$( 'button#' + this.field_id ).on( 'click', function( e ) {
-
+		this.$( `button#${this.field_id}-button` ).on( 'click', ( e ) => {
 			//Create Media Manager On Click to allow multiple on one Page
-			var file_uploader, attachment;
+			let file_uploader, attachment;
 
 			e.preventDefault();
 
-			field_data = $( this ).data();
-
-			if ( "undefined" !== typeof field_data ) {
-				upload_title = field_data.toggleUpload_title;
-				button_text = field_data.toggleButton_text;
-			}
-
 			//Setup the Variables based on the Button Clicked to enable multiple
-			var file_input_id = '#' + this.id + '.pngx-upload-file';
-			var file_name = 'div#' + this.id + '.pngx-file-upload-name';
+			const file_input_id = `#${this.field_id}.pngx-upload-file`;
+			const file_name = `div#${this.field_id}-filename.pngx-file-upload-name`;
+
+			// Get the data from the file input element
+			let field_data = this.$( file_input_id ).data();
+
+			// Update the values only if they exist in the file input element's data
+			this.upload_title = field_data.toggleUpload_title || this.upload_title;
+			this.button_text = field_data.toggleButton_text || this.button_text;
+			this.upload_type = field_data.uploadType || this.upload_type;
 
 			//If the uploader object has already been created, reopen the dialog
 			if ( file_uploader ) {
@@ -908,64 +930,62 @@ function PNGX__File( $, field_id ) {
 
 			//Extend the wp.media object
 			file_uploader = wp.media.frames.file_frame = wp.media( {
-				title: upload_title,
+				title: this.upload_title,
 				button: {
-					text: button_text
+					text: this.button_text
 				},
 				multiple: false,
 				library: {
-					type: 'text/csv',
+					type: this.upload_type,
 				},
 			} );
 
 			//When a file is selected, grab the URL and set it as the text field's value
-			file_uploader.on( 'select', function() {
+			file_uploader.on( 'select', () => {
 				attachment = file_uploader.state().get( 'selection' ).first().toJSON();
 				//Set the Field with the file id.
-				$( file_input_id ).val( attachment.id );
+				this.$( file_input_id ).val( attachment.id );
 				//Set the file name.
-				$( file_name ).find( 'span' ).text( attachment.filename );
+				this.$( file_name ).find( 'span' ).text( attachment.filename );
 				//Trigger New File Uploaded
-				$( 'input#' + this.field_id ).trigger( 'display' );
+				this.$( `input#${this.field_id}` ).trigger( 'display' );
 			} );
 
 			//Open the uploader dialog
 			file_uploader.open();
-
 		} );
+	}
 
-	};
-
-	this.clear = function() {
-
-		/*
+	/**
+	 * Handles the file clearing process.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @returns {void}
+	 */
+	clear = () => {
+		/**
 		 * Remove File and replace with default and Erase File ID
 		 */
-		$( '.pngx-clear-file' ).on( 'click', function( e ) {
+		this.$( '.pngx-clear-file' ).on( 'click', ( e ) => {
 			e.preventDefault();
-			var remove_input_id = 'input#' + this.id + '.pngx-upload-file';
-			var file_name = $( 'div#' + this.id + '.pngx-file-upload-name' );
+			const remove_input_id = `input#${this.field_id}.pngx-upload-file`;
+			const file_name = this.$( `div#${this.field_id}-filename.pngx-file-upload-name` );
 
-			$( remove_input_id ).val( '' );
+			this.$( remove_input_id ).val( '' );
 			file_name.find( 'span' ).text( '' );
-			$( 'input#' + this.field_id ).trigger( 'display' );
+			this.$( `input#${this.field_id}` ).trigger( 'display' );
 		} );
-
-	};
-
-
-	this.init()
-
+	}
 }
 
 /**
  * Scan for File Upload Fields and Setup Upload Script
  */
-(function( $ ) {
-	var file_upload = $( ".pngx-upload-file" );
-	var selector_file;
-	for ( i = 0; i < file_upload.length; i++ ) {
-		selector_file = $( file_upload[i] ).attr( 'id' );
+(( $ ) => {
+	const file_upload = $( ".pngx-upload-file" );
+	file_upload.each( function() {
+		const selector_file = $( this ).attr( 'id' );
 		new PNGX__File( $, selector_file );
-	}
+	} );
 })( jQuery );

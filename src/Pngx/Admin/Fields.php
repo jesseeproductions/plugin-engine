@@ -7,6 +7,7 @@
  * @package Pngx\Admin;
  */
 
+use Pngx\Admin\Field\V2\File;
 use Pngx\Admin\Field\V2\Image;
 use Pngx\Admin\Field\V2\Number;
 use Pngx\Admin\Field\V2\Read_Only;
@@ -297,6 +298,12 @@ class Pngx__Admin__Fields {
 
 		if ( isset( $field['version'] ) && $field['version'] ===  'v2' ) {
 			switch ( $field['type'] ) {
+
+				case 'file':
+
+					File::display( $field, $options, $options_id, $meta, $repeat_vars, static::$admin_template );
+
+					break;
 
 				case 'image':
 
