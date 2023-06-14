@@ -50,7 +50,12 @@ class Database  {
 		$alter_tables = self::get_alter_schema();
 
 		if ( ! empty( $alter_tables ) ) {
-			$wpdb->query( $alter_tables );
+		    foreach ( (array) $alter_tables as $alter_table ) {
+		        $wpdb->query( $alter_table );
+		        if ( $wpdb->last_error ) {
+		            error_log( "Error executing query: {$alter_table}. Error message: {$wpdb->last_error}" );
+		        }
+		    }
 		}
 	}
 
@@ -83,10 +88,10 @@ class Database  {
 	 *
 	 * @since 4.0.0
 	 *
-	 * @return string The SQL to alter tables.
+	 * @return array An array of SQL to alter tables.
 	 */
 	private static function get_alter_schema() {
-		$alter_tables = "";
+		$alter_tables = [];
 
 		/**
 		 * Filter the alter table schema.
@@ -95,7 +100,7 @@ class Database  {
 		 *
 		 * @param string $alter_tables The SQL to alter tables.
 		 */
-		$alter_tables = (string) apply_filters('pngx_alter_table_statements', $alter_tables );
+		$alter_tables = (array) apply_filters('pngx_alter_table_statements', $alter_tables );
 
         return $alter_tables;
 	}

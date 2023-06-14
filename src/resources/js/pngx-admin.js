@@ -61,6 +61,32 @@ var pngx_admin_fields_init = pngx_admin_fields_init || {};
 			}
 		} );
 
+		// FlatPicker Date Picker for Date V2 Field.
+		$( '.pngx-engine-options-control__date-input' ).each( function() {
+			let dateTimeFormat = $(this).data('dateFormat') || "Y-m-d";
+			let altFormat = $( this ).data( 'altFormat' );
+			let defaultDate = $(this).data('defaultDate');
+
+			let flatpickrConfig = {
+				dateFormat: dateTimeFormat,
+				enableTime: true,
+			};
+
+			// If altFormat is defined, add altInput and altFormat to the configuration
+			if ( altFormat ) {
+				flatpickrConfig.altInput = true;
+				flatpickrConfig.altFormat = altFormat;
+			}
+
+			// If defaultDate is defined, add it to the configuration
+			if ( defaultDate ) {
+				flatpickrConfig.defaultDate = defaultDate;
+			}
+
+			$( this ).flatpickr( flatpickrConfig );
+		} );
+
+
 	};
 
 	/*

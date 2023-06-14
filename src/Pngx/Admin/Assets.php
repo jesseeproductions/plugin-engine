@@ -43,6 +43,12 @@ class Pngx__Admin__Assets {
 			filemtime( Pngx__Main::instance()->vendor_path . 'colorbox/colorbox.css' )
 		);
 		wp_register_style(
+			'pngx-flatpickr',
+			Pngx__Main::instance()->vendor_url . 'flatpickr/flatpickr.min.css',
+			false,
+			filemtime( Pngx__Main::instance()->vendor_path . 'flatpickr/flatpickr.min.css' )
+		);
+		wp_register_style(
 			'pngx-admin',
 			Pngx__Main::instance()->resource_url . 'css/pngx-admin.css',
 			[
@@ -51,7 +57,8 @@ class Pngx__Admin__Assets {
 				'pngx-colorbox',
 				'pngx-bootstrap-iconpicker',
 				'pngx-font-awesome',
-				'pngx-bootstrap-iconpicker'
+				'pngx-bootstrap-iconpicker',
+				'pngx-flatpickr',
 			],
 			filemtime( Pngx__Main::instance()->resource_path . 'css/pngx-admin.css' )
 		);
@@ -92,7 +99,13 @@ class Pngx__Admin__Assets {
 			filemtime( Pngx__Main::instance()->vendor_path . 'wp-color-picker-alpha/wp-color-picker-alpha.min.js' ),
 			true
 		);
-
+		wp_register_script(
+			'pngx-flatpickr',
+			Pngx__Main::instance()->vendor_url . 'flatpickr/flatpickr.min.js',
+			[],
+			filemtime( Pngx__Main::instance()->vendor_path . 'flatpickr/flatpickr.min.js' ),
+			true
+		);
 		wp_register_script(
 			'pngx-bumpdown',
 			Pngx__Main::instance()->resource_url . 'js/bumpdown.js',
@@ -196,6 +209,7 @@ class Pngx__Admin__Assets {
 					'jquery-ui-tabs',
 					'pngx-access-profiles',
 					'pngx-dependency',
+					'pngx-flatpickr',
 				],
 			filemtime( Pngx__Main::instance()->resource_path . 'js/pngx-admin.js' ),
 			true
@@ -250,9 +264,9 @@ class Pngx__Admin__Assets {
 	/*
 		* Register Assets
 		*/
-		public function register_plugin_list_assets() {
+	public function register_plugin_list_assets() {
 
-			// @formatter:off
+		// @formatter:off
 			wp_register_script(
 				'pngx-license',
 				Pngx__Main::instance()->resource_url . 'js/pngx-license.js',
@@ -267,12 +281,12 @@ class Pngx__Admin__Assets {
 			) );
 			// @formatter:on
 
-			/**
-			 * Hook to Register New Scripts or Styles for the Admin
-			 */
-			do_action( 'pngx_admin_scripts_styles' );
+		/**
+		 * Hook to Register New Scripts or Styles for the Admin
+		 */
+		do_action( 'pngx_admin_scripts_styles' );
 
-		}
+	}
 
 	/*
 	* Enqueue Plugin Engine Assets
