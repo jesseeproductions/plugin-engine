@@ -197,7 +197,6 @@ var pngx_admin_fields_init = pngx_admin_fields_init || {};
  * @constructor
  */
 function PNGX__Media( $, field_id ) {
-
 	this.field_id = field_id;
 	upload_title = 'Choose Image';
 	button_text = 'Use Image';
@@ -207,15 +206,11 @@ function PNGX__Media( $, field_id ) {
 		this.clear();
 	};
 
-
 	this.upload = function () {
-
 		/*
 		 * Media Manager 3.5
 		 */
-
 		$( 'button#' + this.field_id ).on( 'click', function ( e ) {
-
 			//Create Media Manager On Click to allow multiple on one Page
 			var img_uploader, attachment;
 
@@ -265,13 +260,10 @@ function PNGX__Media( $, field_id ) {
 
 			//Open the uploader dialog
 			img_uploader.open();
-
 		} );
-
 	};
 
 	this.clear = function () {
-
 		/*
 		 * Remove Image and replace with default and Erase Image ID
 		 */
@@ -285,12 +277,9 @@ function PNGX__Media( $, field_id ) {
 			$( 'div#' + this.id + '.pngx-default-image' ).show();
 			$( 'input#' + this.field_id ).trigger( 'display' );
 		} );
-
 	};
 
-
 	this.init()
-
 }
 /**
  * Scan for Image Upload Fields and Setup Upload Script
@@ -880,7 +869,7 @@ var pngx_loadScript = pngx_loadScript || {};
 })( jQuery, pngx_loadScript );
 
 /**
- * File Upload Object
+ * File & Image Upload Object
  *
  * @since 4.0.0
  *
@@ -937,11 +926,11 @@ class PNGX__File {
 			e.preventDefault();
 
 			//Setup the Variables based on the Button Clicked to enable multiple
-			const file_input_id = `#${this.field_id}.pngx-upload-file`;
-			const file_name = `div#${this.field_id}-filename.pngx-file-upload-name`;
+			const fileInputId = `#${this.field_id}.pngx-engine-options-control__upload-file-input`;
+			const fileName = `div#${this.field_id}-filename.pngx-file-upload-name`;
 
 			// Get the data from the file input element
-			let field_data = this.$( file_input_id ).data();
+			let field_data = this.$( fileInputId ).data();
 
 			// Update the values only if they exist in the file input element's data
 			this.upload_title = field_data.toggleUpload_title || this.upload_title;
@@ -970,9 +959,18 @@ class PNGX__File {
 			file_uploader.on( 'select', () => {
 				attachment = file_uploader.state().get( 'selection' ).first().toJSON();
 				//Set the Field with the file id.
-				this.$( file_input_id ).val( attachment.id );
+				this.$( fileInputId ).val( attachment.id );
+
 				//Set the file name.
-				this.$( file_name ).find( 'span' ).text( attachment.filename );
+				this.$( fileName ).find( '.pngx-engine-options-control__upload-file-text' ).text( attachment.filename ).removeClass( 'pngx-a11y-hidden' );
+				this.$( fileName ).find( '.pngx-engine-options-control__upload-file-none-text' ).addClass( 'pngx-a11y-hidden' );
+
+				// Show preview image and hide image message.
+				const imgSrc = 'img#' + this.field_id + '-preview';
+				//Set the preview image with the URL.
+				this.$( imgSrc ).attr( 'src', attachment.url ).removeClass( 'pngx-a11y-hidden' );
+				this.$( `div#${this.field_id}-img-msg` ).addClass( 'pngx-a11y-hidden' );
+
 				//Trigger New File Uploaded
 				this.$( `input#${this.field_id}` ).trigger( 'display' );
 			} );
@@ -993,13 +991,21 @@ class PNGX__File {
 		/**
 		 * Remove File and replace with default and Erase File ID
 		 */
-		this.$( '.pngx-clear-file' ).on( 'click', ( e ) => {
+		this.$( `#${this.field_id}-remove` ).on( 'click', ( e ) => {
 			e.preventDefault();
-			const remove_input_id = `input#${this.field_id}.pngx-upload-file`;
-			const file_name = this.$( `div#${this.field_id}-filename.pngx-file-upload-name` );
+			const removeInputId = `input#${this.field_id}.pngx-engine-options-control__upload-file-input`;
+			this.$( removeInputId ).val( '' );
 
-			this.$( remove_input_id ).val( '' );
-			file_name.find( 'span' ).text( '' );
+			// Remove Filename.
+			const fileName = this.$( `div#${this.field_id}-filename.pngx-file-upload-name` );
+			fileName.find( '.pngx-engine-options-control__upload-file-none-text' ).removeClass( 'pngx-a11y-hidden' );
+			fileName.find( '.pngx-engine-options-control__upload-file-text' ).text( '' ).addClass( 'pngx-a11y-hidden' );
+
+			// Hide preview image and show image message.
+			const imgSrc = 'img#' + this.field_id + '-preview';
+			this.$( imgSrc ).addClass( 'pngx-a11y-hidden' );
+			this.$( `div#${this.field_id}-img-msg` ).removeClass( 'pngx-a11y-hidden' );
+
 			this.$( `input#${this.field_id}` ).trigger( 'display' );
 		} );
 	}
@@ -1009,7 +1015,7 @@ class PNGX__File {
  * Scan for File Upload Fields and Setup Upload Script
  */
 (( $ ) => {
-	const file_upload = $( ".pngx-upload-file" );
+	const file_upload = $( ".pngx-engine-options-control__upload-file-input" );
 	file_upload.each( function() {
 		const selector_file = $( this ).attr( 'id' );
 		new PNGX__File( $, selector_file );

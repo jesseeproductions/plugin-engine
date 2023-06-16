@@ -13,18 +13,20 @@
  *
  * @link    https://pngx.ink/RYIOh
  *
- * @var array<string,string> $classes_wrap  An array of classes for the text wrap.
- * @var array<string,string> $classes_label An array of classes for the label.
- * @var array<string,string> $classes_input An array of classes for the text input.
- * @var string               $label         The label for the text input.
- * @var string               $id            ID of the text input.
- * @var string               $name          The name for the text input.
- * @var string               $placeholder   The placeholder for the text input.
- * @var array<string|mixed>  $page          The page data.
- * @var string               $value         The value of the text field.
- * @var string               $file_name     The name of the file.
- * @var array<string,string> $attrs         Associative array of attributes of the text input.
- * @var array<string,string> $wrap_attrs    Associative array of attributes of the field wrap.
+ * @var array<string,string> $classes_wrap        An array of classes for the text wrap.
+ * @var array<string,string> $classes_label       An array of classes for the label.
+ * @var array<string,string> $classes_input       An array of classes for the text input.
+ * @var array<string,string> $classes_file_none   An array of classes for the file none selected.
+ * @var array<string,string> $classes_file_chosen An array of classes for the chosen file text.
+ * @var string               $label               The label for the text input.
+ * @var string               $id                  ID of the text input.
+ * @var string               $name                The name for the text input.
+ * @var string               $placeholder         The placeholder for the text input.
+ * @var array<string|mixed>  $page                The page data.
+ * @var string               $value               The value of the text field.
+ * @var string               $file_name           The name of the file.
+ * @var array<string,string> $attrs               Associative array of attributes of the text input.
+ * @var array<string,string> $wrap_attrs          Associative array of attributes of the field wrap.
  */
 
 $wrap_classes = [ 'pngx-engine-options-control', 'pngx-engine-options-control__text-wrap' ];
@@ -37,22 +39,25 @@ if ( ! empty( $classes_label ) ) {
 	$label_classes = array_merge( $label_classes, $classes_label );
 }
 
-$input_classes = [ 'pngx-engine-options-control__text-input', 'pngx-upload-file' ];
+$input_classes = [ 'pngx-engine-options-control__file-input', 'pngx-engine-options-control__upload-file-input' ];
 if ( ! empty( $classes_input ) ) {
 	$input_classes = array_merge( $input_classes, $classes_input );
+}
+
+$file_none_classes = [ 'pngx-engine-options-control__upload-file-none-text' ];
+if ( ! empty( $classes_file_none ) ) {
+	$file_none_classes = array_merge( $file_none_classes, $classes_file_none );
+}
+
+$file_chosen_classes = [ 'pngx-engine-options-control__upload-file-text' ];
+if ( ! empty( $classes_file_chosen ) ) {
+	$file_chosen_classes = array_merge( $file_chosen_classes, $classes_file_chosen );
 }
 ?>
 <div
 	<?php pngx_classes( $wrap_classes ); ?>
 	<?php pngx_attributes( $wrap_attrs ) ?>
 >
-	<div
-		id="<?php echo esc_attr( $id ); ?>-filename"
-		class="pngx-file-upload-name"
-	>
-		<?php echo esc_html_x( 'File:', 'File name for file field.', 'plugin-engine' ); ?>
-		<span><?php echo esc_html( $file_name ); ?></span>
-	</div>
 	<label
 		<?php pngx_classes( $classes_label ); ?>
 		for="<?php echo esc_attr( $id ); ?>"
@@ -68,21 +73,31 @@ if ( ! empty( $classes_input ) ) {
 		value="<?php echo esc_html( $value ); ?>"
 		<?php pngx_attributes( $attrs ) ?>
 	>
+	<div class="pngx-engine-options-control__upload-file-ui-wrap">
+		<button
+			id="<?php echo esc_attr( $id ); ?>-button"
+			class="pngx-engine-options-control__upload-file-button"
+		>
+			<?php echo esc_html_x( 'Upload File', 'Upload file button text.', 'plugin-engine' ); ?>
+		</button>
 
-	<button
-		id="<?php echo esc_attr( $id ); ?>-button"
-		class="pngx-file-button"
-	>
-		<?php echo esc_html_x( 'Upload File', 'Upload file button text.', 'plugin-engine' ); ?>
-	</button>
-
-	<small>
+		<div
+			id="<?php echo esc_attr( $id ); ?>-filename"
+			class="pngx-file-upload-name"
+		>
+			<span <?php pngx_classes( $file_none_classes ); ?>>
+				<?php echo esc_html_x( 'No chosen file.', 'No file chosen message', 'plugin-engine' ); ?>
+			</span>
+			<span <?php pngx_classes( $file_chosen_classes ); ?>><?php echo esc_html( $file_name ); ?></span>
+		</div>
+	</div>
+	<div class="pngx-engine-options-control__clear-wrap pngx-engine-options-control__clear-image-wrap">
 		<a
 			id="<?php echo esc_attr( $id ); ?>-remove"
 			href="#"
-			class="pngx-clear-file"
+			class="pngx-engine-options-control__upload-clear-button"
 		>
 			<?php echo esc_html_x( 'Remove File', 'Remove file button text.', 'plugin-engine' ); ?>
 		</a>
-	</small>
+	</div>
 </div>

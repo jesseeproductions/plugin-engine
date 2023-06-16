@@ -32,48 +32,53 @@ class Image {
 			$value = $field['std'];
 		}
 
-		$imagemsg  = isset( $field['imagemsg'] ) ? $field['imagemsg'] : '';
-		$class     = isset( $field['class'] ) ? $field['class'] : '';
-		$repeating = isset( $field['repeating'] ) ? '[]' : '';
-		$imagesrc  = '';
+		$image_msg  = isset( $field['image_msg'] ) ? $field['image_msg'] : '';
 
+		$file_name = '';
+		$image_src  = '';
 		if ( is_numeric( $value ) ) {
-			$imagesrc     = wp_get_attachment_image_src( absint( $value ), 'medium' );
-			$imagesrc     = isset( $imagesrc[0] ) ? wp_normalize_path( $imagesrc[0] ) : '';
-			$imagedisplay = '<div style="display:none" id="' . esc_attr( $field['id'] ) . '" class="pngx-default-image pngx-image-wrap">' . esc_html( $imagemsg ) . '</div> <img src="' . $imagesrc . '" id="' . esc_attr( $field['id'] ) . '" class="pngx-image pngx-image-wrap-img" />';
+			$file_url                     = get_attached_file( absint( $value ) );
+			$file_name                    = basename( $file_url );
+			$image_src                    = wp_get_attachment_image_src( absint( $value ), 'medium' );
+			$image_src                    = isset( $image_src[0] ) ? wp_normalize_path( $image_src[0] ) : '';
+			$field['classes_image_msg'][] = 'pngx-a11y-hidden';
+			$field['classes_file_none'][] = 'pngx-a11y-hidden';
 		} else {
-			$imagedisplay = '<div style="display:block" id="' . esc_attr( $field['id'] ) . '" class="pngx-default-image pngx-image-wrap">' . esc_html( $imagemsg ) . '</div> <img style="display:none" src="' . $imagesrc . '" id="' . esc_attr( $field['id'] ) . '" class="pngx-image pngx-image-wrap-img" />';
+			$field['classes_image_preview'][] = 'pngx-a11y-hidden';
+			$field['classes_file_chosen'][] = 'pngx-a11y-hidden';
 		}
 
-		echo $imagedisplay . '<br>';
+		$field_wrap = isset( $field['fieldset_wrap'] ) ? $field['fieldset_wrap'] : [];
 
-		?>
-
-		<input
-			class="pngx-upload-image <?php echo esc_attr( $class ); ?>"
-			type="hidden" id="<?php echo esc_attr( $field['id'] ); ?>"
-			name="<?php echo esc_attr( $name ) . $repeating; ?>"
-			value="<?php echo esc_attr( $value ); ?>"
-		/>
-
-		<button
-			id="<?php echo esc_attr( $field['id'] ); ?>"
-			class="pngx-image-button" <?php echo isset( $field['function'] ) ? Pngx__Admin__Fields::toggle( $field['function'], $field['id'] ) : null; ?>
-		>
-			<?php echo __( 'Upload Image', 'plugin-engine' ); ?>
-		</button>
-
-		<small>
-			<a href="#" id="<?php echo esc_attr( $field['id'] ); ?>" class="pngx-clear-image">
-				<?php echo __( 'Remove Image', 'plugin-engine' ); ?>
-			</a>
-		</small>
-
-		<?php
-		if ( isset( $field['desc'] ) && ! empty( $field['desc'] ) ) {
-			echo '<span class="description">' . esc_html( $field['desc'] ) . '</span>';
-		}
-
+		$template->template( 'components/field', [
+			'classes_wrap'   => [ "pngx-engine-field__{$field['id']}-wrap", ...$field_wrap ],
+			'id'             => $field['id'],
+			'label'          => $field['label'],
+			'tooltip'        => $field['tooltip'] ?? null,
+			'fieldset_attrs' => ! empty( $field['fieldset_attrs'] ) ? (array) $field['fieldset_attrs'] : [],
+			'template_name'  => 'image',
+			'template_echo'  => true,
+			'template_args'  => [
+				'id'                    => $field['id'],
+				'label'                 => $field['label'],
+				'description'           => ! empty( $field['description'] ) ? $field['description'] : '',
+				'placeholder'           => ! empty( $field['placeholder'] ) ? $field['placeholder'] : '',
+				'classes_wrap'          => ! empty( $field['classes_wrap'] ) ? (array) $field['classes_wrap'] : [],
+				'classes_image_msg'     => ! empty( $field['classes_image_msg'] ) ? (array) $field['classes_image_msg'] : [],
+				'classes_image_preview' => ! empty( $field['classes_image_preview'] ) ? (array) $field['classes_image_preview'] : [],
+				'classes_file_none'     => ! empty( $field['classes_file_none'] ) ? (array) $field['classes_file_none'] : [],
+				'classes_file_chosen'   => ! empty( $field['classes_file_chosen'] ) ? (array) $field['classes_file_chosen'] : [],
+				'classes_input'         => ! empty( $field['classes_input'] ) ? (array) $field['classes_input'] : [ 'pngx-meta-field' ],
+				'classes_label'         => ! empty( $field['classes_label'] ) ? (array) $field['classes_label'] : [ 'screen-reader-text' ],
+				'name'                  => $name,
+				'value'                 => $value,
+				'file_name'             => $file_name,
+				'image_msg'             => $image_msg,
+				'image_src'             => $image_src,
+				'attrs'                 => ! empty( $field['attrs'] ) ? (array) $field['attrs'] : [],
+				'wrap_attrs'            => ! empty( $field['wrap_attrs'] ) ? (array) $field['wrap_attrs'] : [],
+			],
+		] );
 	}
 
 }

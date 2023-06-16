@@ -36,6 +36,9 @@ class File {
 		if ( is_numeric( $value ) ) {
 			$file_url  = get_attached_file( absint( $value ) );
 			$file_name = basename( $file_url );
+			$field['classes_file_none'][] = 'pngx-a11y-hidden';
+		} else {
+			$field['classes_file_chosen'][] = 'pngx-a11y-hidden';
 		}
 
 		$field_wrap = isset( $field['fieldset_wrap'] ) ? $field['fieldset_wrap'] : [];
@@ -49,18 +52,20 @@ class File {
 			'template_name'  => 'file',
 			'template_echo'  => true,
 			'template_args'  => [
-				'id'            => $field['id'],
-				'label'         => $field['label'],
-				'description'   => ! empty( $field['description'] ) ? $field['description'] : '',
-				'placeholder'   => ! empty( $field['placeholder'] ) ? $field['placeholder'] : '',
-				'classes_wrap'  => ! empty( $field['classes_wrap'] ) ? (array) $field['classes_wrap'] : [],
-				'classes_input' => ! empty( $field['classes_input'] ) ? (array) $field['classes_input'] : [ 'pngx-meta-field' ],
-				'classes_label' => ! empty( $field['classes_label'] ) ? (array) $field['classes_label'] : [ 'screen-reader-text' ],
-				'name'          => $name,
-				'value'         => $value,
-				'file_name'     => $file_name,
-				'attrs'         => ! empty( $field['attrs'] ) ? (array) $field['attrs'] : [],
-				'wrap_attrs'    => ! empty( $field['wrap_attrs'] ) ? (array) $field['wrap_attrs'] : [],
+				'id'                  => $field['id'],
+				'label'               => $field['label'],
+				'description'         => ! empty( $field['description'] ) ? $field['description'] : '',
+				'placeholder'         => ! empty( $field['placeholder'] ) ? $field['placeholder'] : '',
+				'classes_wrap'        => ! empty( $field['classes_wrap'] ) ? (array) $field['classes_wrap'] : [],
+				'classes_input'       => ! empty( $field['classes_input'] ) ? (array) $field['classes_input'] : [ 'pngx-meta-field' ],
+				'classes_label'       => ! empty( $field['classes_label'] ) ? (array) $field['classes_label'] : [ 'screen-reader-text' ],
+				'classes_file_none'   => ! empty( $field['classes_file_none'] ) ? (array) $field['classes_file_none'] : [],
+				'classes_file_chosen' => ! empty( $field['classes_file_chosen'] ) ? (array) $field['classes_file_chosen'] : [],
+				'name'                => $name,
+				'value'               => $value,
+				'file_name'           => $file_name,
+				'attrs'               => ! empty( $field['attrs'] ) ? (array) $field['attrs'] : [],
+				'wrap_attrs'          => ! empty( $field['wrap_attrs'] ) ? (array) $field['wrap_attrs'] : [],
 			],
 		] );
 	}
