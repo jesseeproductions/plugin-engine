@@ -3,12 +3,22 @@
 
 /* CSS Switch based off https://codepen.io/mallendeo/pen/eLIiG
 ============================================= */
+
+.pngx-control--switch {
+	display: inline-flex;
+}
+
+.pngx-engine-switch__description {
+	line-height: 1.1;
+	margin-left: rem-calc(10);
+}
+
 input[type="checkbox"].pngx-engine-switch__input {
 	display: none;
 
 	+ .pngx-engine-switch__label {
-		background: var( --pngx-white);
-		border: 1px solid var( --pngx-grey-5 );
+		background: var(--pngx-white);
+		border: 1px solid var(--pngx-grey-5);
 		border-radius: 4px;
 		box-sizing: border-box;
 		cursor: pointer;
@@ -31,7 +41,7 @@ input[type="checkbox"].pngx-engine-switch__input {
 		}
 
 		&:after {
-			background: var( --pngx-grey-6 );
+			background: var(--pngx-grey-6);
 			border-radius: 2px;
 			content: "";
 			left: 0;
@@ -50,7 +60,7 @@ input[type="checkbox"].pngx-engine-switch__input {
 	&:checked + .pngx-engine-switch__label {
 
 		&:after {
-			background: var( --pngx-color-accent-primary );
+			background: var(--pngx-color-accent-primary);
 			left: 50%;
 		}
 	}

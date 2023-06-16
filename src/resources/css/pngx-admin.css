@@ -390,9 +390,57 @@
 }
 
 /*
+ * Dropdown CSS
+ * -------------------------------------------------------------
+ */
+.pngx-field-dropdown .pngx-field-wrap {
+  max-width: 37.5rem;
+}
+
+/*
  * File CSS
  * -------------------------------------------------------------
  */
+.pngx-engine-options-control__upload-file-ui-wrap {
+  border: 1px solid var(--pngx-grey-7);
+  border-radius: 0.3125rem;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  display: inline-flex;
+  max-width: 37.5rem;
+  width: 65%;
+}
+
+.pngx-engine-options-control__upload-file-button {
+  background-color: var(--pngx-grey-7);
+  border: 1px solid var(--pngx-grey-7);
+  border-radius: 0;
+  color: var(--pngx-white);
+  cursor: pointer;
+  display: inline-block;
+  margin: 0;
+  padding: 0.625rem 0.9375rem;
+  transition: all 0.2s linear;
+}
+.pngx-engine-options-control__upload-file-button:hover {
+  background-color: var(--pngx-grey-1);
+  color: var(--pngx-grey-7);
+}
+
+.pngx-file-upload-name {
+  background-color: transparent;
+  border-width: 0;
+  color: var(--pngx-grey-6);
+  padding: 0.625rem 0.9375rem;
+  word-break: break-all;
+}
+
+.pngx-engine-options-control__clear-wrap {
+  display: inline;
+}
+.pngx-engine-options-control__clear-wrap .pngx-engine-options-control__upload-clear-button {
+  font-size: 0.75rem;
+}
+
 /*
  * Image CSS
  * -------------------------------------------------------------
@@ -402,7 +450,7 @@
   border: 1px solid #dbdbdb;
   font-size: 1rem;
   height: auto;
-  margin: 0 0 1.25rem;
+  margin: 0 0 0.625rem;
   max-width: 100%;
   padding: 0.625rem;
   text-align: center;
@@ -413,6 +461,10 @@
  * Password CSS
  * -------------------------------------------------------------
  */
+.pngx-field-password .pngx-field-wrap {
+  max-width: 37.5rem;
+}
+
 .pngx-field.pngx-dependent .pngx-engine-options-control__password-wrap .pngx-engine-options-control-password-input__toggle-wrap,
 .pngx-field .pngx-engine-options-control__password-wrap .pngx-engine-options-control-password-input__toggle-wrap {
   display: inline;
@@ -426,6 +478,15 @@ input[type=checkbox].pngx-engine-options-control-password-input__toggle-type {
 --------------------------------------------- */
 /* CSS Switch based off https://codepen.io/mallendeo/pen/eLIiG
 ============================================= */
+.pngx-control--switch {
+  display: inline-flex;
+}
+
+.pngx-engine-switch__description {
+  line-height: 1.1;
+  margin-left: 0.625rem;
+}
+
 input[type=checkbox].pngx-engine-switch__input {
   display: none;
 }
@@ -473,9 +534,11 @@ input[type=checkbox].pngx-engine-switch__input:checked + .pngx-engine-switch__la
  * Text CSS
  * -------------------------------------------------------------
  */
-.pngx-engine-options-control__text-wrap .pngx-engine-options-control__text-input {
-  max-width: 100%;
-  width: 400px;
+.pngx-field-text .pngx-field-wrap {
+  max-width: 37.5rem;
+}
+.pngx-field-text .pngx-engine-options-control__text-input {
+  width: 100%;
 }
 
 /* ==========================================================================

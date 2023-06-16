@@ -13,16 +13,17 @@
  *
  * @link    https://pngx.ink/RYIOh
  *
- * @var string               $label         Label for the switch input.
- * @var string               $id            ID of the switch input.
- * @var array<string,string> $classes_wrap  An array of classes for the switch wrap.
- * @var array<string,string> $classes_input An array of classes for the switch input.
- * @var array<string,string> $classes_label An array of classes for the switch label.
- * @var string               $name          Name attribute for the switch input.
- * @var string|int           $value         The value of the switch.
- * @var string|int           $checked       Whether the switch is enabled or not.
- * @var array<string,string> $attrs         Associative array of attributes of the switch.
- * @var array<string,string> $wrap_attrs      Associative array of attributes of the field wrap.
+ * @var string               $label              Label for the switch input.
+ * @var string               $id                 ID of the switch input.
+ * @var array<string,string> $classes_wrap       An array of classes for the switch wrap.
+ * @var array<string,string> $classes_input      An array of classes for the switch input.
+ * @var array<string,string> $classes_label      An array of classes for the switch label.
+ * @var string               $name               Name attribute for the switch input.
+ * @var string               $switch_description The description text for the switch.
+ * @var string|int           $value              The value of the switch.
+ * @var string|int           $checked            Whether the switch is enabled or not.
+ * @var array<string,string> $attrs              Associative array of attributes of the switch.
+ * @var array<string,string> $wrap_attrs         Associative array of attributes of the field wrap.
  */
 $wrap_classes = [ 'pngx-control--switch' ];
 if ( ! empty( $classes_wrap ) ) {
@@ -58,4 +59,6 @@ if ( ! empty( $classes_label ) ) {
 			<?php echo esc_html( $label ); ?>
 		</span>
 	</label>
+
+	<span class="pngx-engine-switch__description"><?php echo esc_html( $switch_description ); ?></span>
 </div>

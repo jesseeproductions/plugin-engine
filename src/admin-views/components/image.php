@@ -29,6 +29,7 @@
  * @var string               $file_name             The name of the file.
  * @var string               $image_msg             The name for the image field.
  * @var string               $image_src             The url of the of the image.
+ * @var string               $no_chosen_text        The optional override to the no chosen text.
  * @var array<string,string> $attrs                 Associative array of attributes of the text input.
  * @var array<string,string> $wrap_attrs            Associative array of attributes of the field wrap.
  */
@@ -67,6 +68,8 @@ $file_chosen_classes = [ 'pngx-engine-options-control__upload-file-text' ];
 if ( ! empty( $classes_file_chosen ) ) {
 	$file_chosen_classes = array_merge( $file_chosen_classes, $classes_file_chosen );
 }
+
+$no_chosen_text = ! empty( $no_chosen_text ) ? $no_chosen_text : _x( 'No chosen image.', 'No image chosen message', 'plugin-engine' );
 ?>
 <div
 	<?php pngx_classes( $wrap_classes ); ?>
@@ -114,7 +117,7 @@ if ( ! empty( $classes_file_chosen ) ) {
 			class="pngx-file-upload-name"
 		>
 			<span <?php pngx_classes( $file_none_classes ); ?>>
-				<?php echo esc_html_x( 'No chosen image.', 'No image chosen message', 'plugin-engine' ); ?>
+				<?php echo esc_html( $no_chosen_text ); ?>
 			</span>
 			<span <?php pngx_classes( $file_chosen_classes ); ?>><?php echo esc_html( $file_name ); ?></span>
 		</div>

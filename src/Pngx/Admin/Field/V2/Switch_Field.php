@@ -43,26 +43,27 @@ class Switch_Field {
 		$field_wrap = isset( $field['fieldset_wrap'] ) ? $field['fieldset_wrap'] : [];
 
 		$template->template( 'components/field', [
-				'classes_wrap'   => [ "pngx-engine-field__{$field['id']}-wrap", ...$field_wrap ],
-				'id'             => $field['id'],
-				'label'          => $field['label'],
-				'tooltip'        => $field['tooltip'] ?? null,
-				'fieldset_attrs' => ! empty( $field['fieldset_attrs'] ) ? (array) $field['fieldset_attrs'] : [],
-				'template_name'  => 'switch',
-				'template_echo'  => true,
-				'template_args'  => [
-					'id'            => $field['id'],
-					'label'         => $field['label'],
-					'description'   => isset( $field['description'] ) ? $field['description'] : '',
-					'classes_wrap'  => ! empty( $field['classes_wrap'] ) ? (array) $field['classes_wrap'] : [],
-					'classes_input' => ! empty( $field['classes_input'] ) ? (array) $field['classes_input'] : [ 'pngx-meta-field' ],
-					'classes_label' => ! empty( $field['classes_label'] ) ? (array) $field['classes_label'] : [],
-					'name'          => $name,
-					'value'         => 1,
-					'checked'       => $selected,
-					'attrs'         => ! empty( $field['attrs'] ) ? (array) $field['attrs'] : [],
-					'wrap_attrs'    => ! empty( $field['wrap_attrs'] ) ? (array) $field['wrap_attrs'] : [],
-				],
-			] );
+			'classes_wrap'   => [ "pngx-engine-field__{$field['id']}-wrap", ...$field_wrap ],
+			'id'             => $field['id'],
+			'label'          => $field['label'],
+			'tooltip'        => $field['tooltip'] ?? null,
+			'fieldset_attrs' => ! empty( $field['fieldset_attrs'] ) ? (array) $field['fieldset_attrs'] : [],
+			'template_name'  => 'switch',
+			'template_echo'  => true,
+			'template_args'  => [
+				'id'                 => $field['id'],
+				'label'              => $field['label'],
+				'switch_description' => isset( $field['switch_description'] ) ? $field['switch_description'] : '',
+				'description'        => isset( $field['description'] ) ? $field['description'] : '',
+				'classes_wrap'       => ! empty( $field['classes_wrap'] ) ? (array) $field['classes_wrap'] : [],
+				'classes_input'      => ! empty( $field['classes_input'] ) ? (array) $field['classes_input'] : [ 'pngx-meta-field' ],
+				'classes_label'      => ! empty( $field['classes_label'] ) ? (array) $field['classes_label'] : [],
+				'name'               => $name,
+				'value'              => 1,
+				'checked'            => $selected,
+				'attrs'              => ! empty( $field['attrs'] ) ? (array) $field['attrs'] : [],
+				'wrap_attrs'         => ! empty( $field['wrap_attrs'] ) ? (array) $field['wrap_attrs'] : [],
+			],
+		] );
 	}
 }

@@ -21,7 +21,7 @@
  * @var string               $template_name  The name of the template
  * @var array<string|mixed>  $template_args  The arguments for the template.
  */
-$field_wrap_classes = [ 'pngx-field', 'pngx-field-text' ];
+$field_wrap_classes = [ 'pngx-field', 'pngx-field-' . $template_name ];
 if ( ! empty( $classes_wrap ) ) {
 	$field_wrap_classes = array_merge( $field_wrap_classes, $classes_wrap );
 }

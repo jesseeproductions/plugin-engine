@@ -29,7 +29,7 @@
  * @var int                  $step          The step value of the number input.
  */
 
-$wrap_classes = [ 'pngx-engine-options-control', 'pngx-engine-options-control__text-wrap' ];
+$wrap_classes = [ 'pngx-engine-options-control', 'pngx-engine-options-control__number-wrap' ];
 if ( ! empty( $classes_wrap ) ) {
 	$wrap_classes = array_merge( $wrap_classes, $classes_wrap );
 }
@@ -43,7 +43,7 @@ if ( ! empty( $classes_label ) ) {
 	$label_classes = array_merge( $label_classes, $classes_label );
 }
 
-$input_classes = [ 'pngx-engine-options-control__text-input' ];
+$input_classes = [ 'pngx-engine-options-control__number-input' ];
 if ( ! empty( $classes_input ) ) {
 	$input_classes = array_merge( $input_classes, $classes_input );
 }
