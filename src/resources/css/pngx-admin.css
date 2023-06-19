@@ -192,8 +192,10 @@
 }
 .pngx-admin-body label,
 .pngx-admin-body legend {
+  color: var(--pngx-grey-8);
   display: block;
-  font-weight: 700;
+  font-size: 0.75rem;
+  font-weight: 400;
   margin: 0;
 }
 .pngx-admin-body legend {
@@ -429,7 +431,7 @@
 .pngx-file-upload-name {
   background-color: transparent;
   border-width: 0;
-  color: var(--pngx-grey-6);
+  color: var(--pngx-grey-7);
   padding: 0.625rem 0.9375rem;
   word-break: break-all;
 }
@@ -472,6 +474,18 @@
 
 input[type=checkbox].pngx-engine-options-control-password-input__toggle-type {
   display: none;
+}
+
+/*
+ * Read Only CSS
+ * -------------------------------------------------------------
+ */
+.pngx-field-read-only .pngx-field-wrap {
+  max-width: 37.5rem;
+}
+
+.pngx-wrapper .pngx-field-read-only .pngx-engine-options-details-field-read-only__value-wrap {
+  border: 1px solid var(--pngx-grey-3);
 }
 
 /* ## PNGX Admin Loader
@@ -2681,7 +2695,9 @@ fieldset[disabled] .btn-primary.active {
 
 body:not(.pngx-admin-body) .pngx-tabs label,
 body:not(.pngx-admin-body) .pngx-tabs legend {
-  font-weight: 700;
+  color: var(--pngx-grey-7);
+  font-size: 0.75rem;
+  font-weight: 400;
 }
 body:not(.pngx-admin-body) .pngx-tabs .button-primary {
   border-radius: 0.5rem;
@@ -2692,7 +2708,7 @@ body:not(.pngx-admin-body) .pngx-tabs .button-primary {
 
 .pngx-admin-body .pngx-field-label,
 body:not(.pngx-admin-body) .pngx-tabs .pngx-field-label {
-  margin-bottom: var(--pngx-spacer-1);
+  margin-bottom: 0;
 }
 .pngx-admin-body .select2-container.select2-container--default .select2-selection--single,
 body:not(.pngx-admin-body) .pngx-tabs .select2-container.select2-container--default .select2-selection--single {
@@ -2711,13 +2727,14 @@ body:not(.pngx-admin-body) .pngx-tabs .select2-container.select2-container--defa
 }
 .pngx-admin-body .select2-container.select2-container--default .select2-selection--single .select2-selection__arrow,
 body:not(.pngx-admin-body) .pngx-tabs .select2-container.select2-container--default .select2-selection--single .select2-selection__arrow {
+  background: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M5%206l5%205%205-5%202%201-7%207-7-7%202-1z%22%20fill%3D%22%23555%22%2F%3E%3C%2Fsvg%3E") no-repeat right 5px top 55%;
   height: calc(100% - 0.125rem);
+  transition: transform 0.15s ease-in-out;
   width: 2rem;
 }
 .pngx-admin-body .select2-container.select2-container--default .select2-selection--single .select2-selection__arrow b,
 body:not(.pngx-admin-body) .pngx-tabs .select2-container.select2-container--default .select2-selection--single .select2-selection__arrow b {
-  border-width: 0.5rem 0.3125rem 0 0.3125rem;
-  margin-top: -0.1875rem;
+  display: none;
 }
 .pngx-admin-body .select2-container.select2-container--default .select2-selection--multiple,
 body:not(.pngx-admin-body) .pngx-tabs .select2-container.select2-container--default .select2-selection--multiple {
@@ -2726,14 +2743,15 @@ body:not(.pngx-admin-body) .pngx-tabs .select2-container.select2-container--defa
 }
 .pngx-admin-body .select2-container.select2-container--default .select2-selection--multiple::after,
 body:not(.pngx-admin-body) .pngx-tabs .select2-container.select2-container--default .select2-selection--multiple::after {
-  border-color: #888 transparent transparent transparent;
-  border-style: solid;
-  border-width: 0.5rem 0.3125rem 0 0.3125rem;
+  background: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M5%206l5%205%205-5%202%201-7%207-7-7%202-1z%22%20fill%3D%22%23555%22%2F%3E%3C%2Fsvg%3E") no-repeat right 5px top 55%;
+  height: calc(100% - 0.125rem);
+  width: 2rem;
   content: "";
   pointer-events: none;
   position: absolute;
-  right: 0.8125rem;
+  right: 0;
   top: 50%;
+  transition: transform 0.15s ease-in-out;
   transform: translateY(-50%);
 }
 .pngx-admin-body .select2-container.select2-container--default .select2-selection--multiple .select2-selection__rendered,
@@ -2755,14 +2773,13 @@ body:not(.pngx-admin-body) .pngx-tabs .select2-container.select2-container--defa
     min-height: 1.875rem;
   }
 }
-.pngx-admin-body .select2-container.select2-container--default.select2-container--open .select2-selection--single .select2-selection__arrow b,
-body:not(.pngx-admin-body) .pngx-tabs .select2-container.select2-container--default.select2-container--open .select2-selection--single .select2-selection__arrow b {
-  border-width: 0 0.3125rem 0.5rem 0.3125rem;
+.pngx-admin-body .select2-container.select2-container--default.select2-container--open .select2-selection__arrow,
+body:not(.pngx-admin-body) .pngx-tabs .select2-container.select2-container--default.select2-container--open .select2-selection__arrow {
+  transform: rotate(180deg);
 }
 .pngx-admin-body .select2-container.select2-container--default.select2-container--open .select2-selection--multiple::after,
 body:not(.pngx-admin-body) .pngx-tabs .select2-container.select2-container--default.select2-container--open .select2-selection--multiple::after {
-  border-color: transparent transparent #888;
-  border-width: 0 0.3125rem 0.5rem 0.3125rem;
+  transform: translateY(-50%) rotate(180deg);
 }
 
 .pngx-wrapper * {
@@ -2784,6 +2801,14 @@ body:not(.pngx-admin-body) .pngx-tabs .select2-container.select2-container--defa
   float: right;
 }
 
+.pngx-tabs .pngx-engine-options-details-field-read-only__value-wrap,
+.pngx-tabs input[type=email],
+.pngx-tabs input[type=number],
+.pngx-tabs input[type=password],
+.pngx-tabs input[type=text],
+.pngx-tabs input[type=url],
+.pngx-tabs textarea,
+.pngx-wrapper .pngx-engine-options-details-field-read-only__value-wrap,
 .pngx-wrapper input[type=email],
 .pngx-wrapper input[type=number],
 .pngx-wrapper input[type=password],
@@ -2792,11 +2817,20 @@ body:not(.pngx-admin-body) .pngx-tabs .select2-container.select2-container--defa
 .pngx-wrapper textarea {
   border-color: var(--pngx-grey-5);
   border-radius: 0.5rem;
+  color: var(--pngx-black);
   font-size: 0.875rem;
   line-height: 1.5rem;
   padding: 0.5rem 0.75rem;
   width: auto;
 }
+.pngx-tabs .pngx-engine-options-details-field-read-only__value-wrap.pngx-engine-options-control__text-input,
+.pngx-tabs input[type=email].pngx-engine-options-control__text-input,
+.pngx-tabs input[type=number].pngx-engine-options-control__text-input,
+.pngx-tabs input[type=password].pngx-engine-options-control__text-input,
+.pngx-tabs input[type=text].pngx-engine-options-control__text-input,
+.pngx-tabs input[type=url].pngx-engine-options-control__text-input,
+.pngx-tabs textarea.pngx-engine-options-control__text-input,
+.pngx-wrapper .pngx-engine-options-details-field-read-only__value-wrap.pngx-engine-options-control__text-input,
 .pngx-wrapper input[type=email].pngx-engine-options-control__text-input,
 .pngx-wrapper input[type=number].pngx-engine-options-control__text-input,
 .pngx-wrapper input[type=password].pngx-engine-options-control__text-input,
@@ -2805,6 +2839,14 @@ body:not(.pngx-admin-body) .pngx-tabs .select2-container.select2-container--defa
 .pngx-wrapper textarea.pngx-engine-options-control__text-input {
   width: 100%;
 }
+.pngx-tabs .pngx-engine-options-details-field-read-only__value-wrap.pngx-engine-options-control__password-input,
+.pngx-tabs input[type=email].pngx-engine-options-control__password-input,
+.pngx-tabs input[type=number].pngx-engine-options-control__password-input,
+.pngx-tabs input[type=password].pngx-engine-options-control__password-input,
+.pngx-tabs input[type=text].pngx-engine-options-control__password-input,
+.pngx-tabs input[type=url].pngx-engine-options-control__password-input,
+.pngx-tabs textarea.pngx-engine-options-control__password-input,
+.pngx-wrapper .pngx-engine-options-details-field-read-only__value-wrap.pngx-engine-options-control__password-input,
 .pngx-wrapper input[type=email].pngx-engine-options-control__password-input,
 .pngx-wrapper input[type=number].pngx-engine-options-control__password-input,
 .pngx-wrapper input[type=password].pngx-engine-options-control__password-input,
@@ -2813,50 +2855,60 @@ body:not(.pngx-admin-body) .pngx-tabs .select2-container.select2-container--defa
 .pngx-wrapper textarea.pngx-engine-options-control__password-input {
   width: calc(100% - 120px);
 }
+.pngx-tabs input[type=number],
 .pngx-wrapper input[type=number] {
   height: auto;
 }
+.pngx-tabs span.description,
 .pngx-wrapper span.description {
   display: block;
 }
+.pngx-tabs span.description:not(:first-child),
 .pngx-wrapper span.description:not(:first-child) {
   margin-top: 0.625rem;
 }
+.pngx-tabs [class$=icon32] + h2,
 .pngx-wrapper [class$=icon32] + h2 {
   font-weight: bold;
   line-height: 1;
 }
 @media (min-width: 768px) {
+  .pngx-tabs [class$=icon32] + h2,
   .pngx-wrapper [class$=icon32] + h2 {
     font-size: 3rem;
     margin-bottom: 2rem;
   }
 }
 @media (max-width: 640px) {
+  .pngx-tabs [class$=icon32] + h2,
   .pngx-wrapper [class$=icon32] + h2 {
     margin-bottom: 1rem;
   }
 }
 @media (min-width: 768px) {
+  .pngx-tabs .cctor-options-icon,
   .pngx-wrapper .cctor-options-icon {
     height: 2.5rem;
     width: 2.5rem;
   }
 }
+.pngx-tabs > h4,
 .pngx-wrapper > h4 {
   margin: 0;
 }
 
 #poststuff .pngx-tabs h2 {
-  font-size: 2.25rem;
+  color: var(--pngx-grey-9);
+  font-size: 1.625rem;
   font-weight: 600;
-  line-height: 2.5rem;
+  line-height: 1.875rem;
+  margin-bottom: var(--pngx-spacer-3);
   padding: 0;
 }
 @media (max-width: 640px) {
   #poststuff .pngx-tabs h2 {
-    font-size: 1.3em;
-    line-height: 1.4em;
+    font-size: 1.375rem;
+    line-height: 1.5rem;
   }
 }
 

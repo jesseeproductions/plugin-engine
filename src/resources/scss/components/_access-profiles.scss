@@ -21,8 +21,10 @@
 
 	label,
 	legend {
+		color: var( --pngx-grey-8 );
 		display: block;
-		font-weight: 700;
+		font-size: rem-calc(12);
+		font-weight: 400;
 		margin: 0;
 	}
 
