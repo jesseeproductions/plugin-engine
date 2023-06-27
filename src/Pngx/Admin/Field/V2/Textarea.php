@@ -16,7 +16,7 @@ namespace Pngx\Admin\Field\V2;
  */
 class Textarea {
 
-	public static function display( $field = array(), $options = array(), $options_id = null, $meta = null, $var = null, $template = null ) {
+	public static function display( $field = [], $options = [], $options_id = null, $meta = null, $var = null, $template = null ) {
 
 		if ( ! empty( $options_id ) ) {
 			$name  = $options_id;
@@ -24,11 +24,13 @@ class Textarea {
 		} else {
 			$name  = $field['id'];
 			$value = $meta;
+			if ( ! $value && isset( $field['value'] ) ) {
+				$value = $field['value'];
+			}
 		}
 
 		$rows        = isset( $field['rows'] ) ? $field['rows'] : 12;
 		$cols        = isset( $field['cols'] ) ? $field['cols'] : 50;
-		$placeholder = isset( $field['classes_input'] ) ? $field['classes_input'] : [];
 		$placeholder = isset( $field['placeholder'] ) ? $field['placeholder'] : '';
 
 		if ( ! empty( $var['name'] ) ) {

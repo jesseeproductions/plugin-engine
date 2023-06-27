@@ -24,6 +24,7 @@ class Pngx__Admin__Field__Textarea {
 			$name = $var['name'];
 		}
 
+		// Keep value with no spaces before or after the php code to prevent spaces in the output.
 		?>
 		<textarea
 			class="<?php echo esc_attr( $class ); ?>"
@@ -32,9 +33,7 @@ class Pngx__Admin__Field__Textarea {
 			placeholder="<?php echo esc_attr( $std ); ?>"
 			rows="<?php echo absint( $rows ); ?>"
 			cols="<?php echo absint( $cols ); ?>"
-		>
-		    <?php echo format_for_editor( $value ); ?>
-		</textarea>
+		><?php echo format_for_editor( $value ); ?></textarea>
 
 		<?php
 		if ( isset( $field['desc'] ) && ! empty( $field['desc'] ) ) {

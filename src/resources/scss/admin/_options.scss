@@ -184,14 +184,13 @@ body:not(.pngx-admin-body) .pngx-tabs {
 		font-size: rem-calc(14);
 		line-height: rem-calc(24);
 		padding: rem-calc(8 12);
-		width: auto;
 
-		&.pngx-engine-options-control__text-input {
-			width: 100%;
+		&.pngx-engine-options-control-icon__has-leading {
+			padding-left: rem-calc(35);
 		}
 
-		&.pngx-engine-options-control__password-input {
-			width: calc(100% - 120px);
+		&.pngx-engine-options-control-icon__has-trailing {
+			padding-right: rem-calc(35);
 		}
 	}
 

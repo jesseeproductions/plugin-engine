@@ -36,7 +36,7 @@ if ( ! empty( $classes_label ) ) {
 	$label_classes = array_merge( $label_classes, $classes_label );
 }
 
-$input_classes = [ 'pngx-engine-options-control__date-input' ];
+$input_classes = [ 'pngx-engine-options-control__date-input', 'pngx-engine-options-control-icon__has-trailing' ];
 if ( ! empty( $classes_input ) ) {
 	$input_classes = array_merge( $input_classes, $classes_input );
 }
@@ -60,4 +60,5 @@ if ( ! empty( $classes_input ) ) {
 		value="<?php echo esc_html( $value ); ?>"
 		<?php pngx_attributes( $attrs ) ?>
 	>
+	<?php $this->template( '/components/icons/calendar', [ 'classes' => [ 'pngx-engine-options-control-icon__input', 'pngx-engine-options-control-icon__trailing', 'pngx-engine-options-control__date-icon' ] ] ); ?>
 </div>

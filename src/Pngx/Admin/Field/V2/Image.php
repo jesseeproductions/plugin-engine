@@ -16,7 +16,7 @@ namespace Pngx\Admin\Field\V2;
  */
 class Image {
 
-	public static function display( $field = array(), $options = array(), $options_id = null, $meta = null, $repeat_obj = null, $template = null ) {
+	public static function display( $field = [], $options = [], $options_id = null, $meta = null, $repeat_obj = null, $template = null ) {
 
 		global $pagenow;
 

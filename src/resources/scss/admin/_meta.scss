@@ -73,6 +73,14 @@
 			textarea {
 				width: 100%;
 			}
+
+			&.pngx-engine-options-control-icon__has-leading {
+				padding-left: rem-calc(35);
+			}
+
+			&.pngx-engine-options-control-icon__has-trailing {
+				padding-right: rem-calc(35);
+			}
 		}
 
 		.pngx-variety-field > .description,

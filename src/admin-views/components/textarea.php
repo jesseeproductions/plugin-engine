@@ -28,7 +28,7 @@
  * @var array<string,string> $wrap_attrs      Associative array of attributes of the field wrap.
  */
 
-$wrap_classes = [ 'pngx-engine-options-control', 'pngx-engine-options-control__text-wrap' ];
+$wrap_classes = [ 'pngx-engine-options-control', 'pngx-engine-options-control__textarea-wrap' ];
 if ( ! empty( $classes_wrap ) ) {
 	$wrap_classes = array_merge( $wrap_classes, $classes_wrap );
 }
@@ -38,12 +38,14 @@ if ( ! empty( $classes_label ) ) {
 	$label_classes = array_merge( $label_classes, $classes_label );
 }
 
-$input_classes = [ 'pngx-engine-options-control__text-input' ];
+$input_classes = [ 'pngx-engine-options-control__textarea-input' ];
 if ( ! empty( $classes_input ) ) {
 	$input_classes = array_merge( $input_classes, $classes_input );
 }
+
+// Keep value with no spaces before or after the php code to prevent spaces in the output.
 ?>
-<div <?php pngx_classes( $classes_wrap ); ?> >
+<div <?php pngx_classes( $wrap_classes ); ?> >
 	<label
 		<?php pngx_classes( $classes_label ); ?>
 		for="<?php echo esc_attr( $id ); ?>"
@@ -58,7 +60,5 @@ if ( ! empty( $classes_input ) ) {
 		rows="<?php echo absint( $rows ); ?>"
 		cols="<?php echo absint( $cols ); ?>"
 		<?php pngx_attributes( $attrs ) ?>
-	>
-	    <?php echo format_for_editor( $value ); ?>
-	</textarea>
+	><?php echo format_for_editor( $value ); ?></textarea>
 </div>

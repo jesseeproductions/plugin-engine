@@ -328,6 +328,32 @@
   margin-top: var(--pngx-spacer-4);
 }
 
+.pngx-engine-options-control {
+  position: relative;
+}
+
+/* ## PNGX Admin Icons
+--------------------------------------------- */
+.pngx-engine-options-control-icon__input {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  z-index: 0;
+}
+
+.pngx-engine-options-control-icon__leading {
+  left: 9px;
+}
+
+.pngx-engine-options-control-icon__trailing {
+  right: 9px;
+}
+
+.pngx-svgicon__svg-fill {
+  fill: var(--pngx-grey-7);
+}
+
 /* ## PNGX Admin Loader
 --------------------------------------------- */
 .pngx-admin-loader {
@@ -386,9 +412,19 @@
  * Date CSS
  * -------------------------------------------------------------
  */
-.pngx-engine-options-control__date-wrap .pngx-engine-options-control__date-input {
+.pngx-tabs .pngx-engine-options-control__date-wrap,
+.pngx-wrapper .pngx-engine-options-control__date-wrap {
+  background-color: var(--pngx-white);
+  border-radius: 0.5rem;
+  width: fit-content;
+}
+.pngx-tabs .pngx-engine-options-control__date-wrap .pngx-engine-options-control__date-input,
+.pngx-wrapper .pngx-engine-options-control__date-wrap .pngx-engine-options-control__date-input {
+  background: transparent;
   max-width: 100%;
-  width: 200px;
+  position: relative;
+  width: 240px;
+  z-index: 1;
 }
 
 /*
@@ -408,7 +444,6 @@
   border-radius: 0.3125rem;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   display: inline-flex;
-  max-width: 37.5rem;
   width: 65%;
 }
 
@@ -465,6 +500,9 @@
  */
 .pngx-field-password .pngx-field-wrap {
   max-width: 37.5rem;
+}
+.pngx-field-password .pngx-engine-options-control__password-input {
+  width: calc(100% - 120px);
 }
 
 .pngx-field.pngx-dependent .pngx-engine-options-control__password-wrap .pngx-engine-options-control-password-input__toggle-wrap,
@@ -548,10 +586,17 @@ input[type=checkbox].pngx-engine-switch__input:checked + .pngx-engine-switch__la
  * Text CSS
  * -------------------------------------------------------------
  */
-.pngx-field-text .pngx-field-wrap {
-  max-width: 37.5rem;
-}
 .pngx-field-text .pngx-engine-options-control__text-input {
+  max-width: 37.5rem;
+  width: 100%;
+}
+
+/*
+ * Text CSS
+ * -------------------------------------------------------------
+ */
+.pngx-field-textarea .pngx-engine-options-control__textarea-input {
+  max-width: 37.5rem;
   width: 100%;
 }
 
@@ -2558,6 +2603,36 @@ fieldset[disabled] .btn-primary.active {
 .postbox-container .pngx-meta-field.field-wysiwyg textarea {
   width: 100%;
 }
+.postbox-container .pngx-meta-fields-wrap.admin-field-wrap.pngx-engine-options-control-icon__has-leading, .postbox-container .pngx-meta-fields-wrap.field-checkbox.pngx-engine-options-control-icon__has-leading, .postbox-container .pngx-meta-fields-wrap.field-color.pngx-engine-options-control-icon__has-leading, .postbox-container .pngx-meta-fields-wrap.field-date.pngx-engine-options-control-icon__has-leading, .postbox-container .pngx-meta-fields-wrap.field-image.pngx-engine-options-control-icon__has-leading, .postbox-container .pngx-meta-fields-wrap.field-number.pngx-engine-options-control-icon__has-leading, .postbox-container .pngx-meta-fields-wrap.field-select.pngx-engine-options-control-icon__has-leading, .postbox-container .pngx-meta-fields-wrap.field-text.pngx-engine-options-control-icon__has-leading, .postbox-container .pngx-meta-fields-wrap.field-textarea.pngx-engine-options-control-icon__has-leading, .postbox-container .pngx-meta-fields-wrap.field-url.pngx-engine-options-control-icon__has-leading, .postbox-container .pngx-meta-fields-wrap.field-variety.pngx-engine-options-control-icon__has-leading, .postbox-container .pngx-meta-fields-wrap.field-wysiwyg.pngx-engine-options-control-icon__has-leading,
+.postbox-container .pngx-meta-field.admin-field-wrap.pngx-engine-options-control-icon__has-leading,
+.postbox-container .pngx-meta-field.field-checkbox.pngx-engine-options-control-icon__has-leading,
+.postbox-container .pngx-meta-field.field-color.pngx-engine-options-control-icon__has-leading,
+.postbox-container .pngx-meta-field.field-date.pngx-engine-options-control-icon__has-leading,
+.postbox-container .pngx-meta-field.field-image.pngx-engine-options-control-icon__has-leading,
+.postbox-container .pngx-meta-field.field-number.pngx-engine-options-control-icon__has-leading,
+.postbox-container .pngx-meta-field.field-select.pngx-engine-options-control-icon__has-leading,
+.postbox-container .pngx-meta-field.field-text.pngx-engine-options-control-icon__has-leading,
+.postbox-container .pngx-meta-field.field-textarea.pngx-engine-options-control-icon__has-leading,
+.postbox-container .pngx-meta-field.field-url.pngx-engine-options-control-icon__has-leading,
+.postbox-container .pngx-meta-field.field-variety.pngx-engine-options-control-icon__has-leading,
+.postbox-container .pngx-meta-field.field-wysiwyg.pngx-engine-options-control-icon__has-leading {
+  padding-left: 2.1875rem;
+}
+.postbox-container .pngx-meta-fields-wrap.admin-field-wrap.pngx-engine-options-control-icon__has-trailing, .postbox-container .pngx-meta-fields-wrap.field-checkbox.pngx-engine-options-control-icon__has-trailing, .postbox-container .pngx-meta-fields-wrap.field-color.pngx-engine-options-control-icon__has-trailing, .postbox-container .pngx-meta-fields-wrap.field-date.pngx-engine-options-control-icon__has-trailing, .postbox-container .pngx-meta-fields-wrap.field-image.pngx-engine-options-control-icon__has-trailing, .postbox-container .pngx-meta-fields-wrap.field-number.pngx-engine-options-control-icon__has-trailing, .postbox-container .pngx-meta-fields-wrap.field-select.pngx-engine-options-control-icon__has-trailing, .postbox-container .pngx-meta-fields-wrap.field-text.pngx-engine-options-control-icon__has-trailing, .postbox-container .pngx-meta-fields-wrap.field-textarea.pngx-engine-options-control-icon__has-trailing, .postbox-container .pngx-meta-fields-wrap.field-url.pngx-engine-options-control-icon__has-trailing, .postbox-container .pngx-meta-fields-wrap.field-variety.pngx-engine-options-control-icon__has-trailing, .postbox-container .pngx-meta-fields-wrap.field-wysiwyg.pngx-engine-options-control-icon__has-trailing,
+.postbox-container .pngx-meta-field.admin-field-wrap.pngx-engine-options-control-icon__has-trailing,
+.postbox-container .pngx-meta-field.field-checkbox.pngx-engine-options-control-icon__has-trailing,
+.postbox-container .pngx-meta-field.field-color.pngx-engine-options-control-icon__has-trailing,
+.postbox-container .pngx-meta-field.field-date.pngx-engine-options-control-icon__has-trailing,
+.postbox-container .pngx-meta-field.field-image.pngx-engine-options-control-icon__has-trailing,
+.postbox-container .pngx-meta-field.field-number.pngx-engine-options-control-icon__has-trailing,
+.postbox-container .pngx-meta-field.field-select.pngx-engine-options-control-icon__has-trailing,
+.postbox-container .pngx-meta-field.field-text.pngx-engine-options-control-icon__has-trailing,
+.postbox-container .pngx-meta-field.field-textarea.pngx-engine-options-control-icon__has-trailing,
+.postbox-container .pngx-meta-field.field-url.pngx-engine-options-control-icon__has-trailing,
+.postbox-container .pngx-meta-field.field-variety.pngx-engine-options-control-icon__has-trailing,
+.postbox-container .pngx-meta-field.field-wysiwyg.pngx-engine-options-control-icon__has-trailing {
+  padding-right: 2.1875rem;
+}
 .postbox-container .pngx-meta-fields-wrap .pngx-variety-field > .description,
 .postbox-container .pngx-meta-fields-wrap .pngx-variety-selection > .description,
 .postbox-container .pngx-meta-fields-wrap > .pngx-meta-field-styles,
@@ -2821,39 +2896,38 @@ body:not(.pngx-admin-body) .pngx-tabs .select2-container.select2-container--defa
   font-size: 0.875rem;
   line-height: 1.5rem;
   padding: 0.5rem 0.75rem;
-  width: auto;
 }
-.pngx-tabs .pngx-engine-options-details-field-read-only__value-wrap.pngx-engine-options-control__text-input,
-.pngx-tabs input[type=email].pngx-engine-options-control__text-input,
-.pngx-tabs input[type=number].pngx-engine-options-control__text-input,
-.pngx-tabs input[type=password].pngx-engine-options-control__text-input,
-.pngx-tabs input[type=text].pngx-engine-options-control__text-input,
-.pngx-tabs input[type=url].pngx-engine-options-control__text-input,
-.pngx-tabs textarea.pngx-engine-options-control__text-input,
-.pngx-wrapper .pngx-engine-options-details-field-read-only__value-wrap.pngx-engine-options-control__text-input,
-.pngx-wrapper input[type=email].pngx-engine-options-control__text-input,
-.pngx-wrapper input[type=number].pngx-engine-options-control__text-input,
-.pngx-wrapper input[type=password].pngx-engine-options-control__text-input,
-.pngx-wrapper input[type=text].pngx-engine-options-control__text-input,
-.pngx-wrapper input[type=url].pngx-engine-options-control__text-input,
-.pngx-wrapper textarea.pngx-engine-options-control__text-input {
-  width: 100%;
+.pngx-tabs .pngx-engine-options-details-field-read-only__value-wrap.pngx-engine-options-control-icon__has-leading,
+.pngx-tabs input[type=email].pngx-engine-options-control-icon__has-leading,
+.pngx-tabs input[type=number].pngx-engine-options-control-icon__has-leading,
+.pngx-tabs input[type=password].pngx-engine-options-control-icon__has-leading,
+.pngx-tabs input[type=text].pngx-engine-options-control-icon__has-leading,
+.pngx-tabs input[type=url].pngx-engine-options-control-icon__has-leading,
+.pngx-tabs textarea.pngx-engine-options-control-icon__has-leading,
+.pngx-wrapper .pngx-engine-options-details-field-read-only__value-wrap.pngx-engine-options-control-icon__has-leading,
+.pngx-wrapper input[type=email].pngx-engine-options-control-icon__has-leading,
+.pngx-wrapper input[type=number].pngx-engine-options-control-icon__has-leading,
+.pngx-wrapper input[type=password].pngx-engine-options-control-icon__has-leading,
+.pngx-wrapper input[type=text].pngx-engine-options-control-icon__has-leading,
+.pngx-wrapper input[type=url].pngx-engine-options-control-icon__has-leading,
+.pngx-wrapper textarea.pngx-engine-options-control-icon__has-leading {
+  padding-left: 2.1875rem;
 }
-.pngx-tabs .pngx-engine-options-details-field-read-only__value-wrap.pngx-engine-options-control__password-input,
-.pngx-tabs input[type=email].pngx-engine-options-control__password-input,
-.pngx-tabs input[type=number].pngx-engine-options-control__password-input,
-.pngx-tabs input[type=password].pngx-engine-options-control__password-input,
-.pngx-tabs input[type=text].pngx-engine-options-control__password-input,
-.pngx-tabs input[type=url].pngx-engine-options-control__password-input,
-.pngx-tabs textarea.pngx-engine-options-control__password-input,
-.pngx-wrapper .pngx-engine-options-details-field-read-only__value-wrap.pngx-engine-options-control__password-input,
-.pngx-wrapper input[type=email].pngx-engine-options-control__password-input,
-.pngx-wrapper input[type=number].pngx-engine-options-control__password-input,
-.pngx-wrapper input[type=password].pngx-engine-options-control__password-input,
-.pngx-wrapper input[type=text].pngx-engine-options-control__password-input,
-.pngx-wrapper input[type=url].pngx-engine-options-control__password-input,
-.pngx-wrapper textarea.pngx-engine-options-control__password-input {
-  width: calc(100% - 120px);
+.pngx-tabs .pngx-engine-options-details-field-read-only__value-wrap.pngx-engine-options-control-icon__has-trailing,
+.pngx-tabs input[type=email].pngx-engine-options-control-icon__has-trailing,
+.pngx-tabs input[type=number].pngx-engine-options-control-icon__has-trailing,
+.pngx-tabs input[type=password].pngx-engine-options-control-icon__has-trailing,
+.pngx-tabs input[type=text].pngx-engine-options-control-icon__has-trailing,
+.pngx-tabs input[type=url].pngx-engine-options-control-icon__has-trailing,
+.pngx-tabs textarea.pngx-engine-options-control-icon__has-trailing,
+.pngx-wrapper .pngx-engine-options-details-field-read-only__value-wrap.pngx-engine-options-control-icon__has-trailing,
+.pngx-wrapper input[type=email].pngx-engine-options-control-icon__has-trailing,
+.pngx-wrapper input[type=number].pngx-engine-options-control-icon__has-trailing,
+.pngx-wrapper input[type=password].pngx-engine-options-control-icon__has-trailing,
+.pngx-wrapper input[type=text].pngx-engine-options-control-icon__has-trailing,
+.pngx-wrapper input[type=url].pngx-engine-options-control-icon__has-trailing,
+.pngx-wrapper textarea.pngx-engine-options-control-icon__has-trailing {
+  padding-right: 2.1875rem;
 }
 .pngx-tabs input[type=number],
 .pngx-wrapper input[type=number] {

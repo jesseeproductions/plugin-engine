@@ -415,16 +415,18 @@ class Pngx__Sanitize {
 	}
 
 	/**
-	 * Numbers ID Sanitize
+	 * Number Sanitize.
 	 *
-	 * @return string
+	 * @since 4.0.0
+	 *
+	 * @return float|int Sanitized number.
 	 */
 	private function sanitize_number() {
-		return $this->sanitize_absint();
+		return $this->sanitize_absintfloat();
 	}
 
 	/**
-	 * Numbers ID Sanitize
+	 * Dimensions Sanitize
 	 *
 	 * @return string
 	 */
@@ -452,6 +454,33 @@ class Pngx__Sanitize {
 
 		// After that it should be good to ship!
 		return $this->input;
+	}
+
+	/**
+	 * A method to sanitize integers and floats, returns as float or int
+	 *
+	 * @since 4.0.0
+
+	 * @return float|int|bool Sanitized number or false if invalid.
+	 */
+	private function sanitize_absintfloat( ) {
+		// If it's not numeric we forget about it
+		if ( ! is_numeric( $this->input ) ) {
+			return false;
+		}
+
+		// After the Replace return false if Empty
+		if ( empty( $this->input ) ) {
+			return false;
+		}
+
+		// If it's a float, sanitize it as a float
+		if ( is_float( $this->input + 0 ) ) {
+			return floatval( $this->input );
+		}
+
+		// If it's an integer, sanitize it as an integer
+		return intval( $this->input );
 	}
 
 	/**

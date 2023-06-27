@@ -5,10 +5,11 @@
 .pngx-field-text {
 
 	.pngx-field-wrap {
-		max-width: rem-calc(600);
+
 	}
 
 	.pngx-engine-options-control__text-input {
+		max-width: rem-calc(600);
 		width: 100%;
 	}
 }

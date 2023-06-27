@@ -34,7 +34,7 @@ if ( empty( $fieldset_attrs ) ) {
 	<?php pngx_classes( $field_wrap_classes ); ?>
 	<?php pngx_attributes( $fieldset_attrs ); ?>
 >
-	<span class="pngx-field-inner-wrap">
+	<div class="pngx-field-inner-wrap">
 		<legend class="pngx-field-label">
 			<?php echo esc_html( $label ); ?>
 			<?php if ( $tooltip ) :
@@ -49,5 +49,5 @@ if ( empty( $fieldset_attrs ) ) {
 		<?php
 			$this->template( 'components/description', $template_args );
 		?>
-	</span>
+	</div>
 </fieldset>
