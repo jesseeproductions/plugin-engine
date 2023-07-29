@@ -45,8 +45,9 @@ class Pngx__Admin__Field__File {
 		?>
 
 		<input
-			class="pngx-upload-file <?php echo esc_attr( $class ); ?>"
-			type="hidden" id="<?php echo esc_attr( $field['id'] ); ?>"
+			class="pngx-upload-file <?php echo esc_attr( $class ); ?> pngx-engine-options-control__upload-file-input"
+			type="hidden"
+			id="<?php echo esc_attr( $field['id'] ); ?>"
 			name="<?php echo esc_attr( $name ) . $repeating; ?>"
 			value="<?php echo esc_attr( $value ); ?>"
 			data-upload-type="<?php echo esc_attr( $field['upload_type'] ); ?>"
@@ -55,7 +56,7 @@ class Pngx__Admin__Field__File {
 
 		<button
 			id="<?php echo esc_attr( $field['id'] ); ?>-button"
-			class="pngx-file-button"
+			class="pngx-file-button pngx-engine-options-control__upload-file-button"
 		>
 			<?php echo __( 'Upload File', 'plugin-engine' ); ?>
 		</button>
@@ -64,7 +65,7 @@ class Pngx__Admin__Field__File {
 			<a
 				href="#"
 				id="<?php echo esc_attr( $field['id'] ); ?>-remove"
-				class="pngx-clear-file"
+				class="pngx-clear-file pngx-engine-options-control__upload-clear-button"
 			>
 				<?php echo __( 'Remove File', 'plugin-engine' ); ?>
 			</a>
