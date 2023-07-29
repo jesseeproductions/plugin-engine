@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Plugin Engine
+PluginName: Plugin Engine
 Description: A plugin framework to be embeded in the core plugin
 Version: 4.0.0
 Author: Jessee Productions, LLC
