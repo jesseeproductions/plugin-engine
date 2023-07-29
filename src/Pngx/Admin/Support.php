@@ -216,11 +216,9 @@ if ( ! class_exists( 'Pngx__Admin__Support' ) ) {
 
 			//PHP Info
 			$server['PHP version'] = phpversion();
-
+			$exec = 'Disabled';
 			if ( function_exists( 'exec' ) ) {
 				$exec = 'Enabled';
-			} else {
-				$exec = 'Disabled';
 			}
 			$server['Exec Enabled'] = $exec;
 			$php_vars               = array(
@@ -581,11 +579,14 @@ if ( ! class_exists( 'Pngx__Admin__Support' ) ) {
 		public function guess_path( $program ) {
 			$os      = $this->get_os();
 			$program = $this->escapeshellarg( $program );
+			$path    = '';
 
-			if ( $os['code'] !== 'WIN' ) {
-				$path = exec( "which $program" );
-			} else {
-				$path = exec( "where $program" );
+			if ( function_exists( 'exec' ) ) {
+				if ( $os['code'] !== 'WIN' ) {
+					$path = exec( "which $program" );
+				} else {
+					$path = exec( "where $program" );
+				}
 			}
 
 			if ( $path ) {
