@@ -77,3 +77,16 @@
 
   @return $value;
 }
+
+/**
+ * Screen Reader Hidden Text
+ *
+ */
+@mixin screen_reader_text {
+	position: absolute !important;
+	clip: rect(0, 0, 0, 0);
+	height: 1px;
+	width: 1px;
+	border: 0;
+	overflow: hidden;
+}

@@ -6,3 +6,9 @@
 	display: none !important;
 	visibility: hidden;
 }
+
+.pngx-screen-reader-text,
+.pngx-screen-reader-text span,
+.pngx-screen-reader-shortcut {
+	@include screen_reader_text();
+}
