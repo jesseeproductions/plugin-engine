@@ -152,7 +152,27 @@ class Pngx__Admin__Meta {
 
 		<?php $this->admin_template->template( '/components/loader', [ 'loader_classes' => [ 'pngx-loader__dots' ] ] ); ?>
 
-		<div class="pngx-engine-options-message__wrap"></div>
+		<div class="pngx-engine-options-message__wrap">
+			<?php
+				/**
+				 * Filter Default Template Name
+				 *
+				 * @since 4.0.0
+				 *
+				 * @param array<string>  $message A message to display.
+				 * @param WP_Post $post    The Post object.
+				 * @param array<string|mixed>   $metabox An array of details about the metabox.
+				 *
+				 * @return array<string> $message A message to display.
+				 */
+				$messages = apply_filters( 'pngx_meta_messages', [], $post, $metabox );
+				if ( ! empty( $messages ) && is_array( $messages ) ) {
+					foreach ( $messages as $msg ) {
+						echo $msg;
+					}
+				}
+			?>
+		</div>
 
 		<div class="main pngx-tabs" <?php echo Pngx__Admin__Fields::toggle( $tab_data, null ); ?> >
 

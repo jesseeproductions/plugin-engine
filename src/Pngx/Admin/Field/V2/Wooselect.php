@@ -54,8 +54,10 @@ class Wooselect {
 
 					if ( $field['attrs']['data-source-type'] === 'post' ) {
 						$selected_text = empty( $sel_option ) ? '' : get_the_title( $sel_option );
+						$selected_text = empty( $selected_text ) ? _x( 'Content Not Found', 'Post title not found for dropdown option name.', 'plugin-engine' ) : $selected_text;
 					} elseif ( $field['attrs']['data-source-type'] === 'term' ) {
 						$selected_text = empty( $sel_option ) ? '' : get_term( $sel_option )->name;
+						$selected_text = empty( $selected_text ) ? _x( 'Term Not Found', 'Term not found for dropdown option name.', 'plugin-engine' ) : $selected_text;
 					}
 
 					$selected_option[] = [
@@ -66,8 +68,10 @@ class Wooselect {
 			} else {
 				if ( $field['attrs']['data-source-type'] === 'post' ) {
 					$selected_text = empty( $selected ) ? '' : get_the_title( $selected );
+					$selected_text = empty( $selected_text ) ? _x( 'Content Not Found', 'Post title not found for dropdown option name.', 'plugin-engine' ) : $selected_text;
 				} elseif ( $field['attrs']['data-source-type'] === 'term' ) {
 					$selected_text = empty( $selected ) ? '' : get_term( $selected )->name;
+					$selected_text = empty( $selected_text ) ? _x( 'Term Not Found', 'Term not found for dropdown option name.', 'plugin-engine' ): $selected_text;
 				}
 
 				$selected_option[] = [
