@@ -53,23 +53,18 @@ CREATE TABLE {$wpdb->prefix}pngx_embeddings_meta (
 	KEY embeddings_id (embeddings_id),
 	KEY meta_key (meta_key($max_index_length))
 ) $collate;
-CREATE TABLE {$wpdb->prefix}pngx_embeddings_chunks (
+CREATE TABLE {$wpdb->prefix}embeddings_chunks (
     id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
     uuid varchar(36) NOT NULL,
     embeddings_date datetime NOT NULL default '0000-00-00 00:00:00',
-	embeddings_date_gmt datetime NOT NULL default '0000-00-00 00:00:00',
+    embeddings_date_gmt datetime NOT NULL default '0000-00-00 00:00:00',
     embeddings_post_id bigint(20),
     content_id bigint(20),
-    content_date datetime NOT NULL default '0000-00-00 00:00:00',
+    content_date datetime NOT NULL default '0000-00-00 00:00:00',\
     document text NOT NULL,
+    vectors longtext NOT NULL,
     PRIMARY KEY  (id),
-	KEY type_status_date (embeddings_post_id,content_id,embeddings_date,id)
-) $collate;
-CREATE TABLE {$wpdb->prefix}pngx_embeddings_values (
-	id bigint(20) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	embeddings_id int(11),
-	value decimal(14,12),
-	KEY embeddings_id (embeddings_id)
+    KEY type_status_date (embeddings_post_id,content_id,embeddings_date,id)
 ) $collate;
 CREATE TABLE {$wpdb->prefix}pngx_embeddings_terms (
     id bigint(20) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -123,7 +118,6 @@ CREATE TABLE {$wpdb->prefix}pngx_embeddings_terms (
 			"{$wpdb->prefix}pngx_sessions",
 			"{$wpdb->prefix}pngx_embeddings_meta",
 			"{$wpdb->prefix}pngx_embeddings_chunks",
-			"{$wpdb->prefix}pngx_embeddings_values",
 			"{$wpdb->prefix}pngx_embeddings_terms",
 		];
 
