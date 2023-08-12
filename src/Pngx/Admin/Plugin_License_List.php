@@ -1,16 +1,10 @@
 <?php
-// Don't load directly
-if ( ! defined( 'ABSPATH' ) ) {
-	die( '-1' );
-}
-
 
 /**
  * Plugin Version Validate License from Plugin Page
  *
  */
 class Pngx__Admin__Plugin_License_List {
-
 	protected $file;
 	protected $plugin_name;
 
@@ -19,7 +13,6 @@ class Pngx__Admin__Plugin_License_List {
 	 *
 	 */
 	public function __construct( $file, $license_key, $plugin_name, $status_name, $options, $shop_url, $links = array() ) {
-
 		$this->basename = plugin_basename( $file );
 		$this->file     = basename( dirname( $file ) );
 
@@ -38,25 +31,19 @@ class Pngx__Admin__Plugin_License_List {
 
 		//Add License Key Field
 		add_action( 'after_plugin_row_' . $file, array( $this, 'license_key' ), 10 );
-
 	}
 
 	public function plugin_links( $links ) {
-
 		//Save Deactivate Link
 		if ( isset( $links['deactivate'] ) ) {
 			$this->deactivate_link = $links['deactivate'];
 		}
 
-		$plugin_links = array();
-
+		$plugin_links = [];
 		if ( ! empty( $this->links ) ) {
 			foreach ( $this->links as $k => $link ) {
-
 				$plugin_links[] = '<a href="' . esc_url( get_admin_url() . $link ) . '">' . esc_html( $k ) . '</a>';
-
 			}
-
 		}
 
 		if ( isset( $this->license_info['status'] ) && ( 'valid' === $this->license_info['status'] ) ) {
@@ -68,14 +55,11 @@ class Pngx__Admin__Plugin_License_List {
 		}
 
 		return $links;
-
 	}
 
 
 	public function license_key() {
-
 		$this->license_key_output();
-
 	}
 
 	/**
@@ -83,10 +67,8 @@ class Pngx__Admin__Plugin_License_List {
 	 *
 	 */
 	public function license_key_output() {
-
 		wp_enqueue_style( 'pngx-admin' );
 		wp_enqueue_script( 'pngx-license' );
-
 		?>
 		<tr id="<?php echo esc_attr( $this->file ); ?>-license-key-row" class="active pngx-license-list-key-wrapper" xmlns="http://www.w3.org/1999/html">
 			<td class="plugin-update" colspan="3">
@@ -118,15 +100,12 @@ class Pngx__Admin__Plugin_License_List {
 
 					<?php
 
-
 					$expiration_msg = $expiration_date = '';
-
 					if ( isset( $this->license_info['expires'] ) ) { // Only Display Expiration if Date
 						$expiration_date = strtotime( $this->license_info['expires'] );
 						$expiration_date = date( get_option( 'date_format' ), $expiration_date );
 						$expiration_msg  = sprintf( __( ' and Expires on %s', 'plugin-engine' ), esc_attr( $expiration_date ) );
 					}
-
 					?>
 
 					<input
@@ -245,5 +224,4 @@ class Pngx__Admin__Plugin_License_List {
 		</tr>
 		<?php
 	}
-
 }

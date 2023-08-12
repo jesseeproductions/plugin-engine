@@ -105,7 +105,7 @@ class Pngx__Admin__Fields {
 	/*
 	* Display Individual Fields
 	*/
-	public static function display_field( $field = array(), $options = array(), $options_id = null, $meta = null, $repeat_vars = null ) {
+	public static function display_field( $field = [], $options = [], $options_id = null, $meta = null, $repeat_vars = null ) {
 
 		//Create Different name attribute for Option Fields and Not Meta Fields
 		if ( $options && $options_id ) {
@@ -254,7 +254,7 @@ class Pngx__Admin__Fields {
 				case 'systeminfo':
 
 					Pngx__Admin__Support::getInstance()->get_system_info_copy();
-					echo Pngx__Admin__Support::getInstance()->formatted_support_stats();
+					echo Pngx__Admin__Support::getInstance()->formatted_support_stats( $field );
 
 					break;
 

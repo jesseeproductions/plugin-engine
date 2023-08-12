@@ -9,7 +9,7 @@
 
 namespace Pngx\Install;
 
-use Pngx__Main;
+use Pngx__Main as Main;
 
 /**
  * Class Database
@@ -18,7 +18,54 @@ use Pngx__Main;
  *
  * @package Pngx\Install
  */
-class Database  {
+abstract class Database  {
+
+	/**
+	 * The hook prefix.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @var string
+	 */
+	public static $hook_prefix = 'pngx_';
+
+	/**
+	 * The name of the option key used to store the database version.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @var string
+	 */
+	public static $db_version_key;
+
+	/**
+	 * The name of the option key used to store the database version.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @var string
+	 */
+	public static $schema_version_key;
+
+	/**
+	 * The db version number.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @var int
+	 */
+	public static $db_version;
+
+	/**
+	 * Database constructor.
+	 *
+	 * @since 4.0.0
+	 */
+	public function __construct() {
+		static::$db_version_key     = Main::$db_version_key;
+		static::$schema_version_key = Main::$schema_version_key;
+		static::$db_version         = Main::$db_version;
+	}
 
 	/**
 	 * Create custom tables for Plugin Engine.
@@ -78,7 +125,7 @@ class Database  {
 		 *
 		 * @param string $create_tables The SQL to create tables.
 		 */
-		$tables = (string) apply_filters('pngx_create_table_statements', $create_tables );
+		$tables = (string) apply_filters(static::$hook_prefix . 'create_table_statements', $create_tables );
 
         return $tables;
 	}
@@ -100,7 +147,7 @@ class Database  {
 		 *
 		 * @param string $alter_tables The SQL to alter tables.
 		 */
-		$alter_tables = (array) apply_filters('pngx_alter_table_statements', $alter_tables );
+		$alter_tables = (array) apply_filters(static::$hook_prefix . 'alter_table_statements', $alter_tables );
 
         return $alter_tables;
 	}
@@ -122,7 +169,7 @@ class Database  {
 		 *
 		 * @param array<int|string> $tables An array of Plugin Engine table names.
 		 */
-		$tables = apply_filters( 'pngx_install_get_tables', $tables );
+		$tables = apply_filters( static::$hook_prefix . 'install_get_tables', $tables );
 
 		return $tables;
 	}
@@ -157,20 +204,20 @@ class Database  {
 		if ( 0 < count( $missing_tables ) ) {
 			if ( $modify_notice ) {
 				pngx_notice(
-					'pngx_missing_tables',
-					[ pngx( Database::class ), 'show_base_tables_missing' ]
+					static::$hook_prefix . 'missing_tables',
+					[ pngx( static::class ), 'show_base_tables_missing' ]
 				);
 			}
 
-			update_option( 'pngx_schema_missing_tables', $missing_tables );
+			update_option( static::$hook_prefix . 'schema_missing_tables', $missing_tables );
 		} else {
 			if ( $modify_notice ) {
-				\Pngx__Admin__Notices::instance()->remove( 'pngx_missing_tables' );
+				\Pngx__Admin__Notices::instance()->remove( static::$hook_prefix . 'missing_tables' );
 			}
 
-			update_option( Pngx__Main::$db_version_key, Pngx__Main::$db_version );
-			update_option( 'pngx_database_missing_tables', false );
-			delete_option( 'pngx_schema_missing_tables', [] );
+			update_option( static::$schema_version_key, static::$db_version );
+			update_option( static::$hook_prefix . 'database_missing_tables', false );
+			delete_option( static::$hook_prefix . 'schema_missing_tables', [] );
 		}
 		return $missing_tables;
 	}
@@ -207,7 +254,7 @@ class Database  {
 		 *
 		 * @param string The default plugin name is Plugin Engine.
 		 */
-		$plugin_name = apply_filters( 'pngx_missing_tables_plugin_name', 'Plugin Engine' );
+		$plugin_name = apply_filters( static::$hook_prefix . 'missing_tables_plugin_name', 'Plugin Engine' );
 
 		/**
 		 * Filter the url for missing tables notice to be able to reinstall.
@@ -216,12 +263,12 @@ class Database  {
 		 *
 		 * @param string The default link, empty string as it must be provided by a plugin.
 		 */
-		$database_install_link = apply_filters( 'pngx_missing_tables_notice_link', '' );
+		$database_install_link = apply_filters( static::$hook_prefix . 'missing_tables_notice_link', '' );
 		if ( empty( $database_install_link) ) {
 			return;
 		}
 
-		$missing_tables = get_option( 'pngx_schema_missing_tables', [] );
+		$missing_tables = get_option( static::$hook_prefix . 'schema_missing_tables', [] );
 
 		printf(
 			'<div class="error pngx-notice pngx-dependency-error" data-plugin="%1$s"><p>'
@@ -242,6 +289,6 @@ class Database  {
 	 * @param string|null $version New Plugin Engine DB version or null.
 	 */
 	public static function update_db_version( $version = null ) {
-		update_option( 'pngx_db_version', is_null( $version ) ? Pngx__Main::$db_version : $version );
+		update_option( static::$db_version_key, is_null( $version ) ? static::$db_version : $version );
 	}
 }

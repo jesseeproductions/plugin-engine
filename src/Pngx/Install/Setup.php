@@ -19,9 +19,18 @@ use Pngx\Traits\With_AJAX;
  *
  * @package Pngx\Install
  */
-class Setup {
+abstract class Setup {
 
 	use With_AJAX;
+
+	/**
+	 * The hook prefix.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @var string
+	 */
+	public static $hook_prefix = 'pngx_';
 
 	/**
 	 * The name of the transient that will be used to flag whether if setup is active.
@@ -40,14 +49,51 @@ class Setup {
 	public static $database_install_action = 'pngx-database-reinstall';
 
 	/**
+	 * The name of the option key used to store the database version.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @var string
+	 */
+	public static $db_version_key;
+
+	/**
+	 * The current plugin engine database.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @var int
+	 */
+	public $db_version;
+
+	/**
+	 * The database base class to use for install.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @var string
+	 */
+	public $database;
+
+	/**
+	 * Setup constructor.
+	 *
+	 * @since 4.0.0
+	 */
+	public function __construct() {
+		static::$db_version_key = Main::$db_version_key;
+		$this->saved_db_version = get_option( static::$db_version_key );
+		$this->db_version       = Main::$db_version;
+		$this->database         = Database::class;
+	}
+
+	/**
 	 * Check version of Plugin Engine database and update.
 	 *
 	 * @since 4.0.0
 	 */
 	public function check_version() {
-		$pngx_saved_db_version = get_option( 'pngx_db_version' );
-		$pngx_db_version       = Main::$db_version;
-		$requires_update       = version_compare( $pngx_saved_db_version, $pngx_db_version, '<' );
+		$requires_update = version_compare( $this->saved_db_version, $this->db_version, '<' );
 		if ( $requires_update ) {
 			$this->install();
 			/**
@@ -55,15 +101,15 @@ class Setup {
 			 *
 			 * @since 4.0.0
 			 */
-			do_action( 'pngx_db_updated' );
+			do_action( static::$hook_prefix . 'db_updated' );
 			// If there is no plugin engine
-			if ( ! $pngx_saved_db_version ) {
+			if ( ! $this->saved_db_version ) {
 				/**
 				 * Run when plugin engine has been installed for the first time.
 				 *
 				 * @since 4.0.0
 				 */
-				do_action( 'pngx_db_newly_installed' );
+				do_action( static::$hook_prefix . 'db_newly_installed' );
 			}
 		}
 	}
@@ -88,20 +134,30 @@ class Setup {
 		set_transient( static::SETUP_TRANSIENT, 'yes', MINUTE_IN_SECONDS * 10 );
 		pngx_maybe_define_constant( static::SETUP_TRANSIENT, true );
 
-		pngx( Database::class )::create_tables();
-		pngx( Database::class )::alter_tables();
-		pngx( Database::class )::verify_base_tables();
+		pngx( $this->database )::create_tables();
+		pngx( $this->database )::alter_tables();
+		pngx( $this->database )::verify_base_tables();
 		pngx( Cron::class )::create_crons();
-		pngx( Database::class )::update_db_version();
+		pngx( $this->database )::update_db_version();
 
-		do_action( 'pngx_installing' );
+		/**
+		 * Run when db is installing.
+		 *
+		 * @since 4.0.0
+		 */
+		do_action( static::$hook_prefix . 'installing' );
 
 		delete_transient( static::SETUP_TRANSIENT );
 
 		// Set permalink change on next reload of admin.
 		update_option( 'pngx_permalink_change', true );
 
-		do_action( 'pngx_installed' );
+		/**
+		 * Run after db installed.
+		 *
+		 * @since 4.0.0
+		 */
+		do_action( static::$hook_prefix . 'installed' );
 	}
 
 	/**
@@ -151,7 +207,7 @@ class Setup {
 
 		$this->install();
 
-		$result = pngx( Database::class )::verify_base_tables( false, false );
+		$result = pngx( $this->database )::verify_base_tables( false, false );
 		if ( ! empty( $result ) ) {
 			$error_message = _x( 'Database install failed. Tables could not be verified.', 'Error message when custom tables could not be verified after database install.', 'plugin-engine' );
 
@@ -165,7 +221,7 @@ class Setup {
 		}
 
 		// Sanitize url and prepare to validate it.
-		$url = sanitize_text_field( wp_unslash( $_POST['_wp_http_referer'] ) );
+		$url      = sanitize_text_field( wp_unslash( $_POST['_wp_http_referer'] ) );
 		$location = wp_sanitize_redirect( urldecode( $url ) );
 
 		/**

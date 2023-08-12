@@ -32,18 +32,27 @@ class Pngx__Main {
 	const OPTIONS_ID = 'plugin_engine_options';
 
 	/**
-	 * PNGX Schema version key.
+	 * PNGX DB Version Key.
 	 *
-	 * @since 3.2.0
+	 * @since 4.0.0
 	 *
 	 * @var string
 	 */
-	public static $db_version_key = 'pngx_schema_version';
+	public static $db_version_key = 'pngx_db_version';
+
+	/**
+	 * PNGX Schema Version Key.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @var string
+	 */
+	public static $schema_version_key = 'pngx_schema_version';
 
 	/**
 	 * PNGX Schema version.
 	 *
-	 * @since 3.2.0
+	 * @since 4.0.0
 	 *
 	 * @var string
 	 */
