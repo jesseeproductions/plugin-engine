@@ -367,7 +367,17 @@ pngx.access_profiles = pngx.access_profiles || {};
 
 			if ( nameMatch && nameMatch.length > 1 ) {
 				const name = nameMatch[1];
-				acc[name] = $input.val();
+
+				const inputType = $input.prop( 'type' );
+				if ( inputType === 'checkbox' || inputType === 'radio' ) {
+					if ( $input.prop( 'checked' ) ) {
+						acc[name] = true;
+					} else {
+						acc[name] = '';
+					}
+				} else {
+					acc[name] = $input.val();
+				}
 			}
 
 			return acc;
