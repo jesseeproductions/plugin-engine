@@ -64,10 +64,10 @@ class Pngx__Admin__EDD_License {
 			$license_option_name = esc_attr( $_POST[ 'pngx_license_key_' . $this->license ] );
 
 			// retrieve the license from the database
-			$license_info = get_option( $license_option_name );
+			$license_info = get_option( $license_option_name, [] );
 
 			//Check if the License has changed and deactivate
-			if ( $_POST[ $this->options_id ][ $license_option_name ] != $license_info['key'] ) {
+			if ( isset( $license_info['key'] ) && $_POST[ $this->options_id ][ $license_option_name ] !== $license_info['key'] ) {
 
 				$license_info['key'] = esc_attr( trim( $_POST[ $this->options_id ][ $license_option_name ] ) );
 

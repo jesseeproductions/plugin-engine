@@ -71,7 +71,7 @@ class Pngx__Admin__Plugin_License_List {
 		wp_enqueue_script( 'pngx-license' );
 		?>
 		<tr id="<?php echo esc_attr( $this->file ); ?>-license-key-row" class="active pngx-license-list-key-wrapper" xmlns="http://www.w3.org/1999/html">
-			<td class="plugin-update" colspan="3">
+			<td class="plugin-update" colspan="4">
 
 				<div class="pngx-license-list-key-wrap">
 					<div id="pngx-loading"><span></span></div>
