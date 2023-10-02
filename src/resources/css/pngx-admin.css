@@ -114,6 +114,10 @@
  * @param {Number} $base [null] - Base for pixel conversion.
  * @returns {Number} A number in rems, calculated based on the given value and the base pixel value. rem values are passed through as is.
  */
+/**
+ * Screen Reader Hidden Text
+ *
+ */
 /*
  * Utilities CSS
  * -------------------------------------------------------------
@@ -2361,6 +2365,10 @@ fieldset[disabled] .btn-primary.active {
   padding: 0.5rem 0.75rem;
 }
 
+.pngx-license-field-msg {
+  padding-left: var(--pngx-spacer-2);
+}
+
 .success,
 .pngx-success,
 .pngx-message {
@@ -3514,6 +3522,17 @@ div.repeating-field .remove-repeater {
 .pngx-a11y-hidden {
   display: none !important;
   visibility: hidden;
+}
+
+.pngx-screen-reader-text,
+.pngx-screen-reader-text span,
+.pngx-screen-reader-shortcut {
+  position: absolute !important;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  width: 1px;
+  border: 0;
+  overflow: hidden;
 }
 
 /* ==========================================================================
