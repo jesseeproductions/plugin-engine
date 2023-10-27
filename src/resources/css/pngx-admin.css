@@ -3282,7 +3282,7 @@ div.repeating-field .remove-repeater {
   margin-top: 0;
 }
 .pngx-wrapper .pngx-tabs .pngx-tabs-panel.ui-tabs-panel.ui-widget-content h4.pngx-fields-heading {
-  margin: 0 0 0 -0.625rem;
+  margin: 0;
 }
 @media (max-width: 768px) {
   .pngx-wrapper .pngx-tabs .pngx-tabs-panel.ui-tabs-panel.ui-widget-content h4.pngx-fields-heading {
@@ -3299,6 +3299,7 @@ div.repeating-field .remove-repeater {
 }
 .pngx-tabs .pngx-tabs-panel.ui-tabs-panel.ui-widget-content h4 {
   font-weight: bold;
+  margin: 0;
 }
 @media (min-width: 768px) {
   .pngx-tabs .pngx-tabs-panel.ui-tabs-panel.ui-widget-content h4 {
