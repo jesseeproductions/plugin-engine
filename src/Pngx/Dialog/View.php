@@ -2,12 +2,14 @@
 
 namespace Pngx\Dialog;
 
+use Pngx\Template;
+
 /**
  * Class View
  *
  * @since 3.2.0
  */
-class View extends \Pngx__Template {
+class View extends Template {
 	/**
 	 * Where in the themes we will look for templates.
 	 *
