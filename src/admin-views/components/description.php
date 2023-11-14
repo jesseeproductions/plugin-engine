@@ -32,4 +32,4 @@ if ( empty( $description ) ) {
 }
 
 ?>
-<span class="description"><?php echo esc_html( $description ); ?></span>
+<span class="description"><?php echo wp_kses_post( $description ); ?></span>
