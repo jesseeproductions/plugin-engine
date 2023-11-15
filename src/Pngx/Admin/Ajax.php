@@ -234,8 +234,6 @@ class Pngx__Admin__Ajax {
 
 		$post_id = absint( $_POST['post_id'] );
 
-		log_me($_POST);
-
 		if ( empty( $post_id ) || ! empty( $_POST['title_field'] ) ) {
 
 			$menu_item = array(
