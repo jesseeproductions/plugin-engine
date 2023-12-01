@@ -5,10 +5,10 @@
  *
  * Override this template in your own theme by creating a file at [your-theme]/pngx/dialogs/modal.php
  *
- * @since 3.2.0
+ * @since TBD
  *
  * @package Pngx
- * @version 3.2.0
+ * @version TBD
  */
 
 /** @var \Pngx\Dialog\View $dialog_view */
@@ -17,12 +17,12 @@ $dialog_view = pngx( 'pngx.dialog.view' );
 $vars        = get_defined_vars();
 ?>
 <?php $dialog_view->template( 'button', $vars, true ); ?>
-<script data-js="<?php echo esc_attr( 'dialog-content-' . $id ); ?>" type="text/template">
+<template data-js="<?php echo esc_attr( 'dialog-content-' . $id ); ?>" type="text/template">
 	<?php if ( ! empty( $title ) ) : ?>
 		<h2 <?php pngx_classes( $title_classes ) ?>><?php echo esc_html( $title ); ?></h2>
 	<?php endif; ?>
 	<div <?php pngx_classes( $content_classes ) ?>>
 		<?php echo $content; ?>
 	</div>
-</script>
+</template>
 
