@@ -16,6 +16,7 @@ use Pngx\Admin\Field\V2\Switch_Field;
 use Pngx\Admin\Field\V2\Text;
 use Pngx\Admin\Field\V2\Textarea;
 use Pngx\Admin\Field\V2\Wooselect;
+use Pngx\Admin\Field\V2\WYSIWYG;
 use Pngx\Template;
 
 /**
@@ -351,6 +352,12 @@ class Pngx__Admin__Fields {
 				case 'wooselect':
 
 					Wooselect::display( $field, $options, $options_id, $meta, $repeat_vars, static::$admin_template );
+
+					break;
+
+				case 'wysiwyg':
+
+					WYSIWYG::display( $field, $options, $options_id, $meta, $repeat_vars, static::$admin_template );
 
 					break;
 			}
