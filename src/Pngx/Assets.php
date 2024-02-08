@@ -14,14 +14,14 @@ class Pngx__Assets {
 	 *
 	 * @var array
 	 */
-	protected $assets = array();
+	protected $assets = [];
 
 	/**
 	 * Stores the localized scripts for reference
 	 *
 	 * @var array
 	 */
-	private $localized = array();
+	private $localized = [];
 
 	/**
 	 * Static Singleton Factory Method

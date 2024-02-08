@@ -175,7 +175,7 @@ if ( ! function_exists( 'pngx_asset' ) ) {
 	 *
 	 * @return array             Which Assets was registered
 	 */
-	function pngx_asset( $origin, $slug, $file, $deps = array(), $action = null, $arguments = array() ) {
+	function pngx_asset( $origin, $slug, $file, $deps = [], $action = null, $arguments = [] ) {
 		return pngx( 'pngx.assets' )->register( $origin, $slug, $file, $deps, $action, $arguments );
 	}
 }
