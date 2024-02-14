@@ -80,6 +80,7 @@ class Lazy_CSV_Iterator implements Iterator {
 	 *
 	 * @return mixed The current line of a csv file.
 	 */
+	#[\ReturnTypeWillChange]
 	public function current() {
 		return $this->line;
 	}
@@ -89,7 +90,7 @@ class Lazy_CSV_Iterator implements Iterator {
 	 *
 	 * @since 3.3.0
 	 */
-	public function next() {
+	public function next(): void {
 		$this->line = $this->file->fgetcsv();
 		$this->pointer ++;
 	}
@@ -114,7 +115,7 @@ class Lazy_CSV_Iterator implements Iterator {
 	 *
 	 * @since 3.3.0
 	 */
-	public function rewind() {
+	public function rewind(): void  {
 		$this->pointer = 0;
 		$this->file->seek( 0 );
 		$this->line = $this->file->fgetcsv();
