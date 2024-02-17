@@ -118,28 +118,28 @@ class Session_Provider extends \tad_DI52_ServiceProvider {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * @inheritDoc
 	 */
 	public function set_customer_session_cookie( $set ) {
 		return $this->container->make( SessionForTesting::class )->set_customer_session_cookie( $set );
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * @inheritDoc
 	 */
 	public function save_data( $logged_out_key ) {
 		return $this->container->make( SessionForTesting::class )->save_data( $logged_out_key );
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * @inheritDoc
 	 */
 	public function destroy_session( $set ) {
 		return $this->container->make( SessionForTesting::class )->destroy_session();
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * @inheritDoc
 	 */
 	public function forget_cookie() {
 		return $this->container->make( SessionForTesting::class )->forget_cookie();
@@ -158,7 +158,7 @@ class Session_Provider extends \tad_DI52_ServiceProvider {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * @inheritDoc
 	 */
 	public function maybe_update_nonce_of_logged_out_user( $uid, $action ) {
 		return $this->container->make( SessionForTesting::class )->maybe_update_nonce_of_logged_out_user( $uid, $action );

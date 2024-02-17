@@ -268,7 +268,7 @@ abstract class Pngx__Process__Queue extends Pngx__Process__Handler {
 	}
 
 	/**
-	 * {@inheritdoc}
+	 * @inheritDoc
 	 */
 	public function delete( $key ) {
 		self::delete_queue( $key );
@@ -356,7 +356,7 @@ abstract class Pngx__Process__Queue extends Pngx__Process__Handler {
 	}
 
 	/**
-	 * {@inheritdoc}
+	 * @inheritDoc
 	 */
 	public function save() {
 		$key = $this->generate_key();
@@ -656,7 +656,7 @@ abstract class Pngx__Process__Queue extends Pngx__Process__Handler {
 	}
 
 	/**
-	 * {@inheritdoc}
+	 * @inheritDoc
 	 */
 	protected function get_post_args() {
 		$post_args = parent::get_post_args();

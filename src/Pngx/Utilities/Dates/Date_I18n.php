@@ -19,7 +19,7 @@ use DateTimeImmutable;
  */
 class Date_I18n extends DateTime {
 	/**
-	 * {@inheritDoc}
+	 * @inheritDoc
 	 *
 	 * @return Date_I18n Localizable variation of DateTime.
 	 */

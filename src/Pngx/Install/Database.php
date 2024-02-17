@@ -84,6 +84,9 @@ abstract class Database  {
 		if ( ! empty( $create_tables ) ) {
 			dbDelta( $create_tables );
 		}
+
+		// Wait for tables to be created to prevent errors.
+		sleep(1);
 	}
 
 	/**

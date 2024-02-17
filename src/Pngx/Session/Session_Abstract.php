@@ -84,6 +84,15 @@ abstract class Session_Abstract implements Session_Interface {
 	 *
 	 * @var string Table name for session data.
 	 */
+	protected static $table_name_suffix = 'pngx_sessions';
+
+	/**
+	 * Name of table for the session data.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @var string Table name for session data.
+	 */
 	protected static $table_name;
 
 	/**
@@ -123,33 +132,33 @@ abstract class Session_Abstract implements Session_Interface {
 	protected $cache;
 
 	/**
-	 * {@inheritDoc}
+	 * @inheritDoc
 	 */
 	public abstract function has_session();
 
 	/**
-	 * {@inheritDoc}
+	 * @inheritDoc
 	 */
 	public function __get( $key ) {
 		return $this->get( $key );
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * @inheritDoc
 	 */
 	public function __set( $key, $value ) {
 		$this->set( $key, $value );
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * @inheritDoc
 	 */
 	public function __isset( $key ) {
 		return isset( $this->data[ sanitize_key( $key ) ] );
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * @inheritDoc
 	 */
 	public function __unset( $key ) {
 		if ( isset( $this->data[ $key ] ) ) {
@@ -159,7 +168,7 @@ abstract class Session_Abstract implements Session_Interface {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * @inheritDoc
 	 */
 	public function get( $key, $default = null ) {
 		$key = sanitize_key( $key );
@@ -168,7 +177,7 @@ abstract class Session_Abstract implements Session_Interface {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * @inheritDoc
 	 */
 	public function set( $key, $value ) {
 		if ( $value !== $this->get( $key ) ) {
@@ -179,14 +188,14 @@ abstract class Session_Abstract implements Session_Interface {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * @inheritDoc
 	 */
 	protected function set_table_name() {
-		static::$table_name = $GLOBALS['wpdb']->prefix . 'pngx_sessions';
+		static::$table_name = $GLOBALS['wpdb']->prefix . static::$table_name_suffix;
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * @inheritDoc
 	 */
 	public function get_table_name() {
 		return static::$table_name;
@@ -211,7 +220,7 @@ abstract class Session_Abstract implements Session_Interface {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * @inheritDoc
 	 */
 	public function generate_unique_id() {
 		$unique_id = '';
@@ -230,7 +239,7 @@ abstract class Session_Abstract implements Session_Interface {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * @inheritDoc
 	 */
 	public function get_user_id() {
 		return $this->user_id;
@@ -292,7 +301,7 @@ abstract class Session_Abstract implements Session_Interface {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * @inheritDoc
 	 */
 	public function get_session_id() {
 		$unique_id = '';
@@ -309,7 +318,7 @@ abstract class Session_Abstract implements Session_Interface {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * @inheritDoc
 	 */
 	public function get_session_data() {
 		return $this->has_session() ?
@@ -318,7 +327,7 @@ abstract class Session_Abstract implements Session_Interface {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * @inheritDoc
 	 */
 	public function get_session( $user_id, $default = false ) {
 		global $wpdb;
@@ -353,7 +362,7 @@ abstract class Session_Abstract implements Session_Interface {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * @inheritDoc
 	 */
 	public function save_data( $logged_out_key = 0 ) {
 		// Only save if there is something to save.
@@ -397,7 +406,7 @@ abstract class Session_Abstract implements Session_Interface {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * @inheritDoc
 	 */
 	public function set_expiration_timestamp() {
 		/**
@@ -422,21 +431,21 @@ abstract class Session_Abstract implements Session_Interface {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * @inheritDoc
 	 */
 	public function get_expiration_timestamp() {
 		return $this->expiration_timestamp;
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * @inheritDoc
 	 */
 	public function get_expiring_soon_timestamp() {
 		return $this->expiring_soon_timestamp;
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * @inheritDoc
 	 */
 	public function update_session_timestamp( $user_id, $timestamp ) {
 		global $wpdb;
@@ -450,7 +459,7 @@ abstract class Session_Abstract implements Session_Interface {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * @inheritDoc
 	 */
 	public function cleanup_sessions() {
 		global $wpdb;
@@ -466,7 +475,7 @@ abstract class Session_Abstract implements Session_Interface {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * @inheritDoc
 	 */
 	public function delete_session( $user_id ) {
 		global $wpdb;
@@ -482,7 +491,7 @@ abstract class Session_Abstract implements Session_Interface {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * @inheritDoc
 	 */
 	public function forget_session() {
 		/**
@@ -500,7 +509,7 @@ abstract class Session_Abstract implements Session_Interface {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * @inheritDoc
 	 */
 	public function destroy_session() {
 		$this->delete_session( $this->user_id );

@@ -27,14 +27,14 @@ class Pngx__Process__Post_Thumbnail_Setter extends Pngx__Process__Handler {
 	protected $post_thumbnail;
 
 	/**
-	 * {@inheritdoc}
+	 * @inheritDoc
 	 */
 	public static function action() {
 		return 'post_thumbnail_setter';
 	}
 
 	/**
-	 * {@inheritdoc}
+	 * @inheritDoc
 	 */
 	public function dispatch() {
 		if ( ! isset( $this->post_id, $this->post_thumbnail ) ) {
@@ -96,7 +96,7 @@ class Pngx__Process__Post_Thumbnail_Setter extends Pngx__Process__Handler {
 	}
 
 	/**
-	 * {@inheritdoc}
+	 * @inheritDoc
 	 */
 	public function sync_handle( array $data_source = null ) {
 		/** @var Pngx__Log $logger */

@@ -53,7 +53,7 @@ class Dialog extends \tad_DI52_ServiceProvider {
 	}
 
 	/**
-	  * {@inheritdoc}
+	  * @inheritDoc
 	 *
 	 * @since  3.2.0
 	 */

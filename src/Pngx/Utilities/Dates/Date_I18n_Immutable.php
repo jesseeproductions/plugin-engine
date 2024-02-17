@@ -18,7 +18,7 @@ use DateTimeImmutable;
  */
 class Date_I18n_Immutable extends DateTimeImmutable {
 	/**
-	 * {@inheritDoc}
+	 * @inheritDoc
 	 *
 	 * @return Date_I18n_Immutable Localizable variation of DateTimeImmutable.
 	 */

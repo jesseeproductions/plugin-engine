@@ -39,7 +39,7 @@ abstract class Session_Cookie_Abstract extends Session_Abstract implements Sessi
 	protected $has_cookie = false;
 
 	/**
-	 * {@inheritDoc}
+	 * @inheritDoc
 	 */
 	public function has_session() {
 		return isset( $_COOKIE[ $this->cookie_name ] ) || $this->has_cookie || is_user_logged_in();
@@ -57,7 +57,7 @@ abstract class Session_Cookie_Abstract extends Session_Abstract implements Sessi
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * @inheritDoc
 	 */
 	public function init_session_cookie() {
 		$cookie = $this->get_session_cookie();
@@ -116,7 +116,7 @@ abstract class Session_Cookie_Abstract extends Session_Abstract implements Sessi
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * @inheritDoc
 	 */
 	public function set_customer_session_cookie( $set ) {
 		if ( $set ) {
@@ -133,14 +133,14 @@ abstract class Session_Cookie_Abstract extends Session_Abstract implements Sessi
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * @inheritDoc
 	 */
 	public function get_cookie_name() {
 		return $this->cookie_name;
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * @inheritDoc
 	 */
 	public function get_session_cookie() {
 		$cookie_value = isset( $_COOKIE[ $this->cookie_name ] ) ? wp_unslash( $_COOKIE[ $this->cookie_name ] ) : false;
@@ -167,7 +167,7 @@ abstract class Session_Cookie_Abstract extends Session_Abstract implements Sessi
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * @inheritDoc
 	 */
 	public function forget_cookie() {
 		pngx_setcookie( $this->cookie_name, '', time() - YEAR_IN_SECONDS, $this->use_secure_cookie(), true );
