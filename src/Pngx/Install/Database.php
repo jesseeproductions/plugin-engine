@@ -81,6 +81,10 @@ abstract class Database  {
 
 		// dbDelta() cannot handle primary key changes, if there are changes to a primary key, run them here before it.
 		$create_tables = self::get_schema();
+
+		// Wait for tables to be created to prevent errors.
+		sleep(1);
+
 		if ( ! empty( $create_tables ) ) {
 			dbDelta( $create_tables );
 		}
