@@ -29,7 +29,7 @@ class WYSIWYG {
 			}
 		}
 
-		$rows        = isset( $field['rows'] ) ? $field['rows'] : 12;
+		$rows        = isset( $field['rows'] ) ? $field['rows'] : 20;
 		$cols        = isset( $field['cols'] ) ? $field['cols'] : 50;
 		$placeholder = isset( $field['placeholder'] ) ? $field['placeholder'] : '';
 
@@ -45,7 +45,7 @@ class WYSIWYG {
 			'label'          => $field['label'],
 			'tooltip'        => $field['tooltip'] ?? null,
 			'fieldset_attrs' => ! empty( $field['fieldset_attrs'] ) ? (array) $field['fieldset_attrs'] : [],
-			'template_name'  => 'textarea',
+			'template_name'  => 'wysiwyg',
 			'template_echo'  => true,
 			'template_args'  => [
 				'id'            => $field['id'],

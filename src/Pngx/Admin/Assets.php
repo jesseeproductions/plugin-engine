@@ -162,7 +162,7 @@ class Pngx__Admin__Assets {
 		wp_register_script(
 			'pngx-wp-editor',
 			Pngx__Main::instance()->resource_url . 'js/wp_editor.js',
-			[],
+			[ 'wp-tinymce' ],
 			filemtime( Pngx__Main::instance()->resource_path . 'js/wp_editor.js' ),
 			true
 		);

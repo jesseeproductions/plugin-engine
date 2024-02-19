@@ -174,6 +174,9 @@
 						}
 					} );
 				}
+
+				// Right after making an element visible
+				$dependent.trigger('pngx.dependency.met' );
 			} else {
 				$dependent.removeClass( active_class );
 

@@ -14,7 +14,7 @@ if ( class_exists( 'Pngx__Admin__Field__Wysiwyg' ) ) {
  */
 class Pngx__Admin__Field__Wysiwyg {
 
-	public static function display( $field = array(), $options = array(), $options_id = null, $meta = null, $repeat_obj = null ) {
+	public static function display( $field = [], $options = [], $options_id = null, $meta = null, $repeat_obj = null ) {
 
 		if ( ! empty( $options_id ) ) {
 			$name  = $options_id;
@@ -46,8 +46,6 @@ class Pngx__Admin__Field__Wysiwyg {
 				'post' => $post
 			) );
 		}
-
-		wp_enqueue_script( 'tiny_mce' );
 
 		_WP_Editors::editor_settings( esc_attr( $field['id'] ), $set );
 
@@ -115,7 +113,5 @@ class Pngx__Admin__Field__Wysiwyg {
 		if ( isset( $field['desc'] ) && ! empty( $field['desc'] ) ) {
 			echo '<span class="description">' . esc_html( $field['desc'] ) . '</span>';
 		}
-
 	}
-
 }
