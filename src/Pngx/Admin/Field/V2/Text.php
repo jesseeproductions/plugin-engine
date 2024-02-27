@@ -16,7 +16,18 @@ namespace Pngx\Admin\Field\V2;
  */
 class Text {
 
-	public static function display( $field = [], $options = [], $options_id = null, $meta = null, $var = null, $template = null ) {
+	/**
+	 * Display the Text field.
+	 *
+	 * @param array        $field      Field data.
+	 * @param array        $options    Options data.
+	 * @param string       $options_id Options ID.
+	 * @param string       $meta       Meta data.
+	 * @param array        $var        Variable data.
+	 * @param Template     $template   Template data.
+	 * @param WP_Post|null $post       WP_Post object.
+	 */
+	public static function display( $field = [], $options = [], $options_id = null, $meta = null, $var = null, $template = null, $post = null ) {
 
 		if ( ! empty( $options_id ) ) {
 			$name  = $options_id;
@@ -24,7 +35,13 @@ class Text {
 		} else {
 			$name  = $field['id'];
 			$value = $meta;
-			if ( ! $value && isset( $field['value'] ) ) {
+			if ( ! $value
+				&& isset( $field['value'] )
+				&& (
+					isset ( $post->ID )
+					&& ! metadata_exists( 'post', $post->ID, $field['id'] )
+				)
+			) {
 				$value = $field['value'];
 			}
 		}

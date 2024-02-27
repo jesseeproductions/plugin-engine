@@ -103,10 +103,17 @@ class Pngx__Admin__Fields {
 		}
 	}
 
-	/*
-	* Display Individual Fields
-	*/
-	public static function display_field( $field = [], $options = [], $options_id = null, $meta = null, $repeat_vars = null ) {
+	/**
+	 * Display the field.
+	 *
+	 * @param array        $field       The field to display.
+	 * @param array        $options     The options array.
+	 * @param string|null  $options_id  The options id.
+	 * @param mixed        $meta        The meta value.
+	 * @param mixed        $repeat_vars The repeat vars.
+	 * @param WP_Post|null $post        The post object or null.
+	 */
+	public static function display_field( $field = [], $options = [], $options_id = null, $meta = null, $repeat_vars = null, $post = null ) {
 
 		//Create Different name attribute for Option Fields and Not Meta Fields
 		if ( $options && $options_id ) {
@@ -339,13 +346,13 @@ class Pngx__Admin__Fields {
 
 				case 'text':
 
-					Text::display( $field, $options, $options_id, $meta, $repeat_vars, static::$admin_template );
+					Text::display( $field, $options, $options_id, $meta, $repeat_vars, static::$admin_template, $post );
 
 					break;
 
 				case 'textarea':
 
-					Textarea::display( $field, $options, $options_id, $meta, $repeat_vars, static::$admin_template );
+					Textarea::display( $field, $options, $options_id, $meta, $repeat_vars, static::$admin_template, $post );
 
 					break;
 

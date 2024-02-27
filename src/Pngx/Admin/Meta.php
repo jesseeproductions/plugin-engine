@@ -224,7 +224,7 @@ class Pngx__Admin__Meta {
 								isset( $field['version'] )
 								&& $field['version'] === 'v2'
 							) {
-								Pngx__Admin__Fields::display_field( $field, false, false, $meta, null );
+								Pngx__Admin__Fields::display_field( $field, false, false, $meta, null, $post );
 
 								continue;
 							}
