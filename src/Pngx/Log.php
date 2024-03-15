@@ -257,7 +257,7 @@ class Pngx__Log {
 	 */
 	public function get_current_logger() {
 		if ( ! $this->current_logger ) {
-			$engine = pngx_get_option( 'logging_class', null );
+			$engine = get_option( 'logging_class', null );
 			$available = $this->get_logging_engines();
 
 			if ( empty( $engine ) || ! isset( $available[ $engine ] ) ) {
@@ -340,7 +340,7 @@ class Pngx__Log {
 	 * @return string
 	 */
 	public function get_level() {
-		$current_level = pngx_get_option( 'logging_level', null );
+		$current_level = get_option( 'logging_level', null );
 		$available_levels = wp_list_pluck( $this->get_logging_levels(), 0 );
 
 		if ( ! in_array( $current_level, $available_levels ) ) {

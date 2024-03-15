@@ -50,7 +50,7 @@ class Utils {
 		 *
 		 * @param int $format_index Index of datepickerFormat.
 		 */
-		return apply_filters( 'pngx_datepicker_format_index', pngx_get_option( 'datepickerFormat', static::$default_datepicker_format_index ) );
+		return apply_filters( 'pngx_datepicker_format_index', get_option( 'datepickerFormat', static::$default_datepicker_format_index ) );
 	}
 
 	/**
@@ -1197,7 +1197,7 @@ class Utils {
 		$end_of_day   = clone $date_obj;
 
 		if ( empty( $cutoff ) || ! is_string( $cutoff ) || false === strpos( $cutoff, ':' ) ) {
-			$cutoff = pngx_get_option( 'multiDayCutoff', '00:00' );
+			$cutoff = get_option( 'multiDayCutoff', '00:00' );
 		}
 
 		list( $hours_to_add, $minutes_to_add ) = array_map( 'absint', explode( ':', $cutoff ) );
@@ -1249,7 +1249,7 @@ class Utils {
 		$end_of_day   = clone $date_obj;
 
 		if ( empty( $cutoff ) || ! is_string( $cutoff ) || false === strpos( $cutoff, ':' ) ) {
-			$cutoff = pngx_get_option( 'multiDayCutoff', '00:00' );
+			$cutoff = get_option( 'multiDayCutoff', '00:00' );
 		}
 
 		list( $hours_to_add, $minutes_to_add ) = array_map( 'absint', explode( ':', $cutoff ) );

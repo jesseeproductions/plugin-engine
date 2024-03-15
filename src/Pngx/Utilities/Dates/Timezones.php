@@ -239,7 +239,7 @@ class Timezones {
 	public static function mode() {
 		$mode = self::EVENT_TIMEZONE;
 
-		if ( 'site' === pngx_get_option( 'pngx_events_timezone_mode' ) ) {
+		if ( 'site' === get_option( 'pngx_events_timezone_mode' ) ) {
 			$mode = self::SITE_TIMEZONE;
 		}
 

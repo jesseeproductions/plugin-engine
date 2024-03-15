@@ -114,8 +114,8 @@ class Known_Range {
 	 * @param int $event_id
 	 */
 	public function update_known_range( $event_id ) {
-		$is_earliest_date_marker = in_array( $event_id, pngx_get_option( 'earliest_date_markers', [] ) );
-		$is_latest_date_marker   = in_array( $event_id, pngx_get_option( 'latest_date_markers', [] ) );
+		$is_earliest_date_marker = in_array( $event_id, get_option( 'earliest_date_markers', [] ) );
+		$is_latest_date_marker   = in_array( $event_id, get_option( 'latest_date_markers', [] ) );
 		if ( $is_earliest_date_marker || $is_latest_date_marker ) {
 			$this->rebuild_known_range();
 

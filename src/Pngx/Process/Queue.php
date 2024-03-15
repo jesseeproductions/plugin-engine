@@ -535,7 +535,7 @@ abstract class Pngx__Process__Queue extends Pngx__Process__Handler {
 			( defined( 'PNGX_NO_ASYNC' ) && true === PNGX_NO_ASYNC )
 			|| true === (bool) getenv( 'PNGX_NO_ASYNC' )
 			|| (bool) pngx_get_request_var( 'pngx_queue_sync', false )
-			|| pngx_is_truthy( pngx_get_option( 'pngx_queue_sync', false ) )
+			|| pngx_is_truthy( get_option( 'pngx_queue_sync', false ) )
 		) {
 			$result = $this->sync_process();
 			$this->complete();
