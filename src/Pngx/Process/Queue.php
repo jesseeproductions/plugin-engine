@@ -234,6 +234,33 @@ abstract class Pngx__Process__Queue extends Pngx__Process__Handler {
 	}
 
 	/**
+	 * Returns if queue is active.
+	 *
+	 * @since 4.1.0
+	 *
+	 * @param string $queue_id
+	 *
+	 * @return bool Whether queue is active or not.
+	 */
+	public function is_active( $queue_id ) {
+	    $data_object = $this->get_status_of( $queue_id );
+
+	    if (
+	        $data_object->offsetExists( 'total' )
+	        && $data_object->offsetExists( 'fragments' )
+	    ) {
+		    $total     = intval( $data_object->offsetGet( 'total' ) );
+		    $fragments = intval( $data_object->offsetGet( 'fragments' ) );
+
+		    if ( $total >= 0 && $fragments >= 1 ) {
+			    return true;
+		    }
+	    }
+
+	    return false;
+	}
+
+	/**
 	 * Deletes all queues for a specific action.
 	 *
 	 * @since 4.7.19
@@ -300,7 +327,7 @@ abstract class Pngx__Process__Queue extends Pngx__Process__Handler {
 	}
 
 	/**
-	 * Upates the queue and meta data for the process.
+	 * Updates the queue and meta data for the process.
 	 *
 	 * @since 4.7.12
 	 * @since 4.9.5 Pulled method from the `WP_Background_Process` class.
