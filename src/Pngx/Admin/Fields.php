@@ -12,6 +12,7 @@ use Pngx\Admin\Field\V2\File;
 use Pngx\Admin\Field\V2\Image;
 use Pngx\Admin\Field\V2\Number;
 use Pngx\Admin\Field\V2\Read_Only;
+use Pngx\Admin\Field\V2\Repeater;
 use Pngx\Admin\Field\V2\Switch_Field;
 use Pngx\Admin\Field\V2\Text;
 use Pngx\Admin\Field\V2\Textarea;
@@ -28,7 +29,7 @@ class Pngx__Admin__Fields {
 	/**
 	 * An instance of the admin template handler.
 	 *
-	 * @since 0.1.0
+	 * @since 4.0.0
 	 *
 	 * @var Template
 	 */
@@ -37,7 +38,7 @@ class Pngx__Admin__Fields {
 	/**
 	 * Template_Modifications constructor.
 	 *
-	 * @since 0.1.0
+	 * @since 4.0.0
 	 *
 	 * @param Template $template An instance of the backend template handler.
 	 */
@@ -335,6 +336,12 @@ class Pngx__Admin__Fields {
 				case 'read-only':
 
 					Read_Only::display( $field, $options, $options_id, $meta, $repeat_vars, static::$admin_template );
+
+					break;
+
+				case 'repeater':
+
+					Repeater::display( $field, $options, $options_id, $meta, $repeat_vars, static::$admin_template );
 
 					break;
 

@@ -154,23 +154,23 @@ class Pngx__Admin__Meta {
 
 		<div class="pngx-engine-options-message__wrap">
 			<?php
-				/**
-				 * Filter Default Template Name
-				 *
-				 * @since 4.0.0
-				 *
-				 * @param array<string>  $message A message to display.
-				 * @param WP_Post $post    The Post object.
-				 * @param array<string|mixed>   $metabox An array of details about the metabox.
-				 *
-				 * @return array<string> $message A message to display.
-				 */
-				$messages = apply_filters( 'pngx_meta_messages', [], $post, $metabox );
-				if ( ! empty( $messages ) && is_array( $messages ) ) {
-					foreach ( $messages as $msg ) {
-						echo $msg;
-					}
+			/**
+			 * Filter Default Template Name
+			 *
+			 * @since 4.0.0
+			 *
+			 * @param array<string>       $message A message to display.
+			 * @param WP_Post             $post    The Post object.
+			 * @param array<string|mixed> $metabox An array of details about the metabox.
+			 *
+			 * @return array<string> $message A message to display.
+			 */
+			$messages = apply_filters( 'pngx_meta_messages', [], $post, $metabox );
+			if ( ! empty( $messages ) && is_array( $messages ) ) {
+				foreach ( $messages as $msg ) {
+					echo $msg;
 				}
+			}
 			?>
 		</div>
 
@@ -208,22 +208,12 @@ class Pngx__Admin__Meta {
 
 					foreach ( $fields as $field ) {
 
-						if (
-							isset( $field['section'] ) &&
-							$field['type'] && $field['section'] === $metabox['id'] &&
-							(
-								isset( $field['tab'] ) &&
-								$tab_slug === $field['tab']
-							)
-						) {
+						if ( isset( $field['section'] ) && $field['type'] && $field['section'] === $metabox['id'] && ( isset( $field['tab'] ) && $tab_slug === $field['tab'] ) ) {
 							// get value of this field if it exists for this post
 							$meta = get_post_meta( $post->ID, $field['id'], true );
 
 							// V2 Displays Fields from admin-views directory.
-							if (
-								isset( $field['version'] )
-								&& $field['version'] === 'v2'
-							) {
+							if ( isset( $field['version'] ) && $field['version'] === 'v2' ) {
 								Pngx__Admin__Fields::display_field( $field, false, false, $meta, null, $post );
 
 								continue;
@@ -239,8 +229,8 @@ class Pngx__Admin__Meta {
 								/**
 								 * Filter Default Template Name
 								 */
-								$default = apply_filters( 'pngx-default-template', 'default' );
-								$template_area   = ! empty( $template_select ) ? $template_select : $default;
+								$default       = apply_filters( 'pngx-default-template', 'default' );
+								$template_area = ! empty( $template_select ) ? $template_select : $default;
 								?>
 								<div class="pngx-meta-template-wrap template-wrap-<?php echo esc_html( $wrapclass ); ?>" >
 								<?php
@@ -296,7 +286,7 @@ class Pngx__Admin__Meta {
 								<div class="pngx-meta-field field-<?php echo esc_attr( $field['type'] ); ?> field-<?php echo esc_attr( $field['id'] ); ?>">
 
 									<?php if ( ! empty( $field['label'] ) ) {
-									?>
+										?>
 										<label for="<?php echo esc_attr( $field['id'] ); ?>">
 											<?php echo esc_attr( $field['label'] ); ?>
 										</label>
@@ -334,34 +324,22 @@ class Pngx__Admin__Meta {
 	/**
 	 * Save Meta Fields.
 	 *
-	 * @param int $post_id The post ID.
-	 * @param WP_Post $post An instance of the post object.
+	 * @param int     $post_id The post ID.
+	 * @param WP_Post $post    An instance of the post object.
 	 */
 	public function save_meta( $post_id, $post ) {
 		//Autosave or no past variable then kick out
-		if (
-			empty( $_POST ) ||
-			(
-				defined( 'DOING_AUTOSAVE' ) &&
-				DOING_AUTOSAVE
-			)
-		) {
+		if ( empty( $_POST ) || ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) ) {
 			return;
 		}
 
 		// If no nonce set, then return.
-		if (
-			! isset( $_POST['_inline_edit'] ) &&
-			! isset( $_POST['pngx_nonce'] )
-		) {
+		if ( ! isset( $_POST['_inline_edit'] ) && ! isset( $_POST['pngx_nonce'] ) ) {
 			return;
 		}
 
 		//Check if on the right post type
-		if (
-			isset( $post->post_type ) &&
-			! in_array( $post->post_type, $this->get_post_types() )
-		) {
+		if ( isset( $post->post_type ) && ! in_array( $post->post_type, $this->get_post_types() ) ) {
 			return;
 		}
 
@@ -371,19 +349,12 @@ class Pngx__Admin__Meta {
 		}
 
 		// Verify Plugin Nonce.
-		if (
-			! isset( $_POST['_inline_edit'] ) &&
-			isset( $_POST['pngx_nonce'] ) &&
-			! wp_verify_nonce( $_POST['pngx_nonce'], 'pngx_save_fields' )
-		) {
+		if ( ! isset( $_POST['_inline_edit'] ) && isset( $_POST['pngx_nonce'] ) && ! wp_verify_nonce( $_POST['pngx_nonce'], 'pngx_save_fields' ) ) {
 			return;
 		}
 
 		// Verify Inline Edit Nonce.
-		if (
-			isset( $_POST['_inline_edit'] ) &&
-			! wp_verify_nonce( $_POST['_inline_edit'], 'inlineeditnonce' )
-		) {
+		if ( isset( $_POST['_inline_edit'] ) && ! wp_verify_nonce( $_POST['_inline_edit'], 'inlineeditnonce' ) ) {
 			return;
 		}
 
@@ -424,15 +395,37 @@ class Pngx__Admin__Meta {
 
 			}
 
-			//handle repeatable fields
+			// Handle repeatable fields.
 			if ( 'repeater' === $option['type'] && isset ( $_POST[ $option['id'] ] ) ) {
 
-				if ( ! isset( ${'repeat_obj' . $option['id']} ) ) {
-                    ${'repeat_obj' . $option['id']} = new Pngx__Repeater__Main ( $option['id'], $_POST[ $option['id'] ], $post_id, 'save' );
+				$repeater_data  = $_POST[ $option['id'] ];
+				$sanitized_data = [];
+
+				foreach ( $repeater_data as $index => $repeater_item ) {
+					$sanitized_item = [];
+					$has_data       = false;
+
+					foreach ( $option['repeater_fields'] as $repeater_field ) {
+						$field_id    = $repeater_field['id'];
+						$field_value = isset( $repeater_item[ $field_id ] ) ? $repeater_item[ $field_id ] : '';
+
+						//Send Input to Sanitize Class, will return sanitized input or no input if no sanitization method
+						$sanitized                   = new Pngx__Sanitize( $repeater_field['type'], $field_value, $repeater_field );
+						$sanitized_item[ $field_id ] = $sanitized->result;
+
+						if ( ! empty( $sanitized->result ) ) {
+							$has_data = true;
+						}
+					}
+
+					if ( $has_data ) {
+						$sanitized_data[] = $sanitized_item;
+					}
 				}
 
-				continue;
+				update_post_meta( $post_id, $option['id'], $sanitized_data );
 
+				continue;
 			}
 
 			// Final Check if value should be saved then sanitize and save
