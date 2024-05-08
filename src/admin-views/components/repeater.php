@@ -28,21 +28,9 @@
 use Pngx\Admin\Field\V2\Repeater;
 
 ?>
-<div class="repeater-container">
+<div class="pngx-repeater-container">
 	<div data-repeater-list="<?php echo esc_attr( $name ); ?>">
-		<?php foreach ( $value as $index => $item ) : ?>
-			<div data-repeater-item>
-				<?php foreach ( $repeater_fields as $repeater_field ) : ?>
-					<?php
-					$repeater_field_name  = "{$name}[{$index}][{$repeater_field['id']}]";
-					$repeater_field_value = isset( $item[ $repeater_field['id'] ] ) ? $item[ $repeater_field['id'] ] : '';
-					echo Repeater::display_repeater_field( $repeater_field, $repeater_field_name, $repeater_field_value, $this );
-					?>
-				<?php endforeach; ?>
-				<button data-repeater-delete type="button">Delete</button>
-			</div>
-		<?php endforeach; ?>
-		<div data-repeater-item style="display: none;">
+		<div data-repeater-item style="display: none;" class="pngx-repeater-item">
 			<?php foreach ( $repeater_fields as $repeater_field ) : ?>
 				<?php
 				$repeater_field_name  = "{$name}[{{{index}}}][{$repeater_field['id']}]";
@@ -50,36 +38,26 @@ use Pngx\Admin\Field\V2\Repeater;
 				echo Repeater::display_repeater_field( $repeater_field, $repeater_field_name, $repeater_field_value, $this );
 				?>
 			<?php endforeach; ?>
-			<button data-repeater-delete type="button">Delete</button>
+			<button data-repeater-delete type="button">
+				<span aria-hidden="true">&times;</span>
+				<span class="screen-reader-text">Delete</span>
+			</button>
 		</div>
+		<?php foreach ( $value as $index => $item ) : ?>
+			<div data-repeater-item class="pngx-repeater-item">
+				<?php foreach ( $repeater_fields as $repeater_field ) : ?>
+					<?php
+					$repeater_field_name  = "{$name}[{$index}][{$repeater_field['id']}]";
+					$repeater_field_value = isset( $item[ $repeater_field['id'] ] ) ? $item[ $repeater_field['id'] ] : '';
+					echo Repeater::display_repeater_field( $repeater_field, $repeater_field_name, $repeater_field_value, $this );
+					?>
+				<?php endforeach; ?>
+				<button data-repeater-delete type="button">
+					<span aria-hidden="true">&times;</span>
+					<span class="screen-reader-text">Delete</span>
+				</button>
+			</div>
+		<?php endforeach; ?>
 	</div>
-	<button data-repeater-create type="button">Add</button>
+	<button data-repeater-create class="button-primary" type="button">Add</button>
 </div>
-
-<style>
-	.repeater-container > [data-repeater-item]:first-child {
-		display: none;
-	}
-</style>
-
-<script>
-	jQuery( document ).ready( function( $ ) {
-		$( '.repeater-container' ).repeater( {
-			initEmpty: false,
-			defaultValues: {},
-			show: function() {
-				$( this ).slideDown( function() {
-					// Initialize dropdowns in the new row
-					$( this ).find( '.pngx-dropdown' ).pngx_dropdowns();
-
-					// Trigger dependencies in the new row
-					$( this ).find( '.pngx-dependency' ).trigger( 'change' );
-					$( document ).trigger( 'pngx.dependencies-run' );
-				} );
-			},
-			hide: function( deleteElement ) {
-				$( this ).slideUp( deleteElement );
-			}
-		} );
-	} );
-</script>

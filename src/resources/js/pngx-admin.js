@@ -47,6 +47,7 @@ var pngx_admin_fields_init = pngx_admin_fields_init || {};
 		 */
 		$( ".form-table label:empty" ).parent().hide();
 
+		obj.init_repeater();
 	};
 
 	/*
@@ -176,6 +177,30 @@ var pngx_admin_fields_init = pngx_admin_fields_init || {};
 
 	};
 
+	/**
+	 * Initialize repeater fields.
+	 *
+	 * @since 4.1.0
+	 */
+	obj.init_repeater = function() {
+		$( '.pngx-repeater-container' ).repeater( {
+			initEmpty: false,
+			defaultValues: {},
+			show: function() {
+				$( this ).slideDown( function() {
+					// Initialize dropdowns in the new row
+					$( this ).find( '.pngx-dropdown' ).pngx_dropdowns();
+
+					// Trigger dependencies in the new row
+					$( this ).find( '.pngx-dependency' ).trigger( 'change' );
+					$( document ).trigger( 'pngx.dependencies-run' );
+				} );
+			},
+			hide: function( deleteElement ) {
+				$( this ).slideUp( deleteElement );
+			}
+		} );
+	};
 
 	$( function () {
 		obj.init();
