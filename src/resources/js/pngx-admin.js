@@ -188,6 +188,9 @@ var pngx_admin_fields_init = pngx_admin_fields_init || {};
 			defaultValues: {},
 			show: function() {
 				$( this ).slideDown( function() {
+					// Remove the 'pngx-dropdown-created' class from the cloned item's select
+					$( this ).find( '.pngx-dropdown' ).removeClass( 'pngx-dropdown-ignore' );
+
 					// Initialize dropdowns in the new row
 					$( this ).find( '.pngx-dropdown' ).pngx_dropdowns();
 

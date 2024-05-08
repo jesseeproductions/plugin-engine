@@ -35,6 +35,14 @@ use Pngx\Admin\Field\V2\Repeater;
 				<?php
 				$repeater_field_name  = "{$name}[{{{index}}}][{$repeater_field['id']}]";
 				$repeater_field_value = '';
+
+				if ( $repeater_field['type'] === 'wooselect' ) {
+					if ( ! isset( $repeater_field['classes_select'] ) ) {
+						$repeater_field['classes_select'] = [];
+					}
+					$repeater_field['classes_select'][] = 'pngx-dropdown-ignore';
+				}
+
 				echo Repeater::display_repeater_field( $repeater_field, $repeater_field_name, $repeater_field_value, $this );
 				?>
 			<?php endforeach; ?>

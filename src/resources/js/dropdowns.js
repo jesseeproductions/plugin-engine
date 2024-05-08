@@ -515,7 +515,7 @@ pngx.dropdowns = pngx.dropdowns || {};
 	 * @return {jQuery}         Affected fields
 	 */
 	obj.dropdown = function( $fields, args ) {
-		var $elements = $fields.not( '.select2-offscreen, .select2-container, ' + obj.selector.created.className() ); // eslint-disable-line max-len
+		var $elements = $fields.not( '.select2-offscreen, .select2-container, ' + obj.selector.created.className() + ', .pngx-dropdown-ignore' ); // eslint-disable-line max-len
 
 		if ( 0 === $elements.length ) {
 			return $elements;
