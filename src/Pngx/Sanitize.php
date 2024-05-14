@@ -484,7 +484,9 @@ class Pngx__Sanitize {
 	}
 
 	/**
-	 * Sanitize Google Analytics
+	 * Sanitize Google Analytics.
+	 *
+	 * @since 4.1.0 - Modify for support of GA4.
 	 *
 	 * @return bool|mixed
 	 */
@@ -493,11 +495,9 @@ class Pngx__Sanitize {
 		// en dash to minus, prevents issue with code copied from web with "fancy" dash
 		$this->input = str_replace( '�', '-', $this->input );
 
-		if ( ! preg_match( '|^UA-\d{4,}-\d+$|', $this->input ) ) {
-
+		if ( ! preg_match( '|^G-[A-Za-z0-9]+$|', $this->input ) ) {
 			return false;
 		} else {
-
 			return $this->input;
 		}
 	}

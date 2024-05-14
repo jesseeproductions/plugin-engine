@@ -1,9 +1,14 @@
 === Plugin Engine ===
 
 == Changelog ==
-= 4.0.0 TBD =
+= 4.1.0 May 13th 2024 =
 
-* Fix - Update bootstrap logic to make sure Common will correctly load completely in the context of plugin activations requests, thanks Lucatume for the fix in Tribe Common!
+* Feature - Add V2 fields repeater field support.
+* Tweak - Chanage analytics sanitization to allow for GA4 format.
+= 4.0.0 February 21st 2024 =
+
+* Feature - Add V2 fields support.
+* Fix - Update bootstrap logic to make sure plugin engine will correctly load completely in the context of plugin activations requests, thanks Lucatume for the fix.
 - TODO add automated tests from https://github.com/the-events-calendar/tribe-common/pull/1734/files
 
 = 3.3.0 March 9th, 2023 =
