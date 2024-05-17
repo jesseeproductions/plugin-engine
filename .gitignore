@@ -37,3 +37,7 @@ vendor/*
 !vendor/tribe-select2/*
 !vendor/tribe-selectWoo
 !vendor/tribe-selectWoo/*
+!vendor/jquery-repeater*
+!vendor/jquery-repeater/*
+!vendor/sortable*
+!vendor/sortable/*
