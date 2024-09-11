@@ -84,7 +84,7 @@ abstract class Session_Abstract implements Session_Interface {
 	 *
 	 * @var string Table name for session data.
 	 */
-	protected static $table_name_suffix = 'pngx_sessions';
+	protected $table_name_suffix = 'pngx_sessions';
 
 	/**
 	 * Name of table for the session data.
@@ -93,7 +93,7 @@ abstract class Session_Abstract implements Session_Interface {
 	 *
 	 * @var string Table name for session data.
 	 */
-	protected static $table_name;
+	protected $table_name;
 
 	/**
 	 * User ID.
@@ -191,14 +191,14 @@ abstract class Session_Abstract implements Session_Interface {
 	 * @inheritDoc
 	 */
 	protected function set_table_name() {
-		static::$table_name = $GLOBALS['wpdb']->prefix . static::$table_name_suffix;
+		$this->table_name = $GLOBALS['wpdb']->prefix . $this->table_name_suffix;
 	}
 
 	/**
 	 * @inheritDoc
 	 */
 	public function get_table_name() {
-		return static::$table_name;
+		return $this->table_name;
 	}
 
 	/**
