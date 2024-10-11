@@ -30,7 +30,7 @@ abstract class Session_Abstract implements Session_Interface {
 	 *
 	 * @var string The cache name.
 	 */
-	protected static $cache_name = 'pngx_session';
+	protected $cache_name = 'pngx_session';
 
 	/**
 	 * Cache Group Name
@@ -39,7 +39,7 @@ abstract class Session_Abstract implements Session_Interface {
 	 *
 	 * @var string The cache name.
 	 */
-	protected static $cache_group_name = 'pngx_sessions_group';
+	protected $cache_group_name = 'pngx_sessions_group';
 
 	/**
 	 * Session Data.
@@ -207,7 +207,7 @@ abstract class Session_Abstract implements Session_Interface {
 	 * @return string The cache prefix set in the class.
 	 */
 	public function get_cache_prefix() {
-		return $this->cache->get_cache_prefix( static::$cache_name );
+		return $this->cache->get_cache_prefix( $this->cache_name );
 	}
 
 	/**
@@ -216,7 +216,7 @@ abstract class Session_Abstract implements Session_Interface {
 	 * @return string The cache prefix set in the class.
 	 */
 	public function get_cache_group() {
-		return static::$cache_group_name;
+		return $this->cache_group_name;
 	}
 
 	/**
@@ -337,7 +337,7 @@ abstract class Session_Abstract implements Session_Interface {
 		}
 
 		// Use cache class to attempt to get session.
-		$value = $this->cache->get( $this->get_cache_prefix() . $user_id, static::$cache_group_name );
+		$value = $this->cache->get( $this->get_cache_prefix() . $user_id, $this->cache_group_name );
 
 		if ( false === $value ) {
 			$query = $wpdb->prepare( "
@@ -354,7 +354,7 @@ abstract class Session_Abstract implements Session_Interface {
 
 			$cache_duration = $this->expiration_timestamp - time();
 			if ( 0 < $cache_duration ) {
-				$this->cache->get( $this->get_cache_prefix() . $user_id, static::$cache_group_name );
+				$this->cache->get( $this->get_cache_prefix() . $user_id, $this->cache_group_name );
 			}
 		}
 
@@ -393,7 +393,7 @@ abstract class Session_Abstract implements Session_Interface {
 			}
 		}
 
-		$this->cache->set( $this->get_cache_prefix() . $this->user_id, $this->data, $this->expiration_timestamp - time(), static::$cache_group_name );
+		$this->cache->set( $this->get_cache_prefix() . $this->user_id, $this->data, $this->expiration_timestamp - time(), $this->cache_group_name );
 
 		$this->unsaved = false;
 		if (
@@ -471,7 +471,7 @@ abstract class Session_Abstract implements Session_Interface {
 		);
 		$wpdb->query( $query );
 
-		$this->cache->invalidate_cache_group( static::$cache_group_name );
+		$this->cache->invalidate_cache_group( $this->cache_group_name );
 	}
 
 	/**
@@ -480,7 +480,7 @@ abstract class Session_Abstract implements Session_Interface {
 	public function delete_session( $user_id ) {
 		global $wpdb;
 
-		$this->cache->delete( $this->get_cache_prefix() . $user_id, static::$cache_group_name );
+		$this->cache->delete( $this->get_cache_prefix() . $user_id, $this->cache_group_name );
 
 		$wpdb->delete(
 			$this->get_table_name(),
