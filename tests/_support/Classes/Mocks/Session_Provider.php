@@ -20,7 +20,7 @@ use Pngx\Install\Cron;
  *
  * @package Tribe\Events\Event_Status
  */
-class Session_Provider extends \tad_DI52_ServiceProvider {
+class Session_Provider extends \Pngx\Vendor\lucatume\DI52\ServiceProvider {
 
 	/**
 	 * The constant to disable the sessions coding.

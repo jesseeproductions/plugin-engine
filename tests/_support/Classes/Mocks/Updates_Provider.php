@@ -14,7 +14,7 @@ namespace Pngx\Tests\Classes\Mocks;
 use Pngx\Install\Database;
 use Pngx\Install\Setup;
 use Pngx\Traits\With_Nonce_Routes;
-use tad_DI52_ServiceProvider;
+use Pngx\Vendor\lucatume\DI52\ServiceProvider;
 
 /**
  * Class Updates
@@ -22,7 +22,7 @@ use tad_DI52_ServiceProvider;
  * @since 4.0.0
  *
  */
-class Updates extends tad_DI52_ServiceProvider {
+class Updates extends ServiceProvider {
 
 	use With_Nonce_Routes;
 

@@ -9,7 +9,7 @@ if ( ! class_exists( 'Pngx__Container' ) ) {
 	 *
 	 * Pngx Dependency Injection Container.
 	 */
-	class Pngx__Container extends tad_DI52_Container {
+	class Pngx__Container extends \Pngx\Vendor\lucatume\DI52\Container {
 
 		/**
 		 * @var Pngx__Container
@@ -233,11 +233,9 @@ if ( ! function_exists( 'pngx_register_provider' ) ) {
 	/**
 	 * Registers a service provider in the container.
 	 *
-	 * Service providers must implement the `tad_DI52_ServiceProviderInterface` interface or extend
-	 * the `tad_DI52_ServiceProvider` class.
+	 * Service providers must extend the `\Pngx\Vendor\lucatume\DI52\ServiceProvider` class.
 	 *
-	 * @see tad_DI52_ServiceProvider
-	 * @see tad_DI52_ServiceProviderInterface
+	 * @see \Pngx\Vendor\lucatume\DI52\ServiceProvider
 	 *
 	 * @param string $provider_class
 	 */
