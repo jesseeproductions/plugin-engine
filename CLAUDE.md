@@ -8,7 +8,7 @@ Plugin Engine — A shared plugin framework embedded in Coupon Creator that prov
 ## Stack
 - PHP: 7.4+
 - WordPress: 5.8+
-- DI Container: `lucatume/di52`
+- DI Container: `lucatume/di52` (Strauss-prefixed as `Pngx\Vendor\lucatume\DI52\` in coupon-creator's vendor; plugin-engine does not bundle its own copy)
 - Test Framework: Codeception (via `lucatume/wp-browser`)
 - Test Runner: SLIC (Docker-based)
 
@@ -67,7 +67,7 @@ plugin-engine/
 ```
 
 ### Core Responsibilities
-- **DI Container**: `Pngx__Container` wraps `lucatume/di52` for dependency injection
+- **DI Container**: `Pngx__Container` wraps `\Pngx\Vendor\lucatume\DI52\Container` for dependency injection. The prefixed di52 classes are provided by coupon-creator's `vendor/prefixed/` — plugin-engine does not bundle its own copy.
 - **Plugin Registration**: `Pngx__Abstract_Plugin_Register` — base class for registering plugins
 - **Admin Fields**: Full field rendering system (checkbox, color, date, dropdown, image, etc.)
 - **REST API**: Headers, endpoints, post repository, system info
